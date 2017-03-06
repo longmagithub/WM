@@ -1,0 +1,33 @@
+// var
+
+$font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+
+$colors: (
+  red: #ff2f59,
+  violet: #2b234a,
+  grey: #9c9c9c,
+  blue: #6d78e7,
+  white: #ffffff,
+  green: #5cd992,
+  bice: #e5e9f2,
+  pink: #ff7581,
+  yellow: #f8e71c
+);
+
+// extend
+
+// mixin
+
+// 圆角
+@mixin rounded-corners {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+// 圆
+@mixin roundx {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}

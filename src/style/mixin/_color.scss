@@ -1,0 +1,14 @@
+// 颜色
+@mixin color($color) {
+  color: color($color);
+}
+
+// svg颜色
+@mixin fill($color) {
+  fill: color($color);
+}
+
+// 背景色
+@mixin bg($color) {
+  background-color: color($color);
+}

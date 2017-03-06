@@ -1,0 +1,152 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font: 12px/1.5tahoma, arial, \5b8b\4f53;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+  font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: couriernew, courier, monospace;
+}
+
+small {
+  font-size: 12px;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+sup {
+  vertical-align: text-top;
+}
+
+sub {
+  vertical-align: text-bottom;
+}
+
+legend {
+  color: #000;
+}
+
+fieldset,
+img {
+  border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* mobile reset start */
+
+* {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  /* 字型大小是不會變的，而使用者就無法透過縮放網頁來達成放大字型 */
+  -webkit-appearance: none;
+  /*可以改变按钮或者其它控件看起来类似本地的控件*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "PingFangSC-Regular", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  /* 如果用户长按web网页的文本内容，都会出现选中的行为，提供复制文字等功能。禁止用户选中文字 for iOS */
+  -webkit-user-select: none;
+  /* 字型大小是不會變的，而使用者就無法透過縮放網頁來達成放大字型 */
+  -webkit-text-size-adjust: none;
+  /* 可以改变按钮或者其它控件看起来类似本地的控件 */
+  -webkit-appearance: none;
+  /* -webkit-user-drag CSS 属性控制能否将元素作为一个整体拖动 */
+  -webkit-user-drag: none;
+  /* iphone下滚动不流畅设置 */
+  -webkit-overflow-scrolling : touch;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button,
+input[type="number"],
+input[type="text"] {
+  -webkit-appearance: none;
+}
+
+a,
+img {
+  /* 在IOS浏览器里面，假如用户长按a标签，都会出现默认的弹出菜单事件。禁止用户在新窗口打开页面、如何禁止用户保存图片＼复制图片 for iOS */
+  -webkit-touch-callout: none;
+}
+
+/* mobile reset end */
