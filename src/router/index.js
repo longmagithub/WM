@@ -10,6 +10,10 @@ export default new Router({
   scrollBehavior: () => ({y: 0}),
   routes: [
     {
+      path: '/shopDetail',
+      component: require('../views/shopDetail.vue')
+    },
+    {
       path: '/store',
       component: require('../views/store.vue')
     }, {

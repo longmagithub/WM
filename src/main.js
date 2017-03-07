@@ -21,6 +21,10 @@ import mock from './plugins/mock'
 // 引入初始化
 // import init from './init.js'
 
+// icon字体
+import IconFont from './components/iconfont.vue'
+Vue.component('iconfont', IconFont)
+
 // 同步路由和状态
 sync(store, router)
 

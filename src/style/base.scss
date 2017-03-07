@@ -7,9 +7,9 @@
 // 混合器
 @import "mixin";
 // 默认样式重置(二选一)
-// @import "reset";
+@import "reset";
 // 默认样式同步(二选一)
-@import "normalize";
+// @import "normalize";
 // 布局
 @import "layout";
 // 颜色
