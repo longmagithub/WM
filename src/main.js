@@ -7,7 +7,8 @@ import router from './router'
 // 引入状态管理
 import store from './store'
 // 引入数据加载
-import VueResource from 'vue-resource'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 // 引入表单校验
 import VueValidator from 'vue-validator'
 // 引入路由和状态同步
@@ -34,7 +35,7 @@ Object.keys(filters).forEach(key => {
 })
 console.log(mock)
 
-Vue.use(VueResource) // 声明使用vue-resource
+Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueValidator) // 声明使用vue-validator
 
 const app = new Vue({

@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-import Help from '../views/help.vue'
 
 export default new Router({
   mode: 'history',
@@ -13,22 +12,21 @@ export default new Router({
       path: '/shopDetail',
       component: require('../views/shopDetail.vue')
     },
-    {
-      path: '/store',
-      component: require('../views/store.vue')
-    }, {
-      path: '/404',
-      component: require('../views/404.vue')
-    }, {
+    { // 首页
       path: '/index',
-      component: require('../views/index.vue')
-    }, {
-      path: '/mock',
-      component: require('../views/mock.vue')
-    }, {
-      path: '/help',
-      component: Help
-    }, {
+      component: require('../components/index/index.vue'),
+      children: [
+        {
+          path: '/',
+          redirect: '/goods'
+        },
+        { // 首页
+          path: '/goods',
+          component: require('../components/goods/goods.vue')
+        }
+      ]
+    },
+    {
       path: '/',
       redirect: '/index'
     }

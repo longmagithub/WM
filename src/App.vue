@@ -6,5 +6,5 @@
   </div>
 </template>
 <style lang="sass">
-@import './style/base.scss';
+  @import './style/base.scss';
 </style>
