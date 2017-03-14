@@ -53,8 +53,8 @@
         <li>联系人：{{orderDetail.receiverName}} {{orderDetail.gender === 1 ? '先生' : orderDetail.gender === 2 ? '女士' : ''}}</li>
         <li>电话：{{orderDetail.phoneNumber}}</li>
         <li>地址：{{orderDetail.address}}</li>
-        <li v-if="orderStatus.iconCode === 4 || orderStatus.iconCode === 5 || orderStatus.iconCode === 6">配送方式：蜂鸟专送</li>
-        <li v-if="orderStatus.iconCode === 4 || orderStatus.iconCode === 5 || orderStatus.iconCode === 6">配送骑手：{{orderDetail.dmName}} <span @click="callPhone(orderDetail.dmPhone)">{{orderDetail.dmPhone}}</span></li>
+        <li v-if="orderStatus.iconCode === 4 || orderStatus.iconCode === 5">配送方式：蜂鸟专送</li>
+        <li v-if="orderStatus.iconCode === 4 || orderStatus.iconCode === 5">配送骑手：{{orderDetail.dmName}} <span @click="callPhone(orderDetail.dmPhone)">{{orderDetail.dmPhone}}</span></li>
       </ul>
     </section>
     <section class="bg-white order-info">
