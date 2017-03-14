@@ -1,10 +1,10 @@
 
 @font-face {font-family: "uxwm-iconfont";
-  src: url('iconfont.eot?t=1488885731129'); /* IE9*/
-  src: url('iconfont.eot?t=1488885731129#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1488885731129') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1488885731129') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1488885731129#uxwm-iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1489412842138'); /* IE9*/
+  src: url('iconfont.eot?t=1489412842138#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1489412842138') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1489412842138') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1489412842138#uxwm-iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .uxwm-iconfont {
@@ -40,4 +40,12 @@
 .btn_add_disabled:before { content: "\e617"; }
 
 .btn_reduce_normal:before { content: "\e618"; }
+
+.btn_right:before { content: "\e602"; }
+
+.btn_shopping_normal:before { content: "\e603"; }
+
+.btn_close_normal:before { content: "\e604"; }
+
+.icon_wechat_normal:before { content: "\e605"; }
 

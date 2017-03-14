@@ -14,20 +14,26 @@
 
 <script type="text/ecmascript-6">
   import header from '../header/header.vue'
+  import {urlParse} from '../../common/js/util'
 
   const ERR_OK = 0
   export default{
     data() {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse()
+            return queryParam.id
+          })()
+        }
       }
     },
     created() {
-      this.axios.get('./api/seller').then((response) => {
+      this.axios.get('./api/seller?id=' + this.seller.id).then((response) => {
         response = response.data
         console.log(response)
         if (response.errno === ERR_OK) {
-          this.seller = response.data
+          this.seller = Object.assign({}, this.seller, response.data)
         }
       })
     },

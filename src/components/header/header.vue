@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="content-wrapper" @click.stop="goSeller">
+    <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
       <div class="box-content">
         <div class="logo">
           <img :src="seller.avatar" alt="" width="48px" height="48px">
@@ -13,14 +13,13 @@
           </div>
           <div class="bulletin">公告：微信提示为了部落德玛西亚！</div>
         </div>
-        <div class="enter">》</div>
+        <div class="enter uxwm-iconfont btn_right"></div>
       </div>
       <div class="activity">
-        <span class="icon">减</span>
         <span class="text">满20减5，满20减5，满20减5，满20减5，满20减5，满20减5，</span>
         <span class="number">2个活动</span>
       </div>
-    </div>
+    </router-link>
     <div class="user">
       <div class="user-btn" @click="goUser">我的订单</div>
     </div>
@@ -55,47 +54,50 @@
     padding: 15px 7px 8px 10px;
   }
 
-  .content-wrapper {
+  .header .content-wrapper {
     margin-right: 90px;
     font-size: 0px;
   }
 
-  .box-content {
+  .header .content-wrapper .box-content {
     position: relative;
     display: flex;
     padding-right: 20px;
   }
 
-  .logo {
+  .header .content-wrapper .box-content .logo {
     flex: 0 0 48px;
-    vertical-align: top;
   }
 
-  .logo > img {
+  .header .content-wrapper .box-content .logo img {
     border-radius: 4px;
   }
 
-  .content {
+  .header .content-wrapper .box-content .content {
     flex: 1;
     margin-left: 6px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    /*padding-right: 20px;*/
     font-size: 10px;
     color: #ffffff;
   }
 
-  .title-name {
+  .header .content-wrapper .box-content .content .title-name {
     margin-bottom: 5px;
     font-size: 14px;
   }
 
-  .description {
-    margin: 3px 0 8px 0;
+  .header .content-wrapper .box-content .content .description {
   }
 
-  .bulletin, .title-name, .description {
+  .header .content-wrapper .box-content .content .bulletin {
+    margin-top: 8px;
+  }
+
+  .header .content-wrapper .box-content .content .title-name,
+  .header .content-wrapper .box-content .content .bulletin,
+  .header .content-wrapper .box-content .content .description {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -108,16 +110,20 @@
     width: 10px;
     height: 20px;
     font-size: 20px;
-    color: #f8e71c;
+    color: #ffffff;
   }
 
   .activity {
+    box-sizing: border-box;
+    padding-left: 17px;
     margin-top: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 10px;
     color: #ffffff;
+    background: url("../../assets/icon_activity_status0.png") no-repeat left center;
+    background-size: 12px 12px;
   }
 
   .user {
@@ -146,6 +152,7 @@
     z-index: -1;
     background-size: cover;
     /*background-image: url("http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg")*/
-    filter: blur(10px);
+    filter: blur(30px);
+    opacity: 0.8;
   }
 </style>

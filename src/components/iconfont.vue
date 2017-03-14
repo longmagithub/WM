@@ -12,5 +12,5 @@
   }
 </script>
 <style lang="sass">
-@import './../fonts/iconfont.css';
+  @import './../fonts/iconfont.css';
 </style>
