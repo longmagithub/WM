@@ -54,74 +54,86 @@
     position: relative;
     line-height: 1em;
 
-    .add-un-tip {
-      padding: 7px 16px;
-      font-size: 12px;
-      color: #707070;
-    }
+  .add-un-tip {
+    padding: 7px 16px;
+    font-size: 12px;
+    color: #707070;
+  }
 
-    .add-new {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 49px;
-      line-height: 49px;
-      color: #ff8932;
-      text-align: center;
-    }
+  .add-new {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 49px;
+    line-height: 49px;
+    color: #ff8932;
+    text-align: center;
+  }
 
-    section {
-      .add {
-        padding: 16px 0;
-        display: flex;
-        display: -webkit-flex;
-        .add-inf {
-          margin-left: 16px;
-          font-size: 12px;
-          flex-grow: 1;
+  section {
 
-          .name-and-phone {
-            margin-bottom: 8px;
-            font-size: 14px;
-            span {
-              margin-left: 7px;
-            }
-          }
-        }
+  .add {
+    padding: 16px 0;
+    display: flex;
+    display: -webkit-flex;
 
-        .add-edit {
-          flex-shrink: 0;
-          width: 46px;
-          background: url('../assets/icon_pen.png') no-repeat center center;
-          background-size: 18px 18px;
-        }
-      }
-      .add-available {
-        .add-inf {
-          padding-left: 37px;
-          color: #949494;
+  .add-inf {
+    margin-left: 16px;
+    font-size: 12px;
+    flex-grow: 1;
 
-          .name-and-phone {
-            color: #343434;
-          }
-        }
-      }
-      .add-inf.on {
-        background: url('../assets/btn_right_normal.svg') no-repeat left center;
-        background-size: 20px 20px;
-      }
-      .add-inf.off {
-        background: url('../assets/btn_right_disabled.svg') no-repeat left center;
-        background-size: 20px 20px;
-      }
-      .add-unusable {
-        .add-inf {
-        color: #c5c5c5;
-        .name-and-phone {
-          color: #c5c5c5;
-        }
-      }
-      }
-    }
+  .name-and-phone {
+    margin-bottom: 8px;
+    font-size: 14px;
+
+  span {
+    margin-left: 7px;
+  }
+
+  }
+  }
+
+  .add-edit {
+    flex-shrink: 0;
+    width: 46px;
+    background: url('../assets/icon_pen.png') no-repeat center center;
+    background-size: 18px 18px;
+  }
+
+  }
+  .add-available {
+
+  .add-inf {
+    padding-left: 37px;
+    color: #949494;
+
+  .name-and-phone {
+    color: #343434;
+  }
+
+  }
+  }
+  .add-inf.on {
+    background: url('../assets/btn_right_normal.svg') no-repeat left center;
+    background-size: 20px 20px;
+  }
+
+  .add-inf.off {
+    background: url('../assets/btn_right_disabled.svg') no-repeat left center;
+    background-size: 20px 20px;
+  }
+
+  .add-unusable {
+
+  .add-inf {
+    color: #c5c5c5;
+
+  .name-and-phone {
+    color: #c5c5c5;
+  }
+
+  }
+  }
+  }
   }
 </style>
