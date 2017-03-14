@@ -22,6 +22,9 @@ import mock from './plugins/mock'
 // 引入初始化
 // import init from './init.js'
 
+// 引入共用 js
+import * as PublicJs from './utils/public.js'
+
 // icon字体
 import IconFont from './components/iconfont.vue'
 Vue.component('iconfont', IconFont)
@@ -37,6 +40,9 @@ console.log(mock)
 
 Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueValidator) // 声明使用vue-validator
+
+// 注册
+Vue.prototype.PublicJs = PublicJs
 
 const app = new Vue({
   router,
