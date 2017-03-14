@@ -1,22 +1,22 @@
 <template>
   <div class="addlist-wrap">
-    <section class="addlist">
+    <section class="addlist" v-for="item in withinRange">
       <div class="bg-white add add-available">
-        <div class="add-inf off" @click="selectAdd">
-          <p class="name-and-phone">张先生<span>18767781322</span></p>
-          <p>保亿创艺大1203滨江区南环路3760号保亿创艺大1203滨江区南环路3760号</p>
+        <div class="add-inf" :class="item.addressId === nowSelADDId ? 'on' : 'off'" @click="selectAdd(item.addressId)">
+          <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span></p>
+          <p>{{item.houseNum}} {{item.adress}}</p>
         </div>
-        <div class="add-edit" v-on:click="addNew"></div>
+        <div class="add-edit" v-on:click="addNew(item.addressId)"></div>
       </div>
     </section>
-    <p class="add-un-tip">以下地址超出配送范围</p>
-    <section class="addlist">
+    <p class="add-un-tip" v-show="outofRange.length > 0">以下地址超出配送范围</p>
+    <section class="addlist" v-for="item in outofRange">
       <div class="bg-white add add-unusable">
         <div class="add-inf">
-          <p class="name-and-phone">张先生<span>18767781322</span></p>
-          <p>保亿创艺大1203滨江区南环路3760号</p>
+          <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span></p>
+          <p>{{item.houseNum}} {{item.adress}}</p>
         </div>
-        <div class="add-edit" @click="addNew"></div>
+        <div class="add-edit" @click="addNew(item.addressId)"></div>
       </div>
     </section>
     <div class="bg-white add-new" @click="addNew">
@@ -27,8 +27,18 @@
 </template>
 <script>
   export default {
+    mounted () {
+      this.sessionId = this.$route.query.sid ? this.$route.query.sid : ''
+      this.shopId = this.$route.query.id ? this.$route.query.id : ''
+      this.nowSelADDId = this.$route.query.addressId ? this.$route.query.addressId : ''
+      this.getADDList()
+    },
     data () {
       return {
+        sessionId: '',
+        shopId: '',
+        withinRange: [],
+        outofRange: [],
         icon: {
           new: 'btn_add_normal'
         },
@@ -36,9 +46,28 @@
       }
     },
     methods: {
-      // 选择地址
+      // 获取地址列表
+      getADDList () {
+        const data = {
+          sessionId: this.sessionId,
+          shopId: this.shopId
+        }
+        this.axios.get(`/br/customer/address/list${this.PublicJs.createParams(data)}`)
+        .then((res) => {
+          if (res.data.success) {
+            this.withinRange = res.data.data.withinRange ? res.data.data.withinRange : []
+            this.outofRange = res.data.data.outOfRange ? res.data.data.outOfRange : []
+          } else {}
+        })
+      },
       selectAdd (id) {
         this.nowSelADDId = id
+        this.$router.replace({
+          path: '/submitOrder',
+          query: {
+            addressI: id
+          }
+        })
       },
       // 新增地址
       addNew () {
