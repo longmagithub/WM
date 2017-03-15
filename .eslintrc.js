@@ -18,7 +18,7 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // 括号后面不用空格
+    // 括号前面不用空格
     'space-before-function-paren': 0,
     // 可以有空行
     'no-multiple-empty-lines': ["error", { "max": 2, "maxBOF": 1}]
