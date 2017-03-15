@@ -20,10 +20,15 @@
         defalut: false
       }
     },
-    mounted () {
-      setTimeout(() => {
-        this.show = false
-      }, this.t)
+    watch: {
+      show (val) {
+        if (val) {
+          clearTimeout(this.timeout)
+          this.timeout = setTimeout(() => {
+            this.$emit('closeToast')
+          }, this.t)
+        }
+      }
     }
   }
 </script>

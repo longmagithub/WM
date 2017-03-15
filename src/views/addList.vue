@@ -65,15 +65,31 @@
         this.$router.replace({
           path: '/submitOrder',
           query: {
-            addressI: id
+            addressI: id,
+            shopId: this.shopId
           }
         })
       },
       // 新增地址
-      addNew () {
-        this.$router.push({
-          path: '/addNew'
-        })
+      addNew (id) {
+        if (id) {
+          this.$router.push({
+            path: '/addNew',
+            query: {
+              addressId: id,
+              shopId: this.shopId,
+              sessionId: this.sessionId
+            }
+          })
+        } else {
+          this.$router.push({
+            path: '/addNew',
+            query: {
+              shopId: this.shopId,
+              sessionId: this.sessionId
+            }
+          })
+        }
       }
     }
   }
