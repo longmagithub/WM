@@ -1,7 +1,7 @@
 /**
  * change Title
  */
-export function changeTitleInWx (title) {
+export const changeTitleInWx = function (title) {
   document.title = title
   const i = document.createElement('iframe')
   i.src = '/favicon.ico'
@@ -12,6 +12,23 @@ export function changeTitleInWx (title) {
     }, 9)
   }
   document.body.appendChild(i)
+}
+
+/*
+ * 判断是否在微信浏览器
+ */
+export const isWechat = function () {
+  const ua = window.navigator.userAgent.toLowerCase()
+  const wechatInfo = ua.match(/MicroMessenger\/([\d.]+)/i)
+  if (!wechatInfo) {
+    // 仅支持微信
+    return 0
+  } else if (wechatInfo[1] < '5.0') {
+    // 仅支持微信5.0以上版本
+    return 1
+  } else {
+    return 2
+  }
 }
 
 /*

@@ -75,7 +75,7 @@
         </li>
       </ul>
     </section>
-    <toast :show="toastShow" :text="toastText"></toast>
+    <toast :show="toastShow" :text="toastText" v-on:closeToast="doCloseToast"></toast>
   </div>
 </template>
 <script>
@@ -84,6 +84,7 @@ export default {
   mounted () {
     this.orderId = this.$route.query.id ? this.$route.query.id : ''
     this.sessionId = this.$route.query.sid ? this.$route.query.sid : ''
+    this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
     this.$nextTick(() => {
       this.getOrderDetail()
     })
@@ -93,7 +94,9 @@ export default {
       toastShow: false,
       toastText: '',
       sessionId: '',
+      shopId: '',
       orderId: '',
+      isAjaxing: false,
       icon: {
         phone: 'btn_phone'
       },
@@ -146,7 +149,57 @@ export default {
       this.PublicJs.callPhone(phone)
     },
     toPay () {
+      if (!this.PublicJs.isWechat()) {
+        this.toastShow = true
+        this.toastText = '仅支持微信中支付，且微信版本需在5.0以上'
+        return
+      }
+      if (this.isAjaxing) return
+      this.isAjaxing = true
       // 发起支付
+      const data = {
+        sessionId: this.sessionId,
+        shopId: this.shopId,
+        orderId: this.orderId
+      }
+      this.axios.post(`/br/order/pay`, data)
+      .then((res) => {
+        if (res.data.success) {
+          this.sendWxSDK(res.data.data)
+        } else {
+          this.toastShow = true
+          this.toastText = '网络异常，请稍候重试'
+        }
+      }, (res) => {
+        this.isAjaxing = false
+        this.toastShow = true
+        this.toastText = '网络异常，请稍候重试'
+      })
+    },
+    sendWxSDK (data) {
+      wx.chooseWXPay({
+        timestamp: data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+        nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
+        package: data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+        signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+        paySign: data.paySign, // 支付签名
+        success: function (res) {
+          this.isAjaxing = false
+          this.toastShow = true
+          // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
+          if (res.err_msg == "get_brand_wcpay_request:ok") {
+            this.toastText = '支付成功'
+            // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
+          } else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+            this.toastText = '您已取消支付'
+          } else if (res.err_msg == "get_brand_wcpay_request:fail") {
+            this.toastText = '支付失败'
+          }
+        }
+      })
+    },
+    doCloseToast () {
+      this.toastShow = false
     }
   }
 }

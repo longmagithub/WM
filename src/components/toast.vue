@@ -57,6 +57,7 @@
     padding: 20px;
     min-width: 120px;
     max-width: 80%;
+    line-height: 1.5em;
     text-align: center;
     color: #fff;
     background: rgba(0,0,0,.7);
