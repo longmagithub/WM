@@ -10,10 +10,10 @@
           <span class="acquiesce-orderItem">少点辣</span>
           <span class="acquiesce-orderItem">多点辣</span>
         </div>
-        <span class="orderItem" :class="{'selectClass': selectClass}" @click="selectRemark">不要</span>
-        <span class="orderItem">香菜香菜</span>
-        <span class="orderItem">多香香菜</span>
-        <span class="orderItem">德玛</span>
+        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">不要</span>
+        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">香菜香菜</span>
+        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">多香香菜</span>
+        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">德玛</span>
       </div>
     </section>
     <section class="elseRemark">
@@ -39,12 +39,14 @@
     data() {
       return {
         elseText: '',
-        selectClass: false
+        selectClass: false,
+        userSelect: false
       }
     },
     methods: {
       selectRemark() {
         this.selectClass = !this.selectClass
+        this.userSelect = !this.userSelect
         if (this.selectClass) {
           console.log('选中')
         }

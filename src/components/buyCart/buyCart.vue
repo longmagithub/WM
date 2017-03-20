@@ -8,20 +8,23 @@
         </div>
       </transition>
       <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-      <div class="cart-add uxwm-iconfont btn_add_disabled" @click.stop.prevent="addCart($event, food.price)"></div>
+      <div class="cart-add uxwm-iconfont btn_add_disabled"
+           :class="{forbid: !isYingye}"
+           @click.stop.prevent="addCart($event, food.price)"></div>
     </section>
     <!-- 多规格 -->
-    <section v-else-if="food.specification.length && !food.sellout" class="specification-wrapper"
+    <section class="specification-wrapper"
+             v-else-if="food.specification.length && !food.sellout"
              key="specification-wrapper">
-      <section>
-        <transition name="move">
-          <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
-            <span class="inner uxwm-iconfont btn_reduce_normal"></span>
-          </div>
-        </transition>
-        <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-        <div class="specification" @click.stop.prevent="showChooseList($event)"><span class="text">选规格</span></div>
-      </section>
+      <transition name="move">
+        <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
+          <span class="inner uxwm-iconfont btn_reduce_normal"></span>
+        </div>
+      </transition>
+      <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
+      <div class="specification"
+           :class="{forbid: !isYingye}"
+           @click.stop.prevent="showChooseList($event)"><span class="text">选规格</span></div>
     </section>
     <!-- 售罄 -->
     <section v-else key="sellout-wrapper">
@@ -31,7 +34,7 @@
 </template>
 <script type="text/ecmascript-6">
   import Vue from 'vue'
-
+  //  import {loadFromLocal} from '../../common/js/store'
   export default {
     props: {
       food: {
@@ -42,6 +45,9 @@
       },
       shopcart: {
         type: Number
+      },
+      isYingye: {
+        type: Boolean
       }
     },
     data() {
@@ -49,22 +55,39 @@
         showSpecs: false // 控制显示 规格
       }
     },
+    mounted() {
+//      if (loadFromLocal(this.seller.id, 'userName')) {
+//        this.food = loadFromLocal(this.seller.id, 'userName')
+//      }
+//      console.log(loadFromLocal('undefined', 'userName'))
+//      console.log(this.food)
+    },
     methods: {
       showChooseList(event) {
-        this.$emit('showSpecs', event, this.showSpecs, this.food, this.index)
-      },
-      addCart(event, price) {
-        if (!event._constructed) {
+        if (!this.isYingye) {
+          console.log('打烊了')
           return
-        }
-        if (!this.food.count) {
-          this.food.price = price
-          console.log(this.food.price)
-          Vue.set(this.food, 'count', 1)
         } else {
-          this.food.price = price
-          console.log(this.food.price)
-          this.food.count++
+          this.$emit('showSpecs', event, this.showSpecs, this.food, this.index)
+        }
+      },
+      // 添加到购物车
+      addCart(event, price) {
+        if (!this.isYingye) {
+          console.log('打烊了')
+          return
+        } else {
+          if (!event._constructed) {
+            return
+          }
+          console.log(this.food)
+          if (!this.food.count && !this.food.shopCartPrice) {
+            Vue.set(this.food, 'count', 1)
+            Vue.set(this.food, 'shopCartPrice', price)
+          } else {
+            this.food.shopCartPrice = price
+            this.food.count++
+          }
         }
         this.$emit('add', event.target) // 给父组件传递被点击元素
       },
@@ -87,6 +110,7 @@
   }
 
   .sellout {
+    padding-right: 6px;
     font-size: 13px;
     color: #8a8888;
   }
@@ -110,7 +134,6 @@
   .specification-wrapper .cart-decrease,
   .cart-wrapper .cart-decrease {
     display: inline-block;
-    padding: 5px;
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
@@ -118,6 +141,7 @@
   .specification-wrapper .cart-decrease .inner,
   .cart-wrapper .cart-decrease .inner {
     display: inline-block;
+    padding: 5px;
     line-height: 22px;
     font-size: 22px;
     color: #ff8932;
@@ -161,6 +185,14 @@
     line-height: 22px;
     font-size: 22px;
     color: #ff8932;
+  }
+
+  .cart-wrapper .forbid {
+    color: #dddddd;
+  }
+
+  .specification-wrapper .forbid .text {
+    background: #dddddd;
   }
 
   .shop-cover {

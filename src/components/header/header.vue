@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" ref="header">
     <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
       <div class="box-content">
         <div class="logo">
@@ -16,7 +16,7 @@
         <div class="enter uxwm-iconfont btn_right"></div>
       </div>
       <div class="activity">
-        <span class="text">满20减5，满20减5，满20减5，满20减5，满20减5，满20减5，</span>
+        <span class="text">满20减5，满20减5,满20减5,满20减5,满20减5，满20减5，</span>
         <span class="number">2个活动</span>
       </div>
     </router-link>
@@ -36,12 +36,14 @@
         type: Object
       }
     },
+    created() {
+    },
     methods: {
       goSeller(ele) {
         console.log('去往商家详情')
       },
       goUser(ele) {
-        console.log('去往我的订单')
+        this.$router.push({path: '/orderList'})
       }
     }
   }
@@ -52,6 +54,7 @@
     overflow: hidden;
     position: relative;
     padding: 15px 7px 8px 10px;
+    height: 92px;
   }
 
   .header .content-wrapper {
@@ -114,8 +117,10 @@
   }
 
   .activity {
+    position: relative;
     box-sizing: border-box;
     padding-left: 17px;
+    padding-right: 55px;
     margin-top: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -124,6 +129,12 @@
     color: #ffffff;
     background: url("../../assets/icon_activity_status0.png") no-repeat left center;
     background-size: 12px 12px;
+  }
+
+  .activity .number {
+    position: absolute;
+    top: 0px;
+    right: 0px;
   }
 
   .user {

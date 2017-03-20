@@ -21,7 +21,12 @@
                 <p class="sellNum">已售{{food.sellCount}}份</p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.price}}</span></div>
-                  <buyCart @add="addFood" @showSpecs="showSpecsFun" ref="buyCart" :food="food" :index="index"></buyCart>
+                  <buyCart ref="buyCart"
+                           @add="addFood"
+                           @showSpecs="showSpecsFun"
+                           :food="food"
+                           :isYingye="isYingye"
+                           :index="index"></buyCart>
                 </div>
               </div>
             </li>
@@ -29,11 +34,16 @@
         </li>
       </ul>
     </div>
-    <shopcart ref="shopcart"
+    <shopcart v-if="isYingye"
+              ref="shopcart"
               :seller="seller"
               :selectFoods="selectFoods"
               :deliveryPrice="seller.deliveryPrice"
+              :isYingye="isYingye"
               :minPrice="seller.minPrice"></shopcart>
+    <div class="closeSeller" v-else>
+      商家休息中，暂不接单
+    </div>
     <transition name="fade">
       <div class="shop-cover" @click="closeSpesc" v-if="showSpecs"></div>
     </transition>
@@ -55,7 +65,7 @@
           <div class="specs-price">
             <div class="price-box">￥<span class="text">{{specs.specification[specsIndex].dishPrice}}</span></div>
             <div class="submit"
-                 @click.stop.prevent="submit(specs.specification[specsIndex].id, specs.specification[specsIndex].name, specs.specification[specsIndex].dishPrice, specs.specification[specsIndex].packPrice)">
+                 @click.stop.prevent="addSpecs(specs.specification[specsIndex].id, specs.specification[specsIndex].name, specs.specification[specsIndex].dishPrice, specs.specification[specsIndex].packPrice)">
               选好了
             </div>
           </div>
@@ -68,12 +78,16 @@
   import BScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
+  //  import {loadFromLocal} from '../../common/js/store'
   const ERR_OK = 0
 
   export default {
     props: {
       seller: {
         type: Object
+      },
+      isYingye: {
+        type: Boolean
       }
     },
     data() {
@@ -89,7 +103,8 @@
         normal: false,
         specsIndex: 0,  // 规格的index
         el: {}, // 单元素
-        typeNum: 0
+        typeNum: 0,
+        shopId: ''
       }
     },
     created() {
@@ -101,6 +116,12 @@
             this._initScroll()
             this._calculateHeight()
           })
+        }
+      })
+      // 配送费查询
+      this.axios.get(`/br/shop/deliveryfee?shopId=${this.shopId}`).then((res) => {
+        if (res.data.success) {
+          this.deliveryfee = res.data.data
         }
       })
     },
@@ -176,6 +197,7 @@
       // 关闭 弹窗
       closeSpesc() {
         this.showSpecs = false
+        this.specsIndex = 0
       },
       // 子组件传来方法
       showSpecsFun(event, toggleSpecs, content, falg) {
@@ -188,14 +210,12 @@
       selectSpecs(index) {
         this.specsIndex = index
       },
-      // 提交
-      submit(id, name, dishPrice, packPrice) {
-        console.log(id, name, dishPrice, packPrice)
-        console.log(this.selectFoods)
+      // 多规格加入购车
+      addSpecs(id, name, dishPrice, packPrice) {
         this.$nextTick(() => {
           this.$refs.buyCart[this.falg].addCart(this.el, dishPrice)
         })
-        this.showSpecs = false
+        this.closeSpesc()
       }
     },
     components: {
@@ -209,9 +229,9 @@
   .goods {
     display: flex;
     position: absolute;
-    top: 161px;
+    top: 160px;
     bottom: 0px;
-    margin-bottom: 49px;
+    /*margin-bottom: 49px;*/
     width: 100%;
     overflow: hidden;
   }
@@ -361,6 +381,19 @@
     background: rgba(0, 0, 0, 0.4);
   }
 
+  .goods .closeSeller {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    width: 100%;
+    height: 49px;
+    line-height: 49px;
+    text-align: center;
+    color: #ffffff;
+    background: rgba(71, 71, 73, 0.8);
+  }
+
   .specs-wrapper {
     position: fixed;
     top: 30%;
@@ -457,14 +490,5 @@
     color: #ffffff;
     letter-spacing: 2px;
     border-radius: 5px;
-  }
-
-  .goods .specs-enter-active, .goods .specs-leave-active {
-    transition: all 0.5s;
-  }
-
-  .goods .specs-enter, .goods .specs-leave-active {
-    opacity: 0;
-    background: #ffffff;
   }
 </style>

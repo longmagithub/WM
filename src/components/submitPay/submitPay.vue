@@ -21,7 +21,7 @@
         <i class="uxwm-iconfont btn_right_normal"></i>
       </p>
     </div>
-    <div class="submit-wrapper">
+    <div class="submit-wrapper" @click="weChatPay">
       <div class="submitBtn">确认支付￥20.00</div>
     </div>
     <div class="image-wrapper">
@@ -44,6 +44,10 @@
       countDownFun() {
         this.isTime = !this.isTime
         console.log('倒计时结束')
+      },
+      // 调取微信支付
+      weChatPay() {
+
       }
     },
     components: {

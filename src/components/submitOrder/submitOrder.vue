@@ -11,7 +11,7 @@
       <section class="serviceTime-wrapper">
         <i class="uxwm-iconfont icon_time"></i>
         <span class="text">送达时间</span>
-        <div class="time-wrapper" @click="timeSelect">
+        <div class="time-wrapper">
           <span class="title" v-if="selected === 0">尽快送达</span>
           <span class="time" v-if="selected === 0">预计{{estimateTime | formatDate}}</span>
           <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
@@ -66,21 +66,24 @@
         options: [], // 时间数组
         selected: 0, // 默认index
         estimateTime: new Date(new Date().setMinutes(new Date().getMinutes() + 30)), // 预计时间
-        endTime: 1489586400000, // 结束时间
+        endTime: 1489752000000, // 结束时间
         key: 45
       }
     },
     created() {
       this.options.push(this.estimateTime)
 
-      // 预计默认时间
       let orderTaP = new Date().setMinutes(new Date().getMinutes() + 30)
+      let onceTime = this.estimateTime
 
       // 最后一次时间
       this.endTime = new Date(this.endTime).setMinutes(-15)
+      // 预计默认时间
+      this.estimateTime = orderTaP >= this.endTime ? this.endTime : orderTaP
 
       // 开始第一次时间
-      let oneTimeIndex = Math.floor(this.estimateTime.getMinutes() / 15)
+      let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+
       if (oneTimeIndex === 0) {
         this.options.push(new Date(orderTaP).setMinutes(15))
       } else if (oneTimeIndex === 1) {

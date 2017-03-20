@@ -4,16 +4,29 @@
       <input type="text" class="inviceText" v-model="invice" placeholder="个人或公司全称">
     </div>
     <div class="invice-submit">
-      <div class="submitBtn" :class="{'active': invice.length > 0}">确定</div>
+      <div class="submitBtn"
+           :class="{'active': invice.length > 0}" @click="gotoSubmitOrder">确定
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import {saveToLocal} from '../../../common/js/store'
   export default{
     data() {
       return {
         invice: ''
+      }
+    },
+    methods: {
+      gotoSubmitOrder() {
+        if (this.invice) {
+          saveToLocal('userInvice', 'invice', this.invice)
+          this.$router.push({path: '/submitOrder'})
+        } else {
+          return
+        }
       }
     }
   }

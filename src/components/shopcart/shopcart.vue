@@ -52,10 +52,13 @@
               <li class="food" v-for="food in selectFoods">
                 <span class="name">{{food.name}}</span>
                 <div class="price-box">
-                  <span>￥<span class="price">{{food.price*food.count}}</span></span>
+                  <span>￥<span class="price">{{food.shopCartPrice*food.count}}</span></span>
                 </div>
                 <div class="buyCart-wrapper">
-                  <buyCart @add="addFood" :food="food" :shopcart="1"></buyCart>
+                  <buyCart @add="addFood"
+                           :food="food"
+                           :isYingye="isYingye"
+                           :shopcart="1"></buyCart>
                 </div>
               </li>
             </ul>
@@ -70,10 +73,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  //  import Router from 'vue-router'
   import BScroll from 'better-scroll'
   import buyCart from '../buyCart/buyCart.vue'
-  import {saveToLocal} from '../../common/js/store'
+  import {saveToLocal, loadFromLocal} from '../../common/js/store'
   export default {
     props: {
       selectFoods: {
@@ -81,7 +83,7 @@
         default() {
           return [
             {
-              price: 12,
+              price: 20,
               count: 1
             }
           ]
@@ -97,6 +99,9 @@
       },
       seller: {
         type: Object
+      },
+      isYingye: {
+        type: Boolean
       },
       post: null,
       error: null
@@ -124,11 +129,16 @@
         fold: true
       }
     },
+    created() {
+      console.log(this.selectFoods)
+//      this.selectFoods = loadFromLocal('undefined', 'userName')
+      console.log(loadFromLocal(this.seller.id, 'userName'))
+    },
     computed: {
       totalPrice() { // 总价格
         let total = 0
         this.selectFoods.forEach((food) => {
-          total += food.price * food.count
+          total += food.shopCartPrice * food.count
         })
         return total
       },
@@ -566,4 +576,5 @@
     opacity: 0;
     background: rgba(7, 17, 27, 0);
   }
+
 </style>
