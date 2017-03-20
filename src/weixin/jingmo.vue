@@ -17,6 +17,7 @@
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
+        console.log(this.url)
         this.to()
       } else {
         this.getOpenId()
@@ -28,7 +29,7 @@
         const code = this.$route.query.code
         const type = 'jingmo'
         const api = `http://preapi.wuliaogoule.com/VAMall/SG/api/wechat/getaccesstoken?code=${code}&type=${type}`
-        this.$http.get(api).then((res) => {
+        this.axios.get(api).then((res) => {
           const d = res.data
           if (d.success) {
             that.jump()
@@ -42,7 +43,7 @@
         window.location.href = oauthJumpUrl
       },
       jump () {
-        window.location.href = 'http://preapi.wuliaogoule.com/VAMall/H5/#/2'
+        this.$router.replace({path: '/zhengchang'})
       }
     }
   }

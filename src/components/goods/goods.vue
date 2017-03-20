@@ -119,11 +119,11 @@
         }
       })
       // 配送费查询
-      this.axios.get(`/br/shop/deliveryfee?shopId=${this.shopId}`).then((res) => {
-        if (res.data.success) {
-          this.deliveryfee = res.data.data
-        }
-      })
+//      this.axios.get(`/br/shop/deliveryfee?shopId=${this.shopId}`).then((res) => {
+//        if (res.data.success) {
+//          this.deliveryfee = res.data.data
+//        }
+//      })
     },
     computed: {
       currentIndex() { // 判决区间所对应的位置

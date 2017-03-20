@@ -8,9 +8,35 @@ export default new Router({
   mode: 'history',
   scrollBehavior: () => ({y: 0}),
   routes: [
-    { // 默认
+    // 默认
+    {
       path: '/',
-      redirect: '/index'
+      redirect: '/index' // 重定向到 /jingmo
+    },
+    // 静默授权
+    {
+      path: '/jingmo',
+      component: require('../weixin/jingmo.vue')
+    },
+    // 正常授权
+    {
+      path: 'zhengchang',
+      component: require('../weixin/zhengchang.vue')
+    },
+    // 首页
+    {
+      path: '/index',
+      component: require('../components/index/index.vue'),
+      children: [ // 二级路由
+        {
+          path: '/', // 二级默认
+          redirect: '/goods'
+        },
+        { // 商品页面
+          path: '/goods',
+          component: require('../components/goods/goods.vue')
+        }
+      ]
     },
     // 订单列表
     {
@@ -32,37 +58,28 @@ export default new Router({
       path: '/addNew',
       component: require('../views/addNew.vue')
     },
-    { // 首页
-      path: '/index',
-      component: require('../components/index/index.vue'),
-      children: [ // 二级路由
-        {
-          path: '/', // 二级默认
-          redirect: '/goods'
-        },
-        { // 商品页面
-          path: '/goods',
-          component: require('../components/goods/goods.vue')
-        }
-      ]
-    },
+    // 商家详情
     {
       path: '/shopDetail',
       component: require('../views/shopDetail.vue')
     },
-    { // 提交订单
+    // 提交订单
+    {
       path: '/submitOrder',
       component: require('../components/submitOrder/submitOrder.vue')
     },
-    { // 订单备注
+    // 订单备注
+    {
       path: '/remark',
       component: require('../components/submitOrder/remark/remark.vue')
     },
-    { // 发票抬头
+    // 发票抬头
+    {
       path: '/invoice',
       component: require('../components/submitOrder/invoice/invoice.vue')
     },
-    { // 在线支付
+    // 在线支付
+    {
       path: '/submitPay',
       component: require('../components/submitPay/submitPay.vue')
     }
