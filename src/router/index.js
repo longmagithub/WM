@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 Vue.use(Router)
 
 
 export default new Router({
-  mode: 'history',
   scrollBehavior: () => ({y: 0}),
   routes: [
-    // 默认跳转到goods
+    // 默认
     {
       path: '/',
-      redirect: '/goods' // 重定向到 goods
+      redirect: '/index' // 重定向到 /jingmo
     },
     // 静默授权
     {
@@ -22,10 +22,10 @@ export default new Router({
       path: 'zhengchang',
       component: require('../weixin/zhengchang.vue')
     },
-    // 商品页面
+    // 首页
     {
-      path: '/goods',
-      component: require('../components/goods/goods.vue')
+      path: '/index',
+      component: require('../components/index/index.vue')
     },
     // 订单列表
     {

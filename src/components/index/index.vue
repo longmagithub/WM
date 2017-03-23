@@ -1,20 +1,21 @@
 <template>
-  <div class="main">
+  <div class="index">
     <v-header :seller="seller"></v-header>
     <div class="tab">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
       </div>
     </div>
-    <keep-alive>
-      <router-view :seller="seller" :isYingye="isYingye"></router-view>
-    </keep-alive>
+    <div class="main">
+      <goods :seller="seller" :isYingye="isYingye"></goods>
+    </div>
     <toast :show="toastShow" :text="'toastText'"></toast>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import header from '../header/header.vue'
+  import goods from '../goods/goods.vue'
   import {urlParse} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
@@ -116,6 +117,7 @@
     },
     components: {
       'v-header': header,
+      goods,
       toast
     }
   }
