@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <transition name="fade" mode="out-in">
-      <router-view class="view"><index></index></router-view>
-    </transition>
-    <!--<div>测试12123</div>-->
+    <!--<transition name="fade" mode="out-in">-->
+      <!--<router-view class="view"><index></index></router-view>-->
+    <!--</transition>-->
+    <index></index>
   </div>
 </template>
 <script type="text/ecmascript-6">
