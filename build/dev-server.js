@@ -27,21 +27,21 @@ var apiRoutes = express.Router()
 
 apiRoutes.get('/seller', function (req, res) {
   res.json({
-    errno: 0,
+    success: true,
     data: seller
   });
 })
 
 apiRoutes.get('/goods', function (req, res) {
   res.json({
-    errno: 0,
+    success: true,
     data: goods
   })
 })
 
 apiRoutes.get('/ratings', function (req, res) {
   res.json({
-    errno: 0,
+    success: true,
     data: ratings
   });
 })

@@ -12,8 +12,9 @@
           <div class="price-wrapper">
             <div class="desc" v-if="!totalCount">购物车为空</div>
             <div class="price" v-if="totalCount">
-              <div class="price-num">￥{{totalPrice}}</div>
-              <div class="delivery">另需配送费{{deliveryPrice}}元</div>
+              <div class="price-num">￥{{totalPrice + totalPack}}</div>
+              <div class="delivery">{{deliveryDesc}}</div>
+              <!--<div class="delivery">另需配送费{{deliveryPrice}}元{{deliveryDesc}}</div>-->
             </div>
           </div>
         </div>
@@ -44,7 +45,7 @@
             </div>
             <div class="describe">
               <span class="title">阶梯配送费</span>
-              <span class="text">购物车满85免配送费，购物车满85免配送费，购物车满85免配送费</span>
+              <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}。</span>
             </div>
           </div>
           <div class="list-content" ref="listContent">
@@ -59,6 +60,12 @@
                            :food="food"
                            :isYingye="isYingye"
                            :shopcart="1"></buyCart>
+                </div>
+              </li>
+              <li class="food" v-if="totalPack">
+                <span class="name">餐盒</span>
+                <div class="price-box">
+                  <span>￥<span class="price">{{totalPack}}</span></span>
                 </div>
               </li>
             </ul>
@@ -103,6 +110,10 @@
       isYingye: {
         type: Boolean
       },
+      specsIndex: {
+        type: Number,
+        default: 0
+      },
       post: null,
       error: null
     },
@@ -130,15 +141,14 @@
       }
     },
     created() {
-      console.log(this.selectFoods)
-//      this.selectFoods = loadFromLocal('undefined', 'userName')
+      // this.selectFoods = loadFromLocal('undefined', 'userName')
       console.log(loadFromLocal(this.seller.id, 'userName'))
     },
     computed: {
       totalPrice() { // 总价格
         let total = 0
         this.selectFoods.forEach((food) => {
-          total += food.shopCartPrice * food.count
+          total += Number(food.shopCartPrice) * food.count
         })
         return total
       },
@@ -149,7 +159,16 @@
         })
         return count
       },
-      payDesc() { // pay 的描述
+      // 餐盒费
+      totalPack() {
+        let pack = 0
+        this.selectFoods.forEach((food) => {
+          pack += Number(food.packPrice) * food.count
+        })
+        return pack
+      },
+      // pay 的描述
+      payDesc() {
         if (this.totalPrice === 0) {
           return `￥${this.minPrice}元起送`
         } else if (this.totalPrice < this.minPrice) {
@@ -159,11 +178,31 @@
           return '去结算'
         }
       },
-      payClass() { // pay 的class
+      // pay 的class
+      payClass() {
         if (this.totalPrice < this.minPrice) {
           return 'not-enough'
         } else {
           return 'enough'
+        }
+      },
+      // 配送费描述
+      deliveryDesc() {
+        let fees = this.seller.dispatching.fees
+        if ((this.totalPrice + this.totalPack) < fees[0].price) {
+          console.log(1)
+          return `另需要配送费${fees[0].fee}元`
+        } else {
+//          console.log(2)
+          let flag = 0
+          for (let i = 0; i < fees.length; i++) {
+            if ((this.totalPrice + this.totalPack) >= fees[i].price) {
+              flag = i
+            }
+          }
+          console.log(flag)
+          console.log(fees[flag].fee)
+          return `另需要配送费${fees[flag].fee}元`
         }
       },
       listShow() {
@@ -484,16 +523,13 @@
   }
 
   .shopcart .shopcart-list .list-header .describe {
-    /*display: flex;*/
-    /*justify-content: space-between;*/
-    /*align-items: center;*/
-    height: 32px;
+    min-height: 32px;
     line-height: 32px;
     padding: 0 20px 0 0;
     margin-left: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: wrap;*/
     font-size: 10px;
     color: #a2a2a2;
     background: #ffffff;

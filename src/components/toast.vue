@@ -4,7 +4,7 @@
     <div class="toast-text">{{text}}</div>
   </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
   export default {
     props: {
       text: {
@@ -19,26 +19,16 @@
         type: Boolean,
         defalut: false
       }
-    },
-    watch: {
-      show (val) {
-        if (val) {
-          clearTimeout(this.timeout)
-          this.timeout = setTimeout(() => {
-            this.$emit('closeToast')
-          }, this.t)
-        }
-      }
     }
   }
 </script>
 <style scoped lang="scss">
-.toast {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  .toast {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
   .toast-mask {
     position: absolute;
@@ -46,7 +36,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
   }
 
   .toast-text {
@@ -60,8 +50,9 @@
     line-height: 1.5em;
     text-align: center;
     color: #fff;
-    background: rgba(0,0,0,.7);
+    background: rgba(0, 0, 0, .7);
     border-radius: 4px;
   }
-}
+
+  }
 </style>

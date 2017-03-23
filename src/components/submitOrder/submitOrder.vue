@@ -60,6 +60,7 @@
 
 <script type="text/ecmascript-6">
   import {formatDate} from '../../common/js/date'
+  import * as PublicJs from '../../utils/public'
   export default {
     data() {
       return {
@@ -70,7 +71,16 @@
         key: 45
       }
     },
+    mounted() {
+      this.$nextTick(() => {
+        console.log(231312312312312312312)
+        this.PublicJs.changeTitleInWx('确认订单')
+      })
+    },
     created() {
+      console.log('跳转到提交')
+      // 修改 title
+      PublicJs.changeTitleInWx('确认订单')
       this.options.push(this.estimateTime)
 
       let orderTaP = new Date().setMinutes(new Date().getMinutes() + 30)

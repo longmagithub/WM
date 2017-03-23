@@ -3,40 +3,53 @@
     <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
       <div class="box-content">
         <div class="logo">
-          <img :src="seller.avatar" alt="" width="48px" height="48px">
+          <img :src="seller.logo" alt="" width="48px" height="48px">
         </div>
         <div class="content">
           <div class="title-name">{{seller.name}}</div>
           <!-- 描述 -->
           <div class="description">
-            {{seller.description}}/{{seller.deliveryTime}}分钟到达/满85免配送费/满85免配送费/满85免配送费/满85免配送费
+            {{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span
+            v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]
+            .price}}{{seller.dispatching.fees[0].fee| fees}}</span>
           </div>
-          <div class="bulletin">公告：微信提示为了部落德玛西亚！</div>
+          <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
         </div>
         <div class="enter uxwm-iconfont btn_right"></div>
       </div>
       <div class="activity">
-        <span class="text">满20减5，满20减5,满20减5,满20减5,满20减5，满20减5，</span>
-        <span class="number">2个活动</span>
+        <span class="text">{{seller.dispatching.activity[0].title}}</span>
+        <span class="number">{{seller.dispatching.activity.length}}个活动</span>
       </div>
     </router-link>
     <div class="user">
       <div class="user-btn" @click="goUser">我的订单</div>
     </div>
     <div class="background">
-      <img :src="seller.avatar" alt="" width="100%" height="100%">
+      <img :src="seller.logo" alt="" width="100%" height="100%">
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+
   export default {
     props: {
       seller: {
         type: Object
       }
     },
+    data() {
+      return {
+        description: '' // 配送方式
+      }
+    },
+    mounted () {
+      // 设置页面 title
+    },
     created() {
+      // 配送方式
+      // this.getDispatching()
     },
     methods: {
       goSeller(ele) {
@@ -44,6 +57,14 @@
       },
       goUser(ele) {
         this.$router.push({path: '/orderList'})
+      },
+      // 配送方式查询
+      getDispatching() {
+        this.axios.get(`${this.api}/br/shop/dispatching?shopId=${this.shopId}`).then((res) => {
+          if (res.success) {
+            console.log(res)
+          }
+        })
       }
     }
   }

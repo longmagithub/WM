@@ -43,6 +43,9 @@
         userSelect: false
       }
     },
+    created() {
+      this.PublicJs.changeTitleInWx('订单备注')
+    },
     methods: {
       selectRemark() {
         this.selectClass = !this.selectClass

@@ -3,24 +3,24 @@
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
-            @click="selectMenu(index,$event)">
-          <span class="text">{{item.name}}</span>
+            @click="selectMenu(index, $event)">
+          <span class="text">{{item.dishTypeName}}</span>
         </li>
       </ul>
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
         <li v-for="(item, index) in goods" class="food-list" ref="foodList">
-          <h1 class="food-title">{{item.name}}</h1>
+          <h1 class="food-title">{{item.dishTypeName}}</h1>
           <ul>
-            <li v-for="(food, index) in item.foods" class="food-item">
-              <div class="icon"><img :src="food.icon" width="52px" height="52px"></div>
+            <li v-for="(food, index) in item.dishList" class="food-item">
+              <div class="icon"><img :src="food.imageUrl" width="52px" height="52px"></div>
               <div class="content">
                 <h2 class="name">{{food.name}}</h2>
                 <span class="desc">{{food.description}}</span>
-                <p class="sellNum">已售{{food.sellCount}}份</p>
+                <p class="sellNum">已售{{food.saleCount}}份</p>
                 <div class="price-wrapper">
-                  <div class="price">￥<span class="price-num">{{food.price}}</span></div>
+                  <div class="price">￥<span class="price-num">{{food.specification[0].dishPrice}}</span></div>
                   <buyCart ref="buyCart"
                            @add="addFood"
                            @showSpecs="showSpecsFun"
@@ -79,8 +79,7 @@
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
   //  import {loadFromLocal} from '../../common/js/store'
-  const ERR_OK = 0
-
+  const SUCCESS_OK = true
   export default {
     props: {
       seller: {
@@ -108,22 +107,9 @@
       }
     },
     created() {
-      this.axios.get('./api/goods').then((response) => {
-        response = response.data
-        if (response.errno === ERR_OK) {
-          this.goods = response.data
-          this.$nextTick(() => {
-            this._initScroll()
-            this._calculateHeight()
-          })
-        }
-      })
-      // 配送费查询
-//      this.axios.get(`/br/shop/deliveryfee?shopId=${this.shopId}`).then((res) => {
-//        if (res.data.success) {
-//          this.deliveryfee = res.data.data
-//        }
-//      })
+      // 菜谱信息
+      this.getDishList()
+      console.log(this.seller)
     },
     computed: {
       currentIndex() { // 判决区间所对应的位置
@@ -139,7 +125,7 @@
       selectFoods() {
         let foods = []
         this.goods.forEach((good) => {
-          good.foods.forEach((food) => {
+          good.dishList.forEach((food) => {
             if (food.count) {
               foods.push(food)
             }
@@ -213,9 +199,44 @@
       // 多规格加入购车
       addSpecs(id, name, dishPrice, packPrice) {
         this.$nextTick(() => {
-          this.$refs.buyCart[this.falg].addCart(this.el, dishPrice)
+          this.$refs.buyCart[this.falg].addCart(this.el, dishPrice, packPrice)
         })
         this.closeSpesc()
+      },
+      // 菜谱信息
+      getDishList() {
+        const data = {
+          shopId: this.shoId,
+          customerId: this.customerId
+        }
+        console.log(data)
+        // this.axios.get(`${this.api}/br/dish/list${this.PublicJs.createParams(data)}`).then(() => {
+        this.axios.get('./api/goods').then((res) => {
+          res = res.data
+          if (res.success === SUCCESS_OK) {
+            this.goods = res.data
+            this.$nextTick(() => {
+              this._initScroll()
+              this._calculateHeight()
+            })
+          }
+        })
+      },
+      // 商户信息
+      getShopDetail() {
+        // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
+        // 接口通了  注释下面的 打开上面的
+        this.axios.get('./api/seller').then((res) => {
+          res = res.data
+          if (res.success === SUCCESS_OK) {
+            this.shopDetail = res.data
+            // 排序
+            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
+              res.data.dispatching.fees.price)
+            this.seller = Object.assign({}, this.seller, res.data)
+            this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
+          }
+        })
       }
     },
     components: {
@@ -232,6 +253,7 @@
     top: 160px;
     bottom: 0px;
     /*margin-bottom: 49px;*/
+    padding-bottom: 50px;
     width: 100%;
     overflow: hidden;
   }

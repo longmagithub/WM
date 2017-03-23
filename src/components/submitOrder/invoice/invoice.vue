@@ -19,6 +19,9 @@
         invice: ''
       }
     },
+    created() {
+      this.PublicJs.changeTitleInWx('发票抬头')
+    },
     methods: {
       gotoSubmitOrder() {
         if (this.invice) {

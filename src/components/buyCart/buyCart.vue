@@ -1,7 +1,8 @@
 <template>
   <div class="buyCart">
     <!-- 加减 button -->
-    <section class="cart-wrapper" v-if="(!food.specification.length && !food.sellout) || shopcart" key="cart-wrapper">
+    <section class="cart-wrapper" v-if="(food.specification.length === 1 && food.state === 1) || shopcart"
+             key="cart-wrapper">
       <transition name="move">
         <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
@@ -10,11 +11,11 @@
       <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click.stop.prevent="addCart($event, food.price)"></div>
+           @click.stop.prevent="addCart($event,food.specification[0].dishPrice,food.specification[0].packPrice)"></div>
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
-             v-else-if="food.specification.length && !food.sellout"
+             v-else-if="food.specification.length > 1 && food.state === 1"
              key="specification-wrapper">
       <transition name="move">
         <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
@@ -65,27 +66,27 @@
     methods: {
       showChooseList(event) {
         if (!this.isYingye) {
-          console.log('打烊了')
           return
         } else {
           this.$emit('showSpecs', event, this.showSpecs, this.food, this.index)
         }
       },
       // 添加到购物车
-      addCart(event, price) {
+      addCart(event, price, pack) {
+        console.log(event)
         if (!this.isYingye) {
-          console.log('打烊了')
           return
         } else {
           if (!event._constructed) {
             return
           }
-          console.log(this.food)
-          if (!this.food.count && !this.food.shopCartPrice) {
+          if (!this.food.count && !this.food.shopCartPrice && !this.food.packPrice) {
             Vue.set(this.food, 'count', 1)
             Vue.set(this.food, 'shopCartPrice', price)
+            Vue.set(this.food, 'packPrice', pack)
           } else {
             this.food.shopCartPrice = price
+            this.food.packPrce = pack
             this.food.count++
           }
         }

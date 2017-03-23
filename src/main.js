@@ -12,7 +12,7 @@ import VueAxios from 'vue-axios'
 // 引入表单校验
 import VueValidator from 'vue-validator'
 // 引入路由和状态同步
-import { sync } from 'vuex-router-sync'
+import {sync} from 'vuex-router-sync'
 // 引入自定义过滤
 import * as filters from './filters'
 // 添加mockjs拦截请求，模拟返回服务器数据
@@ -43,6 +43,7 @@ Vue.use(VueValidator) // 声明使用vue-validator
 
 // 注册
 Vue.prototype.PublicJs = PublicJs
+Vue.prototype.api = '/VAOrderH5'
 
 const app = new Vue({
   router,
@@ -50,4 +51,4 @@ const app = new Vue({
   ...App
 }).$mount('#app')
 
-export { app, router, store }
+export {app, router, store}

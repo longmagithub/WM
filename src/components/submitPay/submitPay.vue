@@ -27,31 +27,52 @@
     <div class="image-wrapper">
       <div class="image"></div>
     </div>
+    <toast :show="toastShow" :text="toastText"></toast>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
+  import toast from '../toast.vue'
   export default {
     data() {
       return {
         currentTime: Math.round(new Date().getTime() / 1000), // 当前时间戳
-        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 3) / 1000), // 15分钟后
-        isTime: true
+        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 1) / 1000), // 15分钟后
+        isTime: true,
+        toastShow: false,
+        toastText: ''
       }
     },
     methods: {
       countDownFun() {
         this.isTime = !this.isTime
-        console.log('倒计时结束')
+        console.log(this.isTime)
+        this.toastShow = true
+        this.toastText = '订单已超时'
+        setTimeout(() => {
+          this.toastShow = false
+          this.toastText = ''
+        }, 1000)
       },
       // 调取微信支付
       weChatPay() {
-
+        if (!this.isTime) {
+          this.toastShow = true
+          this.toastText = '订单已超时'
+          setTimeout(() => {
+            this.toastShow = false
+            this.toastText = ''
+          }, 1000)
+          console.log('已经超时')
+        } else {
+          console.log('去支付')
+        }
       }
     },
     components: {
-      CountDown
+      CountDown,
+      toast
     }
   }
 </script>

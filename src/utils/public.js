@@ -12,6 +12,19 @@ export const changeTitleInWx = function (title) {
     }, 9)
   }
   document.body.appendChild(i)
+  // document.title = title
+  // const iframe = document.createElement('iframe')
+  // iframe.src = 'img/logo.png'
+  // const listener = () => {
+  //   setTimeout(() => {
+  //     iframe.removeEventListener('load', listener)
+  //     setTimeout(() => {
+  //       document.body.removeChild(iframe)
+  //     }, 0)
+  //   }, 0)
+  // }
+  // iframe.addEventListener('load', listener)
+  // document.body.appendChild(iframe)
 }
 
 /*
@@ -76,4 +89,20 @@ export const formatTime = function (date, mode) {
  */
 export const callPhone = function (phone) {
   window.location.href = `tel:${phone}`
+}
+
+/**
+ * 冒泡排序
+ */
+export const bubbleSort = function (arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i; j < arr.length; j++) {
+      if (arr[i].price > arr[j].price) {
+        let temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
+      }
+    }
+  }
+  return arr
 }
