@@ -103,7 +103,7 @@
   },
   "goods": [
     {
-      "dishTypeId": "sdfsdfsd9879s8d7fasd12",
+      "dishTypeId": 1110,
       "dishTypeName": "热销榜",
       "type": -1,
       "dishList": [
@@ -112,7 +112,7 @@
           "state": 1,
           "specification": [
             {
-              "id": "sdfsdfsd9879s8d7fasdfd",
+              "id": "pidan01",
               "name": "小份",
               "dishPrice": 10,
               "packPrice": 1
@@ -599,10 +599,53 @@
       ]
     },
     {
-      "dishTypeId": "sdfsdfsd9879s8d7fasd12",
+      "dishTypeId": 1111,
       "dishTypeName": "单人精彩套餐",
       "type": 2,
       "dishList": [
+        {
+          "name": "皮蛋瘦肉粥",
+          "state": 1,
+          "specification": [
+            {
+              "id": "pidan01",
+              "name": "小份",
+              "dishPrice": 10,
+              "packPrice": 1
+            }
+          ],
+          "price": 10,
+          "oldPrice": "",
+          "description": "咸粥",
+          "saleCount": 229,
+          "rating": 100,
+          "info": "一碗皮蛋瘦肉粥，总是我到粥店时的不二之选。香浓软滑，饱腹暖心，皮蛋的Q弹与瘦肉的滑嫩伴着粥香溢于满口，让人喝这样的一碗粥也觉得心满意足",
+          "ratings": [
+            {
+              "username": "3******c",
+              "rateTime": 1469281964000,
+              "rateType": 0,
+              "text": "很喜欢的粥",
+              "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
+            },
+            {
+              "username": "2******3",
+              "rateTime": 1469271264000,
+              "rateType": 0,
+              "text": "",
+              "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
+            },
+            {
+              "username": "3******b",
+              "rateTime": 1469261964000,
+              "rateType": 1,
+              "text": "",
+              "avatar": "http://static.galileo.xiaojukeji.com/static/tms/default_header.png"
+            }
+          ],
+          "icon": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/114/h/114",
+          "imageUrl": "http://fuss10.elemecdn.com/c/cd/c12745ed8a5171e13b427dbc39401jpeg.jpeg?imageView2/1/w/750/h/750"
+        },
         {
           "name": "红枣山药粥套餐",
           "state": 1,

@@ -193,15 +193,12 @@
           console.log(1)
           return `另需要配送费${fees[0].fee}元`
         } else {
-//          console.log(2)
           let flag = 0
           for (let i = 0; i < fees.length; i++) {
             if ((this.totalPrice + this.totalPack) >= fees[i].price) {
               flag = i
             }
           }
-          console.log(flag)
-          console.log(fees[flag].fee)
           return `另需要配送费${fees[flag].fee}元`
         }
       },

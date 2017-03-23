@@ -16,7 +16,10 @@ module.exports = {
   },
   output: {
     path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    publicPath: process.env.NODE_ENV === 'production' ? '/VAOrderH5' + config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    
+    // 下面开发环境 上面打包环境
+    // publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
   resolve: {
@@ -84,7 +87,7 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
+    loaders: utils.cssLoaders({sourceMap: useCssSourceMap}),
     postcss: [
       require('autoprefixer')({
         browsers: ['last 2 versions']
