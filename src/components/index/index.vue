@@ -1,6 +1,8 @@
 <template>
   <div class="index">
-    <vheade :seller="seller"></vheade>
+    <div class="heade">
+      <vheade :seller="seller"></vheade>
+    </div>
     <div class="tab">
       <div class="tab-item">
         <span class="label">商品</span>
