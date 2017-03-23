@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import App from '../App.vue'
 Vue.use(Router)
 
 
@@ -8,76 +7,70 @@ export default new Router({
   mode: 'history',
   scrollBehavior: () => ({y: 0}),
   routes: [
-    // 默认
+    // 默认跳转到goods
     {
       path: '/',
-      component: App,
-      children: [
-        // 静默授权
-        {
-          path: '/jingmo',
-          component: require('../weixin/jingmo.vue')
-        },
-        // 正常授权
-        {
-          path: 'zhengchang',
-          component: require('../weixin/zhengchang.vue')
-        },
-        // 默认跳转到goods
-        {
-          path: '',
-          redirect: '/goods' // 重定向到 goods
-        },
-        { // 商品页面
-          path: '/goods',
-          component: require('../components/goods/goods.vue')
-        },
-        // 订单列表
-        {
-          path: '/orderList',
-          component: require('../views/orderList.vue')
-        },
-        // 订单详情
-        {
-          path: '/orderDetail',
-          component: require('../views/orderDetail.vue')
-        },
-        // 地址列表
-        {
-          path: '/addList',
-          component: require('../views/addList.vue')
-        },
-        // 新增/编辑 地址
-        {
-          path: '/addNew',
-          component: require('../views/addNew.vue')
-        },
-        // 商家详情
-        {
-          path: '/shopDetail',
-          component: require('../views/shopDetail.vue')
-        },
-        // 提交订单
-        {
-          path: '/submitOrder',
-          component: require('../components/submitOrder/submitOrder.vue')
-        },
-        // 订单备注
-        {
-          path: '/remark',
-          component: require('../components/submitOrder/remark/remark.vue')
-        },
-        // 发票抬头
-        {
-          path: '/invoice',
-          component: require('../components/submitOrder/invoice/invoice.vue')
-        },
-        // 在线支付
-        {
-          path: '/submitPay',
-          component: require('../components/submitPay/submitPay.vue')
-        }
-      ]
+      redirect: '/goods' // 重定向到 goods
+    },
+    // 静默授权
+    {
+      path: '/jingmo',
+      component: require('../weixin/jingmo.vue')
+    },
+    // 正常授权
+    {
+      path: 'zhengchang',
+      component: require('../weixin/zhengchang.vue')
+    },
+    // 商品页面
+    {
+      path: '/goods',
+      component: require('../components/goods/goods.vue')
+    },
+    // 订单列表
+    {
+      path: '/orderList',
+      component: require('../views/orderList.vue')
+    },
+    // 订单详情
+    {
+      path: '/orderDetail',
+      component: require('../views/orderDetail.vue')
+    },
+    // 地址列表
+    {
+      path: '/addList',
+      component: require('../views/addList.vue')
+    },
+    // 新增/编辑 地址
+    {
+      path: '/addNew',
+      component: require('../views/addNew.vue')
+    },
+    // 商家详情
+    {
+      path: '/shopDetail',
+      component: require('../views/shopDetail.vue')
+    },
+    // 提交订单
+    {
+      path: '/submitOrder',
+      component: require('../components/submitOrder/submitOrder.vue')
+    },
+    // 订单备注
+    {
+      path: '/remark',
+      component: require('../components/submitOrder/remark/remark.vue')
+    },
+    // 发票抬头
+    {
+      path: '/invoice',
+      component: require('../components/submitOrder/invoice/invoice.vue')
+    },
+    // 在线支付
+    {
+      path: '/submitPay',
+      component: require('../components/submitPay/submitPay.vue')
     }
   ]
 })
