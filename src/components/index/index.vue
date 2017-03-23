@@ -1,9 +1,9 @@
 <template>
   <div class="index">
-    <v-header :seller="seller"></v-header>
+    <vheade :seller="seller"></vheade>
     <div class="tab">
       <div class="tab-item">
-        <router-link to="/goods">商品</router-link>
+        <span class="label">商品</span>
       </div>
     </div>
     <div class="main">
@@ -14,7 +14,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import header from '../header/header.vue'
+  import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
   import {urlParse} from '../../common/js/util'
   import toast from '../../components/toast.vue'
@@ -116,7 +116,7 @@
       }
     },
     components: {
-      'v-header': header,
+      vheade,
       goods,
       toast
     }
@@ -138,7 +138,7 @@
     text-align: center;
   }
 
-  .tab-item > a {
+  .tab-item .label {
     display: block;
     color: #ff6651;
     font-size: 17px;

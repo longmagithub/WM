@@ -5,7 +5,6 @@
         <router-view class="view"></router-view>
       </keep-alive>
     </transition>
-    <div>测试12123</div>
   </div>
 </template>
 <script type="text/ecmascript-6">

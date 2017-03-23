@@ -1,5 +1,6 @@
 <template>
   <div class="header" ref="header">
+    12312312312312312312
     <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
       <div class="box-content">
         <div class="logo">
