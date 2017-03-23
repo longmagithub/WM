@@ -1,19 +1,152 @@
 <template>
   <div id="app">
-    <!--<transition name="fade" mode="out-in">-->
-      <!--<router-view class="view"><index></index></router-view>-->
-    <!--</transition>-->
-    <index></index>
+    <v-header :seller="seller"></v-header>
+    <div class="tab">
+      <div class="tab-item">
+        <router-link to="/goods">商品</router-link>
+      </div>
+    </div>
+    <keep-alive>
+      <router-view :seller="seller" :isYingye="isYingye"></router-view>
+    </keep-alive>
+    <toast :show="toastShow" :text="'toastText'"></toast>
   </div>
 </template>
+
 <script type="text/ecmascript-6">
-  import index from './components/index/index.vue'
-  export default {
+  import header from 'components/header/header.vue'
+  import {urlParse} from './common/js/util'
+  import toast from 'components/toast.vue'
+
+  const SUCCESS_OK = true
+  export default{
+    data() {
+      return {
+        seller: {
+          id: (() => {
+            let queryParam = urlParse()
+            return queryParam.id
+          })()
+        },
+        shopId: '',
+        toastShow: false,
+        toastText: '',
+        nowTime: new Date(),
+        endTime: '',
+        deliveryfee: {}, // 配送费
+        isYingye: true, // 是否营业
+        shopStatus: 0 // 门店状态
+      }
+    },
+    created() {
+      // 门店状态
+      // this.getShopStatus()
+
+      // 营业时间
+      // this.getBusinesshours()
+
+      // 商家信息
+      // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
+      // 接口通了  注释下面的 打开上面的
+      this.axios.get('./api/seller').then((res) => {
+        res = res.data
+        if (res.success === SUCCESS_OK) {
+          // 排序
+          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
+            res.data.dispatching.fees.price)
+          this.seller = Object.assign({}, this.seller, res.data)
+          // 设置微信title
+          this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
+        }
+      })
+    },
+    methods: {
+      // 营业时间
+      getBusinesshours() {
+        this.axios.get('/br/shop/businesshours?shopId=' + this.shopId).then((res) => {
+          if (res.data.success) {
+            res = res.data.data
+            let strB = res.beginTime.split('：', 2)
+            let strE = res.endTime.split('：', 2)
+            let b = new Date()
+            let e = new Date()
+            b.setHours(strB[0])
+            b.setMinutes(strB[1])
+            e.setHours(strE[0])
+            e.setMinutes(strE[1])
+            if (this.nowTime.getTime() - b.getTime() >= 0 && this.nowTime.getTime() - e.getTime() <= 0) {
+              this.isYingye = true
+              console.log('yes')
+            } else {
+              this.isYingye = false
+              this.toggleToast(true, '没在营业时间内')
+              console.log('no')
+            }
+          }
+        })
+      },
+      // 门店门店状态
+      getShopStatus() {
+        this.axios.get(`${this.api}/br/shop/status?shopId=${this.shopId}`).then((res) => {
+          if (res.success) {
+            if (res.data === 1) {
+              return
+            } else {
+              this.toggleToast(res.data, '商家关闭')
+              this.isYingye = true
+            }
+          }
+        })
+      },
+      // toggle toast
+      toggleToast(show, text) {
+        console.log('qweqweqweqweqweq')
+        this.toastText = text
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          if (this.toastShow) {
+            setTimeout(() => {
+              this.toastShow = !this.toastShow
+            }, 1000)
+          }
+        } else {
+          return
+        }
+      }
+    },
     components: {
-      index
+      'v-header': header,
+      toast
     }
   }
 </script>
+
+<style scoped>
+  .tab {
+    display: flex;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    background: #ffffff;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .tab-item {
+    flex: 1;
+    text-align: center;
+  }
+
+  .tab-item > a {
+    display: block;
+    color: #ff6651;
+    font-size: 17px;
+  }
+
+  .appViem {
+    position: relative;
+  }
+</style>
+
 <style lang="sass">
   @import './style/base.scss';
 </style>

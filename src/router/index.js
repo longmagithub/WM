@@ -9,10 +9,10 @@ export default new Router({
   scrollBehavior: () => ({y: 0}),
   routes: [
     // 默认
-    {
-      path: '/',
-      redirect: '/index' // 重定向到 /jingmo
-    },
+    // {
+    //   path: '/',
+    //   redirect: '/index'  重定向到 /jingmo
+    // },
     // 静默授权
     {
       path: '/jingmo',
@@ -24,19 +24,19 @@ export default new Router({
       component: require('../weixin/zhengchang.vue')
     },
     // 首页
-    {
-      path: '/index',
-      component: require('../components/index/index.vue'),
-      children: [ // 二级路由
-        {
-          path: '/', // 二级默认
-          redirect: '/goods'
-        },
-        { // 商品页面
-          path: '/goods',
-          component: require('../components/goods/goods.vue')
-        }
-      ]
+    // {
+    //   path: '/index',
+    //   component: require('../components/index/index.vue'),
+    //   children: [  二级路由
+    //     {
+    //       path: '/',  二级默认
+    //       redirect: '/goods'
+    //     },
+    //   ]
+    // },
+    { // 商品页面
+      path: '/goods',
+      component: require('../components/goods/goods.vue')
     },
     // 订单列表
     {
