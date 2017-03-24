@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.c76cd37ce2bdf21b0bfab9b03f9f7d1f.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/icon_pen.d549409.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/iconfont.654d05f.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/img.4be9eed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.b2b5d863ef56fd0e5a01.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.1818d317060c1f414cb2.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.17bf8a307101f2abc807.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -93,17 +100,18 @@
       <file leaf-file-name="index.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+            <state relative-caret-position="360">
+              <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
               <folding>
-                <element signature="e#1900#2022#0" expanded="false" />
-                <element signature="e#2266#2947#0" expanded="false" />
-                <element signature="e#3003#3807#0" expanded="false" />
-                <element signature="e#3847#4173#0" expanded="false" />
-                <element signature="e#4227#4579#0" expanded="false" />
-                <element signature="e#4618#4657#0" expanded="false" />
-                <element signature="e#4694#4751#0" expanded="false" />
-                <element signature="e#4792#4978#0" expanded="false" />
+                <element signature="e#1696#1734#0" expanded="true" />
+                <element signature="e#1921#2043#0" expanded="false" />
+                <element signature="e#2287#2968#0" expanded="false" />
+                <element signature="e#3024#3828#0" expanded="false" />
+                <element signature="e#3868#4194#0" expanded="false" />
+                <element signature="e#4248#4600#0" expanded="false" />
+                <element signature="e#4639#4678#0" expanded="false" />
+                <element signature="e#4715#4772#0" expanded="false" />
+                <element signature="e#4813#4999#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -589,12 +597,12 @@
       <workItem from="1489997390912" duration="19300000" />
       <workItem from="1490063747464" duration="16624000" />
       <workItem from="1490094869566" duration="51415000" />
-      <workItem from="1490322608043" duration="856000" />
+      <workItem from="1490322608043" duration="1074000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="377403000" />
+    <option name="totallyTimeSpent" value="377621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -1074,17 +1082,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+        <state relative-caret-position="360">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
           <folding>
-            <element signature="e#1900#2022#0" expanded="false" />
-            <element signature="e#2266#2947#0" expanded="false" />
-            <element signature="e#3003#3807#0" expanded="false" />
-            <element signature="e#3847#4173#0" expanded="false" />
-            <element signature="e#4227#4579#0" expanded="false" />
-            <element signature="e#4618#4657#0" expanded="false" />
-            <element signature="e#4694#4751#0" expanded="false" />
-            <element signature="e#4792#4978#0" expanded="false" />
+            <element signature="e#1696#1734#0" expanded="true" />
+            <element signature="e#1921#2043#0" expanded="false" />
+            <element signature="e#2287#2968#0" expanded="false" />
+            <element signature="e#3024#3828#0" expanded="false" />
+            <element signature="e#3868#4194#0" expanded="false" />
+            <element signature="e#4248#4600#0" expanded="false" />
+            <element signature="e#4639#4678#0" expanded="false" />
+            <element signature="e#4715#4772#0" expanded="false" />
+            <element signature="e#4813#4999#0" expanded="false" />
           </folding>
         </state>
       </provider>

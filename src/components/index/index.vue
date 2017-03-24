@@ -10,9 +10,9 @@
             <div class="title-name">{{seller.name}}</div>
             <!-- 描述 -->
             <div class="description">
-              {{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span
-              v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]
-            .price}}{{seller.dispatching.fees[0].fee| fees}}</span>
+              <!--{{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span-->
+              <!--v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]-->
+            <!--.price}}{{seller.dispatching.fees[0].fee| fees}}</span>-->
             </div>
             <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
           </div>
