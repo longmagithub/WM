@@ -1,33 +1,34 @@
 <template>
-  <div class="header" ref="header">
-    12312312312312312312
-    <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
-      <div class="box-content">
-        <div class="logo">
-          <img :src="seller.logo" alt="" width="48px" height="48px">
-        </div>
-        <div class="content">
-          <div class="title-name">{{seller.name}}</div>
-          <!-- 描述 -->
-          <div class="description">
-            {{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span
-            v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]
-            .price}}{{seller.dispatching.fees[0].fee| fees}}</span>
+  <div>
+    <div class="header" ref="header">
+      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
+        <div class="box-content">
+          <div class="logo">
+            <img :src="seller.logo" alt="" width="48px" height="48px">
           </div>
-          <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
+          <div class="content">
+            <div class="title-name">{{seller.name}}</div>
+            <!-- 描述 -->
+            <div class="description">
+              {{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span
+              v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]
+            .price}}{{seller.dispatching.fees[0].fee| fees}}</span>
+            </div>
+            <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
+          </div>
+          <div class="enter uxwm-iconfont btn_right"></div>
         </div>
-        <div class="enter uxwm-iconfont btn_right"></div>
+        <div class="activity">
+          <span class="text">{{seller.dispatching.activity[0].title}}</span>
+          <span class="number">{{seller.dispatching.activity.length}}个活动</span>
+        </div>
+      </router-link>
+      <div class="user">
+        <div class="user-btn" @click="goUser">我的订单</div>
       </div>
-      <div class="activity">
-        <span class="text">{{seller.dispatching.activity[0].title}}</span>
-        <span class="number">{{seller.dispatching.activity.length}}个活动</span>
+      <div class="background">
+        <img :src="seller.logo" alt="" width="100%" height="100%">
       </div>
-    </router-link>
-    <div class="user">
-      <div class="user-btn" @click="goUser">我的订单</div>
-    </div>
-    <div class="background">
-      <img :src="seller.logo" alt="" width="100%" height="100%">
     </div>
   </div>
 </template>
