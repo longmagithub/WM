@@ -24,7 +24,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/VAOrderH5': {
-        target: 'http://192.168.1.51:18081',
+        target: 'http://192.168.1.51',
         changeOrigin: true
       }
     },

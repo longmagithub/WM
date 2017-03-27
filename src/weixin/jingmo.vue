@@ -29,7 +29,7 @@
 //        const code = this.$route.query.code
         const code = 123
         const type = 1 // 授权类型：1静默授权；2用户授权
-        const api = `http://192.168.1.51/VAOrderH5/mp/authority?code=${code}&type=${type}`
+        const api = `http://192.168.1.51/mp/authority?code=${code}&type=${type}`
         this.axios.get(api).then((res) => {
           let d = res.data
           if (d.success) {
