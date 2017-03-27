@@ -45,7 +45,7 @@
             </div>
             <div class="describe">
               <span class="title">阶梯配送费</span>
-              <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}。</span>
+              <!--<span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}。</span>-->
             </div>
           </div>
           <div class="list-content" ref="listContent">
@@ -190,7 +190,6 @@
       deliveryDesc() {
         let fees = this.seller.dispatching.fees
         if ((this.totalPrice + this.totalPack) < fees[0].price) {
-          console.log(1)
           return `另需要配送费${fees[0].fee}元`
         } else {
           let flag = 0

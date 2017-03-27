@@ -18,14 +18,20 @@
              v-else-if="food.specification.length > 1 && food.state === 1"
              key="specification-wrapper">
       <transition name="move">
-        <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
+        <div class="cart-decrease"
+             v-show="food.count>0"
+             :class="{specification_delete: food.specification.length > 1}"
+             @click.stop.prevent="decreaseCart">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
+          <transition name="fade">
+            <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
+          </transition>
         </div>
       </transition>
       <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
-      <div class="specification"
+      <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click.stop.prevent="showChooseList($event)"><span class="text">选规格</span></div>
+           @click.stop.prevent="showChooseList($event)"></div>
     </section>
     <!-- 售罄 -->
     <section v-else key="sellout-wrapper">
@@ -53,7 +59,8 @@
     },
     data() {
       return {
-        showSpecs: false // 控制显示 规格
+        showSpecs: false, // 控制显示 规格
+        showDeleteTip: false // 多规格显示 删除 提示
       }
     },
     mounted() {
@@ -93,11 +100,18 @@
         this.$emit('add', event.target) // 给父组件传递被点击元素
       },
       decreaseCart(event) {
-        if (!event._constructed) {
-          return
-        }
-        if (this.food.count) {
-          this.food.count--
+        if (this.food.specification.length > 1) {
+          this.showDeleteTip = true
+          setTimeout(() => {
+            this.showDeleteTip = false
+          }, 200)
+        } else {
+          if (!event._constructed) {
+            return
+          }
+          if (this.food.count) {
+            this.food.count--
+          }
         }
       }
     }
@@ -134,6 +148,7 @@
 
   .specification-wrapper .cart-decrease,
   .cart-wrapper .cart-decrease {
+    position: relative;
     display: inline-block;
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -180,6 +195,7 @@
     color: rgb(147, 153, 159);
   }
 
+  .specification-wrapper .cart-add,
   .cart-wrapper .cart-add {
     display: inline-block;
     padding: 6px;
@@ -194,6 +210,16 @@
 
   .specification-wrapper .forbid .text {
     background: #dddddd;
+  }
+
+  .specification-wrapper .specification_delete .inner {
+    color: #dddddd;
+  }
+
+  .specification-wrapper .show_delete_tip {
+    position: absolute;
+    font-size: 12px;
+
   }
 
   .shop-cover {
