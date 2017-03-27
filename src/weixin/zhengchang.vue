@@ -25,11 +25,10 @@
       getOpenId () {
         const that = this
         const data = {
-//        const code = this.$route.query.code
-          code: 123,
+          code: this.$route.query.code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
-        const api = 'http://192.168.1.51/mp/authority'
+        const api = '/mp/authority'
         this.axios.post(api, data).then((res) => {
           const d = res.data
           if (d.success) {

@@ -18,7 +18,7 @@
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
         console.log(this.url)
-        this.getOpenId()
+        this.to()
       } else {
         this.getOpenId()
       }
@@ -27,8 +27,7 @@
       getOpenId () {
         const that = this
         const data = {
-//        const code = this.$route.query.code
-          code: 123,
+          code: this.$route.query.code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
         const api = '/mp/authority'
@@ -44,6 +43,7 @@
       },
       to () {
         const oauthCallbackUrl = encodeURIComponent('http://192.168.1.51/VAOrderH5/#/jingmo')
+        console.log(oauthCallbackUrl)
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         window.location.href = oauthJumpUrl
       },
