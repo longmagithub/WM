@@ -26,11 +26,13 @@
     methods: {
       getOpenId () {
         const that = this
+        const data = {
 //        const code = this.$route.query.code
-        const code = 123
-        const type = 1 // 授权类型：1静默授权；2用户授权
-        const api = `http://192.168.1.51/mp/authority?code=${code}&type=${type}`
-        this.axios.get(api).then((res) => {
+          code: 123,
+          type: 1 // 授权类型：1静默授权；2用户授权
+        }
+        const api = 'http://192.168.1.51/mp/authority'
+        this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
             console.log(d)
