@@ -25,8 +25,8 @@
       getOpenId () {
         const that = this
         const code = this.$route.query.code
-        const type = 'zhengchang'
-        const api = `http://preapi.wuliaogoule.com/VAMall/SG/api/wechat/getaccesstoken?code=${code}&type=${type}`
+        const type = 2 // 授权类型：1静默授权；2用户授权
+        const api = `http://192.168.1.51/VAOrderH5/mp/authority?code=${code}&type=${type}`
         this.axios.get(api).then((res) => {
           const d = res.data
           if (d.success) {
@@ -38,7 +38,7 @@
         })
       },
       to () {
-        const oauthCallbackUrl = encodeURIComponent('http://preapi.wuliaogoule.com/VAMall/H5/#/2')
+        const oauthCallbackUrl = encodeURIComponent('http://192.168.1.51/VAOrderH5/#/zhengchang')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
         window.location.href = oauthJumpUrl
       },

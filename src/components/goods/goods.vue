@@ -5,7 +5,6 @@
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
           <span class="text">{{item.dishTypeName}}</span>
-          <!--<span class="category_num" v-if="categoryNum[index]&&item.type==1">{{categoryNum[index]}}</span>-->
         </li>
       </ul>
     </div>
@@ -23,12 +22,12 @@
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.specification[0].dishPrice}}</span><span
                     class="text" v-if="food.specification.length > 1">起</span></div>
-                  <buyCart ref="buyCart"
-                           @add="addFood"
-                           @showSpecs="showSpecsFun"
-                           :food="food"
-                           :isYingye="isYingye"
-                           :index="index"></buyCart>
+                  <!--<buyCart ref="buyCart"-->
+                           <!--@add="addFood"-->
+                           <!--@showSpecs="showSpecsFun"-->
+                           <!--:food="food"-->
+                           <!--:isYingye="isYingye"-->
+                           <!--:index="index"></buyCart>-->
                 </div>
               </div>
             </li>
@@ -94,7 +93,6 @@
     data() {
       return {
         goods: [],
-        categoryNum: [], // 商品类型右上角已加入购物车的数量
         specs: {}, // 规格
         falg: '',
         listHeight: [], // 存放foodList 区间的高度的数组
@@ -112,6 +110,7 @@
     created() {
       // 菜谱信息
       this.getDishList()
+      console.log(this.seller)
     },
     computed: {
       currentIndex() { // 判决区间所对应的位置
@@ -383,7 +382,8 @@
   .food-item .content .price-wrapper .price .price-num {
     font-size: 17px;
   }
-  .food-item .content .price-wrapper .price .text{
+
+  .food-item .content .price-wrapper .price .text {
     padding-left: 5px;
     font-size: 9px;
     color: #6c6c6c;

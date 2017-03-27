@@ -10,7 +10,7 @@ export default new Router({
     // 默认
     {
       path: '/',
-      redirect: '/index' // 重定向到 /jingmo
+      redirect: '/jingmo' // 重定向到 /jingmo
     },
     // 静默授权
     {
@@ -74,6 +74,7 @@ export default new Router({
     }
   ]
 })
+/*
 const router = new Router()
 router.beforeEach((to, from, next) => {
   const token = window.sessionStorage.getItem('demo-token')
@@ -91,4 +92,5 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+*/
 

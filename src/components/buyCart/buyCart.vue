@@ -1,26 +1,28 @@
 <template>
   <div class="buyCart">
     <!-- 加减 button -->
-    <section class="cart-wrapper" v-if="(food.specification.length === 1 && food.state === 1) || shopcart"
+    <section class="cart-wrapper" v-if="(foods.specification.length === 1 && foods.state === 1) || shopcart"
              key="cart-wrapper">
       <transition name="move">
-        <div class="cart-decrease" v-show="food.count>0" @click.stop.prevent="decreaseCart">
+        <div class="cart-decrease"
+             v-show="foodNum > 0"
+             @click.stop.prevent="removeOutCart(1,2,3,4,5,6,7,8,9,$event)">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
         </div>
       </transition>
-      <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
+      <div class="cart-count" v-show="foodNum>0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click.stop.prevent="addCart($event,food.specification[0].dishPrice,food.specification[0].packPrice)"></div>
+           @click.stop.prevent="addToCart(1,2,3,4,5,6,7,8,9,$event)"></div>
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
-             v-else-if="food.specification.length > 1 && food.state === 1"
+             v-else-if="foods.specification.length > 1 && foods.state === 1"
              key="specification-wrapper">
       <transition name="move">
         <div class="cart-decrease"
-             v-show="food.count>0"
-             :class="{specification_delete: food.specification.length > 1}"
+             v-show="foods.count>0"
+             :class="{specification_delete: foods.specification.length > 1}"
              @click.stop.prevent="decreaseCart">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
           <transition name="fade">
@@ -28,7 +30,7 @@
           </transition>
         </div>
       </transition>
-      <div class="cart-count" v-show="food.count>0">{{food.count}}</div>
+      <div class="cart-count" v-show="foods.count>0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
            @click.stop.prevent="showChooseList($event)"></div>
@@ -40,11 +42,11 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import Vue from 'vue'
+  import {mapState, mapMutations} from 'vuex'
   //  import {loadFromLocal} from '../../common/js/store'
   export default {
     props: {
-      food: {
+      foods: {
         type: Object
       },
       index: {
@@ -70,7 +72,33 @@
 //      console.log(loadFromLocal('undefined', 'userName'))
 //      console.log(this.food)
     },
+    computed: {
+      ...mapState([
+        'cartList'
+      ]),
+      // 监听cartList变化，更新当前商铺的购物车信息shopCart，同时返回一个新的对象
+      shopCart: () => {
+        return Object.assign({}, this.cartList[this.shopId])
+      },
+      // shopCart变化的时候重新计算当前商品的数量
+      foodNum: () => {
+        let categoryId = this.foods.categoryId
+        let itemId = this.foods.itemId
+        if (this.shopCart && this.shopCart[categoryId] && this.shopCart[categoryId][itemId]) {
+          let num = 0
+          Object.values(this.shopCart[categoryId][itemId]).forEach((item, index) => {
+            num += item.num
+          })
+          return num
+        } else {
+          return 0
+        }
+      }
+    },
     methods: {
+      ...mapMutations([
+        'ADD_CART', 'REDUCE_CART'
+      ]),
       showChooseList(event) {
         if (!this.isYingye) {
           return
@@ -79,38 +107,55 @@
         }
       },
       // 添加到购物车
-      addCart(event, price, pack) {
+      // 加入购物车，所需7个参数，商铺id，食品分类id，食品id，食品规格id，食品名字，食品价格，食品规格
+      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, skuId, stock, event) {
         console.log(event)
         if (!this.isYingye) {
           return
         } else {
           if (!event._constructed) {
             return
-          }
-          if (!this.food.count && !this.food.shopCartPrice && !this.food.packPrice) {
-            Vue.set(this.food, 'count', 1)
-            Vue.set(this.food, 'shopCartPrice', price)
-            Vue.set(this.food, 'packPrice', pack)
           } else {
-            this.food.shopCartPrice = price
-            this.food.packPrce = pack
-            this.food.count++
+            this.ADD_CART({
+              shopid: this.shopId,
+              categoryId,
+              itemId,
+              foodId,
+              name,
+              price,
+              specs,
+              packingFee,
+              skuId,
+              stock
+            })
           }
         }
         this.$emit('add', event.target) // 给父组件传递被点击元素
       },
-      decreaseCart(event) {
+      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, skuId, stock, event) {
+        // 判断是否是多规格
         if (this.food.specification.length > 1) {
           this.showDeleteTip = true
-          setTimeout(() => {
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
             this.showDeleteTip = false
           }, 200)
         } else {
           if (!event._constructed) {
             return
-          }
-          if (this.food.count) {
-            this.food.count--
+          } else {
+            this.ADD_CART({
+              shopid: this.shopId,
+              categoryId,
+              itemId,
+              foodId,
+              name,
+              price,
+              specs,
+              packingFee,
+              skuId,
+              stock
+            })
           }
         }
       }

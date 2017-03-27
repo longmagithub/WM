@@ -23,8 +23,9 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/br': {
-        'target': 'http://192.168.1.103:3003'
+      '/VAOrderH5': {
+        target: 'http://192.168.1.51:18081',
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
