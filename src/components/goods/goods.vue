@@ -23,11 +23,11 @@
                   <div class="price">￥<span class="price-num">{{food.specification[0].dishPrice}}</span><span
                     class="text" v-if="food.specification.length > 1">起</span></div>
                   <!--<buyCart ref="buyCart"-->
-                           <!--@add="addFood"-->
-                           <!--@showSpecs="showSpecsFun"-->
-                           <!--:food="food"-->
-                           <!--:isYingye="isYingye"-->
-                           <!--:index="index"></buyCart>-->
+                  <!--@add="addFood"-->
+                  <!--@showSpecs="showSpecsFun"-->
+                  <!--:food="food"-->
+                  <!--:isYingye="isYingye"-->
+                  <!--:index="index"></buyCart>-->
                 </div>
               </div>
             </li>
@@ -207,12 +207,14 @@
       // 菜谱信息
       getDishList() {
         const data = {
-          shopId: this.shoId,
-          customerId: this.customerId
+//          shopId: this.shoId,
+          shopId: 123,
+//          customerId: this.customerId
+          customerId: 123
         }
         console.log(data)
-        // this.axios.get(`${this.api}/br/dish/list${this.PublicJs.createParams(data)}`).then(() => {
-        this.axios.get('./api/goods').then((res) => {
+        this.axios.get(`http://192.168.1.51/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
+//        this.axios.get('./api/goods').then((res) => {
           res = res.data
           if (res.success === SUCCESS_OK) {
             this.goods = res.data

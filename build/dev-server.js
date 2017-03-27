@@ -47,7 +47,7 @@ apiRoutes.get('/ratings', function (req, res) {
 })
 
 app.use('/api', apiRoutes)
-/* 上面是测试 mock 数据*/
+/* 上面是测试 mock 数据 */
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
