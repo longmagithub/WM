@@ -23,7 +23,6 @@
     },
     methods: {
       getOpenId () {
-        const that = this
         const data = {
           code: this.$route.query.code,
           type: 2 // 授权类型：1静默授权；2用户授权
@@ -33,21 +32,20 @@
           const d = res.data
           if (d.success) {
             console.log(d)
-            that.jump()
           }
         }, (errorRes) => {
           console.log(errorRes)
         })
       },
       to () {
-        const oauthCallbackUrl = encodeURIComponent('http://192.168.1.51/VAOrderH5/#/zhengchang')
+        const oauthCallbackUrl = encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
         window.location.href = oauthJumpUrl
       },
       // 如果有code 跳转页面
       jump () {
-//        window.location.href = 'http://preapi.wuliaogoule.com/VAMall/H5/#/2'
-        this.$router.replace({path: '/index'})
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+//        this.$router.replace({path: '/index'})
       }
     }
   }

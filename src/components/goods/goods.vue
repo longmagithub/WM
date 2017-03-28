@@ -213,7 +213,7 @@
           customerId: 123
         }
         console.log(data)
-        this.axios.get(`http://192.168.1.51/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
+        this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
 //        this.axios.get('./api/goods').then((res) => {
           res = res.data
           if (res.success === SUCCESS_OK) {

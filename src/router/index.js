@@ -19,7 +19,7 @@ export default new Router({
     },
     // 正常授权
     {
-      path: 'zhengchang',
+      path: '/zhengchang',
       component: require('../weixin/zhengchang.vue')
     },
     // 首页

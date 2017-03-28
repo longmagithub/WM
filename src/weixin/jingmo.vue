@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>{{msg}}</h1>
-    <h2>{{url}}</h2>
+    <!--<h1>{{msg}}</h1>-->
+    <!--<h2>{{url}}</h2>-->
     <!-- <div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div> -->
   </div>
 </template>
@@ -42,13 +42,17 @@
         })
       },
       to () {
-        const oauthCallbackUrl = encodeURIComponent('http://192.168.1.51/VAOrderH5/#/jingmo')
+        const oauthCallbackUrl = encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo')
         console.log(oauthCallbackUrl)
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+        console.log(oauthJumpUrl)
         window.location.href = oauthJumpUrl
+        console.log(1)
       },
       jump () {
-        this.$router.replace({path: '/zhengchang'})
+        console.log(2)
+//        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+        this.$router.replace({path: 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'})
       }
     }
   }
