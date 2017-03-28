@@ -2,7 +2,7 @@
   <div>
     <h1>{{msg}}</h1>
     <h2>{{url}}</h2>
-     <!--<div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div>-->
+    <!--<div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div>-->
   </div>
 </template>
 <script>
@@ -15,9 +15,7 @@
     },
     mounted () {
       this.url = window.location.href
-      window.alert(this.url.indexOf('code'))
       if (this.url.indexOf('code') > 0) {
-        window.alert('yes code')
         this.getOpenId()
       }
     },
@@ -28,7 +26,8 @@
           code: this.$route.query.code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
-        const api = '/mp/authority'
+        console.log(data)
+        const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
