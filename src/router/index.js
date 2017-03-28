@@ -17,6 +17,11 @@ export default new Router({
       path: '/jingmo',
       component: require('../weixin/jingmo.vue')
     },
+    // 静默授权1
+    {
+      path: '/jingmo1',
+      component: require('../weixin/jingmo1.vue')
+    },
     // 正常授权
     {
       path: '/zhengchang',
