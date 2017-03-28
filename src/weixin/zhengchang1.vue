@@ -42,8 +42,13 @@
       },
       // 如果有code 跳转页面
       jump (customerId) {
-        window.location.href =
-          `http://newpay.tunnel.qydev.com/VAOrderH5/#/index?shopId=ca2939cf-f42f-402f-8b75-53283431ee68&customerId=${customerId}`
+        this.$router.replace({
+          path: '/index',
+          query: {
+            'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
+            'customerId': customerId
+          }
+        })
       }
     }
   }
