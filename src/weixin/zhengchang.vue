@@ -17,8 +17,10 @@
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
+        console.log('no')
         this.to()
       } else {
+        console.log('yes')
         this.getOpenId()
       }
     },
@@ -29,6 +31,7 @@
         window.location.href = oauthJumpUrl
       },
       getOpenId () {
+        console.log('go')
         const data = {
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
