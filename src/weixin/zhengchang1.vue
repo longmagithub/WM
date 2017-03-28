@@ -15,9 +15,7 @@
     components: {},
     mounted () {
       this.url = window.location.href
-      if (this.url.indexOf('code') < 0) {
-        this.to()
-      } else {
+      if (this.url.indexOf('code') > 0) {
         this.getOpenId()
       }
     },
@@ -27,26 +25,21 @@
           code: this.$route.query.code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
-        const api = '/mp/authority'
+        const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           const d = res.data
           if (d.success) {
             console.log(d)
+            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)
         })
       },
-      to () {
-        window.alert('授权回调')
-        const oauthCallbackUrl = encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang')
-        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
-        window.alert('授权回调')
-        window.location.href = oauthJumpUrl
-      },
       // 如果有code 跳转页面
-      jump () {
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+      jump (customerId) {
+        window.location.href =
+          `http://newpay.tunnel.qydev.com/VAOrderH5/#/index?shopId=ca2939cf-f42f-402f-8b75-53283431ee68&customerId=${customerId}`
       }
     }
   }

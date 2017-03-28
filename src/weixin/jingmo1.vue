@@ -39,7 +39,8 @@
         })
       },
       jump () {
-        this.$router.replace({path: 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'})
+        this.$router.replace({path:
+          'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang?shopId=ca2939cf-f42f-402f-8b75-53283431ee68'})
       }
     }
   }
