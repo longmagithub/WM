@@ -27,6 +27,11 @@ export default new Router({
       path: '/zhengchang',
       component: require('../weixin/zhengchang.vue')
     },
+    // 正常授权1
+    {
+      path: '/zhengchang1',
+      component: require('../weixin/zhengchang1.vue')
+    },
     // 首页
     {
       path: '/index',
@@ -80,22 +85,22 @@ export default new Router({
   ]
 })
 /*
-const router = new Router()
-router.beforeEach((to, from, next) => {
-  const token = window.sessionStorage.getItem('demo-token')
-  if (to.path === '/' || to.path === '/submitPay') { // 如果是跳转到登录页的
-    if (token !== 'null' && token !== null) {
-      next('/todolist') // 如果有token就转向todolist不返回登录页
-    }
-    next() // 否则跳转回登录页
-  } else {
-    if (token !== 'null' && token !== null) {
-      Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token
-      next() // 如果有token就正常转向
-    } else {
-      next('/') // 否则跳转回登录页
-    }
-  }
-})
-*/
+ const router = new Router()
+ router.beforeEach((to, from, next) => {
+ const token = window.sessionStorage.getItem('demo-token')
+ if (to.path === '/' || to.path === '/submitPay') { // 如果是跳转到登录页的
+ if (token !== 'null' && token !== null) {
+ next('/todolist') // 如果有token就转向todolist不返回登录页
+ }
+ next() // 否则跳转回登录页
+ } else {
+ if (token !== 'null' && token !== null) {
+ Vue.prototype.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token
+ next() // 如果有token就正常转向
+ } else {
+ next('/') // 否则跳转回登录页
+ }
+ }
+ })
+ */
 

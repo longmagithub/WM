@@ -39,9 +39,10 @@
         })
       },
       jump () {
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
-//        this.$router.replace({path:
-//          'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'})
+//        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+        this.$router.replace({
+          path: 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+        })
       }
     }
   }
