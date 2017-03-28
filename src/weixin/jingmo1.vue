@@ -31,6 +31,7 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
+            console.log(d)
             that.jump()
           }
         }, (errorRes) => {
@@ -38,8 +39,9 @@
         })
       },
       jump () {
-        this.$router.replace({path:
-          'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'})
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+//        this.$router.replace({path:
+//          'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'})
       }
     }
   }
