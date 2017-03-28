@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import {urlParse} from '../common/js/util'
+  import {urlParse, setStore} from '../common/js/util'
   export default {
     data () {
       return {
@@ -32,6 +32,7 @@
           let d = res.data
           if (d.success) {
             console.log(d)
+            setStore('user', {customerId: d.customerId})
             that.jump(d.customerId)
           }
         }, (errorRes) => {
@@ -39,13 +40,7 @@
         })
       },
       jump (customerId) {
-//        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
-        this.$router.replace({
-          path: '/zhengchang',
-          query: {
-            'customerId': customerId
-          }
-        })
+        window.location.href = `http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang?customerId=${customerId}`
       }
     }
   }
