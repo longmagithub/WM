@@ -40,6 +40,7 @@
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           const d = res.data
+          console.log(res)
           if (d.success) {
             console.log(d)
             this.jump(d.data.customerId)
