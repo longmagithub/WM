@@ -5,6 +5,8 @@
   </div>
 </template>
 <script>
+  import {urlParse} from '../common/js/util'
+
   export default {
     data () {
       return {
@@ -22,7 +24,7 @@
     methods: {
       getOpenId () {
         const data = {
-          code: this.$route.query.code,
+          code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
         const api = '/mp/authority/customer'

@@ -12,7 +12,6 @@
         url: ''
       }
     },
-    components: {},
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
@@ -21,7 +20,7 @@
     },
     methods: {
       to () {
-        const oauthCallbackUrl = encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang1?shopId=ca2939cf-f42f-402f-8b75-53283431ee68')
+        const oauthCallbackUrl = encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang1')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
         window.location.href = oauthJumpUrl
       }

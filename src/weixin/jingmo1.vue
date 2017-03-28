@@ -27,7 +27,6 @@
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
-        console.log(data)
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           let d = res.data
@@ -40,7 +39,7 @@
       },
       jump () {
         this.$router.replace({path:
-          'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang?shopId=ca2939cf-f42f-402f-8b75-53283431ee68'})
+          'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'})
       }
     }
   }
