@@ -32,7 +32,7 @@
           let d = res.data
           if (d.success) {
             console.log(d)
-            setStore('user', {customerId: d.customerId})
+            setStore('user', {'customerId': d.customerId})
             that.jump(d.customerId)
           }
         }, (errorRes) => {

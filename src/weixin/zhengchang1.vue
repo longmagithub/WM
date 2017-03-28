@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-  import {urlParse} from '../common/js/util'
+  import {urlParse, getStore} from '../common/js/util'
 
   export default {
     data () {
@@ -26,6 +26,7 @@
     methods: {
       getOpenId () {
         const data = {
+          customerId: getStore('user').customerId,
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
