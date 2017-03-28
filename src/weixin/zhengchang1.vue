@@ -17,7 +17,9 @@
     components: {},
     mounted () {
       this.url = window.location.href
+      console.log(this.url)
       if (this.url.indexOf('code') > 0) {
+        console.log(123)
         this.getOpenId()
       }
     },
