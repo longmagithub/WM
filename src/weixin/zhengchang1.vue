@@ -30,9 +30,11 @@
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
+        console.log(data)
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           const d = res.data
+          console.log(res)
           if (d.success) {
             console.log(d)
             this.jump(d.data.customerId)
