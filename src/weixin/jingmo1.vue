@@ -32,16 +32,19 @@
           let d = res.data
           if (d.success) {
             console.log(d)
-            that.jump()
+            that.jump(d.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)
         })
       },
-      jump () {
+      jump (customerId) {
 //        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
         this.$router.replace({
-          path: '/zhengchang'
+          path: '/zhengchang',
+          query: {
+            'customerId': customerId
+          }
         })
       }
     }
