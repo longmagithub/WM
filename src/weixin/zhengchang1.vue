@@ -26,7 +26,7 @@
     methods: {
       getOpenId () {
         const data = {
-          customerId: getStore('user').customerId,
+          customerId: getStore('user'),
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
