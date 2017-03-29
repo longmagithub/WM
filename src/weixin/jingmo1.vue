@@ -33,7 +33,7 @@
           if (d.success) {
             console.log(d)
             setStore('user', d.data.customerId)
-            that.jump(d.dara.customerId)
+            that.jump(d.data.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)
