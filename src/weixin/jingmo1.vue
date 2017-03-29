@@ -32,15 +32,15 @@
           let d = res.data
           if (d.success) {
             console.log(d)
-            setStore('user', d.data.customerId)
-            that.jump(d.data.customerId)
+            setStore('user', {'customerId': d.data.customerId, 'shopId': urlParse().shopId})
+            that.jump()
           }
         }, (errorRes) => {
           console.log(errorRes)
         })
       },
-      jump (customerId) {
-        window.location.href = `http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang?customerId=${customerId}`
+      jump () {
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
       }
     }
   }

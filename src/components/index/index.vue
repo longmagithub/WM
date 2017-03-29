@@ -18,19 +18,14 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {urlParse} from '../../common/js/util'
+//  import {urlParse} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
   const SUCCESS_OK = true
   export default{
     data() {
       return {
-        seller: {
-          id: (() => {
-            let queryParam = urlParse()
-            return queryParam.id
-          })()
-        },
+        seller: {},
         shopId: '',
         toastShow: false,
         toastText: '',
