@@ -22,7 +22,7 @@
     },
     methods: {
       getOpenId () {
-//        const that = this
+        const that = this
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
@@ -32,8 +32,8 @@
           let d = res.data
           if (d.success) {
             console.log(d)
-            setStore('user', d.customerId)
-//            that.jump(d.customerId)
+            setStore('user', d.data.customerId)
+            that.jump(d.dara.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)
