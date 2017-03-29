@@ -33,7 +33,7 @@
           if (d.success) {
             console.log(urlParse().shopId)
             setStore('user', {
-              'shopId': urlParse().shopId,
+              'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
               'customerId': d.data.customerId
             })
             that.jump()
