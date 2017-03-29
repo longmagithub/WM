@@ -33,8 +33,8 @@
           if (d.success) {
             console.log(urlParse().shopId)
             setStore('user', {
-              'customerId': d.data.customerId,
-              'shopId': urlParse().shopId
+              'shopId': urlParse().shopId,
+              'customerId': d.data.customerId
             })
             that.jump()
           }
