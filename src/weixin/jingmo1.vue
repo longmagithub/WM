@@ -31,12 +31,14 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            console.log(d)
-            setStore('user', {'customerId': d.data.customerId, 'shopId': urlParse().shopId})
+            console.log(urlParse().shopId)
+            setStore('user', {
+              'customerId': d.data.customerId,
+              'shopId': urlParse().shopId
+            })
             that.jump()
           }
         }, (errorRes) => {
-          console.log(errorRes)
         })
       },
       jump () {
