@@ -2,25 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fonts/iconfont.eot" afterPath="$PROJECT_DIR$/src/fonts/iconfont.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fonts/iconfont.ttf" afterPath="$PROJECT_DIR$/src/fonts/iconfont.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fonts/iconfont.woff" afterPath="$PROJECT_DIR$/src/fonts/iconfont.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/index.js" afterPath="$PROJECT_DIR$/config/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/buyCart/buyCart.vue" afterPath="$PROJECT_DIR$/src/components/buyCart/buyCart.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/goods/goods.vue" afterPath="$PROJECT_DIR$/src/components/goods/goods.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/header/header.vue" afterPath="$PROJECT_DIR$/src/components/header/header.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" afterPath="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" afterPath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/toast.vue" afterPath="$PROJECT_DIR$/src/components/toast.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fonts/iconfont.css" afterPath="$PROJECT_DIR$/src/fonts/iconfont.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fonts/iconfont.js" afterPath="$PROJECT_DIR$/src/fonts/iconfont.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fonts/iconfont.svg" afterPath="$PROJECT_DIR$/src/fonts/iconfont.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="$PROJECT_DIR$/src/router/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/mutations.js" afterPath="$PROJECT_DIR$/src/store/mutations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/addList.vue" afterPath="$PROJECT_DIR$/src/views/addList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/addNew.vue" afterPath="$PROJECT_DIR$/src/views/addNew.vue" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.0e5f3a88a84b18bec007.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.49d0cba1472a373bb229.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weixin/zhengchang.vue" afterPath="$PROJECT_DIR$/src/weixin/zhengchang.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -123,21 +107,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="zhengchang.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="zhengchang.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/weixin/zhengchang.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+            <state relative-caret-position="312">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addList.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="addList.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/addList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+            <state relative-caret-position="600">
+              <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -275,9 +259,9 @@
         <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/views/addNew.vue" />
         <option value="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" />
-        <option value="$PROJECT_DIR$/src/weixin/zhengchang.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/views/addList.vue" />
+        <option value="$PROJECT_DIR$/src/weixin/zhengchang.vue" />
       </list>
     </option>
   </component>
@@ -543,12 +527,12 @@
       <workItem from="1490616352366" duration="2620000" />
       <workItem from="1490620104107" duration="16254000" />
       <workItem from="1490692812933" duration="16241000" />
-      <workItem from="1490755317155" duration="51654000" />
+      <workItem from="1490755317155" duration="52420000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="507387000" />
+    <option name="totallyTimeSpent" value="508153000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -786,6 +770,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="1156" column="0" selection-start-line="1156" selection-start-column="0" selection-end-line="1156" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -991,34 +976,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/weixin/jingmo.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/weixin/jingmo1.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="29" column="14" selection-start-line="29" selection-start-column="14" selection-end-line="29" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weixin/zhengchang1.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weixin/zhengchang.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1055,8 +1016,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/addList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="23" column="19" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+        <state relative-caret-position="600">
+          <caret line="42" column="32" selection-start-line="42" selection-start-column="32" selection-end-line="42" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/weixin/jingmo.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/weixin/zhengchang1.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/weixin/zhengchang.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
           <folding />
         </state>
       </provider>
