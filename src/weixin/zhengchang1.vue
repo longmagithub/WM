@@ -24,13 +24,13 @@
     methods: {
       getOpenId () {
         console.log('**正常111111授权 调用接口**')
-        console.log(data)
         const data = {
           customerId: getStore('user').customerId,
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
         const api = '/mp/authority/customer'
+        console.log(data)
         this.axios.post(api, data).then((res) => {
           const d = res.data
           if (d.success) {
