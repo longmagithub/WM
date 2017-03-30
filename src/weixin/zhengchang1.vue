@@ -23,6 +23,8 @@
     },
     methods: {
       getOpenId () {
+        console.log('**正常111111授权 调用接口**')
+        console.log(data)
         const data = {
           customerId: getStore('user').customerId,
           code: urlParse().code,
