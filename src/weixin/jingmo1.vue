@@ -27,12 +27,10 @@
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
-        console.log()
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            console.log(urlParse().shopId)
             setStore('user', {
               'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
               'customerId': d.data.customerId
