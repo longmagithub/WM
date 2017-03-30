@@ -22,7 +22,7 @@
       </p>
     </div>
     <div class="submit-wrapper" @click="weChatPay">
-      <div class="submitBtn">确认支付￥20.00</div>
+      <div class="submitBtn">确认支付￥{{paidPrice}}</div>
     </div>
     <div class="image-wrapper">
       <div class="image"></div>
@@ -34,15 +34,23 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
+  import {getStore} from '../../common/js/util'
+  const SUCCESS_OK = true
   export default {
     data() {
       return {
         currentTime: Math.round(new Date().getTime() / 1000), // 当前时间戳
-        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 1) / 1000), // 15分钟后
+        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 5) / 1000), // 15分钟后
         isTime: true,
         toastShow: false,
-        toastText: ''
+        toastText: '',
+        orderId: '',
+        paidPrice: 0 // 支付多少
       }
+    },
+    mounted() {
+      this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
+      this.paidPrice = getStore('userOrderIofo').paidPrice ? getStore('userOrderIofo').paidPrice : 0
     },
     methods: {
       countDownFun() {
@@ -64,10 +72,81 @@
             this.toastShow = false
             this.toastText = ''
           }, 1000)
-          console.log('已经超时')
         } else {
-          console.log('去支付')
+          if (!this.PublicJs.isWechat()) {
+            this.toastShow = true
+            this.toastText = '仅支持微信中支付，且微信版本需在5.0以上'
+            setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
+            }, 1000)
+            return
+          } else {
+            // 发起支付
+            const data = {
+              customerId: getStore('user').customerId,
+              shopId: getStore('user').shopId,
+              orderId: this.orderId
+            }
+            this.axios.post(`/br/order/pay`, data)
+            .then((res) => {
+              res = res.data
+              console.log(res)
+              if (res.success === SUCCESS_OK) {
+//                this.sendWxSDK(res.data.data)
+              } else {
+                this.toastShow = true
+                this.toastText = '订单支付失败，请稍候重试'
+                setTimeout(() => {
+                  this.toastShow = false
+                  this.toastText = ''
+                }, 1000)
+              }
+            }, (res) => {
+              this.toastShow = true
+              this.toastText = '网络异常，请稍候重试'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+            })
+          }
         }
+      },
+      sendWxSDK (data) {
+        console.log(data)
+        wx.chooseWXPay({
+          timestamp: data.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
+          package: data.package, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: data.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign: data.paySign, // 支付签名
+          success: function (res) {
+            this.isAjaxing = false
+            this.toastShow = true
+            // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
+            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              this.toastText = '支付成功'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+              // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
+            } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
+              this.toastText = '您已取消支付'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+            } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
+              this.toastText = '支付失败'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+            }
+          }
+        })
       }
     },
     components: {

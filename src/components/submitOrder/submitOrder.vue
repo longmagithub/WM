@@ -53,27 +53,33 @@
     </div>
     <div class="submitOrder-btn">
       <div class="price">待支付￥98</div>
-      <div class="submit-btn" @click="gotoPay">确认下单</div>
+      <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
+    <toast :show="toastShow" :text="toastText"></toast>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {formatDate} from '../../common/js/date'
+  import {getStore, setStore} from '../../common/js/util'
   import * as PublicJs from '../../utils/public'
+  import toast from '../toast.vue'
+  const SUCCESS_OK = true
   export default {
     data() {
       return {
+        toastShow: false,
+        toastText: '',
         options: [], // 时间数组
         selected: 0, // 默认index
         estimateTime: new Date(new Date().setMinutes(new Date().getMinutes() + 30)), // 预计时间
         endTime: 1489752000000, // 结束时间
-        key: 45
+        key: 45,
+        orderId: '' // 订单id
       }
     },
     mounted() {
       this.$nextTick(() => {
-        console.log(231312312312312312312)
         this.PublicJs.changeTitleInWx('确认订单')
       })
     },
@@ -110,13 +116,72 @@
       }
     },
     methods: {
+      // 提交订单
+      submitOrder() {
+        const data = {
+          shopId: getStore('user').shopId,
+          customerId: getStore('user').customerId,
+          originalPrice: 0.05, // 订单原价
+          packPrice: 0.02, // 订单打包费
+          dispatchPrice: 0.01, // 订单配送费
+          discountPrice: 0, // 订单优惠金额
+          paidPrice: 0.05, // 支付金额
+          addressId: '196e64e2-aff8-45a5-a290-81e747f30766',  // 用户收货ID
+          receivingAddress: '保亿大厦', // 用户收货地址
+          invoiceTitle: '个人', // 发票抬头
+          remark: '翠花上酸菜',  // 订单备注
+          expectTime: 1490849400,  // 期望送达时间
+          orderDish: [  // 订单菜品
+            {
+              specificationId: '49dafd43-cd8b-4834-8331-29930dc84fd8', // 菜规格ID
+              count: 1,  // 菜数量
+              price: 0.01
+            },
+            {
+              specificationId: 'f61f6194-5e0e-41fd-9e70-f3752c897d30', // 菜规格ID
+              count: 1,  // 菜数量
+              price: 0.01
+            }
+          ],
+          shopDiscountId: '' // 所参加优惠活动ID
+        }
+        setStore('userOrderIofo', data)
+        console.log(data)
+        const api = '/br/order'
+        this.axios.post(api, data).then((res) => {
+          res = res.data
+          console.log(res)
+          if (res.success === SUCCESS_OK) {
+            this.orderId = res.data.orderId
+            this.gotoPay()
+          } else {
+            this.toastText = '网络异常，请稍后再试'
+            this.toastShow = true
+            setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
+            }, 1000)
+          }
+        })
+      },
       // 去支付
       gotoPay() {
-        this.$router.push({path: '/submitPay'})
+        this.$router.push({
+          path: '/submitPay',
+          query: {
+            orderId: this.orderId
+          }
+        })
       },
       // 去地址列表
       gotoAddList() {
-        this.$router.push({path: '/addList'})
+        this.$router.push({
+          path: '/addList',
+          query: {
+            shopId: getStore('user').shopId,
+            customerId: getStore('user').customerId
+          }
+        })
       }
     },
     filters: {
@@ -124,6 +189,9 @@
         let date = new Date(time)
         return formatDate(date, 'yyyy-MM-dd hh:mm')
       }
+    },
+    components: {
+      toast
     }
   }
 </script>

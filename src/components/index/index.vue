@@ -1,7 +1,7 @@
 <template>
   <div class="index">
-    <div class="heade">
-      <vheade :seller="seller"></vheade>
+    <div class="header">
+      <vheade :seller="shopDetail" :detail="detail"></vheade>
     </div>
     <div class="tab">
       <div class="tab-item">
@@ -9,54 +9,60 @@
       </div>
     </div>
     <div class="main">
-      <goods :seller="seller" :is-yingye="isYingye"></goods>
+      <goods :shopDetail="shopDetail" :is-yingye="isYingye"></goods>
     </div>
-    <toast :show="toastShow" :text="'toastText'"></toast>
+    <toast :show="toastShow" :text="toastText"></toast>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-//  import {urlParse} from '../../common/js/util'
+  import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
   const SUCCESS_OK = true
   export default{
     data() {
       return {
-        seller: {},
-        shopId: '',
+        shopDetail: {}, // 商家信息
+        detail: {}, // 配送信息
+        shopId: null,
+        customerId: null,
         toastShow: false,
         toastText: '',
         nowTime: new Date(),
         endTime: '',
         deliveryfee: {}, // 配送费
-        isYingye: true, // 是否营业
+        isYingye: false, // 是否营业
         shopStatus: 0 // 门店状态
       }
     },
     created() {
+      if (getStore('user')) {
+        this.shopId = getStore('user').shopId
+        this.customerId = getStore('user').customerId
+      } else {
+//        this.$router.replace({path: '/jingmo'})
+        setStore('user', {
+          'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
+          'customerId': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
+        })
+      }
+      // 请求公共接口
+      this.axios.get('/common/sysconfig/list?type=2').then((res) => {
+        console.log('** 公共接口 **')
+        console.log(res)
+      })
+    },
+    mounted() {
+      // 商家信息
+      this.getShopDetail()
       // 门店状态
-      // this.getShopStatus()
+//      this.getShopState()
 
       // 营业时间
       // this.getBusinesshours()
-
-      // 商家信息
-      // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
-      // 接口通了  注释下面的 打开上面的
-      this.axios.get('./api/seller').then((res) => {
-        res = res.data
-        if (res.success === SUCCESS_OK) {
-          // 排序
-          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
-            res.data.dispatching.fees.price)
-          this.seller = Object.assign({}, this.seller, res.data)
-          // 设置微信title
-          this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
-        }
-      })
     },
     methods: {
       // 营业时间
@@ -64,8 +70,8 @@
         this.axios.get('/br/shop/businesshours?shopId=' + this.shopId).then((res) => {
           if (res.data.success) {
             res = res.data.data
-            let strB = res.beginTime.split('：', 2)
-            let strE = res.endTime.split('：', 2)
+            let strB = res.beginTime.split(':', 2)
+            let strE = res.endTime.split(':', 2)
             let b = new Date()
             let e = new Date()
             b.setHours(strB[0])
@@ -74,39 +80,51 @@
             e.setMinutes(strE[1])
             if (this.nowTime.getTime() - b.getTime() >= 0 && this.nowTime.getTime() - e.getTime() <= 0) {
               this.isYingye = true
-              console.log('yes')
             } else {
               this.isYingye = false
               this.toggleToast(true, '没在营业时间内')
-              console.log('no')
             }
           }
         })
       },
       // 门店门店状态
-      getShopStatus() {
-        this.axios.get(`${this.api}/br/shop/status?shopId=${this.shopId}`).then((res) => {
-          if (res.success) {
-            if (res.data === 1) {
+      getShopState() {
+        this.axios.get(`/br/shop/state?shopId=${this.shopId}`).then((res) => {
+          res = res.data
+          if (res.success === SUCCESS_OK) {
+            if (res.data.state === 1) {
               return
             } else {
-              this.toggleToast(res.data, '商家关闭')
+              this.toggleToast(!res.data.state, '商家关闭')
               this.isYingye = true
             }
           }
         })
       },
+      // 商家信息
+      getShopDetail() {
+        this.axios.get(`/br/shop/detail?shopId=${this.shopId}`).then((res) => {
+          res = res.data
+          if (res.success === SUCCESS_OK) {
+            // 排序
+            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
+              res.data.dispatching.fees.price)
+            this.detail = Object.assign({}, this.detail, res.data.dispatching)
+            this.shopDetail = Object.assign({}, this.shopDetail, res.data)
+            // 设置微信title
+            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
+          }
+        })
+      },
       // toggle toast
       toggleToast(show, text) {
-        console.log('qweqweqweqweqweq')
-        this.toastText = text
         if (show === true || show === 1) {
           this.toastShow = !this.toastShow
-          if (this.toastShow) {
-            setTimeout(() => {
-              this.toastShow = !this.toastShow
-            }, 1000)
-          }
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1000)
         } else {
           return
         }

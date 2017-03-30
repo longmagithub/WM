@@ -5,6 +5,7 @@
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
           <span class="text">{{item.dishTypeName}}</span>
+          <span class="category_num" v-if="categoryNum[index] && item.state === 0">{{categoryNum[index]}}</span>
         </li>
       </ul>
     </div>
@@ -13,21 +14,23 @@
         <li v-for="(item, index) in goods" class="food-list" ref="foodList">
           <h1 class="food-title">{{item.dishTypeName}}</h1>
           <ul>
-            <li v-for="(food, index) in item.dishList" class="food-item">
+            <li class="food-item"
+                v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon"><img :src="food.imageUrl" width="52px" height="52px"></div>
               <div class="content">
                 <h2 class="name">{{food.name}}</h2>
                 <span class="desc">{{food.description}}</span>
-                <p class="sellNum">已售{{food.saleCount}}份</p>
+                <p class="sellNum">已售{{food.dishSpecification[0].saleCount}}份</p>
                 <div class="price-wrapper">
-                  <div class="price">￥<span class="price-num">{{food.specification[0].dishPrice}}</span><span
-                    class="text" v-if="food.specification.length > 1">起</span></div>
-                  <!--<buyCart ref="buyCart"-->
-                  <!--@add="addFood"-->
-                  <!--@showSpecs="showSpecsFun"-->
-                  <!--:food="food"-->
-                  <!--:isYingye="isYingye"-->
-                  <!--:index="index"></buyCart>-->
+                  <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span><span
+                    class="text" v-if="food.dishSpecification.length > 1">起</span></div>
+                  <buyCart ref="buyCart"
+                           @add="addFood"
+                           @showSpecs="showSpecsFun"
+                           :shopId="shopId"
+                           :foods="food"
+                           :isYingye="isYingye"
+                           :index="index"></buyCart>
                 </div>
               </div>
             </li>
@@ -35,14 +38,14 @@
         </li>
       </ul>
     </div>
-    <shopcart v-if="isYingye"
-              ref="shopcart"
-              :seller="seller"
-              :selectFoods="selectFoods"
-              :deliveryPrice="seller.deliveryPrice"
-              :isYingye="isYingye"
-              :minPrice="seller.minPrice"></shopcart>
-    <div class="closeSeller" v-else>
+    <!--<shopcart v-if="isYingye"-->
+    <!--ref="shopcart"-->
+    <!--:seller="seller"-->
+    <!--:selectFoods="selectFoods"-->
+    <!--:deliveryPrice="seller.deliveryPrice"-->
+    <!--:isYingye="isYingye"-->
+    <!--:minPrice="seller.minPrice"></shopcart>-->
+    <div class="closeSeller">
       商家休息中，暂不接单
     </div>
     <transition name="fade">
@@ -57,16 +60,23 @@
           <div class="specs-content">
             <p class="text">规格</p>
             <div class="content">
-              <span class="specs-item" v-for="(itme, index) in specs.specification"
+              <span class="specs-item" v-for="(itme, index) in specs.dishSpecification"
                     :class="{'normal': index === specsIndex}"
-                    @click="selectSpecs(index)">{{itme
-                .name}}</span>
+                    @click="selectSpecs(index)">{{itme.specificationName}}</span>
             </div>
           </div>
           <div class="specs-price">
-            <div class="price-box">￥<span class="text">{{specs.specification[specsIndex].dishPrice}}</span></div>
+            <div class="price-box">￥<span class="text">{{specs.dishSpecification[specsIndex].dishPrice}}</span></div>
             <div class="submit"
-                 @click.stop.prevent="addSpecs(specs.specification[specsIndex].id, specs.specification[specsIndex].name, specs.specification[specsIndex].dishPrice, specs.specification[specsIndex].packPrice)">
+                 @click.stop.prevent="addSpecs(
+                 specs.dishTypeRelations[0],
+                 specs.dishId,
+                 specs.dishSpecification[specsIndex].specificationId,
+                 specs.name,
+                 specs.dishSpecification[specsIndex].dishPrice,
+                 specs.dishSpecification[specsIndex].specificationName,
+                 specs.dishSpecification[specsIndex].packPrice,
+                 $event)">
               选好了
             </div>
           </div>
@@ -76,9 +86,11 @@
   </div>
 </template>
 <script type="text/ecmascript-6">
+  import {mapState, mapMutations} from 'vuex'
   import BScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
+  import {getStore} from '../../common/js/util'
   //  import {loadFromLocal} from '../../common/js/store'
   const SUCCESS_OK = true
   export default {
@@ -99,20 +111,43 @@
         scrollY: 0, // 当前滑动的位置
         selectedFood: {},
         showSpecs: false,
-        dishPrice: '',
-        normal: false,
         specsIndex: 0,  // 规格的index
-        el: {}, // 单元素
-        typeNum: 0,
-        shopId: ''
+        shopId: getStore('user').shopId,
+        categoryNum: [], // 商品类型右上角已加入购物车的数量
+        totalPrice: 0, // 购物车总结
+        cartFoodList: [], // 购物车商品列表
+        showCartList: false// 显示购物车列表
       }
     },
     created() {
       // 菜谱信息
-      this.getDishList()
-      console.log(this.seller)
+//      this.getDishList()
+      const data = {
+        shopId: this.shopId,
+        customerId: getStore('user').customerId
+      }
+      console.log(data)
+      this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
+        res = res.data
+        console.log(res)
+        if (res.success === SUCCESS_OK) {
+          this.goods = res.data.dishesList
+          console.log(this.goods)
+          this.$nextTick(() => {
+            this._initScroll()
+            this._calculateHeight()
+          })
+        }
+      })
     },
     computed: {
+      // 检测 vuex 中cartList
+      ...mapState(['cartList']),
+      // 监听cartList变化 更新当前商铺的购物车信息shopCart 同时返回一个新的对象 因为组件buyCart需要监听shopCart的变化
+      shopCart: function () {
+        console.log('监听cartList变化')
+        return Object.assign({}, this.cartList[this.shopId])
+      },
       currentIndex() { // 判决区间所对应的位置
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i]
@@ -136,6 +171,7 @@
       }
     },
     methods: {
+      ...mapMutations(['ADD_CART', 'REDUCE_CART']),
       // 初始化滚动
       _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
@@ -185,39 +221,84 @@
       closeSpesc() {
         this.showSpecs = false
         this.specsIndex = 0
+        console.log(this.shopCart)
       },
       // 子组件传来方法
-      showSpecsFun(event, toggleSpecs, content, falg) {
-        this.el = event
+      showSpecsFun(event, foods, toggleSpecs) {
         this.showSpecs = !toggleSpecs
-        this.specs = content
-        this.falg = falg
+        console.log(foods)
+        this.specs = foods
       },
-      // 改变 规格价格
+      // 记录当前所选规格的索引值
       selectSpecs(index) {
         this.specsIndex = index
       },
       // 多规格加入购车
-      addSpecs(id, name, dishPrice, packPrice) {
-        this.$nextTick(() => {
-          this.$refs.buyCart[this.falg].addCart(this.el, dishPrice, packPrice)
-        })
+      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
+      addSpecs(categoryId, itemId, foodId, name, price, specs, packPrice, event) {
+        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packPrice})
         this.closeSpesc()
+      },
+      /**
+       * 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值 categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，所有的购物车数据都交给vuex统一管理，包括购物车组件中自身的商品数量，使整个数据流更加清晰
+       */
+      initCategoryNum() {
+        // 左侧食品列表当前分类中已加入购物车的商品数量
+        let newArr = []
+        let cartFoodNum = 0
+        // 购物车总共的价格
+        this.totalPrice = 0
+        // 购物车中所有商品的详细信息列表
+        this.cartFoodList = []
+        this.goods.forEach((item, index) => {
+          console.log('↓goods 每个 item↓')
+          console.log(item)
+          console.log(this.shopCart)
+          console.log(this.shopCart[item.dishList])
+          if (this.shopCart && this.shopCart[item.dishList[0].dishTypeId]) {
+            let num = 0
+            Object.keys(this.shopCart[item.dishList[0].dishTypeId]).forEach(itemid => {
+              Object.keys(this.shopCart[item.dishList[0].dishTypeId][itemid]).forEach(foodid => {
+                let foodItem = this.shopCart[item.dishList[0].dishTypeId][itemid][foodid]
+                num += foodItem.num
+                if (item.state === 0) {
+                  this.totalPrice += foodItem.num * foodItem.price
+                  if (foodItem.num > 0) {
+                    this.cartFoodList[cartFoodNum] = {}
+                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeId
+                    this.cartFoodList[cartFoodNum].item_id = itemid
+                    this.cartFoodList[cartFoodNum].food_id = foodid
+                    this.cartFoodList[cartFoodNum].num = foodItem.num
+                    this.cartFoodList[cartFoodNum].price = foodItem.price
+                    this.cartFoodList[cartFoodNum].name = foodItem.name
+                    this.cartFoodList[cartFoodNum].specs = foodItem.specs
+                    cartFoodNum++
+                  }
+                }
+              })
+            })
+            newArr[index] = num
+          } else {
+            newArr[index] = 0
+          }
+        })
+        this.totalPrice = this.totalPrice.toFixed(2)
+        this.categoryNum = newArr.concat([])
+        console.log(this.categoryNum)
       },
       // 菜谱信息
       getDishList() {
         const data = {
-//          shopId: this.shoId,
-          shopId: 123,
-//          customerId: this.customerId
-          customerId: 123
+          shopId: this.shopId,
+          customerId: getStore('user').customerId
         }
         console.log(data)
         this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
-//        this.axios.get('./api/goods').then((res) => {
           res = res.data
+          console.log(res)
           if (res.success === SUCCESS_OK) {
-            this.goods = res.data
+            this.goods = res.data.dishesList
+            console.log(this.goods)
             this.$nextTick(() => {
               this._initScroll()
               this._calculateHeight()
@@ -240,6 +321,12 @@
             this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
           }
         })
+      }
+    },
+    watch: {
+      // 监听shopCart的变化
+      shopCart: function (value) {
+        this.initCategoryNum()
       }
     },
     components: {

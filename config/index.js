@@ -28,6 +28,9 @@ module.exports = {
       },
       '/mp': {
         'target': 'http://192.168.1.51'
+      },
+      '/common': {
+        'target': 'http://192.168.1.51'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

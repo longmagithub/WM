@@ -39,19 +39,24 @@
     props: {
       seller: {
         type: Object
+      },
+      detail: {
+        type: Object,
+        default: {}
       }
     },
-    data() {
-      return {
-        description: '' // 配送方式
-      }
-    },
+//    data() {
+//      return {
+//        description: '' // 配送方式
+//      }
+//    },
     mounted () {
       // 设置页面 title
     },
     created() {
       // 配送方式
       // this.getDispatching()
+      console.log(this.detail)
     },
     methods: {
       goSeller(ele) {

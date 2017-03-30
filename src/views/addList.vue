@@ -3,7 +3,8 @@
     <section class="addlist" v-for="item in withinRange">
       <div class="bg-white add add-available">
         <div class="add-inf" :class="item.addressId === nowSelADDId ? 'on' : 'off'" @click="selectAdd(item.addressId)">
-          <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span></p>
+          <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span>
+          </p>
           <p>{{item.houseNum}} {{item.adress}}</p>
         </div>
         <div class="add-edit" v-on:click="addNew(item.addressId)"></div>
@@ -13,32 +14,34 @@
     <section class="addlist" v-for="item in outofRange">
       <div class="bg-white add add-unusable">
         <div class="add-inf">
-          <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span></p>
+          <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span>
+          </p>
           <p>{{item.houseNum}} {{item.adress}}</p>
         </div>
         <div class="add-edit" @click="addNew(item.addressId)"></div>
       </div>
     </section>
-    <div class="bg-white add-new" @click="addNew">
+    <div class="bg-white add-new" @click="addNew('')">
       <iconfont :iconname="icon.new"></iconfont>
       新增收货地址
     </div>
   </div>
 </template>
 <script>
+//  import {getStore} from '../common/js/util'
   export default {
     mounted () {
-      this.sessionId = this.$route.query.sid ? this.$route.query.sid : ''
-      this.shopId = this.$route.query.id ? this.$route.query.id : ''
+      this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
+//      this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
       this.nowSelADDId = this.$route.query.addressId ? this.$route.query.addressId : ''
       this.getADDList()
     },
     data () {
       return {
         sessionId: '',
-        shopId: '',
-        withinRange: [],
-        outofRange: [],
+        shopId: 'a86343a3-8b72-4f75-b895-15b07701b5dd',
+        withinRange: [], // 在范围内
+        outofRange: [], // 范围外
         icon: {
           new: 'btn_add_normal'
         },
@@ -54,10 +57,13 @@
         }
         this.axios.get(`/br/customer/address/list${this.PublicJs.createParams(data)}`)
         .then((res) => {
+          console.log('**获取地址列表**')
+          console.log(res)
           if (res.data.success) {
             this.withinRange = res.data.data.withinRange ? res.data.data.withinRange : []
             this.outofRange = res.data.data.outOfRange ? res.data.data.outOfRange : []
-          } else {}
+          } else {
+          }
         })
       },
       selectAdd (id) {
@@ -72,6 +78,7 @@
       },
       // 新增地址
       addNew (id) {
+        console.log(id)
         if (id) {
           this.$router.push({
             path: '/addNew',

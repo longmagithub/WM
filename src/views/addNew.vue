@@ -23,19 +23,23 @@
         <div class="left">地址</div>
         <div class="right">
           <p>
-            <input type="text" v-model="addressDetail.houseNum" placeholder="小区/写字楼/学校等">
+            <input type="text" v-model="addressDetail.address" placeholder="小区/写字楼/学校等">
           </p>
           <p>
-            <input type="text" v-model="addressDetail.address" placeholder="详细地址（如门牌号等）">
+            <input type="text" v-model="addressDetail.houseNum" placeholder="详细地址（如门牌号等）">
           </p>
         </div>
       </li>
     </ul>
     <div class="btns">
       <button type="button" class="btn-del" :class="addressId ? 'on' : 'off'" @click="delAdderss()">删除地址</button><!--
-      --><button type="button" class="btn-save" @click="saveAddress" :class="vaild.name && vaild.phoneNumber && vaild.address && vaild.houseNum && vaild.gender ? 'on' : 'off'">保存地址</button>
+      -->
+      <button type="button" class="btn-save" @click="saveAddress"
+              :class="vaild.name && vaild.phoneNumber && vaild.address && vaild.houseNum && vaild.gender ? 'on' : 'off'">
+        保存地址
+      </button>
     </div>
-    <toast :show="toastShow" :text="toastText" v-on:closeToast="doCloseToast"></toast>
+    <!--<toast :show="toastShow" :text="toastText" v-on:closeToast="doCloseToast"></toast>-->
   </div>
 </template>
 <script>
@@ -132,6 +136,7 @@
         if (this.isAjaxing) return
         this.isAjaxing = true
         let data = {
+          shopId: this.shopId,
           sessionId: this.sessionId,
           name: this.addressDetail.name,
           phoneNumber: this.addressDetail.phoneNumber,
@@ -139,47 +144,74 @@
           address: this.addressDetail.address,
           houseNum: this.addressDetail.houseNum
         }
+        console.log(JSON.stringify(data))
         this.sendData(data)
       },
       sendData (data) {
-        if (this.addressId) {
+        if (this.addressId) { // 修改地址
+          data.addressId = this.addressId
           this.axios.post('/br/customer/address', data)
           .then((res) => {
+            console.log('*** 修改地址 ***')
+            console.log(res)
             this.isAjaxing = false
+            console.log(res)
             if (res.data.success) {
               this.toastShow = true
               this.toastText = '保存成功'
               setTimeout(() => {
+                this.toastShow = false
                 this.backAddressList()
               }, 2000)
             } else {
-              this.toastShow = false
+              this.toastShow = true
               this.toastText = '网络异常，请稍候重试'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
             }
           }, (res) => {
             this.isAjaxing = false
-            this.toastShow = false
+            this.toastShow = true
             this.toastText = '网络异常，请稍候重试'
+            setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
+            }, 1000)
           })
-        } else {
-          data.addressId = this.addressId
+        } else {  // 添加地址
+          console.log(2222)
           this.axios.put('/br/customer/address', data)
           .then((res) => {
+            console.log('*** 添加地址 ***')
+            console.log(res)
             this.isAjaxing = false
             if (res.data.success) {
               this.toastShow = true
               this.toastText = '修改成功'
               setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
                 this.backAddressList()
               }, 2000)
             } else {
-              this.toastShow = false
+              console.log('错误')
+              this.toastShow = true
               this.toastText = '网络异常，请稍候重试'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              })
             }
           }, (res) => {
             this.isAjaxing = false
-            this.toastShow = false
+            this.toastShow = true
             this.toastText = '网络异常，请稍候重试'
+            setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
+            })
           })
         }
       },
@@ -195,16 +227,26 @@
             this.toastShow = true
             this.toastText = '删除成功'
             setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
               this.backAddressList()
             }, 2000)
           } else {
             this.toastShow = true
             this.toastText = '网络异常，请稍候重试'
+            setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
+            })
           }
         }, (res) => {
           this.isAjaxing = false
           this.toastShow = true
           this.toastText = '网络异常，请稍候重试'
+          setTimeout(() => {
+            this.toastShow = false
+            this.toastText = ''
+          })
         })
       },
       // 返回地址列表
@@ -225,93 +267,104 @@
   }
 </script>
 <style scoped lang="scss">
-.address-wrap {
-  padding-top: 12px;
-  line-height: 1em;
-  color: #343434;
+  .address-wrap {
+    padding-top: 12px;
+    line-height: 1em;
+    color: #343434;
 
   ul {
-    li {
-      padding-left: 16px;
-      border-bottom: 1px solid #f1f1f1;
-      display: flex;
-      display: -webkit-flex;
 
-      input {
-        width: 93%;
-        height: 38px;
-        border: none;
-      }
+  li {
+    padding-left: 16px;
+    border-bottom: 1px solid #f1f1f1;
+    display: flex;
+    display: -webkit-flex;
 
-      .left {
-        margin-top: 13px;
-        width: 62px;
-      }
-      .right {
-        flex-grow: 1;
+  input {
+    width: 93%;
+    height: 38px;
+    border: none;
+  }
 
-        .gender-wrap {
-          margin: 12px 0;
-        }
+  .left {
+    margin-top: 13px;
+    width: 62px;
+  }
 
-        p {
-          border-bottom: 1px solid #f1f1f1;
-        }
-        p:last-child {
-          border: none;
-        }
+  .right {
+    flex-grow: 1;
 
-        label {
-          margin-right: 40px;
-          padding-left: 30px;
-        }
-        .gender.on {
-          background: url('../assets/btn_right_normal.svg') no-repeat left center;
-          background-size: 18px 18px;
-        }
-        .gender.off {
-          background: url('../assets/btn_right_disabled.svg') no-repeat left center;
-          background-size: 18px 18px;
-        }
-      }
-    }
+  .gender-wrap {
+    margin: 12px 0;
+  }
+
+  p {
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  p:last-child {
+    border: none;
+  }
+
+  label {
+    margin-right: 40px;
+    padding-left: 30px;
+  }
+
+  .gender.on {
+    background: url('../assets/btn_right_normal.svg') no-repeat left center;
+    background-size: 18px 18px;
+  }
+
+  .gender.off {
+    background: url('../assets/btn_right_disabled.svg') no-repeat left center;
+    background-size: 18px 18px;
+  }
+
+  }
+  }
   }
   .btns {
     padding: 0 19px;
     padding-top: 27px;
 
-    button {
-      padding: 11px 0;
-      border: none;
-      border-radius: 5px;
-      width: 42%;
-      border: 1px solid #c1c1c1;
-    }
-
-    .btn-del {
-      color: #909090;
-      background: #fff;
-    }
-    .btn-del.on {
-      color: #ff8932;
-      border-color: #ff8932;
-    }
-    .btn-del.off {
-      border-color: #fff;
-    }
-
-    .btn-save {
-      color: #fff;
-      float: right;
-    }
-    .btn-save.off {
-      background: #c1c1c1;
-      border-color: #c1c1c1;
-    }
-    .btn-save.on {
-      background: #ff8932;
-      border-color: #ff8932;
-    }
+  button {
+    padding: 11px 0;
+    border: none;
+    border-radius: 5px;
+    width: 42%;
+    border: 1px solid #c1c1c1;
   }
-}
+
+  .btn-del {
+    color: #909090;
+    background: #fff;
+  }
+
+  .btn-del.on {
+    color: #ff8932;
+    border-color: #ff8932;
+  }
+
+  .btn-del.off {
+    border-color: #fff;
+  }
+
+  .btn-save {
+    color: #fff;
+    float: right;
+  }
+
+  .btn-save.off {
+    background: #c1c1c1;
+    border-color: #c1c1c1;
+  }
+
+  .btn-save.on {
+    background: #ff8932;
+    border-color: #ff8932;
+  }
+
+  }
+  }
 </style>

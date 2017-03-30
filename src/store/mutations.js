@@ -29,16 +29,14 @@ import {
 export default {
   // 加入购物车
   [ADD_CART](state, {
-    shopid,
-    categoryId,
-    itemId,
-    foodId,
-    name,
-    price,
-    specs,
-    packingFee,
-    skuId,
-    stock
+    shopid, // 商铺Id
+    categoryId, // 分类Id
+    itemId, // 单个菜Id
+    foodId, // 规格Id
+    name, // 菜名字
+    price,  // 菜价格
+    specs,  // 菜规格
+    packingFee // 饭盒费
   }) {
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
@@ -51,8 +49,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['price'] = price
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['skuId'] = skuId
-      cart[shopid][categoryId][itemId][foodId]['stock'] = stock
     } else if (cart[shopid] && cart[shopid][categoryId]) {
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -62,8 +58,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['price'] = price
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['skuId'] = skuId
-      cart[shopid][categoryId][itemId][foodId]['stock'] = stock
     } else if (cart[shopid]) {
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
@@ -74,8 +68,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['price'] = price
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['skuId'] = skuId
-      cart[shopid][categoryId][itemId][foodId]['stock'] = stock
     } else {
       cart[shopid] = {}
       cart[shopid][categoryId] = {}
@@ -87,8 +79,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['price'] = price
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['skuId'] = skuId
-      cart[shopid][categoryId][itemId][foodId]['stock'] = stock
     }
     // 返回一个新的对象，否则计算属性无法监听到数据的变化
     state.cartList = Object.assign({}, cart)

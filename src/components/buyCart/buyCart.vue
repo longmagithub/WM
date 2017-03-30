@@ -1,39 +1,55 @@
 <template>
   <div class="buyCart">
     <!-- 加减 button -->
-    <section class="cart-wrapper" v-if="(foods.specification.length === 1 && foods.state === 1) || shopcart"
+    <section class="cart-wrapper" v-if="(foods.dishSpecification.length === 1 && foods.state === 1)"
              key="cart-wrapper">
       <transition name="move">
         <div class="cart-decrease"
              v-show="foodNum > 0"
-             @click.stop.prevent="removeOutCart(1,2,3,4,5,6,7,8,9,$event)">
+             @click.stop.prevent="removeOutCart(
+             foods.dishTypeRelations[0],
+             foods.dishId,
+             foods.dishSpecification[0].specificationId,
+             foods.name,
+             foods.dishSpecification[0].dishPrice,
+             foods.dishSpecification[0].specificationName,
+             foods.dishSpecification[0].packPrice,
+             $event)">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
         </div>
       </transition>
       <div class="cart-count" v-show="foodNum>0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
-           :class="{forbid: !isYingye}"
-           @click.stop.prevent="addToCart(1,2,3,4,5,6,7,8,9,$event)"></div>
+           :class="{forbid: isYingye}"
+           @click.stop.prevent="addToCart(
+           foods.dishTypeRelations[0],
+           foods.dishId,
+           foods.dishSpecification[0].specificationId,
+           foods.name,
+           foods.dishSpecification[0].dishPrice,
+           foods.dishSpecification[0].specificationName,
+           foods.dishSpecification[0].packPrice,
+           $event)"></div>
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
-             v-else-if="foods.specification.length > 1 && foods.state === 1"
+             v-else-if="foods.dishSpecification.length > 1 && foods.state === 1"
              key="specification-wrapper">
       <transition name="move">
-        <div class="cart-decrease"
-             v-show="foods.count>0"
-             :class="{specification_delete: foods.specification.length > 1}"
-             @click.stop.prevent="decreaseCart">
-          <span class="inner uxwm-iconfont btn_reduce_normal"></span>
+        <div class="cart-decrease uxwm-iconfont sanjiao"
+             v-show="foodNum > 0"
+             :class="{specification_delete: foods.dishSpecification.length > 1}"
+             @click.stop.prevent="showReduceTip">
+          <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
           </transition>
         </div>
       </transition>
-      <div class="cart-count" v-show="foods.count>0">{{foodNum}}</div>
+      <div class="cart-count" v-show="foodNum > 0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click.stop.prevent="showChooseList($event)"></div>
+           @click.stop.prevent="showChooseList($event,foods)"></div>
     </section>
     <!-- 售罄 -->
     <section v-else key="sellout-wrapper">
@@ -52,6 +68,9 @@
       index: {
         type: Number
       },
+      shopId: {
+        type: String
+      },
       shopcart: {
         type: Number
       },
@@ -65,25 +84,17 @@
         showDeleteTip: false // 多规格显示 删除 提示
       }
     },
-    mounted() {
-//      if (loadFromLocal(this.seller.id, 'userName')) {
-//        this.food = loadFromLocal(this.seller.id, 'userName')
-//      }
-//      console.log(loadFromLocal('undefined', 'userName'))
-//      console.log(this.food)
-    },
     computed: {
-      ...mapState([
-        'cartList'
-      ]),
+      // 接受vuex
+      ...mapState(['cartList']),
       // 监听cartList变化，更新当前商铺的购物车信息shopCart，同时返回一个新的对象
-      shopCart: () => {
+      shopCart() {
         return Object.assign({}, this.cartList[this.shopId])
       },
       // shopCart变化的时候重新计算当前商品的数量
-      foodNum: () => {
-        let categoryId = this.foods.categoryId
-        let itemId = this.foods.itemId
+      foodNum() {
+        let categoryId = this.foods.dishTypeRelations[0]
+        let itemId = this.foods.dishId
         if (this.shopCart && this.shopCart[categoryId] && this.shopCart[categoryId][itemId]) {
           let num = 0
           Object.values(this.shopCart[categoryId][itemId]).forEach((item, index) => {
@@ -96,68 +107,36 @@
       }
     },
     methods: {
-      ...mapMutations([
-        'ADD_CART', 'REDUCE_CART'
-      ]),
-      showChooseList(event) {
-        if (!this.isYingye) {
-          return
-        } else {
-          this.$emit('showSpecs', event, this.showSpecs, this.food, this.index)
+      // 引用vuex方法
+      ...mapMutations(['ADD_CART', 'REDUCE_CART']),
+      // 加入购物车
+      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
+      addToCart(categoryId, itemId, foodId, name, price, specs, packPrice, event) {
+        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packPrice})
+      },
+      // 移除购物车
+      // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
+      removeOutCart(categoryId, itemId, foodId, name, price, specs, packPrice, event) {
+        if (this.foodNum > 0) {
+          this.REDUCE_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packPrice, event})
         }
       },
-      // 添加到购物车
-      // 加入购物车，所需7个参数，商铺id，食品分类id，食品id，食品规格id，食品名字，食品价格，食品规格
-      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, skuId, stock, event) {
-        console.log(event)
-        if (!this.isYingye) {
+      // 打开godds组件里面 多规格
+      showChooseList(event, foods) {
+        if (this.isYingye) {
           return
         } else {
-          if (!event._constructed) {
-            return
-          } else {
-            this.ADD_CART({
-              shopid: this.shopId,
-              categoryId,
-              itemId,
-              foodId,
-              name,
-              price,
-              specs,
-              packingFee,
-              skuId,
-              stock
-            })
-          }
+          this.$emit('showSpecs', event, foods, this.showSpecs)
         }
-        this.$emit('add', event.target) // 给父组件传递被点击元素
       },
-      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, skuId, stock, event) {
-        // 判断是否是多规格
-        if (this.food.specification.length > 1) {
-          this.showDeleteTip = true
+      // 点击多规格商品的减按钮，弹出提示
+      showReduceTip() {
+        this.showDeleteTip = true
+        clearTimeout(this.timer)
+        this.timer = setTimeout(() => {
           clearTimeout(this.timer)
-          this.timer = setTimeout(() => {
-            this.showDeleteTip = false
-          }, 200)
-        } else {
-          if (!event._constructed) {
-            return
-          } else {
-            this.ADD_CART({
-              shopid: this.shopId,
-              categoryId,
-              itemId,
-              foodId,
-              name,
-              price,
-              specs,
-              packingFee,
-              skuId,
-              stock
-            })
-          }
-        }
+          this.showDeleteTip = false
+        }, 1500)
       }
     }
   }
@@ -193,10 +172,19 @@
 
   .specification-wrapper .cart-decrease,
   .cart-wrapper .cart-decrease {
-    position: relative;
     display: inline-block;
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+
+  .specification-wrapper .cart-decrease::before {
+    display: none;
+    position: absolute;
+    top: -6px;
+    left: 25%;
+    opacity: 0.5;
+    font-size: 7px;
+    /*background-color: rgba(0, 0, 0, .7);*/
   }
 
   .specification-wrapper .cart-decrease .inner,
@@ -262,9 +250,18 @@
   }
 
   .specification-wrapper .show_delete_tip {
-    position: absolute;
-    font-size: 12px;
-
+    position: fixed;
+    padding: .5rem 0;
+    top: -50%;
+    right: -150%;
+    min-width: 150px;
+    border: 1px;
+    border-radius: 0.25rem;
+    text-align: center;
+    transform: translateY(-50%);
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, .7);
+    font-size: 10px;
   }
 
   .shop-cover {
