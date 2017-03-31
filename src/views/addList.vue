@@ -31,6 +31,12 @@
   //  import {getStore} from '../common/js/util'
   import {mapState, mapMutations} from 'vuex'
   export default {
+    updated: {
+      data() {
+        console.log('****钩子****')
+        console.log(this.$route.query.customerId)
+      }
+    },
     mounted () {
       this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
 //      this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
