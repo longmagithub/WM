@@ -60,6 +60,7 @@
           sessionId: this.sessionId,
           shopId: this.shopId
         }
+        console.log(JSON.stringify(data))
         this.axios.get(`/br/customer/address/list${this.PublicJs.createParams(data)}`)
         .then((res) => {
           console.log('**获取地址列表**')

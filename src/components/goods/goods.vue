@@ -45,7 +45,7 @@
     <!--:deliveryPrice="seller.deliveryPrice"-->
     <!--:isYingye="isYingye"-->
     <!--:minPrice="seller.minPrice"></shopcart>-->
-    <div class="closeSeller">
+    <div class="closeSeller" @click="submitOrder">
       商家休息中，暂不接单
     </div>
     <transition name="fade">
@@ -221,12 +221,10 @@
       closeSpesc() {
         this.showSpecs = false
         this.specsIndex = 0
-        console.log(this.shopCart)
       },
       // 子组件传来方法
       showSpecsFun(event, foods, toggleSpecs) {
         this.showSpecs = !toggleSpecs
-        console.log(foods)
         this.specs = foods
       },
       // 记录当前所选规格的索引值
@@ -257,6 +255,7 @@
           console.log(this.shopCart[item.dishList])
           if (this.shopCart && this.shopCart[item.dishList[0].dishTypeId]) {
             let num = 0
+            console.log(this.shopCart[item.dishList[0].dishTypeId])
             Object.keys(this.shopCart[item.dishList[0].dishTypeId]).forEach(itemid => {
               Object.keys(this.shopCart[item.dishList[0].dishTypeId][itemid]).forEach(foodid => {
                 let foodItem = this.shopCart[item.dishList[0].dishTypeId][itemid][foodid]
@@ -321,6 +320,9 @@
             this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
           }
         })
+      },
+      submitOrder() {
+        this.$router.push({path: '/submitOrder'})
       }
     },
     watch: {

@@ -182,7 +182,7 @@
           })
         } else {  // 添加地址
           console.log(2222)
-          this.axios.put('/br/customer/address', data)
+          this.axios.post('/br/customer/address', data)
           .then((res) => {
             console.log('*** 添加地址 ***')
             console.log(res)
@@ -220,7 +220,11 @@
         if (!this.addressId) return
         if (this.isAjaxing) return
         this.isAjaxing = true
-        this.axios.delete(`/br/customer/address`)
+        const data = {
+          addressId: this.addressId,
+          sessionId: this.sessionId
+        }
+        this.axios.delete(`/br/customer/address${this.PublicJs.createParams(data)}`)
         .then((res) => {
           this.isAjaxing = false
           if (res.data.success) {

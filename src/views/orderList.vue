@@ -68,13 +68,17 @@
         }
         this.axios.get(`/br/order/list${this.PublicJs.createParams(data)}`)
         .then((res) => {
-          if (res.data.success) {
+          res = res.data
+          console.log('** 订单列表 **')
+          console.log(JSON.stringify(data))
+          console.log(res)
+          if (res.success) {
             this.isAjaxing = false
             if (!this.orderList) {
-              this.orderList = res.data.data
+              this.orderList = res.data.lstOrderInfos
             } else {
-              for (let i = 0; i < res.data.data.length; i++) {
-                this.orderList.push(res.data.data[i])
+              for (let i = 0; i < res.data.lstOrderInfos.length; i++) {
+                this.orderList.push(res.data[i])
               }
             }
             setTimeout(() => {
@@ -92,12 +96,20 @@
             this.dataStatus = '加载失败'
             this.toastShow = true
             this.toastText = '网络异常，请稍候再试'
+            setTimeout(() => {
+              this.toastShow = false
+              this.toastText = ''
+            }, 1000)
           }
         }, (res) => {
           this.isAjaxing = false
           this.dataStatus = '加载失败'
           this.toastShow = true
           this.toastText = '网络异常，请稍候再试'
+          setTimeout(() => {
+            this.toastShow = false
+            this.toastText = ''
+          }, 1000)
         })
       },
       viewDetail (id) {
