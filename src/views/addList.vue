@@ -28,7 +28,7 @@
   </div>
 </template>
 <script>
-//  import {getStore} from '../common/js/util'
+  //  import {getStore} from '../common/js/util'
   export default {
     mounted () {
       this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
@@ -40,7 +40,7 @@
       return {
         sessionId: '',
         shopId: 'a86343a3-8b72-4f75-b895-15b07701b5dd',
-        withinRange: [], // 在范围内
+        withinRange: [], // 范围内
         outofRange: [], // 范围外
         icon: {
           new: 'btn_add_normal'
@@ -58,10 +58,11 @@
         this.axios.get(`/br/customer/address/list${this.PublicJs.createParams(data)}`)
         .then((res) => {
           console.log('**获取地址列表**')
+          res = res.data
           console.log(res)
-          if (res.data.success) {
-            this.withinRange = res.data.data.withinRange ? res.data.data.withinRange : []
-            this.outofRange = res.data.data.outOfRange ? res.data.data.outOfRange : []
+          if (res.success) {
+            this.withinRange = res.data.withinRange ? res.data.withinRange : []
+            this.outofRange = res.data.outOfRange ? res.data.outOfRange : []
           } else {
           }
         })
