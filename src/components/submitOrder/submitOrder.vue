@@ -126,8 +126,8 @@
           dispatchPrice: 0.01, // 订单配送费
           discountPrice: 0, // 订单优惠金额
           paidPrice: 0.05, // 支付金额
-          addressId: '196e64e2-aff8-45a5-a290-81e747f30766',  // 用户收货ID
-          receivingAddress: '保亿大厦', // 用户收货地址
+          addressId: '3a88babe-485d-4d59-ba6f-5e6c54169ada',  // 用户收货ID
+          receivingAddress: '杭州市滨江区南环路3760号保亿创意大厦1201室', // 用户收货地址
           invoiceTitle: '个人', // 发票抬头
           remark: '翠花上酸菜',  // 订单备注
           expectTime: 1490849400,  // 期望送达时间

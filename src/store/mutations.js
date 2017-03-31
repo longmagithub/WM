@@ -3,7 +3,8 @@ import {
   ADD_CART, // 加入购物车
   REDUCE_CART,  // 移出购物车
   INIT_BUYCART,
-  CLEAR_CART
+  CLEAR_CART,
+  CHOOSE_ADDRESS // 选择地址
   // RECORD_SHOPDETAIL,
   // RECORD_USERINFO,
   // GET_USERINFO,
@@ -11,7 +12,6 @@ import {
   // CONFIRM_INVOICE,
   // CHOOSE_SEARCH_ADDRESS,
   // SAVE_GEOHASH,
-  // CHOOSE_ADDRESS,
   // NEED_VALIDATION,
   // SAVE_CART_ID_SIG,
   // SAVE_ORDER_PARAM,
@@ -121,5 +121,13 @@ export default {
     state.cartList[shopid] = null
     state.cartList = Object.assign({}, state.cartList)
     setStore('buyCart', state.cartList)
+  },
+  // 选择地址
+  [CHOOSE_ADDRESS](state, {
+    address,
+    index
+  }) {
+    state.choosedAddress = address
+    state.addressIndex = index
   }
 }

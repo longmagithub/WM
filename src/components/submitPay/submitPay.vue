@@ -86,11 +86,14 @@
             const data = {
               customerId: getStore('user').customerId,
               shopId: getStore('user').shopId,
-              orderId: this.orderId
+//              orderId: this.orderId
+              orderId: '562a9351-e331-4822-937d-25ebb575cd03'
             }
             this.axios.post(`/br/order/pay`, data)
             .then((res) => {
               res = res.data
+              console.log('** 微信支付 **')
+              console.log(data)
               console.log(res)
               if (res.success === SUCCESS_OK) {
 //                this.sendWxSDK(res.data.data)

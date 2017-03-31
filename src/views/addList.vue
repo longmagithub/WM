@@ -29,6 +29,7 @@
 </template>
 <script>
   //  import {getStore} from '../common/js/util'
+  import {mapState, mapMutations} from 'vuex'
   export default {
     mounted () {
       this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
@@ -48,7 +49,11 @@
         nowSelADDId: ''
       }
     },
+    computed: {
+      ...mapState(['addressIndex'])
+    },
     methods: {
+      ...mapMutations(['CHOOSE_ADDRESS']),
       // 获取地址列表
       getADDList () {
         const data = {
@@ -59,6 +64,7 @@
         .then((res) => {
           console.log('**获取地址列表**')
           res = res.data
+          console.log(data)
           console.log(res)
           if (res.success) {
             this.withinRange = res.data.withinRange ? res.data.withinRange : []

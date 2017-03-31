@@ -12,7 +12,7 @@
             <div class="description">
               <!--{{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span-->
               <!--v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]-->
-            <!--.price}}{{seller.dispatching.fees[0].fee| fees}}</span>-->
+              <!--.price}}{{seller.dispatching.fees[0].fee| fees}}</span>-->
             </div>
             <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
           </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+  import {getStore} from '../../common/js/util'
   export default {
     props: {
       seller: {
@@ -63,7 +63,12 @@
         console.log('去往商家详情')
       },
       goUser(ele) {
-        this.$router.push({path: '/orderList'})
+        this.$router.push({
+          path: '/orderList',
+          query: {
+            shopId: getStore('user').shopId
+          }
+        })
       },
       // 配送方式查询
       getDispatching() {

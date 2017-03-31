@@ -8,7 +8,8 @@
             <!-- <span :class="item.state === 0 ? 'order-status0': item.state === 1 ? 'order-status1' : item.state === 2 || item.state === 3 ? 'order-status2' : item.state === 4 ? 'order-status3' : item.state === 5 ? 'order-status4' : item.state === 6 ? 'order-status5' : 'order-status0'">{{orderStatusText[item.state]}}</span> -->
             <span v-if="item.state === 0" class="order-status0">{{orderStatusText[item.state]}}</span>
             <span v-else-if="item.state === 1" class="order-status1">{{orderStatusText[item.state]}}</span>
-            <span v-else-if="item.state === 2 || item.state === 3" class="order-status2">{{orderStatusText[item.state]}}</span>
+            <span v-else-if="item.state === 2 || item.state === 3"
+                  class="order-status2">{{orderStatusText[item.state]}}</span>
             <span v-else-if="item.state === 4" class="order-status3">{{orderStatusText[item.state]}}</span>
             <span v-else-if="item.state === 5" class="order-status4">{{orderStatusText[item.state]}}</span>
             <span v-else-if="item.state === 6" class="order-status5">{{orderStatusText[item.state]}}</span>
@@ -35,6 +36,7 @@
           vue.getOrderList()
         }
       }
+      this.sessionId = this.$route.query.shopId
       this.getOrderList()
     },
     data () {
@@ -120,56 +122,63 @@
     color: #343434;
     overflow-y: auto;
 
-    ul {
-      padding-top: 12px;
+  ul {
+    padding-top: 12px;
 
-      li {
-        margin-bottom: 12px;
+  li {
+    margin-bottom: 12px;
 
-        p {
-          margin-left: 16px;
-          padding: 16px 16px 16px 0;
+  p {
+    margin-left: 16px;
+    padding: 16px 16px 16px 0;
 
-          span {
-            float: right;
-          }
-          /*
-           * 0: 未付款
-           * 1: 已付款
-           * 2: 已接单
-           * 3: 配送中
-           * 4: 已完成
-           * 5: 订单关闭
-           */
-           .order-status0 {
-             color: #ff5083;
-           }
-           .order-status1,
-           .order-status2,
-           .order-status3 {
-             color: #ff8932;
-           }
-           .order-status4 {
-             color: #343434;
-           }
-           .order-status5 {
-             color: #b3b3b3;
-           }
-        }
+  span {
+    float: right;
+  }
 
-        p:last-child {
-          text-align: right;
-        }
+  /*
+   * 0: 未付款
+   * 1: 已付款
+   * 2: 已接单
+   * 3: 配送中
+   * 4: 已完成
+   * 5: 订单关闭
+   */
+  .order-status0 {
+    color: #ff5083;
+  }
 
-        p:after {
-          clear: both;
-        }
-      }
-    }
+  .order-status1,
+  .order-status2,
+  .order-status3 {
+    color: #ff8932;
+  }
 
-    .data-status {
-      padding: 30px 0;
-      text-align: center;
-    }
+  .order-status4 {
+    color: #343434;
+  }
+
+  .order-status5 {
+    color: #b3b3b3;
+  }
+
+  }
+
+  p:last-child {
+    text-align: right;
+  }
+
+  p:after {
+    clear: both;
+  }
+
+  }
+  }
+
+  .data-status {
+    padding: 30px 0;
+    text-align: center;
+  }
+
   }
 </style>
