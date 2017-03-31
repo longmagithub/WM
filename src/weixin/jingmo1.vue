@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>{{msg}}</h1>
-    <h2>{{url}}</h2>
+    <!--<h1>{{msg}}</h1>-->
+    <!--<h2>{{url}}</h2>-->
     <!--<div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div>-->
   </div>
 </template>

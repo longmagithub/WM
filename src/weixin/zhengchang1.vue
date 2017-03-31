@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>{{msg}}</h1>
-    <h2>{{url}}</h2>
+    <!--<h1>{{msg}}</h1>-->
+    <!--<h2>{{url}}</h2>-->
   </div>
 </template>
 <script>
@@ -28,12 +28,9 @@
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
-        console.log(data)
-        window.alert(data.code)
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           const d = res.data
-          console.log(d)
           if (d.success) {
             this.jump(d.data.customerId)
           }
