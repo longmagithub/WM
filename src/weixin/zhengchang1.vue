@@ -30,26 +30,27 @@
         }
         console.log(data)
         window.alert(data.code)
-//        const api = '/mp/authority/customer'
-//        this.axios.post(api, data).then((res) => {
-//          const d = res.data
-//          console.log(d)
-//          if (d.success) {
-//            this.jump(d.data.customerId)
-//          }
-//        }, (errorRes) => {
-//          console.log(errorRes)
-//        })
+        const api = '/mp/authority/customer'
+        this.axios.post(api, data).then((res) => {
+          const d = res.data
+          console.log(d)
+          if (d.success) {
+            this.jump(d.data.customerId)
+          }
+        }, (errorRes) => {
+          console.log(errorRes)
+        })
+      },
+//       如果有code 跳转页面
+      jump (customerId) {
+        this.$router.replace({
+          path: '/index',
+          query: {
+            'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
+            'customerId': customerId
+          }
+        })
       }
-      // 如果有code 跳转页面//      jump (customerId) {
-//        this.$router.replace({
-//          path: '/index',
-//          query: {
-//            'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
-//            'customerId': customerId
-//          }
-//        })
-//      }
     }
   }
 </script>
