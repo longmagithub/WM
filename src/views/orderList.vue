@@ -2,18 +2,11 @@
   <div class="orderlist-wrap" id="orderlist">
     <div id="orderlist_scroll">
       <ul>
-        <li class="bg-white" v-for="item in orderList" @click="viewDetail(item.id)">
+        <li class="bg-white" v-for="item in orderList" @click="viewDetail(item.orderNo, item.id)">
           <p class="bb">
             {{item.orderTime}}
             <!-- <span :class="item.state === 0 ? 'order-status0': item.state === 1 ? 'order-status1' : item.state === 2 || item.state === 3 ? 'order-status2' : item.state === 4 ? 'order-status3' : item.state === 5 ? 'order-status4' : item.state === 6 ? 'order-status5' : 'order-status0'">{{orderStatusText[item.state]}}</span> -->
-            <span v-if="item.state === 0" class="order-status0">{{orderStatusText[item.state]}}</span>
-            <span v-else-if="item.state === 1" class="order-status1">{{orderStatusText[item.state]}}</span>
-            <span v-else-if="item.state === 2 || item.state === 3"
-                  class="order-status2">{{orderStatusText[item.state]}}</span>
-            <span v-else-if="item.state === 4" class="order-status3">{{orderStatusText[item.state]}}</span>
-            <span v-else-if="item.state === 5" class="order-status4">{{orderStatusText[item.state]}}</span>
-            <span v-else-if="item.state === 6" class="order-status5">{{orderStatusText[item.state]}}</span>
-            <span v-else class='order-status0'>{{orderStatusText[item.state]}}</span>
+            <span :class="'order-status' + item.state">{{item.stateMsgC}}</span>
           </p>
           <p>￥{{item.payPrice}}</p>
         </li>
@@ -62,7 +55,8 @@
         this.isAjaxing = true
         this.dataStatus = '加载中...'
         const data = {
-          sessionId: this.sessionId,
+//          sessionId: this.sessionId,
+          sessionId: '640a4f47-916b-48fd-9bd3-ea36fd33365b',
           pageSize: this.pageSize,
           pageIndex: this.pageIndex
         }
@@ -112,12 +106,14 @@
           }, 1000)
         })
       },
-      viewDetail (id) {
+      viewDetail (orderNo, id) {
         this.$router.push({
           path: '/orderDetail',
           query: {
-            'id': id,
-            'sid': this.sessionId
+            'orderNo': orderNo,
+            'orderId': id,
+//            'sid': this.sessionId
+            'sid': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
           }
         })
       }
@@ -150,11 +146,19 @@
 
   /*
    * 0: 未付款
-   * 1: 已付款
-   * 2: 已接单
-   * 3: 配送中
-   * 4: 已完成
-   * 5: 订单关闭
+   * 1: 已付款，待接单
+   * 2: 已接单，待配送
+   * 3: 配送中，待收货
+   * 4: 配送中，待收货
+   * 5: 已完成
+   * 6: 订单关闭
+   * 7: 商户取消订单
+   * 8: 已接单，待配送
+   * 9: 已接单，待配送
+   * 10: 已取消
+   * 11: 已退款
+   * 12: 已取消
+   * 13: 已接单，待接单
    */
   .order-status0 {
     color: #ff5083;
@@ -162,15 +166,23 @@
 
   .order-status1,
   .order-status2,
-  .order-status3 {
+  .order-status3,
+  .order-status4,
+  .order-status8,
+  .order-status9,
+  .order-status13 {
     color: #ff8932;
   }
 
-  .order-status4 {
+  .order-status5,
+  .order-status7,
+  .order-status10,
+  .order-status11,
+  .order-status12 {
     color: #343434;
   }
 
-  .order-status5 {
+  .order-status6 {
     color: #b3b3b3;
   }
 

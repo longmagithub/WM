@@ -66,6 +66,11 @@
   import toast from '../toast.vue'
   const SUCCESS_OK = true
   export default {
+//    beforeRouteEnter: (to, from, next) => {
+//      console.log(to)
+//      console.log(from)
+//      console.log('21312312313123123123123123123************')
+//    },
     data() {
       return {
         toastShow: false,
@@ -114,6 +119,15 @@
       while (oncTime < this.endTime) {
         this.options.push(oncTime += 900000)
       }
+      // 默认地址
+      const data = {
+        sessionId: '640a4f47-916b-48fd-9bd3-ea36fd33365b',
+        shopId: 'ca2939cf-f42f-402f-8b75-53283431ee68'
+      }
+      this.axios.get(`/br/customer/address/default${this.PublicJs.createParams(data)}`).then((res) => {
+        console.log('**默认地址**')
+        console.log(res)
+      })
     },
     methods: {
       // 提交订单

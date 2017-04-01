@@ -84,18 +84,19 @@
             return
           } else {
             // 获取wx config  参数
-            const url = window.location.href
+            const url = 'http://newpay.tunnel.qydev.com/VAOrderH5'
             this.axios.get(`/mp/jsapi/sign?url=${url}`)
             .then((res) => {
               res = res.data
+              console.log('*config*')
               console.log(res)
               if (res.success === SUCCESS_OK) {
                 wx.config({
                   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                   appId: res.data.appId, // 必填，公众号的唯一标识
-                  timestamp: res.data.timeStamp, // 必填，生成签名的时间戳
+                  timestamp: res.data.timestamp, // 必填，生成签名的时间戳
                   nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
-                  signature: res.data.paySign, // 必填，签名，见附录1
+                  signature: res.data.signature, // 必填，签名，见附录1
                   jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 })
                 wx.ready(() => {
@@ -150,7 +151,6 @@
             .then((res) => {
               res = res.data
               if (res.success === SUCCESS_OK) {
-                res.data.paySign = res.data.paySign.toUpperCase()
                 this.sendWxSDK(res.data)
               } else {
                 this.toastShow = true
@@ -175,14 +175,13 @@
       sendWxSDK (data) {
         console.log(data)
         wx.chooseWXPay({
-          timeStamp: data.timeStamp,
+          timeStamp: data.webTimestamp,
           // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
           nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
           package: data.packageDetail, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
           signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           paySign: data.paySign, // 支付签名
           success: function (res) {
-            console.log(res)
             // 支付成功后的回调函数
           }
         })

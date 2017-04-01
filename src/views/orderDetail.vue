@@ -86,7 +86,8 @@
   import Toast from './../components/toast.vue'
   export default {
     mounted () {
-      this.orderId = this.$route.query.id ? this.$route.query.id : ''
+      this.orderNo = this.$route.query.orderNo ? this.$route.query.orderNo : ''
+      this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
       this.sessionId = this.$route.query.sid ? this.$route.query.sid : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
       this.$nextTick(() => {
@@ -99,6 +100,7 @@
         toastText: '',
         sessionId: '',
         shopId: '',
+        orderNo: '',
         orderId: '',
         isAjaxing: false,
         icon: {
@@ -122,7 +124,7 @@
       getOrderDetail () {
         const data = {
           sessionId: this.sessionId,
-          orderId: this.orderId
+          orderNo: this.orderNo
         }
         this.axios.get(`/br/order${this.PublicJs.createParams(data)}`)
         .then((res) => {

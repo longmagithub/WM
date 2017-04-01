@@ -46,7 +46,7 @@
     data () {
       return {
         sessionId: '',
-        shopId: 'a86343a3-8b72-4f75-b895-15b07701b5dd',
+        shopId: 'ca2939cf-f42f-402f-8b75-53283431ee68',
         withinRange: [], // 范围内
         outofRange: [], // 范围外
         icon: {
