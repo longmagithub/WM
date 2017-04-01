@@ -55,7 +55,6 @@
     methods: {
       countDownFun() {
         this.isTime = !this.isTime
-        console.log(this.isTime)
         this.toastShow = true
         this.toastText = '订单已超时'
         setTimeout(() => {
@@ -88,8 +87,6 @@
             this.axios.get(`/mp/jsapi/sign?url=${url}`)
             .then((res) => {
               res = res.data
-              console.log('*config*')
-              console.log(res)
               if (res.success === SUCCESS_OK) {
                 wx.config({
                   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -173,7 +170,6 @@
       },
       // 调取微信 支付
       sendWxSDK (data) {
-        console.log(data)
         wx.chooseWXPay({
           timeStamp: data.webTimestamp,
           // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
@@ -195,10 +191,8 @@
          'signType': data.signType
          }, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
          function (res) {
-         console.log('**微信支付**')
          window.alert(Object.keys(res))
          window.alert(Object.values(res))
-         console.log(res)
          this.isAjaxing = false
          this.toastShow = true
          // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
