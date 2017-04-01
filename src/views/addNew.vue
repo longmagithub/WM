@@ -226,8 +226,13 @@
         }
         console.log('**删除地址**')
         console.log(JSON.stringify(data))
-        this.axios.delete(`/br/customer/address`, data)
+        this.axios({
+          method: 'delete',
+          url: '/br/customer/address',
+          data: data
+        })
         .then((res) => {
+          console.log(res)
           this.isAjaxing = false
           if (res.data.success) {
             this.toastShow = true
