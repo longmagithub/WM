@@ -21,6 +21,7 @@ import mock from './plugins/mock'
 // import * as utils from './utils'
 // 引入初始化
 // import init from './init.js'
+// import WxPay from 'weixin-pay'
 
 // 引入共用 js
 import * as PublicJs from './utils/public.js'
@@ -40,6 +41,7 @@ console.log(mock)
 
 Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueValidator) // 声明使用vue-validator
+// Vue.use(WxPay)
 
 // 注册
 Vue.prototype.PublicJs = PublicJs

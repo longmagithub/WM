@@ -10,7 +10,7 @@ module.exports = {
   plugins: [
     'html'
   ],
-  globals: {
+  'globals': {
     'WeixinJSBridge': true
   },
   // add your custom rules here
