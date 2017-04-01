@@ -23,6 +23,7 @@
             <span v-if="index > 0">{{item | formatDate}}</span>
           </option>
         </select>
+        <i class="uxwm-iconfont btn_right"></i>
       </section>
       <section class="orderDetail-wrapper">
         <div class="title">订单详情</div>
@@ -66,11 +67,6 @@
   import toast from '../toast.vue'
   const SUCCESS_OK = true
   export default {
-//    beforeRouteEnter: (to, from, next) => {
-//      console.log(to)
-//      console.log(from)
-//      console.log('21312312313123123123123123123************')
-//    },
     data() {
       return {
         toastShow: false,
@@ -276,6 +272,7 @@
   .serviceTime-wrapper .time-wrapper {
     display: inline-block;
     float: right;
+    margin-right: 20px;
     color: #ff8923;
     font-size: 14px;
     font-weight: 500;
@@ -303,8 +300,8 @@
   .serviceTime-wrapper .time-select {
     position: absolute;
     top: 0;
-    right: 0;
-    width: 175px;
+    right: 0px;
+    width: 190px;
     height: 39px;
     color: #ff8923;
     font-size: 14px;
@@ -315,6 +312,16 @@
 
   .serviceTime-wrapper .time-select .select-item {
     text-align: center;
+  }
+
+  .serviceTime-wrapper .btn_right {
+    display: inline-block;
+    vertical-align: top;
+    position: absolute;
+    right: 14px;
+    color: #d7d7d7;
+    font-weight: 700;
+    font-size: 14px;
   }
 
   .orderDetail-wrapper {

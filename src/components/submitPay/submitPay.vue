@@ -21,7 +21,7 @@
         <i class="uxwm-iconfont btn_right_normal"></i>
       </p>
     </div>
-    <div class="submit-wrapper" @click="getWxConfig">
+    <div class="submit-wrapper" @click="weChatPay">
       <div class="submitBtn">确认支付￥{{paidPrice}}</div>
     </div>
     <div class="image-wrapper">
@@ -171,56 +171,56 @@
       },
       // 调取微信 支付
       sendWxSDK (data) {
-        wx.chooseWXPay({
-          timeStamp: data.webTimestamp,
-          // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-          nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
-          package: data.packageDetail, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-          signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-          paySign: data.paySign, // 支付签名
-          success: function (res) {
-            // 支付成功后的回调函数
-          }
-        })
-        /* WeixinJSBridge.invoke(
-         'getBrandWCPayRequest', {
-         'appId': data.appId,
-         'timeStamp': Math.floor(data.timeStamp / 1000) + '', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-         'nonceStr': data.nonceStr, // 支付签名随机串，不长于 32 位
-         'package': data.packageDetail, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-         'paySign': data.paySign, // 支付签名
-         'signType': data.signType
-         }, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-         function (res) {
-         window.alert(Object.keys(res))
-         window.alert(Object.values(res))
-         this.isAjaxing = false
-         this.toastShow = true
-         // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
-         if (res.err_msg === 'get_brand_wcpay_request:ok') {
-         this.toastText = '支付成功'
-         setTimeout(() => {
-         this.toastShow = false
-         this.toastText = ''
-         }, 1000)
-         // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
-         } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-         this.toastText = '您已取消支付'
-         setTimeout(() => {
-         this.toastShow = false
-         this.toastText = ''
-         }, 1000)
-         } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-         this.toastText = '支付失败'
-         setTimeout(() => {
-         this.toastShow = false
-         this.toastText = ''
-         }, 1000)
+        /* wx.chooseWXPay({
+         timeStamp: data.timeStamp,
+         // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+         nonceStr: data.nonceStr, // 支付签名随机串，不长于 32 位
+         package: data.packageDetail, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+         signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+         paySign: data.paySign, // 支付签名
+         success: function (res) {
+         // 支付成功后的回调函数
          }
-         //            success: function (res) {
-         //
-         //            }
          }) */
+        WeixinJSBridge.invoke(
+          'getBrandWCPayRequest', {
+            'appId': data.appId,
+            'timeStamp': Math.floor(data.timeStamp / 1000) + '', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+            'nonceStr': data.nonceStr, // 支付签名随机串，不长于 32 位
+            'package': data.packageDetail, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+            'paySign': data.paySign, // 支付签名
+            'signType': data.signType
+          }, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          function (res) {
+            window.alert(Object.keys(res))
+            window.alert(Object.values(res))
+            this.isAjaxing = false
+            this.toastShow = true
+            // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
+            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              this.toastText = '支付成功'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+              // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
+            } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
+              this.toastText = '您已取消支付'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+            } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
+              this.toastText = '支付失败'
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+            }
+            //            success: function (res) {
+            //
+            //            }
+          })
       }
     },
     components: {
