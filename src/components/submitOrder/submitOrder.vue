@@ -131,11 +131,11 @@
         const data = {
           shopId: getStore('user').shopId,
           customerId: getStore('user').customerId,
-          originalPrice: 0.05, // 订单原价
-          packPrice: 0.02, // 订单打包费
+          originalPrice: 0.03, // 订单原价
+          packPrice: 0.03, // 订单打包费
           dispatchPrice: 0.01, // 订单配送费
           discountPrice: 0, // 订单优惠金额
-          paidPrice: 0.05, // 支付金额
+          paidPrice: 0.03, // 支付金额
           addressId: '3a88babe-485d-4d59-ba6f-5e6c54169ada',  // 用户收货ID
           receivingAddress: '杭州市滨江区南环路3760号保亿创意大厦1201室', // 用户收货地址
           invoiceTitle: '个人', // 发票抬头
@@ -144,11 +144,6 @@
           orderDish: [  // 订单菜品
             {
               specificationId: '49dafd43-cd8b-4834-8331-29930dc84fd8', // 菜规格ID
-              count: 1,  // 菜数量
-              price: 0.01
-            },
-            {
-              specificationId: 'f61f6194-5e0e-41fd-9e70-f3752c897d30', // 菜规格ID
               count: 1,  // 菜数量
               price: 0.01
             }
