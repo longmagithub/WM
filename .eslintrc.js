@@ -11,7 +11,8 @@ module.exports = {
     'html'
   ],
   'globals': {
-    'wx': true
+    'wx': true,
+    'WeixinJSBridge': true
   },
   // add your custom rules here
   'rules': {

@@ -224,7 +224,9 @@
           addressId: this.addressId,
           sessionId: this.sessionId
         }
-        this.axios.delete(`/br/customer/address${this.PublicJs.createParams(data)}`)
+        console.log('**删除地址**')
+        console.log(JSON.stringify(data))
+        this.axios.delete(`/br/customer/address`, data)
         .then((res) => {
           this.isAjaxing = false
           if (res.data.success) {
