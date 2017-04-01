@@ -216,7 +216,7 @@
               this.toastText = '支付失败'
               setTimeout(() => {
                 this.toastShow = false
-                this.toastText= ''
+                this.toastText = ''
               }, 1000)
             }
           })
