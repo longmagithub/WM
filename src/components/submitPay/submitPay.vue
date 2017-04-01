@@ -192,6 +192,7 @@
             'signType': data.signType
           }, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           function (res) {
+            window.alert('支付返回的信息')
             window.alert(Object.keys(res))
             window.alert(Object.values(res))
             this.isAjaxing = false
