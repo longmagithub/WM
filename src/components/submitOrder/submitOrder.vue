@@ -132,7 +132,7 @@
           shopId: getStore('user').shopId,
           customerId: getStore('user').customerId,
           originalPrice: 0.03, // 订单原价
-          packPrice: 0.03, // 订单打包费
+          packPrice: 0.01, // 订单打包费
           dispatchPrice: 0.01, // 订单配送费
           discountPrice: 0, // 订单优惠金额
           paidPrice: 0.03, // 支付金额
