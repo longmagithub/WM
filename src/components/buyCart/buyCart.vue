@@ -13,14 +13,13 @@
              foods.name,
              foods.dishSpecification[0].dishPrice,
              foods.dishSpecification[0].specificationName,
-             foods.dishSpecification[0].packPrice,
-             $event)">
+             foods.dishSpecification[0].packPrice)">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
         </div>
       </transition>
       <div class="cart-count" v-show="foodNum>0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
-           :class="{forbid: isYingye}"
+           :class="{forbid: !isYingye}"
            @click.stop.prevent="addToCart(
            foods.dishTypeRelations[0],
            foods.dishId,
@@ -28,8 +27,7 @@
            foods.name,
            foods.dishSpecification[0].dishPrice,
            foods.dishSpecification[0].specificationName,
-           foods.dishSpecification[0].packPrice,
-           $event)"></div>
+           foods.dishSpecification[0].packPrice)"></div>
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
@@ -111,19 +109,20 @@
       ...mapMutations(['ADD_CART', 'REDUCE_CART']),
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
-      addToCart(categoryId, itemId, foodId, name, price, specs, packPrice, event) {
-        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packPrice})
+      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
+        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
-      removeOutCart(categoryId, itemId, foodId, name, price, specs, packPrice, event) {
+      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
         if (this.foodNum > 0) {
-          this.REDUCE_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packPrice, event})
+          this.REDUCE_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
         }
       },
       // 打开godds组件里面 多规格
       showChooseList(event, foods) {
-        if (this.isYingye) {
+        console.log(123)
+        if (!this.isYingye) {
           return
         } else {
           this.$emit('showSpecs', event, foods, this.showSpecs)

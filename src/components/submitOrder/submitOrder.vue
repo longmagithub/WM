@@ -3,7 +3,12 @@
     <div class="submitOrder-wrapper">
       <section class="address-wrapper" @click="gotoAddList">
         <i class="uxwm-iconfont icon_Location"></i>
-        <div class="address-not">
+        <div class="address-yes" v-if="addRess">
+          <p class="header"><span class="name">{{addRess.name}}</span><span class="name">{{addRess.phoneNumber}}</span>
+          </p>
+          <p class="content">{{addRess.houseNum}}{{addRess.houseNum}}</p>
+        </div>
+        <div class="address-not" v-else>
           请添加一个收获地址
         </div>
         <i class="uxwm-iconfont btn_right"></i>
@@ -29,6 +34,23 @@
         <div class="title">订单详情</div>
         <div class="order-list">
           <div class="list-content">
+            <ul>
+              <li class="food_list_item" v-for="item in newShopCart">
+                <div
+                  class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
+                <div class="price">￥{{item.price}}</div>
+              </li>
+              <li class="food_list_item">
+                <div
+                  class="name_num"><span class="name">餐盒费</span></div>
+                <div class="price">￥{{totalPack}}</div>
+              </li>
+              <li class="food_list_item">
+                <div
+                  class="name_num"><span class="name">配送费</span></div>
+                <div class="price">￥{{feesPrice}}</div>
+              </li>
+            </ul>
           </div>
           <div class="discount">
             <div class="list-content"></div>
@@ -61,6 +83,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapState, mapMutations} from 'vuex'
   import {formatDate} from '../../common/js/date'
   import {getStore, setStore} from '../../common/js/util'
   import * as PublicJs from '../../utils/public'
@@ -69,6 +92,13 @@
   export default {
     data() {
       return {
+        shopId: null, // 商店的id
+        customerId: null, // 用户id
+        addRess: null, // 默认地址
+        shopCart: null, // vuex购物车数据
+        newShopCart: [], // 整理后的数据
+        packPriceX: 0, // 餐盒费用
+        feesPriceX: 0,  // 配送费
         toastShow: false,
         toastText: '',
         options: [], // 时间数组
@@ -79,15 +109,22 @@
         orderId: '' // 订单id
       }
     },
-    mounted() {
-      this.$nextTick(() => {
-        this.PublicJs.changeTitleInWx('确认订单')
-      })
-    },
     created() {
-      console.log('跳转到提交')
       // 修改 title
       PublicJs.changeTitleInWx('确认订单')
+      // 获取上个页面传递过来的customerId值
+      this.customerId = this.$route.query.customerId
+      // 获取上个页面传递过来的shopid值
+      this.shopId = this.$route.query.shopId
+      // 获取购物车信息
+      this.INIT_BUYCART()
+      // 将当前商品id保存
+      this.SAVE_SHOPID(this.shopId, this.customerId)
+      // 将购物中当前商品的信息提取出来
+      this.shopCart = this.cartList[this.shopId]
+      console.log(this.totalPack)
+      console.log(this.feesPrice)
+      console.log(this.shopCart)
       this.options.push(this.estimateTime)
 
       let orderTaP = new Date().setMinutes(new Date().getMinutes() + 30)
@@ -115,17 +152,57 @@
       while (oncTime < this.endTime) {
         this.options.push(oncTime += 900000)
       }
+
       // 默认地址
-      const data = {
-        sessionId: '640a4f47-916b-48fd-9bd3-ea36fd33365b',
-        shopId: 'ca2939cf-f42f-402f-8b75-53283431ee68'
-      }
-      this.axios.get(`/br/customer/address/default${this.PublicJs.createParams(data)}`).then((res) => {
-        console.log('**默认地址**')
-        console.log(res)
-      })
+      this.getAddRess()
+    },
+    mounted() {
+      this.PublicJs.changeTitleInWx('确认订单')
+      this.initData()
+      console.log(this.newShopCart)
+    },
+    computed: {
+      ...mapState([
+        'cartList', 'totalPack', 'feesPrice', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
+      ])
     },
     methods: {
+      ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
+      // 默认地址
+      getAddRess() {
+        // 默认地址
+        const data = {
+          sessionId: this.customerId,
+          shopId: this.shopId
+        }
+        this.axios.get(`/br/customer/address/default${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success === true) {
+            this.addRess = res.data
+          }
+        })
+      },
+      // 异步初始化获取数据
+      async initData() {
+        // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
+        this.newShopCart = []
+        this.packPrice = 0
+        Object.values(this.shopCart).forEach(categoryItem => {
+          Object.values(categoryItem).forEach(itemValue => {
+            Object.values(itemValue).forEach(item => {
+              // this.packPrice += item.num * item.packingFee
+              this.newShopCart.push({
+                id: item.id,
+                name: item.name,
+                num: item.num,
+                packingFee: item.packingFee,
+                price: item.price,
+                specs: item.specs
+              })
+            })
+          })
+        })
+      },
       // 提交订单
       submitOrder() {
         const data = {
@@ -213,11 +290,30 @@
     background: #ffffff;
   }
 
+  .address-wrapper .address-yes,
   .address-wrapper .address-not {
     display: inline-block;
     vertical-align: top;
     font-size: 14px;
     color: #343434;
+  }
+
+  .address-wrapper .address-yes .header {
+    margin-bottom: 9px;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #343434;
+  }
+
+  .address-wrapper .address-yes .header .name {
+    margin-right: 8px;
+  }
+
+  .address-wrapper .address-yes .content {
+    line-height: 12px;
+    font-size: 12px;
+    color: #949494;
   }
 
   .address-wrapper .icon_Location {
@@ -338,6 +434,32 @@
   .orderDetail-wrapper .order-list {
     box-sizing: border-box;
     padding-left: 17px;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item {
+    box-sizing: border-box;
+    display: flex;
+    line-height: 37px;
+    padding-right: 14px;
+    height: 37px;
+    width: 100%;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item .price {
+    flex: 0 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #343434;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+    font-size: 13px;
+    color: #949494;
   }
 
   .orderDetail-wrapper .order-list .discount {

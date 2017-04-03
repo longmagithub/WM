@@ -56,11 +56,9 @@
     created() {
       // 配送方式
       // this.getDispatching()
-      console.log(this.detail)
     },
     methods: {
       goSeller(ele) {
-        console.log('去往商家详情')
       },
       goUser(ele) {
         this.$router.push({
@@ -74,7 +72,6 @@
       getDispatching() {
         this.axios.get(`${this.api}/br/shop/dispatching?shopId=${this.shopId}`).then((res) => {
           if (res.success) {
-            console.log(res)
           }
         })
       }

@@ -2,9 +2,11 @@ import {
   // RECORD_ADDRESS,
   ADD_CART, // 加入购物车
   REDUCE_CART,  // 移出购物车
-  INIT_BUYCART,
-  CLEAR_CART,
-  CHOOSE_ADDRESS // 选择地址
+  INIT_BUYCART, // 初始化购物车
+  CLEAR_CART, // 清空购物车
+  SAVE_SHOPID, // 保存商户ID
+  CHOOSE_ADDRESS, // 选择地址
+  USER_PRICE  // uers 合计费用
   // RECORD_SHOPDETAIL,
   // RECORD_USERINFO,
   // GET_USERINFO,
@@ -17,7 +19,6 @@ import {
   // SAVE_ORDER_PARAM,
   // CHANGE_ORDER_PARAM,
   // ORDER_SUCCESS,
-  // SAVE_SHOPID,
   // SAVE_ORDER,
   // OUT_LOGIN,
 } from './mutation-types.js'
@@ -122,6 +123,18 @@ export default {
     state.cartList = Object.assign({}, state.cartList)
     setStore('buyCart', state.cartList)
   },
+  // 网页初始化时从本地缓存获取购物车数据
+  [INIT_BUYCART](state) {
+    let initCart = getStore('buyCart')
+    if (initCart) {
+      state.cartList = initCart
+    }
+  },
+  // 保存商铺id
+  [SAVE_SHOPID](state, shopid, customerid) {
+    state.shopid = shopid
+    state.customerid = customerid
+  },
   // 选择地址
   [CHOOSE_ADDRESS](state, {
     address,
@@ -129,5 +142,14 @@ export default {
   }) {
     state.choosedAddress = address
     state.addressIndex = index
+  },
+  [USER_PRICE](state, {
+    totalPack,
+    feesPrice,
+    allPrice
+  }) {
+    state.totalPack = totalPack
+    state.feesPrice = feesPrice
+    state.allPrice = allPrice
   }
 }

@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="main">
-      <goods :shopDetail="shopDetail" :is-yingye="isYingye"></goods>
+      <goods :seller="shopDetail" :min-price="0" :is-yingye="isYingye"></goods>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
   </div>
@@ -34,7 +34,7 @@
         nowTime: new Date(),
         endTime: '',
         deliveryfee: {}, // 配送费
-        isYingye: false, // 是否营业
+        isYingye: true, // 是否营业
         shopStatus: 0 // 门店状态
       }
     },
@@ -49,11 +49,6 @@
           'customerId': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
         })
       }
-      // 请求公共接口
-      this.axios.get('/common/sysconfig/list?type=2').then((res) => {
-        console.log('** 公共接口 **')
-        console.log(res)
-      })
     },
     mounted() {
       // 商家信息
@@ -103,7 +98,11 @@
       },
       // 商家信息
       getShopDetail() {
-        this.axios.get(`/br/shop/detail?shopId=${this.shopId}`).then((res) => {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success === SUCCESS_OK) {
             // 排序

@@ -26,7 +26,10 @@ const state = {
   orderParam: null, // 传递给后台的订单参数
   orderMessage: null, // 下单成功，保存订单返回信息
   orderDetail: null, // 进入订单详情页前保存该订单信息
-  login: true // 登陆的状态，默认登陆
+  login: true, // 登陆的状态，默认登陆
+  totalPack: null, // 饭盒
+  feesPrice: null, // 配送
+  allPrice: null  // 总价
 }
 
 export default new Vuex.Store({
