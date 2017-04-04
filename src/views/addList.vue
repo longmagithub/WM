@@ -94,8 +94,9 @@
         this.$router.replace({
           path: '/submitOrder',
           query: {
-            addressI: id,
-            shopId: this.shopId
+            shopId: this.shopId,
+            customerId: this.sessionId,
+            addressId: id
           }
         })
       },
@@ -105,9 +106,9 @@
           this.$router.push({
             path: '/addNew',
             query: {
-              addressId: id,
               shopId: this.shopId,
-              sessionId: this.sessionId
+              sessionId: this.sessionId,
+              addressId: id
             }
           })
         } else { // 新增

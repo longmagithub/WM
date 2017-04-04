@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="header" ref="header">
-      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail'}" @click.stop="goSeller">
+      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail', query:{'id':shopid}}"
+                   @click.stop="goSeller">
         <div class="box-content">
           <div class="logo">
             <img :src="seller.logo" alt="" width="48px" height="48px">
@@ -47,13 +48,15 @@
     },
     data() {
       return {
-        descriptions: '' // 配送方式
+        descriptions: '', // 配送方式
+        shopId: ''
       }
     },
     mounted () {
       // 设置页面 title
     },
     created() {
+      this.shopId = getStore('user').shopId
       // 配送方式
       // this.getDispatching()
     },
@@ -64,7 +67,8 @@
         this.$router.push({
           path: '/orderList',
           query: {
-            shopId: getStore('user').shopId
+            shopId: getStore('user').shopId,
+            sessionId: getStore('user').customerId
           }
         })
       },

@@ -18,7 +18,7 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore, getStore} from '../../common/js/util'
+  import {setStore, removeStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
   const SUCCESS_OK = true
@@ -39,22 +39,39 @@
       }
     },
     created() {
-      if (getStore('user')) {
-        this.shopId = getStore('user').shopId
-        this.customerId = getStore('user').customerId
-      } else {
-//        this.$router.replace({path: '/jingmo'})
-        setStore('user', {
-          'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
-          'customerId': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
+      this.shopId = this.$route.query.shopId
+      this.customerId = this.$route.query.customerId
+      // 如果没有 customerId 就去授权
+      if (!this.customerId) {
+        this.$route.replace({
+          path: '/jingmo',
+          query: {
+            shopId: this.shopId
+          }
         })
+      } else {
+        setStore('user', {
+          'shopId': this.shopId,
+          'customerId': this.customerId
+        })
+        removeStore('userInfoID')
+        // 商家信息
+        this.getShopDetail()
       }
-      // 商家信息
-      this.getShopDetail()
+
+//      if (getStore('user')) {
+//        this.shopId = getStore('user').shopId
+//        this.customerId = getStore('user').customerId
+//      } else {
+//        setStore('user', {
+//          'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
+//          'customerId': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
+//        })
+//      }
     },
     mounted() {
       // 门店状态
-//      this.getShopState()
+      // this.getShopState()
       // 营业时间
       // this.getBusinesshours()
     },
@@ -103,7 +120,7 @@
         }
         this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          if (res.success === SUCCESS_OK) {
+          if (res.success) {
             // 排序
             res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
               res.data.dispatching.fees.price)

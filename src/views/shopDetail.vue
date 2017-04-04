@@ -51,8 +51,9 @@ export default {
     getShopInfo () {
       this.axios.get(`/br/shop/detail?merchantId=${this.merchantId}`)
       .then((res) => {
-        if (res.data.success) {
-          this.shopDetail = res.data.data
+        res = res.data
+        if (res.success) {
+          this.shopDetail = res.data
         } else {
           this.toastShow = true
           this.toastText = '网络异常，请稍候再试'

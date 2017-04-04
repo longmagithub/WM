@@ -11,10 +11,13 @@
     data () {
       return {
         msg: '静默授权',
-        url: ''
+        url: '',
+        shopId: '',
+        customerId: ''
       }
     },
     mounted () {
+      this.shopId = urlParse().shopId
       this.url = window.location.href
       if (this.url.indexOf('code') > 0) {
         this.getOpenId()
@@ -31,8 +34,8 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            setStore('user', {
-              'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68',
+            setStore('userInfoID', {
+              'shopId': this.shopId,
               'customerId': d.data.customerId
             })
             that.jump()

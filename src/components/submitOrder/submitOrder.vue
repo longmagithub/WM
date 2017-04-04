@@ -97,6 +97,7 @@
         shopId: null, // 商店的id
         customerId: null, // 用户id
         addRess: null, // 默认地址
+        addressId: '', // 用户地址id
         shopCart: null, // vuex购物车数据
         newShopCart: [], // 整理后的数据
         packPrice: 0, // 餐盒费用
@@ -124,6 +125,8 @@
       this.customerId = this.$route.query.customerId
       // 获取上个页面传递过来的shopid值
       this.shopId = this.$route.query.shopId
+      // 用户地址ID
+      this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
       // 获取购物车信息
       this.INIT_BUYCART()
       // 将当前商品id保存
@@ -136,7 +139,7 @@
       this.feesPrice = getStore('userPrice')[1]
       this.allPrice = getStore('userPrice')[2]
       // 默认地址
-      this.getAddRess()
+      this.getAddRess(this.addressId)
       // 优惠列表
       this.getDiscountList()
       // 默认时间
@@ -176,12 +179,10 @@
       }
     },
     mounted() {
-      this.PublicJs.changeTitleInWx('确认订单')
       this.initData()
     },
     computed: {
-      ...mapState([
-        'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
@@ -202,17 +203,30 @@
         })
       },
       // 默认地址
-      async getAddRess() {
-        const data = {
-          sessionId: this.customerId,
-          shopId: this.shopId
-        }
-        this.axios.get(`/br/customer/address/default${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          if (res.success === true) {
-            this.addRess = res.data
+      async getAddRess(id) {
+        if (id) { // 改变地址
+          const data = {
+            sessionId: this.customerId,
+            addressId: id
           }
-        })
+          this.axios.get(`/br/customer/address${this.PublicJs.createParams(data)}`).then((res) => {
+            res = res.data
+            if (res.success) {
+              this.addRess = res.data
+            }
+          })
+        } else {  // 默认地址
+          const data = {
+            sessionId: this.customerId,
+            shopId: this.shopId
+          }
+          this.axios.get(`/br/customer/address/default${this.PublicJs.createParams(data)}`).then((res) => {
+            res = res.data
+            if (res.success === true) {
+              this.addRess = res.data
+            }
+          })
+        }
       },
       // 异步初始化获取数据
       async initData() {
@@ -260,11 +274,9 @@
           // 所参加优惠活动ID
         }
         setStore('userOrderIofo', data)
-        console.log(data)
         const api = '/br/order'
         this.axios.post(api, data).then((res) => {
           res = res.data
-          console.log(res)
           if (res.success === SUCCESS_OK) {
             this.orderId = res.data.orderId
             this.gotoPay()
@@ -302,8 +314,9 @@
       _isDiscount(data) {
         let newTime = Date.parse(new Date()) / 1000
         let allFeesPrice = this.allPrice + this.feesPrice
-        console.log(newTime)
-        if (data.beginTime <= newTime <= data.endTime) {
+        let beginTime = Date.parse(new Date(data.beginTime)) / 1000
+        let endTime = Date.parse(new Date(data.endTime)) / 1000
+        if (beginTime <= newTime <= endTime) {
           if (allFeesPrice.toFixed(2) >= data.conditionAmount.toFixed(2)) {
             this.isDiscount = true
             this.allNum = allFeesPrice - data.reductionAmount
@@ -312,6 +325,7 @@
             this.allNum = allFeesPrice.toFixed(2)
           }
         } else {
+          this.allNum = allFeesPrice.toFixed(2)
           this.isDiscount = false
         }
       }
@@ -508,7 +522,8 @@
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .price {
-    flex: 0 0 25px;
+    flex: 0 0 40px;
+    text-align: right;
     font-size: 12px;
     font-weight: 600;
     color: #343434;

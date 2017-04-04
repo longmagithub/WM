@@ -57,12 +57,12 @@
             </div>
           </div>
           <div class="content-right">
-            <div v-if="allPrice < minPrice" class="pay" :class="payClass">{{payDesc}}</div>
             <div class="pay"
-                 v-else
+                 v-if="allPrice > minPrice && allPrice > 0"
                  :class="payClass"
                  @click="gotopay">{{payDesc}}
             </div>
+            <div v-else class="pay" :class="payClass">{{payDesc}}</div>
           </div>
         </div>
         <div class="ball-container">
@@ -216,11 +216,9 @@
     created() {
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
-      // 菜谱信息
-//      this.getDishList()
       const data = {
         shopId: this.shopId,
-        customerId: getStore('user').customerId
+        customerId: this.customerId
       }
       this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
         res = res.data
@@ -280,10 +278,10 @@
       },
       // pay 的class
       payClass() {
-        if (this.totalPrice < this.minPrice) {
-          return 'not-enough'
-        } else {
+        if (this.allPrice > this.minPrice && this.allPrice > 0) {
           return 'enough'
+        } else {
+          return 'not-enough'
         }
       },
       // 配送费描述

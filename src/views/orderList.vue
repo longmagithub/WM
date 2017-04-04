@@ -29,12 +29,12 @@
           vue.getOrderList()
         }
       }
-      this.sessionId = this.$route.query.shopId
       this.getOrderList()
     },
     data () {
       return {
         sessionId: '',
+        shopId: '',
         pageIndex: 1,
         pageSize: 20,
         isAjaxing: false,
@@ -49,23 +49,23 @@
     components: {
       Toast
     },
+    created() {
+      this.sessionId = this.$route.query.sessionId
+      this.shopId = this.$route.query.shopId
+    },
     methods: {
       getOrderList () {
         if (this.isAjaxing) return
         this.isAjaxing = true
         this.dataStatus = '加载中...'
         const data = {
-//          sessionId: this.sessionId,
-          sessionId: '640a4f47-916b-48fd-9bd3-ea36fd33365b',
+          sessionId: this.sessionId,
           pageSize: this.pageSize,
           pageIndex: this.pageIndex
         }
         this.axios.get(`/br/order/list${this.PublicJs.createParams(data)}`)
         .then((res) => {
           res = res.data
-          console.log('** 订单列表 **')
-          console.log(JSON.stringify(data))
-          console.log(res)
           if (res.success) {
             this.isAjaxing = false
             if (!this.orderList) {
@@ -112,8 +112,8 @@
           query: {
             'orderNo': orderNo,
             'orderId': id,
-//            'sid': this.sessionId
-            'sid': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
+            'sid': this.sessionId,
+            'shopId': this.shopId
           }
         })
       }

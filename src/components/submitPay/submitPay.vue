@@ -40,7 +40,7 @@
     data() {
       return {
         currentTime: Math.round(new Date().getTime() / 1000), // 当前时间戳
-        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 5) / 1000), // 15分钟后
+        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000), // 15分钟后
         isTime: true,
         toastShow: false,
         toastText: '',
@@ -132,6 +132,13 @@
                 this.toastShow = false
                 this.toastText = ''
               }, 1000)
+              this.$route.replace({
+                path: '/orderList',
+                query: {
+                  'shopId': getStore('user').shopId,
+                  'sessionId': getStore('user').customerId
+                }
+              })
               // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
               this.toastText = '您已取消支付'

@@ -144,7 +144,6 @@
           address: this.addressDetail.address,
           houseNum: this.addressDetail.houseNum
         }
-        console.log(JSON.stringify(data))
         this.sendData(data)
       },
       sendData (data) {
@@ -152,10 +151,7 @@
           data.addressId = this.addressId
           this.axios.post('/br/customer/address', data)
           .then((res) => {
-            console.log('*** 修改地址 ***')
-            console.log(res)
             this.isAjaxing = false
-            console.log(res)
             if (res.data.success) {
               this.toastShow = true
               this.toastText = '保存成功'
@@ -181,11 +177,8 @@
             }, 1000)
           })
         } else {  // 添加地址
-          console.log(2222)
           this.axios.post('/br/customer/address', data)
           .then((res) => {
-            console.log('*** 添加地址 ***')
-            console.log(res)
             this.isAjaxing = false
             if (res.data.success) {
               this.toastShow = true
@@ -196,7 +189,6 @@
                 this.backAddressList()
               }, 2000)
             } else {
-              console.log('错误')
               this.toastShow = true
               this.toastText = '网络异常，请稍候重试'
               setTimeout(() => {
@@ -224,15 +216,12 @@
           addressId: this.addressId,
           sessionId: this.sessionId
         }
-        console.log('**删除地址**')
-        console.log(JSON.stringify(data))
         this.axios({
           method: 'delete',
           url: '/br/customer/address',
           data: data
         })
         .then((res) => {
-          console.log(res)
           this.isAjaxing = false
           if (res.data.success) {
             this.toastShow = true
