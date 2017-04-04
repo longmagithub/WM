@@ -48,15 +48,13 @@
     },
     data() {
       return {
-        descriptions: '', // 配送方式
-        shopId: ''
+        descriptions: '' // 配送方式
       }
     },
     mounted () {
       // 设置页面 title
     },
     created() {
-      this.shopId = getStore('user').shopId
       // 配送方式
       // this.getDispatching()
     },
@@ -71,14 +69,14 @@
             sessionId: getStore('user').customerId
           }
         })
-      },
-      // 配送方式查询
-      getDispatching() {
-        this.axios.get(`${this.api}/br/shop/dispatching?shopId=${this.shopId}`).then((res) => {
-          if (res.success) {
-          }
-        })
       }
+      // 配送方式查询
+//      getDispatching() {
+//        this.axios.get(`${this.api}/br/shop/dispatching?shopId=${this.shopId}`).then((res) => {
+//          if (res.success) {
+//          }
+//        })
+//      }
     }
   }
 </script>

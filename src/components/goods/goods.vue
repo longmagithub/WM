@@ -161,8 +161,7 @@
   import BScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
-  import {getStore, setStore} from '../../common/js/util'
-  const SUCCESS_OK = true
+  dishesList  const SUCCESS_OK = true
   export default {
     props: {
       seller: {

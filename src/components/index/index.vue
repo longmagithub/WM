@@ -43,7 +43,7 @@
       this.customerId = this.$route.query.customerId
       // 如果没有 customerId 就去授权
       if (!this.customerId) {
-        this.$route.replace({
+        this.$router.replace({
           path: '/jingmo',
           query: {
             shopId: this.shopId
