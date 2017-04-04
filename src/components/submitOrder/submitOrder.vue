@@ -16,19 +16,20 @@
       <section class="serviceTime-wrapper">
         <i class="uxwm-iconfont icon_time"></i>
         <span class="text">送达时间</span>
-        <div class="time-wrapper">
+        <span class="soon" v-if="isJinKuai">尽快送达</span>
+        <div class="time-wrapper" v-if="!isJinKuai">
           <span class="title" v-if="selected === 0">尽快送达</span>
           <span class="time" v-if="selected === 0">预计{{estimateTime | formatDate}}</span>
           <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
         </div>
-        <select class="time-select" v-model="selected" placeholder="请选择">
+        <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
           <option class="select-item" v-for="(item, index) in options" :value="index">
             <span class="title" v-if="index === 0">尽快送达 &nbsp|&nbsp</span>
             <span class="time" v-if="index === 0"> 预计{{item | formatDate}}</span>
             <span v-if="index > 0">{{item | formatDate}}</span>
           </option>
         </select>
-        <i class="uxwm-iconfont btn_right"></i>
+        <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
       </section>
       <section class="orderDetail-wrapper">
         <div class="title">订单详情</div>
@@ -38,12 +39,12 @@
               <li class="food_list_item" v-for="item in newShopCart">
                 <div
                   class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
-                <div class="price">￥{{item.price}}</div>
+                <div class="price">￥{{item.num * item.price}}</div>
               </li>
               <li class="food_list_item">
                 <div
                   class="name_num"><span class="name">餐盒费</span></div>
-                <div class="price">￥{{totalPack}}</div>
+                <div class="price">￥{{packPrice}}</div>
               </li>
               <li class="food_list_item">
                 <div
@@ -52,13 +53,14 @@
               </li>
             </ul>
           </div>
-          <div class="discount">
+          <div class="discount" v-if="isDiscount">
             <div class="list-content"></div>
-            <p class="discount-title">满减优惠
-              <span class="discount-num">-￥5</span>
+            <p class="discount-title">{{discountList.title}}
+              <span class="discount-num">-￥{{discountList.reductionAmount}}</span>
             </p>
           </div>
-          <div class="totalPrice">总计：<span class="totaPrice-num">￥53</span></div>
+          <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum}}</span>
+          </div>
         </div>
       </section>
       <section class="remark-wapper">
@@ -67,7 +69,7 @@
             <i class="uxwm-iconfont btn_right"></i>
           </p>
         </router-link>
-        <router-link class="routerLink" :to="{path:'/invoice', query:{id:'invoice'}}">
+        <router-link class="routerLink" v-if="shopInfo.invoice" :to="{path:'/invoice', query:{id:'invoice'}}">
           <p class="invoicetitle">发票抬头
             <i class="uxwm-iconfont btn_right"></i>
           </p>
@@ -75,7 +77,7 @@
       </section>
     </div>
     <div class="submitOrder-btn">
-      <div class="price">待支付￥98</div>
+      <div class="price">待支付￥{{allPrice + feesPrice}}</div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -97,16 +99,22 @@
         addRess: null, // 默认地址
         shopCart: null, // vuex购物车数据
         newShopCart: [], // 整理后的数据
-        packPriceX: 0, // 餐盒费用
-        feesPriceX: 0,  // 配送费
+        packPrice: 0, // 餐盒费用
+        feesPrice: 0,  // 配送费
+        allPrice: 0, // 总费用
+        allNum: 0,  // 优惠后的总费用
+        shopInfo: {},  // 商户信息
+        discountList: {}, // 优惠列表
         toastShow: false,
         toastText: '',
         options: [], // 时间数组
         selected: 0, // 默认index
-        estimateTime: new Date(new Date().setMinutes(new Date().getMinutes() + 30)), // 预计时间
-        endTime: 1489752000000, // 结束时间
-        key: 45,
-        orderId: '' // 订单id
+        estimateTime: new Date(), // 预计时间
+        endTime: new Date(), // 结束时间
+        orderId: '', // 订单id
+        orderDish: [], // 订单菜品
+        isJinKuai: false, // 是否尽快送达
+        isDiscount: false // 是否可以优惠
       }
     },
     created() {
@@ -122,55 +130,79 @@
       this.SAVE_SHOPID(this.shopId, this.customerId)
       // 将购物中当前商品的信息提取出来
       this.shopCart = this.cartList[this.shopId]
-      console.log(this.totalPack)
-      console.log(this.feesPrice)
-      console.log(this.shopCart)
-      this.options.push(this.estimateTime)
-
-      let orderTaP = new Date().setMinutes(new Date().getMinutes() + 30)
-      let onceTime = this.estimateTime
-
-      // 最后一次时间
-      this.endTime = new Date(this.endTime).setMinutes(-15)
-      // 预计默认时间
-      this.estimateTime = orderTaP >= this.endTime ? this.endTime : orderTaP
-
-      // 开始第一次时间
-      let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-
-      if (oneTimeIndex === 0) {
-        this.options.push(new Date(orderTaP).setMinutes(15))
-      } else if (oneTimeIndex === 1) {
-        this.options.push(new Date(orderTaP).setMinutes(30))
-      } else if (oneTimeIndex === 2) {
-        this.options.push(new Date(orderTaP).setMinutes(45))
-      } else if (oneTimeIndex === 3) {
-        new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1)
-        this.options.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
-      }
-      let oncTime = this.options[1]
-      while (oncTime < this.endTime) {
-        this.options.push(oncTime += 900000)
-      }
-
+      // 商户信息
+      this.shopInfo = getStore('shopInfo')
+      this.packPrice = getStore('userPrice')[0]
+      this.feesPrice = getStore('userPrice')[1]
+      this.allPrice = getStore('userPrice')[2]
       // 默认地址
       this.getAddRess()
+      // 优惠列表
+      this.getDiscountList()
+      // 默认时间
+      this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime))
+      // 结束时间
+      let endTimeHours = parseFloat(this.shopInfo.hours[this.shopInfo.hours.length - 1].endTime.split(':')[0])
+      let endTimeMinte = parseFloat(this.shopInfo.hours[this.shopInfo.hours.length - 1].endTime.split(':')[1]) - 15
+      this.endTime = new Date(this.endTime).setHours(endTimeHours)
+      this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
+      this.endTime = new Date(this.endTime).setSeconds(0, 0)
+
+      this.options.push(Date.parse(this.estimateTime))
+      let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime)
+      let onceTime = this.estimateTime
+      // 预计默认时间
+      if (orderTaP > this.endTime) {
+        this.isJinKuai = true
+      } else {
+        this.isJinKuai = false
+        this.estimateTime = orderTaP > this.endTime ? this.endTime : orderTaP
+        // 开始第一次时间
+        let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+        if (oneTimeIndex === 0) {
+          this.options.push(new Date(orderTaP).setMinutes(15))
+        } else if (oneTimeIndex === 1) {
+          this.options.push(new Date(orderTaP).setMinutes(30))
+        } else if (oneTimeIndex === 2) {
+          this.options.push(new Date(orderTaP).setMinutes(45))
+        } else if (oneTimeIndex === 3) {
+          new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1)
+          this.options.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+        }
+        let oncTime = this.options[1]
+        while (oncTime < this.endTime) {
+          this.options.push(oncTime += 900000)
+        }
+      }
     },
     mounted() {
       this.PublicJs.changeTitleInWx('确认订单')
       this.initData()
-      console.log(this.newShopCart)
     },
     computed: {
       ...mapState([
-        'cartList', 'totalPack', 'feesPrice', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'
-      ])
+        'cartList', 'remarkText', 'inputText', 'invoice', 'choosedAddress', 'userInfo'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
+      // 优惠列表查询
+      async getDiscountList() {
+        const data = {
+          customerId: this.customerId,
+          shopId: this.shopId,
+          pageIndex: 1,
+          pageSize: 10
+        }
+        this.axios.get(`/br/shop/discount/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.discountList = res.data.discountList[0]
+            this._isDiscount(res.data.discountList[0])
+          }
+        })
+      },
       // 默认地址
-      getAddRess() {
-        // 默认地址
+      async getAddRess() {
         const data = {
           sessionId: this.customerId,
           shopId: this.shopId
@@ -186,7 +218,7 @@
       async initData() {
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
-        this.packPrice = 0
+        this.orderDish = []
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(item => {
@@ -199,6 +231,11 @@
                 price: item.price,
                 specs: item.specs
               })
+              this.orderDish.push({
+                specificationId: item.id,
+                count: item.num,
+                price: item.price
+              })
             })
           })
         })
@@ -206,26 +243,21 @@
       // 提交订单
       submitOrder() {
         const data = {
-          shopId: getStore('user').shopId,
-          customerId: getStore('user').customerId,
-          originalPrice: 0.03, // 订单原价
-          packPrice: 0.01, // 订单打包费
-          dispatchPrice: 0.01, // 订单配送费
-          discountPrice: 0, // 订单优惠金额
-          paidPrice: 0.03, // 支付金额
-          addressId: '3a88babe-485d-4d59-ba6f-5e6c54169ada',  // 用户收货ID
-          receivingAddress: '杭州市滨江区南环路3760号保亿创意大厦1201室', // 用户收货地址
-          invoiceTitle: '个人', // 发票抬头
-          remark: '翠花上酸菜',  // 订单备注
-          expectTime: 1490849400,  // 期望送达时间
-          orderDish: [  // 订单菜品
-            {
-              specificationId: '49dafd43-cd8b-4834-8331-29930dc84fd8', // 菜规格ID
-              count: 1,  // 菜数量
-              price: 0.01
-            }
-          ],
-          shopDiscountId: '' // 所参加优惠活动ID
+          shopId: this.shopId,
+          customerId: this.customerId,
+          originalPrice: this.allPrice, // 订单原价
+          packPrice: this.packPrice, // 订单餐盒费用
+          dispatchPrice: this.feesPrice, // 订单配送费
+          discountPrice: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2) ? this.discountList.reductionAmount : 0, // 订单优惠金额
+          paidPrice: (this.feesPrice + this.allPrice).toFixed(2), // 支付金额
+          addressId: this.addRess.addressId,  // 用户收货ID
+          receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
+          invoiceTitle: this.invoice, // 发票抬头
+          remark: `${this.remarkText}${this.inputText}`,  // 订单备注
+          expectTime: this.options[this.selected],  // 期望送达时间
+          orderDish: this.orderDish,
+          shopDiscountId: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2)
+          // 所参加优惠活动ID
         }
         setStore('userOrderIofo', data)
         console.log(data)
@@ -260,10 +292,28 @@
         this.$router.push({
           path: '/addList',
           query: {
-            shopId: getStore('user').shopId,
-            customerId: getStore('user').customerId
+            shopId: this.shopId,
+            customerId: this.customerId,
+            addressId: this.addRess.addressId
           }
         })
+      },
+      // 判断是否可以优惠
+      _isDiscount(data) {
+        let newTime = Date.parse(new Date()) / 1000
+        let allFeesPrice = this.allPrice + this.feesPrice
+        console.log(newTime)
+        if (data.beginTime <= newTime <= data.endTime) {
+          if (allFeesPrice.toFixed(2) >= data.conditionAmount.toFixed(2)) {
+            this.isDiscount = true
+            this.allNum = allFeesPrice - data.reductionAmount
+          } else {
+            this.isDiscount = false
+            this.allNum = allFeesPrice.toFixed(2)
+          }
+        } else {
+          this.isDiscount = false
+        }
       }
     },
     filters: {
@@ -360,6 +410,17 @@
     font-weight: 700;
   }
 
+  .serviceTime-wrapper .soon {
+    display: inline-block;
+    float: right;
+    padding-right: 10px;
+    padding-top: 10px;
+    color: #ff8923;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+  }
+
   .serviceTime-wrapper .time-wrapper {
     display: inline-block;
     float: right;
@@ -392,7 +453,7 @@
     position: absolute;
     top: 0;
     right: 0px;
-    width: 190px;
+    width: 210px;
     height: 39px;
     color: #ff8923;
     font-size: 14px;

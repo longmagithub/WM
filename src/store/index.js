@@ -13,9 +13,9 @@ const state = {
   shopDetail: null, // 商家详情信息
   userInfo: null, // 用户信息
   shopid: null, //  商铺id
-  remarkText: null, // 可选择的下单备注
+  remarkText: '', // 可选择的下单备注
   inputText: '', // 手动输入下单备注
-  invoice: false, // 是否需要开发票，默认否
+  invoice: '', // 是否需要开发票，默认否
   searchAddress: null, // 添加地址时选择的地址，通过vuex传递给上一级页面
   geohash: null, // 在msite页面中存入geohash，这个全局的变量在任何地方都有可能会被用到
   choosedAddress: null, // 下单页面确认选择的收货地址

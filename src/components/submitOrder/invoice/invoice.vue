@@ -12,7 +12,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {saveToLocal} from '../../../common/js/store'
+  import {mapMutations} from 'vuex'
   export default{
     data() {
       return {
@@ -23,13 +23,10 @@
       this.PublicJs.changeTitleInWx('发票抬头')
     },
     methods: {
+      ...mapMutations(['CONFIRM_INVOICE']),
       gotoSubmitOrder() {
-        if (this.invice) {
-          saveToLocal('userInvice', 'invice', this.invice)
-          this.$router.push({path: '/submitOrder'})
-        } else {
-          return
-        }
+        this.CONFIRM_INVOICE(this.invice)
+        this.$router.go(-1)
       }
     }
   }

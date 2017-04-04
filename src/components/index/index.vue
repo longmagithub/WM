@@ -49,13 +49,12 @@
           'customerId': '640a4f47-916b-48fd-9bd3-ea36fd33365b'
         })
       }
-    },
-    mounted() {
       // 商家信息
       this.getShopDetail()
+    },
+    mounted() {
       // 门店状态
 //      this.getShopState()
-
       // 营业时间
       // this.getBusinesshours()
     },

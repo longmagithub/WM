@@ -28,25 +28,12 @@
   </div>
 </template>
 <script>
-  //  import {getStore} from '../common/js/util'
   import {mapState, mapMutations} from 'vuex'
   export default {
-    updated: {
-      data() {
-        console.log('****钩子****')
-        console.log(this.$route.query.customerId)
-      }
-    },
-    mounted () {
-      this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
-//      this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
-      this.nowSelADDId = this.$route.query.addressId ? this.$route.query.addressId : ''
-      this.getADDList()
-    },
     data () {
       return {
-        sessionId: '',
-        shopId: 'ca2939cf-f42f-402f-8b75-53283431ee68',
+        sessionId: null, // 用户标记
+        shopId: null, // 商家id
         withinRange: [], // 范围内
         outofRange: [], // 范围外
         icon: {
@@ -55,13 +42,22 @@
         nowSelADDId: ''
       }
     },
+    created() {
+      this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
+      this.nowSelADDId = this.$route.query.addressId ? this.$route.query.addressId : ''
+      this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
+      // 默认地址
+      this.getAddRess()
+      // 地址列表
+      this.getADDList()
+    },
     computed: {
       ...mapState(['addressIndex'])
     },
     methods: {
       ...mapMutations(['CHOOSE_ADDRESS']),
       // 获取地址列表
-      getADDList () {
+      async getADDList () {
         const data = {
           sessionId: this.sessionId,
           shopId: this.shopId
@@ -80,6 +76,19 @@
           }
         })
       },
+      // 默认地址
+      async getAddRess() {
+        const data = {
+          sessionId: this.customerId,
+          shopId: this.shopId
+        }
+        this.axios.get(`/br/customer/address/default${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success === true) {
+            this.addRess = res.data
+          }
+        })
+      },
       selectAdd (id) {
         this.nowSelADDId = id
         this.$router.replace({
@@ -92,8 +101,7 @@
       },
       // 新增地址
       addNew (id) {
-        console.log(id)
-        if (id) {
+        if (id) { // 修改
           this.$router.push({
             path: '/addNew',
             query: {
@@ -102,7 +110,7 @@
               sessionId: this.sessionId
             }
           })
-        } else {
+        } else { // 新增
           this.$router.push({
             path: '/addNew',
             query: {

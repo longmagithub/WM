@@ -6,12 +6,12 @@ import {
   CLEAR_CART, // 清空购物车
   SAVE_SHOPID, // 保存商户ID
   CHOOSE_ADDRESS, // 选择地址
-  USER_PRICE  // uers 合计费用
+  USER_PRICE,  // uers 合计费用
+  CONFIRM_INVOICE, // 是否开发票
+  CONFIRM_REMARK // 订单备注
   // RECORD_SHOPDETAIL,
   // RECORD_USERINFO,
   // GET_USERINFO,
-  // CONFIRM_REMARK,
-  // CONFIRM_INVOICE,
   // CHOOSE_SEARCH_ADDRESS,
   // SAVE_GEOHASH,
   // NEED_VALIDATION,
@@ -143,6 +143,7 @@ export default {
     state.choosedAddress = address
     state.addressIndex = index
   },
+  // 用户 消费
   [USER_PRICE](state, {
     totalPack,
     feesPrice,
@@ -151,5 +152,17 @@ export default {
     state.totalPack = totalPack
     state.feesPrice = feesPrice
     state.allPrice = allPrice
+  },
+  // 记录订单页面用户选择的备注, 传递给订单确认页面
+  [CONFIRM_REMARK](state, {
+    remarkText,
+    inputText
+  }) {
+    state.remarkText = remarkText
+    state.inputText = inputText
+  },
+  // 是否开发票
+  [CONFIRM_INVOICE](state, invoice) {
+    state.invoice = invoice
   }
 }

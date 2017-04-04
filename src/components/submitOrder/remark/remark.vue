@@ -6,14 +6,15 @@
       </div>
       <div class="orderContent">
         <div class="acquiesce">
-          <span class="acquiesce-orderItem" :class="{'selectClass': selectClass}" @click="selectRemark">不要辣</span>
-          <span class="acquiesce-orderItem">少点辣</span>
-          <span class="acquiesce-orderItem">多点辣</span>
+          <span class="acquiesce-orderItem" v-for="(item,index) in initremark"
+                :class="{'selectClass': index === remarkIndex}"
+                @click="selectRemark(index)">{{item}}
+          </span>
         </div>
-        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">不要</span>
-        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">香菜香菜</span>
-        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">多香香菜</span>
-        <span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">德玛</span>
+        <!--<span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">不要</span>-->
+        <!--<span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">香菜香菜</span>-->
+        <!--<span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">多香香菜</span>-->
+        <!--<span class="orderItem" :class="{'selectClass': userSelect}" @click="selectRemark">德玛</span>-->
       </div>
     </section>
     <section class="elseRemark">
@@ -29,30 +30,34 @@
       </div>
     </section>
     <div class="submit">
-      <div class="submitBtn">确定</div>
+      <div class="submitBtn" @click="goSubmitOrder">确定</div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import {mapMutations} from 'vuex'
   export default {
     data() {
       return {
         elseText: '',
         selectClass: false,
-        userSelect: false
+        userSelect: false,
+        initremark: ['不要辣', '少要辣', '多要辣'],
+        remarkIndex: 0
       }
     },
     created() {
       this.PublicJs.changeTitleInWx('订单备注')
     },
     methods: {
-      selectRemark() {
-        this.selectClass = !this.selectClass
-        this.userSelect = !this.userSelect
-        if (this.selectClass) {
-          console.log('选中')
-        }
+      ...mapMutations(['CONFIRM_REMARK']),
+      selectRemark(index) {
+        this.remarkIndex = index
+      },
+      goSubmitOrder() {
+        this.CONFIRM_REMARK({remarkText: this.initremark[this.remarkIndex], inputText: this.elseText})
+        this.$router.go(-1)
       }
     }
   }

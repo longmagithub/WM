@@ -5,7 +5,7 @@
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
           <span class="text">{{item.dishTypeName}}</span>
-          <span class="category_num" v-if="categoryNum[index] && item.state === 0">{{categoryNum[index]}}</span>
+          <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
         </li>
       </ul>
     </div>
@@ -161,8 +161,7 @@
   import BScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
-  import {getStore} from '../../common/js/util'
-  //  import {loadFromLocal} from '../../common/js/store'
+  import {getStore, setStore} from '../../common/js/util'
   const SUCCESS_OK = true
   export default {
     props: {
@@ -295,6 +294,7 @@
           let feesPrice = fees[0].fee
           let allPrice = this.allPrice
           this.USER_PRICE({totalPack, feesPrice, allPrice})
+          setStore('userPrice', [totalPack, feesPrice, allPrice])
           return `另需要配送费${fees[0].fee}元`
         } else {
           let flag = 0
@@ -306,6 +306,7 @@
           let totalPack = this.totalPack
           let feesPrice = fees[flag].fee
           let allPrice = this.allPrice
+          setStore('userPrice', [totalPack, feesPrice, allPrice])
           this.USER_PRICE({totalPack, feesPrice, allPrice})
           return `另需要配送费${fees[flag].fee}元`
         }
@@ -418,23 +419,23 @@
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
                 num += foodItem.num
-                if (item.state === 0) {
-                  this.totalPack += foodItem.num * foodItem.packingFee
-                  this.totalPrice += foodItem.num * foodItem.price
-                  this.allPrice = this.totalPrice + this.totalPack
-                  if (foodItem.num > 0) {
-                    this.cartFoodList[cartFoodNum] = {}
-                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0]
-                    this.cartFoodList[cartFoodNum].item_id = itemid
-                    this.cartFoodList[cartFoodNum].food_id = foodid
-                    this.cartFoodList[cartFoodNum].num = foodItem.num
-                    this.cartFoodList[cartFoodNum].price = foodItem.price
-                    this.cartFoodList[cartFoodNum].name = foodItem.name
-                    this.cartFoodList[cartFoodNum].specs = foodItem.specs
-                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee
-                    cartFoodNum++
-                  }
+//                if (item.state === 0) {
+                this.totalPack += foodItem.num * foodItem.packingFee
+                this.totalPrice += foodItem.num * foodItem.price
+                this.allPrice = this.totalPrice + this.totalPack
+                if (foodItem.num > 0) {
+                  this.cartFoodList[cartFoodNum] = {}
+                  this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0]
+                  this.cartFoodList[cartFoodNum].item_id = itemid
+                  this.cartFoodList[cartFoodNum].food_id = foodid
+                  this.cartFoodList[cartFoodNum].num = foodItem.num
+                  this.cartFoodList[cartFoodNum].price = foodItem.price
+                  this.cartFoodList[cartFoodNum].name = foodItem.name
+                  this.cartFoodList[cartFoodNum].specs = foodItem.specs
+                  this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee
+                  cartFoodNum++
                 }
+//                }
               })
             })
             newArr[index] = num
@@ -444,6 +445,7 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
+        console.log(this.categoryNum)
       },
       // 菜谱信息
       getDishList() {
@@ -592,6 +594,7 @@
   }
 
   .menu-wrapper .menu-item {
+    position: relative;
     display: table;
     height: 51px;
     width: 100%;
@@ -622,12 +625,12 @@
 
   .menu-wrapper .menu-item .category_num {
     position: absolute;
-    top: 4px;
+    top: 6px;
     right: 4px;
     box-sizing: border-box;
-    padding: 0 4px;
+    padding: 2px 4px;
     height: 10px;
-    line-height: 10px;
+    line-height: 8px;
     text-align: center;
     color: #fff;
     font-size: 9px;
@@ -642,6 +645,10 @@
   .foods-wrapper {
     flex: 1;
     background: #ffffff;
+  }
+
+  .foods-wrapper .food-list:last-child {
+    margin-bottom: 200px;
   }
 
   .food-title {

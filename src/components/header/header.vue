@@ -45,11 +45,11 @@
         default: {}
       }
     },
-//    data() {
-//      return {
-//        description: '' // 配送方式
-//      }
-//    },
+    data() {
+      return {
+        descriptions: '' // 配送方式
+      }
+    },
     mounted () {
       // 设置页面 title
     },
