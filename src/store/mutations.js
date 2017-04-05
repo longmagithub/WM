@@ -156,10 +156,12 @@ export default {
   // 记录订单页面用户选择的备注, 传递给订单确认页面
   [CONFIRM_REMARK](state, {
     remarkText,
-    inputText
+    inputText,
+    indexRemark
   }) {
     state.remarkText = remarkText
     state.inputText = inputText
+    state.indexRemark = indexRemark
   },
   // 是否开发票
   [CONFIRM_INVOICE](state, invoice) {

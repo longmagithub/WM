@@ -14,6 +14,7 @@ const state = {
   userInfo: null, // 用户信息
   shopid: null, //  商铺id
   remarkText: '', // 可选择的下单备注
+  indexRemark: null, // 可选择的下单备注 下标
   inputText: '', // 手动输入下单备注
   invoice: '', // 是否需要开发票，默认否
   searchAddress: null, // 添加地址时选择的地址，通过vuex传递给上一级页面

@@ -36,7 +36,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapMutations} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
   export default {
     data() {
       return {
@@ -49,6 +49,11 @@
     },
     created() {
       this.PublicJs.changeTitleInWx('订单备注')
+      this.remarkIndex = this.indexRemark
+      console.log(this.remarkIndex)
+    },
+    computed: {
+      ...mapState(['indexRemark'])
     },
     methods: {
       ...mapMutations(['CONFIRM_REMARK']),
@@ -56,7 +61,9 @@
         this.remarkIndex = index
       },
       goSubmitOrder() {
-        this.CONFIRM_REMARK({remarkText: this.initremark[this.remarkIndex], inputText: this.elseText})
+        this.CONFIRM_REMARK({
+          remarkText: this.initremark[this.remarkIndex], inputText: this.elseText, indexRemark: this.remarkIndex
+        })
         this.$router.go(-1)
       }
     }

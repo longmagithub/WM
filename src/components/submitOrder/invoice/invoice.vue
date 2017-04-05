@@ -1,31 +1,35 @@
 <template>
   <div class="invice">
     <div class="invice-wrapper">
-      <input type="text" class="inviceText" v-model="invice" placeholder="个人或公司全称">
+      <input type="text" class="inviceText" v-model="isInvice" placeholder="个人或公司全称">
     </div>
     <div class="invice-submit">
       <div class="submitBtn"
-           :class="{'active': invice.length > 0}" @click="gotoSubmitOrder">确定
+           :class="{'active': isInvice.length > 0}" @click="gotoSubmitOrder">确定
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapMutations} from 'vuex'
+  import {mapState, mapMutations} from 'vuex'
   export default{
     data() {
       return {
-        invice: ''
+        isInvice: ''
       }
     },
     created() {
       this.PublicJs.changeTitleInWx('发票抬头')
+      this.isInvice = this.invoice
+    },
+    computed: {
+      ...mapState(['invoice'])
     },
     methods: {
       ...mapMutations(['CONFIRM_INVOICE']),
       gotoSubmitOrder() {
-        this.CONFIRM_INVOICE(this.invice)
+        this.CONFIRM_INVOICE(this.isInvice)
         this.$router.go(-1)
       }
     }
