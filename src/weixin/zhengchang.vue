@@ -14,10 +14,16 @@
         url: ''
       }
     },
+    created() {
+      let url = window.location.href.split('=')
+      console.log(url)
+      console.log(getStore('userInfoID'))
+//      this.shopId = url[url.length - 1]
+    },
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
-        this.to()
+//        this.to()
       } else {
         this.getOpenId()
       }
@@ -30,7 +36,7 @@
       },
       getOpenId () {
         const data = {
-          customerId: getStore('user').customerId,
+          customerId: getStore('userInfoID').customerId,
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
@@ -38,7 +44,7 @@
         this.axios.post(api, data).then((res) => {
           const d = res.data
           if (d.success) {
-            this.jump(d.data.customerId)
+//            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)
@@ -49,7 +55,7 @@
         this.$router.replace({
           path: '/index',
           query: {
-            'shopId': getStore('user').shopId,
+            'shopId': getStore('userInfoID').shopId,
             'customerId': customerId
           }
         })
