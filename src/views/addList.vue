@@ -58,6 +58,7 @@
       ...mapMutations(['CHOOSE_ADDRESS']),
       // 获取地址列表
       async getADDList () {
+        console.log('**地址列表**')
         const data = {
           sessionId: this.sessionId,
           shopId: this.shopId
@@ -119,6 +120,19 @@
               sessionId: this.sessionId
             }
           })
+        }
+      },
+      // toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1000)
+        } else {
+          return
         }
       }
     }

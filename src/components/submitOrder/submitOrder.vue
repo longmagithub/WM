@@ -301,12 +301,13 @@
       },
       // 去地址列表
       gotoAddList() {
+        console.log(this.addRess)
         this.$router.push({
           path: '/addList',
           query: {
             shopId: this.shopId,
             customerId: this.customerId,
-            addressId: this.addRess.addressId
+            addressId: this.addRess === null ? '' : this.addRess.addressId
           }
         })
       },
