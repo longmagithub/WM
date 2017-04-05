@@ -28,7 +28,6 @@
     },
     methods: {
       getOpenId () {
-        const that = this
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
@@ -41,13 +40,19 @@
               'customerId': d.data.customerId,
               'shopId': this.shopId
             })
-            that.jump()
+            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
         })
       },
-      jump () {
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang'
+      jump (customerId) {
+        this.$router.replace({
+          path: '/index',
+          query: {
+            'shopId': this.shopId,
+            'customerId': customerId
+          }
+        })
       }
     }
   }
