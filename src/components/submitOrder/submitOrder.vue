@@ -116,6 +116,7 @@
         orderDish: [], // 订单菜品
         isJinKuai: false, // 是否尽快送达
         isDiscount: false // 是否可以优惠
+//        isAddressId: false // 是否有地址id
       }
     },
     created() {
@@ -256,39 +257,44 @@
       },
       // 提交订单
       submitOrder() {
-        const data = {
-          shopId: this.shopId,
-          customerId: this.customerId,
-          originalPrice: this.allPrice, // 订单原价
-          packPrice: this.packPrice, // 订单餐盒费用
-          dispatchPrice: this.feesPrice, // 订单配送费
-          discountPrice: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2) ? this.discountList.reductionAmount : 0, // 订单优惠金额
-          paidPrice: (this.feesPrice + this.allPrice).toFixed(2), // 支付金额
-          addressId: this.addRess.addressId,  // 用户收货ID
-          receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
-          invoiceTitle: this.invoice, // 发票抬头
-          remark: `${this.remarkText}${this.inputText}`,  // 订单备注
-          expectTime: this.options[this.selected],  // 期望送达时间
-          orderDish: this.orderDish,
-          shopDiscountId: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2)
-          // 所参加优惠活动ID
-        }
-        setStore('userOrderIofo', data)
-        const api = '/br/order'
-        this.axios.post(api, data).then((res) => {
-          res = res.data
-          if (res.success === SUCCESS_OK) {
-            this.orderId = res.data.orderId
-            this.gotoPay()
-          } else {
-            this.toastText = '网络异常，请稍后再试'
-            this.toastShow = true
-            setTimeout(() => {
-              this.toastShow = false
-              this.toastText = ''
-            }, 1000)
+        if (this.addressId) {
+          const data = {
+            shopId: this.shopId,
+            customerId: this.customerId,
+            originalPrice: this.allPrice, // 订单原价
+            packPrice: this.packPrice, // 订单餐盒费用
+            dispatchPrice: this.feesPrice, // 订单配送费
+            discountPrice: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2) ? this.discountList.reductionAmount : 0, // 订单优惠金额
+            paidPrice: (this.feesPrice + this.allPrice).toFixed(2), // 支付金额
+            addressId: this.addRess.addressId,  // 用户收货ID
+            receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
+            invoiceTitle: this.invoice, // 发票抬头
+            remark: `${this.remarkText}${this.inputText}`,  // 订单备注
+            expectTime: this.options[this.selected],  // 期望送达时间
+            orderDish: this.orderDish,
+            shopDiscountId: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2)
+            // 所参加优惠活动ID
           }
-        })
+          setStore('userOrderIofo', data)
+          const api = '/br/order'
+          this.axios.post(api, data).then((res) => {
+            res = res.data
+            if (res.success === SUCCESS_OK) {
+              this.orderId = res.data.orderId
+              this.gotoPay()
+            } else {
+              this.toastText = '网络异常，请稍后再试'
+              this.toastShow = true
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+              }, 1000)
+            }
+          })
+        } else {
+//          window.alert('请选择收货地址')
+          this.toggleToast(1, '请选择收货地址')
+        }
       },
       // 去支付
       gotoPay() {
@@ -328,6 +334,19 @@
         } else {
           this.allNum = allFeesPrice.toFixed(2)
           this.isDiscount = false
+        }
+      },
+      // toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1000)
+        } else {
+          return
         }
       }
     },
