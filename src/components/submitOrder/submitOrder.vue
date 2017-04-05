@@ -9,7 +9,7 @@
           <p class="content">{{addRess.houseNum}}{{addRess.houseNum}}</p>
         </div>
         <div class="address-not" v-else>
-          请添加一个收获地址
+          请添加一个收货地址
         </div>
         <i class="uxwm-iconfont btn_right"></i>
       </section>

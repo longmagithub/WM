@@ -91,7 +91,7 @@
                 <li class="food" v-for="(item, index) in cartFoodList" :key="index">
                   <span class="name">{{item.name}}</span>
                   <div class="price-box">
-                    <span>￥<span class="price">{{item.price * item.num}}</span></span>
+                    <span>￥<span class="price">{{item.price * item.num | toFixedFil}}</span></span>
                   </div>
                   <div class="buyCart-wrapper">
                     <div class="cart-decrease inner uxwm-iconfont btn_reduce_normal"
@@ -421,8 +421,9 @@
                 num += foodItem.num
 //                if (item.state === 0) {
                 this.totalPack += foodItem.num * foodItem.packingFee
+                this.totalPack = parseFloat(this.totalPack.toFixed(2))
                 this.totalPrice += foodItem.num * foodItem.price
-                this.allPrice = this.totalPrice + this.totalPack
+                this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
                 if (foodItem.num > 0) {
                   this.cartFoodList[cartFoodNum] = {}
                   this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0]
@@ -572,6 +573,12 @@
     components: {
       shopcart,
       buyCart
+    },
+    filters: {
+      // 保留2位
+      toFixedFil(val) {
+        return val.toFixed(2)
+      }
     }
   }
 </script>
