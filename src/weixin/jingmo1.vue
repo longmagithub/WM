@@ -35,7 +35,6 @@
           let d = res.data
           if (d.success) {
             setStore('user', {
-              'shopId': this.shopId,
               'customerId': d.data.customerId
             })
             that.jump()
