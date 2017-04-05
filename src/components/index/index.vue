@@ -18,7 +18,7 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore, getStore} from '../../common/js/util'
+  import {setStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
   const SUCCESS_OK = true
@@ -41,7 +41,7 @@
     created() {
 //      this.shopId = getStore('user').shopId
       this.shopId = 'ca2939cf-f42f-402f-8b75-53283431ee68'
-      this.customerId = getStore('user').customerId
+      this.customerId = '640a4f47-916b-48fd-9bd3-ea36fd33365b'
 //      this.setStore('user', {
 //        'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68'
 //      })
