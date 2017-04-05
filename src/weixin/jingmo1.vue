@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import {urlParse, setStore} from '../common/js/util'
+  import {urlParse, setStore, getStore} from '../common/js/util'
   export default {
     data () {
       return {
@@ -16,8 +16,12 @@
         customerId: ''
       }
     },
+    created() {
+      let url = 'http://newpay.tunnel.qydev.com/VAOrderH5/?code=011oVaMa1xSVms08kSLa1P18Ma1oVaMY&state=STATE#/jingmo1?shopId=ca2939cf-f42f-402f-8b75-53283431ee68'
+      this.shopId = getStore('user').shopId
+      console.log(url.split('='))
+    },
     mounted () {
-      this.shopId = window.location.href.split('=')[1]
       this.url = window.location.href
       if (this.url.indexOf('code') > 0) {
 //        this.getOpenId()
