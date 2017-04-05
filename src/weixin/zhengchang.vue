@@ -17,7 +17,8 @@
     },
     created() {
       let url = window.location.href.split('=')
-      this.shopId = url[0]
+      this.shopId = url[1]
+      console.log(url)
       setStore('userInfoID', {
         'shopId': this.shopId,
         'customerId': ''
