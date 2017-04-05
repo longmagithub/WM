@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-
   export default {
     data () {
       return {
@@ -16,9 +15,8 @@
       }
     },
     created() {
-      this.shopId = this.$route.query.shopId
-    },
-    mounted () {
+      this.shopId = window.location.href.split('=')[1]
+      console.log(this.shopId)
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
         this.to()

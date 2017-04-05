@@ -17,7 +17,7 @@
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
-        this.to()
+//        this.to()
       } else {
         this.getOpenId()
       }
@@ -38,7 +38,7 @@
         this.axios.post(api, data).then((res) => {
           const d = res.data
           if (d.success) {
-            this.jump(d.data.customerId)
+//            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)

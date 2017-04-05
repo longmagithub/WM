@@ -18,7 +18,7 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore, removeStore} from '../../common/js/util'
+  import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
   const SUCCESS_OK = true
@@ -39,25 +39,25 @@
       }
     },
     created() {
-      this.shopId = this.$route.query.shopId
-      this.customerId = this.$route.query.customerId
+      this.shopId = getStore('userInfoID').shopId
+      this.customerId = getStore('userInfoID').customerId
       // 如果没有 customerId 就去授权
-      if (!this.customerId) {
-        this.$router.replace({
-          path: '/jingmo',
-          query: {
-            shopId: this.shopId
-          }
-        })
-      } else {
-        setStore('user', {
-          'shopId': this.shopId,
-          'customerId': this.customerId
-        })
-        removeStore('userInfoID')
+//      if (!this.customerId) {
+//        this.$router.replace({
+//          path: '/jingmo',
+//          query: {
+//            shopId: this.shopId
+//          }
+//        })
+//      } else {
+//        setStore('user', {
+//          'shopId': this.shopId,
+//          'customerId': this.customerId
+//        })
+//        removeStore('userInfoID')
         // 商家信息
-        this.getShopDetail()
-      }
+      this.getShopDetail()
+//      }
 
 //      if (getStore('user')) {
 //        this.shopId = getStore('user').shopId

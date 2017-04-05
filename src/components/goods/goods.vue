@@ -161,7 +161,8 @@
   import BScroll from 'better-scroll'
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
-  dishesList  const SUCCESS_OK = true
+  import {setStore, getStore} from '../../common/js/util'
+  const SUCCESS_OK = true
   export default {
     props: {
       seller: {
@@ -202,8 +203,8 @@
         selectedFood: {},
         showSpecs: false,
         specsIndex: 0,  // 规格的index
-        shopId: getStore('user').shopId,
-        customerId: getStore('user').customerId,
+        shopId: '',
+        customerId: '',
         categoryNum: [], // 商品类型右上角已加入购物车的数量
         totalPrice: 0, // 购物车总结
         cartFoodList: [], // 购物车商品列表
@@ -213,6 +214,8 @@
       }
     },
     created() {
+      this.shopId = getStore('user').shopId
+      this.customerId = getStore('user').customerId
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
       const data = {
