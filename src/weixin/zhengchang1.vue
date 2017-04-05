@@ -11,10 +11,14 @@
     data () {
       return {
         msg: '用户授权',
-        url: ''
+        url: '',
+        shopId: ''
       }
     },
-    components: {},
+    created() {
+      let url = window.location.href.split('=')
+      this.shopId = url[url.length - 1]
+    },
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') > 0) {
@@ -24,7 +28,6 @@
     methods: {
       getOpenId () {
         const data = {
-          customerId: getStore('userInfoID').customerId,
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }

@@ -10,7 +10,7 @@ export default new Router({
     // 默认
     {
       path: '/',
-      redirect: '/jingmo' // 重定向到 /jingmo
+      redirect: '/zhengchang' // 重定向到 /jingmo
     },
     // 静默授权
     {

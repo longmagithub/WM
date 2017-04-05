@@ -5,22 +5,23 @@
   </div>
 </template>
 <script>
-  import {urlParse, getStore} from '../common/js/util'
+  import {urlParse, setStore} from '../common/js/util'
 
   export default {
     data () {
       return {
         msg: '用户授权',
-        url: ''
+        url: '',
+        shopId: ''
       }
     },
     created() {
       let url = window.location.href.split('=')
-      console.log(url)
-      console.log(getStore('userInfoID'))
-//      this.shopId = url[url.length - 1]
-    },
-    mounted () {
+      this.shopId = url[0]
+      setStore('userInfoID', {
+        'shopId': this.shopId,
+        'customerId': ''
+      })
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
         this.to()
@@ -30,13 +31,12 @@
     },
     methods: {
       to () {
-        const oauthCallbackUrl = encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang1')
-        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx4340e30a4fa4b63b&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+        const oauthCallbackUrl = encodeURIComponent(`http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang1shopId=${this.shopId}`)
+        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
         window.location.href = oauthJumpUrl
       },
       getOpenId () {
         const data = {
-          customerId: getStore('userInfoID').customerId,
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
@@ -45,6 +45,10 @@
           const d = res.data
           if (d.success) {
             this.jump(d.data.customerId)
+            setStore('userInfoID', {
+              'shopId': this.shopId,
+              'customerId': d.data.customerId
+            })
           }
         }, (errorRes) => {
           console.log(errorRes)
@@ -55,7 +59,7 @@
         this.$router.replace({
           path: '/index',
           query: {
-            'shopId': getStore('userInfoID').shopId,
+            'shopId': this.shopId,
             'customerId': customerId
           }
         })
