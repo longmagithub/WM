@@ -38,7 +38,7 @@
         this.axios.post(api, data).then((res) => {
           const d = res.data
           if (d.success) {
-//            this.jump(d.data.customerId)
+            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
           console.log(errorRes)

@@ -6,6 +6,7 @@
   </div>
 </template>
 <script>
+//  import {urlParse} from '../common/js/util'
   export default {
     data () {
       return {
@@ -17,6 +18,8 @@
     created() {
       this.shopId = window.location.href.split('=')[1]
       console.log(this.shopId)
+    },
+    mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
         this.to()
