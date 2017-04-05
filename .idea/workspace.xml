@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/goods/goods.vue" afterPath="$PROJECT_DIR$/src/components/goods/goods.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="$PROJECT_DIR$/src/router/index.js" />
     </list>
     <ignored path="H5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,21 +37,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="456">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="goods.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="453" column="55" selection-start-line="453" selection-start-column="55" selection-end-line="453" selection-end-column="55" />
+            <state relative-caret-position="222">
+              <caret line="450" column="17" selection-start-line="450" selection-start-column="6" selection-end-line="450" selection-end-column="17" />
               <folding>
                 <element signature="e#6963#7006#0" expanded="true" />
                 <element signature="e#7446#7701#0" expanded="false" />
@@ -257,13 +256,13 @@
         <option value="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
         <option value="$PROJECT_DIR$/src/views/orderDetail.vue" />
         <option value="$PROJECT_DIR$/src/components/header/header.vue" />
-        <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/weixin/zhengchang1.vue" />
         <option value="$PROJECT_DIR$/src/weixin/zhengchang.vue" />
         <option value="$PROJECT_DIR$/src/weixin/jingmo1.vue" />
         <option value="$PROJECT_DIR$/src/weixin/jingmo.vue" />
         <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/components/goods/goods.vue" />
+        <option value="$PROJECT_DIR$/src/router/index.js" />
       </list>
     </option>
   </component>
@@ -451,12 +450,12 @@
       <workItem from="1491196420641" duration="20902000" />
       <workItem from="1491274505908" duration="20769000" />
       <workItem from="1491311899717" duration="5619000" />
-      <workItem from="1491356819170" duration="3666000" />
+      <workItem from="1491356819170" duration="3920000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="645234000" />
+    <option name="totallyTimeSpent" value="645488000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -858,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/weixin/zhengchang1.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="624">
@@ -925,20 +916,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1059">
-          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
-          <folding>
-            <element signature="e#472#513#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="453" column="55" selection-start-line="453" selection-start-column="55" selection-end-line="453" selection-end-column="55" />
+        <state relative-caret-position="222">
+          <caret line="450" column="17" selection-start-line="450" selection-start-column="6" selection-end-line="450" selection-end-column="17" />
           <folding>
             <element signature="e#6963#7006#0" expanded="true" />
             <element signature="e#7446#7701#0" expanded="false" />
@@ -1005,6 +986,24 @@
             <element signature="e#25498#25524#0" expanded="false" />
             <element signature="e#25564#25796#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1059">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <folding>
+            <element signature="e#472#513#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
