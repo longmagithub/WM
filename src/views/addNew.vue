@@ -48,7 +48,7 @@
     mounted () {
       this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
-      this.sessionId = this.$route.query.sessionId ? this.$route.query.sessionId : ''
+      this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
       if (this.addressId) {
         this.getAddressDetail(this.addressId)
       }
@@ -177,17 +177,18 @@
             }, 1000)
           })
         } else {  // 添加地址
+          console.log('添加地址')
           this.axios.post('/br/customer/address', data)
           .then((res) => {
             this.isAjaxing = false
             if (res.data.success) {
               this.toastShow = true
               this.toastText = '修改成功'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-                this.backAddressList()
-              }, 2000)
+//              setTimeout(() => {
+//                this.toastShow = false
+//                this.toastText = ''
+//                this.backAddressList()
+//              }, 2000)
             } else {
               this.toastShow = true
               this.toastText = '网络异常，请稍候重试'
@@ -258,6 +259,19 @@
             sessionId: this.sessionId
           }
         })
+      },
+      // toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1000)
+        } else {
+          return
+        }
       },
       // 关闭 toast
       doCloseToast () {

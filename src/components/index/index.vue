@@ -43,11 +43,11 @@
       console.log(this.$route.query.shopId)
       console.log(this.$route.query.customerId)
 //      this.shopId = getStore('user').shopId
-      this.shopId = 'ca2939cf-f42f-402f-8b75-53283431ee68'
-      this.customerId = '640a4f47-916b-48fd-9bd3-ea36fd33365b'
+//      this.shopId = 'ca2939cf-f42f-402f-8b75-53283431ee68'
+//      this.customerId = '640a4f47-916b-48fd-9bd3-ea36fd33365b'
       setStore('user', {
-        'shopId': this.shopId,
-        'customerId': this.customerId
+        'shopId': this.$route.query.shopId,
+        'customerId': this.$route.query.customerId
       })
 //      this.setStore('user', {
 //        'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68'

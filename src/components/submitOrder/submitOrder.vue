@@ -136,15 +136,16 @@
       this.shopCart = this.cartList[this.shopId]
       // 商户信息
       this.shopInfo = getStore('shopInfo')
-      this.packPrice = getStore('userPrice')[0]
-      this.feesPrice = getStore('userPrice')[1]
-      this.allPrice = getStore('userPrice')[2]
+      this.packPrice = parseFloat(getStore('userPrice')[0].toFixed(2))
+      this.feesPrice = parseFloat(getStore('userPrice')[1].toFixed(2))
+      this.allPrice = parseFloat(getStore('userPrice')[2].toFixed(2))
       // 默认地址
       this.getAddRess(this.addressId)
       // 优惠列表
       this.getDiscountList()
-      // 默认时间
-      this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime))
+      // 默认时间 当前时间 + 出餐时间 + 配送时间
+      this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+        this.shopInfo.dispatching.duration))
       // 结束时间
       let endTimeHours = parseFloat(this.shopInfo.hours[this.shopInfo.hours.length - 1].endTime.split(':')[0])
       let endTimeMinte = parseFloat(this.shopInfo.hours[this.shopInfo.hours.length - 1].endTime.split(':')[1]) - 15
@@ -153,7 +154,8 @@
       this.endTime = new Date(this.endTime).setSeconds(0, 0)
 
       this.options.push(Date.parse(this.estimateTime))
-      let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime)
+      // 默认时间 当前时间 + 出餐时间 + 5
+      let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime + this.shopInfo.dispatching.duration)
       let onceTime = this.estimateTime
       // 预计默认时间
       if (orderTaP > this.endTime) {
@@ -321,18 +323,19 @@
       _isDiscount(data) {
         let newTime = Date.parse(new Date()) / 1000
         let allFeesPrice = this.allPrice + this.feesPrice
+        console.log(allFeesPrice)
         let beginTime = Date.parse(new Date(data.beginTime)) / 1000
         let endTime = Date.parse(new Date(data.endTime)) / 1000
         if (beginTime <= newTime <= endTime) {
-          if (allFeesPrice.toFixed(2) >= data.conditionAmount.toFixed(2)) {
+          if (allFeesPrice >= data.conditionAmount.toFixed(2)) {
             this.isDiscount = true
             this.allNum = allFeesPrice - data.reductionAmount
           } else {
             this.isDiscount = false
-            this.allNum = allFeesPrice.toFixed(2)
+            this.allNum = allFeesPrice
           }
         } else {
-          this.allNum = allFeesPrice.toFixed(2)
+          this.allNum = allFeesPrice
           this.isDiscount = false
         }
       },
