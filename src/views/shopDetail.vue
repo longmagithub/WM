@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getShopInfo () {
-      this.axios.get(`/br/shop/detail?merchantId=${this.merchantId}`)
+      this.axios.get(`/br/shop/detail?shopId=${this.merchantId}`)
       .then((res) => {
         res = res.data
         if (res.success) {
