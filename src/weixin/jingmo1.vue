@@ -25,7 +25,7 @@
     },
     methods: {
       getOpenId () {
-//        const that = this
+        const that = this
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
@@ -38,7 +38,7 @@
               'shopId': this.shopId,
               'customerId': d.data.customerId
             })
-//            that.jump()
+            that.jump()
           }
         }, (errorRes) => {
         })
