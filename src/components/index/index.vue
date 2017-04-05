@@ -39,8 +39,8 @@
       }
     },
     created() {
-      this.shopId = getStore('userInfoID').shopId
-      this.customerId = getStore('userInfoID').customerId
+      this.shopId = getStore('user').shopId
+      this.customerId = getStore('user').customerId
       // 如果没有 customerId 就去授权
 //      if (!this.customerId) {
 //        this.$router.replace({

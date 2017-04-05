@@ -34,7 +34,7 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            setStore('userInfoID', {
+            setStore('user', {
               'shopId': this.shopId,
               'customerId': d.data.customerId
             })

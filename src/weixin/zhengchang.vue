@@ -30,7 +30,7 @@
       },
       getOpenId () {
         const data = {
-          customerId: getStore('userInfoID').customerId,
+          customerId: getStore('user').customerId,
           code: urlParse().code,
           type: 2 // 授权类型：1静默授权；2用户授权
         }
@@ -49,7 +49,7 @@
         this.$router.replace({
           path: '/index',
           query: {
-            'shopId': getStore('userInfoID').shopId,
+            'shopId': getStore('user').shopId,
             'customerId': customerId
           }
         })
