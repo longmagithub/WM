@@ -23,6 +23,8 @@
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') > 0) {
+        console.log('**我是code**')
+        console.log(urlParse().code)
         this.getOpenId()
       }
     },
