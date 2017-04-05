@@ -19,7 +19,6 @@
     created() {
       let url = window.location.href.split('=')
       this.shopId = url[url.length - 1]
-      console.log(this.shopId)
     },
     mounted () {
       this.url = window.location.href
@@ -29,12 +28,11 @@
     },
     methods: {
       getOpenId () {
-//        const that = this
+        const that = this
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
-        console.log(data)
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           let d = res.data
@@ -43,7 +41,7 @@
               'customerId': d.data.customerId,
               'shopId': this.shopId
             })
-//            that.jump()
+            that.jump()
           }
         }, (errorRes) => {
         })

@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import {setStore} from '../common/js/util'
+//  import {setStore} from '../common/js/util'
   export default {
     data () {
       return {
@@ -17,9 +17,6 @@
     },
     created() {
       this.shopId = window.location.href.split('=')[1]
-      setStore('user', {
-        'shopId': this.shopId
-      })
     },
     mounted () {
       this.url = window.location.href
