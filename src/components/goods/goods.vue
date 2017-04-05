@@ -20,7 +20,7 @@
               <div class="content">
                 <h2 class="name">{{food.name}}</h2>
                 <span class="desc">{{food.description}}</span>
-                <p class="sellNum">已售{{food.dishSpecification[0].saleCount}}份</p>
+                <p class="sellNum" v-if="food.dishSpecification[0].saleCount">已售{{food.dishSpecification[0].saleCount}}份</p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span><span
                     class="text" v-if="food.dishSpecification.length > 1">起</span></div>
@@ -90,6 +90,7 @@
               <ul>
                 <li class="food" v-for="(item, index) in cartFoodList" :key="index">
                   <span class="name">{{item.name}}</span>
+                  <span class="specs">{{item.specs}}</span>
                   <div class="price-box">
                     <span>￥<span class="price">{{item.price * item.num | toFixedFil}}</span></span>
                   </div>
