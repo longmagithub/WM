@@ -65,8 +65,8 @@
         this.$router.push({
           path: '/orderList',
           query: {
-            shopId: getStore('user').shopId,
-            sessionId: getStore('user').customerId
+            shopId: getStore('userInfoID').shopId,
+            sessionId: getStore('userInfoID').customerId
           }
         })
       }

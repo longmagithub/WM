@@ -121,7 +121,6 @@
       },
       // 打开godds组件里面 多规格
       showChooseList(event, foods) {
-        console.log(123)
         if (!this.isYingye) {
           return
         } else {
