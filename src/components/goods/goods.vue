@@ -88,7 +88,7 @@
             </div>
             <div class="list-content" ref="listContent">
               <ul>
-                <li class="food" v-for="(item, index) in cartFoodList" :key="index">
+                <li class="food" v-for="(item, index) in cartFoodList" v-if="item.num > 0" :key="index">
                   <span class="name">{{item.name}}</span>
                   <span class="specs">{{item.specs}}</span>
                   <div class="price-box">

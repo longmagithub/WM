@@ -36,7 +36,7 @@
         <div class="order-list">
           <div class="list-content">
             <ul>
-              <li class="food_list_item" v-for="item in newShopCart">
+              <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0" :key="index">
                 <div
                   class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
                 <div class="price">￥{{item.num * item.price}}</div>
