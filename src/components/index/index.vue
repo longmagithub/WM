@@ -39,6 +39,7 @@
       }
     },
     created() {
+      console.log('**下面是两个ID**')
       console.log(this.$route.query.shopId)
       console.log(this.$route.query.customerId)
 //      this.shopId = getStore('user').shopId
