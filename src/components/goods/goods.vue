@@ -91,7 +91,7 @@
                 <li class="food" v-for="(item, index) in cartFoodList" :key="index">
                   <span class="name">{{item.name}}</span>
                   <div class="price-box">
-                    <span>￥<span class="price">{{item.price}}</span></span>
+                    <span>￥<span class="price">{{item.price * item.num}}</span></span>
                   </div>
                   <div class="buyCart-wrapper">
                     <div class="cart-decrease inner uxwm-iconfont btn_reduce_normal"

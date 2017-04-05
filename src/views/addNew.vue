@@ -48,7 +48,7 @@
     mounted () {
       this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
-      this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
+      this.sessionId = this.$route.query.sessionId ? this.$route.query.sessionId : ''
       if (this.addressId) {
         this.getAddressDetail(this.addressId)
       }
@@ -184,11 +184,11 @@
             if (res.data.success) {
               this.toastShow = true
               this.toastText = '修改成功'
-//              setTimeout(() => {
-//                this.toastShow = false
-//                this.toastText = ''
-//                this.backAddressList()
-//              }, 2000)
+              setTimeout(() => {
+                this.toastShow = false
+                this.toastText = ''
+                this.backAddressList()
+              }, 2000)
             } else {
               this.toastShow = true
               this.toastText = '网络异常，请稍候重试'
@@ -256,7 +256,7 @@
           path: '/addList',
           query: {
             shopId: this.shopId,
-            sessionId: this.sessionId
+            customerId: this.sessionId
           }
         })
       },
