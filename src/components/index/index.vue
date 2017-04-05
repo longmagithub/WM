@@ -42,9 +42,9 @@
 //      this.shopId = getStore('user').shopId
       this.shopId = 'ca2939cf-f42f-402f-8b75-53283431ee68'
       this.customerId = getStore('user').customerId
-      this.setStore('user', {
-        'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68'
-      })
+//      this.setStore('user', {
+//        'shopId': 'ca2939cf-f42f-402f-8b75-53283431ee68'
+//      })
       // 如果没有 customerId 就去授权
 //      if (!this.customerId) {
 //        this.$router.replace({

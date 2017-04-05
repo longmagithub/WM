@@ -450,7 +450,8 @@
       // 菜谱信息
       getDishList() {
         const data = {
-          shopId: this.shopId,
+//          shopId: this.shopId,
+          shopId: 'ca2939cf-f42f-402f-8b75-53283431ee68',
           customerId: getStore('user').customerId
         }
         this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
