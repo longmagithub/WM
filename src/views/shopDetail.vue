@@ -28,7 +28,8 @@ export default {
   mounted () {
     // 设置页面 title
     this.PublicJs.changeTitleInWx('商家详情')
-    this.merchantId = this.$route.query.id || ''
+//    this.merchantId = this.$route.query.id || ''
+    this.merchantId = 'ca2939cf-f42f-402f-8b75-53283431ee68'
     this.getShopInfo()
   },
   data () {
