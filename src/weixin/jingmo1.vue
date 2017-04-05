@@ -17,13 +17,14 @@
       }
     },
     created() {
-      let url = 'http://newpay.tunnel.qydev.com/VAOrderH5/?code=011oVaMa1xSVms08kSLa1P18Ma1oVaMY&state=STATE#/jingmo1?shopId=ca2939cf-f42f-402f-8b75-53283431ee68'
-      console.log(url.split('='))
+      let url = window.location.href.split('=')
+      this.shopId = url[url.length - 1]
+      console.log(this.shopId)
     },
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') > 0) {
-//        this.getOpenId()
+        this.getOpenId()
       }
     },
     methods: {
@@ -33,12 +34,14 @@
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
+        console.log(data)
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
             setStore('user', {
-              'customerId': d.data.customerId
+              'customerId': d.data.customerId,
+              'shopId': this.shopId
             })
 //            that.jump()
           }
