@@ -104,7 +104,7 @@
       // 新增地址
       addNew (id) {
         if (id) { // 修改
-          this.$router.push({
+          this.$router.replace({
             path: '/addNew',
             query: {
               shopId: this.shopId,
@@ -113,7 +113,7 @@
             }
           })
         } else { // 新增
-          this.$router.push({
+          this.$router.replace({
             path: '/addNew',
             query: {
               shopId: this.shopId,

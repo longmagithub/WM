@@ -183,6 +183,7 @@
             res = res.data
             this.isAjaxing = false
             if (res.success) {
+              thas.toggleToast(1, res.message)
               this.backAddressList()
             } else {
               thas.toggleToast(1, res.message)

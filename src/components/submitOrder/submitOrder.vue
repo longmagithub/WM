@@ -8,7 +8,7 @@
             <p class="header"><span class="name">{{addRess.name}}</span><span
               class="name">{{addRess.phoneNumber}}</span>
             </p>
-            <p class="content">{{addRess.houseNum}}</p>
+            <p class="content">{{addRess.address}}{{addRess.houseNum}}</p>
           </div>
           <div class="address-not" v-else>
             请添加一个收货地址
@@ -21,7 +21,7 @@
           <span class="soon" v-if="isJinKuai">尽快送达</span>
           <div class="time-wrapper" v-if="!isJinKuai">
             <span class="title" v-if="selected === 0">尽快送达</span>
-            <span class="time" v-if="selected === 0">预计{{estimateTime | formatDate}}</span>
+            <span class="time" v-if="selected === 0">预计{{options[0] | formatDate}}</span>
             <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
           </div>
           <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
@@ -161,8 +161,12 @@
 
       this.options.push(Date.parse(this.estimateTime))
       // 默认时间 当前时间 + 出餐时间 + 5
-      let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime + this.shopInfo.dispatching.duration)
-      let onceTime = this.estimateTime
+      let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+        this.shopInfo.dispatching.duration + 15)
+      let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+        this.shopInfo.dispatching.duration + 15))
+      console.log(onceTime)
+      console.log(onceTime.getMinutes())
       // 预计默认时间
       if (orderTaP > this.endTime) {
         this.isJinKuai = true
@@ -171,6 +175,7 @@
         this.estimateTime = orderTaP > this.endTime ? this.endTime : orderTaP
         // 开始第一次时间
         let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+        console.log(onceTime)
         if (oneTimeIndex === 0) {
           this.options.push(new Date(orderTaP).setMinutes(15))
         } else if (oneTimeIndex === 1) {
@@ -188,6 +193,7 @@
       }
     },
     mounted() {
+      console.log(this.options)
       this.initData()
     },
     computed: {
@@ -280,8 +286,7 @@
             remark: `${this.remarkText}${this.inputText}`,  // 订单备注
             expectTime: this.options[this.selected],  // 期望送达时间
             orderDish: this.orderDish,
-            shopDiscountId: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2)
-            // 所参加优惠活动ID
+            shopDiscountId: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2) ? this.discountList.discountId : '' // 所参加优惠活动ID
           }
           setStore('userOrderIofo', data)
           const api = '/br/order'
@@ -374,6 +379,7 @@
     padding-bottom: 49px;
   }
   .address-wrapper {
+    position: relative;
     box-sizing: border-box;
     margin-bottom: 14px;
     padding: 18px 14px 16px 17px;
@@ -386,9 +392,16 @@
 
   .address-wrapper .address-yes,
   .address-wrapper .address-not {
+    box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
+    padding-left: 42px;
+    padding-right: 28px;
+    width: 100%;
     font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     color: #343434;
   }
 
@@ -411,6 +424,7 @@
   }
 
   .address-wrapper .icon_Location {
+    position: absolute;
     display: inline-block;
     margin-right: 22px;
     color: #ff8932;
@@ -418,9 +432,11 @@
   }
 
   .address-wrapper .btn_right {
+    position: absolute;
+    right: 14px;
+    top: 18px;;
     display: inline-block;
     vertical-align: top;
-    float: right;
     color: #d7d7d7;
     font-weight: 700;
     font-size: 14px;
