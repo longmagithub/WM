@@ -23,10 +23,10 @@
           <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
         </div>
         <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
-          <option class="select-item" v-for="(item, index) in options" :value="index">
-            <span class="title" v-if="index === 0">尽快送达 &nbsp|&nbsp</span>
-            <span class="time" v-if="index === 0"> 预计{{item | formatDate}}</span>
-            <span v-if="index > 0">{{item | formatDate}}</span>
+          <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
+            <span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>
+            <span class="time" v-if="indexOption === 0"> 预计{{item | formatDate}}</span>
+            <span v-if="indexOption > 0">{{item | formatDate}}</span>
           </option>
         </select>
         <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
@@ -36,7 +36,7 @@
         <div class="order-list">
           <div class="list-content">
             <ul>
-              <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0" :key="index">
+              <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0">
                 <div
                   class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
                 <div class="price">￥{{item.num * item.price}}</div>
@@ -127,7 +127,7 @@
       // 获取上个页面传递过来的shopid值
       this.shopId = this.$route.query.shopId
       // 用户地址ID
-      this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
+      this.addressId = this.userAddressId ? this.userAddressId : ''
       // 获取购物车信息
       this.INIT_BUYCART()
       // 将当前商品id保存
@@ -185,7 +185,7 @@
       this.initData()
     },
     computed: {
-      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
@@ -285,16 +285,10 @@
               this.orderId = res.data.orderId
               this.gotoPay()
             } else {
-              this.toastText = '网络异常，请稍后再试'
-              this.toastShow = true
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              this.toggleToast(1, res.message)
             }
           })
         } else {
-//          window.alert('请选择收货地址')
           this.toggleToast(1, '请选择收货地址')
         }
       },

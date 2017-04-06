@@ -8,7 +8,8 @@ import {
   CHOOSE_ADDRESS, // 选择地址
   USER_PRICE,  // uers 合计费用
   CONFIRM_INVOICE, // 是否开发票
-  CONFIRM_REMARK // 订单备注
+  CONFIRM_REMARK, // 订单备注
+  USER_ADDRESSID // 用户地址id
   // RECORD_SHOPDETAIL,
   // RECORD_USERINFO,
   // GET_USERINFO,
@@ -166,5 +167,9 @@ export default {
   // 是否开发票
   [CONFIRM_INVOICE](state, invoice) {
     state.invoice = invoice
+  },
+  // 用户地址ID
+  [USER_ADDRESSID](state, userAddressId) {
+    state.userAddressId = userAddressId
   }
 }

@@ -30,7 +30,8 @@ const state = {
   login: true, // 登陆的状态，默认登陆
   totalPack: null, // 饭盒
   feesPrice: null, // 配送
-  allPrice: null  // 总价
+  allPrice: null,  // 总价
+  userAddressId: '' // 用户地址id
 }
 
 export default new Vuex.Store({

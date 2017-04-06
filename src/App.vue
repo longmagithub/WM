@@ -2,7 +2,8 @@
   <div id="app">
     <transition name="fade" mode="out-in">
       <!--<keep-alive>-->
-        <router-view class="view"></router-view>
+        <router-view
+          class="view"></router-view>
       <!--</keep-alive>-->
     </transition>
   </div>

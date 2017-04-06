@@ -55,7 +55,7 @@
       ...mapState(['addressIndex'])
     },
     methods: {
-      ...mapMutations(['CHOOSE_ADDRESS']),
+      ...mapMutations(['CHOOSE_ADDRESS', 'USER_ADDRESSID']),
       // 获取地址列表
       async getADDList () {
         console.log('**地址列表**')
@@ -91,13 +91,13 @@
         })
       },
       selectAdd (id) {
+        this.USER_ADDRESSID(id)
         this.nowSelADDId = id
         this.$router.replace({
           path: '/submitOrder',
           query: {
             shopId: this.shopId,
-            customerId: this.sessionId,
-            addressId: id
+            customerId: this.sessionId
           }
         })
       },

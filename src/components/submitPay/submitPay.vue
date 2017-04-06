@@ -154,6 +154,19 @@
               }, 1000)
             }
           })
+      },
+      // toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1000)
+        } else {
+          return
+        }
       }
     },
     components: {
