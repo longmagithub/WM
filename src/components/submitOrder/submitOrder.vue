@@ -40,7 +40,10 @@
               <ul>
                 <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0">
                   <div
-                    class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
+                    class="name_num"><span class="name">{{item
+                    .name}}<span class="specs" v-if="item.specs">({{item.specs}})</span></span><span
+                    class="num">×{{item
+                    .num}}</span></div>
                   <div class="price">￥{{item.num * item.price}}</div>
                 </li>
                 <li class="food_list_item">
@@ -564,7 +567,10 @@
     font-size: 13px;
     color: #949494;
   }
-
+  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .specs{
+    margin-left: 5px;
+    font-size: 11px;
+  }
   .orderDetail-wrapper .order-list .discount {
     height: 37px;
     line-height: 37px;

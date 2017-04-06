@@ -21,12 +21,13 @@
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
            @click.stop.prevent="addToCart(
+
            foods.dishTypeRelations[0],
            foods.dishId,
            foods.dishSpecification[0].specificationId,
            foods.name,
            foods.dishSpecification[0].dishPrice,
-           foods.dishSpecification[0].specificationName,
+           '',
            foods.dishSpecification[0].packPrice)"></div>
     </section>
     <!-- 多规格 -->
@@ -82,6 +83,8 @@
         showDeleteTip: false // 多规格显示 删除 提示
       }
     },
+    created() {
+    },
     computed: {
       // 接受vuex
       ...mapState(['cartList']),
@@ -121,10 +124,10 @@
       },
       // 打开godds组件里面 多规格
       showChooseList(event, foods) {
-        if (!this.isYingye) {
-          return
-        } else {
+        if (this.isYingye) {
           this.$emit('showSpecs', event, foods, this.showSpecs)
+        } else {
+          return
         }
       },
       // 点击多规格商品的减按钮，弹出提示
@@ -239,8 +242,8 @@
     color: #dddddd;
   }
 
-  .specification-wrapper .forbid .text {
-    background: #dddddd;
+  .specification-wrapper .forbid {
+    color: #dddddd;
   }
 
   .specification-wrapper .specification_delete .inner {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header" ref="header">
-      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail', query:{'id':shopid}}"
+      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail', query:{'id':shopId}}"
                    @click.stop="goSeller">
         <div class="box-content">
           <div class="logo">
@@ -48,7 +48,8 @@
     },
     data() {
       return {
-        descriptions: '' // 配送方式
+        descriptions: '', // 配送方式
+        shopId: ''
       }
     },
     mounted () {

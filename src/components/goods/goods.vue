@@ -20,7 +20,8 @@
               <div class="content">
                 <h2 class="name">{{food.name}}</h2>
                 <span class="desc">{{food.description}}</span>
-                <p class="sellNum" v-if="food.dishSpecification[0].saleCount">已售{{food.dishSpecification[0].saleCount}}份</p>
+                <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
+                  已售{{food.dishSpecification[0].saleCount}}份</p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span><span
                     class="text" v-if="food.dishSpecification.length > 1">起</span></div>
@@ -90,7 +91,7 @@
               <ul>
                 <li class="food" v-for="(item, index) in cartFoodList" v-if="item.num > 0" :key="index">
                   <span class="name">{{item.name}}</span>
-                  <span class="specs">{{item.specs}}</span>
+                  <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   <div class="price-box">
                     <span>￥<span class="price">{{item.price * item.num | toFixedFil}}</span></span>
                   </div>
@@ -171,9 +172,6 @@
       },
       minPrice: {
         type: Number
-      },
-      isYingye: {
-        type: Boolean
       }
     },
     data() {
@@ -199,6 +197,7 @@
         goods: [],
         specs: {}, // 规格
         falg: '',
+        isYingye: false, // 是否营业
         listHeight: [], // 存放foodList 区间的高度的数组
         scrollY: 0, // 当前滑动的位置
         selectedFood: {},
@@ -234,6 +233,8 @@
           })
         }
       })
+      // 门店状态
+      this.getShopState()
     },
     computed: {
       // 检测 vuex 中cartList
@@ -326,6 +327,23 @@
     },
     methods: {
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
+      // 门店门店状态
+      async getShopState() {
+        console.log(123)
+        this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
+          res = res.data
+          console.log(res)
+          if (res.success) {
+            if (res.data.state === 1) {
+              this.isYingye = true
+              return
+            } else {
+              this.toggleToast(!res.data.state, '商家关闭')
+              this.isYingye = false
+            }
+          }
+        })
+      },
       // 初始化滚动
       _initScroll() {
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
@@ -1134,7 +1152,12 @@
     font-size: 14px;
     color: #343434;
   }
-
+  .shopcart .shopcart-list .list-content .food .specs {
+    line-height: 24px;
+    margin-left: 4px;
+    font-size: 14px;
+    color: #a2a2a2;
+  }
   .shopcart .shopcart-list .list-content .food .price-box {
     position: absolute;
     right: 100px;
@@ -1171,7 +1194,7 @@
     padding-top: 6px;
     line-height: 22px;
     text-align: center;
-    font-size: 10px;
+    font-size: 14px;
     color: rgb(147, 153, 159);
   }
 
