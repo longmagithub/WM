@@ -51,7 +51,7 @@
             <div class="price-wrapper">
               <div class="desc" v-if="!totalNum">购物车为空</div>
               <div class="price" v-if="totalNum">
-                <div class="price-num">￥{{allPrice}}</div>
+                <div class="price-num">￥{{allPrice | toFixedFil}}</div>
                 <div class="delivery">{{deliveryDesc}}</div>
               </div>
             </div>

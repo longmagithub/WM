@@ -90,7 +90,7 @@
         }
       },
       'addressDetail.phoneNumber': function (newVal, oldVal) {
-        if (newVal) {
+        if (newVal && (/^1(3|4|5|7|8)\d{9}$/.test(newVal))) {
           this.vaild.phoneNumber = true
         } else {
           this.vaild.phoneNumber = false
@@ -188,7 +188,7 @@
                 this.toastShow = false
                 this.toastText = ''
                 this.backAddressList()
-              }, 2000)
+              }, 500)
             } else {
               this.toastShow = true
               this.toastText = '网络异常，请稍候重试'

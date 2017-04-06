@@ -1,83 +1,86 @@
 <template>
   <div class="submitOrder">
-    <div class="submitOrder-wrapper">
-      <section class="address-wrapper" @click="gotoAddList">
-        <i class="uxwm-iconfont icon_Location"></i>
-        <div class="address-yes" v-if="addRess">
-          <p class="header"><span class="name">{{addRess.name}}</span><span class="name">{{addRess.phoneNumber}}</span>
-          </p>
-          <p class="content">{{addRess.houseNum}}{{addRess.houseNum}}</p>
-        </div>
-        <div class="address-not" v-else>
-          请添加一个收货地址
-        </div>
-        <i class="uxwm-iconfont btn_right"></i>
-      </section>
-      <section class="serviceTime-wrapper">
-        <i class="uxwm-iconfont icon_time"></i>
-        <span class="text">送达时间</span>
-        <span class="soon" v-if="isJinKuai">尽快送达</span>
-        <div class="time-wrapper" v-if="!isJinKuai">
-          <span class="title" v-if="selected === 0">尽快送达</span>
-          <span class="time" v-if="selected === 0">预计{{estimateTime | formatDate}}</span>
-          <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
-        </div>
-        <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
-          <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
-            <span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>
-            <span class="time" v-if="indexOption === 0"> 预计{{item | formatDate}}</span>
-            <span v-if="indexOption > 0">{{item | formatDate}}</span>
-          </option>
-        </select>
-        <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
-      </section>
-      <section class="orderDetail-wrapper">
-        <div class="title">订单详情</div>
-        <div class="order-list">
-          <div class="list-content">
-            <ul>
-              <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0">
-                <div
-                  class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
-                <div class="price">￥{{item.num * item.price}}</div>
-              </li>
-              <li class="food_list_item">
-                <div
-                  class="name_num"><span class="name">餐盒费</span></div>
-                <div class="price">￥{{packPrice}}</div>
-              </li>
-              <li class="food_list_item">
-                <div
-                  class="name_num"><span class="name">配送费</span></div>
-                <div class="price">￥{{feesPrice}}</div>
-              </li>
-            </ul>
-          </div>
-          <div class="discount" v-if="isDiscount">
-            <div class="list-content"></div>
-            <p class="discount-title">{{discountList.title}}
-              <span class="discount-num">-￥{{discountList.reductionAmount}}</span>
+    <div class="submitOrder-wrapper" ref="submitOrderWrapper">
+      <ul>
+        <section class="address-wrapper" @click="gotoAddList">
+          <i class="uxwm-iconfont icon_Location"></i>
+          <div class="address-yes" v-if="addRess">
+            <p class="header"><span class="name">{{addRess.name}}</span><span
+              class="name">{{addRess.phoneNumber}}</span>
             </p>
+            <p class="content">{{addRess.houseNum}}{{addRess.houseNum}}</p>
           </div>
-          <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum}}</span>
+          <div class="address-not" v-else>
+            请添加一个收货地址
           </div>
-        </div>
-      </section>
-      <section class="remark-wapper">
-        <router-link class="routerLink" :to="{path:'/remark', query:{id: 'remark'}}">
-          <p class="remark-title">订单备注
-            <i class="uxwm-iconfont btn_right"></i>
-          </p>
-        </router-link>
-        <router-link class="routerLink" v-if="shopInfo.invoice" :to="{path:'/invoice', query:{id:'invoice'}}">
-          <p class="invoicetitle">发票抬头
-            <i class="uxwm-iconfont btn_right"></i>
-          </p>
-        </router-link>
-      </section>
+          <i class="uxwm-iconfont btn_right"></i>
+        </section>
+        <section class="serviceTime-wrapper">
+          <i class="uxwm-iconfont icon_time"></i>
+          <span class="text">送达时间</span>
+          <span class="soon" v-if="isJinKuai">尽快送达</span>
+          <div class="time-wrapper" v-if="!isJinKuai">
+            <span class="title" v-if="selected === 0">尽快送达</span>
+            <span class="time" v-if="selected === 0">预计{{estimateTime | formatDate}}</span>
+            <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
+          </div>
+          <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
+            <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
+              <span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>
+              <span class="time" v-if="indexOption === 0"> 预计{{item | formatDate}}</span>
+              <span v-if="indexOption > 0">{{item | formatDate}}</span>
+            </option>
+          </select>
+          <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
+        </section>
+        <section class="orderDetail-wrapper">
+          <div class="title">订单详情</div>
+          <div class="order-list">
+            <div class="list-content">
+              <ul>
+                <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0">
+                  <div
+                    class="name_num"><span class="name">{{item.name}}</span><span class="num">×{{item.num}}</span></div>
+                  <div class="price">￥{{item.num * item.price}}</div>
+                </li>
+                <li class="food_list_item">
+                  <div
+                    class="name_num"><span class="name">餐盒费</span></div>
+                  <div class="price">￥{{packPrice}}</div>
+                </li>
+                <li class="food_list_item">
+                  <div
+                    class="name_num"><span class="name">配送费</span></div>
+                  <div class="price">￥{{feesPrice}}</div>
+                </li>
+              </ul>
+            </div>
+            <div class="discount" v-if="isDiscount">
+              <div class="list-content"></div>
+              <p class="discount-title">{{discountList.title}}
+                <span class="discount-num">-￥{{discountList.reductionAmount}}</span>
+              </p>
+            </div>
+            <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum | toFixedFil}}</span>
+            </div>
+          </div>
+        </section>
+        <section class="remark-wapper">
+          <router-link class="routerLink" :to="{path:'/remark', query:{id: 'remark'}}">
+            <p class="remark-title">订单备注
+              <i class="uxwm-iconfont btn_right"></i>
+            </p>
+          </router-link>
+          <router-link class="routerLink" v-if="shopInfo.invoice" :to="{path:'/invoice', query:{id:'invoice'}}">
+            <p class="invoicetitle">发票抬头
+              <i class="uxwm-iconfont btn_right"></i>
+            </p>
+          </router-link>
+        </section>
+      </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="price">待支付￥{{allPrice + feesPrice}}</div>
+      <div class="price">待支付￥{{allPrice + feesPrice | toFixedFil}}</div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -351,6 +354,10 @@
       formatDate(time) {
         let date = new Date(time)
         return formatDate(date, 'yyyy-MM-dd hh:mm')
+      },
+      // 保留2位
+      toFixedFil(val) {
+        return val.toFixed(2)
       }
     },
     components: {
@@ -360,6 +367,9 @@
 </script>
 
 <style scoped>
+  .submitOrder-wrapper {
+    padding-bottom: 49px;
+  }
   .address-wrapper {
     box-sizing: border-box;
     margin-bottom: 14px;

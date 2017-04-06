@@ -140,9 +140,9 @@
 </script>
 <style scoped lang="scss">
   .addlist-wrap {
+    padding-bottom: 49px;
     position: relative;
     line-height: 1em;
-
   .add-un-tip {
     padding: 7px 16px;
     font-size: 12px;
