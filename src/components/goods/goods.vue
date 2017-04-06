@@ -82,9 +82,9 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearCart">清空</span>
               </div>
-              <div class="describe">
+              <div class="describe" v-if="seller.dispatching.fees">
                 <span class="title">阶梯配送费</span>
-                <!--<span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}。</span>-->
+                <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}。</span>
               </div>
             </div>
             <div class="list-content" ref="listContent">
@@ -156,6 +156,10 @@
         </div>
       </transition>
     </section>
+    <div class="toast" v-if="isToastText">
+      <p class="text">{{toastText}}</p>
+      <p class="btn"><span class="yes">确认</span><span class="no">取消</span></p>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -210,7 +214,9 @@
         cartFoodList: [], // 购物车商品列表
         showCartList: false, // 显示购物车列表
         totalPack: 0, // 餐盒费
-        allPrice: 0 // 总价格
+        allPrice: 0, // 总价格
+        toastText: '清空购物车', // 提示
+        isToastText: 0 // 控制 提示
       }
     },
     created() {
@@ -507,8 +513,14 @@
       },
       // 清空当前商铺的购物车信息
       clearCart() {
-        this.toggleCartList()
-        this.CLEAR_CART(this.shopId)
+        let truthBeTold = window.confirm('清空购物车')
+        console.log(truthBeTold)
+        if (truthBeTold) {
+          this.toggleCartList()
+          this.CLEAR_CART(this.shopId)
+        } else {
+          return
+        }
       },
       // 关闭购物车
       hideList() {
@@ -612,6 +624,41 @@
     padding-bottom: 50px;
     width: 100%;
     overflow: hidden;
+  }
+
+  .goods .toast {
+    position: fixed;
+    top: 40%;
+    left: 20%;
+    width: 60%;
+    min-height: 120px;
+    text-align: center;
+    font-size: 18px;
+    color: #333333;
+    background: #c1c1c1;
+    border-radius: 5px;
+  }
+
+  .goods .toast .text {
+    box-sizing: border-box;
+    padding: 15px 0;
+    line-height: 50px;
+    border-bottom: 1px solid #e3e3e3;
+  }
+
+  .goods .toast .btn {
+    line-height: 50px;
+  }
+
+  .goods .toast .btn span {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+  }
+
+  .goods .toast .btn .yes {
+    border-right: 1px solid #e3e3e3;
   }
 
   .menu-wrapper {
@@ -1152,12 +1199,14 @@
     font-size: 14px;
     color: #343434;
   }
+
   .shopcart .shopcart-list .list-content .food .specs {
     line-height: 24px;
     margin-left: 4px;
     font-size: 14px;
     color: #a2a2a2;
   }
+
   .shopcart .shopcart-list .list-content .food .price-box {
     position: absolute;
     right: 100px;

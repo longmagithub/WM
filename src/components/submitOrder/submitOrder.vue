@@ -8,7 +8,7 @@
             <p class="header"><span class="name">{{addRess.name}}</span><span
               class="name">{{addRess.phoneNumber}}</span>
             </p>
-            <p class="content">{{addRess.houseNum}}{{addRess.houseNum}}</p>
+            <p class="content">{{addRess.houseNum}}</p>
           </div>
           <div class="address-not" v-else>
             请添加一个收货地址

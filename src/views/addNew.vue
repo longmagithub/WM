@@ -35,11 +35,11 @@
       <button type="button" class="btn-del" :class="addressId ? 'on' : 'off'" @click="delAdderss()">删除地址</button><!--
       -->
       <button type="button" class="btn-save" @click="saveAddress"
-              :class="vaild.name && vaild.phoneNumber && vaild.address && vaild.houseNum && vaild.gender ? 'on' : 'off'">
+              :class="vaild.name && vaild.phoneNumber && vaild.address && vaild.houseNum ? 'on' : 'off'">
         保存地址
       </button>
     </div>
-    <!--<toast :show="toastShow" :text="toastText" v-on:closeToast="doCloseToast"></toast>-->
+    <toast :show="toastShow" :text="toastText"></toast>
   </div>
 </template>
 <script>
@@ -177,34 +177,18 @@
             }, 1000)
           })
         } else {  // 添加地址
-          console.log('添加地址')
+          let thas = this
           this.axios.post('/br/customer/address', data)
           .then((res) => {
+            res = res.data
             this.isAjaxing = false
-            if (res.data.success) {
-              this.toastShow = true
-              this.toastText = '修改成功'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-                this.backAddressList()
-              }, 500)
+            if (res.success) {
+              this.backAddressList()
             } else {
-              this.toastShow = true
-              this.toastText = '网络异常，请稍候重试'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              })
+              thas.toggleToast(1, res.message)
             }
           }, (res) => {
-            this.isAjaxing = false
-            this.toastShow = true
-            this.toastText = '网络异常，请稍候重试'
-            setTimeout(() => {
-              this.toastShow = false
-              this.toastText = ''
-            })
+            this.toggleToast(1, res.data.data.message)
           })
         }
       },
@@ -225,13 +209,7 @@
         .then((res) => {
           this.isAjaxing = false
           if (res.data.success) {
-            this.toastShow = true
-            this.toastText = '删除成功'
-            setTimeout(() => {
-              this.toastShow = false
-              this.toastText = ''
-              this.backAddressList()
-            }, 2000)
+            this.backAddressList()
           } else {
             this.toastShow = true
             this.toastText = '网络异常，请稍候重试'
