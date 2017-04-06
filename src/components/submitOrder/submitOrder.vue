@@ -44,7 +44,7 @@
                     .name}}<span class="specs" v-if="item.specs">({{item.specs}})</span></span><span
                     class="num">×{{item
                     .num}}</span></div>
-                  <div class="price">￥{{item.num * item.price}}</div>
+                  <div class="price">￥{{item.num * item.price | toFixedFil}}</div>
                 </li>
                 <li class="food_list_item">
                   <div
@@ -378,6 +378,7 @@
   .submitOrder-wrapper {
     padding-bottom: 49px;
   }
+
   .address-wrapper {
     position: relative;
     box-sizing: border-box;
@@ -583,10 +584,12 @@
     font-size: 13px;
     color: #949494;
   }
-  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .specs{
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .specs {
     margin-left: 5px;
     font-size: 11px;
   }
+
   .orderDetail-wrapper .order-list .discount {
     height: 37px;
     line-height: 37px;

@@ -35,7 +35,7 @@
       <button type="button" class="btn-del" :class="addressId ? 'on' : 'off'" @click="delAdderss()">删除地址</button><!--
       -->
       <button type="button" class="btn-save" @click="saveAddress"
-              :class="vaild.name && vaild.phoneNumber && vaild.address && vaild.houseNum ? 'on' : 'off'">
+              :class="vaild.name && vaild.phoneNumber && vaild.address ? 'on' : 'off'">
         保存地址
       </button>
     </div>

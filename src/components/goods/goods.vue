@@ -12,7 +12,9 @@
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
         <li v-for="(item, index) in goods" class="food-list" ref="foodList">
-          <h1 class="food-title">{{item.dishTypeName}}</h1>
+          <h1 class="food-title"><span class="name">{{item.dishTypeName}}</span><span
+            class="desc">{{item.dishTypeDescription
+            }}</span></h1>
           <ul>
             <li class="food-item"
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
@@ -735,8 +737,16 @@
     font-size: 14px;
     font-weight: 400;
     color: #676767;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
-
+  .food-title .desc {
+    margin-left: 4px;
+    width: 100%;
+    font-size: 10px;
+    color: #a4a4a4;
+  }
   .food-item {
     display: flex;
     padding: 20px 12px 15px 0px;
