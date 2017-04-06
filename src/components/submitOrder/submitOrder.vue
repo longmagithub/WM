@@ -278,16 +278,19 @@
             originalPrice: this.allPrice, // 订单原价
             packPrice: this.packPrice, // 订单餐盒费用
             dispatchPrice: this.feesPrice, // 订单配送费
-            discountPrice: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2) ? this.discountList.reductionAmount : 0, // 订单优惠金额
-            paidPrice: (this.feesPrice + this.allPrice).toFixed(2), // 支付金额
+            discountPrice: this.isDiscount ? this.discountList.reductionAmount : 0, // 订单优惠金额
+            paidPrice: this.allNum, // 支付金额
             addressId: this.addRess.addressId,  // 用户收货ID
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
             invoiceTitle: this.invoice, // 发票抬头
             remark: `${this.remarkText}${this.inputText}`,  // 订单备注
-            expectTime: this.options[this.selected],  // 期望送达时间
+            expectTime: this.options[this.selected] / 1000,  // 期望送达时间
             orderDish: this.orderDish,
-            shopDiscountId: this.discountList.conditionAmount >= (this.feesPrice + this.allPrice).toFixed(2) ? this.discountList.discountId : '' // 所参加优惠活动ID
+            shopDiscountId: this.isDiscount ? this.discountList.id : '' // 所参加优惠活动ID
           }
+          console.log('**提交数据**')
+          console.log(this.isDiscount)
+          console.log(data)
           setStore('userOrderIofo', data)
           const api = '/br/order'
           this.axios.post(api, data).then((res) => {
@@ -326,15 +329,20 @@
       },
       // 判断是否可以优惠
       _isDiscount(data) {
-        let newTime = Date.parse(new Date()) / 1000
+        console.log('**是否可以优惠**')
         let allFeesPrice = this.allPrice + this.feesPrice
+        let newTime = Date.parse(new Date()) / 1000
         console.log(allFeesPrice)
         let beginTime = Date.parse(new Date(data.beginTime)) / 1000
         let endTime = Date.parse(new Date(data.endTime)) / 1000
         if (beginTime <= newTime <= endTime) {
-          if (allFeesPrice >= data.conditionAmount.toFixed(2)) {
+          if (allFeesPrice >= parseFloat(data.conditionAmount.toFixed(2))) {
             this.isDiscount = true
-            this.allNum = allFeesPrice - data.reductionAmount
+            if (allFeesPrice - data.reductionAmount > 0) {
+              this.allNum = allFeesPrice - data.reductionAmount
+            } else {
+              this.allNum = 0
+            }
           } else {
             this.isDiscount = false
             this.allNum = allFeesPrice
