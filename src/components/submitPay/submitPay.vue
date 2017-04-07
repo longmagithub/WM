@@ -88,6 +88,7 @@
       },
       // 调取微信 支付
       sendWxSDK (data) {
+        const that = this
         WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
             'appId': data.appId,
@@ -98,13 +99,13 @@
             'signType': data.signType // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           },
           function (res) {
-            this.isAjaxing = false
             window.alert(res.err_msg)
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              window.alert('支付成功')
               removeStore('buyCart')
-              this.toggleToast(1, '支付成功')
-              this.$route.replace({
+              that.toggleToast(1, '支付成功')
+              that.$route.replace({
                 path: '/orderList',
                 query: {
                   'shopId': getStore('user').shopId,
@@ -113,9 +114,11 @@
               })
               // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              this.toggleToast(1, '您已取消支付')
+              window.alert('您已取消支付')
+              that.toggleToast(1, '您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              this.toggleToast(1, '订单支付失败')
+              window.alert('订单支付失败')
+              that.toggleToast(1, '订单支付失败')
             }
           })
       },
