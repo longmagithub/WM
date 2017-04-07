@@ -26,8 +26,8 @@
       return {
         shopDetail: {}, // 商家信息
         detail: {}, // 配送信息
-        shopId: null,
-        customerId: null,
+        shopId: '',
+        customerId: '',
         toastShow: false,
         toastText: '',
         nowTime: new Date(),
@@ -78,7 +78,7 @@
 //        })
 //      },
       // 商家信息
-      async getShopDetail() {
+      getShopDetail() {
         const data = {
           shopId: this.shopId,
           customerId: this.customerId
@@ -87,7 +87,7 @@
           res = res.data
           if (res.success) {
             // 排序
-            // res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
+            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
             this.detail = Object.assign({}, this.detail, res.data.dispatching)
             this.shopDetail = Object.assign({}, this.shopDetail, res.data)
             setStore('shopInfo', this.shopDetail)

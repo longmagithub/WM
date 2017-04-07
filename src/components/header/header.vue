@@ -46,24 +46,18 @@
         default: {}
       }
     },
-    data() {
-      return {
-        descriptions: '', // 配送方式
-        shopId: ''
-      }
-    },
     mounted () {
       // 设置页面 title
-      this.shopId = getStore('user').shopId
+//      this.shopId = getStore('user').shopId
     },
     created() {
       // 配送方式
       // this.getDispatching()
     },
     methods: {
-      goSeller(ele) {
+      goSeller() {
       },
-      goUser(ele) {
+      goUser() {
         this.$router.push({
           path: '/orderList',
           query: {
@@ -197,7 +191,7 @@
     z-index: -1;
     background-size: cover;
     /*background-image: url("http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg")*/
-    filter: blur(30px);
-    opacity: 0.8;
+    /*filter: blur(30px);*/
+    opacity: 0.4;
   }
 </style>
