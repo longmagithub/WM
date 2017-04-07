@@ -298,6 +298,7 @@
       },
       // 配送费描述
       deliveryDesc() {
+        console.log(1231231)
         let fees = this.seller.dispatching.fees
         if (this.allPrice < fees[0].price) {
           let totalPack = this.totalPack

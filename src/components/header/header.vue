@@ -54,7 +54,7 @@
     },
     mounted () {
       // 设置页面 title
-      this.shopId = getStore('userInfoID').shopId
+      this.shopId = getStore('user').shopId
     },
     created() {
       // 配送方式

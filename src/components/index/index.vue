@@ -40,8 +40,9 @@
       console.log('**下面是两个ID**')
       console.log(this.$route.query.shopId)
       console.log(this.$route.query.customerId)
-      this.shopId = urlParse().shopId
-      this.customerId = urlParse().customerId
+      console.log(urlParse())
+      this.shopId = this.$route.query.shopId
+      this.customerId = this.$route.query.customerId
       setStore('user', {
         'shopId': this.shopId,
         'customerId': this.customerId
@@ -86,8 +87,7 @@
           res = res.data
           if (res.success) {
             // 排序
-            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
-              res.data.dispatching.fees.price)
+            // res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
             this.detail = Object.assign({}, this.detail, res.data.dispatching)
             this.shopDetail = Object.assign({}, this.shopDetail, res.data)
             setStore('shopInfo', this.shopDetail)
