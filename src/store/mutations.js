@@ -176,6 +176,8 @@ export default {
   [RECORD_USERINFO](state, shopID, customerID) {
     state.userInfo = customerID
     state.shopID = shopID
+    console.log(state.userInfo)
+    console.log(state.shopID)
     // let validity = 30
     // let now = new Date()
     // now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000)
