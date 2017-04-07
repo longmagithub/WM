@@ -271,7 +271,7 @@
       },
       // 提交订单
       submitOrder() {
-        if (this.addressId) {
+        if (this.addRess) {
           const data = {
             shopId: this.shopId,
             customerId: this.customerId,
