@@ -6,6 +6,7 @@ Vue.use(Router)
 
 export default new Router({
   scrollBehavior: () => ({y: 0}),
+  mode: 'history',
   routes: [
     // 默认
     {
