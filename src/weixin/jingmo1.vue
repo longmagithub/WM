@@ -42,7 +42,7 @@
 //              'customerId': d.data.customerId,
 //              'shopId': this.shopId
 //            })
-            this.jump(d.data.customerId)
+//            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
         })

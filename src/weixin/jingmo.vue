@@ -21,14 +21,13 @@
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
-//        this.to()
+        this.to()
       }
     },
     methods: {
       to () {
         const oauthCallbackUrl = encodeURIComponent(`http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo1?shopId=${this.shopId}`)
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
-        window.alert('去授权')
         window.location.href = oauthJumpUrl
       }
     }
