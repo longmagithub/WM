@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import {urlParse, setStore} from '../common/js/util'
+  import {urlParse} from '../common/js/util'
   export default {
     data () {
       return {
@@ -38,17 +38,18 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            setStore('userInfoID', {
-              'customerId': d.data.customerId,
-              'shopId': this.shopId
-            })
+//            setStore('userInfoID', {
+//              'customerId': d.data.customerId,
+//              'shopId': this.shopId
+//            })
             this.jump(d.data.customerId)
           }
         }, (errorRes) => {
         })
       },
       jump (customerId) {
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/index'
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/index?shopId=' + this.shopId +
+          '&customerId=' + customerId
 //        this.$router.replace({
 //          path: '/index',
 //          query: {

@@ -41,8 +41,8 @@
       console.log(this.$route.query.shopId)
       console.log(this.$route.query.customerId)
       console.log(urlParse())
-      this.shopId = getStore('userInfoID').shopId
-      this.customerId = getStore('userInfoID').customerId
+      this.shopId = this.$route.query.shopId
+      this.customerId = this.$route.query.customerId
       setStore('user', {
         'customerId': getStore('userInfoID').customerId,
         'shopId': getStore('userInfoID').shopId
@@ -85,6 +85,7 @@
         }
         this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
+          console.log(res)
           if (res.success) {
             // 排序
             res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
