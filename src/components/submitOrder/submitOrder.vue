@@ -275,18 +275,18 @@
           const data = {
             shopId: this.shopId,
             customerId: this.customerId,
-            originalPrice: this.allPrice, // 订单原价
+            originalPrice: this.allPrice + this.feesPrice, // 订单原价
             packPrice: this.packPrice, // 订单餐盒费用
             dispatchPrice: this.feesPrice, // 订单配送费
             discountPrice: this.isDiscount ? this.discountList.reductionAmount : 0, // 订单优惠金额
+            shopDiscountId: this.isDiscount ? this.discountList.id : '', // 所参加优惠活动ID
             paidPrice: this.allNum, // 支付金额
             addressId: this.addRess.addressId,  // 用户收货ID
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
+            expectTime: this.options[this.selected] / 1000,  // 期望送达时间
             invoiceTitle: this.invoice, // 发票抬头
             remark: `${this.remarkText}${this.inputText}`,  // 订单备注
-            expectTime: this.options[this.selected] / 1000,  // 期望送达时间
-            orderDish: this.orderDish,
-            shopDiscountId: this.isDiscount ? this.discountList.id : '' // 所参加优惠活动ID
+            orderDish: this.orderDish // 菜品规格
           }
           console.log('**提交数据**')
           console.log(this.isDiscount)
