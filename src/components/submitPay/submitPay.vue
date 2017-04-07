@@ -34,7 +34,7 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-  import {getStore} from '../../common/js/util'
+  import {getStore, removeStore} from '../../common/js/util'
   const SUCCESS_OK = true
   export default {
     data() {
@@ -99,10 +99,10 @@
           },
           function (res) {
             this.isAjaxing = false
-            window.alert(Object.keys(res))
-            window.alert(Object.values(res))
+            window.alert(res.err_msg)
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              removeStore('buyCart')
               this.toggleToast(1, '支付成功')
               this.$route.replace({
                 path: '/orderList',
