@@ -55,29 +55,29 @@
     },
     methods: {
       // 营业时间
-      getBusinesshours() {
-        this.axios.get('/br/shop/businesshours?shopId=' + this.shopId).then((res) => {
-          if (res.data.success) {
-            res = res.data.data
-            let strB = res.beginTime.split(':', 2)
-            let strE = res.endTime.split(':', 2)
-            let b = new Date()
-            let e = new Date()
-            b.setHours(strB[0])
-            b.setMinutes(strB[1])
-            e.setHours(strE[0])
-            e.setMinutes(strE[1])
-            if (this.nowTime.getTime() - b.getTime() >= 0 && this.nowTime.getTime() - e.getTime() <= 0) {
-              this.isYingye = true
-            } else {
-              this.isYingye = false
-              this.toggleToast(true, '没在营业时间内')
-            }
-          }
-        })
-      },
+//      getBusinesshours() {
+//        this.axios.get('/br/shop/businesshours?shopId=' + this.shopId).then((res) => {
+//          if (res.data.success) {
+//            res = res.data.data
+//            let strB = res.beginTime.split(':', 2)
+//            let strE = res.endTime.split(':', 2)
+//            let b = new Date()
+//            let e = new Date()
+//            b.setHours(strB[0])
+//            b.setMinutes(strB[1])
+//            e.setHours(strE[0])
+//            e.setMinutes(strE[1])
+//            if (this.nowTime.getTime() - b.getTime() >= 0 && this.nowTime.getTime() - e.getTime() <= 0) {
+//              this.isYingye = true
+//            } else {
+//              this.isYingye = false
+//              this.toggleToast(true, '没在营业时间内')
+//            }
+//          }
+//        })
+//      },
       // 商家信息
-      getShopDetail() {
+      async getShopDetail() {
         const data = {
           shopId: this.shopId,
           customerId: this.customerId
