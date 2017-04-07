@@ -10,7 +10,7 @@
       <!--<p class="timeNum" v-else>00:00:00</p>-->
       <p class="timeText">
         <span class="text">详情</span>
-        <span class="price">￥20.00</span>
+        <span class="price">￥{{paidPrice}}</span>
       </p>
     </div>
     <div class="payPattern-wrapper">
@@ -55,30 +55,15 @@
     methods: {
       countDownFun() {
         this.isTime = !this.isTime
-        this.toastShow = true
-        this.toastText = '订单已超时'
-        setTimeout(() => {
-          this.toastShow = false
-          this.toastText = ''
-        }, 1000)
+        this.toggleToast(1, '订单已超时')
       },
       // 调取微信支付
       weChatPay() {
         if (!this.isTime) {
-          this.toastShow = true
-          this.toastText = '订单已超时'
-          setTimeout(() => {
-            this.toastShow = false
-            this.toastText = ''
-          }, 1000)
+          this.toggleToast(1, '订单已超时')
         } else {
           if (this.PublicJs.isWechat() === true) {
-            this.toastShow = true
-            this.toastText = '仅支持微信中支付，且微信版本需在5.0以上'
-            setTimeout(() => {
-              this.toastShow = false
-              this.toastText = ''
-            }, 1000)
+            this.toggleToast(1, '仅支持微信中支付，且微信版本需在5.0以上')
             return
           } else {
             // 发起支付
@@ -93,20 +78,10 @@
               if (res.success === SUCCESS_OK) {
                 this.sendWxSDK(res.data)
               } else {
-                this.toastShow = true
-                this.toastText = '订单支付失败，请稍候重试'
-                setTimeout(() => {
-                  this.toastShow = false
-                  this.toastText = ''
-                }, 1000)
+                this.toggleToast(1, res.message)
               }
             }, (res) => {
-              this.toastShow = true
-              this.toastText = '网络异常，请稍候重试'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              this.toggleToast(1, res.message)
             })
           }
         }
@@ -127,11 +102,7 @@
             this.toastShow = true
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
-              this.toastText = '支付成功'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              this.toggleToast(1, '支付成功')
               this.$route.replace({
                 path: '/orderList',
                 query: {
@@ -141,17 +112,9 @@
               })
               // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              this.toastText = '您已取消支付'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              this.toggleToast(1, '您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              this.toastText = '支付失败'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              this.toggleToast(1, '订单支付失败')
             }
           })
       },
