@@ -99,8 +99,8 @@
           },
           function (res) {
             this.isAjaxing = false
-            window.alert(Object.keys.res)
-            window.alert(Object.values.res)
+            window.alert(Object.keys(res))
+            window.alert(Object.values(res))
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               this.toggleToast(1, '支付成功')
