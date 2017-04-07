@@ -41,11 +41,11 @@
       console.log(this.$route.query.shopId)
       console.log(this.$route.query.customerId)
       console.log(urlParse())
-      this.shopId = this.$route.query.shopId
-      this.customerId = this.$route.query.customerId
+      this.shopId = getStore('userInfoID').shopId
+      this.customerId = getStore('userInfoID').customerId
       setStore('user', {
-        'shopId': getStore('userInfoID').shopId,
-        'customerId': getStore('userInfoID').customerId
+        'customerId': getStore('userInfoID').customerId,
+        'shopId': getStore('userInfoID').shopId
       })
       // 商家信息
       this.getShopDetail()
