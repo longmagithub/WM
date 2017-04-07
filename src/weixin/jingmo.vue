@@ -21,7 +21,7 @@
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
-        this.to()
+//        this.to()
       }
     },
     methods: {
