@@ -46,3 +46,22 @@ export const removeStore = name => {
   if (!name) return
   window.localStorage.removeItem(name)
 }
+
+/**
+ * 存储localStorage
+ */
+export const setSINStore = (name, content) => {
+  if (!name) return
+  if (typeof content !== 'string') {
+    content = JSON.stringify(content)
+  }
+  window.sessionStorage.setItem(name, content)
+}
+
+/**
+ * 获取localStorage
+ */
+export const getSINStore = name => {
+  if (!name) return
+  return JSON.parse(window.sessionStorage.getItem(name))
+}

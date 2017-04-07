@@ -20,7 +20,6 @@
   import goods from '../goods/goods.vue'
   import {setStore, urlParse} from '../../common/js/util'
   import toast from '../../components/toast.vue'
-  import {mapState} from 'vuex'
   export default{
     data() {
       return {
@@ -43,21 +42,16 @@
       console.log(urlParse())
       this.shopId = this.$route.query.shopId
       this.customerId = this.$route.query.customerId
-      setStore('user', {
+      setStore('userInfo', {
         'customerId': this.$route.query.customerId,
-        'shopId': this.$route.query.customerId
+        'shopId': this.$route.query.shopId
       })
-      console.log(this.userInfo)
-      console.log(this.shopID)
       // 商家信息
       this.getShopDetail()
     },
     mounted() {
       // 营业时间
 //      this.getBusinesshours()
-    },
-    computed: {
-      ...mapState(['userInfo', 'shopID'])
     },
     methods: {
       // 营业时间

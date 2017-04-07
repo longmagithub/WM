@@ -222,8 +222,8 @@
       }
     },
     created() {
-      this.shopId = getStore('user').shopId
-      this.customerId = getStore('user').customerId
+      this.shopId = getStore('userInfo').shopId
+      this.customerId = getStore('userInfo').customerId
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
       const data = {
@@ -475,24 +475,6 @@
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
         console.log(this.categoryNum)
-      },
-      // 菜谱信息
-      getDishList() {
-        const data = {
-//          shopId: this.shopId,
-          shopId: 'ca2939cf-f42f-402f-8b75-53283431ee68',
-          customerId: getStore('user').customerId
-        }
-        this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          if (res.success === SUCCESS_OK) {
-            this.goods = res.data.dishesList
-            this.$nextTick(() => {
-              this._initScroll()
-              this._calculateHeight()
-            })
-          }
-        })
       },
       // 商户信息
       getShopDetail() {

@@ -7,7 +7,6 @@
 </template>
 <script>
   import {urlParse} from '../common/js/util'
-  import {mapMutations} from 'vuex'
   export default {
     data () {
       return {
@@ -30,7 +29,6 @@
       }
     },
     methods: {
-      ...mapMutations(['RECORD_USERINFO']),
       getOpenId () {
         const data = {
           code: urlParse().code,
@@ -40,7 +38,6 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            this.RECORD_USERINFO({shopID: this.shopId, customerId: d.data.customerId})
             this.jump(d.data.customerId)
           }
         }, (errorRes) => {
