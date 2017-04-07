@@ -59,6 +59,7 @@
         this.isAjaxing = true
         this.dataStatus = '加载中...'
         const data = {
+          shopId: this.shopId,
           sessionId: this.sessionId,
           pageSize: this.pageSize,
           pageIndex: this.pageIndex

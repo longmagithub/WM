@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="header" ref="header">
-      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail', query:{'id':shopId}}"
+      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail', query:{'shopId':shopId}}"
                    @click.stop="goSeller">
         <div class="box-content">
           <div class="logo">
@@ -56,6 +56,7 @@
       // 设置页面 title
     },
     created() {
+      this.shopId = getStore('user').shopId
       // 配送方式
       // this.getDispatching()
     },
@@ -66,8 +67,8 @@
         this.$router.push({
           path: '/orderList',
           query: {
-            shopId: getStore('userInfoID').shopId,
-            sessionId: getStore('userInfoID').customerId
+            shopId: getStore('user').shopId,
+            sessionId: getStore('user').customerId
           }
         })
       }
