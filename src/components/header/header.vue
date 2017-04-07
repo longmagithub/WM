@@ -189,9 +189,13 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-size: cover;
+    background-size: contain;
     /*background-image: url("http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg")*/
-    /*filter: blur(30px);*/
-    opacity: 0.4;
+    -webkit-filter: blur(5px); /* Chrome, Opera */
+    -moz-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    filter: blur(5px);
+    /*opacity: 0.4;*/
   }
 </style>
