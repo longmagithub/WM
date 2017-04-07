@@ -18,7 +18,7 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore} from '../../common/js/util'
+  import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
 
   export default{
@@ -40,11 +40,11 @@
       console.log('**下面是两个ID**')
       console.log(this.$route.query.shopId)
       console.log(this.$route.query.customerId)
-      this.shopId = this.$route.query.shopId
-      this.customerId = this.$route.query.customerId
+//      this.shopId = this.$route.query.shopId
+//      this.customerId = this.$route.query.customerId
       setStore('user', {
-        'shopId': this.shopId,
-        'customerId': this.customerId
+        'shopId': getStore('userInfoID').shopId,
+        'customerId': getStore('userInfoID').customerId
       })
       // 商家信息
       this.getShopDetail()

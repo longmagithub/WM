@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-  import {urlParse, getStore} from '../common/js/util'
+  import {urlParse} from '../common/js/util'
 
   export default {
     data () {
@@ -43,13 +43,14 @@
       },
 //       如果有code 跳转页面
       jump (customerId) {
-        this.$router.replace({
-          path: '/index',
-          query: {
-            'shopId': getStore('userInfoID').shopId,
-            'customerId': customerId
-          }
-        })
+        window.location.href = `http://newpay.tunnel.qydev.com/VAOrderH5/#/index?shopId=${this.shopId}&?customerId=${customerId}`
+//        this.$router.replace({
+//          path: '/index',
+//          query: {
+//            'shopId': getStore('userInfoID').shopId,
+//            'customerId': customerId
+//          }
+//        })
       }
     }
   }
