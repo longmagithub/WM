@@ -18,9 +18,9 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore, urlParse, getStore} from '../../common/js/util'
+  import {setStore, urlParse} from '../../common/js/util'
   import toast from '../../components/toast.vue'
-
+  import {mapState} from 'vuex'
   export default{
     data() {
       return {
@@ -44,8 +44,8 @@
       this.shopId = this.$route.query.shopId
       this.customerId = this.$route.query.customerId
       setStore('user', {
-        'customerId': getStore('userInfoID').customerId,
-        'shopId': getStore('userInfoID').shopId
+        'customerId': this.userInfo,
+        'shopId': this.shopID
       })
       // 商家信息
       this.getShopDetail()
@@ -53,6 +53,9 @@
     mounted() {
       // 营业时间
 //      this.getBusinesshours()
+    },
+    computed: {
+      ...mapState(['userInfo', 'shopID'])
     },
     methods: {
       // 营业时间

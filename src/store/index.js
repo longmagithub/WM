@@ -12,7 +12,7 @@ const state = {
   cartList: {}, //  加入购物车的商品列表
   shopDetail: null, // 商家详情信息
   userInfo: null, // 用户信息
-  shopid: null, //  商铺id
+  shopID: null, //  商铺id
   remarkText: '', // 可选择的下单备注
   indexRemark: null, // 可选择的下单备注 下标
   inputText: '', // 手动输入下单备注

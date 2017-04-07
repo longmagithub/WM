@@ -9,9 +9,9 @@ import {
   USER_PRICE,  // uers 合计费用
   CONFIRM_INVOICE, // 是否开发票
   CONFIRM_REMARK, // 订单备注
-  USER_ADDRESSID // 用户地址id
+  USER_ADDRESSID, // 用户地址id
+  RECORD_USERINFO // 用户信息
   // RECORD_SHOPDETAIL,
-  // RECORD_USERINFO,
   // GET_USERINFO,
   // CHOOSE_SEARCH_ADDRESS,
   // SAVE_GEOHASH,
@@ -171,5 +171,15 @@ export default {
   // 用户地址ID
   [USER_ADDRESSID](state, userAddressId) {
     state.userAddressId = userAddressId
+  },
+  // 记录用户信息
+  [RECORD_USERINFO](state, shopID, customerID) {
+    state.userInfo = customerID
+    state.shopID = shopID
+    // let validity = 30
+    // let now = new Date()
+    // now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000)
+    // document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString()
+    // document.cookie = "SID=huRyTRd9QLij7NkbpHJoj3PQrx1eRiO6bAiw" + ";expires=" + now.toGMTString()
   }
 }
