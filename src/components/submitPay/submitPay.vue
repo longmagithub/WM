@@ -102,6 +102,7 @@
           },
           function (res) {
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
+            window.alert(res.err_msg)
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               removeStore('buyCart')
               this.CLEAR_CART(getStore('user').shopId)
