@@ -44,9 +44,11 @@
       this.shopId = this.$route.query.shopId
       this.customerId = this.$route.query.customerId
       setStore('user', {
-        'customerId': this.userInfo,
-        'shopId': this.shopID
+        'customerId': this.$route.query.customerId,
+        'shopId': this.$route.query.customerId
       })
+      console.log(this.userInfo)
+      console.log(this.shopID)
       // 商家信息
       this.getShopDetail()
     },
