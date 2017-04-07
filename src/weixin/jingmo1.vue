@@ -38,11 +38,7 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-//            setStore('userInfoID', {
-//              'customerId': d.data.customerId,
-//              'shopId': this.shopId
-//            })
-//            this.jump(d.data.customerId)
+            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
         })
