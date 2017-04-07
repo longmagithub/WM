@@ -35,6 +35,7 @@
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
   import {getStore, removeStore} from '../../common/js/util'
+  import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
     data() {
@@ -53,6 +54,7 @@
       this.paidPrice = getStore('userOrderIofo').paidPrice ? getStore('userOrderIofo').paidPrice : 0
     },
     methods: {
+      ...mapMutations(['CLEAR_CART']),
       countDownFun() {
         this.isTime = !this.isTime
         this.toggleToast(1, '订单已超时')
@@ -102,6 +104,7 @@
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               removeStore('buyCart')
+              this.CLEAR_CART(getStore('user').shopId)
               that.toggleToast(1, '支付成功')
               that.$router.replace({
                 path: '/orderList',
