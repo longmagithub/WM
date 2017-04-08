@@ -20,7 +20,7 @@
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon"><img :src="food.imageUrl" width="52px" height="52px"></div>
               <div class="content">
-                <div class="name">{{food.name}}</div>
+                <div class="name_box"><span class="name">{{food.name}}</span></div>
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
@@ -95,9 +95,9 @@
                   <div class="name-wap">
                     <div class="name-box">
                       <span class="name">{{item.name}}</span>
+                      <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
+                      <span class="specs">(大份)</span>
                     </div>
-                    <span class="specs">(大份)</span>
-                    <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
                   </div>
                   <div class="price-box">
                     <span>￥<span class="price">{{item.price * item.num | toFixedFil}}</span></span>
@@ -766,13 +766,16 @@
     padding-left: 64px;
   }
 
-  .food-item .content .name {
-    width: 100px;
+  .food-item .content .name_box {
+    width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+
+  .food-item .content .name_box .name {
     line-height: 20px;
     /*height: 40px;*/
     font-size: 15px;
@@ -1204,14 +1207,20 @@
   .shopcart .shopcart-list .list-content .food:last-child {
     border-bottom: none;
   }
+
   .shopcart .shopcart-list .list-content .food .name-wap {
     box-sizing: border-box;
+    justify-content: flex-start;
+    display: flex;
     position: relative;
-    width: 100px;
+    width: 100%;
     padding-right: 150px;
   }
+
   .shopcart .shopcart-list .list-content .food .name-wap .name-box {
+    position: relative;
     width: 100%;
+    padding-right: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1224,9 +1233,11 @@
     color: #343434;
   }
 
-  .shopcart .shopcart-list .list-content .food .name-wap .specs {
+  .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
     position: absolute;
+    top: 0;
     right: 0;
+    width: 50px;
     line-height: 24px;
     margin-left: 4px;
     font-size: 14px;

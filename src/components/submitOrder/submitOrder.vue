@@ -39,11 +39,11 @@
             <div class="list-content">
               <ul>
                 <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0">
-                  <div
-                    class="name_num"><span class="name">{{item
-                    .name}}<span class="specs" v-if="item.specs">({{item.specs}})</span></span><span
-                    class="num">×{{item
-                    .num}}</span></div>
+                  <div class="name_num">
+                    <span class="name">{{item.name}}</span>
+                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                  </div>
+                  <span class="num">×{{item.num}}</span>
                   <div class="price">￥{{item.num * item.price | toFixedFil}}</div>
                 </li>
                 <li class="food_list_item">
@@ -339,7 +339,7 @@
         let beginTime = Date.parse(new Date(data.beginTime)) / 1000
         let endTime = Date.parse(new Date(data.endTime)) / 1000
         if (beginTime <= newTime <= endTime) {
-          if (allFeesPrice >= parseFloat(data.conditionAmount.toFixed(2))) {
+          if (allFeesPrice >= parseFloat(parseFloat(data.conditionAmount).toFixed(2))) {
             this.isDiscount = true
             if (allFeesPrice - data.reductionAmount > 0) {
               this.allNum = allFeesPrice - data.reductionAmount
@@ -580,24 +580,38 @@
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .price {
-    flex: 0 0 40px;
+    flex: 0 0 50px;
     text-align: right;
     font-size: 12px;
     font-weight: 600;
     color: #343434;
   }
 
+  .orderDetail-wrapper .order-list .list-content .food_list_item .num {
+
+  }
+
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
     margin-right: 30px;
     font-size: 13px;
+    position: relative;
+    width: 100%;
+    padding-right: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: #949494;
   }
 
-  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .specs {
-    margin-left: 5px;
+  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name {
+    width: 100%;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 11px;
   }
 
