@@ -2,6 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.1de2b57af2121feb331e5dfc0e90f732.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/fonts/iconfont.3c76379.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/fonts/iconfont.7de0c52.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/icon_pen.d549409.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/iconfont.654dc6c.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/img.753c69e.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.55ccdd9834e5ecfc3a59.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.003e5368e9e13287eb69.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.360a4e9c68b69af64542.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" afterPath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -88,8 +97,20 @@
       <file leaf-file-name="submitPay.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            <state relative-caret-position="297">
+              <caret line="107" column="39" selection-start-line="107" selection-start-column="39" selection-end-line="107" selection-end-column="39" />
+              <folding>
+                <element signature="e#1129#1174#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mutations.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/store/mutations.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="128" column="27" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -834,18 +855,18 @@
       <workItem from="1491622187114" duration="298000" />
       <workItem from="1491623276674" duration="3545000" />
       <workItem from="1491631402534" duration="5779000" />
-      <workItem from="1491637784518" duration="8177000" />
+      <workItem from="1491637784518" duration="8412000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="731101000" />
+    <option name="totallyTimeSpent" value="731336000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16349542" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1154,16 +1175,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/mutations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3528">
-          <caret line="175" column="45" selection-start-line="175" selection-start-column="35" selection-end-line="175" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#576#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/weixin/jingmo.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -1330,11 +1341,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/mutations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="128" column="27" selection-start-line="128" selection-start-column="19" selection-end-line="128" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="19" column="28" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="297">
+          <caret line="107" column="39" selection-start-line="107" selection-start-column="39" selection-end-line="107" selection-end-column="39" />
+          <folding>
+            <element signature="e#1129#1174#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

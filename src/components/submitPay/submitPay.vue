@@ -34,7 +34,7 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-  import {getStore, removeStore} from '../../common/js/util'
+  import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
@@ -104,13 +104,14 @@
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               removeStore('buyCart')
-              this.CLEAR_CART(getStore('user').shopId)
+              this.CLEAR_CART(getStore('userInfo').shopId)
+              setStore('userPrice', [])
               that.toggleToast(1, '支付成功')
               that.$router.replace({
                 path: '/orderList',
                 query: {
-                  'shopId': getStore('user').shopId,
-                  'sessionId': getStore('user').customerId
+                  'shopId': getStore('userInfo').shopId,
+                  'sessionId': getStore('userInfo').customerId
                 }
               })
               // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
