@@ -314,13 +314,12 @@
       },
       // 去支付
       gotoPay() {
-        window.location.href = ''
-//        this.$router.push({
-//          path: '/submitPay',
-//          query: {
-//            orderId: this.orderId
-//          }
-//        })
+        this.$router.push({
+          path: '/submitPay',
+          query: {
+            orderId: this.orderId
+          }
+        })
       },
       // 去地址列表
       gotoAddList() {
