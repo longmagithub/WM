@@ -92,8 +92,13 @@
             <div class="list-content" ref="listContent">
               <ul>
                 <li class="food" v-for="(item, index) in cartFoodList" v-if="item.num > 0" :key="index">
-                  <span class="name">{{item.name}}</span>
-                  <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                  <div class="name-wap">
+                    <div class="name-box">
+                      <span class="name">{{item.name}}</span>
+                    </div>
+                    <span class="specs">(大份)</span>
+                    <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
+                  </div>
                   <div class="price-box">
                     <span>￥<span class="price">{{item.price * item.num | toFixedFil}}</span></span>
                   </div>
@@ -338,9 +343,9 @@
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
       // 门店门店状态
       getShopState() {
-        console.log(123)
         this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
           res = res.data
+          console.log('**状态**')
           console.log(res)
           if (res.success) {
             if (res.data.state === 1) {
@@ -1199,14 +1204,29 @@
   .shopcart .shopcart-list .list-content .food:last-child {
     border-bottom: none;
   }
+  .shopcart .shopcart-list .list-content .food .name-wap {
+    box-sizing: border-box;
+    position: relative;
+    width: 100px;
+    padding-right: 150px;
+  }
+  .shopcart .shopcart-list .list-content .food .name-wap .name-box {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-  .shopcart .shopcart-list .list-content .food .name {
+  .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
+    width: 100%;
     line-height: 24px;
     font-size: 14px;
     color: #343434;
   }
 
-  .shopcart .shopcart-list .list-content .food .specs {
+  .shopcart .shopcart-list .list-content .food .name-wap .specs {
+    position: absolute;
+    right: 0;
     line-height: 24px;
     margin-left: 4px;
     font-size: 14px;

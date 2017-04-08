@@ -70,8 +70,8 @@
           } else {
             // 发起支付
             const data = {
-              customerId: getStore('user').customerId,
-              shopId: getStore('user').shopId,
+              customerId: getStore('userInfo').customerId,
+              shopId: getStore('userInfo').shopId,
               orderId: this.orderId
             }
             this.axios.post(`/br/order/pay`, data)
