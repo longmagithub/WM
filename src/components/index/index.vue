@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="header">
-      <vheade :seller="shopDetail" :detail="detail"></vheade>
+      <vheade :detail="detail"></vheade>
     </div>
     <div class="tab">
       <div class="tab-item">
@@ -87,8 +87,6 @@
           console.log(res)
           if (res.success) {
             // 排序
-            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
-            this.detail = Object.assign({}, this.detail, res.data.dispatching)
             this.shopDetail = Object.assign({}, this.shopDetail, res.data)
             setStore('shopInfo', this.shopDetail)
             // 设置微信title

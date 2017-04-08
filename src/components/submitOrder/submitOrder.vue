@@ -60,7 +60,7 @@
             </div>
             <div class="discount" v-if="isDiscount">
               <div class="list-content"></div>
-              <p class="discount-title" v-for="item in discountList" v-if="item.id === shopDiscountId">{{item.title}}
+              <p class="discount-title" v-for="item in discountList" v-if="item.discountId === shopDiscountId">{{item.title}}
                 <span class="discount-num">-￥{{item.reductionAmount}}</span>
               </p>
             </div>
@@ -353,7 +353,8 @@
               this.isDiscount = true
               if (allFeesPrice - discArr[0].reductionAmount > 0) {
                 this.allNum = allFeesPrice - parseFloat(discArr[0].reductionAmount)
-                this.shopDiscountId = discArr[0].id
+                this.shopDiscountId = discArr[0].discountId
+                console.log(this.shopDiscountId)
                 this.discountPrice = discArr[0].reductionAmount
               } else {
                 this.allNum = 0

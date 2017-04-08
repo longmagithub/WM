@@ -10,18 +10,16 @@
           <div class="content">
             <div class="title-name">{{seller.name}}</div>
             <!-- 描述 -->
-            <div class="description">
-              <!--{{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span-->
-              <!--v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]-->
-              <!--.price}}{{seller.dispatching.fees[0].fee | fees}}</span>-->
+            <div class="description">{{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span
+              v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0].price}}{{seller.dispatching.fees[0].fee | fees}}</span>
             </div>
             <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
           </div>
-          <div class="enter uxwm-iconfont btn_right"></div>
+          <!--<div class="enter uxwm-iconfont btn_right"></div>-->
         </div>
         <div class="activity">
-          <!--<span class="text">{{seller.dispatching.activity[0].title}}</span>-->
-          <!--<span class="number">{{seller.dispatching.activity.length}}个活动</span>-->
+          <span class="text">{{seller.activity[0].title}}</span>
+          <span class="number">{{seller.activity.length}}个活动</span>
         </div>
       </div>
       <div class="user">
@@ -38,9 +36,6 @@
   import {getStore} from '../../common/js/util'
   export default {
     props: {
-      seller: {
-        type: Object
-      },
       detail: {
         type: Object,
         default: {}
@@ -48,13 +43,31 @@
     },
     data() {
       return {
-        shopId: ''
+        shopId: '',
+        seller: {}
       }
     },
     created() {
       this.shopId = getStore('userInfo').shopId
       // 配送方式
       // this.getDispatching()
+      // 商家信息
+      const data = {
+        shopId: getStore('userInfo').shopId,
+        customerId: getStore('userInfo').customerId
+      }
+      this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
+        res = res.data
+        console.log(res)
+        if (res.success) {
+          // 排序
+//          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
+          this.seller = Object.assign({}, this.seller, res.data)
+          console.log(this.seller)
+          // 设置微信title
+//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
+        }
+      })
     },
     methods: {
       goSeller() {
