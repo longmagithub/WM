@@ -104,15 +104,15 @@
           function (res) {
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
 //              window.alert(res.err_msg)
-              window.location.href = 'https://www.baidu.com/'
+//              window.location.href = 'https://www.baidu.com/'
 //              window.alert('失败')
-//              that.$router.replace({
-//                path: '/orderList',
-//                query: {
-//                  'shopId': getStore('userInfo').shopId,
-//                  'sessionId': getStore('userInfo').customerId
-//                }
-//              })
+              that.$router.replace({
+                path: '/orderList',
+                query: {
+                  'shopId': getStore('userInfo').shopId,
+                  'sessionId': getStore('userInfo').customerId
+                }
+              })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
               that.toggleToast(1, '您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
