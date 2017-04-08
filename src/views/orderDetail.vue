@@ -29,7 +29,7 @@
             <span class="amount">￥{{orderDetail.dispatchPrice}}</span>
           </label>
         </li>
-        <li>
+        <li v-if="orderDetail.discountPrice">
           <div class="discoount">满减优惠</div>
           <label>
             <span class="discount-amount">-￥{{orderDetail.discountPrice}}</span>
@@ -40,7 +40,7 @@
         </li>
       </ul>
     </section>
-    <section class="bg-white others">
+    <section class="bg-white others" v-if="orderDetail.remark !== '' || orderDetail.invoiceTitle !== ''">
       <ul>
         <li class="title">其他</li>
         <li v-show="orderDetail.remark !== ''">订单备注：{{orderDetail.remark}}</li>

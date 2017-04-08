@@ -10,7 +10,7 @@
       <!--<p class="timeNum" v-else>00:00:00</p>-->
       <p class="timeText">
         <span class="text">详情</span>
-        <span class="price">￥{{paidPrice}}</span>
+        <span class="price">￥{{paidPrice | toFixedFil}}</span>
       </p>
     </div>
     <div class="payPattern-wrapper">
@@ -22,7 +22,7 @@
       </p>
     </div>
     <div class="submit-wrapper" @click="weChatPay">
-      <div class="submitBtn">确认支付￥{{paidPrice}}</div>
+      <div class="submitBtn">确认支付￥{{paidPrice | toFixedFil}}</div>
     </div>
     <!--<div class="image-wrapper">-->
     <!--<div class="image"></div>-->
@@ -135,6 +135,12 @@
     components: {
       CountDown,
       toast
+    },
+    filters: {
+      // 保留2位
+      toFixedFil(val) {
+        return val.toFixed(2)
+      }
     }
   }
 </script>

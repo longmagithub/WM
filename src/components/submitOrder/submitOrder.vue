@@ -166,8 +166,6 @@
         this.shopInfo.dispatching.duration + 15)
       let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
         this.shopInfo.dispatching.duration + 15))
-      console.log(onceTime)
-      console.log(onceTime.getMinutes())
       // 预计默认时间
       if (orderTaP > this.endTime) {
         this.isJinKuai = true
@@ -194,7 +192,6 @@
       }
     },
     mounted() {
-      console.log(this.options)
       this.initData()
     },
     computed: {
@@ -203,7 +200,7 @@
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
       // 优惠列表查询
-      getDiscountList() {
+      async getDiscountList() {
         const data = {
           customerId: this.customerId,
           shopId: this.shopId,
@@ -212,10 +209,9 @@
         }
         this.axios.get(`/br/shop/discount/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          console.log(res)
           if (res.data.discountList.length) {
             this.discountList = res.data.discountList
-            this._isDiscount(res.data.discountList)
+            this.isDiscountFun(res.data.discountList)
           } else {
             this.allNum = this.allPrice + this.feesPrice
           }
@@ -281,7 +277,7 @@
           const data = {
             addressId: this.addRess.addressId,  // 用户收货ID
             customerId: this.customerId,
-            discountPrice: this.isDiscount ? this.discountPrice : 0, // 订单优惠金额
+            discountPrice: this.discountPrice, // 订单优惠金额
             dispatchPrice: this.feesPrice, // 订单配送费
             expectTime: this.options[this.selected] / 1000,  // 期望送达时间
             invoiceTitle: this.invoice, // 发票抬头
@@ -291,12 +287,9 @@
             paidPrice: this.allNum, // 支付金额
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
             remark: `${this.remarkText}${this.inputText}`,  // 订单备注
-            shopDiscountId: this.isDiscount ? this.shopDiscountId : '', // 所参加优惠活动ID
+            shopDiscountId: this.shopDiscountId, // 所参加优惠活动ID
             shopId: this.shopId
           }
-          console.log('**提交数据**')
-          console.log(this.isDiscount)
-          console.log(data)
           setStore('userOrderIofo', data)
           const api = '/br/order'
           this.axios.post(api, data).then((res) => {
@@ -323,7 +316,6 @@
       },
       // 去地址列表
       gotoAddList() {
-        console.log(this.addRess)
         this.$router.push({
           path: '/addList',
           query: {
@@ -334,10 +326,9 @@
         })
       },
       // 判断是否可以优惠
-      _isDiscount(data) {
+      isDiscountFun(data) {
         let discArr = []
         console.log('**是否可以优惠**')
-        console.log(data)
         let allFeesPrice = this.allPrice + this.feesPrice
         console.log(allFeesPrice)
         let newTime = Date.parse(new Date()) / 1000
@@ -354,8 +345,9 @@
               if (allFeesPrice - discArr[0].reductionAmount > 0) {
                 this.allNum = allFeesPrice - parseFloat(discArr[0].reductionAmount)
                 this.shopDiscountId = discArr[0].discountId
-                console.log(this.shopDiscountId)
                 this.discountPrice = discArr[0].reductionAmount
+//                console.log(this.shopDiscountId)
+//                console.log(this.discountPrice)
               } else {
                 this.allNum = 0
               }
