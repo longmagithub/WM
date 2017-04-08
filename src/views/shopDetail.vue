@@ -4,7 +4,7 @@
     <div class="title shop-ad-title bb"><iconfont class="title-icon title-icon-ad" :iconname="icons.ad"></iconfont>商家公告</div>
     <div class="content shop-ad-content bb">{{shopDetail.notice}}</div>
   </section>
-  <section class="bg-white shop-activity" v-if="shopDetail.activity.length">
+  <section class="bg-white shop-activity" v-if="shopDetail.activity">
     <div class="title shop-activity-title bb"><iconfont class="title-icon title-icon-activity" :iconname="icons.activity"></iconfont>优惠活动</div>
     <div class="content shop-activity-content">
       <p class="shop-activity-item activity-status0" v-for="item in shopDetail.activity">{{item.title}}</p>
