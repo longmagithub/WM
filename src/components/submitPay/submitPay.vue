@@ -114,9 +114,9 @@
                 }
               })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              that.toggleToast(1, '您已取消支付')
+              that.toggleToast(1, '213123123您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              that.toggleToast(1, '订单支付失败')
+              that.toggleToast(1, '订单支付失败12313123123')
             }
           })
       },
