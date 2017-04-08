@@ -20,7 +20,7 @@
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon"><img :src="food.imageUrl" width="52px" height="52px"></div>
               <div class="content">
-                <h2 class="name">{{food.name}}</h2>
+                <div class="name">{{food.name}}</div>
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
@@ -41,7 +41,7 @@
         </li>
       </ul>
     </div>
-    <div class="shopcart_module" v-if="isYingye">
+    <div class="shopcart_module" v-show="isYingye">
       <div class="shopcart">
         <div class="content" @click="toggleCartList">
           <div class="content-left">
@@ -121,7 +121,7 @@
         <div class="list-mask" @click="hideList" v-show="listShow"></div>
       </transition>
     </div>
-    <div class="closeSeller" v-else>
+    <div class="closeSeller" v-show="!isYingye">
       商家休息中，暂不接单
     </div>
     <transition name="fade">
@@ -203,7 +203,7 @@
         goods: [],
         specs: {}, // 规格
         falg: '',
-        isYingye: false, // 是否营业
+        isYingye: true, // 是否营业
         listHeight: [], // 存放foodList 区间的高度的数组
         scrollY: 0, // 当前滑动的位置
         selectedFood: {},
@@ -299,27 +299,27 @@
       // 配送费描述
       deliveryDesc() {
         console.log(1231231)
-        let fees = this.seller.dispatching.fees
-        if (this.allPrice < fees[0].price) {
+//        const fees = this.seller.dispatching.fees
+        if (this.allPrice < this.seller.dispatching.fees[0].price) {
           let totalPack = this.totalPack
-          let feesPrice = fees[0].fee
+          let feesPrice = this.seller.dispatching.fees[0].fee
           let allPrice = this.allPrice
           this.USER_PRICE({totalPack, feesPrice, allPrice})
           setStore('userPrice', [totalPack, feesPrice, allPrice])
-          return `另需要配送费${fees[0].fee}元`
+          return `另需要配送费${this.seller.dispatching.fees[0].fee}元`
         } else {
           let flag = 0
-          for (let i = 0; i < fees.length; i++) {
-            if (this.allPrice >= fees[i].price) {
+          for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
+            if (this.allPrice >= this.seller.dispatching.fees[i].price) {
               flag = i
             }
           }
           let totalPack = this.totalPack
-          let feesPrice = fees[flag].fee
+          let feesPrice = this.seller.dispatching.fees[flag].fee
           let allPrice = this.allPrice
           setStore('userPrice', [totalPack, feesPrice, allPrice])
           this.USER_PRICE({totalPack, feesPrice, allPrice})
-          return `另需要配送费${fees[flag].fee}元`
+          return `另需要配送费${this.seller.dispatching.fees[flag].fee}元`
         }
       },
       // pay 的描述
@@ -337,7 +337,7 @@
     methods: {
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
       // 门店门店状态
-      async getShopState() {
+      getShopState() {
         console.log(123)
         this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
           res = res.data
@@ -360,6 +360,7 @@
         })
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
           probeType: 3,
+          deceleration: 0.0008,
           click: true
         })
         // 通过foodsScroll 监听个'scroll'事件 在scroll滚动的时候能把实时的位置给暴露出来
@@ -673,7 +674,7 @@
     vertical-align: middle;
     width: 100%;
     padding: 0 15px;
-    text-align: center;
+    text-align: left;
     border-bottom: 1px solid #f1f1f1;
     font-size: 12px;
   }
@@ -724,14 +725,17 @@
     white-space: nowrap;
     overflow: hidden;
   }
+
   .food-title .desc {
     margin-left: 4px;
     width: 100%;
     font-size: 10px;
     color: #a4a4a4;
   }
+
   .food-item {
-    display: flex;
+    /*display: flex;*/
+    position: relative;
     padding: 20px 12px 15px 0px;
     margin-left: 10px;
     border-bottom: 1px solid #f1f1f1;
@@ -743,7 +747,8 @@
   }
 
   .food-item .icon {
-    flex: 0 0 52px;
+    /*flex: 0 0 52px;*/
+    position: absolute;
     margin-right: 12px;
   }
 
@@ -752,11 +757,19 @@
   }
 
   .food-item .content {
-    flex: 1;
-    line-height: 1em;
+    box-sizing: border-box;
+    padding-left: 64px;
   }
 
   .food-item .content .name {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 20px;
+    /*height: 40px;*/
     font-size: 15px;
     color: #343434;
     font-weight: 600;

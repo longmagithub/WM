@@ -4,7 +4,7 @@
     <div class="title shop-ad-title bb"><iconfont class="title-icon title-icon-ad" :iconname="icons.ad"></iconfont>商家公告</div>
     <div class="content shop-ad-content bb">{{shopDetail.notice}}</div>
   </section>
-  <section class="bg-white shop-activity">
+  <section class="bg-white shop-activity" v-if="shopDetail.activity.length">
     <div class="title shop-activity-title bb"><iconfont class="title-icon title-icon-activity" :iconname="icons.activity"></iconfont>优惠活动</div>
     <div class="content shop-activity-content">
       <p class="shop-activity-item activity-status0" v-for="item in shopDetail.activity">{{item.title}}</p>
@@ -13,7 +13,8 @@
   <section class="bg-white shop-info">
     <div class="title shop-info-title bb"><iconfont class="title-icon title-icon-inf" :iconname="icons.info"></iconfont>商家信息</div>
     <ul>
-      <li class="bt">营业时间：{{shopDetail.dispatching}}</li>
+      <li class="bt">营业时间：
+        <span style="margin-right: 5px" v-for="item in shopDetail.hours">{{item.beginTime}}-{{item.endTime}}</span></li>
       <li class="bt">地址：{{shopDetail.address}}</li>
       <li class="bt">电话：{{shopDetail.phone}}</li>
       <li class="bt" v-if="shopDetail.invoice"><label class="bill">商家支持开发票，请在下单时填写好发票抬头</label></li>
@@ -25,32 +26,40 @@
 <script>
 import Toast from './../components/toast.vue'
 export default {
-  mounted () {
-    // 设置页面 title
-    this.PublicJs.changeTitleInWx('商家详情')
-//    this.merchantId = this.$route.query.id || ''
-    this.merchantId = 'ca2939cf-f42f-402f-8b75-53283431ee68'
-    this.getShopInfo()
-  },
   data () {
     return {
       toastShow: false,
       toastText: '',
-      merchantId: '',
+      shopId: '',
+      customerId: '',
       icons: {
         ad: 'icon_Notice',
         activity: 'icon_activity',
         info: 'icon_business'
       },
-      shopDetail: {}
+      shopDetail: {},
+      discountList: {}
     }
+  },
+  created () {
+    // 设置页面 title
+    this.PublicJs.changeTitleInWx('商家详情')
+    this.shopId = this.$route.query.shopId || ''
+    this.customerId = this.$route.query.customerId || ''
+    this.getShopInfo()
+    // 优惠列表
+    this.getDiscountList()
   },
   components: {
     Toast
   },
   methods: {
     getShopInfo () {
-      this.axios.get(`/br/shop/detail?shopId=${this.merchantId}`)
+      const data = {
+        shopId: this.shopId,
+        customerId: this.customerId
+      }
+      this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`)
       .then((res) => {
         res = res.data
         if (res.success) {
@@ -62,6 +71,24 @@ export default {
       }, (res) => {
         this.toastShow = true
         this.toastText = '网络异常，请稍候再试'
+      })
+    },
+    // 优惠列表查询
+    getDiscountList() {
+      const data = {
+        customerId: this.customerId,
+        shopId: this.shopId,
+        pageIndex: 1,
+        pageSize: 10
+      }
+      this.axios.get(`/br/shop/discount/list${this.PublicJs.createParams(data)}`).then((res) => {
+        res = res.data
+        if (res.success) {
+          this.discountList = res.data.discountList[0]
+          this._isDiscount(res.data.discountList[0])
+        } else {
+          this.allNum = this.allPrice + this.feesPrice
+        }
       })
     }
   }

@@ -202,7 +202,7 @@
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
       // 优惠列表查询
-      async getDiscountList() {
+      getDiscountList() {
         const data = {
           customerId: this.customerId,
           shopId: this.shopId,
@@ -214,6 +214,8 @@
           if (res.success) {
             this.discountList = res.data.discountList[0]
             this._isDiscount(res.data.discountList[0])
+          } else {
+            this.allNum = this.allPrice + this.feesPrice
           }
         })
       },
@@ -331,6 +333,7 @@
       _isDiscount(data) {
         console.log('**是否可以优惠**')
         let allFeesPrice = this.allPrice + this.feesPrice
+        console.log(allFeesPrice)
         let newTime = Date.parse(new Date()) / 1000
         console.log(allFeesPrice)
         let beginTime = Date.parse(new Date(data.beginTime)) / 1000

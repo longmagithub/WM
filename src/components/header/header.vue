@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="header" ref="header">
-      <router-link class="content-wrapper" tag="div" :to="{path:'/shopDetail', query:{'shopId':shopId}}"
-                   @click.stop="goSeller">
+      <div class="content-wrapper"
+           @click="goSeller">
         <div class="box-content">
           <div class="logo">
             <img :src="seller.logo" alt="" width="48px" height="48px">
@@ -13,7 +13,7 @@
             <div class="description">
               <!--{{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span-->
               <!--v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0]-->
-              <!--.price}}{{seller.dispatching.fees[0].fee| fees}}</span>-->
+              <!--.price}}{{seller.dispatching.fees[0].fee | fees}}</span>-->
             </div>
             <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
           </div>
@@ -23,7 +23,7 @@
           <!--<span class="text">{{seller.dispatching.activity[0].title}}</span>-->
           <!--<span class="number">{{seller.dispatching.activity.length}}个活动</span>-->
         </div>
-      </router-link>
+      </div>
       <div class="user">
         <div class="user-btn" @click="goUser">我的订单</div>
       </div>
@@ -46,23 +46,32 @@
         default: {}
       }
     },
-    mounted () {
-      // 设置页面 title
-//      this.shopId = getStore('user').shopId
+    data() {
+      return {
+        shopId: ''
+      }
     },
     created() {
+      this.shopId = getStore('userInfo').shopId
       // 配送方式
       // this.getDispatching()
     },
     methods: {
       goSeller() {
+        this.$router.push({
+          path: '/shopDetail',
+          query: {
+            shopId: this.$route.query.shopId,
+            customerId: this.$route.query.customerId
+          }
+        })
       },
       goUser() {
         this.$router.push({
           path: '/orderList',
           query: {
-            shopId: getStore('user').shopId,
-            sessionId: getStore('user').customerId
+            shopId: this.$route.query.shopId,
+            sessionId: this.$route.query.customerId
           }
         })
       }
