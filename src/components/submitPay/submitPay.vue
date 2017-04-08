@@ -34,8 +34,8 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-//  import {getStore, setStore} from '../../common/js/util'
-  import {getStore, removeStore, setStore} from '../../common/js/util'
+  import {getStore, setStore} from '../../common/js/util'
+//  import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
@@ -102,18 +102,18 @@
             'signType': data.signType // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           },
           function (res) {
-//            window.alert(res.err_msg)
-            removeStore('buyCart')
             that.CLEAR_CART(getStore('buyCart').shopId)
             setStore('userPrice', [])
-            this.toggleToast(1, '支付成功')
-            this.$router.replace({
-              path: '/orderList',
-              query: {
-                'shopId': getStore('userInfo').shopId,
-                'sessionId': getStore('userInfo').customerId
-              }
-            })
+            window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
+            window.alert(res.err_msg)
+//            this.toggleToast(1, '支付成功')
+//            this.$router.replace({
+//              path: '/orderList',
+//              query: {
+//                'shopId': getStore('userInfo').shopId,
+//                'sessionId': getStore('userInfo').customerId
+//              }
+//            })
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
 //            if (res.err_msg === 'get_brand_wcpay_request:ok') {
 //              this.$router.replace({
