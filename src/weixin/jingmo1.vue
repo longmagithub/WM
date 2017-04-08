@@ -45,7 +45,7 @@
       },
       jump (customerId) {
         window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId +
-          '&customerId=' + customerId
+          '&customerId=' + customerId + '&T=' + Date.parse(new Date()) / 100000
       }
     }
   }
