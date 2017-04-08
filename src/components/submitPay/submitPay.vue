@@ -35,7 +35,7 @@
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
   import {getStore} from '../../common/js/util'
-//  import {getStore, removeStore, setStore} from '../../common/js/util'
+  //  import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
@@ -103,8 +103,8 @@
           },
           function (res) {
             that.CLEAR_CART(getStore('buyCart').shopId)
-            window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
-            window.alert(res.err_msg)
+//            window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
+//            window.alert(res.err_msg)
 //            this.toggleToast(1, '支付成功')
 //            this.$router.replace({
 //              path: '/orderList',
@@ -114,21 +114,19 @@
 //              }
 //            })
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
-//            if (res.err_msg === 'get_brand_wcpay_request:ok') {
-//              this.$router.replace({
-//                path: '/orderList',
-//                query: {
-//                  'shopId': getStore('userInfo').shopId,
-//                  'sessionId': getStore('userInfo').customerId
-//                }
-//              })
-            // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
-//            } else
-//            if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-//              that.toggleToast(1, '您已取消支付')
-//            } else {
-//              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
-//            }
+            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              this.$router.replace({
+                path: '/orderList',
+                query: {
+                  'shopId': getStore('userInfo').shopId,
+                  'sessionId': getStore('userInfo').customerId
+                }
+              })
+            } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
+              that.toggleToast(1, '您已取消支付')
+            } else {
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
+            }
           })
       },
       // toggle toast
