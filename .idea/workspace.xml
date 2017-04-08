@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="$PROJECT_DIR$/src/router/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" afterPath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/weixin/jingmo.vue" afterPath="$PROJECT_DIR$/src/weixin/jingmo.vue" />
     </list>
     <ignored path="H5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +29,8 @@
       <file leaf-file-name="submitOrder.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="347" column="60" selection-start-line="347" selection-start-column="14" selection-end-line="347" selection-end-column="60" />
+            <state relative-caret-position="120">
+              <caret line="344" column="34" selection-start-line="344" selection-start-column="34" selection-end-line="344" selection-end-column="34" />
               <folding>
                 <element signature="e#4210#4253#0" expanded="true" />
                 <element signature="e#12450#12593#0" expanded="false" />
@@ -72,12 +73,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addList.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/addList.vue">
+      <file leaf-file-name="submitPay.vue" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="104" column="12" selection-start-line="104" selection-start-column="6" selection-end-line="104" selection-end-column="12" />
-              <folding />
+            <state relative-caret-position="369">
+              <caret line="108" column="41" selection-start-line="108" selection-start-column="40" selection-end-line="108" selection-end-column="41" />
+              <folding>
+                <element signature="e#1129#1174#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+            <state relative-caret-position="408">
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -182,11 +185,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jingmo.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="jingmo.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/weixin/jingmo.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+            <state relative-caret-position="504">
+              <caret line="29" column="103" selection-start-line="29" selection-start-column="103" selection-end-line="29" selection-end-column="103" />
               <folding />
             </state>
           </provider>
@@ -258,13 +261,11 @@
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/weixin/zhengchang.vue" />
         <option value="$PROJECT_DIR$/src/weixin/zhengchang1.vue" />
-        <option value="$PROJECT_DIR$/src/weixin/jingmo.vue" />
         <option value="$PROJECT_DIR$/src/store/index.js" />
         <option value="$PROJECT_DIR$/src/store/mutations.js" />
         <option value="$PROJECT_DIR$/src/common/js/util.js" />
         <option value="$PROJECT_DIR$/src/views/addList.vue" />
         <option value="$PROJECT_DIR$/src/components/header/header.vue" />
-        <option value="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
         <option value="$PROJECT_DIR$/src/views/addNew.vue" />
         <option value="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" />
         <option value="$PROJECT_DIR$/src/components/goods/goods.vue" />
@@ -272,6 +273,8 @@
         <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/weixin/jingmo1.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
+        <option value="$PROJECT_DIR$/src/weixin/jingmo.vue" />
+        <option value="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
       </list>
     </option>
   </component>
@@ -817,18 +820,18 @@
       <workItem from="1491622187114" duration="298000" />
       <workItem from="1491623276674" duration="3545000" />
       <workItem from="1491631402534" duration="5779000" />
-      <workItem from="1491637784518" duration="15490000" />
+      <workItem from="1491637784518" duration="15994000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="738414000" />
+    <option name="totallyTimeSpent" value="738918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14235377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.031712472" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1154,16 +1157,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-          <folding>
-            <element signature="e#1129#1174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/addList.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
@@ -1238,14 +1231,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/addNew.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1074">
-          <caret line="230" column="24" selection-start-line="230" selection-start-column="24" selection-end-line="230" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -1264,10 +1249,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/weixin/jingmo1.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/addNew.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1074">
+          <caret line="230" column="24" selection-start-line="230" selection-start-column="24" selection-end-line="230" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="347" column="60" selection-start-line="347" selection-start-column="14" selection-end-line="347" selection-end-column="60" />
+        <state relative-caret-position="120">
+          <caret line="344" column="34" selection-start-line="344" selection-start-column="34" selection-end-line="344" selection-end-column="34" />
           <folding>
             <element signature="e#4210#4253#0" expanded="true" />
             <element signature="e#12450#12593#0" expanded="false" />
@@ -1299,26 +1308,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="108" column="41" selection-start-line="108" selection-start-column="40" selection-end-line="108" selection-end-column="41" />
+          <folding>
+            <element signature="e#1129#1174#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/weixin/jingmo.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/weixin/jingmo1.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="10" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        <state relative-caret-position="504">
+          <caret line="29" column="103" selection-start-line="29" selection-start-column="103" selection-end-line="29" selection-end-column="103" />
           <folding />
         </state>
       </provider>

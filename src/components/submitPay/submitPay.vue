@@ -104,7 +104,7 @@
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               removeStore('buyCart')
-              this.CLEAR_CART(getStore('userInfo').shopId)
+              that.CLEAR_CART(getStore('buyCart').shopId)
               setStore('userPrice', [])
               that.toggleToast(1, '支付成功')
               that.$router.replace({
