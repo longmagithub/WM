@@ -35,6 +35,7 @@
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
   import {getStore} from '../../common/js/util'
+  import * as PublicJs from '../../utils/public'
   //    import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
@@ -49,6 +50,10 @@
         orderId: '',
         paidPrice: 0 // 支付多少
       }
+    },
+    created() {
+      // 修改 title
+      PublicJs.changeTitleInWx('确认订单')
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
