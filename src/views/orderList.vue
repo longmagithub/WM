@@ -18,7 +18,7 @@
 </template>
 <script>
   import Toast from './../components/toast.vue'
-  import {getStore} from '../../common/js/util'
+  import {getStore} from '../common/js/util'
   export default {
     mounted () {
       const vue = this
