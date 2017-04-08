@@ -34,7 +34,7 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-//  import {getStore} from '../../common/js/util'
+  //  import {getStore} from '../../common/js/util'
   import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
@@ -104,11 +104,25 @@
           function (res) {
             window.alert(res.err_msg)
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
-            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+//            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+//              this.$router.replace({
+//                path: '/orderList',
+//                query: {
+//                  'shopId': getStore('userInfo').shopId,
+//                  'sessionId': getStore('userInfo').customerId
+//                }
+//              })
+            // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
+//            } else
+            if (res.err_msg === 'get_brand_wcpay_request:cancel') {
+              that.toggleToast(1, '您已取消支付')
+            } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
+              that.toggleToast(1, '订单支付失败')
+            } else {
               removeStore('buyCart')
               that.CLEAR_CART(getStore('buyCart').shopId)
               setStore('userPrice', [])
-//              this.toggleToast(1, '支付成功')
+              this.toggleToast(1, '支付成功')
               this.$router.replace({
                 path: '/orderList',
                 query: {
@@ -116,11 +130,6 @@
                   'sessionId': getStore('userInfo').customerId
                 }
               })
-              // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
-            } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              that.toggleToast(1, '您已取消支付')
-            } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              that.toggleToast(1, '订单支付失败')
             }
           })
       },
