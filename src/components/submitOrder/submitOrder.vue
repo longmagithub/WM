@@ -317,8 +317,7 @@
         this.$router.push({
           path: '/submitPay',
           query: {
-            orderId: this.orderId,
-            T: parseInt((Date.parse(new Date()) / 100000) * 3)
+            orderId: this.orderId
           }
         })
       },
