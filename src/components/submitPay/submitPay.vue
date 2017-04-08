@@ -34,7 +34,7 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-  import {getStore, setStore} from '../../common/js/util'
+  import {getStore} from '../../common/js/util'
 //  import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
@@ -103,7 +103,6 @@
           },
           function (res) {
             that.CLEAR_CART(getStore('buyCart').shopId)
-            setStore('userPrice', [])
             window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
             window.alert(res.err_msg)
 //            this.toggleToast(1, '支付成功')
