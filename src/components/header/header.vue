@@ -58,12 +58,10 @@
       }
       this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
         res = res.data
-        console.log(res)
         if (res.success) {
           // 排序
 //          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
           this.seller = Object.assign({}, this.seller, res.data)
-          console.log(this.seller)
           // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
         }

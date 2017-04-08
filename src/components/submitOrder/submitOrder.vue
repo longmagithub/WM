@@ -117,6 +117,7 @@
         options: [], // 时间数组
         selected: 0, // 默认index
         estimateTime: new Date(), // 预计时间
+        beginTime: new Date(), // 开始时间
         endTime: new Date(), // 结束时间
         orderId: '', // 订单id
         orderDish: [], // 订单菜品
@@ -159,6 +160,15 @@
       this.endTime = new Date(this.endTime).setHours(endTimeHours)
       this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
       this.endTime = new Date(this.endTime).setSeconds(0, 0)
+      // 开始时间
+      let beginTimeHours = parseFloat(this.shopInfo.hours[0].beginTime.split(':')[0])
+      let beginTimeMinte = parseFloat(this.shopInfo.hours[0].beginTime.split(':')[1])
+      this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
+      this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinte)
+      this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
+      console.log(beginTimeHours)
+      console.log(this.endTime)
+      console.log(this.beginTime)
 
       this.options.push(Date.parse(this.estimateTime))
       // 默认时间 当前时间 + 出餐时间 + 5
@@ -167,7 +177,7 @@
       let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
         this.shopInfo.dispatching.duration + 15))
       // 预计默认时间
-      if (orderTaP > this.endTime) {
+      if (orderTaP > this.endTime || this.beginTime > orderTaP) {
         this.isJinKuai = true
       } else {
         this.isJinKuai = false

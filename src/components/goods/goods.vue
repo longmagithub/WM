@@ -82,7 +82,7 @@
             <div class="list-header">
               <div class="header">
                 <h1 class="title">购物车</h1>
-                <span class="empty uxwm-iconfont btn_delete_normal" @click="clearCart">清空</span>
+                <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
               <div class="describe" v-if="seller.dispatching.fees">
                 <span class="title">阶梯配送费</span>
@@ -122,7 +122,9 @@
         </transition>
       </div>
       <transition name="fade">
-        <div class="list-mask" @click="hideList" v-show="listShow"></div>
+        <div class="list-mask" @click="hideList" v-show="listShow">
+
+        </div>
       </transition>
     </div>
     <div class="closeSeller" v-show="!isYingye">
@@ -163,8 +165,10 @@
       </transition>
     </section>
     <div class="toast" v-if="isToastText">
-      <p class="text">{{toastText}}</p>
-      <p class="btn"><span class="yes">确认</span><span class="no">取消</span></p>
+      <div class="toast-wap">
+        <p class="text">{{toastText}}</p>
+        <p class="btn"><span class="yes" @click="clearCart">确认</span><span class="no" @click="clearToast">取消</span></p>
+      </div>
     </div>
   </div>
 </template>
@@ -222,7 +226,7 @@
         totalPack: 0, // 餐盒费
         allPrice: 0, // 总价格
         toastText: '清空购物车', // 提示
-        isToastText: 0 // 控制 提示
+        isToastText: false // 控制 提示
       }
     },
     created() {
@@ -238,7 +242,6 @@
         res = res.data
         if (res.success === SUCCESS_OK) {
           this.goods = res.data.dishesList
-          console.log(this.goods)
           this.$nextTick(() => {
             this.initCategoryNum()
             this._initScroll()
@@ -303,9 +306,7 @@
       },
       // 配送费描述
       deliveryDesc() {
-        console.log(1231231)
-        const fees = this.seller.dispatching.fees
-        console.log(JSON.stringify(fees))
+//        const fees = this.seller.dispatching.fees
         if (this.allPrice < this.seller.dispatching.fees[0].price) {
           let totalPack = this.totalPack
           let feesPrice = this.seller.dispatching.fees[0].fee
@@ -346,8 +347,6 @@
       getShopState() {
         this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
           res = res.data
-          console.log('**状态**')
-          console.log(res)
           if (res.success) {
             if (res.data.state === 1) {
               this.isYingye = true
@@ -481,7 +480,6 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-        console.log(this.categoryNum)
       },
       // 商户信息
       getShopDetail() {
@@ -503,16 +501,15 @@
       toggleCartList() {
         this.showCartList = !this.showCartList
       },
+      // 清空提示
+      clearToast() {
+        this.isToastText = !this.isToastText
+      },
       // 清空当前商铺的购物车信息
       clearCart() {
-        let truthBeTold = window.confirm('清空购物车')
-        console.log(truthBeTold)
-        if (truthBeTold) {
-          this.toggleCartList()
-          this.CLEAR_CART(this.shopId)
-        } else {
-          return
-        }
+        this.isToastText = !this.isToastText
+        this.toggleCartList()
+        this.CLEAR_CART(this.shopId)
       },
       // 关闭购物车
       hideList() {
@@ -620,26 +617,43 @@
 
   .goods .toast {
     position: fixed;
-    top: 40%;
-    left: 20%;
-    width: 60%;
-    min-height: 120px;
-    text-align: center;
-    font-size: 18px;
-    color: #333333;
-    background: #c1c1c1;
-    border-radius: 5px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 111;
+    /*text-align: center;*/
+    /*font-size: 18px;*/
+    /*color: #333333;*/
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .goods .toast .toast-wap {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    width: 70%;
+    height: 95px;
+    background: #fff;
+    border-radius: 10px;
   }
 
   .goods .toast .text {
     box-sizing: border-box;
-    padding: 15px 0;
-    line-height: 50px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #2b2a2e;
     border-bottom: 1px solid #e3e3e3;
   }
 
   .goods .toast .btn {
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
   }
 
   .goods .toast .btn span {
