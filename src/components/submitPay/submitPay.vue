@@ -25,7 +25,7 @@
       <div class="submitBtn">确认支付￥{{paidPrice}}</div>
     </div>
     <!--<div class="image-wrapper">-->
-      <!--<div class="image"></div>-->
+    <!--<div class="image"></div>-->
     <!--</div>-->
     <toast :show="toastShow" :text="toastText"></toast>
   </div>
@@ -35,7 +35,7 @@
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
   import {getStore} from '../../common/js/util'
-//  import {getStore, removeStore, setStore} from '../../common/js/util'
+  //  import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
@@ -105,11 +105,12 @@
             window.alert(res.err_msg)
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
+              window.alert('支付成功啦！！')
 //              removeStore('buyCart')
 //              that.CLEAR_CART(getStore('buyCart').shopId)
 //              setStore('userPrice', [])
-              that.toggleToast(1, '支付成功')
-              that.$router.replace({
+              this.toggleToast(1, '支付成功')
+              this.$router.replace({
                 path: '/orderList',
                 query: {
                   'shopId': getStore('userInfo').shopId,
