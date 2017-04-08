@@ -24,9 +24,9 @@
     <div class="submit-wrapper" @click="weChatPay">
       <div class="submitBtn">确认支付￥{{paidPrice}}</div>
     </div>
-    <div class="image-wrapper">
-      <div class="image"></div>
-    </div>
+    <!--<div class="image-wrapper">-->
+      <!--<div class="image"></div>-->
+    <!--</div>-->
     <toast :show="toastShow" :text="toastText"></toast>
   </div>
 </template>
