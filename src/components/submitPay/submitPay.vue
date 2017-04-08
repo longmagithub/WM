@@ -107,7 +107,7 @@
 //              window.location.href = 'https://www.baidu.com/'
 //              window.alert('失败')
 //              setStore('userPrice', [])
-              this.CLEAR_CART(getStore('userInfo').shopId)
+              that.CLEAR_CART(getStore('userInfo').shopId)
               that.$router.replace({
                 path: '/orderList',
                 query: {
