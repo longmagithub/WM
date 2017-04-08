@@ -60,8 +60,8 @@
             </div>
             <div class="discount" v-if="isDiscount">
               <div class="list-content"></div>
-              <p class="discount-title">{{discountList.title}}
-                <span class="discount-num">-￥{{discountList.reductionAmount}}</span>
+              <p class="discount-title" v-for="item in discountList" v-if="item.id === shopDiscountId">{{item.title}}
+                <span class="discount-num">-￥{{item.reductionAmount}}</span>
               </p>
             </div>
             <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum | toFixedFil}}</span>
@@ -83,7 +83,7 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="price">待支付￥{{allPrice + feesPrice | toFixedFil}}</div>
+      <div class="price">待支付￥{{allNum | toFixedFil}}</div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -121,8 +121,9 @@
         orderId: '', // 订单id
         orderDish: [], // 订单菜品
         isJinKuai: false, // 是否尽快送达
-        isDiscount: false // 是否可以优惠
-//        isAddressId: false // 是否有地址id
+        isDiscount: false, // 是否可以优惠
+        shopDiscountId: '', // 优惠id
+        discountPrice: 0 // 优惠金额
       }
     },
     created() {
@@ -212,8 +213,8 @@
         this.axios.get(`/br/shop/discount/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            this.discountList = res.data.discountList[0]
-            this._isDiscount(res.data.discountList[0])
+            this.discountList = res.data.discountList
+            this._isDiscount(res.data.discountList)
           } else {
             this.allNum = this.allPrice + this.feesPrice
           }
@@ -280,8 +281,8 @@
             originalPrice: this.allPrice + this.feesPrice, // 订单原价
             packPrice: this.packPrice, // 订单餐盒费用
             dispatchPrice: this.feesPrice, // 订单配送费
-            discountPrice: this.isDiscount ? this.discountList.reductionAmount : 0, // 订单优惠金额
-            shopDiscountId: this.isDiscount ? this.discountList.id : '', // 所参加优惠活动ID
+            discountPrice: this.isDiscount ? this.discountPrice : 0, // 订单优惠金额
+            shopDiscountId: this.isDiscount ? this.shopDiscountId : '', // 所参加优惠活动ID
             paidPrice: this.allNum, // 支付金额
             addressId: this.addRess.addressId,  // 用户收货ID
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
@@ -331,28 +332,37 @@
       },
       // 判断是否可以优惠
       _isDiscount(data) {
+        let discArr = []
         console.log('**是否可以优惠**')
+        console.log(data)
         let allFeesPrice = this.allPrice + this.feesPrice
         console.log(allFeesPrice)
         let newTime = Date.parse(new Date()) / 1000
         console.log(allFeesPrice)
-        let beginTime = Date.parse(new Date(data.beginTime)) / 1000
-        let endTime = Date.parse(new Date(data.endTime)) / 1000
-        if (beginTime <= newTime <= endTime) {
-          if (allFeesPrice >= parseFloat(parseFloat(data.conditionAmount).toFixed(2))) {
-            this.isDiscount = true
-            if (allFeesPrice - data.reductionAmount > 0) {
-              this.allNum = allFeesPrice - data.reductionAmount
+//        let beginTime = Date.parse(new Date(data.beginTime)) / 1000
+//        let endTime = Date.parse(new Date(data.endTime)) / 1000
+        for (let i = 0; i < data.length; i++) {
+          if (Date.parse(new Date(data[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(data[i].endTime)) /
+            1000) {
+            if (allFeesPrice >= parseFloat(parseFloat(data[i].conditionAmount).toFixed(2))) {
+              discArr.push(data[i])
+              console.log(discArr)
+              this.isDiscount = true
+              if (allFeesPrice - discArr[0].reductionAmount > 0) {
+                this.allNum = allFeesPrice - parseFloat(discArr[0].reductionAmount)
+                this.shopDiscountId = discArr[0].id
+                this.discountPrice = discArr[0].reductionAmount
+              } else {
+                this.allNum = 0
+              }
             } else {
-              this.allNum = 0
+              this.isDiscount = false
+              this.allNum = allFeesPrice
             }
           } else {
-            this.isDiscount = false
             this.allNum = allFeesPrice
+            this.isDiscount = false
           }
-        } else {
-          this.allNum = allFeesPrice
-          this.isDiscount = false
         }
       },
       // toggle toast
