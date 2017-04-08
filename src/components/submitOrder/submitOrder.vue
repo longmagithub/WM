@@ -212,7 +212,8 @@
         }
         this.axios.get(`/br/shop/discount/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          if (res.success) {
+          console.log(res)
+          if (res.data.discountList.length) {
             this.discountList = res.data.discountList
             this._isDiscount(res.data.discountList)
           } else {
@@ -276,20 +277,20 @@
       submitOrder() {
         if (this.addRess) {
           const data = {
-            shopId: this.shopId,
-            customerId: this.customerId,
-            originalPrice: this.allPrice + this.feesPrice, // 订单原价
-            packPrice: this.packPrice, // 订单餐盒费用
-            dispatchPrice: this.feesPrice, // 订单配送费
-            discountPrice: this.isDiscount ? this.discountPrice : 0, // 订单优惠金额
-            shopDiscountId: this.isDiscount ? this.shopDiscountId : '', // 所参加优惠活动ID
-            paidPrice: this.allNum, // 支付金额
             addressId: this.addRess.addressId,  // 用户收货ID
-            receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
+            customerId: this.customerId,
+            discountPrice: this.isDiscount ? this.discountPrice : 0, // 订单优惠金额
+            dispatchPrice: this.feesPrice, // 订单配送费
             expectTime: this.options[this.selected] / 1000,  // 期望送达时间
             invoiceTitle: this.invoice, // 发票抬头
+            orderDish: this.orderDish, // 菜品规格
+            originalPrice: this.allPrice + this.feesPrice, // 订单原价
+            packPrice: this.packPrice, // 订单餐盒费用
+            paidPrice: this.allNum, // 支付金额
+            receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
             remark: `${this.remarkText}${this.inputText}`,  // 订单备注
-            orderDish: this.orderDish // 菜品规格
+            shopDiscountId: this.isDiscount ? this.shopDiscountId : '', // 所参加优惠活动ID
+            shopId: this.shopId
           }
           console.log('**提交数据**')
           console.log(this.isDiscount)

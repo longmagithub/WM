@@ -45,12 +45,17 @@
 <script>
   import Toast from './../components/toast.vue'
   export default {
-    mounted () {
+    created () {
       this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
       this.sessionId = this.$route.query.sessionId ? this.$route.query.sessionId : ''
       if (this.addressId) {
         this.getAddressDetail(this.addressId)
+        // 修改 title
+        this.PublicJs.changeTitleInWx('修改地址')
+      } else {
+      // 修改 title
+        this.PublicJs.changeTitleInWx('添加地址')
       }
     },
     data () {
@@ -153,28 +158,36 @@
           .then((res) => {
             this.isAjaxing = false
             if (res.data.success) {
-              this.toastShow = true
-              this.toastText = '保存成功'
-              setTimeout(() => {
-                this.toastShow = false
-                this.backAddressList()
-              }, 2000)
+              this.$router.replace({
+                path: '/addList',
+                query: {
+                  addressId: this.addressId,
+                  shopId: this.shopId,
+                  sessionId: this.sessionId
+                }
+              })
             } else {
-              this.toastShow = true
-              this.toastText = '网络异常，请稍候重试'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              this.toggleToast(1, res.data.message)
+              this.$router.replace({
+                path: '/addList',
+                query: {
+                  addressId: this.addressId,
+                  shopId: this.shopId,
+                  sessionId: this.sessionId
+                }
+              })
             }
           }, (res) => {
             this.isAjaxing = false
-            this.toastShow = true
-            this.toastText = '网络异常，请稍候重试'
-            setTimeout(() => {
-              this.toastShow = false
-              this.toastText = ''
-            }, 1000)
+            this.toggleToast(1, '网络异常，请稍候重试')
+            this.$router.replace({
+              path: '/addList',
+              query: {
+                addressId: this.addressId,
+                shopId: this.shopId,
+                sessionId: this.sessionId
+              }
+            })
           })
         } else {  // 添加地址
           let thas = this
@@ -184,7 +197,14 @@
             this.isAjaxing = false
             if (res.success) {
               thas.toggleToast(1, res.message)
-              this.backAddressList()
+              this.$router.replace({
+                path: '/addList',
+                query: {
+                  addressId: res.data,
+                  shopId: this.shopId,
+                  sessionId: this.sessionId
+                }
+              })
             } else {
               thas.toggleToast(1, res.message)
             }
@@ -209,34 +229,20 @@
         })
         .then((res) => {
           this.isAjaxing = false
-          if (res.data.success) {
-            this.backAddressList()
-          } else {
-            this.toastShow = true
-            this.toastText = '网络异常，请稍候重试'
-            setTimeout(() => {
-              this.toastShow = false
-              this.toastText = ''
+          res = res.data
+          if (res.success) {
+            this.$router.replace({
+              path: '/addList',
+              query: {
+                shopId: this.shopId,
+                sessionId: this.sessionId
+              }
             })
+          } else {
+            this.toggleToast(1, res.message)
           }
         }, (res) => {
-          this.isAjaxing = false
-          this.toastShow = true
-          this.toastText = '网络异常，请稍候重试'
-          setTimeout(() => {
-            this.toastShow = false
-            this.toastText = ''
-          })
-        })
-      },
-      // 返回地址列表
-      backAddressList () {
-        this.$router.replace({
-          path: '/addList',
-          query: {
-            shopId: this.shopId,
-            customerId: this.sessionId
-          }
+          this.toggleToast(1, '网络异常，请稍候重试')
         })
       },
       // toggle toast
