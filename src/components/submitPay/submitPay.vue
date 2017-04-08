@@ -103,6 +103,7 @@
           },
           function (res) {
             window.alert(res.err_msg)
+            window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
 //             get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               this.$router.replace({
