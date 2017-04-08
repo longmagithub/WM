@@ -103,6 +103,7 @@
           },
           function (res) {
             window.alert(res.err_msg)
+            window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/orderList'
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
 //            if (res.err_msg === 'get_brand_wcpay_request:ok') {
 //              this.$router.replace({
@@ -123,13 +124,13 @@
               that.CLEAR_CART(getStore('buyCart').shopId)
               setStore('userPrice', [])
               this.toggleToast(1, '支付成功')
-              this.$router.replace({
-                path: '/orderList',
-                query: {
-                  'shopId': getStore('userInfo').shopId,
-                  'sessionId': getStore('userInfo').customerId
-                }
-              })
+//              this.$router.replace({
+//                path: '/orderList',
+//                query: {
+//                  'shopId': getStore('userInfo').shopId,
+//                  'sessionId': getStore('userInfo').customerId
+//                }
+//              })
             }
           })
       },

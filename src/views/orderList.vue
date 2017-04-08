@@ -18,6 +18,7 @@
 </template>
 <script>
   import Toast from './../components/toast.vue'
+  import {getStore} from '../../common/js/util'
   export default {
     mounted () {
       const vue = this
@@ -50,8 +51,8 @@
       Toast
     },
     created() {
-      this.sessionId = this.$route.query.sessionId
-      this.shopId = this.$route.query.shopId
+      this.sessionId = getStore('userInfo').customerId
+      this.shopId = getStore('userInfo').shopId
     },
     methods: {
       getOrderList () {
