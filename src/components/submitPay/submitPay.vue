@@ -35,7 +35,7 @@
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
   import {getStore} from '../../common/js/util'
-//  import {getStore, removeStore, setStore} from '../../common/js/util'
+  //  import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
@@ -116,8 +116,6 @@
 //            } else
             if (res.err_msg === 'get_brand_wcpay_request:cancel') {
               that.toggleToast(1, '您已取消支付')
-            } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              that.toggleToast(1, '订单支付失败')
             } else {
 //              removeStore('buyCart')
               that.CLEAR_CART(getStore('buyCart').shopId)
