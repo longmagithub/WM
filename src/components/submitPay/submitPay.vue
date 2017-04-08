@@ -104,7 +104,8 @@
           function (res) {
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               window.alert(res.err_msg)
-//              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/orderList'
+              window.alert('失败')
 //              that.$router.replace({
 //                path: '/orderList',
 //                query: {
