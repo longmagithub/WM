@@ -5,7 +5,7 @@
       <p class="order-status-tip" v-if="orderStatus.iconCode === 0 || orderStatus.iconCode === 6">
         {{orderStatus.tip}}</p>
       <p class="order-status-txt">{{orderStatusTipArr[orderStatus.iconCode]}}</p>
-      <button type="button" class="btn-to-pay" v-if="orderStatus.iconCode === 0" @click="toPay()">去支付</button>
+      <button type="button" class="btn-to-pay" v-if="orderStatus.iconCode === 0" @click="weChatPay()">去支付</button>
     </section>
     <section class="bg-white order-foods">
       <ul>
@@ -155,35 +155,38 @@
       callPhone (phone) {
         this.PublicJs.callPhone(phone)
       },
-      toPay () {
-        if (!this.PublicJs.isWechat()) {
-          this.toastShow = true
-          this.toastText = '仅支持微信中支付，且微信版本需在5.0以上'
+      // 调取微信支付
+      weChatPay() {
+//        if (false) {
+//          this.toggleToast(1, '订单已超时')
+//        } else {
+        if (this.PublicJs.isWechat() === true) {
+          this.toggleToast(1, '仅支持微信中支付，且微信版本需在5.0以上')
           return
-        }
-        if (this.isAjaxing) return
-        this.isAjaxing = true
-        // 发起支付
-        const data = {
-          sessionId: this.sessionId,
-          shopId: this.shopId,
-          orderId: this.orderId
-        }
-        this.axios.post(`/br/order/pay`, data)
-        .then((res) => {
-          if (res.data.success) {
-            this.sendWxSDK(res.data.data)
-          } else {
-            this.toastShow = true
-            this.toastText = '网络异常，请稍候重试'
+        } else {
+          // 发起支付
+          const data = {
+            customerId: getStore('userInfo').customerId,
+            shopId: getStore('userInfo').shopId,
+            orderId: this.orderId
           }
-        }, (res) => {
-          this.isAjaxing = false
-          this.toastShow = true
-          this.toastText = '网络异常，请稍候重试'
-        })
+          this.axios.post(`/br/order/pay`, data)
+          .then((res) => {
+            res = res.data
+            if (res.success) {
+              this.sendWxSDK(res.data)
+            } else {
+              this.toggleToast(1, res.message)
+            }
+          }, (res) => {
+            this.toggleToast(1, res.message)
+          })
+        }
+//        }
       },
-      sendWxSDK(data) {
+      // 调取微信 支付
+      sendWxSDK (data) {
+        const that = this
         WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
             'appId': data.appId,
@@ -194,35 +197,23 @@
             'signType': data.signType // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           },
           function (res) {
-            this.isAjaxing = false
-            this.toastShow = true
-            // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
-              this.toastText = '支付成功'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
-              this.$route.replace({
+//              window.alert(res.err_msg)
+//              window.location.href = 'https://www.baidu.com/'
+//              window.alert('失败')
+//              setStore('userPrice', [])
+              that.CLEAR_CART(getStore('userInfo').shopId)
+              that.$router.replace({
                 path: '/orderList',
                 query: {
-                  'shopId': getStore('user').shopId,
-                  'sessionId': getStore('user').customerId
+                  'shopId': getStore('userInfo').shopId,
+                  'sessionId': getStore('userInfo').customerId
                 }
               })
-              // window.location.href = 'paySuccess.html?shopCode=' + shopCode + '&oid=' + orderId + '&addActivity=' + addActivity;
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              this.toastText = '您已取消支付'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              that.toggleToast(1, '您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              this.toastText = '支付失败'
-              setTimeout(() => {
-                this.toastShow = false
-                this.toastText = ''
-              }, 1000)
+              that.toggleToast(1, '订单支付失败')
             }
           })
       },
