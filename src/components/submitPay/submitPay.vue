@@ -103,10 +103,6 @@
           },
           function (res) {
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
-//              window.alert(res.err_msg)
-//              window.location.href = 'https://www.baidu.com/'
-//              window.alert('失败')
-//              setStore('userPrice', [])
               that.CLEAR_CART(getStore('userInfo').shopId)
               that.$router.replace({
                 path: '/orderList',

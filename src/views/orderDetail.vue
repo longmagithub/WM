@@ -85,6 +85,7 @@
 <script>
   import Toast from './../components/toast.vue'
   import {getStore} from './../common/js/util'
+  import {mapMutations} from 'vuex'
   export default {
     mounted () {
       this.orderNo = this.$route.query.orderNo ? this.$route.query.orderNo : ''
@@ -122,6 +123,7 @@
       Toast
     },
     methods: {
+      ...mapMutations(['CLEAR_CART']),
       getOrderDetail () {
         const data = {
           sessionId: this.sessionId,
@@ -202,7 +204,7 @@
 //              window.location.href = 'https://www.baidu.com/'
 //              window.alert('失败')
 //              setStore('userPrice', [])
-//              that.CLEAR_CART(getStore('userInfo').shopId)
+              that.CLEAR_CART(getStore('userInfo').shopId)
               that.$router.replace({
                 path: '/orderList',
                 query: {
