@@ -34,7 +34,7 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-  import {getStore, setStore} from '../../common/js/util'
+  import {getStore} from '../../common/js/util'
   //    import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
@@ -106,7 +106,7 @@
 //              window.alert(res.err_msg)
 //              window.location.href = 'https://www.baidu.com/'
 //              window.alert('失败')
-              setStore('userPrice', [])
+//              setStore('userPrice', [])
               this.CLEAR_CART(getStore('userInfo').shopId)
               that.$router.replace({
                 path: '/orderList',
