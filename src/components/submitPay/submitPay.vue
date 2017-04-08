@@ -114,7 +114,7 @@
 //              }
 //            })
             // get_brand_wcpay_request：ok; get_brand_wcpay_request：cancel; get_brand_wcpay_request：fail
-            if (res.err_msg === 'get_brand_wcpay_request:ok') {
+            if (res.err_msg === 'chooseWXPay:ok') {
               this.$router.replace({
                 path: '/orderList',
                 query: {
