@@ -121,7 +121,7 @@
               that.CLEAR_CART(getStore('buyCart').shopId)
 //              setStore('userPrice', [])
               this.toggleToast(1, '支付成功')
-              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/orderList'
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/#/orderList'
 //              this.$router.replace({
 //                path: '/orderList',
 //                query: {
