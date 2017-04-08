@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.f8b337c7e1fdf87ab891.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.1fb559afb8edf9a97cc5.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" afterPath="$PROJECT_DIR$/src/components/submitPay/submitPay.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -74,10 +77,11 @@
       <file leaf-file-name="submitPay.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="112" column="18" selection-start-line="112" selection-start-column="18" selection-end-line="112" selection-end-column="18" />
+            <state relative-caret-position="369">
+              <caret line="114" column="46" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="46" />
               <folding>
                 <element signature="e#1127#1172#0" expanded="true" />
+                <element signature="e#1260#1328#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -818,12 +822,12 @@
       <workItem from="1491622187114" duration="298000" />
       <workItem from="1491623276674" duration="3545000" />
       <workItem from="1491631402534" duration="5779000" />
-      <workItem from="1491637784518" duration="16900000" />
+      <workItem from="1491637784518" duration="17113000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="739824000" />
+    <option name="totallyTimeSpent" value="740037000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -1315,10 +1319,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/submitPay/submitPay.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="112" column="18" selection-start-line="112" selection-start-column="18" selection-end-line="112" selection-end-column="18" />
+        <state relative-caret-position="369">
+          <caret line="114" column="46" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="46" />
           <folding>
             <element signature="e#1127#1172#0" expanded="true" />
+            <element signature="e#1260#1328#0" expanded="true" />
           </folding>
         </state>
       </provider>
