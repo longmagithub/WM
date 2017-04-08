@@ -48,7 +48,7 @@ export default {
     this.customerId = this.$route.query.customerId || ''
     this.getShopInfo()
     // 优惠列表
-    this.getDiscountList()
+//    this.getDiscountList()
   },
   components: {
     Toast
@@ -85,7 +85,6 @@ export default {
         res = res.data
         if (res.success) {
           this.discountList = res.data.discountList[0]
-          this._isDiscount(res.data.discountList[0])
         } else {
           this.allNum = this.allPrice + this.feesPrice
         }

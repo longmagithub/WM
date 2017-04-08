@@ -95,8 +95,7 @@
                   <div class="name-wap">
                     <div class="name-box">
                       <span class="name">{{item.name}}</span>
-                      <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
-                      <span class="specs">(大份)</span>
+                      <span class="specs" v-if="item.specs">({{item.specs}})</span>
                     </div>
                   </div>
                   <div class="price-box">
@@ -239,6 +238,7 @@
         res = res.data
         if (res.success === SUCCESS_OK) {
           this.goods = res.data.dishesList
+          console.log(this.goods)
           this.$nextTick(() => {
             this.initCategoryNum()
             this._initScroll()
@@ -304,7 +304,8 @@
       // 配送费描述
       deliveryDesc() {
         console.log(1231231)
-//        const fees = this.seller.dispatching.fees
+        const fees = this.seller.dispatching.fees
+        console.log(JSON.stringify(fees))
         if (this.allPrice < this.seller.dispatching.fees[0].price) {
           let totalPack = this.totalPack
           let feesPrice = this.seller.dispatching.fees[0].fee

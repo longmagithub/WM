@@ -92,7 +92,7 @@
             this.shopDetail = Object.assign({}, this.shopDetail, res.data)
             setStore('shopInfo', this.shopDetail)
             // 设置微信title
-            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
+//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
           }
         })
       },

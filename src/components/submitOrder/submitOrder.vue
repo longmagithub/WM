@@ -256,19 +256,21 @@
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(item => {
               // this.packPrice += item.num * item.packingFee
-              this.newShopCart.push({
-                id: item.id,
-                name: item.name,
-                num: item.num,
-                packingFee: item.packingFee,
-                price: item.price,
-                specs: item.specs
-              })
-              this.orderDish.push({
-                specificationId: item.id,
-                count: item.num,
-                price: item.price
-              })
+              if (item.price !== null && item.price >= 0 && item.num > 0) {
+                this.newShopCart.push({
+                  id: item.id,
+                  name: item.name,
+                  num: item.num,
+                  packingFee: item.packingFee,
+                  price: item.price,
+                  specs: item.specs
+                })
+                this.orderDish.push({
+                  specificationId: item.id,
+                  count: item.num,
+                  price: item.price
+                })
+              }
             })
           })
         })
