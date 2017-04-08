@@ -43,7 +43,7 @@
       }
     },
     created() {
-      this.sessionId = this.$route.query.customerId ? this.$route.query.customerId : ''
+      this.sessionId = this.$route.query.sessionId ? this.$route.query.sessionId : ''
       this.nowSelADDId = this.$route.query.addressId ? this.$route.query.addressId : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
       // 默认地址

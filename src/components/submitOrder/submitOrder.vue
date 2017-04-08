@@ -322,7 +322,7 @@
           path: '/addList',
           query: {
             shopId: this.shopId,
-            customerId: this.customerId,
+            sessionId: this.customerId,
             addressId: this.addRess === null ? '' : this.addRess.addressId
           }
         })
