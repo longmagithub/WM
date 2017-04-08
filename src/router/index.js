@@ -6,7 +6,7 @@ Vue.use(Router)
 
 export default new Router({
   scrollBehavior: () => ({y: 0}),
-  // mode: 'hashbang',
+  mode: 'hash',
   routes: [
     // 默认
     {

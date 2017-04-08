@@ -8,7 +8,7 @@
             <!-- <span :class="item.state === 0 ? 'order-status0': item.state === 1 ? 'order-status1' : item.state === 2 || item.state === 3 ? 'order-status2' : item.state === 4 ? 'order-status3' : item.state === 5 ? 'order-status4' : item.state === 6 ? 'order-status5' : 'order-status0'">{{orderStatusText[item.state]}}</span> -->
             <span :class="'order-status' + item.state">{{item.stateMsgC}}</span>
           </p>
-          <p>￥{{item.payPrice}}</p>
+          <p class="aa"><span>{{item.shopName}}</span><span>￥{{item.payPrice}}</span></p>
         </li>
       </ul>
       <p class="data-status">{{dataStatus}}</p>
@@ -190,7 +190,9 @@
   }
 
   p:last-child {
-    text-align: right;
+    /*text-align: right;*/
+    display: flex;
+    justify-content: space-between;
   }
 
   p:after {
