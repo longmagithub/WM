@@ -17,37 +17,6 @@ var port = process.env.PORT || config.dev.port
 var proxyTable = config.dev.proxyTable
 
 var app = express()
-/* 下面是测试 mock 数据 */
-var appData = require('../data.json')
-var seller = appData.seller
-var goods = appData.goods
-var ratings = appData.ratings
-
-var apiRoutes = express.Router()
-
-apiRoutes.get('/seller', function (req, res) {
-  res.json({
-    success: true,
-    data: seller
-  });
-})
-
-apiRoutes.get('/goods', function (req, res) {
-  res.json({
-    success: true,
-    data: goods
-  })
-})
-
-apiRoutes.get('/ratings', function (req, res) {
-  res.json({
-    success: true,
-    data: ratings
-  });
-})
-
-app.use('/api', apiRoutes)
-/* 上面是测试 mock 数据 */
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
