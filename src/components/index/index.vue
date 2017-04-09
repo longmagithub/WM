@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="main">
-      <goods :seller="shopDetail" :min-price="0"></goods>
+      <goods :sellerBOX="shopDetail" :min-price="0"></goods>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
   </div>

@@ -6,7 +6,7 @@
         <div class="box-content">
           <div class="logo">
             <img v-if="seller.logo" :src="seller.logo" alt="" width="48px" height="48px">
-            <img v-else src="../../assets/item_logo.png" alt="" width="48px" height="48px">
+            <img v-else src="../../assets/item_logo.png" alt="" width="50px" height="50px">
           </div>
           <div class="content">
             <div class="title-name">{{seller.name}}</div>
@@ -48,7 +48,9 @@
     data() {
       return {
         shopId: '',
-        seller: {}
+        seller: {
+
+        }
       }
     },
     created() {
