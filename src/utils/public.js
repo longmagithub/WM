@@ -97,7 +97,7 @@ export const callPhone = function (phone) {
 export const bubbleSort = function (arr) {
   for (let i = 0; i < arr.length; i++) {
     for (let j = i; j < arr.length; j++) {
-      if (arr[i].price > arr[j].price) {
+      if (arr[i].price < arr[j].price) {
         let temp = arr[i]
         arr[i] = arr[j]
         arr[j] = temp

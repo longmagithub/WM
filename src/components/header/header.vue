@@ -68,7 +68,7 @@
             return
           } else {
             // 排序
-//          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
+            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
             this.detailBox = res.data
             // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])

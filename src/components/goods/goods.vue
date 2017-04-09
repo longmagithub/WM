@@ -87,7 +87,7 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="seller.dispatching">
+              <div class="describe" v-if="seller.dispatching.fees">
                 <span class="title">阶梯配送费</span>
                 <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}</span>
               </div>
@@ -511,21 +511,21 @@
         }
       },
       // 商户信息
-//      getShopDetail() {
+      getShopDetail() {
         // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
         // 接口通了  注释下面的 打开上面的
-//        this.axios.get('./api/seller').then((res) => {
-//          res = res.data
-//          if (res.success === SUCCESS_OK) {
-//            this.shopDetail = res.data
-//            // 排序
-//            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
-//              res.data.dispatching.fees.price)
-//            this.seller = Object.assign({}, this.seller, res.data)
-//            this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
-//          }
-//        })
-//      },
+        this.axios.get('./api/seller').then((res) => {
+          res = res.data
+          if (res.success === SUCCESS_OK) {
+            this.shopDetail = res.data
+            // 排序
+            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
+              res.data.dispatching.fees.price)
+            this.seller = Object.assign({}, this.seller, res.data)
+            this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
+          }
+        })
+      },
       // 控制显示购物车中已选商品列表
       toggleCartList() {
         this.showCartList = !this.showCartList
@@ -1033,8 +1033,8 @@
     top: -10px;
     margin: 0 20px;
     padding: 8px;
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     box-sizing: border-box;
     border-radius: 50%;
     background: rgb(89, 89, 91);
