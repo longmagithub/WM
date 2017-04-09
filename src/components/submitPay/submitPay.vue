@@ -53,7 +53,7 @@
     },
     created() {
       // 修改 title
-      PublicJs.changeTitleInWx('确认订单')
+      PublicJs.changeTitleInWx('在线支付')
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''

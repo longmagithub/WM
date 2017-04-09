@@ -50,6 +50,7 @@
       Toast
     },
     created() {
+      this.PublicJs.changeTitleInWx('我的订单')
       this.sessionId = getStore('userInfo').customerId
       this.shopId = getStore('userInfo').shopId
       this.getOrderList()
