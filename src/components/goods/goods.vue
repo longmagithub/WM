@@ -322,7 +322,7 @@
       deliveryDesc() {
         if (this.isAjax) {
 //        const fees = this.seller.dispatching.fees
-          if (this.allPrice < this.seller.dispatching.fees[0].price) {
+          if (this.allPrice >= this.seller.dispatching.fees[0].price) {
             let totalPack = this.totalPack
             let feesPrice = this.seller.dispatching.fees[0].fee
             let allPrice = this.allPrice
