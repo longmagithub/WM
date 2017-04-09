@@ -160,6 +160,9 @@ export default {
     inputText,
     indexRemark
   }) {
+    if (remarkText === 'undefined') {
+      remarkText = ''
+    }
     state.remarkText = remarkText
     state.inputText = inputText
     state.indexRemark = indexRemark
