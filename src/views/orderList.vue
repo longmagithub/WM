@@ -19,6 +19,7 @@
 <script>
   import Toast from './../components/toast.vue'
   import {getStore} from '../common/js/util'
+  import * as PublicJs from '../utils/public'
   export default {
     mounted () {
       const vue = this
@@ -50,7 +51,7 @@
       Toast
     },
     created() {
-      this.PublicJs.changeTitleInWx('我的订单')
+      PublicJs.changeTitleInWx('我的订单')
       this.sessionId = getStore('userInfo').customerId
       this.shopId = getStore('userInfo').shopId
       this.getOrderList()

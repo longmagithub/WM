@@ -18,7 +18,7 @@
 <script type="text/ecmascript-6">
   import vheade from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore, urlParse} from '../../common/js/util'
+  import {setStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
   export default{
     data() {
@@ -36,10 +36,6 @@
       }
     },
     created() {
-      console.log('**下面是两个ID**')
-      console.log(this.$route.query.shopId)
-      console.log(this.$route.query.customerId)
-      console.log(urlParse())
       this.shopId = this.$route.query.shopId
       this.customerId = this.$route.query.customerId
       setStore('userInfo', {
@@ -87,13 +83,8 @@
           console.log(res)
           if (res.success) {
             // 排序
-//            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
-//            this.detail = Object.assign({}, this.detail, res.data.dispatching)
             this.shopDetail = res.data
-            console.log(this.shopDetail)
             setStore('shopInfo', this.shopDetail)
-            // 设置微信title
-//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
           }
         })
       },

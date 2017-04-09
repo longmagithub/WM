@@ -44,6 +44,7 @@
 </template>
 <script>
   import Toast from './../components/toast.vue'
+  import * as PublicJs from '../utils/public'
   export default {
     created () {
       this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
@@ -52,10 +53,10 @@
       if (this.addressId) {
         this.getAddressDetail(this.addressId)
         // 修改 title
-        this.PublicJs.changeTitleInWx('修改地址')
+        PublicJs.changeTitleInWx('修改地址')
       } else {
       // 修改 title
-        this.PublicJs.changeTitleInWx('添加地址')
+        PublicJs.changeTitleInWx('新增地址')
       }
     },
     data () {

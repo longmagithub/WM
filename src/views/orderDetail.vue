@@ -86,7 +86,11 @@
   import Toast from './../components/toast.vue'
   import {getStore} from './../common/js/util'
   import {mapMutations} from 'vuex'
+  import * as PublicJs from '../utils/public'
   export default {
+    created() {
+      PublicJs.changeTitleInWx('订单详情')
+    },
     mounted () {
       this.orderNo = this.$route.query.orderNo ? this.$route.query.orderNo : ''
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''

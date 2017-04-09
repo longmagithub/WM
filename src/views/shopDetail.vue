@@ -25,6 +25,7 @@
 </template>
 <script>
 import Toast from './../components/toast.vue'
+import * as PublicJs from '../utils/public'
 export default {
   data () {
     return {
@@ -43,7 +44,7 @@ export default {
   },
   created () {
     // 设置页面 title
-    this.PublicJs.changeTitleInWx('商家详情')
+    PublicJs.changeTitleInWx('商家详情')
     this.shopId = this.$route.query.shopId || ''
     this.customerId = this.$route.query.customerId || ''
     this.getShopInfo()
