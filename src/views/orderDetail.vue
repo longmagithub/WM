@@ -332,65 +332,43 @@
   }
 
   .status1 {
-    background: url('../assets/icon_order_status1.png') no-repeat center bottom;
+    background: url('../assets/icon_order_status1_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
-  .status2 {
-    background: url('../assets/icon_order_status2.png') no-repeat center bottom;
+  .status2,
+  .status8,
+  .status9,
+  .status13
+  {
+    background: url('../assets/icon_order_status2_8_9_13_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
-  .status3 {
-    background: url('../assets/icon_order_status2.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
-
-  .status4 {
-    background: url('../assets/icon_order_status4.png') no-repeat center bottom;
+  .status3,
+  .status4
+  {
+    background: url('../assets/icon_order_status3_4_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
   .status5 {
-    background: url('../assets/icon_order_status5.png') no-repeat center bottom;
+    background: url('../assets/icon_order_status5_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
-  .status6 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+  .status6,
+  .status7,
+  .status10
+  {
+    background: url('../assets/icon_order_status6_7_10_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
-  .status7 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
-
-  .status8 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
-  .status9 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
-  .status10 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
-  .status11 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
   .status12 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background: url('../assets/icon_order_status12_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
-  .status13 {
-    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
-    background-size: 55px 55px;
-  }
-
   }
   section.phone {
     margin-bottom: 0;
