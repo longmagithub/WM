@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import {setStore} from '../common/js/util'
+//  import {setStore} from '../common/js/util'
   export default {
     data () {
       return {
@@ -18,9 +18,6 @@
     },
     created() {
       this.shopId = window.location.href.split('=')[1]
-      setStore('shop', {
-        'shopId': this.shopId
-      })
     },
     mounted () {
       this.url = window.location.href
@@ -31,8 +28,8 @@
     methods: {
       to () {
         const oauthCallbackUrl =
-          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo1?shopId=' + this.shopId + '&T=' +
-            this.tiem)
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo1?T=' +
+            this.tiem + '&shopId=' + this.shopId)
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         window.location.href = oauthJumpUrl
       }

@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import {urlParse, getStore} from '../common/js/util'
+  import {urlParse} from '../common/js/util'
   export default {
     data () {
       return {
@@ -19,8 +19,7 @@
     created() {
       console.log(window.location.href)
       let url = window.location.href.split('=')
-      console.log(url)
-      this.shopId = getStore('shop').shopId
+      this.shopId = url[url.length - 1]
     },
     mounted () {
       this.url = window.location.href
