@@ -467,8 +467,8 @@
         let newArr = []
         let cartFoodNum = 0
         // 购物车总共的价格
-        this.totalPrice = 0
-        this.totalPack = 0
+        this.totalPrice = 0 // 菜品
+        this.totalPack = 0 // 餐盒
         this.allPrice = 0
         // 购物车中所有商品的详细信息列表
         this.cartFoodList = []

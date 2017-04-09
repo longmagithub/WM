@@ -338,7 +338,7 @@
       // 判断是否可以优惠
       isDiscountFun(data) {
         let discArr = []
-        let allFeesPrice = this.allPrice + this.feesPrice
+        let allFeesPrice = this.allPrice
         let newTime = Date.parse(new Date()) / 1000
 //        let beginTime = Date.parse(new Date(data.beginTime)) / 1000
 //        let endTime = Date.parse(new Date(data.endTime)) / 1000

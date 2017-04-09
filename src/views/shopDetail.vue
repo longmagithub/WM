@@ -1,6 +1,6 @@
 <template>
 <div class="shop-detail-wrap">
-  <section class="bg-white shop-ad">
+  <section class="bg-white shop-ad" v-if="shopDetail.notice">
     <div class="title shop-ad-title bb"><iconfont class="title-icon title-icon-ad" :iconname="icons.ad"></iconfont>商家公告</div>
     <div class="content shop-ad-content bb">{{shopDetail.notice}}</div>
   </section>
