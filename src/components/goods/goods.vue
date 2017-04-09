@@ -798,7 +798,7 @@
   }
 
   .food-item {
-    /*display: flex;*/
+    display: flex;
     position: relative;
     padding: 20px 12px 15px 0px;
     margin-left: 10px;
@@ -811,7 +811,7 @@
   }
 
   .food-item .icon {
-    /*flex: 0 0 52px;*/
+    flex: 0 0 52px;
     position: absolute;
     margin-right: 12px;
   }
@@ -821,6 +821,7 @@
   }
 
   .food-item .content {
+    flex: 1;
     box-sizing: border-box;
     padding-left: 64px;
   }
