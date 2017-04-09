@@ -289,7 +289,7 @@
             customerId: this.customerId,
             discountPrice: this.discountPrice, // 订单优惠金额
             dispatchPrice: this.feesPrice, // 订单配送费
-            expectTime: this.options[this.selected] / 1000,  // 期望送达时间
+            expectTime: parseInt(this.options[this.selected] / 1000),  // 期望送达时间
             invoiceTitle: this.invoice, // 发票抬头
             orderDish: this.orderDish, // 菜品规格
             originalPrice: this.allPrice + this.feesPrice, // 订单原价
