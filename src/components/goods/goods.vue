@@ -18,7 +18,10 @@
           <ul>
             <li class="food-item"
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
-              <div class="icon"><img :src="food.imageUrl" width="52px" height="52px"></div>
+              <div class="icon">
+                <img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px">
+                <img v-else src="../../assets/logo.png" width="52px" height="52px">
+              </div>
               <div class="content">
                 <div class="name_box"><span class="name">{{food.name}}</span></div>
                 <span class="desc">{{food.description}}</span>

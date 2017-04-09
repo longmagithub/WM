@@ -5,8 +5,10 @@
            @click="goSeller">
         <div class="box-content">
           <div class="logo">
-            <img :src="seller.logo" alt="" width="48px" height="48px">
+            <img v-if="seller.logo" :src="seller.logo" alt="" width="48px" height="48px">
+            <img v-else src="../../assets/item_logo.png" alt="" width="48px" height="48px">
           </div>
+
           <div class="content">
             <div class="title-name">{{seller.name}}</div>
             <!-- 描述 -->
@@ -26,7 +28,7 @@
         <div class="user-btn" @click="goUser">我的订单</div>
       </div>
       <div class="background">
-        <img :src="seller.logo" alt="" width="100%" height="100%">
+        <!--<img :src="seller.logo" alt="" width="100%" height="100%">-->
       </div>
     </div>
   </div>
@@ -209,13 +211,10 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-size: contain;
-    /*background-image: url("http://static.galileo.xiaojukeji.com/static/tms/seller_avatar_256px.jpg")*/
-    -webkit-filter: blur(5px); /* Chrome, Opera */
-    -moz-filter: blur(5px);
-    -ms-filter: blur(5px);
-    filter: blur(5px);
-    filter: blur(5px);
+    background-size: cover;
+    background: url('../../assets/back.jpg') no-repeat;
+    /*filter: blur(5px);*/
+    /*filter: blur(5px);*/
     /*opacity: 0.4;*/
   }
 </style>
