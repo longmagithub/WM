@@ -48,6 +48,7 @@
     data() {
       return {
         shopId: '',
+        sessionId: '',
         detailBox: {}
       }
     },

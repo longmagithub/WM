@@ -50,9 +50,9 @@
       Toast
     },
     created() {
-      this.getOrderList()
       this.sessionId = getStore('userInfo').customerId
       this.shopId = getStore('userInfo').shopId
+      this.getOrderList()
     },
     methods: {
       getOrderList () {
