@@ -173,6 +173,7 @@
         <p class="btn"><span class="yes" @click="clearCart">确认</span><span class="no" @click="clearToast">取消</span></p>
       </div>
     </div>
+    <toast :show="toastShow" :text="toastText1"></toast>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -181,6 +182,7 @@
   import shopcart from '../shopcart/shopcart'
   import buyCart from '../buyCart/buyCart.vue'
   import {setStore, getStore} from '../../common/js/util'
+  import toast from '../toast.vue'
   const SUCCESS_OK = true
   export default {
     props: {
@@ -211,6 +213,8 @@
           }
         ],
         dropBalls: [],
+        toastShow: false,
+        toastText1: '',
         goods: [],
         specs: {}, // 规格
         falg: '',
@@ -244,12 +248,17 @@
       this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
         res = res.data
         if (res.success === SUCCESS_OK) {
-          this.goods = res.data.dishesList
-          this.$nextTick(() => {
-            this.initCategoryNum()
-            this._initScroll()
-            this._calculateHeight()
-          })
+          if (res.data.dishesList === null) {
+            console.log('菜品为空')
+            this.toggleToast(1, res.message)
+          } else {
+            this.goods = res.data.dishesList
+            this.$nextTick(() => {
+              this.initCategoryNum()
+              this._initScroll()
+              this._calculateHeight()
+            })
+          }
         }
       })
       // 门店状态
@@ -484,6 +493,19 @@
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },
+      // toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText1 = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1000)
+        } else {
+          return
+        }
+      },
       // 商户信息
       getShopDetail() {
         // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
@@ -595,7 +617,8 @@
     },
     components: {
       shopcart,
-      buyCart
+      buyCart,
+      toast
     },
     filters: {
       // 保留2位

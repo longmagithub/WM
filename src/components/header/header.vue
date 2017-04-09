@@ -59,12 +59,20 @@
       }
       this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
         res = res.data
+        console.log(res)
         if (res.success) {
-          // 排序
+          if (res.data === null) {
+            return
+          } else {
+            // 排序
 //          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
-          this.seller = Object.assign({}, this.seller, res.data)
-          // 设置微信title
+            this.seller = Object.assign({}, this.seller, res.data)
+            // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
+          }
+        } else {
+          console.log(2313)
+          return
         }
       })
     },

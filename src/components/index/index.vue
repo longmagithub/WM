@@ -47,7 +47,7 @@
         'shopId': this.$route.query.shopId
       })
       // 商家信息
-      this.getShopDetail()
+//      this.getShopDetail()
     },
     mounted() {
       // 营业时间
