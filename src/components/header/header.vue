@@ -5,25 +5,25 @@
            @click="goSeller">
         <div class="box-content">
           <div class="logo">
-            <img v-if="seller.logo" :src="seller.logo" alt="" width="48px" height="48px">
+            <img v-if="detailBox.logo" :src="detailBox.logo" alt="" width="48px" height="48px">
             <img v-else src="../../assets/item_logo.png" alt="" width="50px" height="50px">
           </div>
           <div class="content">
-            <div class="title-name">{{seller.name}}</div>
+            <div class="title-name">{{detailBox.name}}</div>
             <!-- 描述 -->
             <div class="description">
-              <span v-if="seller.dispatching">{{seller.dispatching.name}}</span>/
-              <span v-if="seller.dispatching">{{seller.dispatching.duration}}分钟到达</span>
-              <span
-                v-if="seller.dispatching">/满{{seller.dispatching.fees[0].price}}{{seller.dispatching.fees[0].fee | fees}}</span>
+              <span>{{detailBox.dispatching.name}}</span>/
+              <span>{{detailBox.dispatching.duration}}分钟到达</span>
+              <span>/满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee |
+                fees}}</span>
             </div>
-            <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
+            <div class="bulletin" v-if="detailBox.notice">公告：{{detailBox.notice}}</div>
           </div>
           <!--<div class="enter uxwm-iconfont btn_right"></div>-->
         </div>
         <div class="activity">
-          <span class="text" v-if="seller.activity">{{seller.activity[0].title}}</span>
-          <span class="number" v-if="seller.activity">{{seller.activity.length}}个活动</span>
+          <span class="text" v-if="detailBox.activity">{{detailBox.activity[0].title}}</span>
+          <span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>
         </div>
       </div>
       <div class="user">
@@ -48,9 +48,7 @@
     data() {
       return {
         shopId: '',
-        seller: {
-
-        }
+        detailBox: {}
       }
     },
     created() {
@@ -71,7 +69,7 @@
           } else {
             // 排序
 //          res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
-            this.seller = Object.assign({}, this.seller, res.data)
+            this.detailBox = res.data
             // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
           }
