@@ -14,7 +14,7 @@
           {{item.dishName}}{{item.dishType}}
           <label>
             <span v-show="item.dishCount > 1">x{{item.dishCount}}</span>
-            <span class="amount">￥{{item.dishPrice}}</span>
+            <span class="amount">￥{{item.dishCount * item.dishPrice | toFixedFil}}</span>
           </label>
         </li>
         <li>
@@ -226,6 +226,12 @@
       },
       doCloseToast() {
         this.toastShow = false
+      }
+    },
+    filters: {
+      // 保留2位
+      toFixedFil(val) {
+        return val.toFixed(2)
       }
     }
   }
