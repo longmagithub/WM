@@ -11,16 +11,19 @@
           <div class="content">
             <div class="title-name">{{seller.name}}</div>
             <!-- 描述 -->
-            <div class="description">{{seller.dispatching.name}}/{{seller.dispatching.duration}}分钟到达<span
-              v-if="seller.dispatching.fees.length">/满{{seller.dispatching.fees[0].price}}{{seller.dispatching.fees[0].fee | fees}}</span>
+            <div class="description">
+              <span v-if="seller.dispatching">{{seller.dispatching.name}}</span>/
+              <span v-if="seller.dispatching">{{seller.dispatching.duration}}分钟到达</span>
+              <span
+                v-if="seller.dispatching">/满{{seller.dispatching.fees[0].price}}{{seller.dispatching.fees[0].fee | fees}}</span>
             </div>
             <div class="bulletin" v-if="seller.notice">公告：{{seller.notice}}</div>
           </div>
           <!--<div class="enter uxwm-iconfont btn_right"></div>-->
         </div>
         <div class="activity">
-          <span class="text">{{seller.activity[0].title}}</span>
-          <span class="number">{{seller.activity.length}}个活动</span>
+          <span class="text" v-if="seller.activity">{{seller.activity[0].title}}</span>
+          <span class="number" v-if="seller.activity">{{seller.activity.length}}个活动</span>
         </div>
       </div>
       <div class="user">

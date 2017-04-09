@@ -87,7 +87,7 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="seller.dispatching.fees">
+              <div class="describe" v-if="seller.dispatching">
                 <span class="title">阶梯配送费</span>
                 <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}</span>
               </div>
@@ -233,7 +233,8 @@
         totalPack: 0, // 餐盒费
         allPrice: 0, // 总价格
         toastText: '清空购物车', // 提示
-        isToastText: false // 控制 提示
+        isToastText: false, // 控制 提示
+        isAjax: false
       }
     },
     created() {
@@ -252,6 +253,7 @@
             console.log('菜品为空')
             this.toggleToast(1, res.message)
           } else {
+            this.isAjax = true
             this.goods = res.data.dishesList
             this.$nextTick(() => {
               this.initCategoryNum()
@@ -318,27 +320,29 @@
       },
       // 配送费描述
       deliveryDesc() {
+        if (this.isAjax) {
 //        const fees = this.seller.dispatching.fees
-        if (this.allPrice < this.seller.dispatching.fees[0].price) {
-          let totalPack = this.totalPack
-          let feesPrice = this.seller.dispatching.fees[0].fee
-          let allPrice = this.allPrice
-          this.USER_PRICE({totalPack, feesPrice, allPrice})
-          setStore('userPrice', [totalPack, feesPrice, allPrice])
-          return `另需要配送费${this.seller.dispatching.fees[0].fee}元`
-        } else {
-          let flag = 0
-          for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
-            if (this.allPrice >= this.seller.dispatching.fees[i].price) {
-              flag = i
+          if (this.allPrice < this.seller.dispatching.fees[0].price) {
+            let totalPack = this.totalPack
+            let feesPrice = this.seller.dispatching.fees[0].fee
+            let allPrice = this.allPrice
+            this.USER_PRICE({totalPack, feesPrice, allPrice})
+            setStore('userPrice', [totalPack, feesPrice, allPrice])
+            return `另需要配送费${this.seller.dispatching.fees[0].fee}元`
+          } else {
+            let flag = 0
+            for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
+              if (this.allPrice >= this.seller.dispatching.fees[i].price) {
+                flag = i
+              }
             }
+            let totalPack = this.totalPack
+            let feesPrice = this.seller.dispatching.fees[flag].fee
+            let allPrice = this.allPrice
+            setStore('userPrice', [totalPack, feesPrice, allPrice])
+            this.USER_PRICE({totalPack, feesPrice, allPrice})
+            return `另需要配送费${this.seller.dispatching.fees[flag].fee}元`
           }
-          let totalPack = this.totalPack
-          let feesPrice = this.seller.dispatching.fees[flag].fee
-          let allPrice = this.allPrice
-          setStore('userPrice', [totalPack, feesPrice, allPrice])
-          this.USER_PRICE({totalPack, feesPrice, allPrice})
-          return `另需要配送费${this.seller.dispatching.fees[flag].fee}元`
         }
       },
       // pay 的描述
@@ -507,21 +511,21 @@
         }
       },
       // 商户信息
-      getShopDetail() {
+//      getShopDetail() {
         // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
         // 接口通了  注释下面的 打开上面的
-        this.axios.get('./api/seller').then((res) => {
-          res = res.data
-          if (res.success === SUCCESS_OK) {
-            this.shopDetail = res.data
-            // 排序
-            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
-              res.data.dispatching.fees.price)
-            this.seller = Object.assign({}, this.seller, res.data)
-            this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
-          }
-        })
-      },
+//        this.axios.get('./api/seller').then((res) => {
+//          res = res.data
+//          if (res.success === SUCCESS_OK) {
+//            this.shopDetail = res.data
+//            // 排序
+//            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
+//              res.data.dispatching.fees.price)
+//            this.seller = Object.assign({}, this.seller, res.data)
+//            this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
+//          }
+//        })
+//      },
       // 控制显示购物车中已选商品列表
       toggleCartList() {
         this.showCartList = !this.showCartList
