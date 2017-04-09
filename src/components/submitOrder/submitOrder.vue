@@ -350,17 +350,17 @@
               console.log(discArr)
               this.isDiscount = true
               if (allFeesPrice - discArr[0].reductionAmount > 0) {
-                this.allNum = allFeesPrice - parseFloat(discArr[0].reductionAmount)
+                this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
                 this.shopDiscountId = discArr[0].discountId
                 this.discountPrice = discArr[0].reductionAmount
 //                console.log(this.shopDiscountId)
 //                console.log(this.discountPrice)
               } else {
-                this.allNum = 0
+                this.allNum = 0 + this.feesPrice
               }
             } else {
               this.isDiscount = false
-              this.allNum = allFeesPrice
+              this.allNum = allFeesPrice + this.feesPrice
             }
           } else {
             this.allNum = allFeesPrice
