@@ -361,6 +361,36 @@
     background-size: 55px 55px;
   }
 
+  .status7 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+
+  .status8 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+  .status9 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+  .status10 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+  .status11 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+  .status12 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+  .status13 {
+    background: url('../assets/icon_order_status6.png') no-repeat center bottom;
+    background-size: 55px 55px;
+  }
+
   }
   section.phone {
     margin-bottom: 0;
