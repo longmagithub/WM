@@ -322,27 +322,37 @@
       deliveryDesc() {
         if (this.isAjax) {
 //        const fees = this.seller.dispatching.fees
-          if (this.allPrice >= this.seller.dispatching.fees[0].price) {
-            let totalPack = this.totalPack
-            let feesPrice = this.seller.dispatching.fees[0].fee
-            let allPrice = this.allPrice
-            this.USER_PRICE({totalPack, feesPrice, allPrice})
-            setStore('userPrice', [totalPack, feesPrice, allPrice])
-            return `另需要配送费${this.seller.dispatching.fees[0].fee}元`
-          } else {
-            let flag = 0
-            for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
-              if (this.allPrice >= this.seller.dispatching.fees[i].price) {
-                flag = i
-              }
+          for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
+            if (this.allPrice >= this.seller.dispatching.fees[i].price) {
+              let totalPack = this.totalPack
+              let feesPrice = this.seller.dispatching.fees[i].fee
+              let allPrice = this.allPrice
+              this.USER_PRICE({totalPack, feesPrice, allPrice})
+              setStore('userPrice', [totalPack, feesPrice, allPrice])
+              return `另需要配送费${this.seller.dispatching.fees[i].fee}元`
             }
-            let totalPack = this.totalPack
-            let feesPrice = this.seller.dispatching.fees[flag].fee
-            let allPrice = this.allPrice
-            setStore('userPrice', [totalPack, feesPrice, allPrice])
-            this.USER_PRICE({totalPack, feesPrice, allPrice})
-            return `另需要配送费${this.seller.dispatching.fees[flag].fee}元`
           }
+//          if (this.allPrice >= this.seller.dispatching.fees[0].price) {
+//            let totalPack = this.totalPack
+//            let feesPrice = this.seller.dispatching.fees[0].fee
+//            let allPrice = this.allPrice
+//            this.USER_PRICE({totalPack, feesPrice, allPrice})
+//            setStore('userPrice', [totalPack, feesPrice, allPrice])
+//            return `另需要配送费${this.seller.dispatching.fees[0].fee}元`
+//          } else {
+//            let flag = 0
+//            for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
+//              if (this.allPrice >= this.seller.dispatching.fees[i].price) {
+//                flag = i
+//              }
+//            }
+//            let totalPack = this.totalPack
+//            let feesPrice = this.seller.dispatching.fees[flag].fee
+//            let allPrice = this.allPrice
+//            setStore('userPrice', [totalPack, feesPrice, allPrice])
+//            this.USER_PRICE({totalPack, feesPrice, allPrice})
+//            return `另需要配送费${this.seller.dispatching.fees[flag].fee}元`
+//          }
         }
       },
       // pay 的描述
