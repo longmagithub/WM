@@ -1,11 +1,11 @@
 <template>
   <div class="order-detail-wrap">
     <section class="bg-white order-status">
-      <div class="order-status-icon" :class="iconCodeArr[orderStatus.iconCode]"></div>
-      <p class="order-status-tip" v-if="orderStatus.iconCode === 0 || orderStatus.iconCode === 6">
+      <div class="order-status-icon" :class="'status' + orderDetail.state"></div>
+      <p class="order-status-tip" v-if="orderDetail.state === 0 || orderDetail.state === 100">
         {{orderStatus.tip}}</p>
-      <p class="order-status-txt">{{orderStatusTipArr[orderStatus.iconCode]}}</p>
-      <button type="button" class="btn-to-pay" v-if="orderStatus.iconCode === 0" @click="weChatPay()">去支付</button>
+      <p class="order-status-txt">{{orderDetail.stateMsgC}}</p>
+      <button type="button" class="btn-to-pay" v-if="orderDetail.state === 0" @click="weChatPay()">去支付</button>
     </section>
     <section class="bg-white order-foods">
       <ul>
@@ -115,7 +115,8 @@
         orderDetail: {
           dishes: []
         },
-        iconCodeArr: ['status0', 'status1', 'status2', 'status3', 'status4', 'status5', 'status6'],
+        iconCodeArr: ['status0', 'status1', 'status2', 'status3', 'status4', 'status5', 'status6', 'status7',
+          'status8', 'status9', 'status10', 'status11', 'status12', 'status13'],
         orderStatusTipArr: ['', '已付款，待商家接单', '已接单，待配送', '已接单，待配送', '配送中，待收货', '已完成', '订单关闭']
       }
     },
@@ -136,7 +137,7 @@
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
               this.orderStatus.tip = `请在${this.addMinutes(res.data.data.orderTime, 15)}前付款，超过时间，订单将被自动取消`
-            } else if (res.data.data.state === 6) {
+            } else if (res.data.data.state === 6 || res.data.data.state === 100) {
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
             }
           } else {
@@ -339,15 +340,13 @@
   .status2,
   .status8,
   .status9,
-  .status13
-  {
+  .status13 {
     background: url('../assets/icon_order_status2_8_9_13_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
   .status3,
-  .status4
-  {
+  .status4 {
     background: url('../assets/icon_order_status3_4_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
@@ -359,8 +358,8 @@
 
   .status6,
   .status7,
-  .status10
-  {
+  .status10,
+  .status100 {
     background: url('../assets/icon_order_status6_7_10_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
@@ -369,6 +368,7 @@
     background: url('../assets/icon_order_status12_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
+
   }
   section.phone {
     margin-bottom: 0;

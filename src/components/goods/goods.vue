@@ -730,8 +730,12 @@
     background: #ffffff;
   }
 
+  .foods-wrapper > ul {
+  }
+
   .foods-wrapper .food-list:last-child {
-    margin-bottom: 200px;
+    box-sizing: border-box;
+    padding-bottom: 1000px;
   }
 
   .food-title {

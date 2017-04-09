@@ -7,6 +7,7 @@
 </template>
 <script>
   import {urlParse} from '../common/js/util'
+
   export default {
     data () {
       return {
