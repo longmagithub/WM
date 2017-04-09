@@ -30,7 +30,6 @@
           vue.getOrderList()
         }
       }
-      this.getOrderList()
     },
     data () {
       return {
@@ -51,6 +50,7 @@
       Toast
     },
     created() {
+      this.getOrderList()
       this.sessionId = getStore('userInfo').customerId
       this.shopId = getStore('userInfo').shopId
     },

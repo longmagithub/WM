@@ -1228,9 +1228,9 @@
     line-height: 32px;
     padding: 0 20px 0 0;
     margin-left: 10px;
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*white-space: wrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
     font-size: 10px;
     color: #a2a2a2;
     background: #ffffff;
