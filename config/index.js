@@ -24,13 +24,13 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/br': {
-        'target': 'http://120.55.137.223'
+        'target': 'http://192.168.1.25'
       },
       '/mp': {
-        'target': 'http://120.55.137.223'
+        'target': 'http://192.168.1.25'
       },
       '/common': {
-        'target': 'http://120.55.137.223'
+        'target': 'http://192.168.1.25'
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
