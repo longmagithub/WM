@@ -17,7 +17,9 @@
       }
     },
     created() {
+      console.log(window.location.href)
       let url = window.location.href.split('=')
+      console.log(url)
       this.shopId = url[url.length - 1]
     },
     mounted () {
@@ -36,7 +38,7 @@
         this.axios.post(api, data).then((res) => {
           let d = res.data
           if (d.success) {
-            this.jump(d.data.customerId)
+//            this.jump(d.data.customerId)
           }
         }, (errorRes) => {
         })
