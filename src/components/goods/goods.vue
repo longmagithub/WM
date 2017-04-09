@@ -87,9 +87,9 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="sellerBOX.dispatching">
+              <div class="describe" v-if="seller.dispatching">
                 <span class="title">阶梯配送费</span>
-                <span class="text" v-for="item in sellerBOX.dispatching.fees">满{{item.price}}元 运费{{item.fee}}</span>
+                <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}</span>
               </div>
             </div>
             <div class="list-content" ref="listContent">
@@ -186,7 +186,7 @@
   const SUCCESS_OK = true
   export default {
     props: {
-      sellerBOX: {
+      seller: {
         type: Object
       },
       minPrice: {
@@ -1033,8 +1033,8 @@
     top: -10px;
     margin: 0 20px;
     padding: 8px;
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     box-sizing: border-box;
     border-radius: 50%;
     background: rgb(89, 89, 91);

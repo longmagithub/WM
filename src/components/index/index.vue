@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="header">
-      <vheade :detail="detail"></vheade>
+      <vheade :seller="shopDetail" :detail="detail"></vheade>
     </div>
     <div class="tab">
       <div class="tab-item">
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="main">
-      <goods :sellerBOX="shopDetail" :min-price="0"></goods>
+      <goods :seller="shopDetail" :min-price="0"></goods>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
   </div>
@@ -46,24 +46,8 @@
         'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
-      const data = {
-        shopId: this.shopId,
-        customerId: this.customerId
-      }
-      this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
-        res = res.data
-        console.log(res)
-        if (res.success) {
-          // 排序
-          this.shopDetail = res.data
-          console.log(this.shopDetail)
-          setStore('shopInfo', this.shopDetail)
-          // 设置微信title
-//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
-        }
-      })
       // 商家信息
-//      this.getShopDetail()
+      this.getShopDetail()
     },
     mounted() {
       // 营业时间
@@ -93,6 +77,26 @@
 //        })
 //      },
       // 商家信息
+      getShopDetail() {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          console.log(res)
+          if (res.success) {
+            // 排序
+//            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
+//            this.detail = Object.assign({}, this.detail, res.data.dispatching)
+            this.shopDetail = res.data
+            console.log(this.shopDetail)
+            setStore('shopInfo', this.shopDetail)
+            // 设置微信title
+//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
+          }
+        })
+      },
       // toggle toast
       toggleToast(show, text) {
         if (show === true || show === 1) {
