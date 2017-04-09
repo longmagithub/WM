@@ -110,10 +110,10 @@
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               that.CLEAR_CART(getStore('userInfo').shopId)
               that.$router.replace({
-                path: '/orderList',
+                path: '/index',
                 query: {
                   'shopId': getStore('userInfo').shopId,
-                  'sessionId': getStore('userInfo').customerId
+                  'customerId': getStore('userInfo').customerId
                 }
               })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {

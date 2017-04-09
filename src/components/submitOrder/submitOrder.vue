@@ -306,7 +306,7 @@
             res = res.data
             if (res.success === SUCCESS_OK) {
               this.orderId = res.data.orderId
-              this.gotoPay()
+              this.gotoPay(res.data.orderId)
             } else {
               this.toggleToast(1, res.message)
             }
