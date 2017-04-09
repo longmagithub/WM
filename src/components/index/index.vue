@@ -47,7 +47,7 @@
         'shopId': this.$route.query.shopId
       })
       // 商家信息
-//      this.getShopDetail()
+      this.getShopDetail()
     },
     mounted() {
       // 营业时间
@@ -87,7 +87,7 @@
           console.log(res)
           if (res.success) {
             // 排序
-            this.shopDetail = Object.assign({}, this.shopDetail, res.data)
+            this.shopDetail = res.data
             setStore('shopInfo', this.shopDetail)
             // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
