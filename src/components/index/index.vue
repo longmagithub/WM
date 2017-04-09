@@ -46,8 +46,24 @@
         'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
+      const data = {
+        shopId: this.shopId,
+        customerId: this.customerId
+      }
+      this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
+        res = res.data
+        console.log(res)
+        if (res.success) {
+          // 排序
+          this.shopDetail = res.data
+          console.log(this.shopDetail)
+          setStore('shopInfo', this.shopDetail)
+          // 设置微信title
+//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
+        }
+      })
       // 商家信息
-      this.getShopDetail()
+//      this.getShopDetail()
     },
     mounted() {
       // 营业时间
@@ -77,23 +93,6 @@
 //        })
 //      },
       // 商家信息
-      getShopDetail() {
-        const data = {
-          shopId: this.shopId,
-          customerId: this.customerId
-        }
-        this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          console.log(res)
-          if (res.success) {
-            // 排序
-            this.shopDetail = res.data
-            setStore('shopInfo', this.shopDetail)
-            // 设置微信title
-//            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
-          }
-        })
-      },
       // toggle toast
       toggleToast(show, text) {
         if (show === true || show === 1) {
