@@ -64,7 +64,7 @@
           </div>
           <div class="content-right">
             <div class="pay"
-                 v-if="allPrice > minPrice && allPrice > 0"
+                 v-if="allPrice >= minPrice && allPrice > 0"
                  :class="payClass"
                  @click="gotopay">{{payDesc}}
             </div>
@@ -312,7 +312,7 @@
       },
       // pay 的class
       payClass() {
-        if (this.allPrice > this.minPrice && this.allPrice > 0) {
+        if (this.allPrice >= this.minPrice && this.allPrice > 0) {
           return 'enough'
         } else {
           return 'not-enough'
