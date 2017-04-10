@@ -21,7 +21,7 @@
           <span class="soon" v-if="isJinKuai">尽快送达</span>
           <div class="time-wrapper" v-if="!isJinKuai">
             <span class="title" v-if="selected === 0">尽快送达</span>
-            <!--<span class="time" v-if="selected === 0">预计{{options[0] | formatDate}}</span>-->
+            <span class="time" v-if="selected === 0">预计{{options[0] | formatDate}}</span>
             <!--<span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>-->
           </div>
           <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
