@@ -113,7 +113,11 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
-        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+        if (this.isYingye) {
+          this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+        } else {
+          return
+        }
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
