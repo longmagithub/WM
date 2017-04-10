@@ -21,8 +21,8 @@
           <span class="soon" v-if="isJinKuai">尽快送达</span>
           <div class="time-wrapper" v-if="!isJinKuai">
             <span class="title" v-if="selected === 0">尽快送达</span>
-            <span class="time" v-if="selected === 0">预计{{options[0] | formatDate}}</span>
-            <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
+            <!--<span class="time" v-if="selected === 0">预计{{options[0] | formatDate}}</span>-->
+            <!--<span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>-->
           </div>
           <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
             <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
@@ -289,7 +289,7 @@
             customerId: this.customerId,
             discountPrice: this.discountPrice, // 订单优惠金额
             dispatchPrice: this.feesPrice, // 订单配送费
-            expectTime: parseInt(this.options[this.selected] / 1000),  // 期望送达时间
+            expectTime: parseInt(this.options[0] / 1000),  // 期望送达时间
             invoiceTitle: this.invoice, // 发票抬头
             orderDish: this.orderDish, // 菜品规格
             originalPrice: this.allPrice + this.feesPrice, // 订单原价
@@ -535,6 +535,7 @@
   }
 
   .serviceTime-wrapper .time-select {
+    display: none;
     position: absolute;
     top: 0;
     right: 0px;
