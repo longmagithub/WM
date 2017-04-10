@@ -89,7 +89,7 @@
               </div>
               <div class="describe" v-if="seller.dispatching.fees">
                 <span class="title">阶梯配送费</span>
-                <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元 运费{{item.fee}}</span>
+                <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元运费{{item.fee}} </span>
               </div>
             </div>
             <div class="list-content" ref="listContent">
