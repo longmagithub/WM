@@ -27,6 +27,7 @@
           <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
             <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
               <span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>
+              <!--<span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>-->
               <span class="time" v-if="indexOption === 0"> 预计{{item | formatDate}}</span>
               <span v-if="indexOption > 0">{{item | formatDate}}</span>
             </option>
