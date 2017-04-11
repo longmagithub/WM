@@ -10,7 +10,12 @@ export default new Router({
     // 默认
     {
       path: '/',
-      redirect: '/jingmo' // 重定向到 /jingmo
+      redirect: '/shopList' // 重定向到 /jingmo
+    },
+    // 静默授权
+    {
+      path: '/shopList',
+      component: require('../views/shopList.vue')
     },
     // 静默授权
     {

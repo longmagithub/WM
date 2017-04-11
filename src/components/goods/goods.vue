@@ -358,10 +358,10 @@
       // pay 的描述
       payDesc() {
         if (this.allPrice === 0) {
-          return `￥${this.minPrice}元起送`
+          return `￥${parseFloat(this.minPrice.toFixed(2))}元起送`
         } else if (this.allPrice < this.minPrice) {
           let diff = this.minPrice - this.allPrice
-          return `还差￥${diff}元起送`
+          return `还差￥${parseFloat(diff.toFixed(2))}元起送`
         } else {
           return '去结算'
         }
@@ -1128,8 +1128,8 @@
   }
 
   .shopcart .content .content-right {
-    flex: 0 0 107px;
-    width: 107px;
+    flex: 0 0 112px;
+    width: 112px;
   }
 
   .shopcart .content .content-right .pay {
