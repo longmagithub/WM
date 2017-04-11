@@ -23,7 +23,7 @@
         </div>
         <div class="activity" v-if="detailBox.activity">
           <span class="text" style="margin-right: 5px" v-if="detailBox.activity"
-                v-for="item in detailBox.activity.reverse()">{{item
+                v-for="item in detailBox.activity">{{item
             .title}}</span>
           <span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>
         </div>
