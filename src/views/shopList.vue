@@ -1,6 +1,117 @@
 <template>
   <div class="shopList">
     <ul>
+      <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
+        <div class="logo">
+          <img src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.JPEG" width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">很爱餐厅</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满20减9，满35减12，满68减20</p>
+          <span class="tiem">28分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('83cee7db-b211-4e5b-bbc3-06882f86fede')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/832c49b2-4ada-47bf-88ff-06dd8cbd26f2/1491890808699shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">炒饭王</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满25减10，满50减25</p>
+          <span class="tiem">30分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('c1a2c562-b2cc-46c2-9e10-47cc8552ca4e')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/9480c029-a45d-479e-a3c3-74ed9c65d54d/1491686827765shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">这个村民间美食</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满35减10，满50减10</p>
+          <span class="tiem">23分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('8d68095c-4ca8-40d0-b3a0-c40dac778c17')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/c5e25f9d-b7d4-4da8-8652-1ddfebae7077/1491674174626shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">味美土菜馆</p>
+          <p class="desc">￥30元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满30减3，满50减5，满80减8</p>
+          <span class="tiem">22分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('5b96f343-62c1-48ac-a392-f4b697cb3be9')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/5b96f343-62c1-48ac-a392-f4b697cb3be9/1491821759529shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">蜜菓联庄店</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满25减5</p>
+          <span class="tiem">28分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('de74f04c-fb3f-4b04-af59-f74eca53d653')">
+        <div class="logo">
+          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG" width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">重庆麻辣烫</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满20减4，满35减7，满50减11</p>
+          <span class="tiem">28分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('8a124c47-eff3-4bbc-8053-c01f72174005')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/af8b7bfa-34b8-4266-accf-1dd64eff580d/1491674516791shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">阿云饭馆</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满15减10</p>
+          <span class="tiem">28分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('9480c029-a45d-479e-a3c3-74ed9c65d54d')">
+        <div class="logo">
+          <img src="http://imagewm.test.u-xian.com/image/shop/1491686621833shopImage.JPEG" width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">黄金烤肉便当</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满20减18，满50减27，满70减42</p>
+          <span class="tiem">32分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('c5e25f9d-b7d4-4da8-8652-1ddfebae7077')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/c1c8dafb-0d9e-4722-b7d8-a540d235e30c/1491674039775shopImage.JPEG	"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">馋嘴花甲</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满20减4，满35减10，满50减15</p>
+          <span class="tiem">38分钟</span>
+        </div>
+      </li>
       <li class="list-item" @click="goIndex('4637cede-37aa-4648-94f5-2799f93508c9')">
         <div class="logo">
           <img
@@ -10,7 +121,46 @@
         <div class="content">
           <p class="shopTitle">小巷子农家菜</p>
           <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满100减45，满55减32，满30减22</p>
+          <p class="manjian">满30减22，满55减32，满100减45</p>
+          <span class="tiem">30分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('d8438de5-d90d-431d-bd68-0d0a85f4401a')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/4637cede-37aa-4648-94f5-2799f93508c9/1491718406275shopImage.JPEG	"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">有家土菜馆</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满30减20，满45减25，满80减36，满120减47，满200减67</p>
+          <span class="tiem">35分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('af8b7bfa-34b8-4266-accf-1dd64eff580d')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/8d68095c-4ca8-40d0-b3a0-c40dac778c17/1491674343847shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">徽府香辣馆</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满28减5，满43减9</p>
+          <span class="tiem">30分钟</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('e1712acd-b5bb-45b7-be12-3f104702eb0d')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/832c49b2-4ada-47bf-88ff-06dd8cbd26f2/1491879269543shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">卉雅小厨</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满12减10，满30减15，满100减45，满200减65</p>
           <span class="tiem">30分钟</span>
         </div>
       </li>
@@ -27,69 +177,6 @@
       <!--<span class="tiem">28分钟</span>-->
       <!--</div>-->
       <!--</li>-->
-      <li class="list-item" @click="goIndex('8a124c47-eff3-4bbc-8053-c01f72174005')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/af8b7bfa-34b8-4266-accf-1dd64eff580d/1491674516791shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">阿云饭馆</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满15减10</p>
-          <span class="tiem">28分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('8d68095c-4ca8-40d0-b3a0-c40dac778c17')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/c5e25f9d-b7d4-4da8-8652-1ddfebae7077/1491674174626shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">味美土菜馆</p>
-          <p class="desc">￥30元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满80减8，满50减5，满30减3</p>
-          <span class="tiem">22分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('9480c029-a45d-479e-a3c3-74ed9c65d54d')">
-        <div class="logo">
-          <img src="http://imagewm.test.u-xian.com/image/shop/1491686621833shopImage.JPEG" width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">黄金烤肉便当</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满70减42，满50减27，满20减18</p>
-          <span class="tiem">32分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('af8b7bfa-34b8-4266-accf-1dd64eff580d')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/8d68095c-4ca8-40d0-b3a0-c40dac778c17/1491674343847shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">徽府香辣馆</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满43减9，满28减5</p>
-          <span class="tiem">30分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('c1a2c562-b2cc-46c2-9e10-47cc8552ca4e')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/9480c029-a45d-479e-a3c3-74ed9c65d54d/1491686827765shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">这个村民间美食</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满50减10，满35减10</p>
-          <span class="tiem">23分钟</span>
-        </div>
-      </li>
       <!--<li class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">-->
       <!--<div class="logo">-->
       <!--<img-->
@@ -103,67 +190,6 @@
       <!--<span class="tiem">34分钟</span>-->
       <!--</div>-->
       <!--</li>-->
-      <li class="list-item" @click="goIndex('c5e25f9d-b7d4-4da8-8652-1ddfebae7077')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/c1c8dafb-0d9e-4722-b7d8-a540d235e30c/1491674039775shopImage.JPEG	"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">馋嘴花甲</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满50减15，满35减10，满20减4</p>
-          <span class="tiem">38分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('d8438de5-d90d-431d-bd68-0d0a85f4401a')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/4637cede-37aa-4648-94f5-2799f93508c9/1491718406275shopImage.JPEG	"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">有家土菜馆</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满200减67，满120减47，满80减36，满45减25，满30减20</p>
-          <span class="tiem">35分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('de74f04c-fb3f-4b04-af59-f74eca53d653')">
-        <div class="logo">
-          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG" width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">重庆麻辣烫</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满50减11，满35减7，满20减4</p>
-          <span class="tiem">28分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
-        <div class="logo">
-          <img src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.JPEG" width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">很爱餐厅</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满68减20，满35减12，满20减9</p>
-          <span class="tiem">28分钟</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('5b96f343-62c1-48ac-a392-f4b697cb3be9')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/5b96f343-62c1-48ac-a392-f4b697cb3be9/1491821759529shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">蜜菓联庄店</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满25减5</p>
-          <span class="tiem">28分钟</span>
-        </div>
-      </li>
       <!--<li class="list-item" @click="goIndex('e452573e-69df-4912-ad96-8b3f4ad52d1f')">-->
       <!--<div class="logo">-->
       <!--<img-->

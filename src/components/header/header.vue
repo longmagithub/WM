@@ -22,7 +22,9 @@
           <!--<div class="enter uxwm-iconfont btn_right"></div>-->
         </div>
         <div class="activity" v-if="detailBox.activity">
-          <span class="text" v-if="detailBox.activity">{{detailBox.activity[0].title}}</span>
+          <span class="text" style="margin-right: 5px" v-if="detailBox.activity"
+                v-for="item in detailBox.activity">{{item
+            .title}}</span>
           <span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>
         </div>
       </div>
