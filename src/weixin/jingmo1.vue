@@ -44,8 +44,8 @@
         })
       },
       jump (customerId) {
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId +
-          '&customerId=' + customerId + '&T=' + Date.parse(new Date()) / 100000
+        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?customerId=' + customerId +
+          '&T=' + Date.parse(new Date()) / 100000)
       }
     }
   }
