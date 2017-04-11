@@ -14,19 +14,19 @@
           <span class="tiem">30分钟</span>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('631af368-3da3-4278-8f1c-42f55d856e6d')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/e452573e-69df-4912-ad96-8b3f4ad52d1f/1491718758273shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">乐速面疙瘩</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满55减21，满15减13</p>
-          <span class="tiem">28分钟</span>
-        </div>
-      </li>
+      <!--<li class="list-item" @click="goIndex('631af368-3da3-4278-8f1c-42f55d856e6d')">-->
+      <!--<div class="logo">-->
+      <!--<img-->
+      <!--src="http://imagewm.test.u-xian.com/image/shop/e452573e-69df-4912-ad96-8b3f4ad52d1f/1491718758273shopImage.JPEG"-->
+      <!--width="48px" height="48px">-->
+      <!--</div>-->
+      <!--<div class="content">-->
+      <!--<p class="shopTitle">乐速面疙瘩</p>-->
+      <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
+      <!--<p class="manjian">满55减21，满15减13</p>-->
+      <!--<span class="tiem">28分钟</span>-->
+      <!--</div>-->
+      <!--</li>-->
       <li class="list-item" @click="goIndex('8a124c47-eff3-4bbc-8053-c01f72174005')">
         <div class="logo">
           <img
@@ -85,24 +85,24 @@
         </div>
         <div class="content">
           <p class="shopTitle">这个村民间美食</p>
-          <p class="desc">￥0元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
           <p class="manjian">满50减10，满35减10</p>
           <span class="tiem">23分钟</span>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/7da10ea0-91ea-4db2-852f-b46afb63ada6/1491673784318shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">豆花花</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满45减8</p>
-          <span class="tiem">34分钟</span>
-        </div>
-      </li>
+      <!--<li class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">-->
+      <!--<div class="logo">-->
+      <!--<img-->
+      <!--src="http://imagewm.test.u-xian.com/image/shop/7da10ea0-91ea-4db2-852f-b46afb63ada6/1491673784318shopImage.JPEG"-->
+      <!--width="48px" height="48px">-->
+      <!--</div>-->
+      <!--<div class="content">-->
+      <!--<p class="shopTitle">豆花花</p>-->
+      <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
+      <!--<p class="manjian">满45减8</p>-->
+      <!--<span class="tiem">34分钟</span>-->
+      <!--</div>-->
+      <!--</li>-->
       <li class="list-item" @click="goIndex('c5e25f9d-b7d4-4da8-8652-1ddfebae7077')">
         <div class="logo">
           <img
@@ -140,19 +140,41 @@
           <span class="tiem">28分钟</span>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('e452573e-69df-4912-ad96-8b3f4ad52d1f')">
+      <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
         <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/d8438de5-d90d-431d-bd68-0d0a85f4401a/1491718589749shopImage.JPEG	"
-            width="48px" height="48px">
+          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG" width="48px" height="48px">
         </div>
         <div class="content">
-          <p class="shopTitle">杯思特KAO肉饭</p>
+          <p class="shopTitle">很爱餐厅</p>
           <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满40减21，满20减14</p>
-          <span class="tiem">30分钟</span>
+          <p class="manjian">满68减20，满35减12，满20减9</p>
+          <span class="tiem">28分钟</span>
         </div>
       </li>
+      <li class="list-item" @click="goIndex('5b96f343-62c1-48ac-a392-f4b697cb3be9')">
+        <div class="logo">
+          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG" width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">蜜菓联庄店</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满25减5</p>
+          <span class="tiem">28分钟</span>
+        </div>
+      </li>
+      <!--<li class="list-item" @click="goIndex('e452573e-69df-4912-ad96-8b3f4ad52d1f')">-->
+      <!--<div class="logo">-->
+      <!--<img-->
+      <!--src="http://imagewm.test.u-xian.com/image/shop/d8438de5-d90d-431d-bd68-0d0a85f4401a/1491718589749shopImage.JPEG	"-->
+      <!--width="48px" height="48px">-->
+      <!--</div>-->
+      <!--<div class="content">-->
+      <!--<p class="shopTitle">杯思特KAO肉饭</p>-->
+      <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
+      <!--<p class="manjian">满40减21，满20减14</p>-->
+      <!--<span class="tiem">30分钟</span>-->
+      <!--</div>-->
+      <!--</li>-->
     </ul>
   </div>
 </template>
