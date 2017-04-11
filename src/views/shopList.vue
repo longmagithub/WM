@@ -142,7 +142,7 @@
       </li>
       <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
         <div class="logo">
-          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG" width="48px" height="48px">
+          <img src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.JPEG" width="48px" height="48px">
         </div>
         <div class="content">
           <p class="shopTitle">很爱餐厅</p>
@@ -153,7 +153,9 @@
       </li>
       <li class="list-item" @click="goIndex('5b96f343-62c1-48ac-a392-f4b697cb3be9')">
         <div class="logo">
-          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG" width="48px" height="48px">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/5b96f343-62c1-48ac-a392-f4b697cb3be9/1491821759529shopImage.JPEG"
+            width="48px" height="48px">
         </div>
         <div class="content">
           <p class="shopTitle">蜜菓联庄店</p>
@@ -180,7 +182,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {urlParse} from '../common/js/util'
+  //  import {urlParse} from '../common/js/util'
   export default {
     data() {
       return {
@@ -188,7 +190,9 @@
       }
     },
     created() {
-      this.customerId = urlParse().customerId
+      let url = window.location.href.split('=')
+      url = url[url.length - 1]
+      console.log(url)
     },
     methods: {
       goIndex(id) {

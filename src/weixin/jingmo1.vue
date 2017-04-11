@@ -44,8 +44,15 @@
         })
       },
       jump (customerId) {
-        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?customerId=' + customerId +
-          '&T=' + Date.parse(new Date()) / 100000)
+        this.$router.replace({
+          path: '/shopList',
+          query: {
+            t: Date.parse(new Date()) / 100000,
+            'customerId': customerId
+          }
+        })
+//        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?customerId=' + customerId +
+//          '&T=' + Date.parse(new Date()) / 100000)
       }
     }
   }
