@@ -11,7 +11,7 @@
       <ul>
         <li class="title">订单详情</li>
         <li v-for="item in orderDetail.dishes">
-          {{item.dishName}}{{item.dishType}}
+          {{item.dishName}}
           <label>
             <span v-show="item.dishCount > 1">x{{item.dishCount}}</span>
             <span class="amount">￥{{item.dishCount * item.dishPrice | toFixedFil}}</span>

@@ -12,9 +12,9 @@
             <div class="title-name">{{detailBox.name}}</div>
             <!-- 描述 -->
             <div class="description">
-              <span>{{detailBox.dispatching.name}}</span>/
-              <span>{{detailBox.dispatching.duration}}分钟到达</span>
-              <span>/满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee |
+              <span>{{detailBox.dispatching.name}}</span>
+              <!--<span>{{detailBox.dispatching.duration}}分钟到达</span>-->
+              <span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee |
                 fees}}</span>
             </div>
             <div class="bulletin" v-if="detailBox.notice">公告：{{detailBox.notice}}</div>
@@ -23,7 +23,7 @@
         </div>
         <div class="activity" v-if="detailBox.activity">
           <span class="text" style="margin-right: 5px" v-if="detailBox.activity"
-                v-for="item in detailBox.activity">{{item
+                v-for="item in detailBox.activity.reverse()">{{item
             .title}}</span>
           <span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>
         </div>
