@@ -2,20 +2,22 @@
   <div>
     <!--<h1>{{msg}}</h1>-->
     <!--<h2>{{url}}</h2>-->
+    <!--<div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div>-->
   </div>
 </template>
 <script>
   import {urlParse} from '../common/js/util'
-
   export default {
     data () {
       return {
-        msg: '用户授权',
+        msg: '静默授权',
         url: '',
-        shopId: ''
+        shopId: '',
+        customerId: ''
       }
     },
     created() {
+      console.log(window.location.href)
       let url = window.location.href.split('=')
       this.shopId = url[url.length - 1]
     },
@@ -29,11 +31,11 @@
       getOpenId () {
         const data = {
           code: urlParse().code,
-          type: 2 // 授权类型：1静默授权；2用户授权
+          type: 1 // 授权类型：1静默授权；2用户授权
         }
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
-          const d = res.data
+          let d = res.data
           if (d.success) {
             this.jump(d.data.customerId)
           }
@@ -41,16 +43,16 @@
           console.log(errorRes)
         })
       },
-//       如果有code 跳转页面
       jump (customerId) {
-        window.location.href = `http://newpay.tunnel.qydev.com/VAOrderH5/#/index?shopId=${this.shopId}&?customerId=${customerId}`
 //        this.$router.replace({
-//          path: '/index',
+//          path: '/shopList',
 //          query: {
-//            'shopId': getStore('userInfoID').shopId,
+//            t: Date.parse(new Date()) / 100000,
 //            'customerId': customerId
 //          }
 //        })
+        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/userOrderList?customerId=' + customerId +
+          '&T=' + Date.parse(new Date()) / 100000)
       }
     }
   }

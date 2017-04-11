@@ -12,6 +12,10 @@ export default new Router({
       path: '/',
       redirect: '/shopList' // 重定向到 /jingmo
     },
+    {
+      path: '/userOrderList',
+      redirect: '/zhengchang' // 重定向到 /jingmo
+    },
     // 静默授权
     {
       path: '/shopList',

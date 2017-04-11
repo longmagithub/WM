@@ -2,68 +2,35 @@
   <div>
     <!--<h1>{{msg}}</h1>-->
     <!--<h2>{{url}}</h2>-->
+    <!-- <div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div> -->
   </div>
 </template>
 <script>
-  import {urlParse, setStore} from '../common/js/util'
-
+  //  import {setStore} from '../common/js/util'
   export default {
     data () {
       return {
-        msg: '用户授权',
+        msg: '静默授权',
         url: '',
-        shopId: ''
+        shopId: '',
+        time: Date.parse(new Date()) / 100000
       }
     },
     created() {
-      let url = window.location.href.split('=')
-      this.shopId = url[1]
-      setStore('userInfoID', {
-        'shopId': this.shopId,
-        'customerId': ''
-      })
+      this.shopId = window.location.href.split('=')[1]
+    },
+    mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
         this.to()
-      } else {
-        this.getOpenId()
       }
     },
     methods: {
       to () {
-        const oauthCallbackUrl = encodeURIComponent(`http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang1shopId=${this.shopId}`)
-        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx980e7bb068f0b763&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
-        window.location.href = oauthJumpUrl
-      },
-      getOpenId () {
-        const data = {
-          code: urlParse().code,
-          type: 2 // 授权类型：1静默授权；2用户授权
-        }
-        const api = '/mp/authority/customer'
-        this.axios.post(api, data).then((res) => {
-          const d = res.data
-          if (d.success) {
-            this.jump(d.data.customerId)
-            setStore('userInfoID', {
-              'shopId': this.shopId,
-              'customerId': d.data.customerId
-            })
-          }
-        }, (errorRes) => {
-          console.log(errorRes)
-        })
-      },
-      // 如果有code 跳转页面
-      jump (customerId) {
-        window.location.href = `http://newpay.tunnel.qydev.com/VAOrderH5/#/index?shopId=${this.shopId}&?customerId=${customerId}`
-//        this.$router.replace({
-//          path: '/index',
-//          query: {
-//            'shopId': this.shopId,
-//            'customerId': customerId
-//          }
-//        })
+        const oauthCallbackUrl =
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/zhengchang1?T=' + this.tiem)
+        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+        window.location.replace(oauthJumpUrl)
       }
     }
   }
