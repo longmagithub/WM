@@ -358,10 +358,10 @@
       // pay 的描述
       payDesc() {
         if (this.allPrice === 0) {
-          return `￥${parseFloat(this.minPrice.toFixed(2))}元起送`
+          return `￥${this.minPrice}元起送`
         } else if (this.allPrice < this.minPrice) {
           let diff = this.minPrice - this.allPrice
-          return `还差￥${parseFloat(diff.toFixed(2))}元起送`
+          return `还差￥${diff}元起送`
         } else {
           return '去结算'
         }
@@ -776,8 +776,8 @@
   }
 
   .food-title {
+    display: flex;
     padding-left: 11px;
-    width: 100%;
     height: 33px;
     line-height: 33px;
     border-left: 4px solid #dddddd;
@@ -785,16 +785,22 @@
     font-size: 14px;
     font-weight: 400;
     color: #676767;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  }
+
+  .food-title .desc .name {
+    display: inline-block;
+    line-height: 33px;
   }
 
   .food-title .desc {
+    display: inline-block;
     margin-left: 4px;
-    width: 100%;
+    width: 100px;
     font-size: 10px;
     color: #a4a4a4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .food-item {
@@ -828,11 +834,11 @@
 
   .food-item .content .name_box {
     width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 2;*/
+    /*-webkit-box-orient: vertical;*/
   }
 
   .food-item .content .name_box .name {
