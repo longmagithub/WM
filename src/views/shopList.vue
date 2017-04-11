@@ -190,9 +190,8 @@
       }
     },
     created() {
-      let url = window.location.href.split('=')
-      url = url[url.length - 1]
-      console.log(url)
+      this.customerId = this.$route.query.customerId
+      console.log(this.customerId)
     },
     methods: {
       goIndex(id) {
