@@ -51,7 +51,7 @@
 //            'customerId': customerId
 //          }
 //        })
-        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/userOrderList?customerId=' + customerId +
+        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/orderList?customerId=' + customerId +
           '&T=' + Date.parse(new Date()) / 100000)
       }
     }
