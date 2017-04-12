@@ -160,7 +160,7 @@
         <div class="content">
           <p class="shopTitle">味美土菜馆</p>
           <p class="desc">￥30元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满30减3，满50减5，满80减8</p>
+          <p class="manjian">满15减5，满25减8，满50减12</p>
           <span class="tiem">40分钟送达</span>
         </div>
       </li>

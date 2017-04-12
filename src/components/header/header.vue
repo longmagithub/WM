@@ -25,7 +25,7 @@
           <span class="text" style="margin-right: 5px" v-if="detailBox.activity"
                 v-for="item in detailBox.activity">{{item
             .title}}</span>
-          <span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>
+          <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
         </div>
       </div>
       <div class="user">

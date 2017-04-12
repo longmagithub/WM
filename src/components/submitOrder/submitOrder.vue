@@ -22,7 +22,7 @@
           <div class="time-wrapper" v-if="!isJinKuai">
             <span class="title" v-if="selected === 0">尽快送达</span>
             <span class="time" v-if="selected === 0">预计{{options[0] | formatDate}}</span>
-            <!--<span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>-->
+            <span class="timeItem" v-if="selected > 0">{{options[selected] | formatDate}}</span>
           </div>
           <select class="time-select" v-model="selected" v-if="!isJinKuai" placeholder="请选择">
             <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
@@ -32,7 +32,7 @@
               <span v-if="indexOption > 0">{{item | formatDate}}</span>
             </option>
           </select>
-          <!--<i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>-->
+          <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
         </section>
         <section class="orderDetail-wrapper">
           <div class="title">订单详情</div>
@@ -61,7 +61,8 @@
             </div>
             <div class="discount" v-if="isDiscount">
               <div class="list-content"></div>
-              <p class="discount-title" v-for="item in discountList" v-if="item.discountId === shopDiscountId">{{item.title}}
+              <p class="discount-title" v-for="item in discountList" v-if="item.discountId === shopDiscountId">
+                {{item.title}}
                 <span class="discount-num">-￥{{item.reductionAmount}}</span>
               </p>
             </div>
@@ -290,7 +291,11 @@
             customerId: this.customerId,
             discountPrice: this.discountPrice, // 订单优惠金额
             dispatchPrice: this.feesPrice, // 订单配送费
-            expectTime: parseInt(this.options[0] / 1000),  // 期望送达时间
+            // expectTime: parseInt(this.options[0] / 1000),
+            /* 测试预约时间 */
+            dispatchType: this.selected === 0 ? 1 : 2,
+            expectTime: parseInt(this.options[this.selected] / 1000),  // 期望送达时间
+            /* 测试预约时间 */
             invoiceTitle: this.invoice, // 发票抬头
             orderDish: this.orderDish, // 菜品规格
             originalPrice: this.allPrice + this.feesPrice, // 订单原价
@@ -510,7 +515,7 @@
   .serviceTime-wrapper .time-wrapper {
     display: inline-block;
     float: right;
-    /*margin-right: 20px;*/
+    margin-right: 20px;
     color: #ff8923;
     font-size: 14px;
     font-weight: 500;
@@ -536,7 +541,7 @@
   }
 
   .serviceTime-wrapper .time-select {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 0;
     right: 0px;

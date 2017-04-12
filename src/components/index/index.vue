@@ -3,11 +3,11 @@
     <div class="header">
       <vheade :seller="shopDetail" :detail="detail"></vheade>
     </div>
-    <div class="tab">
-      <div class="tab-item">
-        <span class="label">商品</span>
-      </div>
-    </div>
+    <!--<div class="tab">-->
+      <!--<div class="tab-item">-->
+        <!--<span class="label">商品</span>-->
+      <!--</div>-->
+    <!--</div>-->
     <div class="main">
       <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
     </div>

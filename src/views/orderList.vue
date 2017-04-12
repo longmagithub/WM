@@ -53,7 +53,7 @@
     created() {
       PublicJs.changeTitleInWx('我的订单')
       this.sessionId = this.$route.query.customerId || getStore('userInfo').customerId
-      this.shopId = getStore('userInfo').shopId || ''
+//      this.shopId = this.$route.query.customerId ? this.$route.query.customerId : ''
       this.getOrderList()
     },
     methods: {
@@ -62,7 +62,6 @@
         this.isAjaxing = true
         this.dataStatus = '加载中...'
         const data = {
-          shopId: this.shopId,
           sessionId: this.sessionId,
           pageSize: this.pageSize,
           pageIndex: this.pageIndex
@@ -74,6 +73,7 @@
             this.isAjaxing = false
             if (!this.orderList) {
               this.orderList = res.data.lstOrderInfos
+              console.log(this.orderList)
             } else {
               for (let i = 0; i < res.data.lstOrderInfos.length; i++) {
                 this.orderList.push(res.data[i])

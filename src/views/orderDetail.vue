@@ -138,6 +138,7 @@
         .then((res) => {
           if (res.data.success) {
             this.orderDetail = res.data.data
+            console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
               this.orderStatus.tip = `请在${this.addMinutes(res.data.data.orderTime, 15)}前付款，超过时间，订单将被自动取消`
@@ -173,8 +174,8 @@
         } else {
           // 发起支付
           const data = {
-            customerId: getStore('userInfo').customerId,
-            shopId: getStore('userInfo').shopId,
+            customerId: this.sessionId,
+            shopId: this.orderDetail.shopId,
             orderId: this.orderId
           }
           this.axios.post(`/br/order/pay`, data)
@@ -213,8 +214,8 @@
               that.$router.replace({
                 path: '/index',
                 query: {
-                  'shopId': getStore('userInfo').shopId,
-                  'customerId': getStore('userInfo').customerId
+                  'shopId': this.orderDetail.shopId,
+                  'customerId': this.sessionId
                 }
               })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
