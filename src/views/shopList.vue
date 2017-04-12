@@ -38,19 +38,6 @@
           <span class="tiem">35分钟送达</span>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('8d68095c-4ca8-40d0-b3a0-c40dac778c17')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/c5e25f9d-b7d4-4da8-8652-1ddfebae7077/1491674174626shopImage.JPEG"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">味美土菜馆</p>
-          <p class="desc">￥30元起送 /&nbsp配送费￥3起</p>
-          <p class="manjian">满30减3，满50减5，满80减8</p>
-          <span class="tiem">40分钟送达</span>
-        </div>
-      </li>
       <li class="list-item" @click="goIndex('4637cede-37aa-4648-94f5-2799f93508c9')">
         <div class="logo">
           <img
@@ -61,6 +48,19 @@
           <p class="shopTitle">小巷子农家菜</p>
           <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
           <p class="manjian">满30减22，满55减32，满100减45</p>
+          <span class="tiem">30分钟送达</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('e452573e-69df-4912-ad96-8b3f4ad52d1f')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/d8438de5-d90d-431d-bd68-0d0a85f4401a/1491718589749shopImage.JPEG	"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">杯思特KAO肉饭</p>
+          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满20减14，满25减15，满50减23，满100减40</p>
           <span class="tiem">30分钟送达</span>
         </div>
       </li>
@@ -151,6 +151,19 @@
           <span class="tiem">30分钟送达</span>
         </div>
       </li>
+      <li class="list-item" @click="goIndex('8d68095c-4ca8-40d0-b3a0-c40dac778c17')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/c5e25f9d-b7d4-4da8-8652-1ddfebae7077/1491674174626shopImage.JPEG"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">味美土菜馆</p>
+          <p class="desc">￥30元起送 /&nbsp配送费￥3起</p>
+          <p class="manjian">满30减3，满50减5，满80减8</p>
+          <span class="tiem">40分钟送达</span>
+        </div>
+      </li>
       <li class="list-item" @click="goIndex('e1712acd-b5bb-45b7-be12-3f104702eb0d')">
         <div class="logo">
           <img
@@ -188,19 +201,6 @@
       <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
       <!--<p class="manjian">满45减8</p>-->
       <!--<span class="tiem">34分钟送达</span>-->
-      <!--</div>-->
-      <!--</li>-->
-      <!--<li class="list-item" @click="goIndex('e452573e-69df-4912-ad96-8b3f4ad52d1f')">-->
-      <!--<div class="logo">-->
-      <!--<img-->
-      <!--src="http://imagewm.test.u-xian.com/image/shop/d8438de5-d90d-431d-bd68-0d0a85f4401a/1491718589749shopImage.JPEG	"-->
-      <!--width="48px" height="48px">-->
-      <!--</div>-->
-      <!--<div class="content">-->
-      <!--<p class="shopTitle">杯思特KAO肉饭</p>-->
-      <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
-      <!--<p class="manjian">满40减21，满20减14</p>-->
-      <!--<span class="tiem">30分钟送达</span>-->
       <!--</div>-->
       <!--</li>-->
     </ul>

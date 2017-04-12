@@ -53,7 +53,7 @@
     created() {
       PublicJs.changeTitleInWx('我的订单')
       this.sessionId = this.$route.query.customerId || getStore('userInfo').customerId
-      this.shopId = getStore('userInfo').shopId
+      this.shopId = getStore('userInfo').shopId || ''
       this.getOrderList()
     },
     methods: {

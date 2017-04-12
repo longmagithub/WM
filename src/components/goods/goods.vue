@@ -361,7 +361,7 @@
           return `￥${this.minPrice}元起送`
         } else if (this.allPrice < this.minPrice) {
           let diff = this.minPrice - this.allPrice
-          return `还差￥${diff}元起送`
+          return `还差￥${diff.toFixed(2)}元起送`
         } else {
           return '去结算'
         }
