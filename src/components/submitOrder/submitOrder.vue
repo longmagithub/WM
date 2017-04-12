@@ -32,7 +32,7 @@
               <span v-if="indexOption > 0">{{item | formatDate}}</span>
             </option>
           </select>
-          <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
+          <!--<i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>-->
         </section>
         <section class="orderDetail-wrapper">
           <div class="title">订单详情</div>
@@ -515,7 +515,7 @@
   .serviceTime-wrapper .time-wrapper {
     display: inline-block;
     float: right;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     color: #ff8923;
     font-size: 14px;
     font-weight: 500;
@@ -541,7 +541,7 @@
   }
 
   .serviceTime-wrapper .time-select {
-    /*display: none;*/
+    display: none;
     position: absolute;
     top: 0;
     right: 0px;
