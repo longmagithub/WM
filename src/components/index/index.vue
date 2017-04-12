@@ -1,7 +1,7 @@
 <template>
   <div class="index">
-    <div class="header">
-      <vheade :seller="shopDetail" :detail="detail"></vheade>
+    <div class="header-box">
+      <banner :seller="shopDetail" :detail="detail"></banner>
     </div>
     <!--<div class="tab">-->
       <!--<div class="tab-item">-->
@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import vheade from '../header/header.vue'
+  import banner from '../header/header.vue'
   import goods from '../goods/goods.vue'
   import {setStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
@@ -103,7 +103,7 @@
       }
     },
     components: {
-      vheade,
+      banner,
       goods,
       toast
     }
