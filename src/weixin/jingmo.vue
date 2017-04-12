@@ -18,11 +18,12 @@
     },
     created() {
       this.shopId = window.location.href.split('=')[1]
+      this.to()
+      console.log('jingmo')
     },
     mounted () {
       this.url = window.location.href
       if (this.url.indexOf('code') < 0) {
-        this.to()
       }
     },
     methods: {
@@ -32,7 +33,6 @@
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
         // window.location.replace(oauthJumpUrl)
-
         window.location.href = oauthJumpUrl
       }
     }
