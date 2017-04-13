@@ -26,6 +26,10 @@ export default new Router({
       redirect: '/shopList' // 重定向到 /jingmo
     },
     {
+      path: '/uxwm',
+      redirect: '/shopList' // 重定向到 /jingmo
+    },
+    {
       path: '/userOrderList',
       redirect: '/zhengchang' // 重定向到 /门店列表
     },
