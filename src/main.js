@@ -17,6 +17,8 @@ import {sync} from 'vuex-router-sync'
 import * as filters from './filters'
 // 添加mockjs拦截请求，模拟返回服务器数据
 import mock from './plugins/mock'
+// 懒加载
+import VueLazyload from 'vue-lazyload'
 // 引入工具类
 // import * as utils from './utils'
 // 引入初始化
@@ -42,6 +44,12 @@ console.log(mock)
 Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueValidator) // 声明使用vue-validator
 // Vue.use(WxPay)
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: 'assets/item_logo.png',
+  loading: 'assets/item_logo.png',
+  attempt: 2
+})
 
 // 注册
 Vue.prototype.PublicJs = PublicJs

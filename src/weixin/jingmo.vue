@@ -12,8 +12,7 @@
       return {
         msg: '静默授权',
         url: '',
-        shopId: '',
-        time: Date.parse(new Date()) / 100000
+        shopId: ''
       }
     },
     created() {
@@ -21,11 +20,6 @@
       this.to()
       console.log('jingmo')
     },
-//    mounted () {
-//      this.url = window.location.href
-//      if (this.url.indexOf('code') < 0) {
-//      }
-//    },
     methods: {
       to () {
         const oauthCallbackUrl =
