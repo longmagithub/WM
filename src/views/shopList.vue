@@ -208,7 +208,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {getStore} from '../common/js/util'
+  import {getStore, urlParse} from '../common/js/util'
   export default {
     data() {
       return {
@@ -216,10 +216,23 @@
       }
     },
     created() {
-      console.log(window.location.href)
-      if (getStore('openId') === null) {
+      let url = window.location.href
+      console.log(url)
+      console.log()
+      if (getStore('openId') === null || url.indexOf('code') < 0) {
         console.log('没有授权')
         this.to()
+      } else {
+        const data = {
+          code: urlParse().code,
+          type: 1 // 授权类型：1静默授权；2用户授权
+        }
+        const api = '/mp/authority/customer'
+        this.axios.post(api, data).then((res) => {
+          console.log(res)
+        }, (errorRes) => {
+          console.log(errorRes)
+        })
       }
     },
     methods: {
