@@ -240,7 +240,7 @@
           })
         }
       } else {
-        return
+        this.customerId = getStore('shopId').customerId
       }
     },
     methods: {
