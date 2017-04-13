@@ -240,7 +240,7 @@
           })
         }
       } else {
-        this.customerId = getStore('shopId').customerId
+        this.customerId = getStore('openId').customerId
       }
     },
     methods: {
