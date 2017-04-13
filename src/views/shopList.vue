@@ -208,7 +208,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {getStore, urlParse} from '../common/js/util'
+  import {getStore, urlParse, setStore} from '../common/js/util'
   export default {
     data() {
       return {
@@ -216,9 +216,10 @@
       }
     },
     created() {
+    },
+    mounted() {
       let url = window.location.href
-      console.log(url)
-      console.log(getStore('openId'))
+      console.log(getStore('openId').customerId)
       if (url.indexOf('code') < 0) {
         console.log('没有授权')
         this.to()
@@ -229,7 +230,11 @@
         }
         const api = '/mp/authority/customer'
         this.axios.post(api, data).then((res) => {
+          res = res.data
           console.log(res)
+          setStore('openId', {
+            customerId: res.customerId
+          })
         }, (errorRes) => {
           console.log(errorRes)
         })
