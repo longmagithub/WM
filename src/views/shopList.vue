@@ -219,7 +219,7 @@
     },
     mounted() {
       let url = window.location.href
-      console.log(getStore('openId').customerId)
+      console.log(getStore('openId'))
       if (url.indexOf('code') < 0) {
         console.log('没有授权')
         this.to()
