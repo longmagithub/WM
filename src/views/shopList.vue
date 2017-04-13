@@ -240,6 +240,7 @@
           })
         }
       } else {
+        console.log(getStore('openId').customerId)
         this.customerId = getStore('openId').customerId
       }
     },
