@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/goods/goods.vue" afterPath="$PROJECT_DIR$/src/components/goods/goods.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/shopList.vue" afterPath="$PROJECT_DIR$/src/views/shopList.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -38,9 +40,11 @@
       <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-120">
-              <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-              <folding />
+            <state relative-caret-position="264">
+              <caret line="44" column="59" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="59" />
+              <folding>
+                <element signature="e#499#540#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,16 +54,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
               <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/router/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="25" column="26" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -85,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="242" column="49" selection-start-line="242" selection-start-column="49" selection-end-line="242" selection-end-column="49" />
+            <state relative-caret-position="144">
+              <caret line="241" column="32" selection-start-line="241" selection-start-column="32" selection-end-line="241" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -101,6 +95,56 @@
             <state relative-caret-position="333">
               <caret line="26" column="19" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="goods.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="774" column="23" selection-start-line="774" selection-start-column="23" selection-end-line="774" selection-end-column="23" />
+              <folding>
+                <element signature="e#8414#8669#0" expanded="false" />
+                <element signature="e#10540#10853#0" expanded="false" />
+                <element signature="e#10904#11033#0" expanded="false" />
+                <element signature="e#11052#11507#0" expanded="false" />
+                <element signature="e#11546#11705#0" expanded="false" />
+                <element signature="e#13917#14336#0" expanded="false" />
+                <element signature="e#14373#14854#0" expanded="false" />
+                <element signature="e#14897#15181#0" expanded="false" />
+                <element signature="e#15052#15173#0" expanded="false" />
+                <element signature="e#15235#15432#0" expanded="false" />
+                <element signature="e#15270#15298#0" expanded="false" />
+                <element signature="e#15476#15512#0" expanded="false" />
+                <element signature="e#15534#15653#0" expanded="false" />
+                <element signature="e#15590#15644#0" expanded="false" />
+                <element signature="e#15822#15896#0" expanded="false" />
+                <element signature="e#15945#15986#0" expanded="false" />
+                <element signature="e#20180#20236#0" expanded="false" />
+                <element signature="e#20522#20578#0" expanded="false" />
+                <element signature="e#20595#20854#0" expanded="false" />
+                <element signature="e#20877#21784#0" expanded="false" />
+                <element signature="e#22414#22611#0" expanded="false" />
+                <element signature="e#22907#22947#0" expanded="false" />
+                <element signature="e#24280#24347#0" expanded="false" />
+                <element signature="e#26911#27144#0" expanded="false" />
+                <element signature="e#27177#27244#0" expanded="false" />
+                <element signature="e#27946#27977#0" expanded="false" />
+                <element signature="e#28027#28084#0" expanded="false" />
+                <element signature="e#28108#28320#0" expanded="false" />
+                <element signature="e#28339#28539#0" expanded="false" />
+                <element signature="e#28568#28688#0" expanded="false" />
+                <element signature="e#28720#28836#0" expanded="false" />
+                <element signature="e#28870#28896#0" expanded="false" />
+                <element signature="e#28936#29029#0" expanded="false" />
+                <element signature="e#29072#29227#0" expanded="false" />
+                <element signature="e#29282#29478#0" expanded="false" />
+                <element signature="e#29529#29585#0" expanded="false" />
+                <element signature="e#29617#29927#0" expanded="false" />
+                <element signature="e#29976#30002#0" expanded="false" />
+                <element signature="e#30042#30274#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -182,8 +226,6 @@
         <option value="$PROJECT_DIR$/src/weixin/zhengchang1.vue" />
         <option value="$PROJECT_DIR$/src/views/orderList.vue" />
         <option value="$PROJECT_DIR$/src/views/orderDetail.vue" />
-        <option value="$PROJECT_DIR$/src/components/goods/goods.vue" />
-        <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" />
         <option value="$PROJECT_DIR$/src/weixin/jingmo1.vue" />
         <option value="$PROJECT_DIR$/src/weixin/jingmo.vue" />
@@ -192,7 +234,9 @@
         <option value="$PROJECT_DIR$/src/views/addNew.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/header/header.vue" />
+        <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/views/shopList.vue" />
+        <option value="$PROJECT_DIR$/src/components/goods/goods.vue" />
       </list>
     </option>
   </component>
@@ -411,6 +455,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goods" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VAOrderH5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VAOrderH5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -611,12 +677,12 @@
       <workItem from="1492050512194" duration="15000" />
       <workItem from="1492053784806" duration="827000" />
       <workItem from="1492061674356" duration="6987000" />
-      <workItem from="1492073423486" duration="6563000" />
+      <workItem from="1492073423486" duration="7093000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="841079000" />
+    <option name="totallyTimeSpent" value="841609000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -885,54 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11736">
-          <caret line="649" column="11" selection-start-line="649" selection-start-column="11" selection-end-line="649" selection-end-column="11" />
-          <folding>
-            <element signature="e#8414#8669#0" expanded="false" />
-            <element signature="e#10540#10853#0" expanded="false" />
-            <element signature="e#10904#11033#0" expanded="false" />
-            <element signature="e#11052#11507#0" expanded="false" />
-            <element signature="e#11546#11705#0" expanded="false" />
-            <element signature="e#13917#14336#0" expanded="false" />
-            <element signature="e#14373#14854#0" expanded="false" />
-            <element signature="e#14897#15181#0" expanded="false" />
-            <element signature="e#15052#15173#0" expanded="false" />
-            <element signature="e#15235#15432#0" expanded="false" />
-            <element signature="e#15270#15298#0" expanded="false" />
-            <element signature="e#15476#15512#0" expanded="false" />
-            <element signature="e#15534#15653#0" expanded="false" />
-            <element signature="e#15590#15644#0" expanded="false" />
-            <element signature="e#15822#15896#0" expanded="false" />
-            <element signature="e#15945#15986#0" expanded="false" />
-            <element signature="e#20180#20236#0" expanded="false" />
-            <element signature="e#20522#20578#0" expanded="false" />
-            <element signature="e#20595#20854#0" expanded="false" />
-            <element signature="e#20877#21784#0" expanded="false" />
-            <element signature="e#22414#22611#0" expanded="false" />
-            <element signature="e#22907#22947#0" expanded="false" />
-            <element signature="e#24280#24347#0" expanded="false" />
-            <element signature="e#26912#27145#0" expanded="false" />
-            <element signature="e#27178#27245#0" expanded="false" />
-            <element signature="e#27947#27978#0" expanded="false" />
-            <element signature="e#28028#28085#0" expanded="false" />
-            <element signature="e#28109#28321#0" expanded="false" />
-            <element signature="e#28340#28540#0" expanded="false" />
-            <element signature="e#28569#28689#0" expanded="false" />
-            <element signature="e#28721#28837#0" expanded="false" />
-            <element signature="e#28871#28897#0" expanded="false" />
-            <element signature="e#28937#29030#0" expanded="false" />
-            <element signature="e#29073#29228#0" expanded="false" />
-            <element signature="e#29283#29479#0" expanded="false" />
-            <element signature="e#29530#29586#0" expanded="false" />
-            <element signature="e#29618#29928#0" expanded="false" />
-            <element signature="e#29977#30003#0" expanded="false" />
-            <element signature="e#30043#30275#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1028,17 +1046,67 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-120">
-          <caret line="24" column="14" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
-          <folding />
+        <state relative-caret-position="264">
+          <caret line="44" column="59" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="59" />
+          <folding>
+            <element signature="e#499#540#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="242" column="49" selection-start-line="242" selection-start-column="49" selection-end-line="242" selection-end-column="49" />
+        <state relative-caret-position="144">
+          <caret line="241" column="32" selection-start-line="241" selection-start-column="32" selection-end-line="241" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/goods/goods.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="774" column="23" selection-start-line="774" selection-start-column="23" selection-end-line="774" selection-end-column="23" />
+          <folding>
+            <element signature="e#8414#8669#0" expanded="false" />
+            <element signature="e#10540#10853#0" expanded="false" />
+            <element signature="e#10904#11033#0" expanded="false" />
+            <element signature="e#11052#11507#0" expanded="false" />
+            <element signature="e#11546#11705#0" expanded="false" />
+            <element signature="e#13917#14336#0" expanded="false" />
+            <element signature="e#14373#14854#0" expanded="false" />
+            <element signature="e#14897#15181#0" expanded="false" />
+            <element signature="e#15052#15173#0" expanded="false" />
+            <element signature="e#15235#15432#0" expanded="false" />
+            <element signature="e#15270#15298#0" expanded="false" />
+            <element signature="e#15476#15512#0" expanded="false" />
+            <element signature="e#15534#15653#0" expanded="false" />
+            <element signature="e#15590#15644#0" expanded="false" />
+            <element signature="e#15822#15896#0" expanded="false" />
+            <element signature="e#15945#15986#0" expanded="false" />
+            <element signature="e#20180#20236#0" expanded="false" />
+            <element signature="e#20522#20578#0" expanded="false" />
+            <element signature="e#20595#20854#0" expanded="false" />
+            <element signature="e#20877#21784#0" expanded="false" />
+            <element signature="e#22414#22611#0" expanded="false" />
+            <element signature="e#22907#22947#0" expanded="false" />
+            <element signature="e#24280#24347#0" expanded="false" />
+            <element signature="e#26911#27144#0" expanded="false" />
+            <element signature="e#27177#27244#0" expanded="false" />
+            <element signature="e#27946#27977#0" expanded="false" />
+            <element signature="e#28027#28084#0" expanded="false" />
+            <element signature="e#28108#28320#0" expanded="false" />
+            <element signature="e#28339#28539#0" expanded="false" />
+            <element signature="e#28568#28688#0" expanded="false" />
+            <element signature="e#28720#28836#0" expanded="false" />
+            <element signature="e#28870#28896#0" expanded="false" />
+            <element signature="e#28936#29029#0" expanded="false" />
+            <element signature="e#29072#29227#0" expanded="false" />
+            <element signature="e#29282#29478#0" expanded="false" />
+            <element signature="e#29529#29585#0" expanded="false" />
+            <element signature="e#29617#29927#0" expanded="false" />
+            <element signature="e#29976#30002#0" expanded="false" />
+            <element signature="e#30042#30274#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

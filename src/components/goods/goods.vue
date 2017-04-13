@@ -772,7 +772,7 @@
 
   .foods-wrapper .food-list:last-child {
     box-sizing: border-box;
-    padding-bottom: 1000px;
+    padding-bottom: 300px;
   }
 
   .food-title {

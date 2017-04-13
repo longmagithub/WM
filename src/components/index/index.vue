@@ -4,9 +4,9 @@
       <banner :seller="shopDetail" :detail="detail"></banner>
     </div>
     <!--<div class="tab">-->
-      <!--<div class="tab-item">-->
-        <!--<span class="label">商品</span>-->
-      <!--</div>-->
+    <!--<div class="tab-item">-->
+    <!--<span class="label">商品</span>-->
+    <!--</div>-->
     <!--</div>-->
     <div class="main">
       <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
@@ -18,7 +18,7 @@
 <script type="text/ecmascript-6">
   import banner from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore} from '../../common/js/util'
+  import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
   export default{
     data() {
@@ -42,6 +42,7 @@
         'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
+      console.log(getStore('userInfo').openId === undefined)
       // 商家信息
       this.getShopDetail()
     },

@@ -235,12 +235,22 @@
             setStore('openId', {
               customerId: res.data.customerId
             })
-          }, (errorRes) => {
-            console.log(errorRes)
           })
         }
+      } else if (getStore('openId').customerId === undefined) {
+        const data = {
+          code: urlParse().code,
+          type: 1 // 授权类型：1静默授权；2用户授权
+        }
+        const api = '/mp/authority/customer'
+        this.axios.post(api, data).then((res) => {
+          res = res.data
+          this.customerId = res.data.customerId
+          setStore('openId', {
+            customerId: res.data.customerId
+          })
+        })
       } else {
-        console.log(getStore('openId').customerId)
         this.customerId = getStore('openId').customerId
       }
     },
