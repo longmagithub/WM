@@ -14,6 +14,7 @@
             <div class="description">
               <span>{{detailBox.dispatching.name}}</span>
               <!--<span>{{detailBox.dispatching.duration}}分钟到达</span>-->
+              <span>{{detailBox.dispatching.duration}}分钟到达</span>
               <span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee |
                 fees}}</span>
             </div>

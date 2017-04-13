@@ -7,7 +7,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">很爱餐厅</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满20减9，满35减12，满68减20</p>
           <span class="tiem">25分钟送达</span>
         </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">炒饭王</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满25减10，满50减25</p>
           <span class="tiem">25分钟送达</span>
         </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">这个村民间美食</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满35减10，满50减10</p>
           <span class="tiem">35分钟送达</span>
         </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">小巷子农家菜</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满30减22，满55减32，满100减45</p>
           <span class="tiem">30分钟送达</span>
         </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">杯思特KAO肉饭</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满20减14，满25减15，满50减23，满100减40</p>
           <span class="tiem">30分钟送达</span>
         </div>
@@ -72,7 +72,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">蜜菓联庄店</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满25减5</p>
           <span class="tiem">28分钟送达</span>
         </div>
@@ -83,7 +83,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">重庆麻辣烫</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满20减4，满35减7，满50减11</p>
           <span class="tiem">30分钟送达</span>
         </div>
@@ -96,7 +96,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">馋嘴花甲</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满20减4，满35减10，满50减15</p>
           <span class="tiem">20分钟送达</span>
         </div>
@@ -109,7 +109,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">阿云饭馆</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满15减10</p>
           <span class="tiem">26分钟送达</span>
         </div>
@@ -120,7 +120,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">黄金烤肉便当</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满20减18，满50减27，满70减42</p>
           <span class="tiem">26分钟送达</span>
         </div>
@@ -133,7 +133,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">有家土菜馆</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满30减20，满45减25，满80减36，满120减47，满200减67</p>
           <span class="tiem">30分钟送达</span>
         </div>
@@ -146,7 +146,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">徽府香辣馆</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满28减5，满43减9</p>
           <span class="tiem">30分钟送达</span>
         </div>
@@ -159,7 +159,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">味美土菜馆</p>
-          <p class="desc">￥30元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥30元起送 /&nbsp优先专送</p>
           <p class="manjian">满15减5，满25减8，满50减12</p>
           <span class="tiem">40分钟送达</span>
         </div>
@@ -172,7 +172,7 @@
         </div>
         <div class="content">
           <p class="shopTitle">卉雅小厨</p>
-          <p class="desc">￥20元起送 /&nbsp配送费￥3起</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满12减10，满30减15，满100减45，满200减65</p>
           <span class="tiem">27分钟送达</span>
         </div>
@@ -185,7 +185,7 @@
       <!--</div>-->
       <!--<div class="content">-->
       <!--<p class="shopTitle">乐速面疙瘩</p>-->
-      <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
+      <!--<p class="desc">￥20元起送 /&nbsp优先专送</p>-->
       <!--<p class="manjian">满55减21，满15减13</p>-->
       <!--<span class="tiem">28分钟送达</span>-->
       <!--</div>-->
@@ -198,7 +198,7 @@
       <!--</div>-->
       <!--<div class="content">-->
       <!--<p class="shopTitle">豆花花</p>-->
-      <!--<p class="desc">￥20元起送 /&nbsp配送费￥3起</p>-->
+      <!--<p class="desc">￥20元起送 /&nbsp优先专送</p>-->
       <!--<p class="manjian">满45减8</p>-->
       <!--<span class="tiem">34分钟送达</span>-->
       <!--</div>-->
@@ -219,25 +219,28 @@
     },
     mounted() {
       let url = window.location.href
-      console.log(getStore('openId'))
-      if (url.indexOf('code') < 0) {
-        console.log('没有授权')
-        this.to()
-      } else {
-        const data = {
-          code: urlParse().code,
-          type: 1 // 授权类型：1静默授权；2用户授权
-        }
-        const api = '/mp/authority/customer'
-        this.axios.post(api, data).then((res) => {
-          res = res.data
-          console.log(res)
-          setStore('openId', {
-            customerId: res.customerId
+      if (getStore('openId') === null) {
+        if (url.indexOf('code') < 0) {
+          console.log('没有授权')
+          this.to()
+        } else {
+          const data = {
+            code: urlParse().code,
+            type: 1 // 授权类型：1静默授权；2用户授权
+          }
+          const api = '/mp/authority/customer'
+          this.axios.post(api, data).then((res) => {
+            res = res.data
+            this.customerId = res.data.customerId
+            setStore('openId', {
+              customerId: res.data.customerId
+            })
+          }, (errorRes) => {
+            console.log(errorRes)
           })
-        }, (errorRes) => {
-          console.log(errorRes)
-        })
+        }
+      } else {
+        return
       }
     },
     methods: {
@@ -246,8 +249,8 @@
           encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
-//         window.location.replace(oauthJumpUrl)
-        window.location.href = oauthJumpUrl
+        window.location.replace(oauthJumpUrl)
+//        window.location.href = oauthJumpUrl
       },
       goIndex(id) {
         this.$router.push({
