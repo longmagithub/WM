@@ -23,7 +23,7 @@ export default new Router({
     // 默认
     {
       path: '/',
-      redirect: '/jingmo' // 重定向到 /jingmo
+      redirect: '/shopList' // 重定向到 /jingmo
     },
     {
       path: '/userOrderList',

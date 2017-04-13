@@ -208,7 +208,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  //  import {urlParse} from '../common/js/util'
+  import {getStore} from '../common/js/util'
   export default {
     data() {
       return {
@@ -216,10 +216,21 @@
       }
     },
     created() {
-      this.customerId = this.$route.query.customerId
-      console.log(this.customerId)
+      console.log(window.location.href)
+      if (getStore('openId') === null) {
+        console.log('没有授权')
+        this.to()
+      }
     },
     methods: {
+      to() {
+        const oauthCallbackUrl =
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?')
+        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+        // 跳转授权 浏览器不保留记录
+//         window.location.replace(oauthJumpUrl)
+        window.location.href = oauthJumpUrl
+      },
       goIndex(id) {
         this.$router.push({
           path: '/index',

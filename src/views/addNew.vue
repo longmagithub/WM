@@ -155,7 +155,7 @@
       sendData (data) {
         if (this.addressId) { // 修改地址
           data.addressId = this.addressId
-          this.axios.post('/br/customer/address', data)
+          this.axios.put('/br/customer/address', data)
           .then((res) => {
             this.isAjaxing = false
             if (res.data.success) {
