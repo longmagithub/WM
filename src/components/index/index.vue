@@ -36,8 +36,8 @@
       }
     },
     created() {
-      this.shopId = this.$route.query.shopId
-      this.customerId = this.$route.query.customerId
+      this.shopId = getStore('userInfo').shopId
+      this.customerId = getStore('userInfo').customerId
 //      setStore('userInfo', {
 //        'customerId': this.$route.query.customerId,
 //        'shopId': this.$route.query.shopId
