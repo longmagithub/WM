@@ -38,10 +38,10 @@
     created() {
       this.shopId = this.$route.query.shopId
       this.customerId = this.$route.query.customerId
-      setStore('userInfo', {
-        'customerId': this.$route.query.customerId,
-        'shopId': this.$route.query.shopId
-      })
+//      setStore('userInfo', {
+//        'customerId': this.$route.query.customerId,
+//        'shopId': this.$route.query.shopId
+//      })
       console.log(getStore())
       console.log(this.shopId)
       console.log(this.customerId)

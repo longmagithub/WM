@@ -267,6 +267,10 @@
 //        window.location.href = oauthJumpUrl
       },
       goIndex(id) {
+        setStore('userInfo', {
+          'customerId': this.customerId,
+          'shopId': id
+        })
         window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId' + id + '&customerId' +
           this.customerId + '&T' + Date.parse(new Date()) / 1000
 //        this.$router.push({
