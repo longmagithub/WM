@@ -220,6 +220,7 @@
     mounted() {
       let url = window.location.href
       if (getStore('openId') === null) {
+        console.log(1)
         if (url.indexOf('code') < 0) {
           console.log('没有授权')
           this.to()
@@ -238,6 +239,7 @@
           })
         }
       } else if (getStore('openId').customerId === undefined) {
+        console.log(2)
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
@@ -251,6 +253,7 @@
           })
         })
       } else {
+        console.log(3)
         this.customerId = getStore('openId').customerId
       }
     },
