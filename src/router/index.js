@@ -2,107 +2,107 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-const jingmo = r => require.ensure([], () => r(require('../weixin/jingmo.vue')), 'jingmo')
-const jingmo1 = r => require.ensure([], () => r(require('../weixin/jingmo1.vue')), 'jingmo1')
-const zhengchang = r => require.ensure([], () => r(require('../weixin/zhengchang.vue')), 'zhengchang')
-const zhengchang1 = r => require.ensure([], () => r(require('../weixin/zhengchang1.vue')), 'zhengchang1')
-const shopList = r => require.ensure([], () => r(require('../views/shopList.vue')), 'shopList')
-const orderList = r => require.ensure([], () => r(require('../views/orderList.vue')), 'orderList')
-const orderDetail = r => require.ensure([], () => r(require('../views/orderDetail.vue')), 'orderDetail')
-const addList = r => require.ensure([], () => r(require('../views/addList.vue')), 'addList')
-const addNew = r => require.ensure([], () => r(require('../views/addNew.vue')), 'addNew')
-const shopDetail = r => require.ensure([], () => r(require('../views/shopDetail.vue')), 'shopDetail')
-const index = r => require.ensure([], () => r(require('../components/index/index.vue')), 'index')
-const submitPay = r => require.ensure([], () => r(require('../components/submitPay/submitPay.vue')), 'submitPay')
-const submitOrder = r => require.ensure([], () => r(require('../components/submitOrder/submitOrder.vue')), 'submitOrder')
-const remark = r => require.ensure([], () => r(require('../components/submitOrder/remark/remark.vue')), 'remark')
-const invoice = r => require.ensure([], () => r(require('../components/submitOrder/invoice/invoice.vue')), 'invoice')
+// const jingmo = r => require.ensure([], () => r(require('../weixin/jingmo.vue')), 'jingmo')
+// const jingmo1 = r => require.ensure([], () => r(require('../weixin/jingmo1.vue')), 'jingmo1')
+// const zhengchang = r => require.ensure([], () => r(require('../weixin/zhengchang.vue')), 'zhengchang')
+// const zhengchang1 = r => require.ensure([], () => r(require('../weixin/zhengchang1.vue')), 'zhengchang1')
+// const shopList = r => require.ensure([], () => r(require('../views/shopList.vue')), 'shopList')
+// const orderList = r => require.ensure([], () => r(require('../views/orderList.vue')), 'orderList')
+// const orderDetail = r => require.ensure([], () => r(require('../views/orderDetail.vue')), 'orderDetail')
+// const addList = r => require.ensure([], () => r(require('../views/addList.vue')), 'addList')
+// const addNew = r => require.ensure([], () => r(require('../views/addNew.vue')), 'addNew')
+// const shopDetail = r => require.ensure([], () => r(require('../views/shopDetail.vue')), 'shopDetail')
+// const index = r => require.ensure([], () => r(require('../components/index/index.vue')), 'index')
+// const submitPay = r => require.ensure([], () => r(require('../components/submitPay/submitPay.vue')), 'submitPay')
+// const submitOrder = r => require.ensure([], () => r(require('../components/submitOrder/submitOrder.vue')), 'submitOrder')
+// const remark = r => require.ensure([], () => r(require('../components/submitOrder/remark/remark.vue')), 'remark')
+// const invoice = r => require.ensure([], () => r(require('../components/submitOrder/invoice/invoice.vue')), 'invoice')
 export default new Router({
   scrollBehavior: () => ({y: 0}),
   routes: [
     // 默认
     {
       path: '/',
-      redirect: '/shopList' // 重定向到 /shopList
+      redirect: '/shopList' // 重定向到 /jingmo
     },
     {
       path: '/userOrderList',
       redirect: '/orderList' // 重定向到 /门店列表
     },
-    // 商家列表
+    // 静默授权
     {
       path: '/shopList',
-      component: shopList
+      component: require('../views/shopList.vue')
     },
     // 静默授权
     {
-      path: '/jingmo2',
-      component: jingmo
+      path: '/jingmo',
+      component: require('../weixin/jingmo.vue')
     },
     // 静默授权1
     {
       path: '/jingmo1',
-      component: jingmo1
+      component: require('../weixin/jingmo1.vue')
     },
     // 正常授权
     {
-      path: '/zhengchang2',
-      component: zhengchang
+      path: '/zhengchang',
+      component: require('../weixin/zhengchang.vue')
     },
     // 正常授权1
     {
       path: '/zhengchang1',
-      component: zhengchang1
+      component: require('../weixin/zhengchang1.vue')
     },
     // 首页
     {
       path: '/index',
-      component: index
+      component: require('../components/index/index.vue')
     },
     // 订单列表
     {
       path: '/orderList',
-      component: orderList
+      component: require('../views/orderList.vue')
     },
     // 订单详情
     {
       path: '/orderDetail',
-      component: orderDetail
+      component: require('../views/orderDetail.vue')
     },
     // 地址列表
     {
       path: '/addList',
-      component: addList
+      component: require('../views/addList.vue')
     },
     // 新增/编辑 地址
     {
       path: '/addNew',
-      component: addNew
+      component: require('../views/addNew.vue')
     },
     // 商家详情
     {
       path: '/shopDetail',
-      component: shopDetail
+      component: require('../views/shopDetail.vue')
     },
     // 提交订单
     {
       path: '/submitOrder',
-      component: submitOrder
+      component: require('../components/submitOrder/submitOrder.vue')
     },
     // 订单备注
     {
       path: '/remark',
-      component: remark
+      component: require('../components/submitOrder/remark/remark.vue')
     },
     // 发票抬头
     {
       path: '/invoice',
-      component: invoice
+      component: require('../components/submitOrder/invoice/invoice.vue')
     },
     // 在线支付
     {
       path: '/submitPay',
-      component: submitPay
+      component: require('../components/submitPay/submitPay.vue')
     }
   ]
 })
