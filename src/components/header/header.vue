@@ -96,8 +96,8 @@
         this.$router.push({
           path: '/orderList',
           query: {
-            shopId: this.$route.query.shopId,
-            sessionId: this.$route.query.customerId
+            shopId: this.shopId,
+            sessionId: this.customerId
           }
         })
       }
