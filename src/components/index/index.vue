@@ -38,13 +38,6 @@
     created() {
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
-//      setStore('userInfo', {
-//        'customerId': this.$route.query.customerId,
-//        'shopId': this.$route.query.shopId
-//      })
-      console.log(getStore())
-      console.log(this.shopId)
-      console.log(this.customerId)
       // 商家信息
       this.getShopDetail()
     },

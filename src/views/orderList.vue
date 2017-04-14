@@ -18,7 +18,7 @@
 </template>
 <script>
   import Toast from './../components/toast.vue'
-  import {getStore} from '../common/js/util'
+  import {getStore, setStore, urlParse} from '../common/js/util'
   import * as PublicJs from '../utils/public'
   export default {
     mounted () {
@@ -51,12 +51,55 @@
       Toast
     },
     created() {
+      let url = window.location.href
+      if (getStore('openId') === null) {
+        if (url.indexOf('code') < 0) {
+          console.log('没有授权')
+          this.to()
+        } else {
+          const data = {
+            code: urlParse().code,
+            type: 1 // 授权类型：1静默授权；2用户授权
+          }
+          const api = '/mp/authority/customer'
+          this.axios.post(api, data).then((res) => {
+            res = res.data
+            this.customerId = res.data.customerId
+            setStore('openId', {
+              customerId: res.data.customerId
+            })
+          })
+        }
+      } else if (getStore('openId').customerId === undefined) {
+        const data = {
+          code: urlParse().code,
+          type: 1 // 授权类型：1静默授权；2用户授权
+        }
+        const api = '/mp/authority/customer'
+        this.axios.post(api, data).then((res) => {
+          res = res.data
+          this.customerId = res.data.customerId
+          setStore('openId', {
+            customerId: res.data.customerId
+          })
+        })
+      } else {
+        this.customerId = getStore('openId').customerId
+      }
       PublicJs.changeTitleInWx('我的订单')
       this.sessionId = this.$route.query.customerId || getStore('userInfo').customerId
 //      this.shopId = this.$route.query.customerId ? this.$route.query.customerId : ''
       this.getOrderList()
     },
     methods: {
+      to() {
+        const oauthCallbackUrl =
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/orderList')
+        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+        // 跳转授权 浏览器不保留记录
+        window.location.replace(oauthJumpUrl)
+//        window.location.href = oauthJumpUrl
+      },
       getOrderList () {
         if (this.isAjaxing) return
         this.isAjaxing = true

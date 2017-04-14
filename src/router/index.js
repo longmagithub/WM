@@ -31,7 +31,7 @@ export default new Router({
     },
     {
       path: '/userOrderList',
-      redirect: '/zhengchang' // 重定向到 /门店列表
+      redirect: '/orderList' // 重定向到 /门店列表
     },
     // 商家列表
     {
