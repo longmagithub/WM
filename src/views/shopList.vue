@@ -4,7 +4,8 @@
       <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
         <div class="logo">
           <img
-            src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100" width="48px" height="48px">
+            src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
         </div>
         <div class="content">
           <p class="shopTitle">很爱餐厅</p>
@@ -80,7 +81,9 @@
       </li>
       <li class="list-item" @click="goIndex('9480c029-a45d-479e-a3c3-74ed9c65d54d')">
         <div class="logo">
-          <img src="http://imagewm.test.u-xian.com/image/shop/1491686621833shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100" width="48px" height="48px">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/1491686621833shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
         </div>
         <div class="content">
           <p class="shopTitle">黄金烤肉便当</p>
@@ -104,7 +107,9 @@
       </li>
       <li class="list-item" @click="goIndex('de74f04c-fb3f-4b04-af59-f74eca53d653')">
         <div class="logo">
-          <img src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100" width="48px" height="48px">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1491817065330shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
         </div>
         <div class="content">
           <p class="shopTitle">重庆麻辣烫</p>
@@ -280,7 +285,7 @@
           'customerId': this.customerId,
           'shopId': id
         })
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId' + id + '&customerId' +
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&customerId=' +
           this.customerId + '&T' + Date.parse(new Date()) / 1000
 //        this.$router.push({
 //          path: '/index',

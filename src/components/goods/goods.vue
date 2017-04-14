@@ -265,6 +265,7 @@
       })
       // 门店状态
       this.getShopState()
+//      this.getShopDetail()
     },
     computed: {
       // 检测 vuex 中cartList
@@ -532,7 +533,6 @@
             res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees,
               res.data.dispatching.fees.price)
             this.seller = Object.assign({}, this.seller, res.data)
-            this.PublicJs.changeTitleInWx(this.seller.name.split('（')[0])
           }
         })
       },
