@@ -46,8 +46,8 @@ Vue.use(VueValidator) // 声明使用vue-validator
 // Vue.use(WxPay)
 Vue.use(VueLazyload, {
   preLoad: 1,
-  error: '../assets/item_logo.png',
-  loading: '../assets/item_logo.png',
+  error: 'assets/item_logo.png',
+  loading: 'assets/item_logo.png',
   attempt: 1
 })
 
