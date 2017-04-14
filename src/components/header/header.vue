@@ -87,8 +87,8 @@
         this.$router.push({
           path: '/shopDetail',
           query: {
-            shopId: this.$route.query.shopId,
-            customerId: this.$route.query.customerId
+            shopId: this.shopId,
+            customerId: this.customerId
           }
         })
       },
