@@ -3,7 +3,7 @@
     <ul>
       <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
         <div class="logo">
-          <img src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.JPEG" width="48px" height="48px">
+          <img src="http://imagewm.u-xian.com/image/shop/1491874549394shopImage.jpeg?x-oss-process=image/resize,m_fill,h_100,w_100" width="48px" height="48px">
         </div>
         <div class="content">
           <p class="shopTitle">很爱餐厅</p>
@@ -15,7 +15,7 @@
       <li class="list-item" @click="goIndex('83cee7db-b211-4e5b-bbc3-06882f86fede')">
         <div class="logo">
           <img
-            src="http://imagewm.u-xian.com/image/shop/832c49b2-4ada-47bf-88ff-06dd8cbd26f2/1491890808699shopImage.JPEG"
+            src="http://imagewm.u-xian.com/image/shop/832c49b2-4ada-47bf-88ff-06dd8cbd26f2/1491890808699shopImage.jpeg?x-oss-process=image/resize,m_fill,h_100,w_100"
             width="48px" height="48px">
         </div>
         <div class="content">
@@ -54,7 +54,7 @@
       <li class="list-item" @click="goIndex('cbc7f7c8-1b4d-48be-a0b8-fbe71aba0a7d')">
         <div class="logo">
           <img
-            src="http://imagewm.test.u-xian.com/image/shop/d8438de5-d90d-431d-bd68-0d0a85f4401a/1491718589749shopImage.JPEG	"
+            src="http://imagewm.u-xian.com/image/shop/9480c029-a45d-479e-a3c3-74ed9c65d54d/1492071280297shopImage.JPEG"
             width="48px" height="48px">
         </div>
         <div class="content">
