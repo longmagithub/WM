@@ -285,7 +285,7 @@
           'customerId': this.customerId,
           'shopId': id
         })
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?T=' + Date.parse(new Date()) / 1000
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) / 1000
 //        this.$router.push({
 //          path: '/index',
 //          query: {
