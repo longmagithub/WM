@@ -55,7 +55,7 @@
           ''}}
         </li>
         <li>电话：{{orderDetail.phoneNumber}}</li>
-        <li>地址：{{orderDetail.address}}</li>
+        <li>地址：{{orderDetail.address}}{{orderDetail.houseNum}}</li>
         <li v-if="orderStatus.iconCode === 4 || orderStatus.iconCode === 5">配送方式：平台专送</li>
         <li v-if="orderStatus.iconCode === 4 || orderStatus.iconCode === 5">配送骑手：{{orderDetail.dmName}} <span
           @click="callPhone(orderDetail.dmPhone)">{{orderDetail.dmPhone}}</span></li>

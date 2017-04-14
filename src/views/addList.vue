@@ -5,7 +5,7 @@
         <div class="add-inf" :class="item.addressId === nowSelADDId ? 'on' : 'off'" @click="selectAdd(item.addressId)">
           <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span>
           </p>
-          <p>{{item.houseNum}} {{item.adress}}</p>
+          <p>{{item.address}}{{item.houseNum}}</p>
         </div>
         <div class="add-edit" v-on:click="addNew(item.addressId)"></div>
       </div>
@@ -16,7 +16,7 @@
         <div class="add-inf">
           <p class="name-and-phone">{{item.name}} {{item.gender === 1 ? '先生' : item.gender ===2 ? '女士' : ''}}<span>{{item.phoneNumber}}</span>
           </p>
-          <p>{{item.houseNum}} {{item.adress}}</p>
+          <p>{{item.address}}{{item.houseNum}}</p>
         </div>
         <div class="add-edit" @click="addNew(item.addressId)"></div>
       </div>

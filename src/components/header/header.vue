@@ -56,7 +56,6 @@
       }
     },
     created() {
-      this.shopId = getStore('userInfo').shopId
       // 配送方式
       // this.getDispatching()
       // 商家信息
