@@ -26,6 +26,10 @@ export default new Router({
       redirect: '/shopList' // 重定向到 /jingmo
     },
     {
+      path: '/jingmo',
+      redirect: '/shopList' // 重定向到 /jingmo
+    },
+    {
       path: '/userOrderList',
       redirect: '/orderList' // 重定向到 /门店列表
     },
@@ -36,7 +40,7 @@ export default new Router({
     },
     // 静默授权
     {
-      path: '/jingmo',
+      path: '/jingmo2',
       component: require('../weixin/jingmo.vue')
     },
     // 静默授权1
@@ -46,7 +50,7 @@ export default new Router({
     },
     // 正常授权
     {
-      path: '/zhengchang',
+      path: '/zhengchang2',
       component: require('../weixin/zhengchang.vue')
     },
     // 正常授权1
