@@ -87,9 +87,10 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="seller.dispatching.fees">
-                <span class="title">阶梯配送费</span>
-                <span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元运费{{item.fee}} </span>
+              <div class="describe" v-if="seller.activity">
+                <!--<span class="title">阶梯配送费</span>-->
+                <span class="text" v-for="item in seller.activity">{{item.title}} </span>
+                <!--<span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元运费{{item.fee}} </span>-->
               </div>
             </div>
             <div class="list-content" ref="listContent">

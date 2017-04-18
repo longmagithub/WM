@@ -122,6 +122,18 @@
     '' +
     '</symbol>' +
     '' +
+    '<symbol id="Groupx" viewBox="0 0 1024 1024">' +
+    '' +
+    '<path d=""  ></path>' +
+    '' +
+    '</symbol>' +
+    '' +
+    '<symbol id="icon_packetsx" viewBox="0 0 1024 1024">' +
+    '' +
+    '<path d=""  ></path>' +
+    '' +
+    '</symbol>' +
+    '' +
     '</svg>'
   var script = function() {
     var scripts = document.getElementsByTagName('script')

@@ -1,10 +1,10 @@
 
 @font-face {font-family: "uxwm-iconfont";
-  src: url('iconfont.eot?t=1490796250763'); /* IE9*/
-  src: url('iconfont.eot?t=1490796250763#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1490796250763') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1490796250763') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1490796250763#uxwm-iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1492511801928'); /* IE9*/
+  src: url('iconfont.eot?t=1492511801928#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1492511801928') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1492511801928') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1492511801928#uxwm-iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .uxwm-iconfont {
@@ -52,4 +52,8 @@
 .icon_wechat_normal:before { content: "\e605"; }
 
 .dangqianfukuan:before { content: "\e606"; }
+
+.Groupx:before { content: "\e607"; }
+
+.icon_packetsx:before { content: "\e608"; }
 

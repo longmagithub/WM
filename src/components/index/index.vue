@@ -12,6 +12,11 @@
       <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
+    <!--红包toast-->
+    <div class="boon" v-show="isCloseBoon">
+      <i class="close" @click="closeBoon"></i>
+      <div class="backImg"></div>
+    </div>
   </div>
 </template>
 
@@ -32,10 +37,17 @@
         nowTime: new Date(),
         endTime: '',
         deliveryfee: {}, // 配送费
-        shopStatus: 0 // 门店状态
+        shopStatus: 0, // 门店状态
+        isCloseBoon: true
       }
     },
     created() {
+      // 调试代码
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': '832c49b2-4ada-47bf-88ff-06dd8cbd26f2'
+      })
+      // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       // 商家信息
@@ -84,6 +96,11 @@
           }
         })
       },
+      // 关闭红包
+      closeBoon() {
+        this.isCloseBoon = false
+        console.log(1231)
+      },
       // toggle toast
       toggleToast(show, text) {
         if (show === true || show === 1) {
@@ -129,5 +146,38 @@
 
   .appViem {
     position: relative;
+  }
+
+  .boon {
+    position: fixed;
+    z-index: 111;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .boon .close {
+    position: fixed;
+    top: 10px;
+    right: 4px;
+    padding: 10px;
+    display: block;
+    z-index: 112;
+    width: 31px;
+    height: 31px;
+    background: url("../../assets/close.png") no-repeat center top 50%;
+    background-size: 31px 31px;
+  }
+
+  .boon .backImg {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/Group33@2x.png") no-repeat center top 50%;
+    background-size: 270px 375px;
   }
 </style>

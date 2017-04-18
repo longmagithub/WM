@@ -541,7 +541,7 @@
   }
 
   .serviceTime-wrapper .time-select {
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 0;
     right: 0px;
