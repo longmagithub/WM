@@ -52,7 +52,7 @@
       // 调试代码 提交时注释
 //      setStore('userInfo', {
 //        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '832c49b2-4ada-47bf-88ff-06dd8cbd26f2'
+//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
 //      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId

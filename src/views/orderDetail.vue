@@ -35,6 +35,12 @@
             <span class="discount-amount">-￥{{orderDetail.discountPrice}}</span>
           </label>
         </li>
+        <li v-if="orderDetail.activities.length">
+          <div class="discoount">红包</div>
+          <label>
+            <span class="discount-amount">-￥{{orderDetail.activities[0].valueC}}</span>
+          </label>
+        </li>
         <li class="total-amount">
           总计：<span>￥{{orderDetail.payPrice}}</span>
         </li>
