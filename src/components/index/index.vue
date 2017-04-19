@@ -50,10 +50,10 @@
     },
     created() {
       // 调试代码 提交时注释
-//      setStore('userInfo', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
-//      })
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': 'd8438de5-d90d-431d-bd68-0d0a85f4401a'
+      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId

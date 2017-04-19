@@ -20,9 +20,9 @@
           </div>
           <!--<div class="enter uxwm-iconfont btn_right"></div>-->
         </div>
-        <div class="activity" v-if="detailBox.activity">
-          <span class="text" style="margin-right: 5px" v-if="detailBox.activity"
-                v-for="item in detailBox.activity">{{item
+        <div class="activity" v-if="activity">
+          <span class="text" style="margin-right: 5px" v-if="activity"
+                v-for="item in activity">{{item
             .title}}</span>
           <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
         </div>
@@ -54,7 +54,8 @@
       return {
         shopId: '',
         sessionId: '',
-        detailBox: {}
+        detailBox: {},
+        activity: []
       }
     },
     created() {
@@ -75,6 +76,8 @@
             // 排序
 //            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
             this.detailBox = res.data
+            this.activity = res.data.activity.reverse()
+            console.log(this.activity)
             // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
           }
