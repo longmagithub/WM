@@ -14,6 +14,19 @@
           <span class="tiem">25分钟送达</span>
         </div>
       </li>
+      <li class="list-item" @click="goIndex('a72cb664-a2d6-4197-bcfa-3850c039411a')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1492481240956.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">正新鸡排</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满15减6，满25减9，满50减15</p>
+          <span class="tiem">27分钟送达</span>
+        </div>
+      </li>
       <li class="list-item" @click="goIndex('83cee7db-b211-4e5b-bbc3-06882f86fede')">
         <div class="logo">
           <img
@@ -27,6 +40,32 @@
           <span class="tiem">25分钟送达</span>
         </div>
       </li>
+      <li class="list-item" @click="goIndex('27956a86-8261-485d-9bfe-a082e5d2329f')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/27956a86-8261-485d-9bfe-a082e5d2329f/1492486146476shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">顺和杂粮煎饼现磨五谷豆浆</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满50减8</p>
+          <span class="tiem">27分钟送达</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('cbc7f7c8-1b4d-48be-a0b8-fbe71aba0a7d')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/9480c029-a45d-479e-a3c3-74ed9c65d54d/1492071280297shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">北方饺子馆</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满15减6，满25减10，满50减15</p>
+          <span class="tiem">30分钟送达</span>
+        </div>
+      </li>
       <li class="list-item" @click="goIndex('5b96f343-62c1-48ac-a392-f4b697cb3be9')">
         <div class="logo">
           <img
@@ -38,6 +77,32 @@
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满15减2，满25减8，满50减16</p>
           <span class="tiem">28分钟送达</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('b150dba0-1f9a-44ff-8a7a-40e6c7648777')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1492482942105.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">古法牛杂面</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满25减6，满35减9，满55减13</p>
+          <span class="tiem">27分钟送达</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('4be9e11a-635b-49e8-9686-12788c097d6a')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1492480358981.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">硬厨小堡</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满25减17，满30减20</p>
+          <span class="tiem">27分钟送达</span>
         </div>
       </li>
       <li class="list-item" @click="goIndex('4637cede-37aa-4648-94f5-2799f93508c9')">
@@ -76,19 +141,6 @@
           <p class="shopTitle">重庆麻辣烫</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满20减4，满35减7，满50减11</p>
-          <span class="tiem">30分钟送达</span>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('cbc7f7c8-1b4d-48be-a0b8-fbe71aba0a7d')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/9480c029-a45d-479e-a3c3-74ed9c65d54d/1492071280297shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">北方饺子馆</p>
-          <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满15减6，满25减10，满50减15</p>
           <span class="tiem">30分钟送达</span>
         </div>
       </li>
@@ -144,19 +196,6 @@
           <span class="tiem">26分钟送达</span>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('d8438de5-d90d-431d-bd68-0d0a85f4401a')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/4637cede-37aa-4648-94f5-2799f93508c9/1491718406275shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100	"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">有家土菜馆</p>
-          <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满30减20，满45减25，满80减36，满120减47，满200减67</p>
-          <span class="tiem">30分钟送达</span>
-        </div>
-      </li>
       <li class="list-item" @click="goIndex('af8b7bfa-34b8-4266-accf-1dd64eff580d')">
         <div class="logo">
           <img
@@ -181,6 +220,19 @@
           <p class="desc">￥30元起送 /&nbsp优先专送</p>
           <p class="manjian">满15减5，满25减8，满50减12</p>
           <span class="tiem">40分钟送达</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('d8438de5-d90d-431d-bd68-0d0a85f4401a')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/4637cede-37aa-4648-94f5-2799f93508c9/1491718406275shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100	"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">有家土菜馆</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满30减20，满45减25，满80减36，满120减47，满200减67</p>
+          <span class="tiem">30分钟送达</span>
         </div>
       </li>
       <li class="list-item" @click="goIndex('e1712acd-b5bb-45b7-be12-3f104702eb0d')">
@@ -326,10 +378,11 @@
     box-sizing: border-box;
     position: relative;
     line-height: 1em;
-    padding-right: 90px;
+    /*padding-right: 90px;*/
   }
 
   .shopList .list-item .content .shopTitle {
+    line-height: 16px;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 5px;
@@ -339,11 +392,13 @@
   .shopList .list-item .content .desc {
     line-height: 20px;
     margin-bottom: 5px;
+    padding-right: 90px;
     color: #6c6c6c;
   }
 
   .shopList .list-item .content .manjian {
     box-sizing: border-box;
+    padding-right: 90px;
     font-size: 11px;
     color: #8a8888;
     padding-left: 17px;
