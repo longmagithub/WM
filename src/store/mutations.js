@@ -10,7 +10,8 @@ import {
   CONFIRM_INVOICE, // 是否开发票
   CONFIRM_REMARK, // 订单备注
   USER_ADDRESSID, // 用户地址id
-  RECORD_USERINFO // 用户信息
+  RECORD_USERINFO, // 用户信息
+  BOON_PRICE // 红包金额
   // RECORD_SHOPDETAIL,
   // GET_USERINFO,
   // CHOOSE_SEARCH_ADDRESS,
@@ -183,5 +184,14 @@ export default {
     // now.setTime(now.getTime() + validity * 24 * 60 * 60 * 1000)
     // document.cookie = "USERID=" + info.user_id + ";expires=" + now.toGMTString()
     // document.cookie = "SID=huRyTRd9QLij7NkbpHJoj3PQrx1eRiO6bAiw" + ";expires=" + now.toGMTString()
+  },
+  // 红包金额
+  [BOON_PRICE](state, {
+    boonPrice, endDate
+  }) {
+    console.log(boonPrice)
+    console.log(endDate)
+    state.boonPrice = boonPrice
+    state.endDate = endDate
   }
 }

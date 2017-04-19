@@ -26,6 +26,9 @@
             .title}}</span>
           <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
         </div>
+        <div class="boonDesc" v-if="boonPrice">
+          您有一个平台红包￥{{boonPrice}}元
+        </div>
       </div>
       <div class="user">
         <div class="user-btn" @click="goUser">我的订单</div>
@@ -39,6 +42,7 @@
 
 <script type="text/ecmascript-6">
   import {getStore} from '../../common/js/util'
+  import {mapState} from 'vuex'
   export default {
     props: {
       detail: {
@@ -79,6 +83,10 @@
           return
         }
       })
+    },
+    computed: {
+      // 检测 vuex 中boonPrice
+      ...mapState(['boonPrice'])
     },
     methods: {
       goSeller() {
@@ -196,6 +204,21 @@
     position: absolute;
     top: 0px;
     right: 0px;
+  }
+
+  .boonDesc {
+    position: relative;
+    box-sizing: border-box;
+    padding-left: 17px;
+    padding-right: 55px;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 10px;
+    color: #ffffff;
+    background: url("../../assets/icon_packets.png") no-repeat left center;
+    background-size: 11px 14px;
   }
 
   .user {

@@ -66,6 +66,11 @@
                 <span class="discount-num">-￥{{item.reductionAmount}}</span>
               </p>
             </div>
+            <div class="boonBox" v-if="boonPrice">
+              <p class="boonBox-title">
+                红包<span class="boonBox-num">-￥{{boonPrice}}</span>
+              </p>
+            </div>
             <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum | toFixedFil}}</span>
             </div>
           </div>
@@ -126,7 +131,8 @@
         isJinKuai: false, // 是否尽快送达
         isDiscount: false, // 是否可以优惠
         shopDiscountId: '', // 优惠id
-        discountPrice: 0 // 优惠金额
+        discountPrice: 0, // 优惠金额
+        isDoonBox: 1 // 是否有红包
       }
     },
     created() {
@@ -207,7 +213,7 @@
       this.initData()
     },
     computed: {
-      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'boonPrice', 'endDate'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
@@ -304,7 +310,8 @@
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
             remark: `${this.remarkText === undefined ? '' : this.remarkText}${this.inputText}`,  // 订单备注
             shopDiscountId: this.shopDiscountId, // 所参加优惠活动ID
-            shopId: this.shopId
+            shopId: this.shopId,
+            redEnvelopePrice: Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
           }
           setStore('userOrderIofo', data)
           const api = '/br/order'
@@ -635,6 +642,7 @@
     font-size: 11px;
   }
 
+  .orderDetail-wrapper .order-list .boonBox,
   .orderDetail-wrapper .order-list .discount {
     height: 37px;
     line-height: 37px;
@@ -651,10 +659,21 @@
     background-size: 15px 15px;
   }
 
+  .orderDetail-wrapper .order-list .boonBox .boonBox-title .boonBox-num,
   .orderDetail-wrapper .order-list .discount .discount-title .discount-num {
     float: right;
     font-size: 14px;
     color: #ff8943;
+  }
+
+  .orderDetail-wrapper .order-list .boonBox .boonBox-title {
+    padding-left: 25px;
+    padding-right: 14px;
+    font-size: 14px;
+    color: #343434;
+    border-bottom: 1px solid #f1f1f1;
+    background: url("../../assets/icon_packets.png") no-repeat left center;
+    background-size: 11px 14px;
   }
 
   .orderDetail-wrapper .order-list .totalPrice {

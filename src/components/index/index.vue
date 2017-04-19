@@ -15,7 +15,13 @@
     <!--红包toast-->
     <div class="boon" v-show="isCloseBoon">
       <i class="close" @click="closeBoon"></i>
-      <div class="backImg"></div>
+      <div class="backImg">
+        <div class="textContent">
+          <p class="price">{{boonPrice}}<span class="desc">元</span></p>
+          <p>恭喜您</p>
+          <p>获得一个{{boonPrice}}元平台通用红包</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +31,7 @@
   import goods from '../goods/goods.vue'
   import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
+  import {mapState, mapMutations} from 'vuex'
   export default{
     data() {
       return {
@@ -38,11 +45,11 @@
         endTime: '',
         deliveryfee: {}, // 配送费
         shopStatus: 0, // 门店状态
-        isCloseBoon: true
+        isCloseBoon: false
       }
     },
     created() {
-      // 调试代码
+      // 调试代码 提交时注释
 //      setStore('userInfo', {
 //        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
 //        'shopId': '832c49b2-4ada-47bf-88ff-06dd8cbd26f2'
@@ -50,36 +57,18 @@
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      // 红包信息
+      this.getRedEnvelope()
       // 商家信息
       this.getShopDetail()
     },
-    mounted() {
-      // 营业时间
-//      this.getBusinesshours()
+    computed: {
+      // 检测 vuex 中boonPrice
+      ...mapState(['boonPrice'])
     },
     methods: {
       // 营业时间
-//      getBusinesshours() {
-//        this.axios.get('/br/shop/businesshours?shopId=' + this.shopId).then((res) => {
-//          if (res.data.success) {
-//            res = res.data.data
-//            let strB = res.beginTime.split(':', 2)
-//            let strE = res.endTime.split(':', 2)
-//            let b = new Date()
-//            let e = new Date()
-//            b.setHours(strB[0])
-//            b.setMinutes(strB[1])
-//            e.setHours(strE[0])
-//            e.setMinutes(strE[1])
-//            if (this.nowTime.getTime() - b.getTime() >= 0 && this.nowTime.getTime() - e.getTime() <= 0) {
-//              this.isYingye = true
-//            } else {
-//              this.isYingye = false
-//              this.toggleToast(true, '没在营业时间内')
-//            }
-//          }
-//        })
-//      },
+      ...mapMutations(['BOON_PRICE']),
       // 商家信息
       getShopDetail() {
         const data = {
@@ -96,20 +85,38 @@
           }
         })
       },
+      // 红包信息
+      getRedEnvelope() {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.BOON_PRICE({boonPrice: res.data.price, endDate: res.data.endDate})
+            if (res.data.first) {
+              if (res.data.price > 0) {
+                this.isCloseBoon = true
+              }
+            }
+          }
+        })
+      },
       // 关闭红包
       closeBoon() {
         this.isCloseBoon = false
-        console.log(1231)
+        this.toggleToast(1, '领取成功', 1500)
       },
       // toggle toast
-      toggleToast(show, text) {
+      toggleToast(show, text, time) {
         if (show === true || show === 1) {
           this.toastShow = !this.toastShow
           this.toastText = text
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.toastShow = !this.toastShow
-          }, 1000)
+          }, time)
         } else {
           return
         }
@@ -179,5 +186,27 @@
     height: 100%;
     background: url("../../assets/Group33@2x.png") no-repeat center top 50%;
     background-size: 270px 375px;
+  }
+
+  .boon .backImg .textContent {
+    position: relative;
+    top: 45%;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .boon .backImg .textContent .price {
+    color: #fdff08;
+    height: 62px;
+    font-size: 58px;
+    line-height: 40px;
+    line-height: 1em;
+    font-family: STYuanti-TC-Regular;
+  }
+
+  .boon .backImg .textContent .price .desc {
+    font-size: 15px;
   }
 </style>

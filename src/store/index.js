@@ -31,7 +31,9 @@ const state = {
   totalPack: null, // 饭盒
   feesPrice: null, // 配送
   allPrice: null,  // 总价
-  userAddressId: '' // 用户地址id
+  userAddressId: '', // 用户地址id
+  boonPrice: 0, // 红包金额
+  endDate: null // 红包结束时间
 }
 
 export default new Vuex.Store({
