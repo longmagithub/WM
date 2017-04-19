@@ -71,7 +71,7 @@
                 红包<span class="boonBox-num">-￥{{boonPrice}}</span>
               </p>
             </div>
-            <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum | toFixedFil}}</span>
+            <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum - boonPrice | toFixedFil}}</span>
             </div>
           </div>
         </section>
@@ -90,7 +90,7 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="price">待支付￥{{allNum | toFixedFil}}</div>
+      <div class="price">待支付￥{{allNum - boonPrice | toFixedFil}}</div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -291,6 +291,7 @@
       },
       // 提交订单
       submitOrder() {
+        let boonPrice = Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
         if (this.addRess) {
           const data = {
             addressId: this.addRess.addressId,  // 用户收货ID
@@ -306,12 +307,12 @@
             orderDish: this.orderDish, // 菜品规格
             originalPrice: this.allPrice + this.feesPrice, // 订单原价
             packPrice: this.packPrice, // 订单餐盒费用
-            paidPrice: this.allNum, // 支付金额
+            paidPrice: (this.allNum - boonPrice).toFixed(2), // 支付金额
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
             remark: `${this.remarkText === undefined ? '' : this.remarkText}${this.inputText}`,  // 订单备注
             shopDiscountId: this.shopDiscountId, // 所参加优惠活动ID
             shopId: this.shopId,
-            redEnvelopePrice: Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
+            redEnvelopePrice: boonPrice
           }
           setStore('userOrderIofo', data)
           const api = '/br/order'
