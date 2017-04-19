@@ -32,7 +32,7 @@
               <span v-if="indexOption > 0">{{item | formatDate}}</span>
             </option>
           </select>
-          <!--<i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>-->
+          <i class="uxwm-iconfont btn_right" v-if="!isJinKuai"></i>
         </section>
         <section class="orderDetail-wrapper">
           <div class="title">订单详情</div>
@@ -71,7 +71,8 @@
                 红包<span class="boonBox-num">-￥{{boonPrice}}</span>
               </p>
             </div>
-            <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum - boonPrice | toFixedFil}}</span>
+            <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum - boonPrice < 0 ? 0.01 : allNum -
+              boonPrice | toFixedFil}}</span>
             </div>
           </div>
         </section>
@@ -90,7 +91,7 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="price">待支付￥{{allNum - boonPrice | toFixedFil}}</div>
+      <div class="price">待支付￥{{allNum - boonPrice < 0 ? 0.01 : allNum - boonPrice | toFixedFil}}</div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -307,7 +308,7 @@
             orderDish: this.orderDish, // 菜品规格
             originalPrice: this.allPrice + this.feesPrice, // 订单原价
             packPrice: this.packPrice, // 订单餐盒费用
-            paidPrice: (this.allNum - boonPrice).toFixed(2), // 支付金额
+            paidPrice: (this.allNum - boonPrice) < 0 ? 0.01 : (this.allNum - boonPrice).toFixed(2), // 支付金额
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
             remark: `${this.remarkText === undefined ? '' : this.remarkText}${this.inputText}`,  // 订单备注
             shopDiscountId: this.shopDiscountId, // 所参加优惠活动ID
@@ -523,7 +524,7 @@
   .serviceTime-wrapper .time-wrapper {
     display: inline-block;
     float: right;
-    /*margin-right: 20px;*/
+    margin-right: 20px;
     color: #ff8923;
     font-size: 14px;
     font-weight: 500;
