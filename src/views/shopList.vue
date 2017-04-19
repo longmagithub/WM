@@ -105,19 +105,6 @@
           <span class="tiem">27分钟送达</span>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('4637cede-37aa-4648-94f5-2799f93508c9')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/ca2939cf-f42f-402f-8b75-53283431ee68/1491718060215shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="48px" height="48px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">小巷子农家菜</p>
-          <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满30减22，满55减32，满100减45</p>
-          <span class="tiem">30分钟送达</span>
-        </div>
-      </li>
       <li class="list-item" @click="goIndex('c5e25f9d-b7d4-4da8-8652-1ddfebae7077')">
         <div class="logo">
           <img
@@ -220,6 +207,19 @@
           <p class="desc">￥30元起送 /&nbsp优先专送</p>
           <p class="manjian">满15减5，满25减8，满50减12</p>
           <span class="tiem">40分钟送达</span>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('4637cede-37aa-4648-94f5-2799f93508c9')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/ca2939cf-f42f-402f-8b75-53283431ee68/1491718060215shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">小巷子农家菜</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满30减22，满55减32，满100减45</p>
+          <span class="tiem">30分钟送达</span>
         </div>
       </li>
       <li class="list-item" @click="goIndex('d8438de5-d90d-431d-bd68-0d0a85f4401a')">
