@@ -152,6 +152,7 @@
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
             }
           } else {
+            console.log(12312312)
             this.toastShow = true
             this.toastText = '网络异常，请稍候再试'
           }
@@ -233,6 +234,19 @@
       },
       doCloseToast() {
         this.toastShow = false
+      },
+      // toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1300)
+        } else {
+          return
+        }
       }
     },
     filters: {
