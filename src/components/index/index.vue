@@ -19,7 +19,7 @@
         <div class="textContent">
           <p class="price">{{boonPrice}}<span class="desc">元</span></p>
           <p>恭喜您</p>
-          <p>获得一个{{boonPrice}}元平台通用红包</p>
+          <p>获得一个悠先外卖红包</p>
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@
       // 关闭红包
       closeBoon() {
         this.isCloseBoon = false
-        this.toggleToast(1, '领取成功', 1300)
+        this.toggleToast(1, '领取成功，支付时将自动抵扣', 1300)
       },
       // toggle toast
       toggleToast(show, text, time) {

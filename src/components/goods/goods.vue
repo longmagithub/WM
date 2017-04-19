@@ -235,7 +235,8 @@
         allPrice: 0, // 总价格
         toastText: '清空购物车', // 提示
         isToastText: false, // 控制 提示
-        isAjax: false
+        isAjax: false,
+        activity: [] // 活动数组
       }
     },
     created() {
