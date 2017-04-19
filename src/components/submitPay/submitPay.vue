@@ -131,7 +131,7 @@
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.toastShow = !this.toastShow
-          }, 1000)
+          }, 1300)
         } else {
           return
         }

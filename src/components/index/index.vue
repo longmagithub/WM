@@ -106,7 +106,7 @@
       // 关闭红包
       closeBoon() {
         this.isCloseBoon = false
-        this.toggleToast(1, '领取成功', 1500)
+        this.toggleToast(1, '领取成功', 1300)
       },
       // toggle toast
       toggleToast(show, text, time) {
