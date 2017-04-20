@@ -20,7 +20,7 @@ import mock from './plugins/mock'
 // 懒加载
 import VueLazyload from 'vue-lazyload'
 // 微信JSSDK
-import wx from 'weixin-js-sdk'
+// import wx from 'weixin-js-sdk'
 // 引入工具类
 // import * as utils from './utils'
 // 引入初始化
@@ -45,7 +45,7 @@ console.log(mock)
 
 // Vue.use(WxPay)
 // 微信配置
-Vue.use(wx)
+// Vue.use(wx)
 Vue.use(VueValidator) // 声明使用vue-validator
 Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueLazyload, {

@@ -32,7 +32,7 @@
   import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
-  import wx from 'weixin-js-sdk'
+//  import wx from 'weixin-js-sdk'
   export default{
     data() {
       return {
@@ -50,10 +50,11 @@
       }
     },
     created() {
+      console.log(wx)
       // 调试代码 提交时注释
 //      setStore('userInfo', {
 //        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': 'd8438de5-d90d-431d-bd68-0d0a85f4401a'
+//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
 //      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
@@ -63,7 +64,7 @@
       // 商家信息
       this.getShopDetail()
       // 微信分享
-      this.setShareConfig()
+//      this.setShareConfig()
       // 隐藏右上角菜单接口
     },
     mounted() {
