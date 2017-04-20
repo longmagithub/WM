@@ -2,7 +2,7 @@
 </template>
 <script>
   export default {
-    mounted () {
+    created () {
       this.setShareWxConfig()
     },
     methods: {
