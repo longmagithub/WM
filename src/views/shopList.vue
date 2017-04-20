@@ -10,7 +10,7 @@
         <div class="content">
           <p class="shopTitle">豆花花</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满25减2，满45减8</p>
+          <p class="manjian">满25减2，满45减5</p>
           <span class="tiem">25分钟送达</span>
         </div>
       </li>
