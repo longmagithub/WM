@@ -65,9 +65,9 @@
       // 微信分享
       this.setShareConfig()
       // 隐藏右上角菜单接口
-      wx.read(() => {
-        wx.hideOptionMenu()
-      })
+//      wx.read(() => {
+//        wx.hideOptionMenu()
+//      })
     },
     mounted() {
     },
@@ -86,7 +86,6 @@
         }
         this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          console.log(res)
           if (res.success) {
             // 排序
             this.shopDetail = res.data
@@ -120,9 +119,9 @@
       // 设置微信分享
       setShareConfig() {
         let url = window.location.href.split('?')
+        console.log(url[0])
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url[0])}`).then((res) => {
           res = res.data
-          console.log(res)
           if (res.success) {
             wx.config({
               debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。

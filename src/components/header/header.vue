@@ -68,7 +68,6 @@
       }
       this.axios.get(`/br/shop/detail${this.PublicJs.createParams(data)}`).then((res) => {
         res = res.data
-        console.log(res)
         if (res.success) {
           if (res.data === null) {
             return
@@ -77,12 +76,10 @@
 //            res.data.dispatching.fees = this.PublicJs.bubbleSort(res.data.dispatching.fees, res.data.dispatching.fees.price)
             this.detailBox = res.data
             this.activity = res.data.activity.reverse()
-            console.log(this.activity)
             // 设置微信title
 //            this.PublicJs.changeTitleInWx(this.shopDetail.name.split('（')[0])
           }
         } else {
-          console.log(2313)
           return
         }
       })

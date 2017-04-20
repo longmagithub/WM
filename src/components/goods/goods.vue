@@ -252,7 +252,7 @@
         res = res.data
         if (res.success === SUCCESS_OK) {
           if (res.data.dishesList === null) {
-            console.log('菜品为空')
+//            console.log('菜品为空')
             this.toggleToast(1, res.message)
           } else {
             this.isAjax = true
