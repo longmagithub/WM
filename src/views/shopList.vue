@@ -275,7 +275,7 @@
       <!--</div>-->
       <!--</li>-->
     </ul>
-    <wxshare></wxshare>
+    <!--<wxshare></wxshare>-->
   </div>
 </template>
 
@@ -339,14 +339,14 @@
           'customerId': this.customerId,
           'shopId': id
         })
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) / 1000
-//        this.$router.push({
-//          path: '/index',
-//          query: {
-//            shopId: id,
-//            customerId: this.customerId
-//          }
-//        })
+//        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) / 1000
+        this.$router.push({
+          path: '/index',
+          query: {
+            shopId: id,
+            customerId: this.customerId
+          }
+        })
       }
     },
     components: {
