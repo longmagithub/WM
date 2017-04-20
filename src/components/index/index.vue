@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <!--<wxshare></wxshare>-->
+    <wxshare></wxshare>
   </div>
 </template>
 
