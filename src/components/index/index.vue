@@ -64,7 +64,7 @@
       // 商家信息
       this.getShopDetail()
       // 微信分享
-//      this.setShareConfig()
+      this.setShareConfig()
       // 隐藏右上角菜单接口
     },
     mounted() {
