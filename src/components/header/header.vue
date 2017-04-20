@@ -126,7 +126,7 @@
     overflow: hidden;
     position: relative;
     padding: 15px 7px 8px 10px;
-    height: 92px;
+    height: 100px;
   }
 
   .header .content-wrapper {
@@ -159,7 +159,7 @@
   }
 
   .header .content-wrapper .box-content .content .title-name {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     font-size: 14px;
   }
 
@@ -167,7 +167,7 @@
   }
 
   .header .content-wrapper .box-content .content .bulletin {
-    margin-top: 8px;
+    margin-top: 5px;
   }
 
   .header .content-wrapper .box-content .content .title-name,
@@ -193,7 +193,7 @@
     box-sizing: border-box;
     padding-left: 17px;
     padding-right: 55px;
-    margin-top: 8px;
+    margin-top: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

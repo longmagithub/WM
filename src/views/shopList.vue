@@ -1,6 +1,19 @@
 <template>
   <div class="shopList">
     <ul>
+      <li class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/7da10ea0-91ea-4db2-852f-b46afb63ada6/1491673784318shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="48px" height="48px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">豆花花</p>
+          <p class="desc">￥20元起送 /&nbsp优先专送</p>
+          <p class="manjian">满25减2，满45减8</p>
+          <span class="tiem">25分钟送达</span>
+        </div>
+      </li>
       <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
         <div class="logo">
           <img
@@ -23,7 +36,7 @@
         <div class="content">
           <p class="shopTitle">正新鸡排</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满15减6，满25减9，满50减15</p>
+          <p class="manjian">满15减7，满30减12，满50减17</p>
           <span class="tiem">27分钟送达</span>
         </div>
       </li>
@@ -49,8 +62,8 @@
         <div class="content">
           <p class="shopTitle">顺和杂粮煎饼现磨五谷豆浆</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满50减8</p>
-          <span class="tiem">27分钟送达</span>
+          <p class="manjian">满25减3，满50减8</p>
+          <span class="tiem">25分钟送达</span>
         </div>
       </li>
       <li class="list-item" @click="goIndex('cbc7f7c8-1b4d-48be-a0b8-fbe71aba0a7d')">
@@ -89,7 +102,7 @@
           <p class="shopTitle">古法牛杂面</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满25减6，满35减9，满55减13</p>
-          <span class="tiem">27分钟送达</span>
+          <span class="tiem">32分钟送达</span>
         </div>
       </li>
       <li class="list-item" @click="goIndex('4be9e11a-635b-49e8-9686-12788c097d6a')">
@@ -102,7 +115,7 @@
           <p class="shopTitle">硬厨小堡</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
           <p class="manjian">满25减17，满30减20</p>
-          <span class="tiem">27分钟送达</span>
+          <span class="tiem">25分钟送达</span>
         </div>
       </li>
       <li class="list-item" @click="goIndex('c5e25f9d-b7d4-4da8-8652-1ddfebae7077')">
@@ -259,19 +272,6 @@
       <!--<p class="desc">￥20元起送 /&nbsp优先专送</p>-->
       <!--<p class="manjian">满55减21，满15减13</p>-->
       <!--<span class="tiem">28分钟送达</span>-->
-      <!--</div>-->
-      <!--</li>-->
-      <!--<li class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">-->
-      <!--<div class="logo">-->
-      <!--<img-->
-      <!--src="http://imagewm.test.u-xian.com/image/shop/7da10ea0-91ea-4db2-852f-b46afb63ada6/1491673784318shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"-->
-      <!--width="48px" height="48px">-->
-      <!--</div>-->
-      <!--<div class="content">-->
-      <!--<p class="shopTitle">豆花花</p>-->
-      <!--<p class="desc">￥20元起送 /&nbsp优先专送</p>-->
-      <!--<p class="manjian">满45减8</p>-->
-      <!--<span class="tiem">34分钟送达</span>-->
       <!--</div>-->
       <!--</li>-->
     </ul>
