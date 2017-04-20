@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    <wxshare></wxshare>
   </div>
 </template>
 
@@ -33,6 +34,7 @@
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wx from 'weixin-js-sdk'
+  import wxshare from '../../components/wxshare.vue'
   export default{
     data() {
       return {
@@ -63,11 +65,11 @@
       // 商家信息
       this.getShopDetail()
       // 微信分享
-      this.setShareConfig()
+//      this.setShareConfig()
       // 隐藏右上角菜单接口
     },
-    mounted() {
-    },
+//    mounted() {
+//    },
     computed: {
       // 检测 vuex 中boonPrice
       ...mapState(['boonPrice'])
@@ -115,7 +117,7 @@
       },
       // 设置微信分享
       setShareConfig() {
-        let url = window.location.href.split('?')[0]
+        let url = window.location.href.split('VA')[0]
         console.log('url地址')
         console.log(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
@@ -148,6 +150,7 @@
       }
     },
     components: {
+      wxshare,
       banner,
       goods,
       toast
