@@ -33,7 +33,6 @@
   import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
-  import wx from 'weixin-js-sdk'
   import wxshare from '../../components/wxshare.vue'
   export default{
     data() {
@@ -53,10 +52,10 @@
     },
     created() {
       // 调试代码 提交时注释
-//      setStore('userInfo', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': 'd8438de5-d90d-431d-bd68-0d0a85f4401a'
-//      })
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': 'd8438de5-d90d-431d-bd68-0d0a85f4401a'
+      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
@@ -116,25 +115,6 @@
         this.toggleToast(1, '领取成功，支付时将自动抵扣', 1300)
       },
       // 设置微信分享
-      setShareConfig() {
-        let url = window.location.href.split('VA')[0]
-        console.log('url地址')
-        console.log(url)
-        this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
-          res = res.data
-          if (res.success) {
-            wx.config({
-              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-              appId: res.data.appId, // 必填，公众号的唯一标识
-              timestamp: res.data.timestamp, // 必填，生成签名的时间戳
-              nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
-              signature: res.data.signature.toLowerCase(), // 必填，签名，见附录1
-              jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo',
-                'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            })
-          }
-        })
-      },
       // toggle toast
       toggleToast(show, text, time) {
         if (show === true || show === 1) {
