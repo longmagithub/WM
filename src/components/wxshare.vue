@@ -3,7 +3,7 @@
 <script>
   export default {
     created () {
-      this.setShareWxConfig()
+      this.setShareConfig()
     },
     methods: {
       setShareConfig() {
