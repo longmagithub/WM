@@ -117,7 +117,7 @@
       setShareConfig() {
         let url = window.location.href.split('#')
         console.log(url[0])
-        this.axios.get(`/mp/jsapi/sign?url=${url[0]}`).then((res) => {
+        this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url[0])}`).then((res) => {
           res = res.data
           if (res.success) {
             wx.config({
