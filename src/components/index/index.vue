@@ -118,7 +118,7 @@
       },
       // 设置微信分享
       setShareConfig() {
-        let url = window.location.href.split('VA')[0]
+        let url = window.location.href.split('com')[0]
         console.log('url地址')
         console.log(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
