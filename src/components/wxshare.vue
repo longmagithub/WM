@@ -9,7 +9,7 @@
     },
     methods: {
       setShareConfig() {
-        let url = window.location.href.split('#')[0]
+        let url = window.location.href
         console.log('url地址')
         console.log(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
