@@ -1,7 +1,7 @@
 <template>
 </template>
 <script>
-  import wx from 'weixin-js-sdk'
+  //  import wx from 'weixin-js-sdk'
   export default {
     mounted () {
       this.setShareConfig()

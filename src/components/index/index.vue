@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+    <wxshare></wxshare>
   </div>
 </template>
 
@@ -33,6 +34,7 @@
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
 //  import wx from 'weixin-js-sdk'
+  import wxshare from '../../components/wxshare.vue'
   export default{
     data() {
       return {
@@ -64,7 +66,7 @@
       // 商家信息
       this.getShopDetail()
       // 微信分享
-      this.setShareConfig()
+//      this.setShareConfig()
       // 隐藏右上角菜单接口
     },
     mounted() {
@@ -149,6 +151,7 @@
       }
     },
     components: {
+      wxshare,
       banner,
       goods,
       toast
