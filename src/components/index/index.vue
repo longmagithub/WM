@@ -51,10 +51,10 @@
     },
     created() {
       // 调试代码 提交时注释
-      setStore('userInfo', {
-        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-        'shopId': 'd8438de5-d90d-431d-bd68-0d0a85f4401a'
-      })
+//      setStore('userInfo', {
+//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+//        'shopId': 'd8438de5-d90d-431d-bd68-0d0a85f4401a'
+//      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
@@ -115,7 +115,7 @@
       },
       // 设置微信分享
       setShareConfig() {
-        let url = window.location.href.split('?')
+        let url = window.location.href.split('#')
         console.log(url[0])
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url[0])}`).then((res) => {
           res = res.data
