@@ -65,9 +65,6 @@
       // 微信分享
       this.setShareConfig()
       // 隐藏右上角菜单接口
-//      wx.read(() => {
-//        wx.hideOptionMenu()
-//      })
     },
     mounted() {
     },
