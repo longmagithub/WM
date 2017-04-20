@@ -8,7 +8,7 @@
     },
     methods: {
       setShareConfig() {
-        let url = window.location.href.split('/VA')[0]
+        let url = window.location.href.split('com')[0]
         console.log('url地址')
         console.log(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
@@ -19,7 +19,7 @@
               appId: res.data.appId, // 必填，公众号的唯一标识
               timestamp: res.data.timestamp, // 必填，生成签名的时间戳
               nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
-              signature: res.data.signature.toLowerCase(), // 必填，签名，见附录1
+              signature: res.data.signature, // 必填，签名，见附录1
               jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo',
                 'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             })
