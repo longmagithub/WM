@@ -275,11 +275,13 @@
       <!--</div>-->
       <!--</li>-->
     </ul>
+    <wxshare></wxshare>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {getStore, urlParse, setStore} from '../common/js/util'
+  import wxshare from '../components/wxshare.vue'
   export default {
     data() {
       return {
@@ -346,6 +348,9 @@
 //          }
 //        })
       }
+    },
+    components: {
+      wxshare
     }
   }
 </script>
