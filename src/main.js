@@ -19,6 +19,8 @@ import * as filters from './filters'
 import mock from './plugins/mock'
 // 懒加载
 import VueLazyload from 'vue-lazyload'
+// 微信JSSDK
+import wx from 'weixin-js-sdk'
 // 引入工具类
 // import * as utils from './utils'
 // 引入初始化
@@ -41,20 +43,20 @@ Object.keys(filters).forEach(key => {
 })
 console.log(mock)
 
-Vue.use(VueAxios, axios) // 声明使用VueAxios
-Vue.use(VueValidator) // 声明使用vue-validator
 // Vue.use(WxPay)
+// 微信配置
+Vue.use(wx)
+Vue.use(VueValidator) // 声明使用vue-validator
+Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueLazyload, {
   preLoad: 1,
   error: 'assets/item_logo.png',
   loading: 'assets/item_logo.png',
   attempt: 1
 })
-
 // 注册
 Vue.prototype.PublicJs = PublicJs
 Vue.prototype.api = '/VAOrderH5'
-
 const app = new Vue({
   router,
   store,

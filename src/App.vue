@@ -2,8 +2,8 @@
   <div id="app">
     <transition name="fade" mode="out-in">
       <!--<keep-alive>-->
-        <router-view
-          class="view"></router-view>
+      <router-view
+        class="view"></router-view>
       <!--</keep-alive>-->
     </transition>
   </div>
@@ -15,10 +15,10 @@
   @import './style/base.scss';
 
   /*#app .fade-enter-active, #app .fade-leave-active {*/
-    /*transition: all 0.3s;*/
+  /*transition: all 0.3s;*/
   /*}*/
 
   /*#app .fade-enter, #app .fade-leave-active {*/
-    /*opacity: 0;*/
+  /*opacity: 0;*/
   /*}*/
 </style>
