@@ -30,10 +30,6 @@ export default new Router({
       redirect: '/shopList' // 重定向到 /jingmo
     },
     {
-      path: '/share',
-      component: require('../components/wxshare.vue') // 测试分享
-    },
-    {
       path: '/userOrderList',
       redirect: '/orderList' // 重定向到 /门店列表
     },
@@ -61,6 +57,11 @@ export default new Router({
     {
       path: '/zhengchang1',
       component: require('../weixin/zhengchang1.vue')
+    },
+    // 分享
+    {
+      path: '/share',
+      component: require('../components/shaerImg.vue')
     },
     // 首页
     {

@@ -13,9 +13,9 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="isCloseBoon">
+    <div class="boon" v-show="1">
       <i class="close" @click="closeBoon"></i>
-      <div class="backImg">
+      <div class="backImg" @click="goShare">
         <div class="textContent">
           <p class="price">{{boonPrice}}<span class="desc">元</span></p>
           <p>恭喜您</p>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <!--<wxshare></wxshare>-->
+    <wxshare></wxshare>
   </div>
 </template>
 
@@ -33,7 +33,6 @@
   import {setStore, getStore} from '../../common/js/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
-//  import wx from 'weixin-js-sdk'
   import wxshare from '../../components/wxshare.vue'
   export default{
     data() {
@@ -52,12 +51,11 @@
       }
     },
     created() {
-      console.log(wx)
       // 调试代码 提交时注释
-//      setStore('userInfo', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
-//      })
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
+      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
@@ -65,9 +63,6 @@
       this.getRedEnvelope()
       // 商家信息
       this.getShopDetail()
-      // 微信分享
-//      this.setShareConfig()
-      // 隐藏右上角菜单接口
     },
     mounted() {
     },
@@ -78,6 +73,10 @@
     methods: {
       // 营业时间
       ...mapMutations(['BOON_PRICE']),
+      // 分享按钮
+      goShare() {
+        console.log('我是胖子')
+      },
       // 商家信息
       getShopDetail() {
         const data = {
@@ -115,26 +114,6 @@
       closeBoon() {
         this.isCloseBoon = false
         this.toggleToast(1, '领取成功，支付时将自动抵扣', 1300)
-      },
-      // 设置微信分享
-      setShareConfig() {
-        let url = window.location.href.split('com')[0]
-        console.log('url地址')
-        console.log(url)
-        this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
-          res = res.data
-          if (res.success) {
-            wx.config({
-              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-              appId: res.data.appId, // 必填，公众号的唯一标识
-              timestamp: res.data.timestamp, // 必填，生成签名的时间戳
-              nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
-              signature: res.data.signature, // 必填，签名，见附录1
-              jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo',
-                'onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            })
-          }
-        })
       },
       // toggle toast
       toggleToast(show, text, time) {
@@ -212,7 +191,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 70%;
+    margin-top: 30%;
     background: url("../../assets/Group33@2x.png") no-repeat center top 50%;
     background-size: 270px 375px;
   }
