@@ -275,7 +275,7 @@
       <!--</div>-->
       <!--</li>-->
     </ul>
-    <!--<wxshare></wxshare>-->
+    <wxshare></wxshare>
   </div>
 </template>
 

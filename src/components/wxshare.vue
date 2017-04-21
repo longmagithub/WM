@@ -4,7 +4,7 @@
   //  import wx from 'weixin-js-sdk'
   export default {
     mounted () {
-      window.alert(window.location.href.split('#')[0])
+//      window.alert(window.location.href.split('#')[0])
       this.setShareConfig()
     },
     methods: {
