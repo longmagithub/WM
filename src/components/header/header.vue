@@ -9,10 +9,12 @@
             <img v-else src="../../assets/item_logo.png" alt="" width="50px" height="50px">
           </div>
           <div class="content">
-            <div class="title-name">{{detailBox.name}}</div>
+            <!--下面打开-->
+            <!--<div class="title-name">{{detailBox.name}}</div>-->
             <!-- 描述 -->
             <div class="description">
-              <span>{{detailBox.dispatching.name}}</span>
+              <!--name 打开-->
+              <!--<span>{{detailBox.dispatching.name}}</span>-->
               <!--<span>{{detailBox.dispatching.duration}}分钟到达</span>-->
               <!--<span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee | fees}}</span>-->
             </div>
