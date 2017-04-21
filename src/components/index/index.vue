@@ -77,7 +77,7 @@
       goShare() {
         console.log('我是胖子')
         WeixinJSBridge.invoke('sendAppMessage', {
-          'appid': 'wx96f6daa5f8a71039', // 公众号appID
+          'appid': 'wx73a13df7b60775a1', // 公众号appID
           'type': 'link', // 非必填，music,vido或link,默认为link。
           'img_url': 'http://pnewsapp.tc.qq.com/newsapp_bt/0/9963967/640', // 缩略图地址
           'img_height': 370, // 缩略图高度
