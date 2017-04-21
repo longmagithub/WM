@@ -85,6 +85,8 @@
           'link': 'http://newpay.tunnel.qydev.com/VAOrderH5/#/share', // 链接地址
           'desc': 'desc', // 描述
           'title': '德玛西亚' // 标题
+        }, function (res) {
+          window.alert(res.err_msg)
         })
       },
       // 商家信息
