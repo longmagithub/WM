@@ -30,6 +30,10 @@ export default new Router({
       redirect: '/shopList' // 重定向到 /jingmo
     },
     {
+      path: '/share',
+      component: require('../components/wxshare.vue') // 测试分享
+    },
+    {
       path: '/userOrderList',
       redirect: '/orderList' // 重定向到 /门店列表
     },
