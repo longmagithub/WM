@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.afe12b89a601845b8b0d.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.b0313750b2d5175cb2fb.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/wxshare.vue" afterPath="$PROJECT_DIR$/src/components/wxshare.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/shopList.vue" afterPath="$PROJECT_DIR$/src/views/shopList.vue" />
     </list>
@@ -27,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="292" column="32" selection-start-line="292" selection-start-column="32" selection-end-line="292" selection-end-column="32" />
+            <state relative-caret-position="147">
+              <caret line="275" column="18" selection-start-line="275" selection-start-column="18" selection-end-line="275" selection-end-column="18" />
               <folding>
                 <element signature="e#12382#12444#0" expanded="true" />
               </folding>
@@ -112,8 +115,8 @@
       <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+            <state relative-caret-position="-48">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
               <folding>
                 <element signature="e#862#903#0" expanded="true" />
                 <element signature="e#2255#2643#0" expanded="false" />
@@ -124,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wxshare.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wxshare.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+            <state relative-caret-position="720">
+              <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -235,9 +238,9 @@
         <option value="$PROJECT_DIR$/src/components/goods/goods.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" />
-        <option value="$PROJECT_DIR$/src/views/shopList.vue" />
-        <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/components/wxshare.vue" />
+        <option value="$PROJECT_DIR$/src/components/index/index.vue" />
+        <option value="$PROJECT_DIR$/src/views/shopList.vue" />
       </list>
     </option>
   </component>
@@ -685,12 +688,12 @@
       <workItem from="1492653396672" duration="69000" />
       <workItem from="1492653552654" duration="255000" />
       <workItem from="1492655925053" duration="93000" />
-      <workItem from="1492659926322" duration="27297000" />
+      <workItem from="1492659926322" duration="27644000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="922170000" />
+    <option name="totallyTimeSpent" value="922517000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -1020,17 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/header/header.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="e#1761#1806#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/router/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -1105,20 +1097,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="292" column="32" selection-start-line="292" selection-start-column="32" selection-end-line="292" selection-end-column="32" />
-          <folding>
-            <element signature="e#12382#12444#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="720">
+          <caret line="30" column="16" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="26" column="7" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        <state relative-caret-position="-48">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
           <folding>
             <element signature="e#862#903#0" expanded="true" />
             <element signature="e#2255#2643#0" expanded="false" />
@@ -1128,11 +1118,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/header/header.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="16" column="28" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="408">
+          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1761#1806#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="275" column="18" selection-start-line="275" selection-start-column="18" selection-end-line="275" selection-end-column="18" />
+          <folding>
+            <element signature="e#12382#12444#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
