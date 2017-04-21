@@ -36,7 +36,7 @@
         <div class="content">
           <p class="shopTitle">正新鸡排</p>
           <p class="desc">￥20元起送 /&nbsp优先专送</p>
-          <p class="manjian">满15减7，满30减12，满50减17</p>
+          <p class="manjian">满15减6，满30减10，满50减15</p>
           <span class="tiem">27分钟送达</span>
         </div>
       </li>
