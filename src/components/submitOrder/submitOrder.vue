@@ -139,6 +139,7 @@
     created() {
       // 修改 title
       PublicJs.changeTitleInWx('我的订单')
+      wx.hideOptionMenu()
       // 获取上个页面传递过来的customerId值
       this.customerId = this.$route.query.customerId
       // 获取上个页面传递过来的shopid值
