@@ -76,21 +76,15 @@
       // 分享按钮
       goShare() {
         console.log('我是胖子')
-        wx.onMenuShareAppMessage({
-          title: '分享标题-大明湖', // 分享标题
-          desc: '分享描述-大明湖畔夏雨荷', // 分享描述
-          link: 'http://newpay.tunnel.qydev.com/VAOrderH5/#/share', // 分享链接
-          imgUrl: '', // 分享图标
-          type: '', // 分享类型,music、video或link，不填默认为link
-          dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-          success: function () {
-            window.alert('分享成功')
-            // 用户确认分享后执行的回调函数
-          },
-          cancel: function () {
-            window.alert('取消分享')
-            // 用户取消分享后执行的回调函数
-          }
+        WeixinJSBridge.invoke('sendAppMessage', {
+          'appid': 'wx96f6daa5f8a71039', // 公众号appID
+          'type': 'link', // 非必填，music,vido或link,默认为link。
+          'img_url': 'http://pnewsapp.tc.qq.com/newsapp_bt/0/9963967/640', // 缩略图地址
+          'img_height': 370, // 缩略图高度
+          'img_width': 550, // 缩略图宽度
+          'link': 'http://newpay.tunnel.qydev.com/VAOrderH5/#/share', // 链接地址
+          'desc': 'desc', // 描述
+          'title': '德玛西亚' // 标题
         })
       },
       // 商家信息
