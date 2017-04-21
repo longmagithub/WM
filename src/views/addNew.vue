@@ -23,7 +23,8 @@
         <div class="left">地址</div>
         <div class="right">
           <p>
-            <input type="text" v-model="addressDetail.address" placeholder="小区/写字楼/学校等">
+            <!--<input type="text" v-model="addressDetail.address" placeholder="小区/写字楼/学校等">-->
+            <span class="addSpan">{{addressDetail.address}}</span>
           </p>
           <p>
             <input type="text" v-model="addressDetail.houseNum" placeholder="详细地址（如门牌号等）">
@@ -55,7 +56,7 @@
         // 修改 title
         PublicJs.changeTitleInWx('修改地址')
       } else {
-      // 修改 title
+        // 修改 title
         PublicJs.changeTitleInWx('新增地址')
       }
     },
@@ -70,7 +71,7 @@
         addressDetail: {
           name: '',
           phoneNumber: '',
-          address: '',
+          address: '杭州市滨江区',
           houseNum: '',
           gender: 0
         },
@@ -303,6 +304,14 @@
   }
 
   p:last-child {
+    border: none;
+  }
+
+  P .addSpan {
+    display: block;
+    width: 93%;
+    height: 38px;
+    line-height: 38px;
     border: none;
   }
 

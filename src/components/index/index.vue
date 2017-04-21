@@ -13,7 +13,7 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="1">
+    <div class="boon" v-show="isCloseBoon">
       <i class="close" @click="closeBoon"></i>
       <div class="backImg" @click="goShare">
         <div class="textContent">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <wxshare></wxshare>
+    <!--<wxshare></wxshare>-->
   </div>
 </template>
 
