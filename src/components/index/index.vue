@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <!--<wxshare></wxshare>-->
+    <wxshare></wxshare>
   </div>
 </template>
 
@@ -76,18 +76,6 @@
       // 分享按钮
       goShare() {
         console.log('我是胖子')
-        WeixinJSBridge.invoke('sendAppMessage', {
-          'appid': 'wx73a13df7b60775a1', // 公众号appID
-          'type': 'link', // 非必填，music,vido或link,默认为link。
-          'img_url': 'http://pnewsapp.tc.qq.com/newsapp_bt/0/9963967/640', // 缩略图地址
-          'img_height': 370, // 缩略图高度
-          'img_width': 550, // 缩略图宽度
-          'link': 'http://newpay.tunnel.qydev.com/VAOrderH5/#/share', // 链接地址
-          'desc': 'desc', // 描述
-          'title': '德玛西亚' // 标题
-        }, function (res) {
-          window.alert(res.err_msg)
-        })
       },
       // 商家信息
       getShopDetail() {
