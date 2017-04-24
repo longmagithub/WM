@@ -3,12 +3,22 @@
     <div id="orderlist_scroll">
       <ul>
         <li class="bg-white" v-for="item in orderList" @click="viewDetail(item.orderNo, item.id)">
-          <p class="bb">
-            {{item.orderTime}}
-            <!-- <span :class="item.state === 0 ? 'order-status0': item.state === 1 ? 'order-status1' : item.state === 2 || item.state === 3 ? 'order-status2' : item.state === 4 ? 'order-status3' : item.state === 5 ? 'order-status4' : item.state === 6 ? 'order-status5' : 'order-status0'">{{orderStatusText[item.state]}}</span> -->
-            <span :class="'order-status' + item.state">{{item.stateMsgC}}</span>
-          </p>
-          <p class="aa"><span>{{item.shopName}}</span><span>￥{{item.payPrice}}</span></p>
+          <div class="orderList-logobox">
+          <img v-if="item.shopLogo" :src="item.shopLogo" width="42px" height="42px">
+          <img v-else src="../assets/item_logo.png" width="42px" height="42px">
+            <!--<img src="../assets/logo.png" width="42px" height="42px">-->
+          </div>
+          <div class="oL-content">
+            <div class="aa">
+              <div class="orderTitle">{{item.shopName}}&nbsp<i class="uxwm-iconfont btn_right"></i></div>
+              <span class="orderStatus" :class="'order-status' + item.state">{{item.stateMsgC}}</span>
+            </div>
+            <p class="bb">
+              {{item.orderTime}}
+              <!-- <span :class="item.state === 0 ? 'order-status0': item.state === 1 ? 'order-status1' : item.state === 2 || item.state === 3 ? 'order-status2' : item.state === 4 ? 'order-status3' : item.state === 5 ? 'order-status4' : item.state === 6 ? 'order-status5' : 'order-status0'">{{orderStatusText[item.state]}}</span> -->
+              <!--<span>￥{{item.payPrice}}</span>-->
+            </p>
+          </div>
         </li>
       </ul>
       <p class="data-status">{{dataStatus}}</p>
@@ -116,7 +126,6 @@
             this.isAjaxing = false
             if (!this.orderList) {
               this.orderList = res.data.lstOrderInfos
-              console.log(this.orderList)
             } else {
               for (let i = 0; i < res.data.lstOrderInfos.length; i++) {
                 this.orderList.push(res.data[i])
@@ -168,27 +177,66 @@
   }
 </script>
 <style scoped lang="scss">
-  .bb {
-    border-bottom: 1px solid #f1f1f1;
-  }
-
   .orderlist-wrap {
     line-height: 1em;
     color: #343434;
     overflow-y: auto;
-
+  }
   ul {
     padding-top: 12px;
-
-  li {
+  }
+  .orderlist-wrap .bg-white {
+    display: flex;
     margin-bottom: 12px;
-
-  p {
-    margin-left: 16px;
-    padding: 16px 16px 16px 0;
-
-  span {
-    float: right;
+  }
+  .orderlist-wrap .bg-white .orderList-logobox {
+    flex: 0 0 42px;
+    margin: 10px;
+    width: 42px;
+    height: 42px;
+  }
+  .orderlist-wrap .bg-white .orderList-logobox img{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  .orderlist-wrap .bg-white .oL-content {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .orderlist-wrap .bg-white .oL-content .aa {
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 8px;
+    padding-right: 10px;
+    line-height: 20px;
+  }
+  .orderlist-wrap .bg-white .oL-content .aa .orderTitle {
+    display: block;
+    box-sizing: border-box;
+    padding-right: 65px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .orderlist-wrap .bg-white .oL-content .aa .orderTitle .btn_right {
+    display: inline-block;
+    vertical-align: top;
+    color: #333;
+    font-size: 10px;
+  }
+  .orderlist-wrap .bg-white .oL-content .aa .orderStatus {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+  }
+  .orderlist-wrap .bg-white .oL-content .bb {
+    margin-top: 3px;
+    line-height: 20px;
+    font-size: 10px;
+    color: #B2B2B2;
   }
 
   /*
@@ -233,25 +281,8 @@
     color: #b3b3b3;
   }
 
-  }
-
-  p:last-child {
-    /*text-align: right;*/
-    display: flex;
-    justify-content: space-between;
-  }
-
-  p:after {
-    clear: both;
-  }
-
-  }
-  }
-
-  .data-status {
+  .orderlist-wrap .data-status {
     padding: 30px 0;
     text-align: center;
-  }
-
   }
 </style>
