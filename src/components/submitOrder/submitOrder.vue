@@ -310,7 +310,7 @@
             packPrice: this.packPrice, // 订单餐盒费用
             paidPrice: parseFloat((this.allNum - boonPrice) < 0 ? 0.01 : (this.allNum - boonPrice).toFixed(2)), // 支付金额
             receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
-            remark: `${this.remarkText === undefined ? '' : this.remarkText}${this.inputText}`,  // 订单备注
+            remark: `${this.remarkText === undefined ? '' : this.remarkText} ${this.inputText}`,  // 订单备注
             shopDiscountId: this.shopDiscountId, // 所参加优惠活动ID
             shopId: this.shopId,
             redEnvelopePrice: boonPrice
