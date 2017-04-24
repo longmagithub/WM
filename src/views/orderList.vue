@@ -10,7 +10,7 @@
           </div>
           <div class="oL-content">
             <div class="aa">
-              <div class="orderTitle">{{item.shopName}}&nbsp<i class="uxwm-iconfont btn_right"></i></div>
+              <div class="orderTitle">{{item.shopName}}&nbsp&nbsp&nbsp<i class="uxwm-iconfont btn_right"></i></div>
               <span class="orderStatus" :class="'order-status' + item.state">{{item.stateMsgC}}</span>
             </div>
             <p class="bb">
@@ -224,7 +224,7 @@
   .orderlist-wrap .bg-white .oL-content .aa .orderTitle .btn_right {
     display: inline-block;
     vertical-align: top;
-    color: #333;
+    color: #B2B2B2;
     font-size: 10px;
   }
   .orderlist-wrap .bg-white .oL-content .aa .orderStatus {
