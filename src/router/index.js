@@ -63,6 +63,11 @@ export default new Router({
       path: '/share',
       component: require('../components/shaerImg.vue')
     },
+    // 邀请码
+    {
+      path: '/invite',
+      component: require('../views/inviteNum.vue')
+    },
     // 首页
     {
       path: '/index',

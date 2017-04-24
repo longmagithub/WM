@@ -209,7 +209,7 @@
   .orderlist-wrap .bg-white .oL-content .aa {
     position: relative;
     box-sizing: border-box;
-    padding-top: 8px;
+    padding-top: 10px;
     padding-right: 10px;
     line-height: 20px;
   }
