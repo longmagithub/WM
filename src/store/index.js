@@ -33,7 +33,9 @@ const state = {
   allPrice: null,  // 总价
   userAddressId: '', // 用户地址id
   boonPrice: 0, // 红包金额
-  endDate: null // 红包结束时间
+  endDate: null, // 红包结束时间
+  redEnvelopeType: null, // 红包类型
+  redEnvelopeId: '' // 红包id
 }
 
 export default new Vuex.Store({

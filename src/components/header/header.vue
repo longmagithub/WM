@@ -28,9 +28,9 @@
             .title}}</span>
           <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
         </div>
-        <div class="boonDesc" v-if="boonPrice">
-          您有一个平台红包￥{{boonPrice}}元
-        </div>
+        <!--<div class="boonDesc" v-if="boonPrice">-->
+          <!--您有一个平台红包￥{{boonPrice}}元-->
+        <!--</div>-->
       </div>
       <div class="user">
         <div class="user-btn" @click="goUser">我的订单</div>

@@ -1,17 +1,20 @@
 <template>
   <div class="inviteWap">
-    <div class="invite">
-      <div class="inviteNum">A1THMIM</div>
+    <div class="inviteSuccess" v-if="isSuccessInviteNum">
+    <!--<div class="inviteSuccess" v-if="0">-->
+      <div class="inviteNum" v-show="idcode">{{idcode}}</div>
+    </div>
+    <div class="invite" v-else>
+      <div class="inviteNum" v-show="idcode">{{idcode}}</div>
       <div class="inviteBox">
         <p class="inviteWrapper">
           <i class="uxwm-iconfont icon_inviteNum"></i>
-          <input type="text" class="inviteInput" placeholder="输入您的优惠码">
+          <input type="text" class="inviteInput" v-model="referenceCode" placeholder="输入您的优惠码">
         </p>
         <div class="inviteBtn" @click="goShopList">确定</div>
       </div>
       <toast :show="toastShow" :text="toastText"></toast>
     </div>
-    <div class="inviteSuccess"></div>
   </div>
 </template>
 
@@ -24,14 +27,16 @@
         inviteText: '',
         toastShow: false,
         toastText: '',
-        customerId: ''
+        customerId: '',
+        idcode: '124',
+        referenceCode: '',
+        isSuccessInviteNum: ''
       }
     },
     created() {
       let url = window.location.href
       if (getStore('openId') === null) {
         if (url.indexOf('code') < 0) {
-//          console.log('没有授权')
           this.to()
         } else {
           const data = {
@@ -42,6 +47,7 @@
           this.axios.post(api, data).then((res) => {
             res = res.data
             this.customerId = res.data.customerId
+            this.getIdcode(this.customerId)
             setStore('openId', {
               customerId: res.data.customerId
             })
@@ -56,20 +62,45 @@
         this.axios.post(api, data).then((res) => {
           res = res.data
           this.customerId = res.data.customerId
+          this.getIdcode(this.customerId)
           setStore('openId', {
             customerId: res.data.customerId
           })
         })
       } else {
         this.customerId = getStore('openId').customerId
+        this.getIdcode(this.customerId)
       }
     },
     methods: {
+      // 我的邀请码
+      getIdcode(id) {
+        this.axios.get(`/br/customer/idcode?sessionId=${id}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.idcode = res.data.idCode
+            this.isSuccessInviteNum = res.data.referenceCode
+          }
+        })
+      },
+      // 去列表页面
       goShopList() {
-        this.toggleToast(1, '成功了，去列表', 1300)
-        setTimeout(() => {
-          window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?T=' + Date.parse(new Date()) / 1000
-        }, 1800)
+        const data = {
+          sessionId: this.customerId,
+          referenceCode: this.referenceCode
+        }
+        this.axios.post('/br/customer/idcode', data).then((res) => {
+          res = res.data
+          if (res.success && res.code === 200) {
+            console.log(res.data)
+            this.toggleToast(1, res.message, 1500)
+            setTimeout(() => {
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?T=' + Date.parse(new Date()) / 1000
+            }, 2000)
+          } else {
+            this.toggleToast(1, res.message, 1500)
+          }
+        })
       },
       // 去授权
       to() {
@@ -109,19 +140,18 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../assets/inviteNum.png") no-repeat;
+    background: url("../assets/inviteNum01.png") no-repeat;
     background-size: 100%;
   }
 
   .inviteSuccess {
-    display: none;
     position: fixed;
     z-index: 111;
     top: 0px;
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../assets/inviteSuccess.png") no-repeat;
+    background: url("../assets/inviteSuccess01.png") no-repeat;
     background-size: 100%;
   }
 

@@ -214,7 +214,7 @@
       this.initData()
     },
     computed: {
-      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'boonPrice', 'endDate'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'boonPrice', 'endDate', 'redEnvelopeId'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
@@ -295,25 +295,40 @@
         let boonPrice = Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
         if (this.addRess) {
           const data = {
-            addressId: this.addRess.addressId,  // 用户收货ID
-            customerId: this.customerId,
-            discountPrice: this.discountPrice, // 订单优惠金额
-            dispatchPrice: this.feesPrice, // 订单配送费
-            // expectTime: parseInt(this.options[0] / 1000),
-            /* 测试预约时间 */
-            dispatchType: this.selected === 0 ? 1 : 2,
-            expectTime: parseInt(this.options[this.selected] / 1000),  // 期望送达时间
-            /* 测试预约时间 */
-            invoiceTitle: this.invoice, // 发票抬头
-            orderDish: this.orderDish, // 菜品规格
-            originalPrice: this.allPrice + this.feesPrice, // 订单原价
-            packPrice: this.packPrice, // 订单餐盒费用
-            paidPrice: parseFloat((this.allNum - boonPrice) < 0 ? 0.01 : (this.allNum - boonPrice).toFixed(2)), // 支付金额
-            receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`, // 用户收货地址
-            remark: `${this.remarkText === undefined ? '' : this.remarkText} ${this.inputText}`,  // 订单备注
-            shopDiscountId: this.shopDiscountId, // 所参加优惠活动ID
+            // 商户id
             shopId: this.shopId,
-            redEnvelopePrice: boonPrice
+            // 用户id
+            customerId: this.customerId,
+            // 订单餐盒费用
+            packPrice: this.packPrice,
+            // 菜品规格
+            orderDish: this.orderDish,
+            // 订单配送费
+            dispatchPrice: this.feesPrice,
+            // 订单优惠金额
+            discountPrice: this.discountPrice,
+            // 用户收货ID
+            addressId: this.addRess.addressId,
+            // 配送方式
+            dispatchType: this.selected === 0 ? 1 : 2,
+            // 期望送达时间
+            expectTime: parseInt(this.options[this.selected] / 1000),
+            // 订单原价
+            originalPrice: this.allPrice + this.feesPrice,
+            // 支付金额
+            paidPrice: parseFloat((this.allNum - boonPrice) < 0 ? 0.01 : (this.allNum - boonPrice).toFixed(2)),
+            // 用户收货地址
+            receivingAddress: `${this.addRess.address}${this.addRess.houseNum}`,
+            // 发票抬头
+            invoiceTitle: this.invoice,
+            // 订单备注
+            remark: `${this.remarkText === undefined ? '' : this.remarkText} ${this.inputText}`,
+            // 所参加优惠活动ID
+            shopDiscountId: this.shopDiscountId,
+            // 红包金额
+            redEnvelopePrice: boonPrice,
+            // 红包id
+            redEnvelopeId: this.redEnvelopeId
           }
           setStore('userOrderIofo', data)
           const api = '/br/order'

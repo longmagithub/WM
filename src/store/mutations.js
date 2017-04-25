@@ -187,11 +187,14 @@ export default {
   },
   // 红包金额
   [BOON_PRICE](state, {
-    boonPrice, endDate
+    boonPrice,
+    endDate,
+    redEnvelopeType,
+    redEnvelopeId
   }) {
-    console.log(boonPrice)
-    console.log(endDate)
     state.boonPrice = boonPrice
     state.endDate = endDate
+    state.redEnvelopeType = redEnvelopeType
+    state.redEnvelopeId = redEnvelopeId
   }
 }

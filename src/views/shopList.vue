@@ -2,21 +2,23 @@
   <!--把优惠按钮注释 调整 'content'padding-right: 90px; -->
   <div class="shopList">
     <ul>
-      <li class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">
-        <div class="logo">
-          <img
-            src="http://imagewm.test.u-xian.com/image/shop/7da10ea0-91ea-4db2-852f-b46afb63ada6/1491673784318shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">豆花花</p>
-          <p class="manjian">满25减2，满45减5</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">30分钟</span></p>
+      <li class="listbox">
+        <div class="list-item" @click="goIndex('c1c8dafb-0d9e-4722-b7d8-a540d235e30c')">
+          <div class="logo">
+            <img
+              src="http://imagewm.test.u-xian.com/image/shop/7da10ea0-91ea-4db2-852f-b46afb63ada6/1491673784318shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+              width="51px" height="51px">
+          </div>
+          <div class="content">
+            <p class="shopTitle">豆花花</p>
+            <p class="manjian">满25减2，满45减5，满25减2，满45减5，满25减2，满45减5</p>
+            <div class="contentRight">
+              <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+              <p class="tiemBox"><span class="tiem">30分钟</span></p>
+            </div>
           </div>
         </div>
+        <div class="contentRight-Hui" @click="toggleParity"><span>惠</span></div>
       </li>
       <li class="list-item" @click="goIndex('832c49b2-4ada-47bf-88ff-06dd8cbd26f2')">
         <div class="logo">
@@ -130,22 +132,22 @@
           </div>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('9314ce9b-cd74-4e2a-aded-423fafe972f7')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/b3cf0a19-21a6-4b6b-86ec-4efde9ef1e0b/1493021118691shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">大娘饺子联庄店</p>
-          <p class="manjian">满15减6，满25减9，满50减15</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">25分钟</span></p>
-          </div>
-        </div>
-      </li>
+      <!--<li class="list-item" @click="goIndex('9314ce9b-cd74-4e2a-aded-423fafe972f7')">-->
+      <!--<div class="logo">-->
+      <!--<img-->
+      <!--src="http://imagewm.u-xian.com/image/shop/b3cf0a19-21a6-4b6b-86ec-4efde9ef1e0b/1493021118691shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"-->
+      <!--width="51px" height="51px">-->
+      <!--</div>-->
+      <!--<div class="content">-->
+      <!--<p class="shopTitle">大娘饺子联庄店</p>-->
+      <!--<p class="manjian">满15减6，满25减9，满50减15</p>-->
+      <!--<div class="contentRight">-->
+      <!--&lt;!&ndash;<div class="contentRight-Hui"><span>惠</span></div>&ndash;&gt;-->
+      <!--&lt;!&ndash;<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>&ndash;&gt;-->
+      <!--<p class="tiemBox"><span class="tiem">25分钟</span></p>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</li>-->
       <li class="list-item" @click="goIndex('b150dba0-1f9a-44ff-8a7a-40e6c7648777')">
         <div class="logo">
           <img
@@ -339,6 +341,25 @@
         </div>
       </li>
     </ul>
+    <transition name="fade">
+      <div class="shopListToast" @click="closeToast" v-show="shopListShow">
+        <div class="textConten">
+          <span class="logo"></span>
+          <div class="uxwm-terrace">
+            <div class="label">悠先外卖：</div>
+            <div class="manjianText">
+              <span v-for="item in itemShopList.discounts">{{item.title}}</span>
+            </div>
+          </div>
+          <div class="else-terrace">
+            <div class="label">其他平台：</div>
+            <div class="manjianText">
+              <span v-for="item in itemShopList.thirdDiscounts">{{item.title}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -347,8 +368,14 @@
   export default {
     data() {
       return {
-        customerId: ''
+        customerId: '',
+        shopList: [],
+        shopListShow: false,
+        itemShopList: {}
       }
+    },
+    created() {
+      this.getShopList()
     },
     mounted() {
       let url = window.location.href
@@ -396,6 +423,29 @@
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
+      // 获取列表
+      getShopList() {
+        const data = {
+          customerId: 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+          pageSize: 30,
+          pageNumber: 1
+        }
+        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            console.log(res.data)
+          }
+        })
+      },
+      //  显示比价弹窗
+      toggleParity() {
+        console.log(123)
+        this.shopListShow = true
+      },
+      // 关闭 比较 toast
+      closeToast() {
+        this.shopListShow = false
+      },
       goIndex(id) {
         setStore('userInfo', {
           'customerId': this.customerId,
@@ -419,12 +469,41 @@
     background: #fff;
   }
 
+  .shopList .listbox {
+    position: relative;
+  }
+
+  .shopList .listbox .contentRight-Hui {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 20px 10px 25px 25px;
+  }
+
+  .shopList .listbox .contentRight-Hui span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-family: STYuanti-TC-Regular;
+    font-size: 14px;
+    color: #FFFFFF;
+    border-radius: 50%;
+    background: #FFA74E;
+    box-shadow: 0 2px 2px 0 rgba(255, 166, 78, 0.50);
+  }
+
   .shopList .list-item {
     box-sizing: border-box;
     display: flex;
     padding: 8px 12px 10px 8px;
     border-bottom: 5px solid #f5f5f5;
     /*margin-bottom: 15px;*/
+  }
+
+  .shopList .list-item:first-child {
+    border-top: 10px solid #f5f5f5;
   }
 
   .shopList .list-item .logo {
@@ -484,27 +563,6 @@
     right: 0;
   }
 
-  .shopList .list-item .content .contentRight .contentRight-Hui {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding: 10px;
-  }
-
-  .shopList .list-item .content .contentRight .contentRight-Hui span {
-    display: block;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    line-height: 25px;
-    font-family: STYuanti-TC-Regular;
-    font-size: 14px;
-    color: #FFFFFF;
-    border-radius: 50%;
-    background: #FFA74E;
-    box-shadow: 0 2px 2px 0 rgba(255, 166, 78, 0.50);
-  }
-
   .shopList .list-item .content .contentRight .tiemBox {
     margin-top: 35px;
     line-height: 14px;
@@ -518,5 +576,84 @@
 
   .shopList .list-item .content .contentRight .tiemBox .distance {
     color: #a2a2a2;
+  }
+
+  .shopList .shopListToast {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+    /*backdrop-filter: blur(10px);*/
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .shopList .shopListToast .textConten {
+    position: relative;
+    top: 35%;
+    margin: 0 auto;
+    width: 76%;
+    padding: 3px;
+    border-radius: 20px;
+    background: #fff;
+  }
+
+  .shopList .shopListToast .textConten .logo {
+    display: block;
+    position: absolute;
+    top: -27px;
+
+    width: 100%;
+    height: 36px;
+    background: url("../assets/VS@2x.png") no-repeat center;
+    background-size: 56px;
+  }
+
+  .shopList .shopListToast .textConten .uxwm-terrace {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 18px 12px 18px;
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #FA753E;
+    line-height: 20px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .shopList .shopListToast .textConten .else-terrace {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 18px 12px 18px;
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #8C8C8C;
+    line-height: 20px;
+  }
+
+  .shopList .shopListToast .textConten .uxwm-terrace .label,
+  .shopList .shopListToast .textConten .else-terrace .label {
+    flex: 0 0 65px;
+  }
+
+  .shopList .shopListToast .textConten .uxwm-terrace .manjianText,
+  .shopList .shopListToast .textConten .else-terrace .manjianText {
+    flex: 1;
+  }
+
+  .shopList .shopListToast .textConten .uxwm-terrace .label {
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    color: #FA753E;
+  }
+
+  .shopList .fade-enter-active, .shopList .fade-leave-active {
+    transition: all 0.3s;
+  }
+
+  .shopList .fade-enter, .shopList .fade-leave-active {
+    opacity: 0;
+    background: rgba(7, 17, 27, 0);
   }
 </style>
