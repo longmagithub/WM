@@ -1,33 +1,53 @@
 <template>
-  <div class="invite">
-    <div class="inviteBox">
-      <p class="inviteWrapper">
-        <i class="uxwm-iconfont icon_inviteNum"></i>
-        <input type="text" class="inviteInput" placeholder="输入您的优惠码">
-      </p>
-      <div class="inviteBtn" @click="goShopList">确定</div>
+  <div class="inviteWap">
+    <div class="invite">
+      <div class="inviteNum">A1THMIM</div>
+      <div class="inviteBox">
+        <p class="inviteWrapper">
+          <i class="uxwm-iconfont icon_inviteNum"></i>
+          <input type="text" class="inviteInput" placeholder="输入您的优惠码">
+        </p>
+        <div class="inviteBtn" @click="goShopList">确定</div>
+      </div>
+      <toast :show="toastShow" :text="toastText"></toast>
     </div>
-    <toast :show="toastShow" :text="toastText"></toast>
+    <div class="inviteSuccess"></div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import toast from '../components/toast.vue'
-  import {urlParse, setStore} from '../common/js/util'
+  import {getStore, urlParse, setStore} from '../common/js/util'
   export default {
     data() {
       return {
         inviteText: '',
         toastShow: false,
-        toastText: ''
+        toastText: '',
+        customerId: ''
       }
     },
     created() {
       let url = window.location.href
-      if (url.indexOf('code') < 0) {
-        // console.log('没有授权')
-        this.to()
-      } else {
+      if (getStore('openId') === null) {
+        if (url.indexOf('code') < 0) {
+//          console.log('没有授权')
+          this.to()
+        } else {
+          const data = {
+            code: urlParse().code,
+            type: 1 // 授权类型：1静默授权；2用户授权
+          }
+          const api = '/mp/authority/customer'
+          this.axios.post(api, data).then((res) => {
+            res = res.data
+            this.customerId = res.data.customerId
+            setStore('openId', {
+              customerId: res.data.customerId
+            })
+          })
+        }
+      } else if (getStore('openId').customerId === undefined) {
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
@@ -40,6 +60,8 @@
             customerId: res.data.customerId
           })
         })
+      } else {
+        this.customerId = getStore('openId').customerId
       }
     },
     methods: {
@@ -80,6 +102,7 @@
 
 <style>
   .invite {
+    /*display: none;*/
     position: fixed;
     z-index: 111;
     top: 0px;
@@ -90,11 +113,33 @@
     background-size: 100%;
   }
 
+  .inviteSuccess {
+    display: none;
+    position: fixed;
+    z-index: 111;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url("../assets/inviteSuccess.png") no-repeat;
+    background-size: 100%;
+  }
+
   .inviteBox {
     position: absolute;
     top: 66%;
     left: 15%;
     width: 70%;
+  }
+
+  .inviteNum {
+    position: relative;
+    top: 38%;
+    text-align: center;
+    font-family: STYuanti-SC-Regular;
+    font-size: 36px;
+    color: #FFA448;
+    letter-spacing: 1.28px;
   }
 
   .inviteBox .inviteWrapper {

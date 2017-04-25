@@ -34,22 +34,6 @@
           </div>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('a72cb664-a2d6-4197-bcfa-3850c039411a')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/1492481240956.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">正新鸡排</p>
-          <p class="manjian">满15减6，满30减10，满50减15</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">27分钟</span></p>
-          </div>
-        </div>
-      </li>
       <li class="list-item" @click="goIndex('83cee7db-b211-4e5b-bbc3-06882f86fede')">
         <div class="logo">
           <img
@@ -82,6 +66,102 @@
           </div>
         </div>
       </li>
+      <li class="list-item" @click="goIndex('8f7dae2f-c258-4f1e-a2e2-89ffef32ad48')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1492750129632.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="51px" height="51px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">上吉铺黄焖鸡米</p>
+          <p class="manjian">满15减10，满35减14，满50减18</p>
+          <div class="contentRight">
+            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
+            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+            <p class="tiemBox"><span class="tiem">26分钟</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('40f97640-c1d1-42df-9049-184ffb94e824')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1492751387180.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="51px" height="51px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">重庆小面</p>
+          <p class="manjian">满15减6，满25减11，满30减16</p>
+          <div class="contentRight">
+            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
+            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+            <p class="tiemBox"><span class="tiem">32分钟</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('b3cf0a19-21a6-4b6b-86ec-4efde9ef1e0b')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1493020794031shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="51px" height="51px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">铜锣湾地下铁餐吧</p>
+          <p class="manjian">满15减5，满25减7，满39减10</p>
+          <div class="contentRight">
+            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
+            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+            <p class="tiemBox"><span class="tiem">27分钟</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('9480c029-a45d-479e-a3c3-74ed9c65d54d')">
+        <div class="logo">
+          <img
+            src="http://imagewm.test.u-xian.com/image/shop/1491686621833shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="51px" height="51px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">黄金烤肉便当</p>
+          <p class="manjian">满20减18，满50减27，满70减42</p>
+          <div class="contentRight">
+            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
+            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+            <p class="tiemBox"><span class="tiem">26分钟</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('9314ce9b-cd74-4e2a-aded-423fafe972f7')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/b3cf0a19-21a6-4b6b-86ec-4efde9ef1e0b/1493021118691shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="51px" height="51px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">大娘饺子联庄店</p>
+          <p class="manjian">满15减6，满25减9，满50减15</p>
+          <div class="contentRight">
+            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
+            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+            <p class="tiemBox"><span class="tiem">25分钟</span></p>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" @click="goIndex('b150dba0-1f9a-44ff-8a7a-40e6c7648777')">
+        <div class="logo">
+          <img
+            src="http://imagewm.u-xian.com/image/shop/1492482942105.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
+            width="51px" height="51px">
+        </div>
+        <div class="content">
+          <p class="shopTitle">古法牛杂面</p>
+          <p class="manjian">满25减6，满35减9，满55减13</p>
+          <div class="contentRight">
+            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
+            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
+            <p class="tiemBox"><span class="tiem">32分钟</span></p>
+          </div>
+        </div>
+      </li>
       <li class="list-item" @click="goIndex('cbc7f7c8-1b4d-48be-a0b8-fbe71aba0a7d')">
         <div class="logo">
           <img
@@ -111,22 +191,6 @@
             <!--<div class="contentRight-Hui"><span>惠</span></div>-->
             <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
             <p class="tiemBox"><span class="tiem">28分钟</span></p>
-          </div>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('b150dba0-1f9a-44ff-8a7a-40e6c7648777')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/1492482942105.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">古法牛杂面</p>
-          <p class="manjian">满25减6，满35减9，满55减13</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">32分钟</span></p>
           </div>
         </div>
       </li>
@@ -194,19 +258,19 @@
           </div>
         </div>
       </li>
-      <li class="list-item" @click="goIndex('9480c029-a45d-479e-a3c3-74ed9c65d54d')">
+      <li class="list-item" @click="goIndex('a72cb664-a2d6-4197-bcfa-3850c039411a')">
         <div class="logo">
           <img
-            src="http://imagewm.test.u-xian.com/image/shop/1491686621833shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
+            src="http://imagewm.u-xian.com/image/shop/1492481240956.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
             width="51px" height="51px">
         </div>
         <div class="content">
-          <p class="shopTitle">黄金烤肉便当</p>
-          <p class="manjian">满20减18，满50减27，满70减42</p>
+          <p class="shopTitle">正新鸡排</p>
+          <p class="manjian">满15减6，满30减10，满50减15</p>
           <div class="contentRight">
             <!--<div class="contentRight-Hui"><span>惠</span></div>-->
             <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">26分钟</span></p>
+            <p class="tiemBox"><span class="tiem">27分钟</span></p>
           </div>
         </div>
       </li>
@@ -266,70 +330,6 @@
         </div>
         <div class="content">
           <p class="shopTitle">小巷子农家菜</p>
-          <p class="manjian">满30减22，满55减32，满100减45</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">30分钟</span></p>
-          </div>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('8f7dae2f-c258-4f1e-a2e2-89ffef32ad48')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/1492750129632.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">上吉铺黄焖鸡米</p>
-          <p class="manjian">满30减22，满55减32，满100减45</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">30分钟</span></p>
-          </div>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('40f97640-c1d1-42df-9049-184ffb94e824')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/1492751387180.jpg?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">重庆小面</p>
-          <p class="manjian">满30减22，满55减32，满100减45</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">30分钟</span></p>
-          </div>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('b3cf0a19-21a6-4b6b-86ec-4efde9ef1e0b')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/1493020794031shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">铜锣烧地下铁</p>
-          <p class="manjian">满30减22，满55减32，满100减45</p>
-          <div class="contentRight">
-            <!--<div class="contentRight-Hui"><span>惠</span></div>-->
-            <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-            <p class="tiemBox"><span class="tiem">30分钟</span></p>
-          </div>
-        </div>
-      </li>
-      <li class="list-item" @click="goIndex('9314ce9b-cd74-4e2a-aded-423fafe972f7')">
-        <div class="logo">
-          <img
-            src="http://imagewm.u-xian.com/image/shop/b3cf0a19-21a6-4b6b-86ec-4efde9ef1e0b/1493021118691shopImage.JPEG?x-oss-process=image/resize,m_fill,h_100,w_100"
-            width="51px" height="51px">
-        </div>
-        <div class="content">
-          <p class="shopTitle">大娘饺子联庄店</p>
           <p class="manjian">满30减22，满55减32，满100减45</p>
           <div class="contentRight">
             <!--<div class="contentRight-Hui"><span>惠</span></div>-->
