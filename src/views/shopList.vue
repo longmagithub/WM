@@ -346,8 +346,10 @@
             <img :src="item.logo" width="51px" height="51px">
           </div>
           <div class="content">
-            <p class="shopTitle">豆花花</p>
-            <p class="manjian">满25减2，满45减5，满25减2，满45减5，满25减2，满45减5</p>
+            <p class="shopTitle">{{item.shopName}}</p>
+            <p class="manjian">
+              <span v-for="discountsItem in item.discounts">{{discountsItem.title}}</span>
+            </p>
             <div class="contentRight">
               <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
               <p class="tiemBox"><span class="tiem">30分钟</span></p>
@@ -442,17 +444,23 @@
       // 获取列表
       getShopList() {
         const data = {
-          customerId: 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+          customerId: this.customerId || getStore('openId').customerId,
           pageSize: 30,
           pageNumber: 1,
           longitude: 0, // 经度
-          latitude: 0 // 维度
+          latitude: 0, // 维度
+          discounts: [], // uxwm 满减
+          thirdDiscounts: [] // 其他平台满减
         }
         this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
             this.shopList = res.data
+            this.discounts = res.data.discounts
+            this.thirdDiscounts = res.data.thirdDiscounts
             console.log(res.data)
+            console.log(this.discounts)
+            console.log(this.thirdDiscounts)
           }
         })
       },
