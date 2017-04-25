@@ -348,15 +348,15 @@
           <div class="content">
             <p class="shopTitle">{{item.shopName}}</p>
             <p class="manjian">
-              <span v-for="discountsItem in item.discounts">{{discountsItem.title}}</span>
+              <span v-for="discountsItem in item.discounts">{{discountsItem.title}}&nbsp;&nbsp;</span>
             </p>
             <div class="contentRight">
               <!--<p class="tiemBox"><span class="distance">1.15KM</span>丨<span class="tiem">30分钟</span></p>-->
-              <p class="tiemBox"><span class="tiem">30分钟</span></p>
+              <p class="tiemBox"><span class="tiem">{{item.duration}}分钟</span></p>
             </div>
           </div>
         </div>
-        <div class="contentRight-Hui" @click="toggleParity"><span>惠</span></div>
+        <div class="contentRight-Hui" @click="toggleParity(item.discounts, item.thirdDiscounts)"><span>惠</span></div>
       </li>
     </ul>
     <transition name="fade">
@@ -366,13 +366,13 @@
           <div class="uxwm-terrace">
             <div class="label">悠先外卖：</div>
             <div class="manjianText">
-              <span v-for="item in itemShopList.discounts">{{item.title}}</span>
+              <span v-for="item in duration">{{item.title}}&nbsp;</span>
             </div>
           </div>
           <div class="else-terrace">
             <div class="label">其他平台：</div>
             <div class="manjianText">
-              <span v-for="item in itemShopList.thirdDiscounts">{{item.title}}</span>
+              <span v-for="item in thirdDiscounts">{{item.title}}&nbsp;&nbsp;</span>
             </div>
           </div>
         </div>
@@ -389,7 +389,9 @@
         customerId: '',
         shopList: [],
         shopListShow: false,
-        itemShopList: {}
+        itemShopList: {},
+        thirdDiscounts: [], // 其他平台
+        duration: []  // uxwm平台
       }
     },
     created() {
@@ -455,19 +457,30 @@
         this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            this.shopList = res.data
-            this.discounts = res.data.discounts
-            this.thirdDiscounts = res.data.thirdDiscounts
-            console.log(res.data)
-            console.log(this.discounts)
-            console.log(this.thirdDiscounts)
+            res.data.forEach((data) => {
+              data.discounts = data.discounts.reverse()
+              data.thirdDiscounts = data.thirdDiscounts.reverse()
+              this.shopList.push(data)
+            })
+//            console.log(this.shopList)
           }
         })
       },
       //  显示比价弹窗
-      toggleParity() {
-        console.log(123)
-        this.shopListShow = true
+      toggleParity(duration, thirdDiscounts) {
+        if (duration.length > 0) {
+          if (thirdDiscounts.length > 0) {
+            this.duration = duration
+            this.thirdDiscounts = thirdDiscounts
+            this.shopListShow = true
+          } else {
+            console.log('其他为空')
+            return
+          }
+        } else {
+          console.log('全为空')
+          return
+        }
       },
       // 关闭 比较 toast
       closeToast() {
@@ -504,7 +517,7 @@
     position: absolute;
     top: 0px;
     right: 0px;
-    padding: 20px 10px 25px 25px;
+    padding: 10px 10px 25px 25px;
   }
 
   .shopList .listbox .contentRight-Hui span {
@@ -529,7 +542,7 @@
     /*margin-bottom: 15px;*/
   }
 
-  .shopList .list-item:first-child {
+  .shopList .listbox:first-child {
     border-top: 10px solid #f5f5f5;
   }
 
@@ -667,6 +680,10 @@
   .shopList .shopListToast .textConten .uxwm-terrace .manjianText,
   .shopList .shopListToast .textConten .else-terrace .manjianText {
     flex: 1;
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #FA753E;
+    line-height: 20px;
   }
 
   .shopList .shopListToast .textConten .uxwm-terrace .label {
