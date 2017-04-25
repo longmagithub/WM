@@ -433,8 +433,6 @@
       }
       this.getShopList()
     },
-    mounted() {
-    },
     methods: {
       to() {
         const oauthCallbackUrl =
@@ -475,15 +473,17 @@
       toggleParity(duration, thirdDiscounts) {
         if (duration.length > 0) {
           if (thirdDiscounts.length > 0) {
+            this.duration = []
+            this.thirdDiscounts = []
             this.duration = duration
             this.thirdDiscounts = thirdDiscounts
             this.shopListShow = true
           } else {
-            console.log('其他为空')
+//            console.log('其他为空')
             return
           }
         } else {
-          console.log('全为空')
+//          console.log('全为空')
           return
         }
       },
