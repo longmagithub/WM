@@ -343,7 +343,8 @@
       <li class="listbox" v-for="item in shopList">
         <div class="list-item" @click="goIndex(item.shopId)">
           <div class="logo">
-            <img :src="item.logo" width="51px" height="51px">
+            <img v-if="item.logo" :src="item.logo" width="51px" height="51px">
+            <img v-else src="../assets/item_logo.png" width="51px" height="51px">
           </div>
           <div class="content">
             <p class="shopTitle">{{item.shopName}}</p>
@@ -460,6 +461,10 @@
             res.data.forEach((data) => {
               data.discounts = data.discounts.reverse()
               data.thirdDiscounts = data.thirdDiscounts.reverse()
+              // 添加 图片分割
+              if (data.logo) {
+                data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+              }
               this.shopList.push(data)
             })
 //            console.log(this.shopList)
