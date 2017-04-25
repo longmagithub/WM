@@ -33,6 +33,11 @@ export default new Router({
       path: '/userOrderList',
       redirect: '/orderList' // 重定向到 /门店列表
     },
+    // 除去缓存
+    {
+      path: '/jingmo',
+      component: require('../views/jingmo.vue')
+    },
     // 静默授权
     {
       path: '/shopList',
