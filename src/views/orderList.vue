@@ -28,7 +28,7 @@
 </template>
 <script>
   import Toast from './../components/toast.vue'
-  import {getStore, setStore, urlParse} from '../common/js/util'
+  import {getStore, setStore, urlParse, removeStore} from '../common/js/util'
   import * as PublicJs from '../utils/public'
   export default {
     mounted () {
@@ -61,12 +61,32 @@
       Toast
     },
     created() {
-      let url = window.location.href
-      if (getStore('openId') === null) {
-        if (url.indexOf('code') < 0) {
-          console.log('没有授权')
-          this.to()
-        } else {
+      if (getStore('version') === null || getStore('version') !== 20170426) {
+        removeStore('openId')
+        removeStore('userInfo')
+        removeStore('shopInfo')
+        setStore('version', 20170426)
+      } else {
+        let url = window.location.href
+        if (getStore('openId') === null) {
+          if (url.indexOf('code') < 0) {
+            console.log('没有授权')
+            this.to()
+          } else {
+            const data = {
+              code: urlParse().code,
+              type: 1 // 授权类型：1静默授权；2用户授权
+            }
+            const api = '/mp/authority/customer'
+            this.axios.post(api, data).then((res) => {
+              res = res.data
+              this.customerId = res.data.customerId
+              setStore('openId', {
+                customerId: res.data.customerId
+              })
+            })
+          }
+        } else if (getStore('openId').customerId === undefined) {
           const data = {
             code: urlParse().code,
             type: 1 // 授权类型：1静默授权；2用户授权
@@ -79,27 +99,14 @@
               customerId: res.data.customerId
             })
           })
+        } else {
+          this.customerId = getStore('openId').customerId
         }
-      } else if (getStore('openId').customerId === undefined) {
-        const data = {
-          code: urlParse().code,
-          type: 1 // 授权类型：1静默授权；2用户授权
-        }
-        const api = '/mp/authority/customer'
-        this.axios.post(api, data).then((res) => {
-          res = res.data
-          this.customerId = res.data.customerId
-          setStore('openId', {
-            customerId: res.data.customerId
-          })
-        })
-      } else {
-        this.customerId = getStore('openId').customerId
-      }
-      PublicJs.changeTitleInWx('我的订单')
-      this.sessionId = getStore('openId').customerId || this.$route.query.customerId || getStore('userInfo').customerId
+        PublicJs.changeTitleInWx('我的订单')
+        this.sessionId = getStore('openId').customerId || this.$route.query.customerId || getStore('userInfo').customerId
 //      this.shopId = this.$route.query.customerId ? this.$route.query.customerId : ''
-      this.getOrderList()
+        this.getOrderList()
+      }
     },
     methods: {
       to() {

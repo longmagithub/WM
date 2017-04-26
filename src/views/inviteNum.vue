@@ -20,7 +20,7 @@
 
 <script type="text/ecmascript-6">
   import toast from '../components/toast.vue'
-  import {getStore, urlParse, setStore} from '../common/js/util'
+  import {getStore, urlParse, setStore, removeStore} from '../common/js/util'
   export default {
     data() {
       return {
@@ -35,11 +35,32 @@
       }
     },
     created() {
-      let url = window.location.href
-      if (getStore('openId') === null) {
-        if (url.indexOf('code') < 0) {
-          this.to()
-        } else {
+      if (getStore('version') === null || getStore('version') !== 20170426) {
+        removeStore('openId')
+        removeStore('userInfo')
+        removeStore('shopInfo')
+        setStore('version', 20170426)
+      } else {
+        let url = window.location.href
+        if (getStore('openId') === null) {
+          if (url.indexOf('code') < 0) {
+            this.to()
+          } else {
+            const data = {
+              code: urlParse().code,
+              type: 1 // 授权类型：1静默授权；2用户授权
+            }
+            const api = '/mp/authority/customer'
+            this.axios.post(api, data).then((res) => {
+              res = res.data
+              this.customerId = res.data.customerId
+              this.getIdcode(this.customerId)
+              setStore('openId', {
+                customerId: res.data.customerId
+              })
+            })
+          }
+        } else if (getStore('openId').customerId === undefined) {
           const data = {
             code: urlParse().code,
             type: 1 // 授权类型：1静默授权；2用户授权
@@ -53,24 +74,10 @@
               customerId: res.data.customerId
             })
           })
-        }
-      } else if (getStore('openId').customerId === undefined) {
-        const data = {
-          code: urlParse().code,
-          type: 1 // 授权类型：1静默授权；2用户授权
-        }
-        const api = '/mp/authority/customer'
-        this.axios.post(api, data).then((res) => {
-          res = res.data
-          this.customerId = res.data.customerId
+        } else {
+          this.customerId = getStore('openId').customerId
           this.getIdcode(this.customerId)
-          setStore('openId', {
-            customerId: res.data.customerId
-          })
-        })
-      } else {
-        this.customerId = getStore('openId').customerId
-        this.getIdcode(this.customerId)
+        }
       }
     },
     methods: {
