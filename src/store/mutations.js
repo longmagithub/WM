@@ -192,6 +192,10 @@ export default {
     redEnvelopeType,
     redEnvelopeId
   }) {
+    console.log(boonPrice)
+    console.log(endDate)
+    console.log(redEnvelopeType)
+    console.log(redEnvelopeId)
     state.boonPrice = boonPrice
     state.endDate = endDate
     state.redEnvelopeType = redEnvelopeType

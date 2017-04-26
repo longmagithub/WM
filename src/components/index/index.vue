@@ -52,14 +52,14 @@
     },
     created() {
       // 调试代码 提交时注释
-//      setStore('userInfo', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
-//      })
-//      setStore('openId', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
-//      })
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
+      })
+      setStore('openId', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
+      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
@@ -67,6 +67,7 @@
       this.getRedEnvelope()
       // 商家信息
       this.getShopDetail()
+      console.log(123123)
     },
     mounted() {
     },
@@ -98,6 +99,7 @@
       },
       // 红包信息
       getRedEnvelope() {
+        console.log('红包')
         const data = {
           shopId: this.shopId,
           customerId: this.customerId
@@ -118,6 +120,13 @@
                 }
               }
             }
+          } else {
+            this.BOON_PRICE({
+              boonPrice: 0,
+              endDate: null,
+              redEnvelopeType: null,
+              redEnvelopeId: ''
+            })
           }
         })
       },
