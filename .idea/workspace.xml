@@ -2,6 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.be3f7f6749df2b34345c32726a000227.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.83d3e62463fd7623ecb9.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.42e7e7df6a4d5d4d9915.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/shopList.vue" afterPath="$PROJECT_DIR$/src/views/shopList.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -37,27 +43,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="51" column="6" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
+            <state relative-caret-position="312">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
               <folding>
-                <element signature="e#2309#2346#0" expanded="false" />
-                <element signature="e#2384#2772#0" expanded="false" />
+                <element signature="e#2293#2330#0" expanded="false" />
+                <element signature="e#2368#2756#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="679" column="3" selection-start-line="679" selection-start-column="3" selection-end-line="679" selection-end-column="3" />
-              <folding>
-                <element signature="e#20401#20407#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="477">
+              <caret line="695" column="19" selection-start-line="695" selection-start-column="19" selection-end-line="695" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -234,8 +238,8 @@
         <option value="$PROJECT_DIR$/src/views/addNew.vue" />
         <option value="$PROJECT_DIR$/src/views/inviteNum.vue" />
         <option value="$PROJECT_DIR$/src/views/orderList.vue" />
-        <option value="$PROJECT_DIR$/src/components/index/index.vue" />
         <option value="$PROJECT_DIR$/src/views/shopList.vue" />
+        <option value="$PROJECT_DIR$/src/components/index/index.vue" />
       </list>
     </option>
   </component>
@@ -648,12 +652,12 @@
       <workItem from="1493083043783" duration="28093000" />
       <workItem from="1493129315208" duration="405000" />
       <workItem from="1493130311283" duration="15000" />
-      <workItem from="1493169673901" duration="8864000" />
+      <workItem from="1493169673901" duration="9633000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="997071000" />
+    <option name="totallyTimeSpent" value="997840000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="0" />
@@ -1107,23 +1111,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="51" column="6" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
-          <folding>
-            <element signature="e#2309#2346#0" expanded="false" />
-            <element signature="e#2384#2772#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="477">
+          <caret line="695" column="19" selection-start-line="695" selection-start-column="19" selection-end-line="695" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/shopList.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="679" column="3" selection-start-line="679" selection-start-column="3" selection-end-line="679" selection-end-column="3" />
+        <state relative-caret-position="312">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
           <folding>
-            <element signature="e#20401#20407#0" expanded="true" />
+            <element signature="e#2293#2330#0" expanded="false" />
+            <element signature="e#2368#2756#0" expanded="false" />
           </folding>
         </state>
       </provider>

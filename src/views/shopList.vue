@@ -371,10 +371,10 @@
               <span v-for="item in duration">{{item.title}}&nbsp;</span>
             </div>
           </div>
-          <div class="else-terrace" v-if="thirdDiscounts.length">
+          <div class="else-terrace" v-if="thirdDiscounts.length > 0">
             <div class="label">其他平台：</div>
-            <div class="manjianText">
-              <span v-for="item in thirdDiscounts">{{item.title}}&nbsp;&nbsp;</span>
+            <div class="elsemanjianText">
+              <span v-for="item in thirdDiscounts">{{item.title}}</span>
             </div>
           </div>
           <div class="else-terrace1" v-else>悠先外卖独家优惠</div>
@@ -661,7 +661,6 @@
     display: block;
     position: absolute;
     top: -27px;
-
     width: 100%;
     height: 36px;
     background: url("../assets/VS@2x.png") no-repeat center;
@@ -670,7 +669,7 @@
 
   .shopList .shopListToast .textConten .uxwm-terrace {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 18px 18px 12px 18px;
     font-family: PingFangSC-Regular;
     font-size: 13px;
@@ -678,6 +677,7 @@
     line-height: 20px;
     border-bottom: 1px solid #f5f5f5;
   }
+
   .shopList .shopListToast .textConten .else-terrace1 {
     padding: 11px 18px 12px 18px;
     font-family: PingFangSC-Regular;
@@ -686,9 +686,10 @@
     line-height: 20px;
     text-align: center;
   }
+
   .shopList .shopListToast .textConten .else-terrace {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 11px 18px 12px 18px;
     font-family: PingFangSC-Regular;
     font-size: 13px;
@@ -701,12 +702,18 @@
     flex: 0 0 65px;
   }
 
-  .shopList .shopListToast .textConten .uxwm-terrace .manjianText,
-  .shopList .shopListToast .textConten .else-terrace .manjianText {
+  .shopList .shopListToast .textConten .uxwm-terrace .manjianText {
     flex: 1;
     font-family: PingFangSC-Regular;
     font-size: 13px;
     color: #FA753E;
+    line-height: 20px;
+  }
+
+  .shopList .shopListToast .textConten .else-terrace .elsemanjianText {
+    font-family: PingFangSC-Regular;
+    font-size: 13px;
+    color: #8C8C8C;
     line-height: 20px;
   }
 
