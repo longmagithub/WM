@@ -210,6 +210,7 @@
         }
       }
       console.log(this.boonPrice)
+      this.getRedEnvelope()
     },
     mounted() {
       this.initData()
@@ -238,7 +239,7 @@
         })
       },
       //  红包
-      async getRedEnvelope() {
+      getRedEnvelope() {
         const data = {
           shopId: this.shopId,
           customerId: this.customerId

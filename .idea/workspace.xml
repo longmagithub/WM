@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/index/index.vue" afterPath="$PROJECT_DIR$/src/components/index/index.vue" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.7187159aa022dc25520c58d185ba14c6.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/fonts/iconfont.6dd66c0.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/fonts/iconfont.888ec3d.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/Group33@2x.436103e.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/back.4aa093c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/icon_pen.d549409.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/iconfont.e36cb16.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/img.753c69e.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/inviteNum02.0dc177c.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/inviteSuccess02.e64ab44.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/shaer.3f38d9c.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.abc1cd401d55d3516333.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.8826ab38580df151ab61.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.b505da346aaa3ea30047.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" afterPath="$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -42,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
-              <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
+              <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
               <folding>
                 <element signature="e#2367#2404#0" expanded="false" />
                 <element signature="e#2442#2830#0" expanded="false" />
@@ -84,8 +97,8 @@
       <file leaf-file-name="submitOrder.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="249" column="25" selection-start-line="249" selection-start-column="25" selection-end-line="249" selection-end-column="25" />
+            <state relative-caret-position="441">
+              <caret line="210" column="7" selection-start-line="210" selection-start-column="7" selection-end-line="210" selection-end-column="7" />
               <folding>
                 <element signature="e#4623#4666#0" expanded="true" />
               </folding>
@@ -711,12 +724,12 @@
       <workItem from="1493083043783" duration="28093000" />
       <workItem from="1493129315208" duration="405000" />
       <workItem from="1493130311283" duration="15000" />
-      <workItem from="1493169673901" duration="16157000" />
+      <workItem from="1493169673901" duration="16509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1004364000" />
+    <option name="totallyTimeSpent" value="1004716000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="0" />
@@ -1178,8 +1191,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/submitOrder/submitOrder.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="249" column="25" selection-start-line="249" selection-start-column="25" selection-end-line="249" selection-end-column="25" />
+        <state relative-caret-position="441">
+          <caret line="210" column="7" selection-start-line="210" selection-start-column="7" selection-end-line="210" selection-end-column="7" />
           <folding>
             <element signature="e#4623#4666#0" expanded="true" />
           </folding>
@@ -1189,7 +1202,7 @@
     <entry file="file://$PROJECT_DIR$/src/components/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
-          <caret line="56" column="25" selection-start-line="56" selection-start-column="25" selection-end-line="56" selection-end-column="25" />
+          <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
           <folding>
             <element signature="e#2367#2404#0" expanded="false" />
             <element signature="e#2442#2830#0" expanded="false" />
