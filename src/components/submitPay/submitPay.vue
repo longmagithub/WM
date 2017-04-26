@@ -34,9 +34,8 @@
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
   import toast from '../toast.vue'
-  import {getStore} from '../../common/js/util'
+  import {getStore, removeStore} from '../../common/js/util'
   import * as PublicJs from '../../utils/public'
-  //    import {getStore, removeStore, setStore} from '../../common/js/util'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
@@ -109,6 +108,8 @@
           function (res) {
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               that.CLEAR_CART(getStore('userInfo').shopId)
+              removeStore('buyCart')
+              removeStore('userPrice')
               that.$router.replace({
                 path: '/index',
                 query: {

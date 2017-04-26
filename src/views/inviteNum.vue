@@ -123,7 +123,7 @@
       // 去授权
       to() {
         const oauthCallbackUrl =
-          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/invite?t=' + Date.parse(new Date()) / 1000)
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/inviteNum?t=' + Date.parse(new Date()) / 1000)
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
         window.location.replace(oauthJumpUrl)
@@ -158,7 +158,7 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../assets/inviteNum01.png") no-repeat;
+    background: url("../assets/inviteNum02.png") no-repeat;
     background-size: 100%;
   }
 
@@ -169,7 +169,7 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../assets/inviteSuccess01.png") no-repeat;
+    background: url("../assets/inviteSuccess02.png") no-repeat;
     background-size: 100%;
   }
 

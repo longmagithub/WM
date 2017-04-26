@@ -70,7 +70,7 @@ export default new Router({
     },
     // 邀请码
     {
-      path: '/invite',
+      path: '/inviteNum',
       component: require('../views/inviteNum.vue')
     },
     // 首页
