@@ -4,8 +4,8 @@
       <ul>
         <li class="bg-white" v-for="item in orderList" @click="viewDetail(item.orderNo, item.id)">
           <div class="orderList-logobox">
-          <img v-if="item.shopLogo" :src="item.shopLogo" width="42px" height="42px">
-          <img v-else src="../assets/item_logo.png" width="42px" height="42px">
+            <img v-if="item.shopLogo" :src="item.shopLogo" width="42px" height="42px">
+            <img v-else src="../assets/item_logo.png" width="42px" height="42px">
             <!--<img src="../assets/logo.png" width="42px" height="42px">-->
           </div>
           <div class="oL-content">
@@ -66,7 +66,14 @@
         removeStore('userInfo')
         removeStore('shopInfo')
         setStore('version', 20170426)
+        this.isCode()
       } else {
+        this.isCode()
+      }
+    },
+    methods: {
+      // 判断code
+      isCode() {
         let url = window.location.href
         if (getStore('openId') === null) {
           if (url.indexOf('code') < 0) {
@@ -106,9 +113,8 @@
         this.sessionId = getStore('openId').customerId || this.$route.query.customerId || getStore('userInfo').customerId
 //      this.shopId = this.$route.query.customerId ? this.$route.query.customerId : ''
         this.getOrderList()
-      }
-    },
-    methods: {
+      },
+      // 微信授权
       to() {
         const oauthCallbackUrl =
           encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/orderList')
@@ -189,30 +195,36 @@
     color: #343434;
     overflow-y: auto;
   }
+
   ul {
     padding-top: 12px;
   }
+
   .orderlist-wrap .bg-white {
     display: flex;
     margin-bottom: 12px;
   }
+
   .orderlist-wrap .bg-white .orderList-logobox {
     flex: 0 0 42px;
     margin: 10px;
     width: 42px;
     height: 42px;
   }
-  .orderlist-wrap .bg-white .orderList-logobox img{
+
+  .orderlist-wrap .bg-white .orderList-logobox img {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
   }
+
   .orderlist-wrap .bg-white .oL-content {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .orderlist-wrap .bg-white .oL-content .aa {
     position: relative;
     box-sizing: border-box;
@@ -220,6 +232,7 @@
     padding-right: 10px;
     line-height: 20px;
   }
+
   .orderlist-wrap .bg-white .oL-content .aa .orderTitle {
     display: block;
     box-sizing: border-box;
@@ -228,17 +241,20 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .orderlist-wrap .bg-white .oL-content .aa .orderTitle .btn_right {
     display: inline-block;
     vertical-align: top;
     color: #B2B2B2;
     font-size: 10px;
   }
+
   .orderlist-wrap .bg-white .oL-content .aa .orderStatus {
     position: absolute;
     top: 8px;
     right: 10px;
   }
+
   .orderlist-wrap .bg-white .oL-content .bb {
     margin-top: 3px;
     line-height: 20px;

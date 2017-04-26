@@ -40,7 +40,13 @@
         removeStore('userInfo')
         removeStore('shopInfo')
         setStore('version', 20170426)
+        this.isCode()
       } else {
+        this.isCode()
+      }
+    },
+    methods: {
+      isCode() {
         let url = window.location.href
         if (getStore('openId') === null) {
           if (url.indexOf('code') < 0) {
@@ -78,9 +84,7 @@
           this.customerId = getStore('openId').customerId
           this.getIdcode(this.customerId)
         }
-      }
-    },
-    methods: {
+      },
       // 我的邀请码
       getIdcode(id) {
         this.axios.get(`/br/customer/idcode?sessionId=${id}`).then((res) => {

@@ -402,7 +402,14 @@
         removeStore('userInfo')
         removeStore('shopInfo')
         setStore('version', 20170426)
+        this.isCode()
       } else {
+        this.isCode()
+      }
+    },
+    methods: {
+      // 判断code
+      isCode() {
         let url = window.location.href
         if (getStore('openId') === null) {
           if (url.indexOf('code') < 0) {
@@ -439,9 +446,7 @@
           this.customerId = getStore('openId').customerId
         }
         this.getShopList()
-      }
-    },
-    methods: {
+      },
       to() {
         const oauthCallbackUrl =
           encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?')
