@@ -173,10 +173,16 @@
     background-size: 100%;
   }
 
+  /*.inviteBox {*/
+    /*position: absolute;*/
+    /*top: 66%;*/
+    /*left: 15%;*/
+    /*width: 70%;*/
+  /*}*/
   .inviteBox {
-    position: absolute;
-    top: 66%;
-    left: 15%;
+    position: static;
+    margin: 0 auto;
+    margin-top: 90%;
     width: 70%;
   }
 
