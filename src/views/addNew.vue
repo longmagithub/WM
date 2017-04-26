@@ -140,6 +140,16 @@
         })
       },
       saveAddress () {
+        if (!this.vaild.name) {
+          this.toggleToast(1, '姓名不能为空')
+          return
+        } else if (!this.vaild.phoneNumber) {
+          this.toggleToast(1, '手机格式不对')
+          return
+        } else if (!this.vaild.houseNum) {
+          this.toggleToast(1, '地址不能为空')
+          return
+        }
         if (this.isAjaxing) return
         this.isAjaxing = true
         let data = {
@@ -255,7 +265,7 @@
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.toastShow = !this.toastShow
-          }, 1000)
+          }, 1500)
         } else {
           return
         }
