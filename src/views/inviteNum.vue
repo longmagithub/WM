@@ -173,38 +173,38 @@
     background-size: 100%;
   }
 
-  /*.inviteBox {*/
-    /*position: absolute;*/
-    /*top: 66%;*/
-    /*left: 15%;*/
-    /*width: 70%;*/
-  /*}*/
   .inviteBox {
-    position: fixed;
+    position: absolute;
     top: 66%;
     left: 15%;
     width: 70%;
   }
-
-  /*.inviteNum {*/
-    /*position: relative;*/
-    /*top: 38%;*/
-    /*text-align: center;*/
-    /*font-family: STYuanti-SC-Regular;*/
-    /*font-size: 36px;*/
-    /*color: #FFA448;*/
-    /*letter-spacing: 1.28px;*/
+  /*.inviteBox {*/
+    /*position: fixed;*/
+    /*top: 66%;*/
+    /*left: 15%;*/
+    /*width: 70%;*/
   /*}*/
+
   .inviteNum {
-    position: fixed;
+    position: relative;
     top: 38%;
-    width: 100%;
     text-align: center;
     font-family: STYuanti-SC-Regular;
     font-size: 36px;
     color: #FFA448;
     letter-spacing: 1.28px;
   }
+  /*.inviteNum {*/
+    /*position: fixed;*/
+    /*top: 38%;*/
+    /*width: 100%;*/
+    /*text-align: center;*/
+    /*font-family: STYuanti-SC-Regular;*/
+    /*font-size: 36px;*/
+    /*color: #FFA448;*/
+    /*letter-spacing: 1.28px;*/
+  /*}*/
 
   .inviteBox .inviteWrapper {
     position: relative;
