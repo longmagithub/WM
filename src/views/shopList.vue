@@ -371,13 +371,13 @@
               <span v-for="item in duration">{{item.title}}&nbsp;</span>
             </div>
           </div>
-          <div class="else-terrace" v-if="item.thirdDiscounts.length">
+          <div class="else-terrace" v-if="thirdDiscounts.length">
             <div class="label">其他平台：</div>
             <div class="manjianText">
               <span v-for="item in thirdDiscounts">{{item.title}}&nbsp;&nbsp;</span>
             </div>
           </div>
-          <div class="else-terrace" v-else>悠先外卖独家优惠</div>
+          <div class="else-terrace1" v-else>悠先外卖独家优惠</div>
         </div>
       </div>
     </transition>
@@ -482,23 +482,18 @@
               }
               this.shopList.push(data)
             })
-//            console.log(this.shopList)
+            console.log(this.shopList)
           }
         })
       },
       //  显示比价弹窗
       toggleParity(duration, thirdDiscounts) {
         if (duration.length > 0) {
-          if (thirdDiscounts.length > 0) {
-            this.duration = []
-            this.thirdDiscounts = []
-            this.duration = duration
-            this.thirdDiscounts = thirdDiscounts
-            this.shopListShow = true
-          } else {
-//            console.log('其他为空')
-            return
-          }
+          this.duration = []
+          this.thirdDiscounts = []
+          this.duration = duration
+          this.thirdDiscounts = thirdDiscounts
+          this.shopListShow = true
         } else {
 //          console.log('全为空')
           return
@@ -683,7 +678,14 @@
     line-height: 20px;
     border-bottom: 1px solid #f5f5f5;
   }
-
+  .shopList .shopListToast .textConten .else-terrace1 {
+    padding: 11px 18px 12px 18px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #8C8C8C;
+    line-height: 20px;
+    text-align: center;
+  }
   .shopList .shopListToast .textConten .else-terrace {
     display: flex;
     justify-content: space-between;
