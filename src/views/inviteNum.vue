@@ -182,7 +182,7 @@
   .inviteBox {
     position: static;
     margin: 0 auto;
-    margin-top: 90%;
+    margin-top: 95%;
     width: 70%;
   }
 
