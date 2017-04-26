@@ -357,7 +357,7 @@
             </div>
           </div>
         </div>
-        <div class="contentRight-Hui"
+        <div class="contentRight-Hui" v-if="1"
              @click="toggleParity(item.discounts, item.thirdDiscounts)"><span>惠</span></div>
       </li>
     </ul>

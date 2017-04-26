@@ -59,7 +59,7 @@
       this.paidPrice = getStore('userOrderIofo').paidPrice ? getStore('userOrderIofo').paidPrice : 0
     },
     methods: {
-      ...mapMutations(['CLEAR_CART']),
+      ...mapMutations(['CLEAR_CART', 'BOON_PRICE']),
       countDownFun() {
         this.isTime = !this.isTime
         this.toggleToast(1, '订单已超时')
@@ -108,8 +108,15 @@
           function (res) {
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               that.CLEAR_CART(getStore('userInfo').shopId)
+              that.BOON_PRICE({
+                boonPrice: 0,
+                endDate: null,
+                redEnvelopeType: null,
+                redEnvelopeId: ''
+              })
               removeStore('buyCart')
               removeStore('userPrice')
+
               that.$router.replace({
                 path: '/index',
                 query: {

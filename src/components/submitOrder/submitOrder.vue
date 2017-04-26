@@ -292,6 +292,7 @@
       },
       // 提交订单
       submitOrder() {
+        console.log(this.boonPrice)
         let boonPrice = Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
         if (this.addRess) {
           const data = {
