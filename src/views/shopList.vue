@@ -427,6 +427,7 @@
               setStore('openId', {
                 customerId: res.data.customerId
               })
+              this.getShopList(this.customerId)
             })
           }
         } else if (getStore('openId').customerId === undefined) {
@@ -441,11 +442,12 @@
             setStore('openId', {
               customerId: res.data.customerId
             })
+            this.getShopList(this.customerId)
           })
         } else {
           this.customerId = getStore('openId').customerId
+          this.getShopList(this.customerId)
         }
-        this.getShopList()
       },
       to() {
         const oauthCallbackUrl =
@@ -456,9 +458,9 @@
 //        window.location.href = oauthJumpUrl
       },
       // 获取列表
-      getShopList() {
+      getShopList(id) {
         const data = {
-          customerId: this.customerId || getStore('openId').customerId,
+          customerId: id,
           pageSize: 30,
           pageNumber: 1,
           longitude: 0, // 经度

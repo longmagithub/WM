@@ -91,6 +91,7 @@
               setStore('openId', {
                 customerId: res.data.customerId
               })
+              this.getOrderList(this.customerId)
             })
           }
         } else if (getStore('openId').customerId === undefined) {
@@ -105,14 +106,15 @@
             setStore('openId', {
               customerId: res.data.customerId
             })
+            this.getOrderList(this.customerId)
           })
         } else {
           this.customerId = getStore('openId').customerId
+          this.getOrderList(this.customerId)
         }
         PublicJs.changeTitleInWx('我的订单')
         this.sessionId = getStore('openId').customerId || this.$route.query.customerId || getStore('userInfo').customerId
 //      this.shopId = this.$route.query.customerId ? this.$route.query.customerId : ''
-        this.getOrderList()
       },
       // 微信授权
       to() {
@@ -123,12 +125,12 @@
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
-      getOrderList () {
+      getOrderList (id) {
         if (this.isAjaxing) return
         this.isAjaxing = true
         this.dataStatus = '加载中...'
         const data = {
-          sessionId: this.sessionId,
+          sessionId: id,
           pageSize: this.pageSize,
           pageIndex: this.pageIndex
         }
