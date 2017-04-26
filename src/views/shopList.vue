@@ -357,7 +357,8 @@
             </div>
           </div>
         </div>
-        <div class="contentRight-Hui" @click="toggleParity(item.discounts, item.thirdDiscounts)"><span>惠</span></div>
+        <div class="contentRight-Hui" v-if="item.thirdDiscounts.length"
+             @click="toggleParity(item.discounts, item.thirdDiscounts)"><span>惠</span></div>
       </li>
     </ul>
     <transition name="fade">
