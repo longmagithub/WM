@@ -1,10 +1,10 @@
 <template>
   <div class="inviteWap">
-    <div class="inviteSuccess" v-if="isSuccessInviteNum">
-    <!--<div class="inviteSuccess" v-if="0">-->
+    <div class="inviteSuccess" v-show="isSuccessInvite">
+      <!--<div class="inviteSuccess" v-if="0">-->
       <div class="inviteNum" v-show="idcode">{{idcode}}</div>
     </div>
-    <div class="invite" v-else>
+    <div class="invite" v-show="!isSuccessInvite">
       <div class="inviteNum" v-show="idcode">{{idcode}}</div>
       <div class="inviteBox">
         <p class="inviteWrapper">
@@ -28,9 +28,10 @@
         toastShow: false,
         toastText: '',
         customerId: '',
-        idcode: '124',
+        idcode: '',
         referenceCode: '',
-        isSuccessInviteNum: ''
+        isSuccessInviteNum: '',
+        isSuccessInvite: false
       }
     },
     created() {
@@ -80,6 +81,11 @@
           if (res.success) {
             this.idcode = res.data.idCode
             this.isSuccessInviteNum = res.data.referenceCode
+            if (this.isSuccessInviteNum === '') {
+              this.isSuccessInvite = false
+            } else {
+              this.isSuccessInvite = true
+            }
           }
         })
       },

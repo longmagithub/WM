@@ -97,7 +97,7 @@
         this.customerId = getStore('openId').customerId
       }
       PublicJs.changeTitleInWx('我的订单')
-      this.sessionId = this.$route.query.customerId || getStore('userInfo').customerId
+      this.sessionId = getStore('openId').customerId || this.$route.query.customerId || getStore('userInfo').customerId
 //      this.shopId = this.$route.query.customerId ? this.$route.query.customerId : ''
       this.getOrderList()
     },
