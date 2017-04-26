@@ -357,7 +357,7 @@
             </div>
           </div>
         </div>
-        <div class="contentRight-Hui" v-if="1"
+        <div class="contentRight-Hui" v-if="item.showFavorableTips"
              @click="toggleParity(item.discounts, item.thirdDiscounts)"><span>惠</span></div>
       </li>
     </ul>
@@ -398,12 +398,12 @@
       }
     },
     created() {
-      if (getStore('version') === null || getStore('version') !== 2017042601) {
+      if (getStore('version') === null || getStore('version') !== 2017042602) {
         removeStore('version')
         removeStore('openId')
         removeStore('userInfo')
         removeStore('shopInfo')
-        setStore('version', 2017042601)
+        setStore('version', 2017042602)
         this.isCode()
       } else {
         this.isCode()
