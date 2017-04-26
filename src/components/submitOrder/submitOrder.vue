@@ -133,7 +133,10 @@
         isDiscount: false, // 是否可以优惠
         shopDiscountId: '', // 优惠id
         discountPrice: 0, // 优惠金额
-        isDoonBox: 1 // 是否有红包
+        isDoonBox: 1, // 是否有红包
+        boonPrice: 0,
+        endDate: null,
+        redEnvelopeId: ''
       }
     },
     created() {
@@ -175,9 +178,6 @@
       this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
       this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinte)
       this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
-      console.log(beginTimeHours)
-      console.log(this.endTime)
-      console.log(this.beginTime)
 
       this.options.push(Date.parse(this.estimateTime))
       // 默认时间 当前时间 + 出餐时间 + 5
@@ -209,12 +209,13 @@
           this.options.push(oncTime += 900000)
         }
       }
+      console.log(this.boonPrice)
     },
     mounted() {
       this.initData()
     },
     computed: {
-      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'boonPrice', 'endDate', 'redEnvelopeId'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
@@ -233,6 +234,21 @@
             this.isDiscountFun(res.data.discountList)
           } else {
             this.allNum = this.allPrice + this.feesPrice
+          }
+        })
+      },
+      //  红包
+      async getRedEnvelope() {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.endDate = res.data.endDate
+            this.boonPrice = res.data.price
+            this.redEnvelopeId = res.data.redEnvelopeId
           }
         })
       },

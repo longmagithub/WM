@@ -17,7 +17,7 @@
       <i class="close" @click="closeBoon"></i>
       <div class="backImg" @click="goShare">
         <div class="textContent">
-          <p class="price">{{boonPrice}}<span class="desc">元</span></p>
+          <p class="price">{{IndexboonPrice}}<span class="desc">元</span></p>
           <p>恭喜您</p>
           <p>获得一个悠先外卖红包</p>
         </div>
@@ -47,7 +47,8 @@
         endTime: '',
         deliveryfee: {}, // 配送费
         shopStatus: 0, // 门店状态
-        isCloseBoon: false
+        isCloseBoon: false,
+        IndexboonPrice: 0
       }
     },
     created() {
@@ -99,7 +100,6 @@
       },
       // 红包信息
       getRedEnvelope() {
-        console.log('红包')
         const data = {
           shopId: this.shopId,
           customerId: this.customerId
@@ -107,15 +107,10 @@
         this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            this.BOON_PRICE({
-              boonPrice: res.data.price,
-              endDate: res.data.endDate,
-              redEnvelopeType: res.data.type,
-              redEnvelopeId: res.data.redEnvelopeId
-            })
             if (res.data.type === 1) {
               if (res.data.first) {
                 if (res.data.price > 0) {
+                  this.IndexboonPrice = res.data.price
                   this.isCloseBoon = true
                 }
               }
