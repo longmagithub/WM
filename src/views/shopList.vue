@@ -357,7 +357,7 @@
             </div>
           </div>
         </div>
-        <div class="contentRight-Hui" v-if="item.thirdDiscounts.length"
+        <div class="contentRight-Hui"
              @click="toggleParity(item.discounts, item.thirdDiscounts)"><span>惠</span></div>
       </li>
     </ul>
@@ -371,12 +371,13 @@
               <span v-for="item in duration">{{item.title}}&nbsp;</span>
             </div>
           </div>
-          <div class="else-terrace">
+          <div class="else-terrace" v-if="item.thirdDiscounts.length">
             <div class="label">其他平台：</div>
             <div class="manjianText">
               <span v-for="item in thirdDiscounts">{{item.title}}&nbsp;&nbsp;</span>
             </div>
           </div>
+          <div class="else-terrace" v-else>悠先外卖独家优惠</div>
         </div>
       </div>
     </transition>
