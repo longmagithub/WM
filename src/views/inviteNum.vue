@@ -35,12 +35,12 @@
       }
     },
     created() {
-      if (getStore('version') === null || getStore('version') !== 2017042602) {
+      if (getStore('version') === null || getStore('version') !== 20170503) {
         removeStore('version')
         removeStore('openId')
         removeStore('userInfo')
         removeStore('shopInfo')
-        setStore('version', 2017042602)
+        setStore('version', 20170503)
         this.isCode()
       } else {
         this.isCode()

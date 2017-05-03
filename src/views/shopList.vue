@@ -398,12 +398,12 @@
       }
     },
     created() {
-      if (getStore('version') === null || getStore('version') !== 2017042602) {
+      if (getStore('version') === null || getStore('version') !== 20170503) {
         removeStore('version')
         removeStore('openId')
         removeStore('userInfo')
         removeStore('shopInfo')
-        setStore('version', 2017042602)
+        setStore('version', 20170503)
         this.isCode()
       } else {
         this.isCode()
@@ -456,8 +456,8 @@
           encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
-        window.location.replace(oauthJumpUrl)
-//        window.location.href = oauthJumpUrl
+//        window.location.replace(oauthJumpUrl)
+        window.location.href = oauthJumpUrl
       },
       // 获取列表
       getShopList(id) {
