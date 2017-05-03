@@ -68,9 +68,6 @@
       this.getRedEnvelope()
       // 商家信息
       this.getShopDetail()
-      console.log(123123)
-    },
-    mounted() {
     },
     computed: {
       // 检测 vuex 中boonPrice
