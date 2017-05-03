@@ -58,7 +58,7 @@
               <div class="desc" v-if="!totalNum">购物车为空</div>
               <div class="price" v-if="totalNum">
                 <div class="price-num">￥{{allPrice | toFixedFil}}</div>
-                <div class="delivery">{{deliveryDesc}}</div>
+                <!--<div class="delivery">{{deliveryDesc}}</div>-->
               </div>
             </div>
           </div>
@@ -191,7 +191,8 @@
         type: Object
       },
       minPrice: {
-        type: Number
+        type: Number,
+        default: 0
       }
     },
     data() {
@@ -244,6 +245,7 @@
       this.customerId = getStore('userInfo').customerId
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
+      console.log(this.cartList)
       const data = {
         shopId: this.shopId,
         customerId: this.customerId
@@ -335,27 +337,6 @@
               return `另需要配送费${this.seller.dispatching.fees[i].fee}元`
             }
           }
-//          if (this.allPrice >= this.seller.dispatching.fees[0].price) {
-//            let totalPack = this.totalPack
-//            let feesPrice = this.seller.dispatching.fees[0].fee
-//            let allPrice = this.allPrice
-//            this.USER_PRICE({totalPack, feesPrice, allPrice})
-//            setStore('userPrice', [totalPack, feesPrice, allPrice])
-//            return `另需要配送费${this.seller.dispatching.fees[0].fee}元`
-//          } else {
-//            let flag = 0
-//            for (let i = 0; i < this.seller.dispatching.fees.length; i++) {
-//              if (this.allPrice >= this.seller.dispatching.fees[i].price) {
-//                flag = i
-//              }
-//            }
-//            let totalPack = this.totalPack
-//            let feesPrice = this.seller.dispatching.fees[flag].fee
-//            let allPrice = this.allPrice
-//            setStore('userPrice', [totalPack, feesPrice, allPrice])
-//            this.USER_PRICE({totalPack, feesPrice, allPrice})
-//            return `另需要配送费${this.seller.dispatching.fees[flag].fee}元`
-//          }
         }
       },
       // pay 的描述
@@ -1117,14 +1098,16 @@
   }
 
   .shopcart .content .content-left .price-wrapper .price {
+    display: flex;
+    align-items: center;
     height: 49px;
-    padding: 8px 0;
+    /*padding: 8px 0;*/
     color: #ffffff;
     text-align: left;
   }
 
   .shopcart .content .content-left .price-wrapper .price .price-num {
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     font-size: 17px;
     line-height: 17px;
     font-weight: 500;
