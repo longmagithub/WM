@@ -157,7 +157,7 @@
       // 商户信息
       this.shopInfo = getStore('shopInfo')
       this.packPrice = parseFloat(getStore('userPrice')[0].toFixed(2))
-//      this.feesPrice = parseFloat(getStore('userPrice')[1].toFixed(2))
+      this.feesPrice = parseFloat(getStore('userPrice')[1].toFixed(2))
       this.allPrice = parseFloat(getStore('userPrice')[2].toFixed(2))
       // 默认地址
       this.getAddRess(this.addressId)
@@ -264,7 +264,7 @@
             res = res.data
             if (res.success) {
               this.addRess = res.data
-              this.getDispatchPrice(res.data.distance)
+//              this.getDispatchPrice(res.data.distance)
             }
           })
         } else {  // 默认地址
@@ -276,7 +276,7 @@
             res = res.data
             if (res.success === true) {
               this.addRess = res.data
-              this.getDispatchPrice(res.data.distance)
+//              this.getDispatchPrice(res.data.distance)
             }
           })
         }
