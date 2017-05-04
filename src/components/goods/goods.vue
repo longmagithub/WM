@@ -631,7 +631,7 @@
   .goods {
     display: flex;
     position: absolute;
-    top: 125px;
+    top: 90px;
     bottom: 0px;
     /*margin-bottom: 49px;*/
     padding-bottom: 50px;

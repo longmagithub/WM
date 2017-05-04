@@ -256,7 +256,8 @@
         if (id) { // 改变地址
           const data = {
             sessionId: this.customerId,
-            addressId: id
+            addressId: id,
+            shopId: this.shopId
           }
           this.axios.get(`/br/customer/address${this.PublicJs.createParams(data)}`).then((res) => {
             res = res.data

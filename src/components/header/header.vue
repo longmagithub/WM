@@ -125,7 +125,7 @@
     overflow: hidden;
     position: relative;
     padding: 15px 7px 8px 10px;
-    height: 108px;
+    height: 67px;
   }
 
   .header .content-wrapper {
