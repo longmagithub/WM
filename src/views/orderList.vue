@@ -61,12 +61,12 @@
       Toast
     },
     created() {
-      if (getStore('version') === null || getStore('version') !== 2017050402) {
+      if (getStore('version') === null || getStore('version') !== 2017050403) {
         removeStore('version')
         removeStore('openId')
         removeStore('userInfo')
         removeStore('shopInfo')
-        setStore('version', 2017050402)
+        setStore('version', 2017050403)
         this.isCode()
       } else {
         this.isCode()

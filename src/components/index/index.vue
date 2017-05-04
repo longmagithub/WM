@@ -53,14 +53,14 @@
     },
     created() {
       // 调试代码 提交时注释
-//      setStore('userInfo', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
-//      })
-//      setStore('openId', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': '9480c029-a45d-479e-a3c3-74ed9c65d54d'
-//      })
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
+      })
+      setStore('openId', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
+      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId

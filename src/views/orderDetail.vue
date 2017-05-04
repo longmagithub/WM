@@ -154,7 +154,6 @@
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
             }
           } else {
-            console.log(12312312)
             this.toastShow = true
             this.toastText = '网络异常，请稍候再试'
           }

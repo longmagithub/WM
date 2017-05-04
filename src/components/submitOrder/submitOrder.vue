@@ -52,7 +52,7 @@
                     class="name_num"><span class="name">餐盒费</span></div>
                   <div class="price">￥{{packPrice}}</div>
                 </li>
-                <li class="food_list_item">
+                <li class="food_list_item" v-if="feesPrice">
                   <div
                     class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
@@ -262,7 +262,11 @@
             res = res.data
             if (res.success) {
               this.addRess = res.data
-              this.getDispatchPrice(res.data.distance || 0)
+              if (res.data) {
+                this.getDispatchPrice(res.data.distance)
+              } else {
+                this.getDispatchPrice('noDistance')
+              }
             }
           })
         } else {  // 默认地址
@@ -274,7 +278,11 @@
             res = res.data
             if (res.success === true) {
               this.addRess = res.data
-              this.getDispatchPrice(res.data.distance || 0)
+              if (res.data) {
+                this.getDispatchPrice(res.data.distance)
+              } else {
+                this.getDispatchPrice(res.data)
+              }
             }
           })
         }
@@ -309,27 +317,31 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
-        console.log(userPosition)
-        const data = {
-          sessionId: this.customerId,
-          shopId: this.shopId
-        }
-        this.axios.get(`/br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          if (res.success) {
-            res.data.forEach((item) => {
-              if (userPosition >= item.startDistance && userPosition < item.endDistance) {
-                this.feesPrice = item.price
-                // 优惠列表
-                this.getDiscountList()
-              }
-            })
+        if (userPosition === null) {
+          this.feesPrice = 0
+          this.getDiscountList()
+        } else {
+          const data = {
+            sessionId: this.customerId,
+            shopId: this.shopId
           }
-        })
+          this.axios.get(`/br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
+            res = res.data
+            if (res.success) {
+              res.data.forEach((item) => {
+                if (userPosition >= item.startDistance && userPosition < item.endDistance) {
+                  this.feesPrice = item.price
+                  console.log(this.feesPrice)
+                  // 优惠列表
+                  this.getDiscountList()
+                }
+              })
+            }
+          })
+        }
       },
       // 提交订单
       submitOrder() {
-        console.log(this.boonPrice)
         let boonPrice = Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
         if (this.addRess) {
           const data = {
