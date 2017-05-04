@@ -147,7 +147,9 @@
             console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
-              this.orderStatus.tip = `请在${this.addMinutes(res.data.data.orderTime, 15)}前付款，超过时间，订单将被自动取消`
+              this.addMinutes(res.data.data.orderTime)
+//              this.orderStatus.tip = `请在${this.addMinutes(res.data.data.orderTime, 15)}前付款，超过时间，订单将被自动取消`
+              this.orderStatus.tip = `请在${res.data.data.orderTime}前付款，超过时间，订单将被自动取消`
             } else if (res.data.data.state === 6 || res.data.data.state === 100) {
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
             }
@@ -162,10 +164,13 @@
         })
       },
       addMinutes (date, minutes) {
-        minutes = parseInt(minutes)
-        var interTimes = minutes * 60 * 1000
-        interTimes = parseInt(interTimes)
-        return this.PublicJs.formatTime((new Date(Date.parse(date) + interTimes).getTime() / 1000), 'hh:mm')
+        console.log(date)
+        let orderTime = new Date(new Date(date).setMinutes(new Date(date).getMinutes() + 15))
+        console.log(orderTime)
+//        minutes = parseInt(minutes)
+//        var interTimes = minutes * 60 * 1000
+//        interTimes = parseInt(interTimes)
+//        return this.PublicJs.formatTime((new Date(Date.parse(date) + interTimes).getTime() / 1000), 'hh:mm')
       },
       callPhone (phone) {
         this.PublicJs.callPhone(phone)

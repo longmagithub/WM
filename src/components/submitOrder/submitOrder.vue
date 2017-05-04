@@ -207,7 +207,6 @@
           this.options.push(oncTime += 900000)
         }
       }
-      console.log(this.boonPrice)
       this.getRedEnvelope()
     },
     mounted() {
@@ -263,7 +262,7 @@
             res = res.data
             if (res.success) {
               this.addRess = res.data
-              this.getDispatchPrice(res.data.distance)
+              this.getDispatchPrice(res.data.distance || 0)
             }
           })
         } else {  // 默认地址
@@ -275,7 +274,7 @@
             res = res.data
             if (res.success === true) {
               this.addRess = res.data
-              this.getDispatchPrice(res.data.distance)
+              this.getDispatchPrice(res.data.distance || 0)
             }
           })
         }
