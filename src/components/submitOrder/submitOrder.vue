@@ -161,8 +161,6 @@
       this.allPrice = parseFloat(getStore('userPrice')[2].toFixed(2))
       // 默认地址
       this.getAddRess(this.addressId)
-      // 优惠列表
-      this.getDiscountList()
       // 默认时间 当前时间 + 出餐时间 + 配送时间
       this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
         this.shopInfo.dispatching.duration))
@@ -222,7 +220,7 @@
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
       // 优惠列表查询
-      async getDiscountList() {
+      getDiscountList() {
         const data = {
           customerId: this.customerId,
           shopId: this.shopId,
@@ -323,7 +321,8 @@
             res.data.forEach((item) => {
               if (userPosition >= item.startDistance && userPosition < item.endDistance) {
                 this.feesPrice = item.price
-                console.log(this.feesPrice = item.price)
+                // 优惠列表
+                this.getDiscountList()
               }
             })
           }

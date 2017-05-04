@@ -333,7 +333,7 @@
               let feesPrice = this.seller.dispatching.fees[i].fee
               let allPrice = this.allPrice
               this.USER_PRICE({totalPack, feesPrice, allPrice})
-              setStore('userPrice', [totalPack, feesPrice, allPrice])
+//              setStore('userPrice', [totalPack, feesPrice, allPrice])
               return `另需要配送费${this.seller.dispatching.fees[i].fee}元`
             }
           }
