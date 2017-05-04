@@ -157,7 +157,7 @@
       // 商户信息
       this.shopInfo = getStore('shopInfo')
       this.packPrice = parseFloat(getStore('userPrice')[0].toFixed(2))
-      this.feesPrice = parseFloat(getStore('userPrice')[1].toFixed(2))
+//      this.feesPrice = parseFloat(getStore('userPrice')[1].toFixed(2))
       this.allPrice = parseFloat(getStore('userPrice')[2].toFixed(2))
       // 默认地址
       this.getAddRess(this.addressId)
@@ -213,6 +213,7 @@
       this.getRedEnvelope()
     },
     mounted() {
+//      this.getDispatchPrice()
       this.initData()
     },
     computed: {
@@ -264,7 +265,7 @@
             res = res.data
             if (res.success) {
               this.addRess = res.data
-//              this.getDispatchPrice(res.data.distance)
+              this.getDispatchPrice(res.data.distance)
             }
           })
         } else {  // 默认地址
@@ -276,7 +277,7 @@
             res = res.data
             if (res.success === true) {
               this.addRess = res.data
-//              this.getDispatchPrice(res.data.distance)
+              this.getDispatchPrice(res.data.distance)
             }
           })
         }
@@ -311,18 +312,18 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
+        console.log(userPosition)
         const data = {
           sessionId: this.customerId,
           shopId: this.shopId
         }
-        this.axios.get(`br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
+        this.axios.get(`/br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            res.data.dispatchPriceList.forEach((item) => {
-              if (item.startDistance >= userPosition < item.endDistance) {
+            res.data.forEach((item) => {
+              if (userPosition >= item.startDistance && userPosition < item.endDistance) {
                 this.feesPrice = item.price
-              } else {
-                this.toggleToast(1, '地址超出配送范围，请重新选择')
+                console.log(this.feesPrice = item.price)
               }
             })
           }

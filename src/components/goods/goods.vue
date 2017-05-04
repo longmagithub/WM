@@ -58,7 +58,7 @@
               <div class="desc" v-if="!totalNum">购物车为空</div>
               <div class="price" v-if="totalNum">
                 <div class="price-num">￥{{allPrice | toFixedFil}}</div>
-                <div class="delivery">{{deliveryDesc}}</div>
+                <!--<div class="delivery">{{deliveryDesc}}</div>-->
               </div>
             </div>
           </div>
@@ -597,7 +597,7 @@
       },
       // 去结算
       gotopay() {
-//        setStore('userPrice', [this.totalPack, 0, this.allPrice])
+        setStore('userPrice', [this.totalPack, 0, this.allPrice])
         this.$router.push({
           path: '/submitOrder',
           query: {
@@ -1099,16 +1099,16 @@
   }
 
   .shopcart .content .content-left .price-wrapper .price {
-    /*display: flex;*/
-    /*align-items: center;*/
+    display: flex;
+    align-items: center;
     height: 49px;
-    padding: 8px 0;
+    /*padding: 8px 0;*/
     color: #ffffff;
     text-align: left;
   }
 
   .shopcart .content .content-left .price-wrapper .price .price-num {
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
     font-size: 17px;
     line-height: 17px;
     font-weight: 500;
