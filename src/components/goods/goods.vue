@@ -597,6 +597,7 @@
       },
       // 去结算
       gotopay() {
+        setStore('userPrice', [this.totalPack, 0, this.allPrice])
         this.$router.push({
           path: '/submitOrder',
           query: {
