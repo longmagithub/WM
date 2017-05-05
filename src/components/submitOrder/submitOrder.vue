@@ -266,7 +266,7 @@
               if (res.data) {
                 this.getDispatchPrice(res.data.distance)
               } else {
-                this.getDispatchPrice('noDistance')
+                this.getDispatchPrice(res.data)
               }
             }
           })
