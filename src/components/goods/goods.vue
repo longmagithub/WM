@@ -245,9 +245,6 @@
       this.customerId = getStore('userInfo').customerId
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
-//      this.cartList.((item) => {
-//        console.log(item)
-//      })
       const data = {
         shopId: this.shopId,
         customerId: this.customerId

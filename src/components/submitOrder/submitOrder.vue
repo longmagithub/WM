@@ -71,8 +71,11 @@
                 红包<span class="boonBox-num">-￥{{boonPrice}}</span>
               </p>
             </div>
-            <div class="totalPrice">总计：<span class="totaPrice-num">￥{{allNum - boonPrice < 0 ? 0.01 : allNum -
-              boonPrice | toFixedFil}}</span>
+            <div class="totalPrice" :class="{isTotalPrice: !feesPrice}">总计：<span class="totaPrice-num">￥{{allNum -
+              boonPrice < 0 ?
+              0.01 :
+              allNum -
+              boonPrice | toFixedFil}}</span><span v-if="!feesPrice" class="noFessPrice">(不包含配送费)</span>
             </div>
           </div>
         </section>
@@ -91,7 +94,8 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="price">待支付￥{{allNum - boonPrice < 0 ? 0.01 : allNum - boonPrice | toFixedFil}}</div>
+      <div class="price">待支付￥{{allNum - boonPrice < 0 ? 0.01 : allNum - boonPrice |
+        toFixedFil}}<span class="noFessPrice" v-if="!feesPrice">(不包含配送费)</span></div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -676,14 +680,15 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .price {
     flex: 0 0 50px;
+    padding-left: 12px;
     text-align: right;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 13px;
+    /*font-weight: 600;*/
     color: #343434;
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .num {
-
+    color: #949494;
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num {
@@ -696,7 +701,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: #949494;
+    /*color: #949494;*/
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name {
@@ -747,6 +752,17 @@
   .orderDetail-wrapper .order-list .totalPrice {
     height: 37px;
     line-height: 37px;
+    /*line-height: 13px;*/
+    /*padding-top: 7px;*/
+    padding-right: 14px;
+    text-align: right;
+    font-size: 13px;
+    color: #2b2a2e;
+  }
+
+  .orderDetail-wrapper .order-list .isTotalPrice {
+    line-height: 13px;
+    padding-top: 7px;
     padding-right: 14px;
     text-align: right;
     font-size: 13px;
@@ -755,6 +771,15 @@
 
   .orderDetail-wrapper .order-list .totalPrice .totaPrice-num {
     color: #ff8932;
+  }
+
+  .orderDetail-wrapper .order-list .isTotalPrice .noFessPrice {
+    display: block;
+    margin-top: 3px;
+    margin-left: 4px;
+    padding-bottom: 5px;
+    font-size: 10px;
+    color: #949494;
   }
 
   .remark-wapper {
@@ -812,8 +837,14 @@
 
   .submitOrder-btn .price {
     flex: 1;
-    padding-left: 17px;
+    padding-left: 15px;
     background: #59595b;
+  }
+
+  .submitOrder-btn .price .noFessPrice {
+    margin-left: 4px;
+    font-size: 10px;
+    font-weight: 100;
   }
 
   .submitOrder-btn .submit-btn {
