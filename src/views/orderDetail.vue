@@ -146,7 +146,7 @@
             this.orderDetail = res.data.data
             console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
-            if (res.data.data.state === 100) {
+            if (res.data.data.state === 0) {
               this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, 15)
             } else if (res.data.data.state === 6 || res.data.data.state === 100) {
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
