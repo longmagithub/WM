@@ -129,7 +129,8 @@
       getAddressDetail (id) {
         const data = {
           sessionId: this.sessionId,
-          addressId: id
+          addressId: id,
+          shopId: this.shopId
         }
         this.axios.get(`/br/customer/address${this.PublicJs.createParams(data)}`)
         .then((res) => {
@@ -164,6 +165,7 @@
         this.sendData(data)
       },
       sendData (data) {
+        console.log(data)
         if (this.addressId) { // 修改地址
           data.addressId = this.addressId
           this.axios.put('/br/customer/address', data)

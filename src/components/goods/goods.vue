@@ -245,7 +245,9 @@
       this.customerId = getStore('userInfo').customerId
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
-      console.log(this.cartList)
+//      this.cartList.((item) => {
+//        console.log(item)
+//      })
       const data = {
         shopId: this.shopId,
         customerId: this.customerId
@@ -278,7 +280,8 @@
       shopCartList: function () {
         return Object.assign({}, this.cartList[this.shopId])
       },
-      currentIndex() { // 判决区间所对应的位置
+      // 判决区间所对应的位置
+      currentIndex() {
         for (let i = 0; i < this.listHeight.length; i++) {
           let height1 = this.listHeight[i]
           let height2 = this.listHeight[i + 1]
