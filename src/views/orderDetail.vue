@@ -1,11 +1,14 @@
 <template>
   <div class="order-detail-wrap">
     <section class="bg-white order-status">
-      <div class="order-status-icon" :class="'status' + orderDetail.state"></div>
+      <div  class="order-status-icon" :class="'status' + orderDetail.state"></div>
       <p class="order-status-tip"
-         v-if="orderDetail.state === 0 || orderDetail.state === 100 || orderDetail.state === 6 || orderDetail.state === 7 || orderDetail.state === 10">
+         v-if="orderDetail.state === 0 || orderDetail.state === 100 || orderDetail.state === 6">
         {{orderStatus.tip}}</p>
       <p class="order-status-txt">{{orderDetail.stateMsgC}}</p>
+      <p class="order-status-tip"
+         v-if="orderDetail.state === 7 || orderDetail.state === 10">
+        {{orderStatus.tip}}</p>
       <button type="button" class="btn-to-pay" v-if="orderDetail.state === 0" @click="weChatPay()">去支付</button>
     </section>
     <section class="bg-white order-foods">
@@ -342,8 +345,10 @@
   }
 
   .order-status-tip {
-    margin-top: 5px;
+    margin: 0 20px;
+    margin-top: 8px;
     font-size: 11px;
+    line-height: 15px;
     color: #b3b3b3;
   }
 
