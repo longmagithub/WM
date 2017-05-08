@@ -188,7 +188,8 @@
   export default {
     props: {
       seller: {
-        type: Object
+        type: Object,
+        default: {}
       },
       minPrice: {
         type: Number,
@@ -220,7 +221,7 @@
         goods: [],
         specs: {}, // 规格
         falg: '',
-        isYingye: true, // 是否营业
+        isYingye: true, // 是否营业 默认是 false 关店
         listHeight: [], // 存放foodList 区间的高度的数组
         scrollY: 0, // 当前滑动的位置
         selectedFood: {},
@@ -237,12 +238,16 @@
         toastText: '清空购物车', // 提示
         isToastText: false, // 控制 提示
         isAjax: false,
-        activity: [] // 活动数组
+        activity: [], // 活动数组
+        hoursArr: [], // 营业时间数组
+        beginTime: new Date(), // 开始时间
+        endTime: new Date() // 结束时间
       }
     },
     created() {
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      this.hoursArr = getStore('shopInfo').hours
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
       const data = {
@@ -358,9 +363,33 @@
         this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
           res = res.data
           if (res.success) {
+            // state === 1 开店 然后判断是否在营业时间
             if (res.data.state === 1) {
-              this.isYingye = true
-              return
+              // 当前小时
+              let activeTime = Date.parse(new Date())
+              for (let i = 0; i < this.hoursArr.length; i++) {
+                // 开始时间
+                let beginTimeHours = parseFloat(this.hoursArr[i].beginTime.split(':')[0])
+                let beginTimeMinutes = parseFloat(this.hoursArr[i].beginTime.split(':')[1])
+                this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
+                this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinutes)
+                this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
+                console.log(this.beginTime)
+                // 结束时间
+                let endTimeHours = parseFloat(this.hoursArr[i].endTime.split(':')[0])
+                let endTimeMinutes = parseFloat(this.hoursArr[i].endTime.split(':')[1])
+                this.endTime = new Date(this.endTime).setHours(endTimeHours)
+                this.endTime = new Date(this.endTime).setMinutes(endTimeMinutes)
+                this.endTime = new Date(this.endTime).setSeconds(0, 0)
+                if (activeTime >= this.beginTime && activeTime <= this.endTime) {
+                  this.isYingye = true
+                  console.log(1)
+                  return
+                } else {
+                  this.isYingye = false
+                  this.toggleToast(1, '商家关闭')
+                }
+              }
             } else {
               this.toggleToast(!res.data.state, '商家关闭')
               this.isYingye = false
@@ -504,7 +533,7 @@
           return
         }
       },
-      // 商户信息
+      // 商户信息（没有执行）
       getShopDetail() {
         // this.axios.get(`${this.api}/br/shop/detail?shopId=${this.shopId}`).then((res) => {
         // 接口通了  注释下面的 打开上面的

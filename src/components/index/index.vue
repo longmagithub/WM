@@ -3,11 +3,6 @@
     <div class="header-box">
       <banner :seller="shopDetail" :detail="detail"></banner>
     </div>
-    <!--<div class="tab">-->
-    <!--<div class="tab-item">-->
-    <!--<span class="label">商品</span>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="main">
       <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
     </div>
@@ -74,7 +69,7 @@
       ...mapState(['boonPrice'])
     },
     methods: {
-      // 营业时间
+      // 红包
       ...mapMutations(['BOON_PRICE']),
       // 分享按钮
       goShare() {

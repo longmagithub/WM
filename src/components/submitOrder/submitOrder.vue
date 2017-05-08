@@ -188,6 +188,9 @@
       let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
         this.shopInfo.dispatching.duration + 15))
       // 预计默认时间
+      console.log(this.endTime)
+      console.log(this.beginTime)
+      console.log(orderTaP)
       if (orderTaP > this.endTime || this.beginTime > orderTaP) {
         this.isJinKuai = true
       } else {
@@ -221,7 +224,7 @@
       ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId'])
     },
     methods: {
-      ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID']),
+      ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID', 'CLEAR_CART']),
       // 优惠列表查询
       getDiscountList() {
         const data = {
@@ -392,6 +395,18 @@
             if (res.success === SUCCESS_OK) {
               this.orderId = res.data.orderId
               this.gotoPay(res.data.orderId)
+            } else if (res.code === 13023) {
+              this.CLEAR_CART(data.shopId)
+              this.toggleToast(1, '菜品价格有变化，请重新下单')
+              setTimeout(() => {
+                this.$router.replace({
+                  path: '/index',
+                  query: {
+                    'shopId': getStore('userInfo').shopId,
+                    'customerId': getStore('userInfo').customerId
+                  }
+                })
+              }, 2000)
             } else {
               this.toggleToast(1, res.message)
             }
@@ -461,7 +476,7 @@
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.toastShow = !this.toastShow
-          }, 1000)
+          }, 1500)
         } else {
           return
         }

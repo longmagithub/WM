@@ -2,7 +2,8 @@
   <div class="order-detail-wrap">
     <section class="bg-white order-status">
       <div class="order-status-icon" :class="'status' + orderDetail.state"></div>
-      <p class="order-status-tip" v-if="orderDetail.state === 0 || orderDetail.state === 100">
+      <p class="order-status-tip"
+         v-if="orderDetail.state === 0 || orderDetail.state === 100 || orderDetail.state === 6 || orderDetail.state === 7 || orderDetail.state === 10">
         {{orderStatus.tip}}</p>
       <p class="order-status-txt">{{orderDetail.stateMsgC}}</p>
       <button type="button" class="btn-to-pay" v-if="orderDetail.state === 0" @click="weChatPay()">去支付</button>
@@ -150,6 +151,8 @@
               this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, 15)
             } else if (res.data.data.state === 6 || res.data.data.state === 100) {
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
+            } else if (res.data.data.state === 7 || res.data.data.state === 10) {
+              this.orderStatus.tip = '由于特殊原因，商户无法处理您的订单，系统将自动退款'
             }
           } else {
             this.toastShow = true
