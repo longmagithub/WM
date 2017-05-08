@@ -93,10 +93,10 @@
   </div>
 </template>
 <script>
-  import Toast from './../components/toast.vue'
-  import {getStore} from './../common/js/util'
+  import Toast from '../../components/toast.vue'
+  import {getStore} from '../../common/utils/util'
   import {mapMutations} from 'vuex'
-  import * as PublicJs from '../utils/public'
+  import * as PublicJs from '../../common/utils/public'
   export default {
     created() {
       PublicJs.changeTitleInWx('订单详情')
@@ -293,7 +293,7 @@
   }
   .discoount {
     display: inline;
-    background: url('../assets/icon_activity_status0.png') no-repeat left center;
+    background: url('../../assets/icon_activity_status0.png') no-repeat left center;
     background-size: 13px 13px;
     padding-left: 24px;
   }
@@ -369,12 +369,12 @@
   }
 
   .status0 {
-    background: url('../assets/icon_order_status0.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status0.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
   .status1 {
-    background: url('../assets/icon_order_status1_.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status1_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
@@ -382,18 +382,18 @@
   .status8,
   .status9,
   .status13 {
-    background: url('../assets/icon_order_status2_8_9_13_.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status2_8_9_13_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
   .status3,
   .status4 {
-    background: url('../assets/icon_order_status3_4_.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status3_4_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
   .status5 {
-    background: url('../assets/icon_order_status5_.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status5_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
@@ -401,12 +401,12 @@
   .status7,
   .status10,
   .status100 {
-    background: url('../assets/icon_order_status6_7_10_.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status6_7_10_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 
   .status12 {
-    background: url('../assets/icon_order_status12_.png') no-repeat center bottom;
+    background: url('../../assets/icon_order_status12_.png') no-repeat center bottom;
     background-size: 55px 55px;
   }
 

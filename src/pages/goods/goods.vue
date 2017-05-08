@@ -180,10 +180,9 @@
 <script type="text/ecmascript-6">
   import {mapState, mapMutations} from 'vuex'
   import BScroll from 'better-scroll'
-  import shopcart from '../shopcart/shopcart'
-  import buyCart from '../buyCart/buyCart.vue'
-  import {setStore, getStore} from '../../common/js/util'
-  import toast from '../toast.vue'
+  import buyCart from '../../components/buyCart/buyCart.vue'
+  import {setStore, getStore} from '../../common/utils/util'
+  import toast from '../../components/toast.vue'
   const SUCCESS_OK = true
   export default {
     props: {
@@ -247,7 +246,7 @@
     created() {
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
-      this.hoursArr = getStore('shopInfo').hours
+      this.hoursArr = this.seller.hours
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
       const data = {
@@ -258,7 +257,6 @@
         res = res.data
         if (res.success === SUCCESS_OK) {
           if (res.data.dishesList === null) {
-//            console.log('菜品为空')
             this.toggleToast(1, res.message)
           } else {
             this.isAjax = true
@@ -274,6 +272,8 @@
       // 门店状态
       this.getShopState()
 //      this.getShopDetail()
+    },
+    mounted() {
     },
     computed: {
       // 检测 vuex 中cartList
@@ -365,31 +365,31 @@
           if (res.success) {
             // state === 1 开店 然后判断是否在营业时间
             if (res.data.state === 1) {
-              // 当前小时
-              let activeTime = Date.parse(new Date())
-              for (let i = 0; i < this.hoursArr.length; i++) {
-                // 开始时间
-                let beginTimeHours = parseFloat(this.hoursArr[i].beginTime.split(':')[0])
-                let beginTimeMinutes = parseFloat(this.hoursArr[i].beginTime.split(':')[1])
-                this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
-                this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinutes)
-                this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
-                console.log(this.beginTime)
-                // 结束时间
-                let endTimeHours = parseFloat(this.hoursArr[i].endTime.split(':')[0])
-                let endTimeMinutes = parseFloat(this.hoursArr[i].endTime.split(':')[1])
-                this.endTime = new Date(this.endTime).setHours(endTimeHours)
-                this.endTime = new Date(this.endTime).setMinutes(endTimeMinutes)
-                this.endTime = new Date(this.endTime).setSeconds(0, 0)
-                if (activeTime >= this.beginTime && activeTime <= this.endTime) {
-                  this.isYingye = true
-                  console.log(1)
-                  return
-                } else {
-                  this.isYingye = false
-                  this.toggleToast(1, '商家关闭')
+              this.$nextTick(() => {
+                // 当前小时
+                let activeTime = Date.parse(new Date())
+                for (let i = 0; i < this.hoursArr.length; i++) {
+                  // 开始时间
+                  let beginTimeHours = parseFloat(this.hoursArr[i].beginTime.split(':')[0])
+                  let beginTimeMinutes = parseFloat(this.hoursArr[i].beginTime.split(':')[1])
+                  this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
+                  this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinutes)
+                  this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
+                  // 结束时间
+                  let endTimeHours = parseFloat(this.hoursArr[i].endTime.split(':')[0])
+                  let endTimeMinutes = parseFloat(this.hoursArr[i].endTime.split(':')[1])
+                  this.endTime = new Date(this.endTime).setHours(endTimeHours)
+                  this.endTime = new Date(this.endTime).setMinutes(endTimeMinutes)
+                  this.endTime = new Date(this.endTime).setSeconds(0, 0)
+                  if (activeTime >= this.beginTime && activeTime <= this.endTime) {
+                    this.isYingye = true
+                    return
+                  } else {
+                    this.isYingye = false
+                    this.toggleToast(1, '商家关闭')
+                  }
                 }
-              }
+              })
             } else {
               this.toggleToast(!res.data.state, '商家关闭')
               this.isYingye = false
@@ -643,7 +643,6 @@
       }
     },
     components: {
-      shopcart,
       buyCart,
       toast
     },

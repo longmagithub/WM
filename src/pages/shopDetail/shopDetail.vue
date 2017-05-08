@@ -24,8 +24,8 @@
 </div>
 </template>
 <script>
-import Toast from './../components/toast.vue'
-import * as PublicJs from '../utils/public'
+import Toast from '../../components/toast.vue'
+import * as PublicJs from '../../common/utils/public'
 export default {
   data () {
     return {
@@ -154,7 +154,7 @@ export default {
 
         .activity-status0 {
           padding-left: 20px;
-          background: url('./../assets/icon_activity_status0.png') no-repeat left center;
+          background: url('../../assets/icon_activity_status0.png') no-repeat left center;
           background-size: 13px 13px;
         }
       }
@@ -170,7 +170,7 @@ export default {
 
           .bill {
             padding-left: 20px;
-            background: url('./../assets/icon_bill.png') no-repeat left center;
+            background: url('../../assets/icon_bill.png') no-repeat left center;
             background-size: 13px 13px;
           }
         }

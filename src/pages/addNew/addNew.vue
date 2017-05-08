@@ -44,8 +44,8 @@
   </div>
 </template>
 <script>
-  import Toast from './../components/toast.vue'
-  import * as PublicJs from '../utils/public'
+  import Toast from '../../components/toast.vue'
+  import * as PublicJs from '../../common/utils/public'
   export default {
     created () {
       this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
@@ -333,12 +333,12 @@
   }
 
   .gender.on {
-    background: url('../assets/btn_right_normal.svg') no-repeat left center;
+    background: url('../../assets/btn_right_normal.svg') no-repeat left center;
     background-size: 18px 18px;
   }
 
   .gender.off {
-    background: url('../assets/btn_right_disabled.svg') no-repeat left center;
+    background: url('../../assets/btn_right_disabled.svg') no-repeat left center;
     background-size: 18px 18px;
   }
 

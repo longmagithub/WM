@@ -28,7 +28,7 @@ import VueLazyload from 'vue-lazyload'
 // import WxPay from 'weixin-pay'
 
 // 引入共用 js
-import * as PublicJs from './utils/public.js'
+import * as PublicJs from './common/utils/public.js'
 
 // icon字体
 import IconFont from './components/iconfont.vue'

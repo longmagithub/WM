@@ -25,7 +25,7 @@
 <script type="text/ecmascript-6">
   import banner from '../header/header.vue'
   import goods from '../goods/goods.vue'
-  import {setStore, getStore} from '../../common/js/util'
+  import {setStore, getStore} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wxshare from '../../components/wxshare.vue'
@@ -48,14 +48,14 @@
     },
     created() {
       // 调试代码 提交时注释
-//      setStore('userInfo', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
-//      })
-//      setStore('openId', {
-//        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-//        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
-//      })
+      setStore('userInfo', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
+      })
+      setStore('openId', {
+        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
+      })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId

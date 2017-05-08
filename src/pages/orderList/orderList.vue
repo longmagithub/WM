@@ -5,7 +5,7 @@
         <li class="bg-white" v-for="item in orderList" @click="viewDetail(item.orderNo, item.id)">
           <div class="orderList-logobox">
             <img v-if="item.shopLogo" :src="item.shopLogo" width="42px" height="42px">
-            <img v-else src="../assets/item_logo.png" width="42px" height="42px">
+            <img v-else src="../../assets/item_logo.png" width="42px" height="42px">
             <!--<img src="../assets/logo.png" width="42px" height="42px">-->
           </div>
           <div class="oL-content">
@@ -27,9 +27,9 @@
   </div>
 </template>
 <script>
-  import Toast from './../components/toast.vue'
-  import {getStore, setStore, urlParse, removeStore} from '../common/js/util'
-  import * as PublicJs from '../utils/public'
+  import Toast from '../../components/toast.vue'
+  import {getStore, setStore, urlParse, removeStore} from '../../common/utils/util'
+  import * as PublicJs from '../../common/utils/public'
   export default {
     mounted () {
       const vue = this

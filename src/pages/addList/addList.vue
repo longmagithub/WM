@@ -29,7 +29,7 @@
 </template>
 <script>
   import {mapState, mapMutations} from 'vuex'
-  import * as PublicJs from '../utils/public'
+  import * as PublicJs from '../../common/utils/util'
   export default {
     data () {
       return {
@@ -183,7 +183,7 @@
   .add-edit {
     flex-shrink: 0;
     width: 46px;
-    background: url('../assets/icon_pen.png') no-repeat center center;
+    background: url('../../assets/icon_pen.png') no-repeat center center;
     background-size: 18px 18px;
   }
 
@@ -201,12 +201,12 @@
   }
   }
   .add-inf.on {
-    background: url('../assets/btn_right_normal.svg') no-repeat left center;
+    background: url('../../assets/btn_right_normal.svg') no-repeat left center;
     background-size: 20px 20px;
   }
 
   .add-inf.off {
-    background: url('../assets/btn_right_disabled.svg') no-repeat left center;
+    background: url('../../assets/btn_right_disabled.svg') no-repeat left center;
     background-size: 20px 20px;
   }
 

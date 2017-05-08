@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {getStore} from '../../common/js/util'
+  import {getStore} from '../../common/utils/util'
   import {mapState} from 'vuex'
   export default {
     props: {

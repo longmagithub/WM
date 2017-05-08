@@ -1,6 +1,7 @@
 <template>
   <div class="imgbox">
-    <img src="../assets/shaer.jpg" width="100%" height="100%">
+    <!--微信分享页面-->
+    <img src="../../assets/shaer.jpg" width="100%" height="100%">
   </div>
 </template>
 

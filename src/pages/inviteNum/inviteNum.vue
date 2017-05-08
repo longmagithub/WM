@@ -19,8 +19,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import toast from '../components/toast.vue'
-  import {getStore, urlParse, setStore, removeStore} from '../common/js/util'
+  import toast from '../../components/toast.vue'
+  import {getStore, urlParse, setStore, removeStore} from '../../common/utils/util'
   export default {
     data() {
       return {
@@ -158,7 +158,7 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../assets/inviteNum02.png") no-repeat;
+    background: url("../../assets/inviteNum02.png") no-repeat;
     background-size: 100%;
   }
 
@@ -169,7 +169,7 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../assets/inviteSuccess02.png") no-repeat;
+    background: url("../../assets/inviteSuccess02.png") no-repeat;
     background-size: 100%;
   }
 

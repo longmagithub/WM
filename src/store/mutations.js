@@ -27,7 +27,7 @@ import {
 import {
   setStore,
   getStore
-} from '../common/js/util'
+} from '../common/utils/util'
 
 export default {
   // 加入购物车

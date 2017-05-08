@@ -104,10 +104,10 @@
 
 <script type="text/ecmascript-6">
   import {mapState, mapMutations} from 'vuex'
-  import {formatDate} from '../../common/js/date'
-  import {getStore, setStore} from '../../common/js/util'
-  import * as PublicJs from '../../utils/public'
-  import toast from '../toast.vue'
+  import {formatDate} from '../../common/utils/date'
+  import {getStore, setStore} from '../../common/utils/util'
+  import * as PublicJs from '../../common/utils/public'
+  import toast from '../../components/toast.vue'
   const SUCCESS_OK = true
   export default {
     data() {

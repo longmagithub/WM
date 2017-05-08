@@ -33,9 +33,9 @@
 
 <script type="text/ecmascript-6">
   import CountDown from './counter/counter.vue'
-  import toast from '../toast.vue'
-  import {getStore, removeStore} from '../../common/js/util'
-  import * as PublicJs from '../../utils/public'
+  import toast from '../../components/toast.vue'
+  import {getStore, removeStore} from '../../common/utils/util'
+  import * as PublicJs from '../../common/utils/public'
   import {mapMutations} from 'vuex'
   const SUCCESS_OK = true
   export default {
