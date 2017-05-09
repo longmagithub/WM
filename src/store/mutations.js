@@ -43,8 +43,10 @@ export default {
   }) {
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
+      console.log(1)
       cart[shopid][categoryId][itemId][foodId]['num']++
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
+      console.log(2)
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['id'] = foodId
@@ -53,6 +55,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
     } else if (cart[shopid] && cart[shopid][categoryId]) {
+      console.log(3)
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
@@ -62,6 +65,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
     } else if (cart[shopid]) {
+      console.log(4)
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -72,6 +76,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
     } else {
+      console.log(5)
       cart[shopid] = {}
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
@@ -112,13 +117,6 @@ export default {
       }
     }
   },
-  // 网页初始化时从本地缓存获取购物车数据
-  // [INIT_BUYCART](state) {
-  //   let initCart = getStore('buyCart')
-  //   if (initCart) {
-  //     state.cartList = JSON.parse(initCart)
-  //   }
-  // },
   // 清空当前商品的购物车信息
   [CLEAR_CART](state, shopid) {
     state.cartList[shopid] = null

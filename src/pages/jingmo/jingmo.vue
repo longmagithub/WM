@@ -1,33 +1,46 @@
 <template>
-  <div>
-    <!--<h1>{{msg}}</h1>-->
-    <!--<h2>{{url}}</h2>-->
-    <!-- <div style="padding: 8px; border: 1px solid #ddd;" @click="jump">点我跳转【用户授权】</div> -->
-  </div>
 </template>
 <script>
-  //  import {setStore} from '../common/js/util'
+  import {urlParse} from '../../common/utils/util'
   export default {
     data () {
       return {
         msg: '静默授权',
         url: '',
-        shopId: ''
+        code: ''
       }
     },
     created() {
-      this.shopId = window.location.href.split('=')[1]
-      this.to()
-      console.log('jingmo')
+      this.url = window.location.href
+      if (this.url.indexOf('code') < 0) {
+        this.to()
+      } else {
+        const data = {
+          code: urlParse().code,
+          type: 1 // 授权类型：1静默授权；2用户授权
+        }
+        this.axios.post('/mp/authority/customer', data).then((res) => {
+          res = res.data
+          this.goIndex(res.data.customerId)
+        })
+      }
     },
     methods: {
-      to () {
+      to() {
         const oauthCallbackUrl =
-          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo1')
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
-//         window.location.replace(oauthJumpUrl)
-        window.location.href = oauthJumpUrl
+        window.location.replace(oauthJumpUrl)
+//        window.location.href = oauthJumpUrl
+      },
+      goIndex(id) {
+        this.$router.replace({
+          path: '/index',
+          query: {
+            customerId: id
+          }
+        })
       }
     }
   }

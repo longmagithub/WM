@@ -22,11 +22,11 @@ export default new Router({
     // 默认
     {
       path: '/',
-      redirect: '/index' // 重定向到 /jingmo
+      redirect: '/jingmo' // 重定向到 /jingmo
     },
     // 静默授权
     {
-      path: '/jingmo1',
+      path: '/jingmo',
       component: require('../pages/jingmo/jingmo.vue')
     },
     // 分享
