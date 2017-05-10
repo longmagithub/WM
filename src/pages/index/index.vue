@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="index-box">
-      <div class="header">
+      <div class="header" ref="header">
         <div class="content-wrapper"
              @click="goSeller">
           <div class="box-content">
@@ -11,7 +11,8 @@
             </div>
             <div class="content">
               <!--下面打开-->
-              <div class="title-name">{{shopDetail.name}}</div>
+              <!--<div class="title-name">{{shopDetail.name}}</div>-->
+              <div class="title-name">麻辣小面联庄店麻辣小面联庄店麻辣小面联庄店</div>
               <!-- 描述 -->
               <!--<div class="description">-->
               <!--name 打开-->
@@ -20,20 +21,13 @@
               <!--<span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee | fees}}</span>-->
               <!--</div>-->
               <div class="bulletin" v-if="shopDetail.notice">公告：{{shopDetail.notice}}</div>
-              <!--<div class="bulletin" v-if="shopDetail.notice">-->
-              <!--<textarea class="elseText"-->
-              <!--v-model="shopDetail.notice"-->
-              <!--disabled="disabled"-->
-              <!--rows="2" maxlength="10"-->
-              <!--placeholder="请输入备注内容（可不填）"></textarea>-->
-              <!--</div>-->
             </div>
             <!--<div class="enter uxwm-iconfont btn_right"></div>-->
           </div>
           <div class="activity" v-if="shopDetail.activity">
           <span class="text" style="margin-right: 5px" v-if="shopDetail.activity"
                 v-for="item in shopDetail.activity">{{item
-            .title}}</span>
+            .title}}我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb</span>
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
           <!--<div class="boonDesc" v-if="boonPrice">-->
@@ -43,25 +37,22 @@
         <div class="user">
           <!--<div class="user-btn" @click="goUser">我的</div>-->
           <circle-menu
+            class="circle_menu_box"
             type="bottom"
             circle="circleMenu.circle"
             :number="3"
             mask="white"
-            width="35px"
-            height="35px"
             colors="circleMenu.colors">
             <div class="uxwm-iconfont wo circle-menu"
-                 width="35px"
-                 height="35px"
                  slot="item_btn"></div>
-            <span slot="item_1" @click="goUser" class="fa fa-twitter fa-lg">订单列表</span>
-            <span slot="item_2" @click="goInviteNum" class="fa fa-weixin fa-lg">邀请码</span>
-            <span slot="item_3" @click="goShare" class="fa fa-weixin fa-lg">分享</span>
+            <span slot="item_1" @click="goUser" class="orderList">订单</span>
+            <span slot="item_2" @click="goInviteNum" class="">邀请码</span>
+            <span slot="item_3" @click="goShare" class="">分享</span>
           </circle-menu>
         </div>
-        <div class="background">
-          <!--<img :src="seller.logo" alt="" width="100%" height="100%">-->
-        </div>
+        <!--<div class="background">-->
+        <!--<img :src="seller.logo" alt="" width="100%" height="100%">-->
+        <!--</div>-->
       </div>
       <div class="main">
         <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
@@ -95,7 +86,7 @@
       return {
         circleMenu: {
           circle: true,
-          colors: ['#FFE26F', 'F3825F', '#F19584', '#F19584']
+          colors: ['#ff6651', '#ff6651', '#ff6651', '#ff6651']
         },
         shopDetail: {}, // 商家信息
         detail: {}, // 配送信息
@@ -108,7 +99,8 @@
         deliveryfee: {}, // 配送费
         shopStatus: 0, // 门店状态
         isCloseBoon: false,
-        IndexboonPrice: 0
+        IndexboonPrice: 0,
+        headerHeight: 0
       }
     },
     created() {
@@ -129,9 +121,22 @@
       // 商家信息
       this.getShopDetail()
     },
+    mounted() {
+      this.$nextTick(() => {
+        console.log(this.$refs.header.getBoundingClientRect().height)
+        this.headerHeight = document.getElementsByClassName('header')
+        console.log(this.headerHeight)
+        console.log(document.getElementsByClassName('header')[0].clientHeight)
+        console.log(document.getElementsByClassName('header')[0].offsetHeight)
+      })
+    },
     computed: {
       // 检测 vuex 中boonPrice
-      ...mapState(['boonPrice'])
+      ...mapState(['boonPrice']),
+      initHeight() {
+        this.headerHeight = this.$refs.header
+        console.log(this.headerHeight)
+      }
     },
     methods: {
       // 红包
@@ -200,10 +205,11 @@
       },
       // 分享
       goShare() {
+        console.log(123)
         wx.ready(() => {
           wx.onMenuShareTimeline({
             title: '我在Thank u mom得到一个大红包，快来~快来~这里还有呐!', // 分享标题
-            link: '', // 分享链接
+            link: 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/erweima', // 分享链接
             imgUrl: '../../assets/item_logo.png', // 分享图标
             success: function () {
               // 用户确认分享后执行的回调函数
@@ -215,7 +221,7 @@
           wx.onMenuShareAppMessage({
             title: '我在Thank u mom得到一个大红包，快来~快来~这里还有呐', // 分享标题
             desc: '微信点外卖-更便宜，更快捷。', // 分享描述
-            link: '', // 分享链接
+            link: 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/erweima', // 分享链接
             imgUrl: '../../assets/item_logo.png', // 分享图标
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -262,9 +268,6 @@
 </script>
 
 <style scoped>
-  /*.index {*/
-  /**/
-  /*}*/
   .tab {
     display: flex;
     width: 100%;
@@ -350,7 +353,9 @@
     /*overflow: hidden;*/
     /*position: relative;*/
     padding: 15px 7px 8px 10px;
-    height: 100px;
+    /*height: 154px;*/
+    background-size: cover;
+    background: url('../../assets/back.jpg') no-repeat;
   }
 
   .header .content-wrapper {
@@ -376,8 +381,8 @@
     flex: 1;
     margin-left: 6px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
     font-size: 10px;
     color: #ffffff;
   }
@@ -391,9 +396,6 @@
     font-size: 10px;
   }
 
-  .header .content-wrapper .box-content .content .bulletin {
-  }
-
   .header .content-wrapper .box-content .content .title-name,
   .header .content-wrapper .box-content .content .description {
     overflow: hidden;
@@ -402,25 +404,14 @@
   }
 
   .header .content-wrapper .box-content .content .bulletin {
-    margin-top: 8px;
-    height: 30px;
-    overflow: hidden;
+    display: none;
+    margin-top: 5px;
+    /*height: 30px;*/
+    display: -webkit-flex;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical !important;
   }
-
-  /*.header .content-wrapper .box-content .content .bulletin .elseText {*/
-  /*box-sizing: border-box;*/
-  /*width: 100%;*/
-  /*max-height: 30px;*/
-  /*color: #343434;*/
-  /*font-size: 12px;*/
-  /*border: none;*/
-  /*background: none;*/
-  /*overflow: hidden;*/
-  /*text-overflow: ellipsis;*/
-  /*!*white-space: nowrap;*!*/
-  /*}*/
 
   .enter {
     position: absolute;
@@ -436,7 +427,7 @@
     position: relative;
     box-sizing: border-box;
     padding-left: 17px;
-    padding-right: 55px;
+    /*padding-right: 55px;*/
     margin-top: 4px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -470,22 +461,34 @@
 
   .user {
     position: absolute;
-    top: 24px;
-    right: 7px;
-    width: 35px;
-    height: 35px;
+    top: 15px;
+    right: 20px;
   }
 
-  .user #CircleMenu .oy-menu-group {
-    display: block;
-    width: 35px !important;
-    height: 35px !important;
+  .user .circle-menu {
+    box-sizing: border-box;
+    width: 48px;
+    height: 48px;
+    line-height: 45px;
+    font-size: 22px;
+    color: #fff;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.9);
   }
 
-  .user #CircleMenu .oy-menu-group .oy-menu-btn {
+  .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item span {
     display: block;
-    width: 35px !important;
-    height: 35px !important;
+    width: 48px !important;
+    height: 48px !important;
+    line-height: 48px !important;
+    border-radius: 50% !important;
+    background: #ff6651 !important;
+    font-size: 12px;
+    color: #fff;
+  }
+
+  .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item .orderList {
+    font-size: 13px;
   }
 
   .user-btn {

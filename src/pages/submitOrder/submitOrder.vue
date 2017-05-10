@@ -143,14 +143,17 @@
         redEnvelopeId: '',
         testTime: [
           {
-            beginTime: '17:00',
-            endTime: '20:30'
+            beginTime: '07:00',
+            endTime: '09:30'
+          },
+          {
+            beginTime: '11:00',
+            endTime: '14:00'
+          },
+          {
+            beginTime: '16:00',
+            endTime: '21:00'
           }
-//          ,
-//          {
-//            beginTime: '22:00',
-//            endTime: '23:00'
-//          }
         ]
       }
     },
@@ -213,7 +216,25 @@
           } else if (oneTimeIndex === 3) {
             timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
           }
+        } else if (i === 1) {
+          console.log(this.beginTime)
+          let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+            15)
+          let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+            15))
+          // 开始第一次时间
+          let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+          if (oneTimeIndex === 0) {
+            timeArr.push(new Date(orderTaP).setMinutes(15))
+          } else if (oneTimeIndex === 1) {
+            timeArr.push(new Date(orderTaP).setMinutes(30))
+          } else if (oneTimeIndex === 2) {
+            timeArr.push(new Date(orderTaP).setMinutes(45))
+          } else if (oneTimeIndex === 3) {
+            timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+          }
         } else {
+          console.log(this.beginTime)
           let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
             15)
           let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +

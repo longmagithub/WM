@@ -29,6 +29,11 @@ export default new Router({
       path: '/jingmo',
       component: require('../pages/jingmo/jingmo.vue')
     },
+    // 二维码
+    {
+      path: '/erweima',
+      component: require('../pages/index/erweima.vue')
+    },
     // 分享
     {
       path: '/share',
