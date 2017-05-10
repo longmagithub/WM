@@ -141,19 +141,16 @@
         boonPrice: 0,
         endDate: null,
         redEnvelopeId: '',
-        testHours: [
+        testTime: [
           {
-            beginTime: '07:30',
-            endTime: '12:00'
-          },
-          {
-            beginTime: '13:30',
-            endTime: '18:45'
-          },
-          {
-            beginTime: '20:20',
-            endTime: '23:45'
+            beginTime: '17:00',
+            endTime: '20:30'
           }
+//          ,
+//          {
+//            beginTime: '22:00',
+//            endTime: '23:00'
+//          }
         ]
       }
     },
@@ -182,55 +179,75 @@
       // 默认时间 当前时间 + 出餐时间 + 配送时间
       this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
         this.shopInfo.dispatching.duration))
-      // 结束时间
-//      let endTimeHours = parseFloat(this.shopInfo.hours[this.shopInfo.hours.length - 1].endTime.split(':')[0])
-//      let endTimeMinte = parseFloat(this.shopInfo.hours[this.shopInfo.hours.length - 1].endTime.split(':')[1]) - 15
-      // 测试 时间 testHours
-      let endTimeHours = parseFloat(this.testHours[0].endTime.split(':')[0])
-      let endTimeMinte = parseFloat(this.testHours[0].endTime.split(':')[1]) - 15
-      this.endTime = new Date(this.endTime).setHours(endTimeHours)
-      this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
-      this.endTime = new Date(this.endTime).setSeconds(0, 0)
-      // 开始时间
-//      let beginTimeHours = parseFloat(this.shopInfo.hours[0].beginTime.split(':')[0])
-//      let beginTimeMinte = parseFloat(this.shopInfo.hours[0].beginTime.split(':')[1])
-      // 测试 时间 testHours
-      let beginTimeHours = parseFloat(this.testHours[0].beginTime.split(':')[0])
-      let beginTimeMinte = parseFloat(this.testHours[0].beginTime.split(':')[1])
-      this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
-      this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinte)
-      this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
-
       this.options.push(Date.parse(this.estimateTime))
+      let timeArr = []
+      for (let i = 0; i < this.shopInfo.hours.length; i++) {
+        timeArr = []
+        // 开始时间
+        let beginTimeHours = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[0])
+        let beginTimeMinte = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[1]) + this.shopInfo.makingTime +
+          this.shopInfo.dispatching.duration
+        this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
+        this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinte)
+        this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
+        // 结束时间
+        let endTimeHours = parseFloat(this.shopInfo.hours[i].endTime.split(':')[0])
+        let endTimeMinte = parseFloat(this.shopInfo.hours[i].endTime.split(':')[1]) + this.shopInfo.makingTime +
+          this.shopInfo.dispatching.duration
+        this.endTime = new Date(this.endTime).setHours(endTimeHours)
+        this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
+        this.endTime = new Date(this.endTime).setSeconds(0, 0)
+        if (i === 0) {
+          let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+            this.shopInfo.dispatching.duration + 15)
+          let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+            this.shopInfo.dispatching.duration + 15))
+          // 开始第一次时间
+          let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+          if (oneTimeIndex === 0) {
+            timeArr.push(new Date(orderTaP).setMinutes(15))
+          } else if (oneTimeIndex === 1) {
+            timeArr.push(new Date(orderTaP).setMinutes(30))
+          } else if (oneTimeIndex === 2) {
+            timeArr.push(new Date(orderTaP).setMinutes(45))
+          } else if (oneTimeIndex === 3) {
+            timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+          }
+        } else {
+          let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+            15)
+          let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+            15))
+          // 开始第一次时间
+          let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+          if (oneTimeIndex === 0) {
+            timeArr.push(new Date(orderTaP).setMinutes(15))
+          } else if (oneTimeIndex === 1) {
+            timeArr.push(new Date(orderTaP).setMinutes(30))
+          } else if (oneTimeIndex === 2) {
+            timeArr.push(new Date(orderTaP).setMinutes(45))
+          } else if (oneTimeIndex === 3) {
+            timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+          }
+        }
+        let oncTime = timeArr[0]
+        while (oncTime < this.endTime) {
+          timeArr.push(oncTime += 900000)
+        }
+        this.options = this.options.concat(timeArr)
+      }
       // 默认时间 当前时间 + 出餐时间 + 5
-      let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-        this.shopInfo.dispatching.duration + 15)
-//      let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-//        this.shopInfo.dispatching.duration + 15))
+
+
       // 默认时间  是否 小于
-      this.estimateTime = orderTaP > this.endTime ? this.endTime : orderTaP
+//      this.estimateTime = orderTaP > this.endTime ? this.endTime : orderTaP
       // 预计默认时间
 //      if (orderTaP > this.endTime || this.beginTime > orderTaP) {
 //        this.isJinKuai = true
 //      } else {
 //        this.isJinKuai = false
 //        this.estimateTime = orderTaP > this.endTime ? this.endTime : orderTaP
-//        // 开始第一次时间
-//        let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-//        if (oneTimeIndex === 0) {
-//          this.options.push(new Date(orderTaP).setMinutes(15))
-//        } else if (oneTimeIndex === 1) {
-//          this.options.push(new Date(orderTaP).setMinutes(30))
-//        } else if (oneTimeIndex === 2) {
-//          this.options.push(new Date(orderTaP).setMinutes(45))
-//        } else if (oneTimeIndex === 3) {
-//          new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1)
-//          this.options.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
-//        }
-//        let oncTime = this.options[1]
-//        while (oncTime < this.endTime) {
-//          this.options.push(oncTime += 900000)
-//        }
+//
 //      }
       this.getRedEnvelope()
     },
@@ -357,7 +374,6 @@
               res.data.forEach((item) => {
                 if (userPosition >= item.startDistance && userPosition < item.endDistance) {
                   this.feesPrice = item.price
-                  console.log(this.feesPrice)
                   // 优惠列表
                   this.getDiscountList()
                 }
@@ -465,7 +481,6 @@
             1000) {
             if (allFeesPrice >= parseFloat(parseFloat(data[i].conditionAmount).toFixed(2))) {
               discArr.push(data[i])
-              console.log(discArr)
               this.isDiscount = true
               if (allFeesPrice - discArr[0].reductionAmount > 0) {
                 this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice

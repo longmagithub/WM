@@ -12,13 +12,20 @@
             <!--下面打开-->
             <div class="title-name">{{detailBox.name}}</div>
             <!-- 描述 -->
-            <div class="description">
-              <!--name 打开-->
-              <span>{{detailBox.dispatching.name}}</span>
-              <!--<span>{{detailBox.dispatching.duration}}分钟到达</span>-->
-              <!--<span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee | fees}}</span>-->
+            <!--<div class="description">-->
+            <!--name 打开-->
+            <!--<span>{{detailBox.dispatching.name}}</span>-->
+            <!--<span>{{detailBox.dispatching.duration}}分钟到达</span>-->
+            <!--<span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee | fees}}</span>-->
+            <!--</div>-->
+            <!--<div class="bulletin" v-if="detailBox.notice">公告：{{detailBox.notice}}</div>-->
+            <div class="bulletin" v-if="detailBox.notice">
+              <textarea class="elseText"
+                        v-model="detailBox.notice"
+                        disabled="disabled"
+                        rows="2"
+                        placeholder="请输入备注内容（可不填）"></textarea>
             </div>
-            <div class="bulletin" v-if="detailBox.notice">公告：{{detailBox.notice}}</div>
           </div>
           <!--<div class="enter uxwm-iconfont btn_right"></div>-->
         </div>
@@ -29,11 +36,11 @@
           <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
         </div>
         <!--<div class="boonDesc" v-if="boonPrice">-->
-          <!--您有一个平台红包￥{{boonPrice}}元-->
+        <!--您有一个平台红包￥{{boonPrice}}元-->
         <!--</div>-->
       </div>
-      <div class="user">
-        <div class="user-btn" @click="goUser">我的订单</div>
+      <div class="user" v-if="1">
+        <div class="user-btn" @click="goUser">我的</div>
       </div>
       <div class="background">
         <!--<img :src="seller.logo" alt="" width="100%" height="100%">-->
@@ -122,6 +129,7 @@
 
 <style scoped>
   .header {
+    /*box-sizing: border-box;*/
     overflow: hidden;
     position: relative;
     padding: 15px 7px 8px 10px;
@@ -129,7 +137,7 @@
   }
 
   .header .content-wrapper {
-    margin-right: 90px;
+    margin-right: 50px;
     font-size: 0px;
   }
 
@@ -162,7 +170,8 @@
     font-size: 14px;
   }
 
-  .header .content-wrapper .box-content .content .description {
+  .header .content-wrapper .box-content .content .title-name .description {
+    font-size: 10px;
   }
 
   .header .content-wrapper .box-content .content .bulletin {
@@ -170,11 +179,24 @@
   }
 
   .header .content-wrapper .box-content .content .title-name,
-  .header .content-wrapper .box-content .content .bulletin,
   .header .content-wrapper .box-content .content .description {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .header .content-wrapper .box-content .content .bulletin {
+  }
+
+  .header .content-wrapper .box-content .content .bulletin .elseText {
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    max-height: 30px;
+    color: #343434;
+    font-size: 12px;
+    border: none;
+    background: none;
   }
 
   .enter {

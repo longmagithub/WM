@@ -28,19 +28,20 @@
     methods: {
       to() {
         const oauthCallbackUrl =
-          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/#/jingmo')
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
       goIndex(id) {
-        this.$router.replace({
-          path: '/index',
-          query: {
-            customerId: id
-          }
-        })
+        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/index')
+//        this.$router.replace({
+//          path: '/index',
+//          query: {
+//            customerId: id
+//          }
+//        })
       }
     }
   }
