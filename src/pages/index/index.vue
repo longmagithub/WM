@@ -40,8 +40,24 @@
           <!--您有一个平台红包￥{{boonPrice}}元-->
           <!--</div>-->
         </div>
-        <div class="user" v-if="1">
-          <div class="user-btn" @click="goUser">我的</div>
+        <div class="user">
+          <!--<div class="user-btn" @click="goUser">我的</div>-->
+          <circle-menu
+            type="bottom"
+            circle="circleMenu.circle"
+            :number="3"
+            mask="white"
+            width="35px"
+            height="35px"
+            colors="circleMenu.colors">
+            <div class="uxwm-iconfont wo circle-menu"
+                 width="35px"
+                 height="35px"
+                 slot="item_btn"></div>
+            <span slot="item_1" @click="goUser" class="fa fa-twitter fa-lg">订单列表</span>
+            <span slot="item_2" @click="goInviteNum" class="fa fa-weixin fa-lg">邀请码</span>
+            <span slot="item_3" @click="goShare" class="fa fa-weixin fa-lg">分享</span>
+          </circle-menu>
         </div>
         <div class="background">
           <!--<img :src="seller.logo" alt="" width="100%" height="100%">-->
@@ -73,9 +89,14 @@
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wxshare from '../../components/wxshare.vue'
+  import CircleMenu from 'vue-circle-menu'
   export default{
     data() {
       return {
+        circleMenu: {
+          circle: true,
+          colors: ['#FFE26F', 'F3825F', '#F19584', '#F19584']
+        },
         shopDetail: {}, // 商家信息
         detail: {}, // 配送信息
         shopId: '',
@@ -93,12 +114,12 @@
     created() {
       // 调试代码 提交时注释
       setStore('userInfo', {
-        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
+        'customerId': this.$route.query.customerId || 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': this.$route.query.shopId
       })
       setStore('openId', {
-        'customerId': 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
-        'shopId': 'e3e616f2-dee1-49d8-8dff-08ba9a203dd4'
+        'customerId': this.$route.query.customerId || 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'shopId': this.$route.query.shopId
       })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
@@ -115,10 +136,6 @@
     methods: {
       // 红包
       ...mapMutations(['BOON_PRICE']),
-      // 分享按钮
-      goShare() {
-        console.log('我是胖子')
-      },
       // 商家信息
       getShopDetail() {
         const data = {
@@ -181,6 +198,46 @@
           }
         })
       },
+      // 分享
+      goShare() {
+        wx.ready(() => {
+          wx.onMenuShareTimeline({
+            title: '我在Thank u mom得到一个大红包，快来~快来~这里还有呐!', // 分享标题
+            link: '', // 分享链接
+            imgUrl: '../../assets/item_logo.png', // 分享图标
+            success: function () {
+              // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+            }
+          })
+          wx.onMenuShareAppMessage({
+            title: '我在Thank u mom得到一个大红包，快来~快来~这里还有呐', // 分享标题
+            desc: '微信点外卖-更便宜，更快捷。', // 分享描述
+            link: '', // 分享链接
+            imgUrl: '../../assets/item_logo.png', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+              // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+            }
+          })
+        })
+      },
+      // 邀请码
+      goInviteNum() {
+        this.$router.push({
+          path: '/inviteNum',
+          query: {
+            shopId: getStore('userInfo').shopId,
+            sessionId: getStore('userInfo').customerId
+          }
+        })
+      },
       // toggle toast
       toggleToast(show, text, time) {
         if (show === true || show === 1) {
@@ -198,7 +255,8 @@
     components: {
       wxshare,
       goods,
-      toast
+      toast,
+      CircleMenu
     }
   }
 </script>
@@ -414,6 +472,20 @@
     position: absolute;
     top: 24px;
     right: 7px;
+    width: 35px;
+    height: 35px;
+  }
+
+  .user #CircleMenu .oy-menu-group {
+    display: block;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .user #CircleMenu .oy-menu-group .oy-menu-btn {
+    display: block;
+    width: 35px !important;
+    height: 35px !important;
   }
 
   .user-btn {

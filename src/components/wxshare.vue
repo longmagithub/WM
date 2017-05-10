@@ -3,15 +3,11 @@
 <script>
   export default {
     mounted () {
-//      window.alert(window.location.href.split('#')[0])
       this.setShareConfig()
     },
     methods: {
       setShareConfig() {
         let url = window.location.href.split('#')[0]
-//        let url = 'http://newpay.tunnel.qydev.com/VAOrderH5/'
-        console.log('url地址')
-        console.log(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
           res = res.data
           if (res.success) {
@@ -21,7 +17,7 @@
               timestamp: res.data.timestamp, // 必填，生成签名的时间戳
               nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
               signature: res.data.signature, // 必填，签名，见附录1
-              jsApiList: ['onMenuShareAppMessage']
+              jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline']
             })
           }
         })
