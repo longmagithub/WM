@@ -22,8 +22,8 @@
               <!--</div>-->
               <div class="bulletin" v-if="shopDetail.notice">公告：{{shopDetail.notice}}</div>
               <!--<div class="bulletin" v-if="shopDetail.notice">公告：订单满50元实付金额，赠送揉蓝柠檬水。-->
-                <!--订单满80元(实付金额)，赠送欧巴香辣年糕。-->
-                <!--订单满120元实付金额，赠送手原味鸡半只。-->
+              <!--订单满80元(实付金额)，赠送欧巴香辣年糕。-->
+              <!--订单满120元实付金额，赠送手原味鸡半只。-->
               <!--</div>-->
             </div>
             <!--<div class="enter uxwm-iconfont btn_right"></div>-->
@@ -207,8 +207,8 @@
         this.$router.push({
           path: '/orderList',
           query: {
-            shopId: getStore('userInfo').shopId,
-            sessionId: getStore('userInfo').customerId
+            shopId: this.shopId,
+            sessionId: this.customerId
           }
         })
       },
@@ -228,8 +228,8 @@
         this.$router.push({
           path: '/inviteNum',
           query: {
-            shopId: getStore('userInfo').shopId,
-            sessionId: getStore('userInfo').customerId
+            shopId: this.shopId,
+            sessionId: this.customerId
           }
         })
       },

@@ -29,7 +29,7 @@
 </template>
 <script>
   import {mapState, mapMutations} from 'vuex'
-  import * as PublicJs from '../../common/utils/util'
+//  import * as PublicJs from '../../common/utils/util'
   export default {
     data () {
       return {
@@ -45,7 +45,7 @@
     },
     created() {
       // 修改 title
-      PublicJs.changeTitleInWx('选择收货地址')
+//      PublicJs.changeTitleInWx('选择收货地址')
       this.sessionId = this.$route.query.sessionId ? this.$route.query.sessionId : ''
       this.nowSelADDId = this.$route.query.addressId ? this.$route.query.addressId : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''

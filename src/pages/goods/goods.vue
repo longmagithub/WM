@@ -80,8 +80,10 @@
             </transition>
           </div>
         </div>
+        <div class="manjianDesc" v-html="manjianDesc"></div>
         <transition name="fold">
           <div class="shopcart-list" v-show="listShow">
+            <div class="manjianDesc" v-html="manjianDesc"></div>
             <div class="list-header">
               <div class="header">
                 <h1 class="title">购物车</h1>
@@ -127,7 +129,6 @@
       </div>
       <transition name="fade">
         <div class="list-mask" @click="hideList" v-show="listShow">
-
         </div>
       </transition>
     </div>
@@ -240,7 +241,11 @@
         activity: [], // 活动数组
         hoursArr: [], // 营业时间数组
         beginTime: new Date(), // 开始时间
-        endTime: new Date() // 结束时间
+        endTime: new Date(), // 结束时间
+        shopDiscountId: '', // 优惠id
+        conditionAmount: 0, // 满金额
+        discountPrice: 0, // 优惠金额
+        discountList: []
       }
     },
     created() {
@@ -272,6 +277,9 @@
       // 门店状态
       this.getShopState()
 //      this.getShopDetail()
+
+      // 优惠列表
+      this.getDiscountList()
     },
     mounted() {
     },
@@ -354,10 +362,61 @@
         } else {
           return '去结算'
         }
+      },
+      // 动态满减的描述
+      manjianDesc() {
+        let discArr = []
+        let desc = ''
+        let allFeesPrice = this.allPrice
+        let newTime = Date.parse(new Date()) / 1000
+        if (this.totalNum) {
+          for (let i = 0; i < this.discountList.length; i++) {
+            if (Date.parse(new Date(this.discountList[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(this.discountList[i].endTime)) /
+              1000) {
+              if (allFeesPrice >= parseFloat(parseFloat(this.discountList[i].conditionAmount).toFixed(2))) {
+                discArr.push(this.discountList[i])
+                if (allFeesPrice - discArr[0].reductionAmount > 0) {
+                  this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
+                  this.shopDiscountId = discArr[0].discountId
+                  this.discountPrice = discArr[0].reductionAmount
+                  this.conditionAmount = discArr[0].conditionAmount
+                  console.log(this.conditionAmount)
+                  console.log(this.discountPrice)
+                  return `已满${this.conditionAmount}减，结算减<span class='manjianDescPrice'>${this.discountPrice}元</span>`
+                }
+              } else {
+                desc = this.seller.activity[0].title
+              }
+            } else {
+              desc = this.seller.activity[0].title
+            }
+          }
+        } else {
+          desc = this.seller.activity[0].title
+        }
+        return desc
       }
     },
     methods: {
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
+      // 优惠列表查询
+      getDiscountList() {
+        const data = {
+          customerId: this.customerId,
+          shopId: this.shopId,
+          pageIndex: 1,
+          pageSize: 10
+        }
+        this.axios.get(`/br/shop/discount/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.data.discountList.length) {
+            this.discountList = res.data.discountList
+            this.isDiscountFun(res.data.discountList)
+          } else {
+            this.allNum = this.allPrice + this.feesPrice
+          }
+        })
+      },
       // 门店门店状态
       getShopState() {
         this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
@@ -1199,6 +1258,31 @@
     z-index: -1;
     width: 100%;
     transform: translate3d(0, -100%, 0);
+  }
+
+  .shopcart .manjianDesc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transform: translate3d(0, -100%, 0);
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 11px;
+    color: #343434;
+    letter-spacing: 0;
+    background: #FFF8EE;
+  }
+
+  .shopcart .manjianDesc .manjianDescPrice {
+    font-family: PingFangSC-Regular;
+    font-size: 11px;
+    color: red;
+    letter-spacing: 0;
+    line-height: 16px;
   }
 
   .shopcart .fold-enter-active, .shopcart .fold-leave-active {

@@ -28,7 +28,7 @@
 </template>
 <script>
   import Toast from '../../components/toast.vue'
-  import {getStore, setStore, urlParse, removeStore} from '../../common/utils/util'
+  import {getStore, setStore, urlParse} from '../../common/utils/util'
   import * as PublicJs from '../../common/utils/public'
   export default {
     mounted () {
@@ -61,16 +61,23 @@
       Toast
     },
     created() {
-      if (getStore('version') === null || getStore('version') !== 2017050404) {
-        removeStore('version')
-        removeStore('openId')
-        removeStore('userInfo')
-        removeStore('shopInfo')
-        setStore('version', 2017050404)
-        this.isCode()
+      this.shopId = this.$route.query.shopId
+      this.customerId = this.$route.query.customerId
+      if (this.shopId && this.customerId) {
+        this.getOrderList(this.customerId)
       } else {
         this.isCode()
       }
+//      if (getStore('version') === null || getStore('version') !== 2017050404) {
+//        removeStore('version')
+//        removeStore('openId')
+//        removeStore('userInfo')
+//        removeStore('shopInfo')
+//        setStore('version', 2017050404)
+//        this.isCode()
+//      } else {
+//        this.isCode()
+//      }
     },
     methods: {
       // 判断code

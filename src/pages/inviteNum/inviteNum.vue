@@ -20,7 +20,7 @@
 
 <script type="text/ecmascript-6">
   import toast from '../../components/toast.vue'
-  import {getStore, urlParse, setStore, removeStore} from '../../common/utils/util'
+  import {getStore, urlParse, setStore} from '../../common/utils/util'
   export default {
     data() {
       return {
@@ -35,16 +35,23 @@
       }
     },
     created() {
-      if (getStore('version') === null || getStore('version') !== 2017050404) {
-        removeStore('version')
-        removeStore('openId')
-        removeStore('userInfo')
-        removeStore('shopInfo')
-        setStore('version', 2017050404)
-        this.isCode()
+      this.shopId = this.$route.query.shopId
+      this.customerId = this.$route.query.customerId
+      if (this.shopId && this.customerId) {
+        this.getIdcode(this.customerId)
       } else {
         this.isCode()
       }
+//      if (getStore('version') === null || getStore('version') !== 2017050404) {
+//        removeStore('version')
+//        removeStore('openId')
+//        removeStore('userInfo')
+//        removeStore('shopInfo')
+//        setStore('version', 2017050404)
+//        this.isCode()
+//      } else {
+//        this.isCode()
+//      }
     },
     methods: {
       isCode() {
@@ -179,11 +186,12 @@
     left: 15%;
     width: 70%;
   }
+
   /*.inviteBox {*/
-    /*position: fixed;*/
-    /*top: 66%;*/
-    /*left: 15%;*/
-    /*width: 70%;*/
+  /*position: fixed;*/
+  /*top: 66%;*/
+  /*left: 15%;*/
+  /*width: 70%;*/
   /*}*/
 
   .inviteNum {
@@ -195,15 +203,16 @@
     color: #FFA448;
     letter-spacing: 1.28px;
   }
+
   /*.inviteNum {*/
-    /*position: fixed;*/
-    /*top: 38%;*/
-    /*width: 100%;*/
-    /*text-align: center;*/
-    /*font-family: STYuanti-SC-Regular;*/
-    /*font-size: 36px;*/
-    /*color: #FFA448;*/
-    /*letter-spacing: 1.28px;*/
+  /*position: fixed;*/
+  /*top: 38%;*/
+  /*width: 100%;*/
+  /*text-align: center;*/
+  /*font-family: STYuanti-SC-Regular;*/
+  /*font-size: 36px;*/
+  /*color: #FFA448;*/
+  /*letter-spacing: 1.28px;*/
   /*}*/
 
   .inviteBox .inviteWrapper {
