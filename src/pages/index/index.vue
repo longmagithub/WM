@@ -30,7 +30,7 @@
             .title}}我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb</span>
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
-          <div class="boonDesc" v-if="1">
+          <div class="fessDesc" v-if="1">
             满87减运费，加加减减
           </div>
         </div>
@@ -55,13 +55,16 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="isCloseBoon">
-      <i class="close" @click="closeBoon"></i>
-      <div class="backImg" @click="goShare">
+    <div class="boon" v-show="isCloseBoon" @click="closeBoon">
+      <div class="shareJiantou">
+      </div>
+      <div class="backImg">
+        <div class="boonDesc">
+          客官，看你骨骼清奇，<br>
+          不去晒个红包简直就是浪费良辰美景
+        </div>
         <div class="textContent">
-          <p class="price">{{IndexboonPrice}}<span class="desc">元</span></p>
-          <p>恭喜您</p>
-          <p>获得一个悠先外卖红包</p>
+          <p class="price">{{IndexboonPrice}}<i class="yuanIcon"></i></p>
         </div>
       </div>
     </div>
@@ -300,50 +303,78 @@
     background-size: 31px 31px;
   }
 
+  .boon.shareJiantou {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url("../../assets/jiantou@2x.png") no-repeat right;
+  }
+
   .boon .backImg {
     position: relative;
-    top: 0;
+    top: 10%;
     left: 0;
     width: 100%;
-    height: 70%;
-    margin-top: 30%;
-    background: url("../../assets/Group33@2x.png") no-repeat center top 50%;
-    background-size: 270px 375px;
+    height: 374px;
+    background: url("../../assets/hongbao@2x.png") no-repeat center;
+    background-size: 288px 374px;
+  }
+
+  .boon .backImg .boonDesc {
+    position: absolute;
+    width: 100%;
+    top: 66px;
+    text-align: center;
+    font-family: STYuanti-SC-Regular;
+    font-size: 11px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    line-height: 18px;
   }
 
   .boon .backImg .textContent {
-    position: relative;
-    top: 45%;
+    position: absolute;
+    top: 126px;
     margin: 0 auto;
+    width: 100%;
+    height: 77px;
     color: #fff;
-    text-align: center;
-    font-size: 13px;
   }
 
   .boon .backImg .textContent .price {
     color: #fdff08;
-    height: 62px;
-    font-size: 58px;
-    line-height: 40px;
-    line-height: 1em;
-    font-family: STYuanti-TC-Regular;
+    height: 77px;
+    line-height: 77px;
+    text-align: center;
+    font-family: STYuanti-SC-Bold;
+    font-size: 55px;
+    color: #FA6B4B;
+    letter-spacing: 0;
   }
 
-  .boon .backImg .textContent .price .desc {
+  .boon .backImg .textContent .price .yuanIcon {
+    display: inline-block;
+    position: relative;
+    margin-left: 4px;
+    width: 20px;
+    height: 60px;
+    background: url("../../assets/yuan@2x.png") no-repeat center;
+    background-size: 20px 20px;
     font-size: 15px;
   }
 
   .main {
     flex: 1 1 100%;
     overflow: hidden;
+    position: relative;
   }
 
   .header {
     flex: 0 0 auto;
     box-sizing: border-box;
     padding: 15px 7px 8px 10px;
-    background-size: cover;
     background: url('../../assets/back.jpg') no-repeat;
+    background-size: 100% 100%;
   }
 
   .header .content-wrapper {
@@ -422,8 +453,8 @@
     white-space: nowrap;
     font-size: 10px;
     color: #ffffff;
-    background: url("../../assets/icon_activity_status0.png") no-repeat left center;
-    background-size: 12px 12px;
+    background: url("../../assets/icon_jian_normal@2x.png") no-repeat left center;
+    background-size: 11px 11px;
   }
 
   .activity .number {
@@ -432,7 +463,7 @@
     right: 0px;
   }
 
-  .boonDesc {
+  .fessDesc {
     position: relative;
     box-sizing: border-box;
     padding-left: 17px;
@@ -443,8 +474,8 @@
     white-space: nowrap;
     font-size: 10px;
     color: #ffffff;
-    background: url("../../assets/icon_packets.png") no-repeat left center;
-    background-size: 11px 14px;
+    background: url("../../assets/icon_pei_normal@2x.png") no-repeat left center;
+    background-size: 11px 11px;
   }
 
   .user {

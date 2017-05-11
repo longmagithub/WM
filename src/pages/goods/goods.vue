@@ -658,9 +658,9 @@
 <style scoped>
   .goods {
     display: flex;
-    /*position: absolute;*/
-    /*top: 200px;*/
-    /*bottom: 0px;*/
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
     /*margin-bottom: 49px;*/
     padding-bottom: 50px;
     width: 100%;
@@ -721,15 +721,9 @@
 
   .menu-wrapper {
     flex: 0 0 85px;
-    height: 100%;
     width: 85px;
     background: #f8f8f8;
     /*overflow: hidden;*/
-
-  }
-
-  .menu-wrapper > ul {
-    /*height: 100%;*/
   }
 
   .menu-wrapper .menu-item {
@@ -782,13 +776,8 @@
   }
 
   .foods-wrapper {
-    height: 100%;
     flex: 1;
     background: #ffffff;
-  }
-
-  .foods-wrapper > ul {
-    /*height: 100%;*/
   }
 
   .foods-wrapper .food-list:last-child {

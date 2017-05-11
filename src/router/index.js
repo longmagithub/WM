@@ -3,9 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 // const jingmo = r => require.ensure([], () => r(require('../weixin/jingmo.vue')), 'jingmo')
-// const jingmo1 = r => require.ensure([], () => r(require('../weixin/jingmo1.vue')), 'jingmo1')
-// const zhengchang = r => require.ensure([], () => r(require('../weixin/zhengchang.vue')), 'zhengchang')
-// const zhengchang1 = r => require.ensure([], () => r(require('../weixin/zhengchang1.vue')), 'zhengchang1')
 // const orderList = r => require.ensure([], () => r(require('../views/orderList.vue')), 'orderList')
 // const orderDetail = r => require.ensure([], () => r(require('../views/orderDetail.vue')), 'orderDetail')
 // const addList = r => require.ensure([], () => r(require('../views/addList.vue')), 'addList')
