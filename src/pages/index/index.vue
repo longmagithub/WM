@@ -11,8 +11,7 @@
             </div>
             <div class="content">
               <!--下面打开-->
-              <!--<div class="title-name">{{shopDetail.name}}</div>-->
-              <div class="title-name">麻辣小面联庄店麻辣小面联庄店麻辣小面联庄店</div>
+              <div class="title-name">{{shopDetail.name}}</div>
               <!-- 描述 -->
               <!--<div class="description">-->
               <!--name 打开-->
