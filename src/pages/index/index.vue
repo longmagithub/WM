@@ -30,29 +30,24 @@
             .title}}我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb</span>
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
-          <!--<div class="boonDesc" v-if="boonPrice">-->
-          <!--您有一个平台红包￥{{boonPrice}}元-->
-          <!--</div>-->
+          <div class="boonDesc" v-if="1">
+            满87减运费，加加减减
+          </div>
         </div>
         <div class="user">
-          <!--<div class="user-btn" @click="goUser">我的</div>-->
           <circle-menu
             class="circle_menu_box"
             type="bottom"
             circle="circleMenu.circle"
-            :number="3"
+            :number="2"
             mask="white"
             colors="circleMenu.colors">
             <div class="uxwm-iconfont wo circle-menu"
                  slot="item_btn"></div>
             <span slot="item_1" @click="goUser" class="orderList">订单</span>
             <span slot="item_2" @click="goInviteNum" class="">邀请码</span>
-            <span slot="item_3" @click="goShare" class="">分享</span>
           </circle-menu>
         </div>
-        <!--<div class="background">-->
-        <!--<img :src="seller.logo" alt="" width="100%" height="100%">-->
-        <!--</div>-->
       </div>
       <div class="main">
         <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
@@ -248,6 +243,16 @@
 </script>
 
 <style scoped>
+  .index-box {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
   .tab {
     display: flex;
     width: 100%;
@@ -328,12 +333,15 @@
     font-size: 15px;
   }
 
+  .main {
+    flex: 1 1 100%;
+    overflow: hidden;
+  }
+
   .header {
+    flex: 0 0 auto;
     box-sizing: border-box;
-    /*overflow: hidden;*/
-    /*position: relative;*/
     padding: 15px 7px 8px 10px;
-    /*height: 154px;*/
     background-size: cover;
     background: url('../../assets/back.jpg') no-repeat;
   }
