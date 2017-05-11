@@ -119,15 +119,6 @@
       // 商家信息
       this.getShopDetail()
     },
-    mounted() {
-      this.$nextTick(() => {
-        console.log(this.$refs.header.getBoundingClientRect().height)
-        this.headerHeight = document.getElementsByClassName('header')
-        console.log(this.headerHeight)
-        console.log(document.getElementsByClassName('header')[0].clientHeight)
-        console.log(document.getElementsByClassName('header')[0].offsetHeight)
-      })
-    },
     computed: {
       // 检测 vuex 中boonPrice
       ...mapState(['boonPrice']),
