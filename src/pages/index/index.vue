@@ -206,6 +206,13 @@
       // 分享
       goShare() {
         console.log(123)
+        WeixinJSBridge.invoke('sendAppMessage', {
+          'appid': 'wx73a13df7b60775a1',
+          'img_url': this.shopDetail.logo,
+          'link': 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/erweima',
+          'title': '我在Thank u mom得到一个大红包，快来~快来~这里还有呐', // 分享标题
+          'desc': '微信点外卖-更便宜，更快捷。'
+        })
       },
       // 邀请码
       goInviteNum() {
