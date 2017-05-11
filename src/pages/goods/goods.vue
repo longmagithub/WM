@@ -276,7 +276,6 @@
       })
       // 门店状态
       this.getShopState()
-//      this.getShopDetail()
 
       // 优惠列表
       this.getDiscountList()
@@ -382,7 +381,7 @@
                   this.conditionAmount = discArr[0].conditionAmount
                   console.log(this.conditionAmount)
                   console.log(this.discountPrice)
-                  return `已满${this.conditionAmount}减，结算减<span class='manjianDescPrice'>${this.discountPrice}元</span>`
+                  return `已满${this.conditionAmount}减，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
                 }
               } else {
                 desc = this.seller.activity[0].title
@@ -714,7 +713,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .goods {
     display: flex;
     position: absolute;
