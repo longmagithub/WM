@@ -394,7 +394,7 @@
             if (res.success) {
               res.data.forEach((item) => {
                 if (userPosition >= item.startDistance && userPosition < item.endDistance) {
-                  this.feesPrice = item.price
+                  this.feesPrice = item.price / 100
                   // 优惠列表
                   this.getDiscountList()
                 }

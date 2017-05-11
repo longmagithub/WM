@@ -21,17 +21,21 @@
               <!--<span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee | fees}}</span>-->
               <!--</div>-->
               <div class="bulletin" v-if="shopDetail.notice">公告：{{shopDetail.notice}}</div>
+              <!--<div class="bulletin" v-if="shopDetail.notice">公告：订单满50元实付金额，赠送揉蓝柠檬水。-->
+                <!--订单满80元(实付金额)，赠送欧巴香辣年糕。-->
+                <!--订单满120元实付金额，赠送手原味鸡半只。-->
+              <!--</div>-->
             </div>
             <!--<div class="enter uxwm-iconfont btn_right"></div>-->
           </div>
           <div class="activity" v-if="shopDetail.activity">
           <span class="text" style="margin-right: 5px" v-if="shopDetail.activity"
                 v-for="item in shopDetail.activity">{{item
-            .title}}我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb我是满减&npsb</span>
+            .title}}</span>
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
-          <div class="fessDesc" v-if="1">
-            满87减运费，加加减减
+          <div class="fessDesc" v-if="freedispatch === 1">
+            满{{freedispatch.price}}元满配送费
           </div>
         </div>
         <div class="user">
@@ -82,6 +86,7 @@
   export default{
     data() {
       return {
+        freedispatch: {}, // 免配送费
         circleMenu: {
           circle: true,
           colors: ['#ff6651', '#ff6651', '#ff6651', '#ff6651']
@@ -118,6 +123,8 @@
       this.getRedEnvelope()
       // 商家信息
       this.getShopDetail()
+      // 免配送费
+      this.getFreedispatch()
     },
     computed: {
       // 检测 vuex 中boonPrice
@@ -164,6 +171,19 @@
                 }
               }
             }
+          }
+        })
+      },
+      // 查询免配送费
+      getFreedispatch() {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/shop/freedispatch${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.freedispatch = res.data
           }
         })
       },
