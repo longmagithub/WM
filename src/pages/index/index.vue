@@ -185,6 +185,12 @@
             res.data.price = res.data.price / 100
             this.freedispatch = res.data
             this.MANJIAN_FEESPRICE(res.data)
+            if (res.data === null) {
+              this.MANJIAN_FEESPRICE({
+                state: 0,
+                price: 0
+              })
+            }
           }
         })
       },
