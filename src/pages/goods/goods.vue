@@ -57,8 +57,10 @@
             <div class="price-wrapper">
               <div class="desc" v-if="!totalNum">购物车为空</div>
               <div class="price" v-if="totalNum">
-                <div class="price-num" :class="{'price-numS': freedispatchPrice === 0}">￥{{allPrice | toFixedFil}}</div>
-                <div class="delivery" v-if="freedispatchPrice">满{{freedispatchPrice}}元满配送费</div>
+                <div class="price-num" :class="{'price-numS': freedispatchPrice.state === 0}">￥{{allPrice |
+                  toFixedFil}}
+                </div>
+                <div class="delivery" v-if="freedispatchPrice.state !== 0">满{{freedispatchPrice.price}}元免配送费</div>
                 <!--<div class="delivery">{{deliveryDesc}}</div>-->
               </div>
             </div>
@@ -198,7 +200,7 @@
       },
       freedispatchPrice: {
         type: Number,
-        default: 0
+        default: {}
       }
     },
     data() {

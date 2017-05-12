@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="main">
-        <goods :seller="shopDetail" :min-price="shopDetail.minPrice" :freedispatchPrice="freedispatch.price"></goods>
+        <goods :seller="shopDetail" :min-price="shopDetail.minPrice" :freedispatchPrice="freedispatch"></goods>
       </div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -184,9 +184,7 @@
           if (res.success) {
             res.data.price = res.data.price / 100
             this.freedispatch = res.data
-            if (res.data.state === 1) {
-              this.MANJIAN_FEESPRICE(res.data.price)
-            }
+            this.MANJIAN_FEESPRICE(res.data)
           }
         })
       },

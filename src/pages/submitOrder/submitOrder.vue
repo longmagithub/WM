@@ -55,14 +55,13 @@
                 <li class="food_list_item" v-if="feesPrice">
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
-                  <div class="price" v-if="allPrice > manJianFeesPrice">￥0(满1{{manJianFeesPrice}}元免配送费)</div>
                 </li>
-                <li class="food_list_item" v-if="allPrice > manJianFeesPrice"
-                    :class="{'manJianFeesPrice': allPrice > manJianFeesPrice}">
+                <li class="food_list_item" v-if="manJianFeesPrice.state === 1 && allPrice > manJianFeesPrice.price"
+                    :class="{'manJianFeesPrice': manJianFeesPrice.state === 1 && allPrice > manJianFeesPrice.price}">
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">
                     <span class="price_num">￥0</span>
-                    <span class="price_desc">(满{{manJianFeesPrice}}元免配送费)</span>
+                    <span class="price_desc">(满{{manJianFeesPrice.price}}元免配送费)</span>
                   </div>
                 </li>
               </ul>
@@ -79,11 +78,15 @@
                 红包<span class="boonBox-num">-￥{{boonPrice}}</span>
               </p>
             </div>
-            <div class="totalPrice" :class="{isTotalPrice: !feesPrice}">总计：<span class="totaPrice-num">￥{{allNum -
+            <div class="totalPrice"
+                 :class="{isTotalPrice: isFeessSwitch}">总计：<span
+              class="totaPrice-num">￥{{allNum -
               boonPrice < 0 ?
               0.01 :
               allNum -
-              boonPrice | toFixedFil}}</span><span v-if="!feesPrice" class="noFessPrice">(不包含配送费)</span>
+              boonPrice | toFixedFil}}</span><span
+              v-if="isFeessSwitch"
+              class="noFessPrice">(不包含配送费)</span>
             </div>
           </div>
         </section>
@@ -103,7 +106,9 @@
     </div>
     <div class="submitOrder-btn">
       <div class="price">待支付￥{{allNum - boonPrice < 0 ? 0.01 : allNum - boonPrice |
-        toFixedFil}}<span class="noFessPrice" v-if="!feesPrice">(不包含配送费)</span></div>
+        toFixedFil}}<span class="noFessPrice"
+                          v-if="isFeessSwitch">(不包含配送费)</span>
+      </div>
       <div class="submit-btn" @click="submitOrder">确认下单</div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -149,6 +154,7 @@
         boonPrice: 0,
         endDate: null,
         redEnvelopeId: '',
+        isFeessSwitch: true, // 是否显示 '不包含配送费'
         testTime: [
           {
             beginTime: '07:00',
@@ -386,29 +392,62 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
-        if (userPosition === null) { // 没有位置
-          this.feesPrice = 0
-          this.getDiscountList()
-        } else if (this.allPrice > this.manJianFeesPrice) { // 满足 满减条件
-          this.feesPrice = 0
-          this.getDiscountList()
-        } else { // 不满足就 去算阶梯配送费
-          const data = {
-            sessionId: this.customerId,
-            shopId: this.shopId
-          }
-          this.axios.get(`/br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
-            res = res.data
-            if (res.success) {
-              res.data.forEach((item) => {
-                if (userPosition >= item.startDistance && userPosition < item.endDistance) {
-                  this.feesPrice = item.price / 100
-                  // 优惠列表
-                  this.getDiscountList()
+        console.log('总价' + this.allPrice)
+        console.log(this.manJianFeesPrice)
+        if (this.manJianFeesPrice.state === 1) {
+          if (this.allPrice > this.manJianFeesPrice.price) {
+            this.feesPrice = 0
+            this.getDiscountList()
+            this.isFeessSwitch = false
+          } else {
+            if (userPosition === null) { // 没有位置
+              this.feesPrice = 0
+              this.getDiscountList()
+              this.isFeessSwitch = true
+            } else { // 不满足就 去算阶梯配送费
+              console.log(3)
+              const data = {
+                sessionId: this.customerId,
+                shopId: this.shopId
+              }
+              this.axios.get(`/br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
+                res = res.data
+                if (res.success) {
+                  res.data.forEach((item) => {
+                    if (userPosition >= item.startDistance && userPosition < item.endDistance) {
+                      this.feesPrice = item.price / 100
+                      // 优惠列表
+                      this.getDiscountList()
+                    }
+                  })
                 }
               })
             }
-          })
+          }
+        } else {
+          this.isFeessSwitch = true
+          if (userPosition === null) { // 没有位置
+            this.feesPrice = 0
+            this.getDiscountList()
+          } else { // 不满足就 去算阶梯配送费
+            console.log(3)
+            const data = {
+              sessionId: this.customerId,
+              shopId: this.shopId
+            }
+            this.axios.get(`/br/dispatch/price${this.PublicJs.createParams(data)}`).then((res) => {
+              res = res.data
+              if (res.success) {
+                res.data.forEach((item) => {
+                  if (userPosition >= item.startDistance && userPosition < item.endDistance) {
+                    this.feesPrice = item.price / 100
+                    // 优惠列表
+                    this.getDiscountList()
+                  }
+                })
+              }
+            })
+          }
         }
       },
       // 提交订单
@@ -515,18 +554,14 @@
                 this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
                 this.shopDiscountId = discArr[0].discountId
                 this.discountPrice = discArr[0].reductionAmount
-                console.log(1)
               } else {
-                console.log(2)
                 this.allNum = 0 + this.feesPrice
               }
             } else {
-              console.log(2)
               this.isDiscount = false
               this.allNum = allFeesPrice + this.feesPrice
             }
           } else {
-            console.log(4)
             this.allNum = allFeesPrice
             this.isDiscount = false
           }
