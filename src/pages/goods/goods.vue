@@ -199,7 +199,7 @@
         default: 0
       },
       freedispatchPrice: {
-        type: Number,
+        type: Object,
         default: {}
       }
     },
@@ -252,7 +252,19 @@
         shopDiscountId: '', // 优惠id
         conditionAmount: 0, // 满金额
         discountPrice: 0, // 优惠金额
-        discountList: []
+        discountList: [],
+        textTime: [
+          {
+            beginTime: '08:00',
+            endTime: '12:00'
+          }, {
+            beginTime: '13:00',
+            endTime: '14:00'
+          }, {
+            beginTime: '13:00',
+            endTime: '22:00'
+          }
+        ]
       }
     },
     created() {
@@ -386,8 +398,6 @@
                     this.shopDiscountId = discArr[0].discountId
                     this.discountPrice = discArr[0].reductionAmount
                     this.conditionAmount = discArr[0].conditionAmount
-                    console.log(this.conditionAmount)
-                    console.log(this.discountPrice)
                     return `已满${this.conditionAmount}，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
                   }
                 } else {
@@ -420,7 +430,6 @@
           res = res.data
           if (res.data.discountList.length) {
             this.discountList = res.data.discountList
-            this.isDiscountFun(res.data.discountList)
           } else {
             this.allNum = this.allPrice + this.feesPrice
           }
@@ -435,27 +444,29 @@
             if (res.data.state === 1) {
               // 当前时间
               let activeTime = Date.parse(new Date())
-              console.log(this.hoursArr.length)
-              for (let i = 0; i < res.data.hours.length; i++) {
+              for (let i = 0; i < this.textTime.length; i++) {
                 // 开始时间
-                let beginTimeHours = parseFloat(res.data.hours[i].beginTime.split(':')[0])
-                let beginTimeMinutes = parseFloat(res.data.hours[i].beginTime.split(':')[1])
-                this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
-                this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinutes)
-                this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
+                let beginTimeHours = parseFloat(this.textTime[i].beginTime.split(':')[0])
+                let beginTimeMinutes = parseFloat(this.textTime[i].beginTime.split(':')[1])
+                this.beginTime = new Date(new Date(this.beginTime).setHours(beginTimeHours)).setMinutes(beginTimeMinutes)
                 // 结束时间
-                let endTimeHours = parseFloat(res.data.hours[i].endTime.split(':')[0])
-                let endTimeMinutes = parseFloat(res.data.hours[i].endTime.split(':')[1])
-                this.endTime = new Date(this.endTime).setHours(endTimeHours)
-                this.endTime = new Date(this.endTime).setMinutes(endTimeMinutes)
-                this.endTime = new Date(this.endTime).setSeconds(0, 0)
-                if (activeTime >= this.beginTime && activeTime <= this.endTime) {
+                let endTimeHours = parseFloat(this.textTime[i].endTime.split(':')[0])
+                let endTimeMinutes = parseFloat(this.textTime[i].endTime.split(':')[1])
+                this.endTime = new Date(new Date(this.endTime).setHours(endTimeHours)).setMinutes(endTimeMinutes)
+//                console.log(this.beginTime)
+//                console.log(this.endTime)
+//                console.log(activeTime)
+                if ((activeTime >= this.beginTime) && (activeTime < this.endTime)) {
                   this.isYingye = true
-                  return
+                  console.log(1111111111)
+                  break
                 } else {
+                  console.log(222222222)
                   this.isYingye = false
-                  this.toggleToast(1, '商家关闭')
                 }
+              }
+              if (this.isYingye === false) {
+                this.toggleToast(1, '商家关闭')
               }
             } else {
               this.toggleToast(!res.data.state, '商家关闭')

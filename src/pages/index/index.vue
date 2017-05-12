@@ -185,6 +185,10 @@
             this.freedispatch = res.data
             this.MANJIAN_FEESPRICE(res.data)
             if (res.data === null) {
+              this.freedispatch = {
+                state: 0,
+                price: 0
+              }
               this.MANJIAN_FEESPRICE({
                 state: 0,
                 price: 0
