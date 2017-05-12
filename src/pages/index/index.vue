@@ -148,7 +148,6 @@
             // 排序
             res.data.activity = res.data.activity.reverse()
             this.shopDetail = res.data
-            console.log(this.shopDetail)
             setStore('shopInfo', this.shopDetail)
           }
         })

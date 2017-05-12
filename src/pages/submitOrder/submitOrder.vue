@@ -403,7 +403,6 @@
               this.getDiscountList()
               this.isFeessSwitch = true
             } else { // 不满足就 去算阶梯配送费
-              console.log(3)
               const data = {
                 sessionId: this.customerId,
                 shopId: this.shopId
