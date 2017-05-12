@@ -11,7 +11,8 @@ import {
   CONFIRM_REMARK, // 订单备注
   USER_ADDRESSID, // 用户地址id
   RECORD_USERINFO, // 用户信息
-  BOON_PRICE // 红包金额
+  BOON_PRICE, // 红包金额
+  MANJIAN_FEESPRICE // 满减_配送费
   // RECORD_SHOPDETAIL,
   // GET_USERINFO,
   // CHOOSE_SEARCH_ADDRESS,
@@ -198,5 +199,10 @@ export default {
     state.endDate = endDate
     state.redEnvelopeType = redEnvelopeType
     state.redEnvelopeId = redEnvelopeId
+  },
+  // 满减_配送费
+  [MANJIAN_FEESPRICE](state, manJianFeesPrice) {
+    console.log(manJianFeesPrice)
+    state.manJianFeesPrice = manJianFeesPrice
   }
 }

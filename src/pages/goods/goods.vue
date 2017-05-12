@@ -386,7 +386,7 @@
                     this.conditionAmount = discArr[0].conditionAmount
                     console.log(this.conditionAmount)
                     console.log(this.discountPrice)
-                    return `已满${this.conditionAmount}减，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
+                    return `已满${this.conditionAmount}，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
                   }
                 } else {
                   desc = this.seller.activity[0].title
@@ -431,31 +431,30 @@
           if (res.success) {
             // state === 1 开店 然后判断是否在营业时间
             if (res.data.state === 1) {
-              this.$nextTick(() => {
-                // 当前小时
-                let activeTime = Date.parse(new Date())
-                for (let i = 0; i < this.hoursArr.length; i++) {
-                  // 开始时间
-                  let beginTimeHours = parseFloat(this.hoursArr[i].beginTime.split(':')[0])
-                  let beginTimeMinutes = parseFloat(this.hoursArr[i].beginTime.split(':')[1])
-                  this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
-                  this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinutes)
-                  this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
-                  // 结束时间
-                  let endTimeHours = parseFloat(this.hoursArr[i].endTime.split(':')[0])
-                  let endTimeMinutes = parseFloat(this.hoursArr[i].endTime.split(':')[1])
-                  this.endTime = new Date(this.endTime).setHours(endTimeHours)
-                  this.endTime = new Date(this.endTime).setMinutes(endTimeMinutes)
-                  this.endTime = new Date(this.endTime).setSeconds(0, 0)
-                  if (activeTime >= this.beginTime && activeTime <= this.endTime) {
-                    this.isYingye = true
-                    return
-                  } else {
-                    this.isYingye = false
-                    this.toggleToast(1, '商家关闭')
-                  }
+              // 当前时间
+              let activeTime = Date.parse(new Date())
+              console.log(this.hoursArr.length)
+              for (let i = 0; i < res.data.hours.length; i++) {
+                // 开始时间
+                let beginTimeHours = parseFloat(res.data.hours[i].beginTime.split(':')[0])
+                let beginTimeMinutes = parseFloat(res.data.hours[i].beginTime.split(':')[1])
+                this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
+                this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinutes)
+                this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
+                // 结束时间
+                let endTimeHours = parseFloat(res.data.hours[i].endTime.split(':')[0])
+                let endTimeMinutes = parseFloat(res.data.hours[i].endTime.split(':')[1])
+                this.endTime = new Date(this.endTime).setHours(endTimeHours)
+                this.endTime = new Date(this.endTime).setMinutes(endTimeMinutes)
+                this.endTime = new Date(this.endTime).setSeconds(0, 0)
+                if (activeTime >= this.beginTime && activeTime <= this.endTime) {
+                  this.isYingye = true
+                  return
+                } else {
+                  this.isYingye = false
+                  this.toggleToast(1, '商家关闭')
                 }
-              })
+              }
             } else {
               this.toggleToast(!res.data.state, '商家关闭')
               this.isYingye = false

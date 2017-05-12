@@ -53,9 +53,17 @@
                   <div class="price">￥{{packPrice}}</div>
                 </li>
                 <li class="food_list_item" v-if="feesPrice">
-                  <div
-                    class="name_num"><span class="name">配送费</span></div>
+                  <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
+                  <div class="price" v-if="allPrice > manJianFeesPrice">￥0(满1{{manJianFeesPrice}}元免配送费)</div>
+                </li>
+                <li class="food_list_item" v-if="allPrice > manJianFeesPrice"
+                    :class="{'manJianFeesPrice': allPrice > manJianFeesPrice}">
+                  <div class="name_num"><span class="name">配送费</span></div>
+                  <div class="price">
+                    <span class="price_num">￥0</span>
+                    <span class="price_desc">(满{{manJianFeesPrice}}元免配送费)</span>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -217,7 +225,6 @@
             timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
           }
         } else if (i === 1) {
-          console.log(this.beginTime)
           let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
             15)
           let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
@@ -234,7 +241,6 @@
             timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
           }
         } else {
-          console.log(this.beginTime)
           let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
             15)
           let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
@@ -273,11 +279,10 @@
       this.getRedEnvelope()
     },
     mounted() {
-//      this.getDispatchPrice()
       this.initData()
     },
     computed: {
-      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice'])
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID', 'CLEAR_CART']),
@@ -381,10 +386,13 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
-        if (userPosition === null) {
+        if (userPosition === null) { // 没有位置
           this.feesPrice = 0
           this.getDiscountList()
-        } else {
+        } else if (this.allPrice > this.manJianFeesPrice) { // 满足 满减条件
+          this.feesPrice = 0
+          this.getDiscountList()
+        } else { // 不满足就 去算阶梯配送费
           const data = {
             sessionId: this.customerId,
             shopId: this.shopId
@@ -507,16 +515,18 @@
                 this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
                 this.shopDiscountId = discArr[0].discountId
                 this.discountPrice = discArr[0].reductionAmount
-//                console.log(this.shopDiscountId)
-//                console.log(this.discountPrice)
+                console.log(1)
               } else {
+                console.log(2)
                 this.allNum = 0 + this.feesPrice
               }
             } else {
+              console.log(2)
               this.isDiscount = false
               this.allNum = allFeesPrice + this.feesPrice
             }
           } else {
+            console.log(4)
             this.allNum = allFeesPrice
             this.isDiscount = false
           }
@@ -552,7 +562,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .submitOrder-wrapper {
     padding-bottom: 49px;
   }
@@ -754,6 +764,44 @@
     font-size: 13px;
     /*font-weight: 600;*/
     color: #343434;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .manJianFeesPrice {
+    box-sizing: border-box;
+    display: flex;
+    line-height: 44px;
+    padding-right: 14px;
+    height: 44px;
+    width: 100%;
+    border-bottom: 1px solid #f1f1f1;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .manJianFeesPrice .price {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 130px;
+    padding-left: 12px;
+    padding-top: 7px;
+    text-align: right;
+    font-size: 13px;
+    /*font-weight: 600;*/
+    color: #343434;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .manJianFeesPrice .price .price_num {
+    /*display: block;*/
+    height: 13px;
+    line-height: 13px;
+    font-size: 13px;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .manJianFeesPrice .price .price_desc {
+    /*display: block;*/
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 10px;
+    height: 10px;
+    color: #949494;
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .num {

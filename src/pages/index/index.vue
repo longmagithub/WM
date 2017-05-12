@@ -29,7 +29,7 @@
             .title}}</span>
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
-          <div class="fessDesc" v-if="freedispatch === 1">
+          <div class="fessDesc" v-if="freedispatch.state === 1">
             满{{freedispatch.price}}元满配送费
           </div>
         </div>
@@ -135,7 +135,7 @@
     },
     methods: {
       // 红包
-      ...mapMutations(['BOON_PRICE']),
+      ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE']),
       // 商家信息
       getShopDetail() {
         const data = {
@@ -182,7 +182,11 @@
         this.axios.get(`/br/shop/freedispatch${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
+            res.data.price = res.data.price / 100
             this.freedispatch = res.data
+            if (res.data.state === 1) {
+              this.MANJIAN_FEESPRICE(res.data.price)
+            }
           }
         })
       },
