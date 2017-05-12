@@ -20,10 +20,6 @@
               <!--<span>/ 满{{detailBox.dispatching.fees[0].price}}{{detailBox.dispatching.fees[0].fee | fees}}</span>-->
               <!--</div>-->
               <div class="bulletin" v-if="shopDetail.notice">公告：{{shopDetail.notice}}</div>
-              <!--<div class="bulletin" v-if="shopDetail.notice">公告：订单满50元实付金额，赠送揉蓝柠檬水。-->
-              <!--订单满80元(实付金额)，赠送欧巴香辣年糕。-->
-              <!--订单满120元实付金额，赠送手原味鸡半只。-->
-              <!--</div>-->
             </div>
             <!--<div class="enter uxwm-iconfont btn_right"></div>-->
           </div>
@@ -53,21 +49,20 @@
         </div>
       </div>
       <div class="main">
-        <goods :seller="shopDetail" :min-price="shopDetail.minPrice"></goods>
+        <goods :seller="shopDetail" :min-price="shopDetail.minPrice" :freedispatchPrice="freedispatch.price"></goods>
       </div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
     <div class="boon" v-show="isCloseBoon" @click="closeBoon">
-      <div class="shareJiantou">
-      </div>
+      <!--<div class="boon" v-show="1" @click="closeBoon">-->
       <div class="backImg">
-        <div class="boonDesc">
-          客官，看你骨骼清奇，<br>
-          不去晒个红包简直就是浪费良辰美景
-        </div>
+        <div class="boonDesc" v-html="boonMegText"></div>
         <div class="textContent">
           <p class="price">{{IndexboonPrice}}<i class="yuanIcon"></i></p>
+        </div>
+        <div class="boonBtn" :class="{toogleBoonBtnClass:toogleBoonBtnClass}" @click="toogleBoonBtn">
+          {{toogleBoonBtnText}}
         </div>
       </div>
     </div>
@@ -102,7 +97,10 @@
         shopStatus: 0, // 门店状态
         isCloseBoon: false,
         IndexboonPrice: 0,
-        headerHeight: 0
+        headerHeight: 0,
+        toogleBoonBtnText: '炫耀一下',
+        toogleBoonBtnClass: false,
+        boonMegText: '' // 红包提示语
       }
     },
     created() {
@@ -124,6 +122,8 @@
       this.getShopDetail()
       // 免配送费
       this.getFreedispatch()
+      // 红包提示语
+      this.getBoonMeg()
     },
     computed: {
       // 检测 vuex 中boonPrice
@@ -232,6 +232,20 @@
           }
         })
       },
+      // 改变红包btn 内容
+      toogleBoonBtn() {
+        this.toogleBoonBtnText = '右上角你懂得'
+        this.toogleBoonBtnClass = true
+      },
+      // 红包提示语
+      getBoonMeg() {
+        this.axios.get('/common/sysconfig?name=shareMessage').then((res) => {
+          res = res.data
+          if (res.success) {
+            this.boonMegText = res.data.content
+          }
+        })
+      },
       // toggle toast
       toggleToast(show, text, time) {
         if (show === true || show === 1) {
@@ -323,8 +337,8 @@
   .boon .backImg {
     position: relative;
     top: 10%;
-    left: 0;
-    width: 100%;
+    left: 11%;
+    width: 78%;
     height: 374px;
     background: url("../../assets/hongbao@2x.png") no-repeat center;
     background-size: 288px 374px;
@@ -349,6 +363,38 @@
     width: 100%;
     height: 77px;
     color: #fff;
+  }
+
+  .boon .backImg .boonBtn {
+    position: absolute;
+    top: 389px;
+    left: 10%;
+    width: 80%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-family: STYuanti-SC-Bold;
+    font-size: 22px;
+    color: #FFE826;
+    letter-spacing: 3.84px;
+    background: url("../../assets/boonBtn.png") no-repeat center;
+    background-size: 214px 45px;
+  }
+
+  .boon .backImg .toogleBoonBtnClass {
+    position: absolute;
+    top: 389px;
+    left: 10%;
+    width: 80%;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    font-family: STYuanti-SC-Bold;
+    font-size: 22px;
+    color: #FFFFFF;
+    letter-spacing: 3.84px;
+    background: url("../../assets/boonBtn.png") no-repeat center;
+    background-size: 214px 45px;
   }
 
   .boon .backImg .textContent .price {

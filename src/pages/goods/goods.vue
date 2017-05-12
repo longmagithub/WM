@@ -57,7 +57,8 @@
             <div class="price-wrapper">
               <div class="desc" v-if="!totalNum">购物车为空</div>
               <div class="price" v-if="totalNum">
-                <div class="price-num">￥{{allPrice | toFixedFil}}</div>
+                <div class="price-num" :class="{'price-numS': freedispatchPrice === 0}">￥{{allPrice | toFixedFil}}</div>
+                <div class="delivery" v-if="freedispatchPrice">满{{freedispatchPrice}}元满配送费</div>
                 <!--<div class="delivery">{{deliveryDesc}}</div>-->
               </div>
             </div>
@@ -80,10 +81,10 @@
             </transition>
           </div>
         </div>
-        <div class="manjianDesc" v-html="manjianDesc"></div>
+        <div class="manjianDesc" v-if="this.seller.activity" v-html="manjianDesc"></div>
         <transition name="fold">
           <div class="shopcart-list" v-show="listShow">
-            <div class="manjianDesc" v-html="manjianDesc"></div>
+            <div class="manjianDesc" v-if="this.seller.activity" v-html="manjianDesc"></div>
             <div class="list-header">
               <div class="header">
                 <h1 class="title">购物车</h1>
@@ -194,6 +195,10 @@
       minPrice: {
         type: Number,
         default: 0
+      },
+      freedispatchPrice: {
+        type: Number,
+        default: 0
       }
     },
     data() {
@@ -276,7 +281,6 @@
       })
       // 门店状态
       this.getShopState()
-
       // 优惠列表
       this.getDiscountList()
     },
@@ -364,36 +368,40 @@
       },
       // 动态满减的描述
       manjianDesc() {
-        let discArr = []
-        let desc = ''
-        let allFeesPrice = this.allPrice
-        let newTime = Date.parse(new Date()) / 1000
-        if (this.totalNum) {
-          for (let i = 0; i < this.discountList.length; i++) {
-            if (Date.parse(new Date(this.discountList[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(this.discountList[i].endTime)) /
-              1000) {
-              if (allFeesPrice >= parseFloat(parseFloat(this.discountList[i].conditionAmount).toFixed(2))) {
-                discArr.push(this.discountList[i])
-                if (allFeesPrice - discArr[0].reductionAmount > 0) {
-                  this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
-                  this.shopDiscountId = discArr[0].discountId
-                  this.discountPrice = discArr[0].reductionAmount
-                  this.conditionAmount = discArr[0].conditionAmount
-                  console.log(this.conditionAmount)
-                  console.log(this.discountPrice)
-                  return `已满${this.conditionAmount}减，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
+        if (this.seller.activity) {
+          let discArr = []
+          let desc = ''
+          let allFeesPrice = this.allPrice
+          let newTime = Date.parse(new Date()) / 1000
+          if (this.totalNum) {
+            for (let i = 0; i < this.discountList.length; i++) {
+              if (Date.parse(new Date(this.discountList[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(this.discountList[i].endTime)) /
+                1000) {
+                if (allFeesPrice >= parseFloat(parseFloat(this.discountList[i].conditionAmount).toFixed(2))) {
+                  discArr.push(this.discountList[i])
+                  if (allFeesPrice - discArr[0].reductionAmount > 0) {
+                    this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
+                    this.shopDiscountId = discArr[0].discountId
+                    this.discountPrice = discArr[0].reductionAmount
+                    this.conditionAmount = discArr[0].conditionAmount
+                    console.log(this.conditionAmount)
+                    console.log(this.discountPrice)
+                    return `已满${this.conditionAmount}减，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
+                  }
+                } else {
+                  desc = this.seller.activity[0].title
                 }
               } else {
                 desc = this.seller.activity[0].title
               }
-            } else {
-              desc = this.seller.activity[0].title
             }
+          } else {
+            desc = this.seller.activity[0].title
           }
+          return desc
         } else {
-          desc = this.seller.activity[0].title
+          return
         }
-        return desc
       }
     },
     methods: {
@@ -1183,22 +1191,30 @@
   }
 
   .shopcart .content .content-left .price-wrapper .price {
-    display: flex;
-    align-items: center;
     height: 49px;
-    /*padding: 8px 0;*/
+    padding: 8px 0;
     color: #ffffff;
     text-align: left;
   }
 
   .shopcart .content .content-left .price-wrapper .price .price-num {
-    /*margin-bottom: 5px;*/
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: 17px;
+    line-height: 17px;
+    font-weight: 500;
+  }
+
+  .shopcart .content .content-left .price-wrapper .price .price-numS {
+    margin-top: 9px;
+    width: 100%;
     font-size: 17px;
     line-height: 17px;
     font-weight: 500;
   }
 
   .shopcart .content .content-left .price-wrapper .price .delivery {
+    width: 100%;
     line-height: 11px;
     font-size: 11px;
   }
