@@ -392,8 +392,6 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
-        console.log('总价' + this.allPrice)
-        console.log(this.manJianFeesPrice)
         if (this.manJianFeesPrice.state === 1) {
           if (this.allPrice > this.manJianFeesPrice.price) {
             this.feesPrice = 0
@@ -416,6 +414,7 @@
                   res.data.forEach((item) => {
                     if (userPosition >= item.startDistance && userPosition < item.endDistance) {
                       this.feesPrice = item.price / 100
+                      this.isFeessSwitch = false
                       // 优惠列表
                       this.getDiscountList()
                     }
@@ -425,12 +424,11 @@
             }
           }
         } else {
-          this.isFeessSwitch = true
           if (userPosition === null) { // 没有位置
             this.feesPrice = 0
             this.getDiscountList()
+            this.isFeessSwitch = true
           } else { // 不满足就 去算阶梯配送费
-            console.log(3)
             const data = {
               sessionId: this.customerId,
               shopId: this.shopId
@@ -441,6 +439,7 @@
                 res.data.forEach((item) => {
                   if (userPosition >= item.startDistance && userPosition < item.endDistance) {
                     this.feesPrice = item.price / 100
+                    this.isFeessSwitch = false
                     // 优惠列表
                     this.getDiscountList()
                   }
