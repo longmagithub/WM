@@ -444,24 +444,19 @@
             if (res.data.state === 1) {
               // 当前时间
               let activeTime = Date.parse(new Date())
-              for (let i = 0; i < this.textTime.length; i++) {
+              for (let i = 0; i < res.data.hours.length; i++) {
                 // 开始时间
-                let beginTimeHours = parseFloat(this.textTime[i].beginTime.split(':')[0])
-                let beginTimeMinutes = parseFloat(this.textTime[i].beginTime.split(':')[1])
+                let beginTimeHours = parseFloat(res.data.hours[i].beginTime.split(':')[0])
+                let beginTimeMinutes = parseFloat(res.data.hours[i].beginTime.split(':')[1])
                 this.beginTime = new Date(new Date(this.beginTime).setHours(beginTimeHours)).setMinutes(beginTimeMinutes)
                 // 结束时间
-                let endTimeHours = parseFloat(this.textTime[i].endTime.split(':')[0])
-                let endTimeMinutes = parseFloat(this.textTime[i].endTime.split(':')[1])
+                let endTimeHours = parseFloat(res.data.hours[i].endTime.split(':')[0])
+                let endTimeMinutes = parseFloat(res.data.hours[i].endTime.split(':')[1])
                 this.endTime = new Date(new Date(this.endTime).setHours(endTimeHours)).setMinutes(endTimeMinutes)
-//                console.log(this.beginTime)
-//                console.log(this.endTime)
-//                console.log(activeTime)
                 if ((activeTime >= this.beginTime) && (activeTime < this.endTime)) {
                   this.isYingye = true
-                  console.log(1111111111)
                   break
                 } else {
-                  console.log(222222222)
                   this.isYingye = false
                 }
               }

@@ -6,7 +6,7 @@
                   v-on:end_callback="countDownFun"
                   :currentTime="currentTime"
                   :startTime="currentTime"
-                  :endTime="endTime"></count-down>
+                  :endTime="reverseTime"></count-down>
       <!--<p class="timeNum" v-else>00:00:00</p>-->
       <p class="timeText">
         <span class="text">详情</span>
@@ -42,17 +42,33 @@
     data() {
       return {
         currentTime: Math.round(new Date().getTime() / 1000), // 当前时间戳
-        endTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000), // 15分钟后
+        reverseTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000), // 15分钟后
         isTime: true,
         toastShow: false,
         toastText: '',
         orderId: '',
-        paidPrice: 0 // 支付多少
+        paidPrice: 0, // 支付多少
+        beginTime: new Date(), // 开始时间
+        endTime: new Date(), // 结束时间
+        textTime: [
+          {
+            beginTime: '08:00',
+            endTime: '12:00'
+          }, {
+            beginTime: '13:00',
+            endTime: '14:00'
+          }, {
+            beginTime: '13:00',
+            endTime: '22:00'
+          }
+        ]
       }
     },
     created() {
       // 修改 title
       PublicJs.changeTitleInWx('在线支付')
+      // 门店门店状态
+      this.getShopState()
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
@@ -60,6 +76,30 @@
     },
     methods: {
       ...mapMutations(['CLEAR_CART', 'BOON_PRICE']),
+      // 门店门店状态
+      getShopState() {
+        this.axios.get(`/br/shop/status?shopId=${getStore('userInfo').shopId}&customerId=${getStore('userInfo').customerId}`).then((res) => {
+          res = res.data
+          // 当前时间
+          let activeTime = Date.parse(new Date())
+          for (let i = 0; i < this.textTime.length; i++) {
+            // 开始时间
+            let beginTimeHours = parseFloat(this.textTime[i].beginTime.split(':')[0])
+            let beginTimeMinutes = parseFloat(this.textTime[i].beginTime.split(':')[1])
+            this.beginTime = new Date(new Date(this.beginTime).setHours(beginTimeHours)).setMinutes(beginTimeMinutes)
+            // 结束时间
+            let endTimeHours = parseFloat(this.textTime[i].endTime.split(':')[0])
+            let endTimeMinutes = parseFloat(this.textTime[i].endTime.split(':')[1])
+            this.endTime = new Date(new Date(this.endTime).setHours(endTimeHours)).setMinutes(endTimeMinutes)
+            if ((activeTime >= this.beginTime) && (activeTime < this.endTime)) {
+              this.isYingye = true
+              break
+            } else {
+              this.isYingye = false
+            }
+          }
+        })
+      },
       countDownFun() {
         this.isTime = !this.isTime
         this.toggleToast(1, '订单已超时')

@@ -30,7 +30,7 @@
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
           <div class="fessDesc" v-if="freedispatch.state === 1">
-            满{{freedispatch.price}}元满配送费
+            满{{freedispatch.price}}元免配送费
           </div>
         </div>
         <div class="user">
