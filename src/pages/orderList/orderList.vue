@@ -78,6 +78,7 @@
 //      } else {
 //        this.isCode()
 //      }
+      this.getReverTime()
     },
     methods: {
       // 判断code
@@ -85,7 +86,7 @@
         let url = window.location.href
         if (getStore('openId') === null) {
           if (url.indexOf('code') < 0) {
-            console.log('没有授权')
+//            console.log('没有授权')
             this.to()
           } else {
             const data = {
@@ -193,6 +194,15 @@
             'orderId': id,
             'sid': this.sessionId,
             'shopId': this.shopId
+          }
+        })
+      },
+      // 确认支付倒计时
+      getReverTime() {
+        this.axios.get(`/br/shop/status?shopId=${this.shopId}&customerId=${this.customerId}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            setStore('hours', res.data.hours)
           }
         })
       }

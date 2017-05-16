@@ -1,7 +1,7 @@
 <template>
   <div class="order-detail-wrap">
     <section class="bg-white order-status">
-      <div  class="order-status-icon" :class="'status' + orderDetail.state"></div>
+      <div class="order-status-icon" :class="'status' + orderDetail.state"></div>
       <p class="order-status-tip"
          v-if="orderDetail.state === 0 || orderDetail.state === 100 || orderDetail.state === 6">
         {{orderStatus.tip}}</p>
@@ -99,13 +99,13 @@
   import * as PublicJs from '../../common/utils/public'
   export default {
     created() {
-      PublicJs.changeTitleInWx('订单详情')
-    },
-    mounted () {
       this.orderNo = this.$route.query.orderNo ? this.$route.query.orderNo : ''
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
       this.sessionId = this.$route.query.sid ? this.$route.query.sid : ''
       this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
+      PublicJs.changeTitleInWx('订单详情')
+    },
+    mounted () {
       this.$nextTick(() => {
         this.getOrderDetail()
       })
@@ -119,6 +119,7 @@
         orderNo: '',
         orderId: '',
         isAjaxing: false,
+        statusTimeArr: [], // 营业时间
         icon: {
           phone: 'btn_phone'
         },
@@ -131,7 +132,10 @@
         },
         iconCodeArr: ['status0', 'status1', 'status2', 'status3', 'status4', 'status5', 'status6', 'status7',
           'status8', 'status9', 'status10', 'status11', 'status12', 'status13'],
-        orderStatusTipArr: ['', '已付款，待商家接单', '已接单，待配送', '已接单，待配送', '配送中，待收货', '已完成', '订单关闭']
+        orderStatusTipArr: ['', '已付款，待商家接单', '已接单，待配送', '已接单，待配送', '配送中，待收货', '已完成', '订单关闭'],
+        reverseTime: 0, // 倒计时时间
+        ReverBeginTime: new Date(), // 用来计算倒计时
+        ReverEndTime: new Date() // 用来计算倒计时
       }
     },
     components: {
@@ -148,10 +152,10 @@
         .then((res) => {
           if (res.data.success) {
             this.orderDetail = res.data.data
-            console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
-              this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, 15)
+//              this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, this.reverseTime)
+              this.getReverTime(res.data.data.orderTime)
             } else if (res.data.data.state === 6 || res.data.data.state === 100) {
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'
             } else if (res.data.data.state === 7 || res.data.data.state === 10) {
@@ -166,14 +170,40 @@
           this.toastText = '网络异常，请稍候再试'
         })
       },
+      // 确认支付倒计时
+      getReverTime(activeTime) {
+        let isActiveTime = activeTime
+        activeTime = Date.parse(activeTime.replace(/-/g, '/'))
+        let hours = getStore('hours')
+        for (let i = 0; i < hours.length; i++) {
+          // 开始时间
+          let beginTimeHours = parseFloat(hours[i].beginTime.split(':')[0])
+          let beginTimeMinutes = parseFloat(hours[i].beginTime.split(':')[1])
+          this.ReverBeginTime = new Date(new Date(this.ReverBeginTime).setHours(beginTimeHours)).setMinutes(beginTimeMinutes)
+          // 结束时间
+          let endTimeHours = parseFloat(hours[i].endTime.split(':')[0])
+          let endTimeMinutes = parseFloat(hours[i].endTime.split(':')[1])
+          this.ReverEndTime = new Date(new Date(this.ReverEndTime).setHours(endTimeHours)).setMinutes(endTimeMinutes)
+          if ((activeTime >= this.ReverBeginTime) && (activeTime < this.ReverEndTime)) {
+            let timeValue = this.ReverEndTime - activeTime
+            if (timeValue > 900000) { // 满足倒计时15分钟
+              this.reverseTime = 15
+              this.orderStatus.tip = this.addMinutes(isActiveTime, this.reverseTime)
+            } else {  //  不满足15分钟
+              let reverseTimeMinutes = new Date(timeValue).getMinutes()
+              this.orderStatus.tip = this.addMinutes(isActiveTime, reverseTimeMinutes)
+            }
+            break
+          } else {
+            this.toggleToast(1, '没有在营业时间内')
+          }
+        }
+      },
       addMinutes (date, minutes) {
         date = date.replace(/-/g, '/')
         let oT = new Date(new Date(date).setMinutes(new Date(date).getMinutes() + minutes))
-        return '请在' + oT.getHours() + ':' + oT.getMinutes() + '前付款，超过时间，订单将被自动取消'
-//        minutes = parseInt(minutes)
-//        var interTimes = minutes * 60 * 1000
-//        interTimes = parseInt(interTimes)
-//        return this.PublicJs.formatTime((new Date(Date.parse(date) + interTimes).getTime() / 1000), 'hh:mm')
+        let mm = oT.getMinutes() === 0 ? '00' : oT.getMinutes()
+        return '请在' + oT.getHours() + ':' + mm + '前付款，超过时间，订单将被自动取消'
       },
       callPhone (phone) {
         this.PublicJs.callPhone(phone)
