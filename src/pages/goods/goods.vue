@@ -4,7 +4,7 @@
       <ul>
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
-          <span class="text">{{item.dishTypeName}}</span>
+          <span class="text"><i class="uxwm-iconfont huo"></i>{{item.dishTypeName}}</span>
           <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
         </li>
       </ul>
@@ -23,7 +23,7 @@
                 <img v-else src="../../assets/logo.png" width="52px" height="52px">
               </div>
               <div class="content">
-                <div class="name_box"><span class="name">{{food.name}}</span></div>
+                <div class="name_box"><i class="uxwm-iconfont huo"></i><span class="name">{{food.name}}</span></div>
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
@@ -131,8 +131,7 @@
         </transition>
       </div>
       <transition name="fade">
-        <div class="list-mask" @click="hideList" v-show="listShow">
-        </div>
+        <div class="list-mask" @click="hideList" v-show="listShow"></div>
       </transition>
     </div>
     <div class="closeSeller" v-show="!isYingye">
@@ -297,6 +296,8 @@
       this.getShopState()
       // 优惠列表
       this.getDiscountList()
+      // 查询爆款活动接口
+      this.getActivityHotstyle()
     },
     mounted() {
     },
@@ -418,6 +419,17 @@
     },
     methods: {
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
+      // 查询爆款活动接口
+      getActivityHotstyle() {
+        const data = {
+          customerId: this.customerId,
+          shopId: this.shopId
+        }
+        this.axios.get(`/br/shop/activity/hotstyle${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          console.log(res)
+        })
+      },
       // 优惠列表查询
       getDiscountList() {
         const data = {
@@ -825,6 +837,11 @@
     font-size: 12px;
   }
 
+  .menu-wrapper .menu-item .text .huo {
+    margin-right: 4px;
+    color: #ff553e;
+  }
+
   .menu-wrapper .menu-item:last-child .text {
     border-bottom: none;
   }
@@ -922,6 +939,11 @@
     /*display: -webkit-box;*/
     /*-webkit-line-clamp: 2;*/
     /*-webkit-box-orient: vertical;*/
+  }
+
+  .food-item .content .name_box .huo {
+    margin-right: 4px;
+    color: #ff553e;
   }
 
   .food-item .content .name_box .name {
