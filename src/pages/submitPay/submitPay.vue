@@ -42,14 +42,14 @@
     data() {
       return {
         currentTime: Math.round(new Date().getTime() / 1000), // 当前时间戳
-        reverseTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000), // 15分钟后
+        reverseTime: getStore('reverseTime').reverseTimeKey ? getStore('reverseTime').reverseTimeKey : Math.round(new
+            Date().setMinutes(new Date().getMinutes() + 15) / 1000),
+        // 15分钟后
         isTime: true,
         toastShow: false,
         toastText: '',
         orderId: '',
         paidPrice: 0, // 支付多少
-        beginTime: new Date(), // 开始时间
-        endTime: new Date(), // 结束时间
         textTime: [
           {
             beginTime: '08:00',
@@ -67,8 +67,6 @@
     created() {
       // 修改 title
       PublicJs.changeTitleInWx('在线支付')
-      // 门店门店状态
-      this.getShopState()
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
@@ -76,30 +74,6 @@
     },
     methods: {
       ...mapMutations(['CLEAR_CART', 'BOON_PRICE']),
-      // 门店门店状态
-      getShopState() {
-        this.axios.get(`/br/shop/status?shopId=${getStore('userInfo').shopId}&customerId=${getStore('userInfo').customerId}`).then((res) => {
-          res = res.data
-          // 当前时间
-          let activeTime = Date.parse(new Date())
-          for (let i = 0; i < this.textTime.length; i++) {
-            // 开始时间
-            let beginTimeHours = parseFloat(this.textTime[i].beginTime.split(':')[0])
-            let beginTimeMinutes = parseFloat(this.textTime[i].beginTime.split(':')[1])
-            this.beginTime = new Date(new Date(this.beginTime).setHours(beginTimeHours)).setMinutes(beginTimeMinutes)
-            // 结束时间
-            let endTimeHours = parseFloat(this.textTime[i].endTime.split(':')[0])
-            let endTimeMinutes = parseFloat(this.textTime[i].endTime.split(':')[1])
-            this.endTime = new Date(new Date(this.endTime).setHours(endTimeHours)).setMinutes(endTimeMinutes)
-            if ((activeTime >= this.beginTime) && (activeTime < this.endTime)) {
-              this.isYingye = true
-              break
-            } else {
-              this.isYingye = false
-            }
-          }
-        })
-      },
       countDownFun() {
         this.isTime = !this.isTime
         this.toggleToast(1, '订单已超时')

@@ -155,6 +155,10 @@
         endDate: null,
         redEnvelopeId: '',
         isFeessSwitch: true, // 是否显示 '不包含配送费'
+        ReverBeginTime: new Date(), // 用来计算倒计时
+        ReverEndTime: new Date(), // 用来计算倒计时
+        reverseTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000),
+        hoursArr: [],
         testTime: [
           {
             beginTime: '07:00',
@@ -223,16 +227,16 @@
           this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinte)
           this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
           // 结束时间
-          console.log(this.beginTime)
+//          console.log(this.beginTime)
           let endTimeHours = parseFloat(this.shopInfo.hours[i].endTime.split(':')[0])
           let endTimeMinte = parseFloat(this.shopInfo.hours[i].endTime.split(':')[1]) + this.shopInfo.makingTime +
             this.shopInfo.dispatching.duration - 15
           this.endTime = new Date(this.endTime).setHours(endTimeHours)
           this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
           this.endTime = new Date(this.endTime).setSeconds(0, 0)
-          console.log(new Date(this.endTime))
+//          console.log(new Date(this.endTime))
           if (i === 0) {
-            console.log('i===' + i)
+//            console.log('i===' + i)
             let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
               this.shopInfo.dispatching.duration + 15)
             let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
@@ -249,7 +253,7 @@
               timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
             }
           } else if (i === 1) {
-            console.log('i===' + i)
+//            console.log('i===' + i)
             let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
               15)
             let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
@@ -266,7 +270,7 @@
               timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
             }
           } else {
-            console.log('i===' + i)
+//            console.log('i===' + i)
             let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
               15)
             let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
@@ -289,9 +293,6 @@
           }
           while (oncTime < this.endTime)
           this.options = this.options.concat(timeArr)
-          this.options.forEach(item => {
-            console.log(new Date(item))
-          })
         }
       },
       // 优惠列表查询
@@ -519,12 +520,45 @@
       },
       // 去支付
       gotoPay() {
+        this.getReverTime()
         this.$router.push({
           path: '/submitPay',
           query: {
             orderId: this.orderId
           }
         })
+      },
+      // 确认支付倒计时
+      getReverTime() {
+        let activeTime = Date.parse(new Date())
+        for (let i = 0; i < this.shopInfo.hours.length; i++) {
+          // 开始时间
+          let beginTimeHours = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[0])
+          let beginTimeMinutes = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[1])
+          this.ReverBeginTime = new Date(new Date(this.ReverBeginTime).setHours(beginTimeHours)).setMinutes(beginTimeMinutes)
+          // 结束时间
+          let endTimeHours = parseFloat(this.shopInfo.hours[i].endTime.split(':')[0])
+          let endTimeMinutes = parseFloat(this.shopInfo.hours[i].endTime.split(':')[1])
+          this.ReverEndTime = new Date(new Date(this.ReverEndTime).setHours(endTimeHours)).setMinutes(endTimeMinutes)
+          if ((activeTime >= this.ReverBeginTime) && (activeTime < this.ReverEndTime)) {
+            let timeValue = this.ReverEndTime - activeTime
+            if (timeValue > 900000) { // 满足倒计时15分钟
+              this.reverseTime = Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000)
+              setStore('reverseTime', {
+                'reverseTimeKey': this.reverseTime
+              })
+            } else {  //  不满足15分钟
+              let reverseTimeMinutes = new Date(timeValue).getMinutes()
+              this.reverseTime = Math.round(new Date().setMinutes(new Date().getMinutes() + reverseTimeMinutes) / 1000)
+              setStore('reverseTime', {
+                'reverseTimeKey': this.reverseTime
+              })
+            }
+            break
+          } else {
+            console.log('bbb' + i)
+          }
+        }
       },
       // 去地址列表
       gotoAddList() {
