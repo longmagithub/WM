@@ -1,11 +1,13 @@
 <template>
   <div class="inviteWap">
-    <div class="inviteSuccess" v-show="isSuccessInvite">
-      <!--<div class="inviteSuccess" v-if="0">-->
-      <div class="inviteNum" v-show="idcode">{{idcode}}</div>
-    </div>
-    <div class="invite" v-show="!isSuccessInvite">
-      <div class="inviteNum" v-show="idcode">{{idcode}}</div>
+    <div class="invite">
+      <div class="logoimg"></div>
+      <div class="inviteText">
+        <p class="title">我的邀请码：<span class="inviteNum">{{idcode}}</span></p>
+        <p class="inviteDesc">好友使用您的邀请码并成功下单后,<br>
+          您与好友都会获得一个最高<span class="inviteNum">20元</span>的红包</p>
+      </div>
+      <div class="inviteBorder"></div>
       <div class="inviteBox">
         <p class="inviteWrapper">
           <i class="uxwm-iconfont icon_inviteNum"></i>
@@ -42,16 +44,6 @@
       } else {
         this.isCode()
       }
-//      if (getStore('version') === null || getStore('version') !== 2017050404) {
-//        removeStore('version')
-//        removeStore('openId')
-//        removeStore('userInfo')
-//        removeStore('shopInfo')
-//        setStore('version', 2017050404)
-//        this.isCode()
-//      } else {
-//        this.isCode()
-//      }
     },
     methods: {
       isCode() {
@@ -120,7 +112,14 @@
             console.log(res.data)
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
-              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?T=' + Date.parse(new Date()) / 1000
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) /
+                1000
+            }, 2000)
+          } else if (res.code === 14001) {
+            this.toggleToast(1, res.message, 1500)
+            setTimeout(() => {
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) /
+                1000
             }, 2000)
           } else {
             this.toggleToast(1, res.message, 1500)
@@ -165,8 +164,85 @@
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url("../../assets/inviteNum02.png") no-repeat;
+    background: rgba(255, 209, 102, 1);
     background-size: 100%;
+  }
+
+  .invite .logoimg {
+    position: absolute;
+    top: 47px;;
+    width: 100%;
+    height: 182px;
+    background: url("../../assets/inviteLogo.png") no-repeat center;
+    background-size: 182px 100%;
+  }
+
+  /*ip5*/
+  @media (max-width: 320px) {
+    .invite .logoimg {
+      position: absolute;
+      top: 40px;;
+      width: 100%;
+      height: 155px;
+      background: url("../../assets/inviteLogo.png") no-repeat center;
+      background-size: 155px 100%;
+    }
+  }
+
+  .invite .inviteText {
+    position: absolute;
+    top: 254px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+  }
+
+  @media (max-width: 320px) {
+    .invite .inviteText {
+      position: absolute;
+      top: 210px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+    }
+  }
+
+  .invite .inviteText .title {
+    font-family: STYuanti-SC-Regular;
+    font-size: 18px;
+    color: #FFFFFF;
+    letter-spacing: 0.64px;
+  }
+
+  .invite .inviteText .title .inviteNum {
+    font-family: STYuanti-SC-Bold;
+    font-size: 24px;
+    color: #FF5544;
+    letter-spacing: 0.85px;
+  }
+
+  .invite .inviteText .inviteDesc {
+    font-family: STYuanti-SC-Regular;
+    font-size: 13px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    line-height: 23px;
+  }
+
+  .invite .inviteText .inviteDesc .inviteNum {
+    font-family: STYuanti-SC-Bold;
+    font-size: 16px;
+    color: #FF5544;
+    letter-spacing: 1.24px;
+  }
+
+  .invite .inviteBorder {
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    height: 20px;
+    background: url("../../assets/inviteBorder.png") no-repeat center;
+    background-size: 94% 20px;
   }
 
   .inviteSuccess {
@@ -182,38 +258,10 @@
 
   .inviteBox {
     position: absolute;
-    top: 66%;
+    top: 62%;
     left: 15%;
     width: 70%;
   }
-
-  /*.inviteBox {*/
-  /*position: fixed;*/
-  /*top: 66%;*/
-  /*left: 15%;*/
-  /*width: 70%;*/
-  /*}*/
-
-  .inviteNum {
-    position: relative;
-    top: 38%;
-    text-align: center;
-    font-family: STYuanti-SC-Regular;
-    font-size: 36px;
-    color: #FFA448;
-    letter-spacing: 1.28px;
-  }
-
-  /*.inviteNum {*/
-  /*position: fixed;*/
-  /*top: 38%;*/
-  /*width: 100%;*/
-  /*text-align: center;*/
-  /*font-family: STYuanti-SC-Regular;*/
-  /*font-size: 36px;*/
-  /*color: #FFA448;*/
-  /*letter-spacing: 1.28px;*/
-  /*}*/
 
   .inviteBox .inviteWrapper {
     position: relative;
@@ -240,7 +288,7 @@
 
   .inviteBox .inviteWrapper .icon_inviteNum {
     line-height: 50px;
-    color: #FFB66C;
+    color: #FF5544;
   }
 
   .inviteBox .inviteBtn {
@@ -254,8 +302,7 @@
     font-size: 16px;
     color: #FFFFFF;
     letter-spacing: 0.57px;
-    background: #FFB66C;
+    background: #FF5544;
     border-radius: 6px;
-    box-shadow: 0 2px 2px 0 rgba(255, 166, 78, 0.50);
   }
 </style>
