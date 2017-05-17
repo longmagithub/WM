@@ -742,9 +742,10 @@
               wx.getLocation({
                 type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
                 success: function (res) {
+                  that.getBaiDuMap(res)
                   if (res.errMsg === 'getLocation:ok') {
-                    that.getBaiDuMap(res)
                   } else if (res.errMsg === 'getLocation:cancel') {
+                    that.getBaiDuMap(res)
                   }
                 }
               })
@@ -755,7 +756,7 @@
       // 百度地址算位置
       getBaiDuMap(res) {
         let location = []
-        this.shopListArr.forEach((item, index) => {
+        this.shopListArr.forEach((item) => {
           this.latLon += item.latitudeB + ',' + item.longitudeB + '|'
         })
         this.latLon = this.latLon.slice(0, -1)
@@ -765,8 +766,8 @@
         const data = {
           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
           output: 'json', // 输出的数据类型
-          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
-//          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
+//          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
+          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
           destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
