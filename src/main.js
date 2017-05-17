@@ -11,6 +11,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 // 引入表单校验
 import VueValidator from 'vue-validator'
+// 引入vue-resource
+import VueResource from 'vue-resource'
 // 引入路由和状态同步
 import {sync} from 'vuex-router-sync'
 // 引入自定义过滤
@@ -44,6 +46,7 @@ console.log(mock)
 // Vue.use(WxPay)
 // 微信配置
 // Vue.use(wx)
+Vue.use(VueResource) // 声明使用vue-resource
 Vue.use(VueValidator) // 声明使用vue-validator
 Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueLazyload, {
