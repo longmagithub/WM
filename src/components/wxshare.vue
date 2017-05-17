@@ -772,6 +772,7 @@
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
+          console.log(res)
           res.result.forEach((item, index) => {
             item.flag = index
             this.shopListArr[index].location = item

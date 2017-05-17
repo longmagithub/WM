@@ -118,6 +118,7 @@
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       console.log(this.shopListArr)
+      console.log('+++++++++++++++++++++++++++++++++++')
       // 百度地址
 //      this.getBaiDuMap()
       // 红包信息
@@ -134,7 +135,6 @@
       ...mapState(['boonPrice']),
       initHeight() {
         this.headerHeight = this.$refs.header
-        console.log(this.headerHeight)
       }
     },
     methods: {
@@ -242,7 +242,6 @@
       },
       // 分享
       goShare() {
-        console.log(123)
         WeixinJSBridge.invoke('sendAppMessage', {
           'appid': 'wx73a13df7b60775a1',
           'img_url': this.shopDetail.logo,
