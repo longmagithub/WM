@@ -3,7 +3,6 @@
 <script>
   export default {
     created() {
-      this.getShopList('dcfae6aa-83af-484d-bbb6-8e0096d16272')
       this.getBaiDuMap()
     },
     mounted () {

@@ -67,7 +67,7 @@
         })
       },
       goIndex(shopId, custId) {
-        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + custId + 'shopId=' +
+        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + custId + '&shopId=' +
           shopId)
 //        this.$router.replace({
 //          path: '/index',
