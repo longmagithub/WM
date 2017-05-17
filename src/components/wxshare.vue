@@ -76,7 +76,7 @@
                 }
               })
               wx.getLocation({
-                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
                 success: function (res) {
                   console.log(res)
 //                  var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
@@ -92,6 +92,18 @@
               })
             })
           }
+        })
+      },
+      async getBaiDuMap() {
+        const data = {
+          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
+          output: 'json', // 这是输出的数据类型
+          origins: '20.274085,120.15507', // 起点：维度，经度
+          destinations: '30.1854,120.162|30.1854,120.162|30.185,120.161', // 终点：维度，经度|维度，经度  多个用 | 分开
+          coord_type: 'wgs84' // 坐标类型
+        }
+        this.axios.get(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+          console.log(res)
         })
       }
     }
