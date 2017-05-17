@@ -2,9 +2,6 @@
 </template>
 <script>
   export default {
-    created() {
-      this.getBaiDuMap()
-    },
     mounted () {
       this.setShareConfig()
     },
