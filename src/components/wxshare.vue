@@ -696,7 +696,7 @@
     },
     mounted () {
       this.setShareConfig()
-      this.getBaiDuMap()
+//      this.getBaiDuMap()
     },
     methods: {
       setShareConfig() {
@@ -765,8 +765,8 @@
         const data = {
           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
           output: 'json', // 输出的数据类型
-//          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
-          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
+          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
+//          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
           destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
