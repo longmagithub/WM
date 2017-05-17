@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <wxshare></wxshare>
     <div class="index-box">
       <div class="header" ref="header">
         <div class="content-wrapper"
@@ -66,7 +67,6 @@
         </div>
       </div>
     </div>
-    <wxshare></wxshare>
   </div>
 </template>
 

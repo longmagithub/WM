@@ -1,13 +1,14 @@
 <template>
 </template>
 <script>
-  import {urlParse} from '../../common/utils/util'
+  import {urlParse, setStore} from '../../common/utils/util'
   export default {
     data () {
       return {
         msg: '静默授权',
         url: '',
-        code: ''
+        code: '',
+        customerId: ''
       }
     },
     created() {
@@ -21,7 +22,9 @@
         }
         this.axios.post('/mp/authority/customer', data).then((res) => {
           res = res.data
-          this.goIndex(res.data.customerId)
+          if (res.success) {
+            this.getShopList(res.data.customerId)
+          }
         })
       }
     },
@@ -34,8 +37,38 @@
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
-      goIndex(id) {
-        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/index')
+      // 获取列表
+      getShopList(id) {
+        const data = {
+          customerId: id,
+          pageSize: 30,
+          pageNumber: 1,
+          longitude: 0, // 经度
+          latitude: 0, // 维度
+          discounts: [], // uxwm 满减
+          thirdDiscounts: [] // 其他平台满减
+        }
+        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            res.data.forEach((data) => {
+              data.discounts = data.discounts.reverse()
+              data.thirdDiscounts = data.thirdDiscounts.reverse()
+              // 添加 图片分割
+              if (data.logo) {
+                data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+              }
+            })
+            setStore('shopList', {
+              id: res.data
+            })
+            this.goIndex(res.data[0].shopId, id)
+          }
+        })
+      },
+      goIndex(shopId, custId) {
+        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + custId + 'shopId=' +
+          shopId)
 //        this.$router.replace({
 //          path: '/index',
 //          query: {

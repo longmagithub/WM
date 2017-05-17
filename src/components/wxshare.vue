@@ -10,33 +10,6 @@
       this.setShareConfig()
     },
     methods: {
-      // 获取列表
-      getShopList(id) {
-        const data = {
-          customerId: id,
-          pageSize: 30,
-          pageNumber: 1,
-          longitude: 0, // 经度
-          latitude: 0, // 维度
-          discounts: [], // uxwm 满减
-          thirdDiscounts: [] // 其他平台满减
-        }
-        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          if (res.success) {
-            res.data.forEach((data) => {
-              data.discounts = data.discounts.reverse()
-              data.thirdDiscounts = data.thirdDiscounts.reverse()
-              // 添加 图片分割
-              if (data.logo) {
-                data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
-              }
-//              this.shopList.push(data)
-            })
-            console.log(res.data)
-          }
-        })
-      },
       setShareConfig() {
         let url = window.location.href.split('#')[0]
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
