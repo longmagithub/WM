@@ -2,6 +2,7 @@
 </template>
 <script>
   import {urlParse, setStore} from '../../common/utils/util'
+  import wxshare from '../../components/wxshare.vue'
   export default {
     data () {
       return {
@@ -103,6 +104,9 @@
           console.log(res)
         })
       }
+    },
+    components: {
+      wxshare
     }
   }
 </script>

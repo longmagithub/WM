@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/wxshare.vue" afterPath="$PROJECT_DIR$/src/components/wxshare.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/index/index.vue" afterPath="$PROJECT_DIR$/src/pages/index/index.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/jingmo/jingmo.vue" afterPath="$PROJECT_DIR$/src/pages/jingmo/jingmo.vue" />
     </list>
     <ignored path="H5.iws" />
@@ -85,9 +83,11 @@
       <file leaf-file-name="jingmo.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/jingmo/jingmo.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="69" column="39" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
-              <folding />
+            <state relative-caret-position="429">
+              <caret line="107" column="17" selection-start-line="107" selection-start-column="17" selection-end-line="107" selection-end-column="17" />
+              <folding>
+                <element signature="e#34#92#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,9 +116,10 @@
         <entry file="file://$PROJECT_DIR$/src/pages/index/index.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="137" column="59" selection-start-line="137" selection-start-column="59" selection-end-line="137" selection-end-column="59" />
+              <caret line="273" column="14" selection-start-line="273" selection-start-column="4" selection-end-line="273" selection-end-column="14" />
               <folding>
                 <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#3011#3049#0" expanded="true" />
                 <element signature="e#3402#3500#0" expanded="false" />
                 <element signature="e#4664#4847#0" expanded="false" />
                 <element signature="e#4747#4841#0" expanded="false" />
@@ -734,12 +735,12 @@
       <workItem from="1494293821088" duration="61171000" />
       <workItem from="1494481953944" duration="41617000" />
       <workItem from="1494583685713" duration="50919000" />
-      <workItem from="1494983507681" duration="17963000" />
+      <workItem from="1494983507681" duration="18133000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1231046000" />
+    <option name="totallyTimeSpent" value="1231216000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -1193,12 +1194,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/index/index.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="137" column="59" selection-start-line="137" selection-start-column="59" selection-end-line="137" selection-end-column="59" />
+          <caret line="273" column="14" selection-start-line="273" selection-start-column="4" selection-end-line="273" selection-end-column="14" />
           <folding>
             <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#3011#3049#0" expanded="true" />
             <element signature="e#3402#3500#0" expanded="false" />
             <element signature="e#4664#4847#0" expanded="false" />
             <element signature="e#4747#4841#0" expanded="false" />
@@ -1261,19 +1271,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/jingmo/jingmo.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="69" column="39" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="429">
+          <caret line="107" column="17" selection-start-line="107" selection-start-column="17" selection-end-line="107" selection-end-column="17" />
+          <folding>
+            <element signature="e#34#92#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
