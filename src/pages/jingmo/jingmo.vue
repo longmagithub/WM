@@ -23,6 +23,7 @@
         this.axios.post('/mp/authority/customer', data).then((res) => {
           res = res.data
           if (res.success) {
+            this.customerId = res.data.customerId
             this.getShopList(res.data.customerId)
           }
         })
@@ -38,9 +39,9 @@
 //        window.location.href = oauthJumpUrl
       },
       // 获取列表
-      getShopList(id) {
+      getShopList(custId) {
         const data = {
-          customerId: id,
+          customerId: custId,
           pageSize: 30,
           pageNumber: 1,
           longitude: 0, // 经度
@@ -59,10 +60,9 @@
                 data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
               }
             })
-            setStore('shopList', {
-              id: res.data
-            })
-            this.goIndex(res.data[0].shopId, id)
+            let setStoreContetn = {custId: res.data}
+            setStore('shopList', setStoreContetn)
+            this.goIndex(res.data[0].shopId, custId)
           }
         })
       },

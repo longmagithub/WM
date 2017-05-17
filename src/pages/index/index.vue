@@ -104,6 +104,19 @@
       }
     },
     created() {
+      wx.getLocation({
+        type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+        success: function (res) {
+          this.getBaiDuMap(res)
+//                  var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+//                  var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+//                  var speed = res.speed; // 速度，以米/每秒计
+//                  var accuracy = res.accuracy; // 位置精度
+        },
+        cancel: function (rep) {
+          // 用户取消分享后执行的回调函数
+        }
+      })
       // 调试代码 提交时注释
       setStore('userInfo', {
         'customerId': this.$route.query.customerId || 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
@@ -136,6 +149,20 @@
     methods: {
       // 红包
       ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE']),
+      // 百度地址算位置
+      getBaiDuMap(location) {
+        getStore('shopList')[this.customerId]
+        const data = {
+          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
+          output: 'json', // 输出的数据类型
+          origins: location.latitude + ',' + location.longitude, // 起点：维度，经度
+          destinations: '30.1854,120.162|30.1854,120.162|30.185,120.161', // 终点：维度，经度|维度，经度  多个用 | 分开
+          coord_type: 'gcj02' // 坐标类型
+        }
+        this.axios.get(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+          console.log(res)
+        })
+      },
       // 商家信息
       getShopDetail() {
         const data = {
