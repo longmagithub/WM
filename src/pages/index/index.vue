@@ -100,7 +100,8 @@
         headerHeight: 0,
         toogleBoonBtnText: '炫耀一下',
         toogleBoonBtnClass: false,
-        boonMegText: '' // 红包提示语
+        boonMegText: '', // 红包提示语
+        shopListArr: getStore('shopList')
       }
     },
     created() {
@@ -116,6 +117,7 @@
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      console.log(this.shopListArr)
       // 百度地址
 //      this.getBaiDuMap()
       // 红包信息
