@@ -31,6 +31,9 @@ module.exports = {
       },
       '/common': {
         'target': 'http://192.168.1.25'
+      },
+      '/routematrix': {
+        'target': 'http://api.map.baidu.com/routematrix/v2/riding'
       }
     },
     // CSS Sourcemaps off by default because  relative paths are "buggy"
