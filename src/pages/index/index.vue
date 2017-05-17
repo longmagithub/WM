@@ -116,6 +116,8 @@
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      // 百度地址
+      this.getBaiDuMap()
       // 红包信息
       this.getRedEnvelope()
       // 商家信息
@@ -136,6 +138,20 @@
     methods: {
       // 红包
       ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE']),
+      // 百度地址算位置
+      getBaiDuMap(location) {
+//        getStore('shopList')[this.customerId]
+        const data = {
+          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
+          output: 'json', // 输出的数据类型
+          origins: '30.1854' + ',' + '120.162', // 起点：维度，经度
+          destinations: '30.1854,120.162|30.1854,120.162|30.185,120.161', // 终点：维度，经度|维度，经度  多个用 | 分开
+          coord_type: 'gcj02' // 坐标类型
+        }
+        this.axios.get(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+          console.log(res)
+        })
+      },
       // 商家信息
       getShopDetail() {
         const data = {
