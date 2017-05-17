@@ -4,6 +4,7 @@
   export default {
     mounted () {
       this.setShareConfig()
+      this.getBaiDuMap()
     },
     methods: {
       setShareConfig() {
@@ -13,7 +14,7 @@
           res = res.data
           if (res.success) {
             wx.config({
-              debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+              debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
               appId: res.data.appId, // 必填，公众号的唯一标识
               timestamp: res.data.timestamp, // 必填，生成签名的时间戳
               nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
@@ -61,18 +62,35 @@
       },
       // 百度地址算位置
       getBaiDuMap(res) {
+        let location = []
         window.alert('________----------___________------______-------__')
 //        getStore('shopList')[this.customerId]
         const data = {
           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
           output: 'json', // 输出的数据类型
-          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
-          destinations: '30.1854,120.162|30.1854,120.162|30.185,120.161', // 终点：维度，经度|维度，经度  多个用 | 分开
+//          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
+          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
+          destinations: '31.1854,121.162|32.1854,122.162|33.185,123.161', // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           console.log(res)
+          res.result.forEach((item, index) => {
+            console.log(index)
+            item.flag = index
+            location.push(item)
+          })
+          for (let i = 0; i < location.length; i++) {
+            for (let j = i; j < location.length; j++) {
+              if (location[i].distance.value > location[j].distance.value) {
+                let temp = location[i]
+                location[i] = location[j]
+                location[j] = temp
+              }
+            }
+          }
+          console.log(JSON.stringify(location))
         })
       }
     }

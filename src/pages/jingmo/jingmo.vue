@@ -61,8 +61,7 @@
                 data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
               }
             })
-            let setStoreContetn = {custId: res.data}
-            setStore('shopList', setStoreContetn)
+            setStore('shopList', res.data)
             this.goIndex(res.data[0].shopId, custId)
           }
         })
