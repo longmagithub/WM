@@ -19,8 +19,6 @@ import * as filters from './filters'
 import mock from './plugins/mock'
 // 懒加载
 import VueLazyload from 'vue-lazyload'
-// 微信JSSDK
-// import wx from 'weixin-js-sdk'
 // 引入工具类
 // import * as utils from './utils'
 // 引入初始化

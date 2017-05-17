@@ -1,12 +1,41 @@
 <template>
-  <div id="container" style="width:500px; height:300px"></div>
 </template>
 <script>
   export default {
+    created() {
+      this.getShopList('dcfae6aa-83af-484d-bbb6-8e0096d16272')
+    },
     mounted () {
       this.setShareConfig()
     },
     methods: {
+      // 获取列表
+      getShopList(id) {
+        const data = {
+          customerId: id,
+          pageSize: 30,
+          pageNumber: 1,
+          longitude: 0, // 经度
+          latitude: 0, // 维度
+          discounts: [], // uxwm 满减
+          thirdDiscounts: [] // 其他平台满减
+        }
+        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            res.data.forEach((data) => {
+              data.discounts = data.discounts.reverse()
+              data.thirdDiscounts = data.thirdDiscounts.reverse()
+              // 添加 图片分割
+              if (data.logo) {
+                data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+              }
+//              this.shopList.push(data)
+            })
+            console.log(res.data)
+          }
+        })
+      },
       setShareConfig() {
         let url = window.location.href.split('#')[0]
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
@@ -50,14 +79,15 @@
                 type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
                 success: function (res) {
                   console.log(res)
-                  this.Amap = new AMap.Map('container', {
-                    zoom: 10,
-                    center: [res.latitude, res.longitude]
-                  })
 //                  var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
 //                  var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
 //                  var speed = res.speed; // 速度，以米/每秒计
 //                  var accuracy = res.accuracy; // 位置精度
+                },
+                cancel: function (rep) {
+                  console.log(rep)
+                  window.alert('取消回调')
+                  // 用户取消分享后执行的回调函数
                 }
               })
             })
