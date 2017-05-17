@@ -148,7 +148,7 @@
           destinations: '30.1854,120.162|30.1854,120.162|30.185,120.161', // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
-        this.axios.get(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+        this.axios.get(`/api/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           console.log(res)
         })
       },
