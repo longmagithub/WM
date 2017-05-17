@@ -1,4 +1,5 @@
 <template>
+  <div id="container" style="width:500px; height:300px"></div>
 </template>
 <script>
   export default {
@@ -49,6 +50,10 @@
                 type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
                 success: function (res) {
                   console.log(res)
+                  this.Amap = new AMap.Map('container', {
+                    zoom: 10,
+                    center: [res.latitude, res.longitude]
+                  })
 //                  var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
 //                  var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
 //                  var speed = res.speed; // 速度，以米/每秒计
@@ -62,3 +67,5 @@
     }
   }
 </script>
+<style>
+</style>
