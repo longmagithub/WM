@@ -772,6 +772,7 @@
           coord_type: 'gcj02' // 坐标类型
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+          window.alert(res)
           res = res.data
           console.log(res)
           res.result.forEach((item, index) => {
@@ -790,6 +791,8 @@
           }
           setStore('shopList', this.shopListArr)
 //          console.log(JSON.stringify(this.shopListArr))
+        }, (err) => {
+          window.alert(err)
         })
       }
     }
