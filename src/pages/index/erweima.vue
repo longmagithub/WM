@@ -8,7 +8,7 @@
     <div class="shareText">客官，看你骨骼清奇，<br>
       不去晒个红包简直就是浪费良辰美景呐~
     </div>
-    <div class="wechatImg"></div>
+    <div class="wechatImg"><img src="../../assets/WechatIMG22.jpeg" width="120px" height="120px" alt=""></div>
     <div class="bottomText">长按关注 领取红包</div>
   </div>
 </template>
@@ -151,8 +151,9 @@
     position: absolute;
     top: 68%;
     width: 100%;
+    text-align: center;
     height: 120px;
-    background: url("../../assets/WechatIMG22.jpeg") no-repeat center;
+    /*background: url("../../assets/WechatIMG22.jpeg") no-repeat center;*/
     background-size: 120px 120px;
   }
   @media (max-width: 320px) {
