@@ -200,6 +200,10 @@
       freedispatchPrice: {
         type: Object,
         default: {}
+      },
+      changeShopId: {
+        type: String,
+        default: ''
       }
     },
     data() {
@@ -272,34 +276,14 @@
       this.hoursArr = this.seller.hours
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
-      const data = {
-        shopId: this.shopId,
-        customerId: this.customerId
-      }
-      this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
-        res = res.data
-        if (res.success === SUCCESS_OK) {
-          if (res.data.dishesList === null) {
-            this.toggleToast(1, res.message)
-          } else {
-            this.isAjax = true
-            this.goods = res.data.dishesList
-            this.$nextTick(() => {
-              this.initCategoryNum()
-              this._initScroll()
-              this._calculateHeight()
-            })
-          }
-        }
-      })
+      // 菜谱列表
+      this.getDistList()
       // 门店状态
       this.getShopState()
       // 优惠列表
       this.getDiscountList()
       // 查询爆款活动接口
       this.getActivityHotstyle()
-    },
-    mounted() {
     },
     computed: {
       // 检测 vuex 中cartList
@@ -419,6 +403,29 @@
     },
     methods: {
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
+      // 菜谱列表
+      getDistList() {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/dish/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success === SUCCESS_OK) {
+            if (res.data.dishesList === null) {
+              this.toggleToast(1, res.message)
+            } else {
+              this.isAjax = true
+              this.goods = res.data.dishesList
+              this.$nextTick(() => {
+                this.initCategoryNum()
+                this._initScroll()
+                this._calculateHeight()
+              })
+            }
+          }
+        })
+      },
       // 查询爆款活动接口
       getActivityHotstyle() {
         const data = {
@@ -725,6 +732,21 @@
       // 监听shopCart的变化
       shopCartList: function (value) {
         this.initCategoryNum()
+      },
+      changeShopId: function (value) {
+        this.shopId = getStore('userInfo').shopId
+        this.customerId = getStore('userInfo').customerId
+        this.hoursArr = this.seller.hours
+        // 初始化购物车，获取存储在localStorage中的购物车商品信息
+        this.INIT_BUYCART()
+        // 菜谱列表
+        this.getDistList()
+        // 门店状态
+        this.getShopState()
+        // 优惠列表
+        this.getDiscountList()
+        // 查询爆款活动接口
+        this.getActivityHotstyle()
       }
     },
     components: {

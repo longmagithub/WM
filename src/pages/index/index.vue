@@ -60,7 +60,8 @@
         </div>
       </div>
       <div class="main">
-        <goods :seller="shopDetail" :min-price="shopDetail.minPrice" :freedispatchPrice="freedispatch"></goods>
+        <goods :seller="shopDetail" :changeShopId="shopId" :min-price="shopDetail.minPrice"
+               :freedispatchPrice="freedispatch"></goods>
       </div>
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
@@ -112,8 +113,8 @@
         toogleBoonBtnText: '炫耀一下',
         toogleBoonBtnClass: false,
         boonMegText: '', // 红包提示语
-        shopListArr: [],
-        shopID: this.$route.query.shopId
+        shopListArr: []
+
       }
     },
     created() {
@@ -260,6 +261,7 @@
       // 切换门店
       changeShop(item) {
         this.shopListShow = !this.shopListShow
+        this.shopId = item.shopId
         this.$router.push({
           path: '/index',
           query: {
@@ -347,6 +349,7 @@
     },
     watch: {
       shopId: function (value) {
+        console.log(1231231231)
         // 调试代码 提交时注释
         setStore('userInfo', {
           'customerId': this.$route.query.customerId,
