@@ -576,7 +576,7 @@
     border-bottom: 1px solid #d9d7d7;
   }
 
-  .header .shopList .shopLsit-item .item-text:last-child {
+  .header .shopList .shopLsit-item:last-child .item-text {
     border-bottom: none;
   }
   .header .content-wrapper {
