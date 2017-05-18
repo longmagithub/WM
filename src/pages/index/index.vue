@@ -576,6 +576,9 @@
     border-bottom: 1px solid #d9d7d7;
   }
 
+  .header .shopList .shopLsit-item .item-text:last-child {
+    border-bottom: none;
+  }
   .header .content-wrapper {
     margin-right: 50px;
     font-size: 0px;
