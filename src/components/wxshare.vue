@@ -82,8 +82,7 @@
           this.latLon.push(item.latitudeB + ',' + item.longitudeB)
         })
         this.latLon = this.latLon.join('|')
-        console.log(this.latLon)
-        window.alert('________----------___________------______-------__')
+//        window.alert('________----------___________------______-------__')
         const data = {
           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
           output: 'json', // 输出的数据类型
@@ -92,10 +91,8 @@
           destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
-        console.log(data)
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          window.alert(res.message)
           res.result.forEach((item, index) => {
             item.flag = index
             this.shopListArr[index].location = item
