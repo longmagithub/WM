@@ -129,7 +129,6 @@
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.shopListArr = getStore('shopList')
-      console.log(this.shopListArr)
 //      console.log('+++++++++++++++++++++++++++++++++++')
       // 百度地址
 //      this.getBaiDuMap()
