@@ -81,7 +81,7 @@
         this.shopListArr.forEach((item) => {
           this.latLon += item.latitudeB + ',' + item.longitudeB + '|'
         })
-        this.latLon = this.latLon.slice(9, -1)
+        this.latLon = this.latLon.slice(0, -1)
 //        this.latLon = this.latLon.slice()
         console.log(this.latLon)
         window.alert('________----------___________------______-------__')
