@@ -259,8 +259,15 @@
       // 切换门店
       changeShop(item) {
         this.shopListShow = !this.shopListShow
-        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId +
-          '&shopId=' + item.shopId + '&t=' + Date.parse(new Date())
+        this.$router.push({
+          path: '/index',
+          query: {
+            shopId: item.shopId,
+            customerId: getStore('userInfo').customerId
+          }
+        })
+//        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId +
+//          '&shopId=' + item.shopId + '&t=' + Date.parse(new Date())
       },
       switchShop() {
         if (this.shopListArr === null) {
