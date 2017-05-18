@@ -52,7 +52,7 @@
             :number="2"
             mask="white"
             colors="circleMenu.colors">
-            <div class="uxwm-iconfont wo circle-menu"
+            <div class="circle-menu"
                  slot="item_btn"></div>
             <span slot="item_1" @click="goUser" class="orderList">订单</span>
             <span slot="item_2" @click="goInviteNum" class="">邀请码</span>
@@ -730,6 +730,8 @@
     font-size: 22px;
     color: #fff;
     border-radius: 50%;
+    background: url("../../assets/userImg.png") no-repeat center;
+    background-size: 48px 48px;
     border: 1px solid rgba(255, 255, 255, 0.9);
   }
 

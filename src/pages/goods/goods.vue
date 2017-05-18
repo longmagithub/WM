@@ -4,7 +4,7 @@
       <ul>
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
-          <span class="text"><i class="uxwm-iconfont huo"></i>{{item.dishTypeName}}</span>
+          <span class="text"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i>{{item.dishTypeName}}</span>
           <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
         </li>
       </ul>
@@ -23,7 +23,9 @@
                 <img v-else src="../../assets/logo.png" width="52px" height="52px">
               </div>
               <div class="content">
-                <div class="name_box"><i class="uxwm-iconfont huo"></i><span class="name">{{food.name}}</span></div>
+                <div class="name_box"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i><span
+                  class="name">{{food
+                  .name}}</span></div>
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
@@ -430,7 +432,8 @@
       getActivityHotstyle() {
         const data = {
           customerId: this.customerId,
-          shopId: this.shopId
+          shopId: this.shopId,
+          state: 1
         }
         this.axios.get(`/br/shop/activity/hotstyle${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
