@@ -79,10 +79,10 @@
         resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
         let location = []
         this.shopListArr.forEach((item) => {
-          this.latLon.push(item.latitudeB + ',' + item.longitudeB + '|')
+          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
         })
-        this.latLon.join(this.latLon)
-        this.latLon = this.latLon.slice(0, -1)
+        this.latLon = this.latLon.join('|')
+//        this.latLon = this.latLon.slice(0, -1)
         console.log(this.latLon)
 //        this.latLon = this.latLon.slice()
         console.log(this.latLon)
