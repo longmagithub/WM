@@ -3,6 +3,17 @@
     <wxshare></wxshare>
     <div class="index-box">
       <div class="header" ref="header">
+        <div class="title-name" @click="switchShop">{{shopDetail.name}}<i class="down-sanjian"
+                                                                          v-if="shopListArr"></i></div>
+        <div class="shopList" v-show="shopListShow">
+          <ul>
+            <li class="shopLsit-item"
+                v-for="(item,index) in shopListArr"><span
+              @click="changeShop(item)"
+              class="item-text">{{item.shopName}}</span></li>
+          </ul>
+        </div>
+        <div class="shopListTost" v-show="shopListShow" @click="switchShop"></div>
         <div class="content-wrapper"
              @click="goSeller">
           <div class="box-content">
@@ -12,7 +23,6 @@
             </div>
             <div class="content">
               <!--下面打开-->
-              <div class="title-name">{{shopDetail.name}}</div>
               <!-- 描述 -->
               <!--<div class="description">-->
               <!--name 打开-->
@@ -80,6 +90,7 @@
   export default{
     data() {
       return {
+        shopListShow: false, // 门店列表 switch
         freedispatch: {}, // 免配送费
         circleMenu: {
           circle: true,
@@ -101,22 +112,23 @@
         toogleBoonBtnText: '炫耀一下',
         toogleBoonBtnClass: false,
         boonMegText: '', // 红包提示语
-        shopListArr: getStore('shopList')
+        shopListArr: []
       }
     },
     created() {
       // 调试代码 提交时注释
       setStore('userInfo', {
-        'customerId': this.$route.query.customerId || 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
       setStore('openId', {
-        'customerId': this.$route.query.customerId || 'dcfae6aa-83af-484d-bbb6-8e0096d16272',
+        'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      this.shopListArr = getStore('shopList')
       console.log(this.shopListArr)
 //      console.log('+++++++++++++++++++++++++++++++++++')
       // 百度地址
@@ -245,6 +257,19 @@
         this.isCloseBoon = false
         this.toggleToast(1, '领取成功，支付时将自动抵扣', 1300)
       },
+      // 切换门店
+      changeShop(item) {
+        this.shopListShow = !this.shopListShow
+        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId +
+          '&shopId=' + item.shopId
+      },
+      switchShop() {
+        if (this.shopListArr === null) {
+          return
+        } else {
+          this.shopListShow = !this.shopListShow
+        }
+      },
       // 去用户详情
       goSeller() {
         this.$router.push({
@@ -322,7 +347,7 @@
   }
 </script>
 
-<style scoped>
+<style>
   .index-box {
     display: flex;
     flex-direction: column;
@@ -486,6 +511,72 @@
     background-size: 100% 100%;
   }
 
+  .header .title-name {
+    box-sizing: border-box;
+    position: absolute;
+    top: 15px;
+    left: 64px;
+    width: 100%;
+    margin-bottom: 4px;
+    padding-right: 145px;
+    font-size: 14px;
+    color: #fff;
+    z-index: 100;
+  }
+
+  .header .title-name .down-sanjian {
+    display: inline-block;
+    margin-left: 10px;
+    width: 11px;
+    height: 9px;
+    background: url("../../assets/downSj.png") no-repeat center;
+    background-size: 11px 9px;
+  }
+
+  .header .shopList {
+    /*box-sizing: border-box;*/
+    /*padding: 0 22px;*/
+    position: absolute;
+    top: 38px;
+    left: 64px;
+    width: 162px;
+    height: 228px;
+    overflow: scroll;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 6px 0 rgba(133, 132, 132, 0.24);
+    border-radius: 5px;
+    z-index: 100;
+  }
+
+  .header .shopListTost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: rgba(0, 0, 0, .4);
+  }
+
+  .header .shopList .shopLsit-item {
+    box-sizing: border-box;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  .header .shopList .shopLsit-item .item-text {
+    display: block;
+    width: 100%;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    color: #333333;
+    letter-spacing: 0.2px;
+    border-bottom: 1px solid #d9d7d7;
+  }
+
   .header .content-wrapper {
     margin-right: 50px;
     font-size: 0px;
@@ -507,6 +598,7 @@
 
   .header .content-wrapper .box-content .content {
     flex: 1;
+    margin-top: 16px;
     margin-left: 6px;
     overflow: hidden;
     /*text-overflow: ellipsis;*/
@@ -516,8 +608,6 @@
   }
 
   .header .content-wrapper .box-content .content .title-name {
-    margin-bottom: 4px;
-    font-size: 14px;
   }
 
   .header .content-wrapper .box-content .content .title-name .description {
