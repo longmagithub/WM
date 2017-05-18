@@ -831,7 +831,9 @@
         this.shopListArr.forEach((item) => {
           this.latLon += item.latitudeB + ',' + item.longitudeB + '|'
         })
-        this.latLon = this.latLon.slice(0, -1)
+        this.latLon = this.latLon.slice(9, -1)
+//        this.latLon = this.latLon.slice()
+        console.log(this.latLon)
         window.alert('________----------___________------______-------__')
         const data = {
           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
@@ -841,6 +843,7 @@
           destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
+        console.log(data)
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           window.alert(res.message)
