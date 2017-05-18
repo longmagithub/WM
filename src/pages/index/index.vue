@@ -8,9 +8,9 @@
         <div class="shopList" v-show="shopListShow">
           <ul>
             <li class="shopLsit-item"
-                v-for="(item,index) in shopListArr"><span
-              @click="changeShop(item)"
-              class="item-text">{{item.shopName}}</span></li>
+                v-for="(item,index) in shopListArr"
+                @click="changeShop(item)">
+              <span class="item-text">{{item.shopName}}</span></li>
           </ul>
         </div>
         <div class="shopListTost" v-show="shopListShow" @click="switchShop"></div>
@@ -260,7 +260,7 @@
       changeShop(item) {
         this.shopListShow = !this.shopListShow
         window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId +
-          '&shopId=' + item.shopId
+          '&shopId=' + item.shopId + '&t=' + Date.parse(new Date())
       },
       switchShop() {
         if (this.shopListArr === null) {
@@ -579,6 +579,7 @@
   .header .shopList .shopLsit-item:last-child .item-text {
     border-bottom: none;
   }
+
   .header .content-wrapper {
     margin-right: 50px;
     font-size: 0px;

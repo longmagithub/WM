@@ -68,7 +68,7 @@
       },
       goIndex(shopId, custId) {
         window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + custId + '&shopId=' +
-          shopId)
+          shopId + '&t=' + Date.parse(new Date()))
 //        this.$router.replace({
 //          path: '/index',
 //          query: {
