@@ -349,7 +349,6 @@
     },
     watch: {
       shopId: function (value) {
-        console.log(1231231231)
         // 调试代码 提交时注释
         setStore('userInfo', {
           'customerId': this.$route.query.customerId,

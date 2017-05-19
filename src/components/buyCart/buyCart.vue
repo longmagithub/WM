@@ -21,7 +21,6 @@
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
            @click.stop.prevent="addToCart(
-
            foods.dishTypeRelations[0],
            foods.dishId,
            foods.dishSpecification[0].specificationId,

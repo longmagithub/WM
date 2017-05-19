@@ -44,10 +44,10 @@ export default {
   }) {
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
-      console.log(1)
+      // console.log(1)
       cart[shopid][categoryId][itemId][foodId]['num']++
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
-      console.log(2)
+      // console.log(2)
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['id'] = foodId
@@ -56,7 +56,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
     } else if (cart[shopid] && cart[shopid][categoryId]) {
-      console.log(3)
+      // console.log(3)
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
@@ -66,7 +66,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
     } else if (cart[shopid]) {
-      console.log(4)
+      // console.log(4)
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -77,7 +77,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['specs'] = specs
       cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
     } else {
-      console.log(5)
+      // console.log(5)
       cart[shopid] = {}
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}

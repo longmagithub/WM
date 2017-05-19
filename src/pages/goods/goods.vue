@@ -4,8 +4,9 @@
       <ul>
         <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
-          <span class="text"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i>{{item.dishTypeName}}</span>
-          <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
+          <span class="text"><i class="uxwm-iconfont huo"
+                                v-show="item.dishTypeStyle === 1"></i>{{item.dishTypeName}}</span>
+          <span class="category_num" v-if="categoryNum[index]&&item.dishTypeStyle === 0">{{categoryNum[index]}}</span>
         </li>
       </ul>
     </div>
@@ -30,8 +31,11 @@
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
                 <div class="price-wrapper">
-                  <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span><span
-                    class="text" v-if="food.dishSpecification.length > 1">起</span></div>
+                  <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
+                    <span class="text" v-if="food.dishSpecification.length > 1">起</span>
+                    <s class="originalPrice" v-if="food.dishTypeStyleOfDish === 1">￥{{food.dishSpecification[0]
+                      .originalPrice}}</s>
+                  </div>
                   <buyCart ref="buyCart"
                            @add="addFood"
                            @showSpecs="showSpecsFun"
@@ -258,6 +262,7 @@
         conditionAmount: 0, // 满金额
         discountPrice: 0, // 优惠金额
         discountList: [],
+        activityHotstyle: {}, // 爆款活动规则
         textTime: [
           {
             beginTime: '08:00',
@@ -284,7 +289,7 @@
       this.getShopState()
       // 优惠列表
       this.getDiscountList()
-      // 查询爆款活动接口
+      // 查询爆款活动规则
       this.getActivityHotstyle()
     },
     computed: {
@@ -437,7 +442,10 @@
         }
         this.axios.get(`/br/shop/activity/hotstyle${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          console.log(res)
+          if (res.success) {
+            console.log(res)
+            this.activityHotstyle = res.data
+          }
         })
       },
       // 优惠列表查询
@@ -561,6 +569,7 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
+        console.log(this.cartFoodList)
         this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
       },
       // 移除购物车
@@ -587,24 +596,24 @@
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
                 num += foodItem.num
-//                if (item.state === 0) {
-                this.totalPack += foodItem.num * foodItem.packingFee
-                this.totalPack = parseFloat(this.totalPack.toFixed(2))
-                this.totalPrice += foodItem.num * foodItem.price
-                this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
-                if (foodItem.num > 0) {
-                  this.cartFoodList[cartFoodNum] = {}
-                  this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0]
-                  this.cartFoodList[cartFoodNum].item_id = itemid
-                  this.cartFoodList[cartFoodNum].food_id = foodid
-                  this.cartFoodList[cartFoodNum].num = foodItem.num
-                  this.cartFoodList[cartFoodNum].price = foodItem.price
-                  this.cartFoodList[cartFoodNum].name = foodItem.name
-                  this.cartFoodList[cartFoodNum].specs = foodItem.specs
-                  this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee
-                  cartFoodNum++
+                if (item.dishTypeStyle === 0) {
+                  this.totalPack += foodItem.num * foodItem.packingFee
+                  this.totalPack = parseFloat(this.totalPack.toFixed(2))
+                  this.totalPrice += foodItem.num * foodItem.price
+                  this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
+                  if (foodItem.num > 0) {
+                    this.cartFoodList[cartFoodNum] = {}
+                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0]
+                    this.cartFoodList[cartFoodNum].item_id = itemid
+                    this.cartFoodList[cartFoodNum].food_id = foodid
+                    this.cartFoodList[cartFoodNum].num = foodItem.num
+                    this.cartFoodList[cartFoodNum].price = foodItem.price
+                    this.cartFoodList[cartFoodNum].name = foodItem.name
+                    this.cartFoodList[cartFoodNum].specs = foodItem.specs
+                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee
+                    cartFoodNum++
+                  }
                 }
-//                }
               })
             })
             newArr[index] = num
@@ -1013,6 +1022,12 @@
 
   .food-item .content .price-wrapper .price .price-num {
     font-size: 17px;
+  }
+
+  .food-item .content .price-wrapper .price .originalPrice {
+    margin-left: 7px;
+    font-size: 12px;
+    color: #9c9c9c;
   }
 
   .food-item .content .price-wrapper .price .text {
