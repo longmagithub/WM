@@ -5,7 +5,7 @@
         <section class="address-wrapper" @click="gotoAddList">
           <i class="uxwm-iconfont icon_Location"></i>
           <div class="address-yes" v-if="addRess">
-            <p class="header"><span class="name">{{addRess.name}}</span><span
+            <p class="submitOrder-header"><span class="name">{{addRess.name}}</span><span
               class="name">{{addRess.phoneNumber}}</span>
             </p>
             <p class="content">{{addRess.address}}{{addRess.houseNum}}</p>
@@ -663,7 +663,7 @@
     color: #343434;
   }
 
-  .address-wrapper .address-yes .header {
+  .address-wrapper .address-yes .submitOrder-header {
     margin-bottom: 9px;
     line-height: 14px;
     font-size: 14px;
@@ -671,7 +671,7 @@
     color: #343434;
   }
 
-  .address-wrapper .address-yes .header .name {
+  .address-wrapper .address-yes .submitOrder-header .name {
     margin-right: 8px;
   }
 

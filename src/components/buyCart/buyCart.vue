@@ -13,7 +13,11 @@
              foods.name,
              foods.dishSpecification[0].dishPrice,
              foods.dishSpecification[0].specificationName,
-             foods.dishSpecification[0].packPrice)">
+             foods.dishSpecification[0].packPrice,
+             foods.dishTypeStyleOfDish,
+             foods.dishSpecification[0].limitCount,
+             foods.dishSpecification[0].originalPrice,
+             foods.dishSpecification[0].remainQuantity)">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
         </div>
       </transition>
@@ -27,7 +31,11 @@
            foods.name,
            foods.dishSpecification[0].dishPrice,
            '',
-           foods.dishSpecification[0].packPrice)"></div>
+           foods.dishSpecification[0].packPrice,
+           foods.dishTypeStyleOfDish,
+           foods.dishSpecification[0].limitCount,
+           foods.dishSpecification[0].originalPrice,
+           foods.dishSpecification[0].remainQuantity)"></div>
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
@@ -110,19 +118,46 @@
       // 引用vuex方法
       ...mapMutations(['ADD_CART', 'REDUCE_CART']),
       // 加入购物车
-      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
-      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
+      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，
+      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
+        console.log()
         if (this.isYingye) {
-          this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+          this.ADD_CART({
+            shopid: this.shopId,
+            categoryId,
+            itemId,
+            foodId,
+            name,
+            price,
+            specs,
+            packingFee,
+            dishTypeStyle,
+            limitCount,
+            originalPrice,
+            remainQuantity
+          })
         } else {
           return
         }
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
-      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
+      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
         if (this.foodNum > 0) {
-          this.REDUCE_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+          this.REDUCE_CART({
+            shopid: this.shopId,
+            categoryId,
+            itemId,
+            foodId,
+            name,
+            price,
+            specs,
+            packingFee,
+            dishTypeStyle,
+            limitCount,
+            originalPrice,
+            remainQuantity
+          })
         }
       },
       // 打开godds组件里面 多规格
@@ -145,7 +180,6 @@
     }
   }
 </script>
-
 <style scoped>
   .specification-wrapper,
   .cart-wrapper {

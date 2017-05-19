@@ -30,6 +30,7 @@
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
+                <p class="limit-box"></p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
                     <span class="text" v-if="food.dishSpecification.length > 1">起</span>
@@ -114,7 +115,9 @@
                     </div>
                   </div>
                   <div class="price-box">
-                    <span>￥<span class="price">{{item.price * item.num | toFixedFil}}</span></span>
+                    <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
+                    <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
+                    <!--.limitNum,item.limitCount)}}</span></span>-->
                   </div>
                   <div class="buyCart-wrapper">
                     <div class="cart-decrease inner uxwm-iconfont btn_reduce_normal"
@@ -263,6 +266,8 @@
         discountPrice: 0, // 优惠金额
         discountList: [],
         activityHotstyle: {}, // 爆款活动规则
+        priceNum: 0, // 计算多分类
+        originalPriceLimitCount: 0, // 计算多分类
         textTime: [
           {
             beginTime: '08:00',
@@ -407,6 +412,8 @@
           return
         }
       }
+      // 购物车单项菜总价展示
+      // 爆款price，原价，数量，爆款数量，爆款数量限制
     },
     methods: {
       ...mapMutations(['ADD_CART', 'REDUCE_CART', 'CLEAR_CART', 'INIT_BUYCART', 'USER_PRICE']),
@@ -569,7 +576,6 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
-        console.log(this.cartFoodList)
         this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
       },
       // 移除购物车
@@ -592,25 +598,45 @@
         this.goods.forEach((item, index) => {
           if (this.shopCartList && this.shopCartList[item.dishList[0].dishTypeRelations[0]]) {
             let num = 0
+//            let limitNum = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
+                console.log(foodItem)
                 num += foodItem.num
+//                limitNum += foodItem.limitNum
                 if (item.dishTypeStyle === 0) {
                   this.totalPack += foodItem.num * foodItem.packingFee
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
-                  this.totalPrice += foodItem.num * foodItem.price
+                  if (foodItem.dishTypeStyle === 1) {
+                    this.totalPrice +=
+                      (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                  } else {
+                    this.totalPrice += foodItem.num * foodItem.price
+                  }
+//                  this.totalPrice += foodItem.num * foodItem.price
                   this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
                   if (foodItem.num > 0) {
                     this.cartFoodList[cartFoodNum] = {}
-                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0]
-                    this.cartFoodList[cartFoodNum].item_id = itemid
-                    this.cartFoodList[cartFoodNum].food_id = foodid
-                    this.cartFoodList[cartFoodNum].num = foodItem.num
-                    this.cartFoodList[cartFoodNum].price = foodItem.price
-                    this.cartFoodList[cartFoodNum].name = foodItem.name
-                    this.cartFoodList[cartFoodNum].specs = foodItem.specs
-                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee
+                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
+                    this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
+                    this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
+                    this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
+                    this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
+                    this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
+                    this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
+                    this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
+                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
+                    this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
+                    this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
+                    this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
+                    this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
+                    if (foodItem.dishTypeStyle === 1) {
+                      this.cartFoodList[cartFoodNum].priceAll =
+                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                    } else {
+                      this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
+                    }
                     cartFoodNum++
                   }
                 }
@@ -623,6 +649,7 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
+        console.log(JSON.stringify(this.cartFoodList))
       },
       // toggle toast
       toggleToast(show, text) {
