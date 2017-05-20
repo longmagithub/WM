@@ -5,7 +5,7 @@
       <div class="inviteText">
         <p class="title">我的邀请码：<span class="inviteNum">{{idcode}}</span></p>
         <p class="inviteDesc">好友使用您的邀请码并成功下单后,<br>
-          您与好友都会获得一个最高<span class="inviteNum">20元</span>的红包</p>
+          您与好友都会获得一个最高<span class="inviteNum">10元</span>的红包</p>
       </div>
       <div class="inviteBorder"></div>
       <div class="inviteBox">
@@ -112,14 +112,14 @@
             console.log(res.data)
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
-              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) /
-                1000
+              window.location.href =
+              'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
             }, 2000)
           } else if (res.code === 14001) {
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
-              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) /
-                1000
+              window.location.href =
+              'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
             }, 2000)
           } else {
             this.toggleToast(1, res.message, 1500)
