@@ -179,6 +179,7 @@
         ReverEndTime: new Date(), // 用来计算倒计时
         reverseTime: Math.round(new Date().setMinutes(new Date().getMinutes() + 15) / 1000),
         hoursArr: [],
+        discounSwitch: true, // 判断爆款是否可以优惠
         testTime: [
           {
             beginTime: '07:00',
@@ -327,7 +328,11 @@
           res = res.data
           if (res.data.discountList.length) {
             this.discountList = res.data.discountList
-            this.isDiscountFun(res.data.discountList)
+            if (this.discounSwitch) {
+              this.isDiscountFun(res.data.discountList)
+            } else {
+              this.allNum = this.allPrice + this.feesPrice
+            }
           } else {
             this.allNum = this.allPrice + this.feesPrice
           }
@@ -397,6 +402,7 @@
               // this.packPrice += item.num * item.packingFee
               if (item.price !== null && item.price >= 0 && item.num > 0) {
                 if (item.dishTypeStyle === 1) { // 爆款
+                  this.discounSwitch = false
                   if (item.limitCount !== 0) { // 个人有限制
                     if (item.limitNum > 1) {
                       this.newShopCart.push({
@@ -404,6 +410,22 @@
                         name: item.name,
                         num: item.num,
                         Dnum: (item.num) - item.limitNum,
+                        packingFee: item.packingFee,
+                        price: item.price,
+                        specs: item.specs,
+                        dishTypeStyle: item.dishTypeStyle,
+                        limitNum: item.limitNum,
+                        limitCount: item.limitCount,
+                        originalPrice: item.originalPrice,
+                        remainQuantity: item.remainQuantity,
+                        hotTyep: 1
+                      })
+                    } else if (item.limitNum === 1) {
+                      this.newShopCart.push({
+                        id: item.id,
+                        name: item.name,
+                        num: item.num,
+                        Dnum: item.num,
                         packingFee: item.packingFee,
                         price: item.price,
                         specs: item.specs,
@@ -422,28 +444,14 @@
                         price: item.price,
                         type: item.dishTypeStyle
                       })
+                    } else {
+                      this.orderDish.push({
+                        specificationId: item.id,
+                        count: (item.num) - item.limitNum,
+                        price: item.originalPrice,
+                        type: 0
+                      })
                     }
-                    this.newShopCart.push({
-                      id: item.id,
-                      name: item.name,
-                      num: item.num,
-                      Dnum: (item.num) - item.limitNum,
-                      packingFee: item.packingFee,
-                      price: item.price,
-                      specs: item.specs,
-                      dishTypeStyle: item.dishTypeStyle,
-                      limitNum: item.limitNum,
-                      limitCount: item.limitCount,
-                      originalPrice: item.originalPrice,
-                      remainQuantity: item.remainQuantity,
-                      hotTyep: 0
-                    })
-                    this.orderDish.push({
-                      specificationId: item.id,
-                      count: (item.num) - item.limitNum,
-                      price: item.originalPrice,
-                      type: 0
-                    })
                   } else if (item.limitCount === 0) { // 个人无限制
                     console.log('无个人')
                     if (item.remainQuantity > 1) {
@@ -523,6 +531,7 @@
             })
           })
         })
+        console.log(JSON.stringify(this.newShopCart))
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
