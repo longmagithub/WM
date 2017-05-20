@@ -121,11 +121,33 @@
                   </div>
                   <div class="buyCart-wrapper">
                     <div class="cart-decrease inner uxwm-iconfont btn_reduce_normal"
-                         @click.stop.prevent="removeOutCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs, item.packingFee)">
+                         @click.stop.prevent="removeOutCart(
+                         item.category_id,
+                         item.item_id,
+                         item.food_id,
+                         item.name,
+                         item.price,
+                         item.specs,
+                         item.packingFee,
+                         item.dishTypeStyle,
+                         item.limitCount,
+                         item.originalPrice,
+                         item.remainQuantity)">
                     </div>
                     <div class="cart-count">{{item.num}}</div>
                     <div class="cart-add uxwm-iconfont btn_add_disabled"
-                         @click.stop.prevent="addToCart(item.category_id, item.item_id, item.food_id, item.name, item.price, item.specs, item.packingFee)"></div>
+                         @click.stop.prevent="addToCart(
+                         item.category_id,
+                         item.item_id,
+                         item.food_id,
+                         item.name,
+                         item.price,
+                         item.specs,
+                         item.packingFee,
+                         item.dishTypeStyle,
+                         item.limitCount,
+                         item.originalPrice,
+                         item.remainQuantity)"></div>
                   </div>
                 </li>
                 <li class="food" v-if="totalPack">
@@ -296,6 +318,7 @@
       this.getDiscountList()
       // 查询爆款活动规则
       this.getActivityHotstyle()
+      console.log(JSON.stringify(this.cartList))
     },
     computed: {
       // 检测 vuex 中cartList
@@ -568,20 +591,62 @@
         this.specsIndex = index
       },
       // 多规格加入购车
-      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
-      addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee) {
-        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，是否爆款分类，限购数量，原价，库存
+      addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
+               remainQuantity) {
+        this.ADD_CART({
+          shopid: this.shopId,
+          categoryId,
+          itemId,
+          foodId,
+          name,
+          price,
+          specs,
+          packingFee,
+          dishTypeStyle,
+          limitCount,
+          originalPrice,
+          remainQuantity
+        })
         this.closeSpesc()
       },
       // 加入购物车
-      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费
-      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
-        this.ADD_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
+      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
+                remainQuantity) {
+        this.ADD_CART({
+          shopid: this.shopId,
+          categoryId,
+          itemId,
+          foodId,
+          name,
+          price,
+          specs,
+          packingFee,
+          dishTypeStyle,
+          limitCount,
+          originalPrice,
+          remainQuantity
+        })
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
-      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee) {
-        this.REDUCE_CART({shopid: this.shopId, categoryId, itemId, foodId, name, price, specs, packingFee})
+      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
+                    remainQuantity) {
+        this.REDUCE_CART({
+          shopid: this.shopId,
+          categoryId,
+          itemId,
+          foodId,
+          name,
+          price,
+          specs,
+          packingFee,
+          dishTypeStyle,
+          limitCount,
+          originalPrice,
+          remainQuantity
+        })
       },
       // 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，
       // 所有的购物车数据都交给vuex统一管理，包括购物车组件中自身的商品数量，使整个数据流更加清晰

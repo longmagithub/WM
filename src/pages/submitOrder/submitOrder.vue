@@ -40,22 +40,30 @@
             <div class="list-content">
               <ul>
                 <li class="food_list_item" v-for="item in newShopCart"
-                    v-if="item.num > 0 && item.dishTypeStyle === 1">
+                    v-if="item.num > 0">
                   <div class="name_num">
-                    <span class="name"><i class="uxwm-iconfont huo" v-if="item.num > 0 && item.dishTypeStyle === 1"></i>{{item.name}}</span>
+                    <span class="name"><i class="uxwm-iconfont huo" v-if="item.hotTyep === 1"></i>{{item.name}}</span>
                     <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
-                  <span class="num">×{{item.num}}</span>
-                  <div class="price">￥{{item.num * item.price | toFixedFil}}</div>
-                </li>
-                <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0 && item.dishTypeStyle === 0">
-                  <div class="name_num">
-                    <span class="name">{{item.name}}</span>
-                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                  <span class="num" v-if="item.hotTyep === 1">×{{item.limitNum}}</span>
+                  <span class="num" v-if="item.hotTyep === 0">×{{item.Dnum}}</span>
+                  <div class="price" v-if="item.hotTyep === 1">￥{{item.limitNum * item.price | toFixedFil}}</div>
+                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">￥{{item.num * item.price |
+                    toFixedFil}}
                   </div>
-                  <span class="num">×{{item.num}}</span>
-                  <div class="price">￥{{item.num * item.price | toFixedFil}}</div>
+                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">￥{{item.Dnum *
+                    item.originalPrice |
+                    toFixedFil}}
+                  </div>
                 </li>
+                <!--<li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0 && item.dishTypeStyle === 0">-->
+                <!--<div class="name_num">-->
+                <!--<span class="name">{{item.name}}</span>-->
+                <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
+                <!--</div>-->
+                <!--<span class="num">×{{item.num}}</span>-->
+                <!--<div class="price">￥{{item.num * item.price | toFixedFil}}</div>-->
+                <!--</li>-->
                 <li class="food_list_item">
                   <div
                     class="name_num"><span class="name">餐盒费</span></div>
@@ -213,7 +221,8 @@
     },
     mounted() {
       this.initData()
-      console.log(JSON.stringify(this.newShopCart))
+//      console.log(JSON.stringify(this.newShopCart))
+      console.log(JSON.stringify(this.orderDish))
     },
     computed: {
       ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice'])
@@ -391,6 +400,7 @@
                       id: item.id,
                       name: item.name,
                       num: item.num,
+                      Dnum: (item.num) - item.limitNum,
                       packingFee: item.packingFee,
                       price: item.price,
                       specs: item.specs,
@@ -398,7 +408,16 @@
                       limitNum: item.limitNum,
                       limitCount: item.limitCount,
                       originalPrice: item.originalPrice,
-                      remainQuantity: item.remainQuantity
+                      remainQuantity: item.remainQuantity,
+                      hotTyep: 1
+                    })
+                  }
+                  if (item.limitNum <= item.limitCount) {
+                    this.orderDish.push({
+                      specificationId: item.id,
+                      count: item.limitNum,
+                      price: item.price,
+                      type: item.dishTypeStyle
                     })
                   }
                 }
@@ -406,6 +425,7 @@
                   id: item.id,
                   name: item.name,
                   num: item.num,
+                  Dnum: (item.num) - item.limitNum,
                   packingFee: item.packingFee,
                   price: item.price,
                   specs: item.specs,
@@ -413,12 +433,14 @@
                   limitNum: item.limitNum,
                   limitCount: item.limitCount,
                   originalPrice: item.originalPrice,
-                  remainQuantity: item.remainQuantity
+                  remainQuantity: item.remainQuantity,
+                  hotTyep: 0
                 })
                 this.orderDish.push({
                   specificationId: item.id,
-                  count: item.num,
-                  price: item.price
+                  count: (item.num) - item.limitNum,
+                  price: item.dishTypeStyle === 0 ? item.price : item.originalPrice,
+                  type: item.dishTypeStyle
                 })
               }
             })
@@ -494,7 +516,7 @@
             customerId: this.customerId,
             // 订单餐盒费用
             packPrice: this.packPrice,
-            // 菜品规格
+            // 所有菜
             orderDish: this.orderDish,
             // 订单配送费
             dispatchPrice: this.feesPrice,
@@ -523,6 +545,7 @@
             // 红包id
             redEnvelopeId: this.redEnvelopeId
           }
+          console.log(JSON.stringify(data))
           setStore('userOrderIofo', data)
           const api = '/br/order'
           this.axios.post(api, data).then((res) => {
