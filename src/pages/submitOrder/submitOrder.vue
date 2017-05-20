@@ -47,7 +47,10 @@
                   </div>
                   <span class="num" v-if="item.hotTyep === 1">×{{item.limitNum}}</span>
                   <span class="num" v-if="item.hotTyep === 0">×{{item.Dnum}}</span>
-                  <div class="price" v-if="item.hotTyep === 1">￥{{item.limitNum * item.price | toFixedFil}}</div>
+                  <div class="price" v-if="item.hotTyep === 1">
+                    <s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>
+                    ￥{{item.limitNum * item.price | toFixedFil}}
+                  </div>
                   <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">￥{{item.num * item.price |
                     toFixedFil}}
                   </div>
@@ -882,7 +885,7 @@
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .price {
-    flex: 0 0 50px;
+    flex: 0 0 100px;
     padding-left: 12px;
     text-align: right;
     font-size: 13px;
@@ -947,6 +950,17 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name {
     width: 100%;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .huo {
+    margin-right: 4px;
+    color: #ff553e;
+  }
+
+  .orderDetail-wrapper .order-list .list-content .food_list_item .price .originalPrice {
+    margin-right: 7px;
+    font-size: 12px;
+    color: #9c9c9c;
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
