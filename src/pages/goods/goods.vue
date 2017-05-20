@@ -90,10 +90,10 @@
             </transition>
           </div>
         </div>
-        <div class="manjianDesc" v-if="this.seller.activity" v-html="manjianDesc"></div>
+        <div class="manjianDesc" v-if="manjianDesc" v-html="manjianDesc"></div>
         <transition name="fold">
           <div class="shopcart-list" v-show="listShow">
-            <div class="manjianDesc" v-if="this.seller.activity" v-html="manjianDesc"></div>
+            <div class="manjianDesc" v-if="manjianDesc" v-html="manjianDesc"></div>
             <div class="list-header">
               <div class="header">
                 <h1 class="title">购物车</h1>
@@ -379,7 +379,7 @@
       },
       // 动态满减的描述
       manjianDesc() {
-        if (this.seller.activity) {
+        if (this.seller.activity.length > 0) {
           let discArr = []
           let desc = ''
           let allFeesPrice = this.allPrice
@@ -409,7 +409,7 @@
           }
           return desc
         } else {
-          return
+          return false
         }
       }
       // 购物车单项菜总价展示

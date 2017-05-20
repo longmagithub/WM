@@ -34,10 +34,9 @@
             </div>
             <!--<div class="enter uxwm-iconfont btn_right"></div>-->
           </div>
-          <div class="activity" v-if="shopDetail.activity">
-          <span class="text" style="margin-right: 5px" v-if="shopDetail.activity"
-                v-for="item in shopDetail.activity">{{item
-            .title}}</span>
+          <div class="activity" v-show="shopDetail.activity">
+          <span class="text" style="margin-right: 5px" v-show="shopDetail.activity"
+                v-for="item in shopDetail.activity">{{item.title}}</span>
             <!--<span class="number" v-if="detailBox.activity">{{detailBox.activity.length}}个活动</span>-->
           </div>
           <div class="fessDesc" v-if="freedispatch.state === 1">
@@ -114,7 +113,6 @@
         toogleBoonBtnClass: false,
         boonMegText: '', // 红包提示语
         shopListArr: []
-
       }
     },
     created() {
@@ -202,9 +200,11 @@
           res = res.data
           if (res.success) {
             // 排序
-            res.data.activity = res.data.activity.reverse()
-            this.shopDetail = res.data
-            setStore('shopInfo', this.shopDetail)
+            this.$nextTick(() => {
+              res.data.activity = res.data.activity.reverse()
+              this.shopDetail = res.data
+              setStore('shopInfo', this.shopDetail)
+            })
           }
         })
       },
