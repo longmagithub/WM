@@ -35,7 +35,11 @@
            foods.dishTypeStyleOfDish,
            foods.dishSpecification[0].limitCount,
            foods.dishSpecification[0].originalPrice,
-           foods.dishSpecification[0].remainQuantity)"></div>
+           foods.dishSpecification[0].remainQuantity)">
+        <transition name="fade">
+          <p class="show_addToCart_hotType" v-if="showAddToCartAotType">该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦</p>
+        </transition>
+      </div>
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
@@ -87,7 +91,8 @@
     data() {
       return {
         showSpecs: false, // 控制显示 规格
-        showDeleteTip: false // 多规格显示 删除 提示
+        showDeleteTip: false, // 多规格显示 删除 提示
+        showAddToCartAotType: false // 超过爆款限制
       }
     },
     created() {
@@ -120,8 +125,17 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
-        console.log()
         if (this.isYingye) {
+          if (dishTypeStyle === 1) {
+            if (this.foodNum === limitCount) {
+              this.showAddToCartAotType = true
+              clearTimeout(this.timer)
+              this.timer = setTimeout(() => {
+                clearTimeout(this.timer)
+                this.showAddToCartAotType = false
+              }, 1500)
+            }
+          }
           this.ADD_CART({
             shopid: this.shopId,
             categoryId,
@@ -268,11 +282,28 @@
 
   .specification-wrapper .cart-add,
   .cart-wrapper .cart-add {
+    position: relative;
     display: inline-block;
     padding: 6px;
     line-height: 22px;
     font-size: 22px;
     color: #ff8932;
+  }
+
+  .cart-wrapper .cart-add .show_addToCart_hotType {
+    position: absolute;
+    /*position: fixed;*/
+    padding: .5rem 0;
+    top: -60%;
+    right: -10%;
+    min-width: 210px;
+    border: 1px;
+    border-radius: 0.25rem;
+    text-align: center;
+    transform: translateY(-50%);
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, .7);
+    font-size: 10px;
   }
 
   .cart-wrapper .forbid {
