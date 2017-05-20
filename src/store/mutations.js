@@ -46,10 +46,6 @@ export default {
     originalPrice, // 菜原价
     remainQuantity // 爆款库存
   }) {
-    console.log(dishTypeStyle)
-    console.log(limitCount)
-    console.log(originalPrice)
-    console.log(remainQuantity)
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       // console.log(1)
@@ -57,11 +53,20 @@ export default {
       //   console.log('超过了限制了')
       // }
       if (dishTypeStyle === 1) { // 如果是爆款
-        if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (limitCount - 1)) { // 爆款数量大于限制数量
-          cart[shopid][categoryId][itemId][foodId]['num']++
-        } else {
-          cart[shopid][categoryId][itemId][foodId]['num']++
-          cart[shopid][categoryId][itemId][foodId]['limitNum']++
+        if (limitCount !== 0) { // 个人有限制
+          if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (limitCount - 1)) { // 爆款数量大于限制数量
+            cart[shopid][categoryId][itemId][foodId]['num']++
+          } else {
+            cart[shopid][categoryId][itemId][foodId]['num']++
+            cart[shopid][categoryId][itemId][foodId]['limitNum']++
+          }
+        } else if (limitCount === 0) { // 个人没有限制
+          if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (remainQuantity - 1)) { // 判断是否超过库存
+            cart[shopid][categoryId][itemId][foodId]['num']++
+          } else {
+            cart[shopid][categoryId][itemId][foodId]['num']++
+            cart[shopid][categoryId][itemId][foodId]['limitNum']++
+          }
         }
       } else if (dishTypeStyle === 0) { // 非爆款
         if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (limitCount - 1)) { // 爆款数量大于限制数量
@@ -153,18 +158,33 @@ export default {
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       if (cart[shopid][categoryId][itemId][foodId]['num'] > 0) {
         if (dishTypeStyle === 1) { // 如果是爆款
-          console.log('如果是爆款')
-          if (cart[shopid][categoryId][itemId][foodId]['num'] === (limitCount)) { // 爆款数量大于限制数量
-            console.log(1)
-            cart[shopid][categoryId][itemId][foodId]['num']--
-            cart[shopid][categoryId][itemId][foodId]['limitNum']--
-          } else if (cart[shopid][categoryId][itemId][foodId]['num'] < (limitCount)) {
-            console.log(2)
-            cart[shopid][categoryId][itemId][foodId]['num']--
-            cart[shopid][categoryId][itemId][foodId]['limitNum']--
-          } else {
-            console.log(3)
-            cart[shopid][categoryId][itemId][foodId]['num']--
+          if (limitCount !== 0) { // 有个人限制
+            console.log('如果是爆款')
+            if (cart[shopid][categoryId][itemId][foodId]['num'] === (limitCount)) { // 爆款数量大于限制数量
+              console.log(1)
+              cart[shopid][categoryId][itemId][foodId]['num']--
+              cart[shopid][categoryId][itemId][foodId]['limitNum']--
+            } else if (cart[shopid][categoryId][itemId][foodId]['num'] < (limitCount)) {
+              console.log(2)
+              cart[shopid][categoryId][itemId][foodId]['num']--
+              cart[shopid][categoryId][itemId][foodId]['limitNum']--
+            } else {
+              console.log(3)
+              cart[shopid][categoryId][itemId][foodId]['num']--
+            }
+          } else if (limitCount === 0) {
+            if (cart[shopid][categoryId][itemId][foodId]['num'] === (remainQuantity)) { // 爆款数量大于限制数量
+              console.log(1)
+              cart[shopid][categoryId][itemId][foodId]['num']--
+              cart[shopid][categoryId][itemId][foodId]['limitNum']--
+            } else if (cart[shopid][categoryId][itemId][foodId]['num'] < (remainQuantity)) {
+              console.log(2)
+              cart[shopid][categoryId][itemId][foodId]['num']--
+              cart[shopid][categoryId][itemId][foodId]['limitNum']--
+            } else {
+              console.log(3)
+              cart[shopid][categoryId][itemId][foodId]['num']--
+            }
           }
         } else if (dishTypeStyle === 0) { // 非爆款
           console.log('非爆款')

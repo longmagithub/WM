@@ -30,7 +30,12 @@
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
                   已售{{food.dishSpecification[0].saleCount}}份</p>
-                <p class="limit-box"></p>
+                <p class="limit-box" v-show="item.dishTypeStyle === 1">
+                  <span class="limit-box_limitCount" v-show="food.dishSpecification[0].limitCount > 0">限{{food
+                    .dishSpecification[0].limitCount}}份</span>
+                  <span class="limit-box_remainQuantity" v-show="food.dishSpecification[0].remainQuantity > 0">仅剩{{food
+                    .dishSpecification[0].remainQuantity}}份</span>
+                </p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
                     <span class="text" v-if="food.dishSpecification.length > 1">起</span>
@@ -1094,6 +1099,23 @@
     color: #c9c9c9;
   }
 
+  .food-item .content .limit-box {
+    margin-top: 9px;
+    font-size: 9px;
+  }
+
+  .food-item .content .limit-box .limit-box_limitCount {
+    box-sizing: border-box;
+    padding: 0 4px;
+    margin-right: 10px;
+    line-height: 0em;
+    color: #ff8932;
+    border: 1px solid #ff8932;
+    border-radius: 4px;
+  }
+  .food-item .content .limit-box .limit-box_remainQuantity {
+    color: #ff5740;
+  }
   .food-item .content .sellNum {
     margin-top: 7px;
     font-size: 11px;
@@ -1104,7 +1126,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 16px;
+    margin-top: 10px;
   }
 
   .food-item .content .price-wrapper .price {

@@ -37,7 +37,8 @@
            foods.dishSpecification[0].originalPrice,
            foods.dishSpecification[0].remainQuantity)">
         <transition name="fade">
-          <p class="show_addToCart_hotType" v-if="showAddToCartAotType">该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦</p>
+          <p class="show_addToCart_hotType" v-if="showAddToCartAotType">
+            该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦</p>
         </transition>
       </div>
     </section>
@@ -127,13 +128,24 @@
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
         if (this.isYingye) {
           if (dishTypeStyle === 1) {
-            if (this.foodNum === limitCount) {
-              this.showAddToCartAotType = true
-              clearTimeout(this.timer)
-              this.timer = setTimeout(() => {
+            if (limitCount !== 0) {
+              if (this.foodNum === limitCount) {
+                this.showAddToCartAotType = true
                 clearTimeout(this.timer)
-                this.showAddToCartAotType = false
-              }, 1500)
+                this.timer = setTimeout(() => {
+                  clearTimeout(this.timer)
+                  this.showAddToCartAotType = false
+                }, 1500)
+              }
+            } else if (limitCount === 0) {
+              if (this.foodNum === remainQuantity) {
+                this.showAddToCartAotType = true
+                clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                  clearTimeout(this.timer)
+                  this.showAddToCartAotType = false
+                }, 1500)
+              }
             }
           }
           this.ADD_CART({
