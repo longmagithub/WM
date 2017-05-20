@@ -24,7 +24,13 @@
         <div class="right">
           <p>
             <!--<input type="text" v-model="addressDetail.address" placeholder="小区/写字楼/学校等">-->
-            <span class="addSpan">{{addressDetail.address}}</span>
+            <!--<span class="addSpan">{{addressDetail.address}}</span>-->
+            <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
+              <span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>
+              <!--<span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>-->
+              <span class="time" v-if="indexOption === 0"> 预计{{item | formatDate}}</span>
+              <span v-if="indexOption > 0">{{item | formatDate}}</span>
+            </option>
           </p>
           <p>
             <input type="text" v-model="addressDetail.houseNum" placeholder="详细地址（如门牌号等）">
@@ -71,6 +77,7 @@
         addressDetail: {
           name: '',
           phoneNumber: '',
+//          address: ['上城区', '下城区', '江干区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '富阳区'],
           address: '杭州市滨江区',
           houseNum: '',
           gender: 0
