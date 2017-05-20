@@ -39,18 +39,18 @@
           <div class="order-list">
             <div class="list-content">
               <ul>
-                <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0 && item.dishTypeStyle === 0">
+                <li class="food_list_item" v-for="item in newShopCart"
+                    v-if="item.num > 0 && item.dishTypeStyle === 1">
                   <div class="name_num">
-                    <span class="name">{{item.name}}</span>
+                    <span class="name"><i class="uxwm-iconfont huo" v-if="item.num > 0 && item.dishTypeStyle === 1"></i>{{item.name}}</span>
                     <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
                   <span class="num">×{{item.num}}</span>
                   <div class="price">￥{{item.num * item.price | toFixedFil}}</div>
                 </li>
-                <li class="food_list_item" v-for="item in newShopCart"
-                    v-else-if="item.num > 0 && item.dishTypeStyle === 1">
+                <li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0 && item.dishTypeStyle === 0">
                   <div class="name_num">
-                    <span class="name"><i class="uxwm-iconfont huo" v-if="item.num > 0 && item.dishTypeStyle === 1"></i>{{item.name}}</span>
+                    <span class="name">{{item.name}}</span>
                     <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
                   <span class="num">×{{item.num}}</span>
@@ -199,7 +199,6 @@
       this.SAVE_SHOPID(this.shopId, this.customerId)
       // 将购物中当前商品的信息提取出来
       this.shopCart = this.cartList[this.shopId]
-      console.log(JSON.stringify(this.newShopCart))
       // 商户信息
       this.shopInfo = getStore('shopInfo')
       this.packPrice = parseFloat(getStore('userPrice')[0].toFixed(2))
@@ -214,6 +213,7 @@
     },
     mounted() {
       this.initData()
+      console.log(JSON.stringify(this.newShopCart))
     },
     computed: {
       ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice'])
@@ -385,6 +385,23 @@
             Object.values(itemValue).forEach(item => {
               // this.packPrice += item.num * item.packingFee
               if (item.price !== null && item.price >= 0 && item.num > 0) {
+                if (item.dishTypeStyle === 1) {
+                  if (item.limitNum > 1) {
+                    this.newShopCart.push({
+                      id: item.id,
+                      name: item.name,
+                      num: item.num,
+                      packingFee: item.packingFee,
+                      price: item.price,
+                      specs: item.specs,
+                      dishTypeStyle: item.dishTypeStyle,
+                      limitNum: item.limitNum,
+                      limitCount: item.limitCount,
+                      originalPrice: item.originalPrice,
+                      remainQuantity: item.remainQuantity
+                    })
+                  }
+                }
                 this.newShopCart.push({
                   id: item.id,
                   name: item.name,

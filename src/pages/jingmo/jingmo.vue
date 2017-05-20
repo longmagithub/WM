@@ -43,7 +43,7 @@
       getShopList(custId) {
         const data = {
           customerId: custId,
-          pageSize: 30,
+          pageSize: 10000,
           pageNumber: 1,
           longitude: 0, // 经度
           latitude: 0, // 维度
