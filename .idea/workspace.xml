@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/buyCart/buyCart.vue" afterPath="$PROJECT_DIR$/src/components/buyCart/buyCart.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/goods/goods.vue" afterPath="$PROJECT_DIR$/src/pages/goods/goods.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/mutations.js" afterPath="$PROJECT_DIR$/src/store/mutations.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" afterPath="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" />
     </list>
     <ignored path="H5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -105,72 +103,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="submitOrder.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-              <folding>
-                <element signature="n#section#3;n#ul#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="e#10113#14197#0" expanded="false" />
-                <element signature="e#14247#14784#0" expanded="false" />
-                <element signature="e#14822#15256#0" expanded="false" />
-                <element signature="e#15299#16426#0" expanded="false" />
-                <element signature="e#20027#22073#0" expanded="false" />
-                <element signature="e#20486#20583#0" expanded="false" />
-                <element signature="e#21408#21499#0" expanded="false" />
-                <element signature="e#24572#24743#0" expanded="false" />
-                <element signature="e#24783#26392#0" expanded="false" />
-                <element signature="e#26429#26684#0" expanded="false" />
-                <element signature="e#26730#27972#0" expanded="false" />
-                <element signature="e#28026#28338#0" expanded="false" />
-                <element signature="e#28359#28562#0" expanded="false" />
-                <element signature="e#28646#28677#0" expanded="false" />
-                <element signature="e#28698#28915#0" expanded="false" />
-                <element signature="e#28982#29250#0" expanded="false" />
-                <element signature="e#29304#29419#0" expanded="false" />
-                <element signature="e#29479#29507#0" expanded="false" />
-                <element signature="e#29550#29619#0" expanded="false" />
-                <element signature="e#29655#29776#0" expanded="false" />
-                <element signature="e#29808#29985#0" expanded="false" />
-                <element signature="e#30010#30250#0" expanded="false" />
-                <element signature="e#30286#30408#0" expanded="false" />
-                <element signature="e#30439#30534#0" expanded="false" />
-                <element signature="e#30565#30749#0" expanded="false" />
-                <element signature="e#30788#30950#0" expanded="false" />
-                <element signature="e#30996#31134#0" expanded="false" />
-                <element signature="e#31179#31256#0" expanded="false" />
-                <element signature="e#31305#31335#0" expanded="false" />
-                <element signature="e#31373#31586#0" expanded="false" />
-                <element signature="e#31637#31666#0" expanded="false" />
-                <element signature="e#31702#31863#0" expanded="false" />
-                <element signature="e#31888#31982#0" expanded="false" />
-                <element signature="e#32014#32165#0" expanded="false" />
-                <element signature="e#32202#32259#0" expanded="false" />
-                <element signature="e#34528#34604#0" expanded="false" />
-                <element signature="e#34696#34763#0" expanded="false" />
-                <element signature="e#34826#35076#0" expanded="false" />
-                <element signature="e#35226#35290#0" expanded="false" />
-                <element signature="e#35351#35592#0" expanded="false" />
-                <element signature="e#35641#35829#0" expanded="false" />
-                <element signature="e#35880#36019#0" expanded="false" />
-                <element signature="e#36083#36108#0" expanded="false" />
-                <element signature="e#36172#36306#0" expanded="false" />
-                <element signature="e#36325#36471#0" expanded="false" />
-                <element signature="e#36502#36570#0" expanded="false" />
-                <element signature="e#36603#36740#0" expanded="false" />
-                <element signature="e#36773#36872#0" expanded="false" />
-                <element signature="e#36959#37097#0" expanded="false" />
-                <element signature="e#37118#37307#0" expanded="false" />
-                <element signature="e#37335#37402#0" expanded="false" />
-                <element signature="e#37443#37513#0" expanded="false" />
-                <element signature="e#37546#37686#0" expanded="false" />
-                <element signature="e#37703#37747#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="inviteNum.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/inviteNum/inviteNum.vue">
           <provider selected="true" editor-type-id="text-editor">
@@ -229,11 +161,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="goods.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="goods.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/goods/goods.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="93">
-              <caret line="1112" column="30" selection-start-line="1112" selection-start-column="30" selection-end-line="1112" selection-end-column="30" />
+            <state relative-caret-position="213">
+              <caret line="1117" column="3" selection-start-line="1117" selection-start-column="3" selection-end-line="1117" selection-end-column="3" />
               <folding>
                 <element signature="e#10153#10196#0" expanded="true" />
                 <element signature="e#10547#10597#0" expanded="false" />
@@ -466,11 +398,77 @@
       <file leaf-file-name="mutations.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/store/mutations.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-507">
+            <state relative-caret-position="333">
               <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
               <folding>
                 <element signature="e#2581#3427#0" expanded="false" />
                 <element signature="e#10893#11158#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="submitOrder.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="958" column="3" selection-start-line="958" selection-start-column="3" selection-end-line="958" selection-end-column="3" />
+              <folding>
+                <element signature="n#section#3;n#ul#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#10113#14197#0" expanded="false" />
+                <element signature="e#14247#14784#0" expanded="false" />
+                <element signature="e#14822#15256#0" expanded="false" />
+                <element signature="e#15299#16426#0" expanded="false" />
+                <element signature="e#22447#24493#0" expanded="false" />
+                <element signature="e#22906#23003#0" expanded="false" />
+                <element signature="e#23828#23919#0" expanded="false" />
+                <element signature="e#26992#27163#0" expanded="false" />
+                <element signature="e#27203#28812#0" expanded="false" />
+                <element signature="e#28849#29104#0" expanded="false" />
+                <element signature="e#29150#30392#0" expanded="false" />
+                <element signature="e#30446#30758#0" expanded="false" />
+                <element signature="e#30779#30982#0" expanded="false" />
+                <element signature="e#31899#31927#0" expanded="false" />
+                <element signature="e#33725#33755#0" expanded="false" />
+                <element signature="e#34057#34086#0" expanded="false" />
+                <element signature="e#36948#37024#0" expanded="false" />
+                <element signature="e#37646#37710#0" expanded="false" />
+                <element signature="e#38503#38528#0" expanded="false" />
+                <marker date="1495270723000" expanded="false" signature="31066:31097" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="31118:31335" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="31402:31670" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="31724:31839" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="31970:32039" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="32075:32196" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="32228:32405" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="32430:32670" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="32706:32828" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="32859:32954" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="32985:33169" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="33208:33370" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="33416:33554" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="33599:33676" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="33793:34006" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="34122:34283" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="34308:34402" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="34434:34585" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="34622:34679" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="37116:37183" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="37246:37496" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="37771:38012" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="38061:38249" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="38300:38439" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="38592:38726" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="38745:38891" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="38922:38990" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39023:39160" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39193:39292" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39379:39517" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39538:39727" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39755:39822" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39863:39933" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="39966:40106" ph="{...}" />
+                <marker date="1495270723000" expanded="false" signature="40123:40167" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -540,10 +538,10 @@
         <option value="$PROJECT_DIR$/src/pages/index/index.vue" />
         <option value="$PROJECT_DIR$/src/pages/jingmo/jingmo.vue" />
         <option value="$PROJECT_DIR$/src/pages/inviteNum/inviteNum.vue" />
-        <option value="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" />
         <option value="$PROJECT_DIR$/src/store/mutations.js" />
         <option value="$PROJECT_DIR$/src/components/buyCart/buyCart.vue" />
         <option value="$PROJECT_DIR$/src/pages/goods/goods.vue" />
+        <option value="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" />
       </list>
     </option>
   </component>
@@ -624,208 +622,7 @@
     <panes>
       <pane id="Scratches" />
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="submitOrder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jingmo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inviteNum" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="goods" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VAOrderH5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="build" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scope" />
     </panes>
@@ -1069,19 +866,20 @@
       <workItem from="1494481953944" duration="41617000" />
       <workItem from="1494583685713" duration="50919000" />
       <workItem from="1494983507681" duration="97783000" />
-      <workItem from="1495245114836" duration="17109000" />
+      <workItem from="1495245114836" duration="18688000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1327975000" />
+    <option name="totallyTimeSpent" value="1329554000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1091,7 +889,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1099,6 +896,26 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24947146" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -1421,17 +1238,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
-          <folding>
-            <element signature="n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/jingmo/jingmo.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -1449,81 +1255,6 @@
           <folding>
             <element signature="e#799#845#0" expanded="true" />
             <element signature="e#1466#2750#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-          <folding>
-            <element signature="n#section#3;n#ul#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#10113#14197#0" expanded="false" />
-            <element signature="e#14247#14784#0" expanded="false" />
-            <element signature="e#14822#15256#0" expanded="false" />
-            <element signature="e#15299#16426#0" expanded="false" />
-            <element signature="e#20027#22073#0" expanded="false" />
-            <element signature="e#20486#20583#0" expanded="false" />
-            <element signature="e#21408#21499#0" expanded="false" />
-            <element signature="e#24572#24743#0" expanded="false" />
-            <element signature="e#24783#26392#0" expanded="false" />
-            <element signature="e#26429#26684#0" expanded="false" />
-            <element signature="e#26730#27972#0" expanded="false" />
-            <element signature="e#28026#28338#0" expanded="false" />
-            <element signature="e#28359#28562#0" expanded="false" />
-            <element signature="e#28646#28677#0" expanded="false" />
-            <element signature="e#28698#28915#0" expanded="false" />
-            <element signature="e#28982#29250#0" expanded="false" />
-            <element signature="e#29304#29419#0" expanded="false" />
-            <element signature="e#29479#29507#0" expanded="false" />
-            <element signature="e#29550#29619#0" expanded="false" />
-            <element signature="e#29655#29776#0" expanded="false" />
-            <element signature="e#29808#29985#0" expanded="false" />
-            <element signature="e#30010#30250#0" expanded="false" />
-            <element signature="e#30286#30408#0" expanded="false" />
-            <element signature="e#30439#30534#0" expanded="false" />
-            <element signature="e#30565#30749#0" expanded="false" />
-            <element signature="e#30788#30950#0" expanded="false" />
-            <element signature="e#30996#31134#0" expanded="false" />
-            <element signature="e#31179#31256#0" expanded="false" />
-            <element signature="e#31305#31335#0" expanded="false" />
-            <element signature="e#31373#31586#0" expanded="false" />
-            <element signature="e#31637#31666#0" expanded="false" />
-            <element signature="e#31702#31863#0" expanded="false" />
-            <element signature="e#31888#31982#0" expanded="false" />
-            <element signature="e#32014#32165#0" expanded="false" />
-            <element signature="e#32202#32259#0" expanded="false" />
-            <element signature="e#34528#34604#0" expanded="false" />
-            <element signature="e#34696#34763#0" expanded="false" />
-            <element signature="e#34826#35076#0" expanded="false" />
-            <element signature="e#35226#35290#0" expanded="false" />
-            <element signature="e#35351#35592#0" expanded="false" />
-            <element signature="e#35641#35829#0" expanded="false" />
-            <element signature="e#35880#36019#0" expanded="false" />
-            <element signature="e#36083#36108#0" expanded="false" />
-            <element signature="e#36172#36306#0" expanded="false" />
-            <element signature="e#36325#36471#0" expanded="false" />
-            <element signature="e#36502#36570#0" expanded="false" />
-            <element signature="e#36603#36740#0" expanded="false" />
-            <element signature="e#36773#36872#0" expanded="false" />
-            <element signature="e#36959#37097#0" expanded="false" />
-            <element signature="e#37118#37307#0" expanded="false" />
-            <element signature="e#37335#37402#0" expanded="false" />
-            <element signature="e#37443#37513#0" expanded="false" />
-            <element signature="e#37546#37686#0" expanded="false" />
-            <element signature="e#37703#37747#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/mutations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-507">
-          <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
-          <folding>
-            <element signature="e#2581#3427#0" expanded="false" />
-            <element signature="e#10893#11158#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1631,8 +1362,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/goods/goods.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="1112" column="30" selection-start-line="1112" selection-start-column="30" selection-end-line="1112" selection-end-column="30" />
+        <state relative-caret-position="213">
+          <caret line="1117" column="3" selection-start-line="1117" selection-start-column="3" selection-end-line="1117" selection-end-column="3" />
           <folding>
             <element signature="e#10153#10196#0" expanded="true" />
             <element signature="e#10547#10597#0" expanded="false" />
@@ -1829,6 +1560,92 @@
             <element signature="e#47424#47612#0" expanded="false" />
             <element signature="e#47689#47720#0" expanded="false" />
             <element signature="e#47790#47847#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
+          <folding>
+            <element signature="n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/mutations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="56" column="29" selection-start-line="56" selection-start-column="29" selection-end-line="56" selection-end-column="29" />
+          <folding>
+            <element signature="e#2581#3427#0" expanded="false" />
+            <element signature="e#10893#11158#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="958" column="3" selection-start-line="958" selection-start-column="3" selection-end-line="958" selection-end-column="3" />
+          <folding>
+            <element signature="n#section#3;n#ul#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#10113#14197#0" expanded="false" />
+            <element signature="e#14247#14784#0" expanded="false" />
+            <element signature="e#14822#15256#0" expanded="false" />
+            <element signature="e#15299#16426#0" expanded="false" />
+            <element signature="e#22447#24493#0" expanded="false" />
+            <element signature="e#22906#23003#0" expanded="false" />
+            <element signature="e#23828#23919#0" expanded="false" />
+            <element signature="e#26992#27163#0" expanded="false" />
+            <element signature="e#27203#28812#0" expanded="false" />
+            <element signature="e#28849#29104#0" expanded="false" />
+            <element signature="e#29150#30392#0" expanded="false" />
+            <element signature="e#30446#30758#0" expanded="false" />
+            <element signature="e#30779#30982#0" expanded="false" />
+            <element signature="e#31899#31927#0" expanded="false" />
+            <element signature="e#33725#33755#0" expanded="false" />
+            <element signature="e#34057#34086#0" expanded="false" />
+            <element signature="e#36948#37024#0" expanded="false" />
+            <element signature="e#37646#37710#0" expanded="false" />
+            <element signature="e#38503#38528#0" expanded="false" />
+            <marker date="1495270723000" expanded="false" signature="31066:31097" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="31118:31335" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="31402:31670" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="31724:31839" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="31970:32039" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="32075:32196" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="32228:32405" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="32430:32670" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="32706:32828" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="32859:32954" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="32985:33169" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="33208:33370" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="33416:33554" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="33599:33676" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="33793:34006" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="34122:34283" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="34308:34402" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="34434:34585" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="34622:34679" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="37116:37183" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="37246:37496" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="37771:38012" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="38061:38249" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="38300:38439" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="38592:38726" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="38745:38891" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="38922:38990" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39023:39160" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39193:39292" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39379:39517" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39538:39727" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39755:39822" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39863:39933" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="39966:40106" ph="{...}" />
+            <marker date="1495270723000" expanded="false" signature="40123:40167" ph="{...}" />
           </folding>
         </state>
       </provider>
