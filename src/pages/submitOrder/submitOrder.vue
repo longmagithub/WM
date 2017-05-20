@@ -224,8 +224,6 @@
     },
     mounted() {
       this.initData()
-//      console.log(JSON.stringify(this.newShopCart))
-      console.log(JSON.stringify(this.orderDish))
     },
     computed: {
       ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice'])
@@ -392,6 +390,7 @@
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
         this.orderDish = []
+        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(item => {
@@ -423,28 +422,51 @@
                       type: item.dishTypeStyle
                     })
                   }
+                  this.newShopCart.push({
+                    id: item.id,
+                    name: item.name,
+                    num: item.num,
+                    Dnum: (item.num) - item.limitNum,
+                    packingFee: item.packingFee,
+                    price: item.price,
+                    specs: item.specs,
+                    dishTypeStyle: item.dishTypeStyle,
+                    limitNum: item.limitNum,
+                    limitCount: item.limitCount,
+                    originalPrice: item.originalPrice,
+                    remainQuantity: item.remainQuantity,
+                    hotTyep: 0
+                  })
+                  this.orderDish.push({
+                    specificationId: item.id,
+                    count: (item.num) - item.limitNum,
+                    price: item.originalPrice,
+                    type: 0
+                  })
                 }
-                this.newShopCart.push({
-                  id: item.id,
-                  name: item.name,
-                  num: item.num,
-                  Dnum: (item.num) - item.limitNum,
-                  packingFee: item.packingFee,
-                  price: item.price,
-                  specs: item.specs,
-                  dishTypeStyle: item.dishTypeStyle,
-                  limitNum: item.limitNum,
-                  limitCount: item.limitCount,
-                  originalPrice: item.originalPrice,
-                  remainQuantity: item.remainQuantity,
-                  hotTyep: 0
-                })
-                this.orderDish.push({
-                  specificationId: item.id,
-                  count: (item.num) - item.limitNum,
-                  price: item.dishTypeStyle === 0 ? item.price : item.originalPrice,
-                  type: item.dishTypeStyle
-                })
+                if (item.dishTypeStyle === 0) {
+                  this.newShopCart.push({
+                    id: item.id,
+                    name: item.name,
+                    num: item.num,
+                    Dnum: item.num,
+                    packingFee: item.packingFee,
+                    price: item.price,
+                    specs: item.specs,
+                    dishTypeStyle: item.dishTypeStyle,
+                    limitNum: item.limitNum,
+                    limitCount: item.limitCount,
+                    originalPrice: item.originalPrice,
+                    remainQuantity: item.remainQuantity,
+                    hotTyep: 0
+                  })
+                  this.orderDish.push({
+                    specificationId: item.id,
+                    count: item.num,
+                    price: item.dishTypeStyle === 0 ? item.price : item.originalPrice,
+                    type: item.dishTypeStyle
+                  })
+                }
               }
             })
           })
