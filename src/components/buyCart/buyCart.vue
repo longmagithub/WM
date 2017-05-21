@@ -93,7 +93,8 @@
       return {
         showSpecs: false, // 控制显示 规格
         showDeleteTip: false, // 多规格显示 删除 提示
-        showAddToCartAotType: false // 超过爆款限制
+        showAddToCartAotType: false, // 超过爆款限制
+        userCount: 0 // 用户可以点多少个
       }
     },
     created() {
@@ -128,24 +129,28 @@
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
         if (this.isYingye) {
           if (dishTypeStyle === 1) {
-            if (limitCount !== 0) {
-              if (this.foodNum === limitCount) {
-                this.showAddToCartAotType = true
-                clearTimeout(this.timer)
-                this.timer = setTimeout(() => {
-                  clearTimeout(this.timer)
-                  this.showAddToCartAotType = false
-                }, 1500)
-              }
-            } else if (limitCount === 0) {
-              if (this.foodNum === remainQuantity) {
-                this.showAddToCartAotType = true
-                clearTimeout(this.timer)
-                this.timer = setTimeout(() => {
-                  clearTimeout(this.timer)
-                  this.showAddToCartAotType = false
-                }, 1500)
-              }
+            if (limitCount === 0) { // 个人无限制 取库存
+              this.userCount = remainQuantity
+//              if (this.foodNum === limitCount) {
+//                this.showAddToCartAotType = true
+//                clearTimeout(this.timer)
+//                this.timer = setTimeout(() => {
+//                  clearTimeout(this.timer)
+//                  this.showAddToCartAotType = false
+//                }, 1500)
+//              }
+            } else if (limitCount <= remainQuantity) { // 个人 <= 库存 取个人
+              this.userCount = limitCount
+//              if (this.foodNum === remainQuantity) {
+//                this.showAddToCartAotType = true
+//                clearTimeout(this.timer)
+//                this.timer = setTimeout(() => {
+//                  clearTimeout(this.timer)
+//                  this.showAddToCartAotType = false
+//                }, 1500)
+//              }
+            } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
+              this.userCount = remainQuantity
             }
           }
           this.ADD_CART({
@@ -160,7 +165,8 @@
             dishTypeStyle,
             limitCount,
             originalPrice,
-            remainQuantity
+            remainQuantity,
+            userCount: this.userCount
           })
         } else {
           return
@@ -170,6 +176,13 @@
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
       removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
         if (this.foodNum > 0) {
+          if (limitCount === 0) { // 个人无限制 取库存
+            this.userCount = remainQuantity
+          } else if (limitCount <= remainQuantity) { // 个人 <= 库存 取个人
+            this.userCount = limitCount
+          } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
+            this.userCount = remainQuantity
+          }
           this.REDUCE_CART({
             shopid: this.shopId,
             categoryId,
@@ -182,7 +195,8 @@
             dishTypeStyle,
             limitCount,
             originalPrice,
-            remainQuantity
+            remainQuantity,
+            userCount: this.userCount
           })
         }
       },

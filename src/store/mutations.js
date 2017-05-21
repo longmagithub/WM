@@ -44,36 +44,27 @@ export default {
     dishTypeStyle, // 是否爆款分类
     limitCount, // 限制份数
     originalPrice, // 菜原价
-    remainQuantity // 爆款库存
+    remainQuantity, // 爆款库存
+    userCount // 用户可以点多少
   }) {
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
-      // console.log(1)
-      // if (cart[shopid][categoryId][itemId][foodId]['num'] > limitCount) {
-      //   console.log('超过了限制了')
-      // }
       if (dishTypeStyle === 1) { // 如果是爆款
-        if (limitCount !== 0) { // 个人有限制
-          if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (limitCount - 1)) { // 爆款数量大于限制数量
-            cart[shopid][categoryId][itemId][foodId]['num']++
-          } else {
-            cart[shopid][categoryId][itemId][foodId]['num']++
-            cart[shopid][categoryId][itemId][foodId]['limitNum']++
-          }
-        } else if (limitCount === 0) { // 个人没有限制
-          if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (remainQuantity - 1)) { // 判断是否超过库存
-            cart[shopid][categoryId][itemId][foodId]['num']++
-          } else {
-            cart[shopid][categoryId][itemId][foodId]['num']++
-            cart[shopid][categoryId][itemId][foodId]['limitNum']++
-          }
-        }
-      } else if (dishTypeStyle === 0) { // 非爆款
-        if (cart[shopid][categoryId][itemId][foodId]['limitNum'] > (limitCount - 1)) { // 爆款数量大于限制数量
+        if (cart[shopid][categoryId][itemId][foodId]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
+          cart[shopid][categoryId][itemId][foodId]['overflowNum']++
           cart[shopid][categoryId][itemId][foodId]['num']++
-        } else {
-          cart[shopid][categoryId][itemId][foodId]['num']++
+        } else if (cart[shopid][categoryId][itemId][foodId]['num'] < userCount) { // 如果没有超出 增加 num 和 limitNum
           cart[shopid][categoryId][itemId][foodId]['limitNum']++
+          cart[shopid][categoryId][itemId][foodId]['num']++
+        } else if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) { // 本命默认是1 === 都不用加了 只是 num
+          cart[shopid][categoryId][itemId][foodId]['num']++
+          cart[shopid][categoryId][itemId][foodId]['overflowNum']++
+        }
+      }
+      if (dishTypeStyle === 0) { // 非爆款
+        if (cart[shopid][categoryId][itemId][foodId]['limitCount'] === userCount) { // 如果没有超出 增加 num 和 limitNum
+          cart[shopid][categoryId][itemId][foodId]['overflowNum']++
+          cart[shopid][categoryId][itemId][foodId]['num']++
         }
       }
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
@@ -81,6 +72,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
       cart[shopid][categoryId][itemId][foodId]['id'] = foodId
       cart[shopid][categoryId][itemId][foodId]['name'] = name
       cart[shopid][categoryId][itemId][foodId]['price'] = price
@@ -96,6 +88,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
       cart[shopid][categoryId][itemId][foodId]['id'] = foodId
       cart[shopid][categoryId][itemId][foodId]['name'] = name
       cart[shopid][categoryId][itemId][foodId]['price'] = price
@@ -105,6 +98,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
     } else if (cart[shopid]) {
       // console.log(4)
       cart[shopid][categoryId] = {}
@@ -112,6 +106,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
       cart[shopid][categoryId][itemId][foodId]['id'] = foodId
       cart[shopid][categoryId][itemId][foodId]['name'] = name
       cart[shopid][categoryId][itemId][foodId]['price'] = price
@@ -121,6 +116,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
     } else {
       // console.log(5)
       cart[shopid] = {}
@@ -129,6 +125,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
       cart[shopid][categoryId][itemId][foodId]['id'] = foodId
       cart[shopid][categoryId][itemId][foodId]['name'] = name
       cart[shopid][categoryId][itemId][foodId]['price'] = price
@@ -138,6 +135,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
     }
     // 返回一个新的对象，否则计算属性无法监听到数据的变化
     state.cartList = Object.assign({}, cart)
@@ -152,51 +150,29 @@ export default {
     foodId,
     name,
     price,
-    specs, dishTypeStyle, limitCount, originalPrice, remainQuantity
+    specs, dishTypeStyle, limitCount, originalPrice, remainQuantity, userCount
   }) {
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       if (cart[shopid][categoryId][itemId][foodId]['num'] > 0) {
         if (dishTypeStyle === 1) { // 如果是爆款
-          if (limitCount !== 0) { // 有个人限制
-            console.log('如果是爆款')
-            if (cart[shopid][categoryId][itemId][foodId]['num'] === (limitCount)) { // 爆款数量大于限制数量
-              console.log(1)
-              cart[shopid][categoryId][itemId][foodId]['num']--
-              cart[shopid][categoryId][itemId][foodId]['limitNum']--
-            } else if (cart[shopid][categoryId][itemId][foodId]['num'] < (limitCount)) {
-              console.log(2)
-              cart[shopid][categoryId][itemId][foodId]['num']--
-              cart[shopid][categoryId][itemId][foodId]['limitNum']--
-            } else {
-              console.log(3)
-              cart[shopid][categoryId][itemId][foodId]['num']--
-            }
-          } else if (limitCount === 0) {
-            if (cart[shopid][categoryId][itemId][foodId]['num'] === (remainQuantity)) { // 爆款数量大于限制数量
-              console.log(1)
-              cart[shopid][categoryId][itemId][foodId]['num']--
-              cart[shopid][categoryId][itemId][foodId]['limitNum']--
-            } else if (cart[shopid][categoryId][itemId][foodId]['num'] < (remainQuantity)) {
-              console.log(2)
-              cart[shopid][categoryId][itemId][foodId]['num']--
-              cart[shopid][categoryId][itemId][foodId]['limitNum']--
-            } else {
-              console.log(3)
-              cart[shopid][categoryId][itemId][foodId]['num']--
-            }
+          if (cart[shopid][categoryId][itemId][foodId]['num'] > userCount) { // 如果超出userConut 减少 num 和 overflowNum
+            cart[shopid][categoryId][itemId][foodId]['overflowNum']--
+            cart[shopid][categoryId][itemId][foodId]['num']--
+          } else if (cart[shopid][categoryId][itemId][foodId]['num'] < userCount) { // 如果没有超出 减少 num 和 limitNum
+            cart[shopid][categoryId][itemId][foodId]['limitNum']--
+            cart[shopid][categoryId][itemId][foodId]['num']--
+          } else if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) { // 本命默认是1 === 都不用减了 只是 num
+            cart[shopid][categoryId][itemId][foodId]['num']--
+            cart[shopid][categoryId][itemId][foodId]['limitNum']--
           }
-        } else if (dishTypeStyle === 0) { // 非爆款
-          console.log('非爆款')
+        }
+        if (dishTypeStyle === 0) { // 非爆款
           cart[shopid][categoryId][itemId][foodId]['num']--
-          // if (cart[shopid][categoryId][itemId][foodId]['limitNum'] < (limitCount)) { // 爆款数量大于限制数量
-          //   console.log(3)
-          //   cart[shopid][categoryId][itemId][foodId]['num']--
-          // } else {
-          //   console.log(4)
-          //   cart[shopid][categoryId][itemId][foodId]['num']--
-          //   cart[shopid][categoryId][itemId][foodId]['limitNum']--
-          // }
+          if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) {
+            cart[shopid][categoryId][itemId][foodId]['limitNum'] = 0
+            cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
+          }
         }
         // 返回一个新的对象，否则计算属性无法监听到数据的变化
         state.cartList = Object.assign({}, cart)
@@ -212,7 +188,8 @@ export default {
   [CLEAR_CART](state, shopid) {
     state.cartList[shopid] = null
     state.cartList = Object.assign({}, state.cartList)
-    setStore('buyCart', state.cartList)
+    // setStore('buyCart', state.cartList)
+    setStore('buyCart', {})
   },
   // 网页初始化时从本地缓存获取购物车数据
   [INIT_BUYCART](state) {

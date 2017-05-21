@@ -46,7 +46,7 @@
                     <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 1">×{{item.limitNum}}</span>
-                  <span class="num" v-if="item.hotTyep === 0">×{{item.Dnum}}</span>
+                  <span class="num" v-if="item.hotTyep === 0">×{{item.overflowNum}}</span>
                   <div class="price" v-if="item.hotTyep === 1">
                     <s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>
                     ￥{{item.limitNum * item.price | toFixedFil}}
@@ -54,7 +54,7 @@
                   <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">￥{{item.num * item.price |
                     toFixedFil}}
                   </div>
-                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">￥{{item.Dnum *
+                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">￥{{item.overflowNum *
                     item.originalPrice |
                     toFixedFil}}
                   </div>
@@ -233,8 +233,8 @@
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID', 'CLEAR_CART']),
       // 计算预计时间
       getShopState() {
-        console.log('出餐时间：' + this.shopInfo.makingTime)
-        console.log('配送时间：' + this.shopInfo.dispatching.duration)
+//        console.log('出餐时间：' + this.shopInfo.makingTime)
+//        console.log('配送时间：' + this.shopInfo.dispatching.duration)
         // 默认时间 当前时间 + 出餐时间 + 配送时间
         this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
           this.shopInfo.dispatching.duration))
@@ -449,115 +449,36 @@
             Object.values(itemValue).forEach(item => {
               // this.packPrice += item.num * item.packingFee
               if (item.price !== null && item.price >= 0 && item.num > 0) {
-                if (item.dishTypeStyle === 1) { // 爆款
-                  this.discounSwitch = false
-                  if (item.limitCount !== 0) { // 个人有限制
-                    if (item.limitNum > 1) {
-                      this.newShopCart.push({
-                        id: item.id,
-                        name: item.name,
-                        num: item.num,
-                        Dnum: (item.num) - item.limitNum,
-                        packingFee: item.packingFee,
-                        price: item.price,
-                        specs: item.specs,
-                        dishTypeStyle: item.dishTypeStyle,
-                        limitNum: item.limitNum,
-                        limitCount: item.limitCount,
-                        originalPrice: item.originalPrice,
-                        remainQuantity: item.remainQuantity,
-                        hotTyep: 1
-                      })
-                    } else if (item.limitNum === 1) {
-                      this.newShopCart.push({
-                        id: item.id,
-                        name: item.name,
-                        num: item.num,
-                        Dnum: item.num,
-                        packingFee: item.packingFee,
-                        price: item.price,
-                        specs: item.specs,
-                        dishTypeStyle: item.dishTypeStyle,
-                        limitNum: item.limitNum,
-                        limitCount: item.limitCount,
-                        originalPrice: item.originalPrice,
-                        remainQuantity: item.remainQuantity,
-                        hotTyep: 1
-                      })
-                    }
-                    if (item.limitNum <= item.limitCount) {
-                      this.orderDish.push({
-                        specificationId: item.id,
-                        count: item.limitNum,
-                        price: item.price,
-                        type: item.dishTypeStyle
-                      })
-                    } else {
-                      this.orderDish.push({
-                        specificationId: item.id,
-                        count: (item.num) - item.limitNum,
-                        price: item.originalPrice,
-                        type: 0
-                      })
-                    }
-                  } else if (item.limitCount === 0) { // 个人无限制
-                    console.log('无个人')
-                    if (item.remainQuantity > 1) {
-                      this.newShopCart.push({
-                        id: item.id,
-                        name: item.name,
-                        num: item.num,
-                        Dnum: (item.num) - item.limitNum,
-                        packingFee: item.packingFee,
-                        price: item.price,
-                        specs: item.specs,
-                        dishTypeStyle: item.dishTypeStyle,
-                        limitNum: item.limitNum,
-                        limitCount: item.limitCount,
-                        originalPrice: item.originalPrice,
-                        remainQuantity: item.remainQuantity,
-                        hotTyep: 1
-                      })
-                    } else {
-                      this.newShopCart.push({
-                        id: item.id,
-                        name: item.name,
-                        num: item.num,
-                        Dnum: (item.num) - item.limitNum,
-                        packingFee: item.packingFee,
-                        price: item.price,
-                        specs: item.specs,
-                        dishTypeStyle: item.dishTypeStyle,
-                        limitNum: item.limitNum,
-                        limitCount: item.limitCount,
-                        originalPrice: item.originalPrice,
-                        remainQuantity: item.remainQuantity,
-                        hotTyep: 0
-                      })
-                    }
-                    if (item.limitNum <= item.remainQuantity) {
-                      this.orderDish.push({
-                        specificationId: item.id,
-                        count: item.limitNum,
-                        price: item.price,
-                        type: item.dishTypeStyle
-                      })
-                    } else {
-                      this.orderDish.push({
-                        specificationId: item.id,
-                        count: (item.num) - item.limitNum,
-                        price: item.originalPrice,
-                        type: 0
-                      })
-                    }
+                if (item.dishTypeStyle === 1) { // 爆款属性
+                  if (item.overflowNum > 0) { // 满足爆款
+                    this.newShopCart.push({
+                      id: item.id,
+                      name: item.name,
+                      num: item.num,
+                      overflowNum: item.overflowNum,
+                      packingFee: item.packingFee,
+                      price: item.price,
+                      specs: item.specs,
+                      dishTypeStyle: item.dishTypeStyle,
+                      limitNum: item.limitNum,
+                      limitCount: item.limitCount,
+                      originalPrice: item.originalPrice,
+                      remainQuantity: item.remainQuantity,
+                      userCount: item.userCount,
+                      hotTyep: 1
+                    })
+                    this.orderDish.push({
+                      specificationId: item.id,
+                      count: item.limitNum,
+                      price: item.price,
+                      type: 1
+                    })
                   }
-                }
-                if (item.dishTypeStyle === 0) { // 非爆款
                   this.newShopCart.push({
                     id: item.id,
                     name: item.name,
                     num: item.num,
-                    Dnum: item.num,
+                    overflowNum: item.overflowNum,
                     packingFee: item.packingFee,
                     price: item.price,
                     specs: item.specs,
@@ -566,13 +487,38 @@
                     limitCount: item.limitCount,
                     originalPrice: item.originalPrice,
                     remainQuantity: item.remainQuantity,
+                    userCount: item.userCount,
+                    hotTyep: 0
+                  })
+                  this.orderDish.push({
+                    specificationId: item.id,
+                    count: item.overflowNum,
+                    price: item.originalPrice,
+                    type: 0
+                  })
+                }
+                if (item.dishTypeStyle === 0) { // 非爆款 如果改数据不是爆款正常添加到渲染数组(newShopCart)和提交订单数组(orderDish)
+                  this.newShopCart.push({
+                    id: item.id,
+                    name: item.name,
+                    num: item.num,
+                    overflowNum: item.overflowNum,
+                    packingFee: item.packingFee,
+                    price: item.price,
+                    specs: item.specs,
+                    dishTypeStyle: item.dishTypeStyle,
+                    limitNum: item.limitNum,
+                    limitCount: item.limitCount,
+                    originalPrice: item.originalPrice,
+                    remainQuantity: item.remainQuantity,
+                    userCount: item.userCount,
                     hotTyep: 0
                   })
                   this.orderDish.push({
                     specificationId: item.id,
                     count: item.num,
                     price: item.dishTypeStyle === 0 ? item.price : item.originalPrice,
-                    type: item.dishTypeStyle
+                    type: 0
                   })
                 }
               }
@@ -678,7 +624,6 @@
             // 红包id
             redEnvelopeId: this.redEnvelopeId
           }
-          console.log(JSON.stringify(data))
           setStore('userOrderIofo', data)
           const api = '/br/order'
           this.axios.post(api, data).then((res) => {

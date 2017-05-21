@@ -137,7 +137,8 @@
                          item.dishTypeStyle,
                          item.limitCount,
                          item.originalPrice,
-                         item.remainQuantity)">
+                         item.remainQuantity,
+                         item.userCount)">
                     </div>
                     <div class="cart-count">{{item.num}}</div>
                     <div class="cart-add uxwm-iconfont btn_add_disabled"
@@ -152,7 +153,8 @@
                          item.dishTypeStyle,
                          item.limitCount,
                          item.originalPrice,
-                         item.remainQuantity)"></div>
+                         item.remainQuantity,
+                         item.userCount)"></div>
                   </div>
                 </li>
                 <li class="food" v-if="totalPack">
@@ -620,14 +622,15 @@
           dishTypeStyle,
           limitCount,
           originalPrice,
-          remainQuantity
+          remainQuantity,
+          userCount: 0
         })
         this.closeSpesc()
       },
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                remainQuantity) {
+                remainQuantity, userCount) {
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -640,13 +643,14 @@
           dishTypeStyle,
           limitCount,
           originalPrice,
-          remainQuantity
+          remainQuantity,
+          userCount
         })
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
       removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                    remainQuantity) {
+                    remainQuantity, userCount) {
         this.REDUCE_CART({
           shopid: this.shopId,
           categoryId,
@@ -659,7 +663,8 @@
           dishTypeStyle,
           limitCount,
           originalPrice,
-          remainQuantity
+          remainQuantity,
+          userCount
         })
       },
       // 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，
@@ -681,6 +686,7 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
+                console.log(foodItem)
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
                 if (item.dishTypeStyle === 0) {
@@ -714,10 +720,12 @@
                     this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
                     this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
                     this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
+                    this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
+                    this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
                     if (foodItem.dishTypeStyle === 1) {
                       this.cartFoodList[cartFoodNum].priceAll =
-                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
-                    } else {
+                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
+                    } else if (foodItem.dishTypeStyle === 0) {
                       this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
                     }
                     cartFoodNum++
@@ -734,7 +742,7 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-//        console.log(JSON.stringify(this.cartFoodList))
+        console.log(JSON.stringify(this.cartFoodList))
       },
       // toggle toast
       toggleToast(show, text) {
