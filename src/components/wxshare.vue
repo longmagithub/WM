@@ -59,9 +59,9 @@
                 success: function (res) {
                   console.log(that)
                   if (res.errMsg === 'getLocation:ok') {
-                    that.getBaiDuMap(res)
+//                    that.getBaiDuMap(res)
                   } else if (res.errMsg === 'getLocation:cancel') {
-                    that.getBaiDuMap(0)
+//                    that.getBaiDuMap(0)
                   }
                 }
               })

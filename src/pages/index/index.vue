@@ -4,8 +4,9 @@
     <div class="index-box">
       <div class="header" ref="header">
         <div class="title-name" @click="switchShop">{{shopDetail.name}}<i class="down-sanjian"
-                                                                          v-if="shopListArr"></i></div>
-        <div class="shopList" v-show="shopListShow">
+                                                                          v-if="0"></i></div>
+        <div class="shopList" v-show="0">
+          <!--<div class="shopList" v-show="shopListShow">-->
           <ul>
             <li class="shopLsit-item"
                 v-for="(item,index) in shopListArr"
@@ -273,11 +274,12 @@
 //          '&shopId=' + item.shopId + '&t=' + Date.parse(new Date())
       },
       switchShop() {
-        if (this.shopListArr === null) {
-          return
-        } else {
-          this.shopListShow = !this.shopListShow
-        }
+        return
+//        if (this.shopListArr === null) {
+//          return
+//        } else {
+//          this.shopListShow = !this.shopListShow
+//        }
       },
       // 去用户详情
       goSeller() {
