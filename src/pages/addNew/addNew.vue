@@ -22,15 +22,15 @@
       <li>
         <div class="left">地址</div>
         <div class="right">
-          <p>
+          <p class="rightbox"><span class="city">杭州市</span>
             <!--<input type="text" v-model="addressDetail.address" placeholder="小区/写字楼/学校等">-->
             <!--<span class="addSpan">{{addressDetail.address}}</span>-->
-            <option class="select-item" v-for="(item, indexOption) in options" :value="indexOption">
-              <span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>
-              <!--<span class="title" v-if="indexOption === 0">尽快送达 &nbsp|&nbsp</span>-->
-              <span class="time" v-if="indexOption === 0"> 预计{{item | formatDate}}</span>
-              <span v-if="indexOption > 0">{{item | formatDate}}</span>
-            </option>
+            <select class="citySelect" v-model="addressDetail.address">
+              <option class="select-item" v-for="(item, index) in addressARR" :value="item">
+                <span class="title">{{item}}</span>
+              </option>
+            </select>
+            <i class="uxwm-iconfont sanjiao"></i>
           </p>
           <p>
             <input type="text" v-model="addressDetail.houseNum" placeholder="详细地址（如门牌号等）">
@@ -74,11 +74,12 @@
         shopId: '',
         sessionId: '',
         addressId: '',
+        addressARR: ['上城区', '下城区', '江干区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '富阳区'],
         addressDetail: {
           name: '',
           phoneNumber: '',
-//          address: ['上城区', '下城区', '江干区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '富阳区'],
-          address: '杭州市滨江区',
+          address: '上城区',
+//          address: '杭州市滨江区',
           houseNum: '',
           gender: 0
         },
@@ -166,7 +167,7 @@
           name: this.addressDetail.name,
           phoneNumber: this.addressDetail.phoneNumber,
           gender: this.addressDetail.gender,
-          address: this.addressDetail.address,
+          address: '杭州市' + this.addressDetail.address,
           houseNum: this.addressDetail.houseNum
         }
         this.sendData(data)
@@ -314,6 +315,31 @@
   .right {
     flex-grow: 1;
 
+  .rightbox {
+    display: flex;
+    position: relative;
+    height: 38px;
+    line-height: 38px;
+
+  .city {
+    flex: 0 0 50px;
+    margin-right: 10px;
+  }
+
+  .citySelect {
+    flex: 1;
+    padding-left: 10px;
+    background: none;
+    border: none;
+  }
+
+  .sanjiao {
+    position: absolute;
+    top: 0;
+    left: 140px;
+  }
+
+  }
   .gender-wrap {
     margin: 12px 0;
   }
