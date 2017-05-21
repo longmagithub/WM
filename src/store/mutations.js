@@ -188,8 +188,8 @@ export default {
   [CLEAR_CART](state, shopid) {
     state.cartList[shopid] = null
     state.cartList = Object.assign({}, state.cartList)
-    // setStore('buyCart', state.cartList)
-    setStore('buyCart', {})
+    setStore('buyCart', state.cartList)
+    // setStore('buyCart', {})
   },
   // 网页初始化时从本地缓存获取购物车数据
   [INIT_BUYCART](state) {
