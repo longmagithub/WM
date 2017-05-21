@@ -47,7 +47,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {setStore} from '../../common/utils/util'
+  import {setStore, urlParse} from '../../common/utils/util'
   export default {
     data() {
       return {
@@ -60,6 +60,8 @@
       }
     },
     created() {
+      this.customerId = urlParse().customerId
+      this.getShopList(this.customerId)
     },
     methods: {
       getShopList(id) {

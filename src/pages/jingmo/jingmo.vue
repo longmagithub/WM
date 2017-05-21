@@ -28,7 +28,7 @@
           if (res.success) {
             this.customerId = res.data.customerId
             this.shopId
-            this.goIndex(this.shopId, this.customerId)
+            this.goIndex(this.customerId)
 //            this.getShopList(res.data.customerId)
           }
         })
