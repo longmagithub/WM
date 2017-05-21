@@ -82,7 +82,7 @@
 
 <script type="text/ecmascript-6">
   import goods from '../goods/goods.vue'
-  import {setStore, getStore} from '../../common/utils/util'
+  import {setStore, getStore, removeStore} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wxshare from '../../components/wxshare.vue'
@@ -363,6 +363,7 @@
         this.customerId = getStore('userInfo').customerId
         this.shopListArr = getStore('shopList')
 //        this.CLEAR_CART(this.shopId)
+        removeStore('buyCart')
         // 红包信息
         this.getRedEnvelope()
         // 商家信息
