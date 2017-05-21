@@ -93,6 +93,7 @@
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
+          console.log(res)
           window.alert(res.message)
           res.result.forEach((item, index) => {
             item.flag = index
