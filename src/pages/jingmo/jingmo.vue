@@ -1,7 +1,4 @@
 <template>
-  <div class="">
-    <wxshare></wxshare>
-  </div>
 </template>
 <script>
   import {urlParse, setStore} from '../../common/utils/util'
@@ -16,34 +13,22 @@
       }
     },
     created() {
-      wx.getLocation({
-        type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-        success: function (res) {
-//          console.log(that)
-          if (res.errMsg === 'getLocation:ok') {
-//            that.getBaiDuMap(res)
-          } else if (res.errMsg === 'getLocation:cancel') {
-//            that.getBaiDuMap(0)
-          }
-        }
-      })
       this.url = window.location.href
-      console.log(urlParse().code)
-//      if (this.url.indexOf('code') < 0) {
-//        this.to()
-//      } else {
-//        const data = {
-//          code: urlParse().code,
-//          type: 1 // 授权类型：1静默授权；2用户授权
-//        }
-//        this.axios.post('/mp/authority/customer', data).then((res) => {
-//          res = res.data
-//          if (res.success) {
-//            this.customerId = res.data.customerId
-//            this.getShopList(res.data.customerId)
-//          }
-//        })
-//      }
+      if (this.url.indexOf('code') < 0) {
+        this.to()
+      } else {
+        const data = {
+          code: urlParse().code,
+          type: 1 // 授权类型：1静默授权；2用户授权
+        }
+        this.axios.post('/mp/authority/customer', data).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.customerId = res.data.customerId
+            this.getShopList(res.data.customerId)
+          }
+        })
+      }
     },
     methods: {
       to() {
