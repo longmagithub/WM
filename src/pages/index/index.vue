@@ -362,7 +362,7 @@
         this.shopId = getStore('userInfo').shopId
         this.customerId = getStore('userInfo').customerId
         this.shopListArr = getStore('shopList')
-        this.CLEAR_CART(this.shopId)
+//        this.CLEAR_CART(this.shopId)
         // 红包信息
         this.getRedEnvelope()
         // 商家信息
