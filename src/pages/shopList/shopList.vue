@@ -47,7 +47,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {urlParse} from '../../common/utils/util'
+//  import {urlParse} from '../../common/utils/util'
   export default {
     data() {
       return {
@@ -60,7 +60,7 @@
       }
     },
     created() {
-      this.customerId = urlParse().customerId
+      this.customerId = this.$route.query.customerId
       this.getShopList(this.customerId)
     },
     methods: {
