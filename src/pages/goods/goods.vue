@@ -29,7 +29,7 @@
                   .name}}</span></div>
                 <span class="desc">{{food.description}}</span>
                 <!--<p class="sellNum" v-if="food.dishSpecification[0].saleCount">-->
-                  <!--已售{{food.dishSpecification[0].saleCount}}份</p>-->
+                <!--已售{{food.dishSpecification[0].saleCount}}份</p>-->
                 <p class="limit-box" v-show="item.dishTypeStyle === 1">
                   <span class="limit-box_limitCount" v-show="food.dishSpecification[0].limitCount > 0">限{{food
                     .dishSpecification[0].limitCount}}份</span>
@@ -299,6 +299,7 @@
         activityHotstyle: {}, // 爆款活动规则
         priceNum: 0, // 计算多分类
         originalPriceLimitCount: 0, // 计算多分类
+        discounSwitch: false, // 判断爆款是否可以优惠
         textTime: [
           {
             beginTime: '08:00',
@@ -411,37 +412,41 @@
       },
       // 动态满减的描述
       manjianDesc() {
-        if (this.seller.activity.length > 0) {
-          let discArr = []
-          let desc = ''
-          let allFeesPrice = this.allPrice
-          let newTime = Date.parse(new Date()) / 1000
-          if (this.totalNum) {
-            for (let i = 0; i < this.discountList.length; i++) {
-              if (Date.parse(new Date(this.discountList[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(this.discountList[i].endTime)) /
-                1000) {
-                if (allFeesPrice >= parseFloat(parseFloat(this.discountList[i].conditionAmount).toFixed(2))) {
-                  discArr.push(this.discountList[i])
-                  if (allFeesPrice - discArr[0].reductionAmount > 0) {
-                    this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
-                    this.shopDiscountId = discArr[0].discountId
-                    this.discountPrice = discArr[0].reductionAmount
-                    this.conditionAmount = discArr[0].conditionAmount
-                    return `已满${this.conditionAmount}，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
+        if (this.discounSwitch) {
+          return false
+        } else {
+          if (this.seller.activity.length > 0) {
+            let discArr = []
+            let desc = ''
+            let allFeesPrice = this.allPrice
+            let newTime = Date.parse(new Date()) / 1000
+            if (this.totalNum) {
+              for (let i = 0; i < this.discountList.length; i++) {
+                if (Date.parse(new Date(this.discountList[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(this.discountList[i].endTime)) /
+                  1000) {
+                  if (allFeesPrice >= parseFloat(parseFloat(this.discountList[i].conditionAmount).toFixed(2))) {
+                    discArr.push(this.discountList[i])
+                    if (allFeesPrice - discArr[0].reductionAmount > 0) {
+                      this.allNum = (allFeesPrice - parseFloat(discArr[0].reductionAmount)) + this.feesPrice
+                      this.shopDiscountId = discArr[0].discountId
+                      this.discountPrice = discArr[0].reductionAmount
+                      this.conditionAmount = discArr[0].conditionAmount
+                      return `已满${this.conditionAmount}，结算减<span class='manjianDescPrice'>${this.discountPrice}</span>元`
+                    }
+                  } else {
+                    desc = this.seller.activity[0].title
                   }
                 } else {
                   desc = this.seller.activity[0].title
                 }
-              } else {
-                desc = this.seller.activity[0].title
               }
+            } else {
+              desc = this.seller.activity[0].title
             }
+            return desc
           } else {
-            desc = this.seller.activity[0].title
+            return false
           }
-          return desc
-        } else {
-          return false
         }
       }
       // 购物车单项菜总价展示
@@ -676,7 +681,6 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-//                console.log(foodItem)
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
                 if (item.dishTypeStyle === 0) {
@@ -691,6 +695,11 @@
 //                  this.totalPrice += foodItem.num * foodItem.price
                   this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
                   if (foodItem.num > 0) {
+                    if (foodItem.dishTypeStyle === 1) {
+                      this.discounSwitch = true
+                    } else if (foodItem.dishTypeStyle === 0) {
+                      this.discounSwitch = false
+                    }
                     this.cartFoodList[cartFoodNum] = {}
                     this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
                     this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
@@ -712,6 +721,8 @@
                       this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
                     }
                     cartFoodNum++
+                  } else {
+                    this.discounSwitch = false
                   }
                 }
               })
