@@ -28,21 +28,22 @@
         }
       })
       this.url = window.location.href
-      if (this.url.indexOf('code') < 0) {
-        this.to()
-      } else {
-        const data = {
-          code: urlParse().code,
-          type: 1 // 授权类型：1静默授权；2用户授权
-        }
-        this.axios.post('/mp/authority/customer', data).then((res) => {
-          res = res.data
-          if (res.success) {
-            this.customerId = res.data.customerId
-            this.getShopList(res.data.customerId)
-          }
-        })
-      }
+      console.log(urlParse().code)
+//      if (this.url.indexOf('code') < 0) {
+//        this.to()
+//      } else {
+//        const data = {
+//          code: urlParse().code,
+//          type: 1 // 授权类型：1静默授权；2用户授权
+//        }
+//        this.axios.post('/mp/authority/customer', data).then((res) => {
+//          res = res.data
+//          if (res.success) {
+//            this.customerId = res.data.customerId
+//            this.getShopList(res.data.customerId)
+//          }
+//        })
+//      }
     },
     methods: {
       to() {
