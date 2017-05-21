@@ -82,7 +82,7 @@
 
 <script type="text/ecmascript-6">
   import goods from '../goods/goods.vue'
-  import {setStore, getStore, removeStore} from '../../common/utils/util'
+  import {setStore, getStore} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wxshare from '../../components/wxshare.vue'
@@ -347,33 +347,33 @@
         }
       }
     },
-    watch: {
-      shopId: function (value) {
-        // 调试代码 提交时注释
-        setStore('userInfo', {
-          'customerId': this.$route.query.customerId,
-          'shopId': this.$route.query.shopId
-        })
-        setStore('openId', {
-          'customerId': this.$route.query.customerId,
-          'shopId': this.$route.query.shopId
-        })
-        // ↑↑↑↑↑调试带代码↑↑↑↑
-        this.shopId = getStore('userInfo').shopId
-        this.customerId = getStore('userInfo').customerId
-        this.shopListArr = getStore('shopList')
-        this.CLEAR_CART(this.shopId)
-        removeStore('buyCart')
-        // 红包信息
-        this.getRedEnvelope()
-        // 商家信息
-        this.getShopDetail()
-        // 免配送费
-        this.getFreedispatch()
-        // 红包提示语
-        this.getBoonMeg()
-      }
-    },
+//    watch: {
+//      shopId: function (value) {
+//        // 调试代码 提交时注释
+//        setStore('userInfo', {
+//          'customerId': this.$route.query.customerId,
+//          'shopId': this.$route.query.shopId
+//        })
+//        setStore('openId', {
+//          'customerId': this.$route.query.customerId,
+//          'shopId': this.$route.query.shopId
+//        })
+//        // ↑↑↑↑↑调试带代码↑↑↑↑
+//        this.shopId = getStore('userInfo').shopId
+//        this.customerId = getStore('userInfo').customerId
+//        this.shopListArr = getStore('shopList')
+//        this.CLEAR_CART(this.shopId)
+//        removeStore('buyCart')
+//        // 红包信息
+//        this.getRedEnvelope()
+//        // 商家信息
+//        this.getShopDetail()
+//        // 免配送费
+//        this.getFreedispatch()
+//        // 红包提示语
+//        this.getBoonMeg()
+//      }
+//    },
     components: {
       wxshare,
       goods,
