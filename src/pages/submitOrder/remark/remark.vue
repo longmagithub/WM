@@ -51,7 +51,6 @@
       this.PublicJs.changeTitleInWx('订单备注')
       this.remarkIndex = this.indexRemark
       this.elseText = this.inputText
-      console.log(this.remarkIndex)
     },
     computed: {
       ...mapState(['indexRemark', 'inputText'])

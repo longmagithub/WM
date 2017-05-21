@@ -67,13 +67,16 @@
     created() {
       // 修改 title
       PublicJs.changeTitleInWx('在线支付')
+      this.CONFIRM_REMARK({
+        remarkText: '', inputText: '', indexRemark: null
+      })
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
       this.paidPrice = getStore('userOrderIofo').paidPrice ? getStore('userOrderIofo').paidPrice : 0
     },
     methods: {
-      ...mapMutations(['CLEAR_CART', 'BOON_PRICE']),
+      ...mapMutations(['CLEAR_CART', 'BOON_PRICE', 'CONFIRM_REMARK']),
       countDownFun() {
         this.isTime = !this.isTime
         this.toggleToast(1, '订单已超时')
