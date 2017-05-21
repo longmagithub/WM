@@ -240,18 +240,18 @@
           this.shopInfo.dispatching.duration))
         this.options.push(Date.parse(this.estimateTime))
 //        let timeArr = []
-        for (let i = 0; i < this.testTime.length; i++) {
-//          timeArr = []
+//        for (let i = 0; i < this.testTime.length; i++) {
+        for (let i = 0; i < this.shopInfo.hours.length; i++) {
           // 开始时间
-          let beginTimeHours = parseFloat(this.testTime[i].beginTime.split(':')[0])
-          let beginTimeMinte = parseFloat(this.testTime[i].beginTime.split(':')[1]) + this.shopInfo.makingTime +
+          let beginTimeHours = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[0])
+          let beginTimeMinte = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[1]) + this.shopInfo.makingTime +
             this.shopInfo.dispatching.duration
           this.beginTime = new Date(this.beginTime).setHours(beginTimeHours)
           this.beginTime = new Date(this.beginTime).setMinutes(beginTimeMinte)
           this.beginTime = new Date(this.beginTime).setSeconds(0, 0)
           // 结束时间
-          let endTimeHours = parseFloat(this.testTime[i].endTime.split(':')[0])
-          let endTimeMinte = parseFloat(this.testTime[i].endTime.split(':')[1]) + this.shopInfo.makingTime +
+          let endTimeHours = parseFloat(this.shopInfo.hours[i].endTime.split(':')[0])
+          let endTimeMinte = parseFloat(this.shopInfo.hours[i].endTime.split(':')[1]) + this.shopInfo.makingTime +
             this.shopInfo.dispatching.duration - 15
           this.endTime = new Date(this.endTime).setHours(endTimeHours)
           this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
