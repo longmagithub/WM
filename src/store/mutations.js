@@ -48,7 +48,7 @@ export default {
     userCount // 用户可以点多少
   }) {
     let cart = state.cartList
-    if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
+    if ((cart[shopid] === shopid) && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       if (dishTypeStyle === 1) { // 如果是爆款
         if (cart[shopid][categoryId][itemId][foodId]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
           cart[shopid][categoryId][itemId][foodId]['overflowNum']++
@@ -67,7 +67,7 @@ export default {
           cart[shopid][categoryId][itemId][foodId]['num']++
         }
       }
-    } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
+    } else if ((cart[shopid] === shopid) && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
       // console.log(2)
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
@@ -82,7 +82,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
-    } else if (cart[shopid] && cart[shopid][categoryId]) {
+    } else if ((cart[shopid] === shopid) && cart[shopid][categoryId]) {
       // console.log(3)
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -99,7 +99,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
       cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
-    } else if (cart[shopid]) {
+    } else if ((cart[shopid] === shopid)) {
       // console.log(4)
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
