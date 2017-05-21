@@ -26,6 +26,11 @@ export default new Router({
       path: '/jingmo',
       component: require('../pages/jingmo/jingmo.vue')
     },
+    // shopList
+    {
+      path: '/shopList',
+      component: require('../pages/shopList/shopList.vue')
+    },
     // 二维码
     {
       path: '/erweima',
