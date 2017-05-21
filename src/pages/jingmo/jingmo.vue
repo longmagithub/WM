@@ -2,7 +2,7 @@
 </template>
 <script>
   //  import {urlParse, setStore, getStore} from '../../common/utils/util'
-  import {urlParse} from '../../common/utils/util'
+  import {urlParse, setStore} from '../../common/utils/util'
   import wxshare from '../../components/wxshare.vue'
   export default {
     data () {
@@ -17,12 +17,12 @@
     created() {
       this.url = window.location.href
       console.log(this.url)
+      setStore('testId', {
+        'customerId': '12312312312',
+        'shopId': urlParse().shopId
+      })
       if (this.url.indexOf('shopId') < 0) {
         this.shopId = urlParse().shopId
-//        setStore('openId', {
-//          'customerId': '',
-//          'shopId': this.shopId
-//        })
       }
       if (this.url.indexOf('code') < 0) {
         this.to()
