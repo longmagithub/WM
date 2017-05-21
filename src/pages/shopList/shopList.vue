@@ -47,7 +47,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-//  import {urlParse} from '../../common/utils/util'
+  //  import {urlParse} from '../../common/utils/util'
   export default {
     data() {
       return {
@@ -61,6 +61,7 @@
     },
     created() {
       this.customerId = this.$route.query.customerId
+      console.log(this.customerId)
       this.getShopList(this.customerId)
     },
     methods: {
@@ -108,19 +109,15 @@
         this.shopListShow = false
       },
       goIndex(id) {
-//        setStore('userInfo', {
-//          'customerId': this.customerId,
-//          'shopId': id
-//        })
-        window.location.href =
-          'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
-//        this.$router.push({
-//          path: '/index',
-//          query: {
-//            shopId: id,
-//            customerId: this.customerId
-//          }
-//        })
+//        window.location.href =
+//          'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
+        this.$router.push({
+          path: '/index',
+          query: {
+            shopId: id,
+            customerId: this.customerId
+          }
+        })
       }
     }
   }
