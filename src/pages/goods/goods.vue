@@ -327,7 +327,7 @@
       this.getDiscountList()
       // 查询爆款活动规则
       this.getActivityHotstyle()
-      console.log(JSON.stringify(this.cartList))
+//      console.log(JSON.stringify(this.cartList))
     },
     computed: {
       // 检测 vuex 中cartList
@@ -482,7 +482,7 @@
         this.axios.get(`/br/shop/activity/hotstyle${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            console.log(res)
+//            console.log(res)
             this.activityHotstyle = res.data
           }
         })
@@ -676,7 +676,7 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-                console.log(foodItem)
+//                console.log(foodItem)
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
                 if (item.dishTypeStyle === 0) {
@@ -723,7 +723,7 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-        console.log(JSON.stringify(this.cartFoodList))
+//        console.log(JSON.stringify(this.cartFoodList))
       },
       // toggle toast
       toggleToast(show, text) {

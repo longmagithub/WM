@@ -187,11 +187,11 @@
           },
           {
             beginTime: '10:00',
-            endTime: '12:00'
+            endTime: '18:00'
           },
           {
-            beginTime: '16:00',
-            endTime: '21:00'
+            beginTime: '20:00',
+            endTime: '23:00'
           }
         ]
       }
@@ -239,11 +239,9 @@
         this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
           this.shopInfo.dispatching.duration))
         this.options.push(Date.parse(this.estimateTime))
-        let timeArr = []
-        let testTimeArr = []
+//        let timeArr = []
         for (let i = 0; i < this.testTime.length; i++) {
-          testTimeArr = []
-          timeArr = []
+//          timeArr = []
           // 开始时间
           let beginTimeHours = parseFloat(this.testTime[i].beginTime.split(':')[0])
           let beginTimeMinte = parseFloat(this.testTime[i].beginTime.split(':')[1]) + this.shopInfo.makingTime +
@@ -254,106 +252,117 @@
           // 结束时间
           let endTimeHours = parseFloat(this.testTime[i].endTime.split(':')[0])
           let endTimeMinte = parseFloat(this.testTime[i].endTime.split(':')[1]) + this.shopInfo.makingTime +
-            this.shopInfo.dispatching.duration
+            this.shopInfo.dispatching.duration - 15
           this.endTime = new Date(this.endTime).setHours(endTimeHours)
           this.endTime = new Date(this.endTime).setMinutes(endTimeMinte)
           this.endTime = new Date(this.endTime).setSeconds(0, 0)
-          // 预约第一个时间
-          let bespeakTime = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+          // 预约时间判断区间 开始
+          let bespeakOncTime = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
             this.shopInfo.dispatching.duration + 15)
-          bespeakTime = new Date(bespeakTime).setSeconds(0, 0)
-          // 判断
-          let bespeakOnceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-            this.shopInfo.dispatching.duration + 15))
-//          bespeakOnceTime = new Date(bespeakOnceTime).setSeconds(0, 0)
-
-          console.log('开始时间：' + this.beginTime)
-          console.log('预约时间：' + bespeakTime)
-          console.log('结束时间：' + (this.endTime))
-          console.log((bespeakTime < this.beginTime && bespeakTime < this.endTime))
-          console.log((bespeakTime > this.beginTime && bespeakTime < this.endTime))
-          console.log('_________________------------------__________________')
+          bespeakOncTime = new Date(bespeakOncTime).setSeconds(0, 0)
+          // 判断时间2
 //          let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-//            this.shopInfo.dispatching.duration + 15))
-          // 预约时间判断
-          if ((bespeakTime < this.beginTime && bespeakTime < this.endTime) || (bespeakTime > this.beginTime &&
-            bespeakTime < this.endTime)) {
-            console.log('判断预约' + i)
-            let oneTimeIndex = Math.floor(bespeakOnceTime.getMinutes() / 15)
+//              this.shopInfo.dispatching.duration + 15))
+          if ((bespeakOncTime >= this.beginTime && bespeakOncTime <= this.endTime)) {
+            // 开始第一次时间
+            let oneTimeIndex = Math.floor(new Date(bespeakOncTime).getMinutes() / 15)
+            let flagTime = 0
+            let flagTimeArr = []
             if (oneTimeIndex === 0) {
-              testTimeArr.push(new Date(bespeakTime).setMinutes(15))
+              flagTime = new Date(bespeakOncTime).setMinutes(15)
             } else if (oneTimeIndex === 1) {
-              testTimeArr.push(new Date(bespeakTime).setMinutes(30))
+              flagTime = new Date(bespeakOncTime).setMinutes(30)
             } else if (oneTimeIndex === 2) {
-              testTimeArr.push(new Date(bespeakTime).setMinutes(45))
+              flagTime = new Date(bespeakOncTime).setMinutes(45)
             } else if (oneTimeIndex === 3) {
-              testTimeArr.push(new Date(new Date(bespeakTime).setUTCMinutes(0)).setHours(new Date(bespeakTime).getHours() + 1))
+              flagTime = new Date(new Date(bespeakOncTime).setUTCMinutes(0)).setHours(new Date(bespeakOncTime).getHours() + 1)
             }
             do {
-              testTimeArr.push(bespeakOnceTime += 900000)
+              flagTimeArr.push(flagTime += 900000)
             }
-            while (oncTime < this.endTime)
-            this.options = this.options.concat(timeArr)
-//            console.log(JSON.stringify(testTimeArr))
+            while (flagTime < this.endTime)
+            this.options = this.options.concat(flagTimeArr)
           }
-          if (i === 0) {
-//            console.log('i===' + i)
-            let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-              this.shopInfo.dispatching.duration + 15)
-            let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-              this.shopInfo.dispatching.duration + 15))
+          if ((bespeakOncTime <= this.beginTime && bespeakOncTime <= this.endTime)) {
             // 开始第一次时间
-            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+            let oneTimeIndex = Math.floor(new Date(this.beginTime).getMinutes() / 15)
+            let flagTimeS = 0
+            let flagTimeSArr = []
             if (oneTimeIndex === 0) {
-              timeArr.push(new Date(orderTaP).setMinutes(15))
+              flagTimeS = new Date(this.beginTime).setMinutes(15)
             } else if (oneTimeIndex === 1) {
-              timeArr.push(new Date(orderTaP).setMinutes(30))
+              flagTimeS = new Date(this.beginTime).setMinutes(30)
             } else if (oneTimeIndex === 2) {
-              timeArr.push(new Date(orderTaP).setMinutes(45))
+              flagTimeS = new Date(this.beginTime).setMinutes(45)
             } else if (oneTimeIndex === 3) {
-              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+              flagTimeS = new Date(new Date(this.beginTime).setUTCMinutes(0)).setHours(new Date(this.beginTime).getHours() + 1)
             }
-          } else if (i === 1) {
-//            console.log('i===' + i)
-            let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-              15)
-            let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-              15))
-            // 开始第一次时间
-            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-            if (oneTimeIndex === 0) {
-              timeArr.push(new Date(orderTaP).setMinutes(15))
-            } else if (oneTimeIndex === 1) {
-              timeArr.push(new Date(orderTaP).setMinutes(30))
-            } else if (oneTimeIndex === 2) {
-              timeArr.push(new Date(orderTaP).setMinutes(45))
-            } else if (oneTimeIndex === 3) {
-              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+            do {
+              flagTimeSArr.push(flagTimeS += 900000)
             }
-          } else if (i === 3) {
-//            console.log('i===' + i)
-            let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-              15)
-            let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-              15))
-            // 开始第一次时间
-            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-            if (oneTimeIndex === 0) {
-              timeArr.push(new Date(orderTaP).setMinutes(15))
-            } else if (oneTimeIndex === 1) {
-              timeArr.push(new Date(orderTaP).setMinutes(30))
-            } else if (oneTimeIndex === 2) {
-              timeArr.push(new Date(orderTaP).setMinutes(45))
-            } else if (oneTimeIndex === 3) {
-              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
-            }
+            while (flagTimeS < this.endTime)
+            this.options = this.options.concat(flagTimeSArr)
           }
-          let oncTime = timeArr[0]
-          do {
-            timeArr.push(oncTime += 900000)
-          }
-          while (oncTime < this.endTime)
-          this.options = this.options.concat(timeArr)
+//          this.options = this.options.concat(timeArr)
+//          timeArr.forEach(item => {
+//            console.log(new Date(item))
+//          })
+//          console.log(timeArr)
+//          if (i === 0) {
+//            let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+//              this.shopInfo.dispatching.duration + 15)
+//            let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
+//              this.shopInfo.dispatching.duration + 15))
+//            // 开始第一次时间
+//            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+//            if (oneTimeIndex === 0) {
+//              timeArr.push(new Date(orderTaP).setMinutes(15))
+//            } else if (oneTimeIndex === 1) {
+//              timeArr.push(new Date(orderTaP).setMinutes(30))
+//            } else if (oneTimeIndex === 2) {
+//              timeArr.push(new Date(orderTaP).setMinutes(45))
+//            } else if (oneTimeIndex === 3) {
+//              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+//            }
+//          } else if (i === 1) {
+//            let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+//              15)
+//            let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+//              15))
+//            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+//            if (oneTimeIndex === 0) {
+//              timeArr.push(new Date(orderTaP).setMinutes(15))
+//            } else if (oneTimeIndex === 1) {
+//              timeArr.push(new Date(orderTaP).setMinutes(30))
+//            } else if (oneTimeIndex === 2) {
+//              timeArr.push(new Date(orderTaP).setMinutes(45))
+//            } else if (oneTimeIndex === 3) {
+//              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+//            }
+//          } else if (i === 3) {
+//            let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+//              15)
+//            let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
+//              15))
+//            // 开始第一次时间
+//            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
+//            if (oneTimeIndex === 0) {
+//              timeArr.push(new Date(orderTaP).setMinutes(15))
+//            } else if (oneTimeIndex === 1) {
+//              timeArr.push(new Date(orderTaP).setMinutes(30))
+//            } else if (oneTimeIndex === 2) {
+//              timeArr.push(new Date(orderTaP).setMinutes(45))
+//            } else if (oneTimeIndex === 3) {
+//              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
+//            }
+//          }
+//          let oncTime = timeArr[0]
+//          do {
+//            timeArr.push(oncTime += 900000)
+//          }
+//          while (oncTime < this.endTime)
+//          this.options = this.options.concat(timeArr)
+//          console.log(JSON.stringify(timeArr))
         }
       },
       // 优惠列表查询
