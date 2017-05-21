@@ -15,7 +15,7 @@
     },
     methods: {
       setShareConfig() {
-        let that = this
+//        let that = this
         let url = window.location.href.split('#')[0]
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
           res = res.data
@@ -54,17 +54,6 @@
                   // 用户取消分享后执行的回调函数
                 }
               })
-              wx.getLocation({
-                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-                success: function (res) {
-                  console.log(that)
-                  if (res.errMsg === 'getLocation:ok') {
-                    that.getBaiDuMap(res)
-                  } else if (res.errMsg === 'getLocation:cancel') {
-                    that.getBaiDuMap(0)
-                  }
-                }
-              })
             })
           }
         })
@@ -93,7 +82,7 @@
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-//          window.alert(res.message)
+          window.alert(res.message)
           res.result.forEach((item, index) => {
             item.flag = index
             this.shopListArr[index].location = item
