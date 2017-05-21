@@ -1,8 +1,8 @@
 <template>
 </template>
 <script>
-  //  import {urlParse, setStore} from '../../common/utils/util'
-  import {urlParse} from '../../common/utils/util'
+  import {urlParse, setStore, getStore} from '../../common/utils/util'
+  //  import {urlParse} from '../../common/utils/util'
   import wxshare from '../../components/wxshare.vue'
   export default {
     data () {
@@ -17,7 +17,13 @@
     created() {
       this.url = window.location.href
       console.log(this.url)
-      this.shopId = urlParse().shopId
+      if (this.url.indexOf('shopId') < 0) {
+        this.shopId = urlParse().shopId
+        setStore('openId', {
+          'customerId': '',
+          'shopId': this.shopId
+        })
+      }
       if (this.url.indexOf('code') < 0) {
         this.to()
       } else {
@@ -29,8 +35,11 @@
           res = res.data
           if (res.success) {
             this.customerId = res.data.customerId
-            this.shopId
-            this.goIndex(this.shopId, this.customerId)
+            setStore('openId', {
+              'customerId': this.customerId,
+              'shopId': getStore('openId').shopId
+            })
+            this.goIndex(getStore('openId').shopId, this.customerId)
 //            this.getShopList(res.data.customerId)
           }
         })
@@ -39,7 +48,7 @@
     methods: {
       to() {
         const oauthCallbackUrl =
-          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo?shopId=' + this.shopId)
+          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
         window.location.replace(oauthJumpUrl)
