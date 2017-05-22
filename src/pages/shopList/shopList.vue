@@ -79,10 +79,6 @@
             let latitude = coords.latitude // 纬度
             window.alert(longitude)
             window.alert(latitude)
-          }, (rep) => {
-            console.log(rep)
-            window.alert(rep.PositionError)
-            window.alert(Object.values(rep.PositionError))
           })
         } else {
           window.alert('无法获取到您的地理定位')
