@@ -106,6 +106,8 @@
       // 百度计算位置
       getBaiDuMap(resData) {
         let defaultLonca = {
+//          latitude: this.shopList[0].latitudeB,
+//          longitude: this.shopList[0].longitudeB
           latitude: this.shopList[0].latitudeB,
           longitude: this.shopList[0].longitudeB
         }
