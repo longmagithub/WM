@@ -129,7 +129,7 @@
           coord_type: 'gcj02' // 坐标类型
         }
         console.log(this)
-        this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+        this.$http.jsonp(`https://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           window.alert(res.message)
           res.result.forEach((item, index) => {
