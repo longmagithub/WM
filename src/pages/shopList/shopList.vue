@@ -81,7 +81,7 @@
             window.alert(latitude)
           }, (rep) => {
             console.log(rep)
-            window.alert(Object.values(rep))
+            window.alert(rep)
           })
         } else {
           window.alert('无法获取到您的地理定位')
