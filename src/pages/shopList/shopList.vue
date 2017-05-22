@@ -63,8 +63,72 @@
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
       this.getShopList(this.customerId)
+      this.getLocation()
     },
     methods: {
+      // 原生获取地理位置
+      getLocation() {
+        console.log('12311231312434342324243')
+        if (navigator.geolocation) {
+          console.log(navigator.geolocation)
+          navigator.geolocation.getCurrentPosition((location) => {
+            // console.log(location)
+            let coords = location.coords
+            let longitude = coords.longitude // 经度
+            let latitude = coords.latitude // 纬度
+            window.alert(longitude)
+            window.alert(latitude)
+          }, (rep) => {
+            console.log(rep)
+            window.alert(Object.values(rep))
+          })
+        } else {
+          window.alert('无法获取到您的地理定位')
+        }
+      },
+      // 百度计算位置
+      getBaiDuMap(resData) {
+        let defaultLonca = {
+          latitude: this.shopListArr[0].latitudeB,
+          longitude: this.shopListArr[0].longitudeB
+        }
+        let defaultRes = {}
+        resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
+        let location = []
+        this.shopListArr.forEach((item) => {
+          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
+        })
+        this.latLon = this.latLon.join('|')
+//        window.alert('________----------___________------______-------__')
+        const data = {
+          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
+          output: 'json', // 输出的数据类型
+          origins: defaultRes.latitude + ',' + defaultRes.longitude, // 起点：维度，经度
+//          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
+          destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
+          coord_type: 'gcj02' // 坐标类型
+        }
+        this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          console.log(res)
+//          window.alert(res.message)
+          res.result.forEach((item, index) => {
+            item.flag = index
+            this.shopListArr[index].location = item
+            location.push(item)
+          })
+          for (let i = 0; i < this.shopListArr.length; i++) {
+            for (let j = i; j < this.shopListArr.length; j++) {
+              if (this.shopListArr[i].location.distance.value > this.shopListArr[j].location.distance.value) {
+                let temp = this.shopListArr[i]
+                this.shopListArr[i] = this.shopListArr[j]
+                this.shopListArr[j] = temp
+              }
+            }
+          }
+//          setStore('shopList', this.shopListArr)
+        })
+      },
       getShopList(id) {
         const data = {
           customerId: id,
@@ -108,6 +172,7 @@
       closeToast() {
         this.shopListShow = false
       },
+      // 去首页
       goIndex(id) {
 //        window.location.href =
 //          'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
