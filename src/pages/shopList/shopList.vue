@@ -56,7 +56,13 @@
         shopListShow: false,
         itemShopList: {},
         thirdDiscounts: [], // 其他平台
-        duration: []  // uxwm平台
+        duration: [],  // uxwm平台
+        isAjax: false, // 判断ajax是否成功
+        latLon: [],
+        location: {
+          longitude: '', // 经度
+          latitude: '' // 维度
+        }
       }
     },
     created() {
@@ -69,31 +75,36 @@
       // 原生获取地理位置
       getLocation() {
         window.alert('获取地理位置')
-        console.log('12311231312434342324243')
         if (navigator.geolocation) {
           console.log(navigator.geolocation)
-          navigator.geolocation.getCurrentPosition((location) => {
+          navigator.geolocation.getCurrentPosition((res) => {
             // console.log(location)
-            let coords = location.coords
-            let longitude = coords.longitude // 经度
-            let latitude = coords.latitude // 纬度
+            this.location.longitude = res.coords.longitude
+            this.location.latitude = res.coords.latitude
+            let longitude = res.coords.longitude // 经度
+            let latitude = res.coords.latitude // 纬度
             window.alert(longitude)
             window.alert(latitude)
+            this.isAjax = true
+          }, (err) => {
+            console.log(err)
+            this.isAjax = true
           })
         } else {
+          this.isAjax = false
           window.alert('无法获取到您的地理定位')
         }
       },
       // 百度计算位置
       getBaiDuMap(resData) {
         let defaultLonca = {
-          latitude: this.shopListArr[0].latitudeB,
-          longitude: this.shopListArr[0].longitudeB
+          latitude: this.shopList[0].latitudeB,
+          longitude: this.shopList[0].longitudeB
         }
         let defaultRes = {}
         resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
         let location = []
-        this.shopListArr.forEach((item) => {
+        this.shopList.forEach((item) => {
           this.latLon.push(item.latitudeB + ',' + item.longitudeB)
         })
         this.latLon = this.latLon.join('|')
@@ -108,25 +119,25 @@
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          console.log(res)
 //          window.alert(res.message)
           res.result.forEach((item, index) => {
             item.flag = index
-            this.shopListArr[index].location = item
+            this.shopList[index].location = item
             location.push(item)
           })
-          for (let i = 0; i < this.shopListArr.length; i++) {
-            for (let j = i; j < this.shopListArr.length; j++) {
-              if (this.shopListArr[i].location.distance.value > this.shopListArr[j].location.distance.value) {
-                let temp = this.shopListArr[i]
-                this.shopListArr[i] = this.shopListArr[j]
-                this.shopListArr[j] = temp
+          for (let i = 0; i < this.shopList.length; i++) {
+            for (let j = i; j < this.shopList.length; j++) {
+              if (this.shopList[i].location.distance.value > this.shopList[j].location.distance.value) {
+                let temp = this.shopList[i]
+                this.shopList[i] = this.shopList[j]
+                this.shopList[j] = temp
               }
             }
           }
-//          setStore('shopList', this.shopListArr)
+          console.log(this.shopList)
         })
       },
+      // 请求门店列表
       getShopList(id) {
         const data = {
           customerId: id,
@@ -140,6 +151,7 @@
         this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
+            this.isAjax = true
             res.data.forEach((data) => {
               data.discounts = data.discounts.reverse()
               data.thirdDiscounts = data.thirdDiscounts.reverse()
@@ -148,8 +160,12 @@
                 data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
               }
               this.shopList.push(data)
+              if (this.isAjax) {
+                this.getBaiDuMap(this.location)
+              }
             })
-            console.log(this.shopList)
+          } else {
+            this.isAjax = false
           }
         })
       },
