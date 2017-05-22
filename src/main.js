@@ -46,6 +46,7 @@ console.log(mock)
 // Vue.use(WxPay)
 // 微信配置
 // Vue.use(wx)
+// console.log(VueResource)
 Vue.use(VueResource) // 声明使用vue-resource
 Vue.use(VueValidator) // 声明使用vue-validator
 Vue.use(VueAxios, axios) // 声明使用VueAxios
