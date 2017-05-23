@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   //  import {urlParse} from '../../common/utils/util'
   export default {
     data() {
@@ -56,14 +56,14 @@
         shopListShow: false,
         itemShopList: {},
         thirdDiscounts: [], // 其他平台
-        duration: []  // uxwm平台
+        duration: [] // uxwm平台
       }
     },
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
-      this.getShopList(this.customerId)
-      this.getLocation()
+      this.getLocation() 
+      //this.getShopList(this.customerId,30,120)        
     },
     methods: {
       // 原生获取地理位置
@@ -73,30 +73,47 @@
         if (navigator.geolocation) {
           console.log(navigator.geolocation)
           navigator.geolocation.getCurrentPosition((location) => {
-            // console.log(location)
+            console.log(location)
             let coords = location.coords
             let longitude = coords.longitude // 经度
-            let latitude = coords.latitude // 纬度
-            window.alert(longitude)
-            window.alert(latitude)
+            let   latitude = coords.latitude // 纬度
+            this.getShopList(this.customerId,longitude,latitude)              
+          //  window.alert(latitude)
+          },(error) => {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                window.alert('定位失败,用户拒绝请求地理定位')
+                break
+              case error.POSITION_UNAVAILABLE:
+                window.alert('定位失败,位置信息是不可用')
+                break
+              case error.TIMEOUT:
+                window.alert('定位失败,请求获取用户位置超时')
+                break
+              case error.UNKNOWN_ERROR:
+                window.alert('定位失败,定位系统失效')
+                break
+            }
+            this.getShopList(this.customerId,0,0) 
           })
         } else {
-          window.alert('无法获取到您的地理定位')
-        }
+          window.alert('无法获取到您的地理定位') 
+        } 
+
       },
       // 百度计算位置
       getBaiDuMap(resData) {
         let defaultLonca = {
-          latitude: this.shopListArr[0].latitudeB,
-          longitude: this.shopListArr[0].longitudeB
+          latitude: this.shopListArr[0].latitudeB, //店铺列表纬度
+          longitude: this.shopListArr[0].longitudeB //店铺列表经度
         }
         let defaultRes = {}
         resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
         let location = []
         this.shopListArr.forEach((item) => {
-          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
+          this.latLon.push(item.latitudeB + ',' + item.longitudeB)//将经纬度push进latLon
         })
-        this.latLon = this.latLon.join('|')
+        this.latLon = this.latLon.join('|')//通过|拼接以字符串的形式传递个latLon
 //        window.alert('________----------___________------______-------__')
         const data = {
           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
@@ -107,10 +124,11 @@
           coord_type: 'gcj02' // 坐标类型
         }
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          console.log(res)
-//          window.alert(res.message)
-          res.result.forEach((item, index) => {
+        //  console.log(1111111)
+        //  res = res.data
+        //console.log(111111)
+ //         window.alert(res.message)
+          res.result.forEach((item, index) => {//元素、下标
             item.flag = index
             this.shopListArr[index].location = item
             location.push(item)
@@ -125,22 +143,30 @@
             }
           }
 //          setStore('shopList', this.shopListArr)
+        },(error) => {
+          console.log(111111111)
         })
       },
-      getShopList(id) {
+      getShopList(id,longitude,latitude) {
+        // window.alert(longitude);
         const data = {
           customerId: id,
           pageSize: 30,
           pageNumber: 1,
-          longitude: 0, // 经度
-          latitude: 0, // 维度
+          longitude: longitude, // 经度
+          latitude: latitude, // 维度
           discounts: [], // uxwm 满减
           thirdDiscounts: [] // 其他平台满减
         }
         this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
+          console.log(res)
           if (res.success) {
+            let shopId="";
             res.data.forEach((data) => {
+              if(shopId===""){
+                shopId = data.shopId;
+              }
               data.discounts = data.discounts.reverse()
               data.thirdDiscounts = data.thirdDiscounts.reverse()
               // 添加 图片分割
@@ -148,8 +174,14 @@
                 data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
               }
               this.shopList.push(data)
+             // window.alert(this.distance)
             })
+            // window.alert("shopId:"+shopId)
             console.log(this.shopList)
+            if(longitude>0&&latitude>0)
+            {
+               this.goIndex(shopId)
+            }
           }
         })
       },

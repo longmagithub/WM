@@ -95,6 +95,11 @@ export default new Router({
     {
       path: '/submitPay',
       component: require('../pages/submitPay/submitPay.vue')
+    },
+    // 红包页面
+    {
+      path: '/redlist',
+      component: require('../pages/redList/redlist.vue')
     }
   ]
 })
