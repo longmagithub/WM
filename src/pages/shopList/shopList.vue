@@ -46,8 +46,13 @@
   </div>
 </template>
 
+<<<<<<< HEAD
 <script>
   //  import {urlParse} from '../../common/utils/util'
+=======
+<script type="text/ecmascript-6">
+  import {getStore} from '../../common/utils/util'
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
   export default {
     data() {
       return {
@@ -56,12 +61,20 @@
         shopListShow: false,
         itemShopList: {},
         thirdDiscounts: [], // 其他平台
+<<<<<<< HEAD
         duration: [] // uxwm平台
+=======
+        duration: [],  // uxwm平台
+        isAjax: false, // 判断ajax是否成功
+        latLon: [],
+        location: {}
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
       }
     },
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
+<<<<<<< HEAD
       this.getLocation() 
       //this.getShopList(this.customerId,30,120)        
     },
@@ -100,18 +113,70 @@
           window.alert('无法获取到您的地理定位') 
         } 
 
+=======
+      this.getShopList(this.customerId)
+      this.location = getStore('userLocation')
+      console.log(this.location)
+//      this.getLocation(this.location)
+    },
+    methods: {
+      // 请求门店列表
+      getShopList(id) {
+        const data = {
+          customerId: id,
+          pageSize: 30,
+          pageNumber: 1,
+          longitude: 0, // 经度
+          latitude: 0, // 维度
+          discounts: [], // uxwm 满减
+          thirdDiscounts: [] // 其他平台满减
+        }
+        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.isAjax = true
+            res.data.forEach((data) => {
+              data.discounts = data.discounts.reverse()
+              data.thirdDiscounts = data.thirdDiscounts.reverse()
+              // 添加 图片分割
+              if (data.logo) {
+                data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+              }
+              this.shopList.push(data)
+//              if (this.isAjax) {
+              this.getBaiDuMap(this.location)
+//              }
+            })
+          } else {
+            this.isAjax = false
+          }
+        })
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
       },
       // 百度计算位置
       getBaiDuMap(resData) {
         let defaultLonca = {
+<<<<<<< HEAD
           latitude: this.shopListArr[0].latitudeB, //店铺列表纬度
           longitude: this.shopListArr[0].longitudeB //店铺列表经度
+=======
+//          latitude: this.shopList[0].latitudeB,
+//          longitude: this.shopList[0].longitudeB
+          latitude: this.shopList[0].latitudeB,
+          longitude: this.shopList[0].longitudeB
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
         }
         let defaultRes = {}
         resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
         let location = []
+<<<<<<< HEAD
         this.shopListArr.forEach((item) => {
           this.latLon.push(item.latitudeB + ',' + item.longitudeB)//将经纬度push进latLon
+=======
+        this.shopList.forEach((item) => {
+          console.log(this.shopList)
+          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
         })
         this.latLon = this.latLon.join('|')//通过|拼接以字符串的形式传递个latLon
 //        window.alert('________----------___________------______-------__')
@@ -123,25 +188,34 @@
           destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
           coord_type: 'gcj02' // 坐标类型
         }
+<<<<<<< HEAD
         this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
         //  console.log(1111111)
         //  res = res.data
         //console.log(111111)
  //         window.alert(res.message)
           res.result.forEach((item, index) => {//元素、下标
+=======
+        console.log(this)
+        this.$http.jsonp(`https://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+          res = res.data
+          window.alert(res.message)
+          res.result.forEach((item, index) => {
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
             item.flag = index
-            this.shopListArr[index].location = item
+            this.shopList[index].location = item
             location.push(item)
           })
-          for (let i = 0; i < this.shopListArr.length; i++) {
-            for (let j = i; j < this.shopListArr.length; j++) {
-              if (this.shopListArr[i].location.distance.value > this.shopListArr[j].location.distance.value) {
-                let temp = this.shopListArr[i]
-                this.shopListArr[i] = this.shopListArr[j]
-                this.shopListArr[j] = temp
+          for (let i = 0; i < this.shopList.length; i++) {
+            for (let j = i; j < this.shopList.length; j++) {
+              if (this.shopList[i].location.distance.value > this.shopList[j].location.distance.value) {
+                let temp = this.shopList[i]
+                this.shopList[i] = this.shopList[j]
+                this.shopList[j] = temp
               }
             }
           }
+<<<<<<< HEAD
 //          setStore('shopList', this.shopListArr)
         },(error) => {
           console.log(111111111)
@@ -183,6 +257,9 @@
                this.goIndex(shopId)
             }
           }
+=======
+          console.log(this.shopList)
+>>>>>>> 06b204100d4969ed48d00aa04c5d6453215f039e
         })
       },
       //  显示比价弹窗

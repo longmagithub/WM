@@ -1,8 +1,8 @@
 <template>
 </template>
 <script>
-  import {urlParse} from '../../common/utils/util'
-//  import wxshare from '../../components/wxshare.vue'
+  import {urlParse, setStore} from '../../common/utils/util'
+  //  import wxshare from '../../components/wxshare.vue'
   export default {
     data () {
       return {
@@ -10,7 +10,11 @@
         url: '',
         code: '',
         customerId: '',
-        shopId: ''
+        shopId: '',
+        location: {
+          longitude: '', // 经度
+          latitude: '' // 维度
+        }
       }
     },
     created() {
@@ -27,8 +31,7 @@
           res = res.data
           if (res.success) {
             this.customerId = res.data.customerId
-            this.shopId
-            this.goIndex(this.customerId)
+            this.getLocation()
 //            this.getShopList(res.data.customerId)
           }
         })
@@ -51,6 +54,28 @@
 //            customerId: id
 //          }
 //        })
+      },
+      // 原生获取地理位置
+      getLocation() {
+        window.alert('获取地理位置')
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((res) => {
+            this.location.longitude = res.coords.longitude
+            this.location.latitude = res.coords.latitude
+            let longitude = res.coords.longitude // 经度
+            let latitude = res.coords.latitude // 纬度
+            window.alert(longitude)
+            window.alert(latitude)
+            setStore('userLocation', this.location)
+            this.goIndex(this.customerId)
+          }, (err) => {
+            this.goIndex(this.customerId)
+            console.log(err)
+          })
+        } else {
+          this.isAjax = false
+          window.alert('无法获取到您的地理定位')
+        }
       }
     }
 //    ,
