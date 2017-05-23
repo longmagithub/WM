@@ -46,7 +46,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {getStore} from '../../common/utils/util'
   export default {
     data() {
@@ -59,26 +59,61 @@
         duration: [],  // uxwm平台
         isAjax: false, // 判断ajax是否成功
         latLon: [],
-        location: {}
+      //  location: {}
       }
     },
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
+      this.getLocation() 
       this.getShopList(this.customerId)
       this.location = getStore('userLocation')
       console.log(this.location)
 //      this.getLocation(this.location)
     },
     methods: {
+      // 获取用户地理定位
+       getLocation() {
+      //  window.alert('获取地理位置')
+        console.log('12311231312434342324243')
+        if (navigator.geolocation) {
+          console.log(navigator.geolocation)
+          navigator.geolocation.getCurrentPosition((location) => {
+            console.log(location)
+            let coords = location.coords
+            let longitude = coords.longitude // 经度
+            let latitude = coords.latitude // 纬度
+            this.getShopList(this.customerId,longitude,latitude)              
+          //  window.alert(latitude)
+          },(error) => {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                window.alert('定位失败,用户拒绝请求地理定位')
+                break
+              case error.POSITION_UNAVAILABLE:
+                window.alert('定位失败,位置信息是不可用')
+                break
+              case error.TIMEOUT:
+                window.alert('定位失败,请求获取用户位置超时')
+                break
+              case error.UNKNOWN_ERROR:
+                window.alert('定位失败,定位系统失效')
+                break
+            }
+            this.getShopList(this.customerId,0,0) 
+          })
+        } else {
+          window.alert('无法获取到您的地理定位') 
+        } 
+      },
       // 请求门店列表
-      getShopList(id) {
+      getShopList(id,longitude,latitude) {
         const data = {
           customerId: id,
           pageSize: 30,
           pageNumber: 1,
-          longitude: 0, // 经度
-          latitude: 0, // 维度
+          longitude: longitude, // 经度
+          latitude: latitude, // 维度
           discounts: [], // uxwm 满减
           thirdDiscounts: [] // 其他平台满减
         }
@@ -86,7 +121,11 @@
           res = res.data
           if (res.success) {
             this.isAjax = true
+            let shopId="";
             res.data.forEach((data) => {
+              if(shopId===""){
+                shopId = data.shopId;
+              }
               data.discounts = data.discounts.reverse()
               data.thirdDiscounts = data.thirdDiscounts.reverse()
               // 添加 图片分割
@@ -95,60 +134,65 @@
               }
               this.shopList.push(data)
 //              if (this.isAjax) {
-              this.getBaiDuMap(this.location)
+              //this.getBaiDuMap(this.location)
 //              }
             })
+            console.log(this.shopList)
+            if(longitude>0&&latitude>0)
+            {
+            this.goIndex(shopId)
+            }
           } else {
             this.isAjax = false
           }
         })
       },
       // 百度计算位置
-      getBaiDuMap(resData) {
-        let defaultLonca = {
-//          latitude: this.shopList[0].latitudeB,
-//          longitude: this.shopList[0].longitudeB
-          latitude: this.shopList[0].latitudeB,
-          longitude: this.shopList[0].longitudeB
-        }
-        let defaultRes = {}
-        resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
-        let location = []
-        this.shopList.forEach((item) => {
-          console.log(this.shopList)
-          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
-        })
-        this.latLon = this.latLon.join('|')
-//        window.alert('________----------___________------______-------__')
-        const data = {
-          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
-          output: 'json', // 输出的数据类型
-          origins: defaultRes.latitude + ',' + defaultRes.longitude, // 起点：维度，经度
-//          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
-          destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
-          coord_type: 'gcj02' // 坐标类型
-        }
-        console.log(this)
-        this.$http.jsonp(`https://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          window.alert(res.message)
-          res.result.forEach((item, index) => {
-            item.flag = index
-            this.shopList[index].location = item
-            location.push(item)
-          })
-          for (let i = 0; i < this.shopList.length; i++) {
-            for (let j = i; j < this.shopList.length; j++) {
-              if (this.shopList[i].location.distance.value > this.shopList[j].location.distance.value) {
-                let temp = this.shopList[i]
-                this.shopList[i] = this.shopList[j]
-                this.shopList[j] = temp
-              }
-            }
-          }
-          console.log(this.shopList)
-        })
-      },
+//       getBaiDuMap(resData) {
+//         let defaultLonca = {
+// //          latitude: this.shopList[0].latitudeB,
+// //          longitude: this.shopList[0].longitudeB
+//           latitude: this.shopList[0].latitudeB,
+//           longitude: this.shopList[0].longitudeB
+//         }
+//         let defaultRes = {}
+//         resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
+//         let location = []
+//         this.shopList.forEach((item) => {
+//           console.log(this.shopList)
+//           this.latLon.push(item.latitudeB + ',' + item.longitudeB)
+//         })
+//         this.latLon = this.latLon.join('|')
+// //        window.alert('________----------___________------______-------__')
+//         const data = {
+//           ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
+//           output: 'json', // 输出的数据类型
+//           origins: defaultRes.latitude + ',' + defaultRes.longitude, // 起点：维度，经度
+// //          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
+//           destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
+//           coord_type: 'gcj02' // 坐标类型
+//         }
+//         console.log(this)
+//         this.$http.jsonp(`https://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+//           res = res.data
+//           window.alert(res.message)
+//           res.result.forEach((item, index) => {
+//             item.flag = index
+//             this.shopList[index].location = item
+//             location.push(item)
+//           })
+//           for (let i = 0; i < this.shopList.length; i++) {
+//             for (let j = i; j < this.shopList.length; j++) {
+//               if (this.shopList[i].location.distance.value > this.shopList[j].location.distance.value) {
+//                 let temp = this.shopList[i]
+//                 this.shopList[i] = this.shopList[j]
+//                 this.shopList[j] = temp
+//               }
+//             }
+//           }
+//           console.log(this.shopList)
+//         })
+//       },
       //  显示比价弹窗
       toggleParity(duration, thirdDiscounts) {
         if (duration.length > 0) {
