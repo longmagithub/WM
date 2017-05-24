@@ -69,11 +69,11 @@
     methods: {
       // 原生获取地理位置
       getLocation() {
-        window.alert('获取地理位置')
+//        window.alert('获取地理位置000000')
 //        console.log('12311231312434342324243')
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((location) => {
-            window.alert('获取成功')
+//            window.alert('获取成功')
             let coords = location.coords
             let longitude = coords.longitude // 经度
             let latitude = coords.latitude // 纬度
@@ -81,22 +81,22 @@
           }, (error) => {
             switch (error.code) {
               case error.PERMISSION_DENIED:
-                window.alert('定位失败,用户拒绝请求地理定位11111')
+//                window.alert('定位失败,用户拒绝请求地理定位11111')
                 break
               case error.POSITION_UNAVAILABLE:
-                window.alert('定位失败,位置信息是不可用22222')
+//                window.alert('定位失败,位置信息是不可用22222')
                 break
               case error.TIMEOUT:
-                window.alert('定位失败,请求获取用户位置超时33333')
+//                window.alert('定位失败,请求获取用户位置超时33333')
                 break
               case error.UNKNOWN_ERROR:
-                window.alert('定位失败,定位系统失效44444')
+//                window.alert('定位失败,定位系统失效44444')
                 break
             }
             this.getShopList(this.customerId, 0, 0)
           })
         } else {
-          window.alert('无法获取到您的地理定位55555')
+//          window.alert('无法获取到您的地理定位55555')
         }
       },
       // 请求门店列表
