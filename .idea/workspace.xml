@@ -2,25 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/css/app.63e8d70e1404cbc92ffca25271d85a61.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/js/app.8c028c4f5b30511ed416.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/js/app.bc1d3b38052ee03ab021.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/js/manifest.75e2b39c35213c872502.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/js/manifest.fa537e064017c0c8f294.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/js/vendor.f3742bc279dcc7f3de30.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/static/js/vendor.feeca15d8e772ee2defc.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/pages/redList/redlist.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/dist/static/css/app.2a477ae4f636f28965fe62b88f591c50.css" afterPath="$PROJECT_DIR$/dist/static/css/app.61315d0903574f0ab4a5031e50a2ea56.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/dist/static/img/iconfont.6643f7d.svg" afterPath="$PROJECT_DIR$/dist/static/img/iconfont.2019e51.svg" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.61315d0903574f0ab4a5031e50a2ea56.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.63e8d70e1404cbc92ffca25271d85a61.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/iconfont.2019e51.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.8c028c4f5b30511ed416.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.bc1d3b38052ee03ab021.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.f63312782a31557a9f32.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.75e2b39c35213c872502.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.76b09c4c2b7dc7ab9e32.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.fa537e064017c0c8f294.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.44d46cc727a2056b4d6e.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.f3742bc279dcc7f3de30.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.feeca15d8e772ee2defc.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/webpack.base.conf.js" afterPath="$PROJECT_DIR$/build/webpack.base.conf.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/static/js/app.f63312782a31557a9f32.js" afterPath="$PROJECT_DIR$/dist/static/js/app.f63312782a31557a9f32.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/static/js/manifest.76b09c4c2b7dc7ab9e32.js" afterPath="$PROJECT_DIR$/dist/static/js/manifest.76b09c4c2b7dc7ab9e32.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/static/js/vendor.44d46cc727a2056b4d6e.js" afterPath="$PROJECT_DIR$/dist/static/js/vendor.44d46cc727a2056b4d6e.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/wxshare.vue" afterPath="$PROJECT_DIR$/src/components/wxshare.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/shopList/shopList.vue" afterPath="$PROJECT_DIR$/src/pages/shopList/shopList.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="$PROJECT_DIR$/src/router/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/redList/redlist.vue" afterPath="$PROJECT_DIR$/src/pages/redList/redlist.vue" />
     </list>
     <ignored path="H5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -184,11 +181,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shopList.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/shopList/shopList.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1200">
-              <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+            <state relative-caret-position="96">
+              <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
               <folding>
                 <element signature="e#622#628#0" expanded="true" />
                 <element signature="e#628#634#0" expanded="true" />
@@ -208,25 +205,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CircleMenu.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/node_modules/vue-circle-menu/dist/CircleMenu.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="124" column="28" selection-start-line="124" selection-start-column="18" selection-end-line="124" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="wxshare.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
+            <state relative-caret-position="336">
+              <caret line="50" column="36" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
               <folding>
                 <element signature="n#template#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#!!top" expanded="false" />
-                <marker date="1495594107000" expanded="true" signature="228:236" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -235,30 +221,19 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/router/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
+            <state relative-caret-position="-72">
               <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-              <folding>
-                <marker date="1495594107000" expanded="false" signature="7:53" ph="..." />
-                <marker date="1495594107000" expanded="true" signature="71:1249" ph="//..." />
-                <marker date="1495594107000" expanded="true" signature="1276:3169" ph="{...}" />
-                <marker date="1495594107000" expanded="true" signature="1322:3167" ph="[...]" />
-                <marker date="1495594107000" expanded="true" signature="1338:1404" ph="{&quot;path&quot;: '/'...}" />
-                <marker date="1495594107000" expanded="true" signature="1422:1507" ph="{&quot;path&quot;: '/jingmo'...}" />
-                <marker date="1495594107000" expanded="true" signature="1529:1620" ph="{&quot;path&quot;: '/shopList'...}" />
-                <marker date="1495594107000" expanded="true" signature="1637:1723" ph="{&quot;path&quot;: '/erweima'...}" />
-                <marker date="1495594107000" expanded="true" signature="1739:1827" ph="{&quot;path&quot;: '/share'...}" />
-                <marker date="1495594107000" expanded="true" signature="1844:1938" ph="{&quot;path&quot;: '/inviteNum'...}" />
-                <marker date="1495594107000" expanded="true" signature="1954:2036" ph="{&quot;path&quot;: '/index'...}" />
-                <marker date="1495594107000" expanded="true" signature="2054:2148" ph="{&quot;path&quot;: '/orderList'...}" />
-                <marker date="1495594107000" expanded="true" signature="2166:2266" ph="{&quot;path&quot;: '/orderDetail'...}" />
-                <marker date="1495594107000" expanded="true" signature="2284:2372" ph="{&quot;path&quot;: '/addList'...}" />
-                <marker date="1495594107000" expanded="true" signature="2394:2479" ph="{&quot;path&quot;: '/addNew'...}" />
-                <marker date="1495594107000" expanded="true" signature="2497:2594" ph="{&quot;path&quot;: '/shopDetail'...}" />
-                <marker date="1495594107000" expanded="true" signature="2612:2712" ph="{&quot;path&quot;: '/submitOrder'...}" />
-                <marker date="1495594107000" expanded="true" signature="2730:2827" ph="{&quot;path&quot;: '/remark'...}" />
-                <marker date="1495594107000" expanded="true" signature="2845:2945" ph="{&quot;path&quot;: '/invoice'...}" />
-                <marker date="1495594107000" expanded="true" signature="2963:3163" ph="{&quot;path&quot;: '/submitPay'...}" />
-              </folding>
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="redlist.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/redList/redlist.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -280,7 +255,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/views/shopDetail.vue" />
         <option value="$PROJECT_DIR$/src/weixin/zhengchang.vue" />
         <option value="$PROJECT_DIR$/src/weixin/zhengchang1.vue" />
         <option value="$PROJECT_DIR$/src/weixin/jingmo1.vue" />
@@ -327,10 +301,11 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/src/components/wxshare.vue" />
         <option value="$PROJECT_DIR$/src/pages/jingmo/jingmo.vue" />
         <option value="$PROJECT_DIR$/src/pages/shopList/shopList.vue" />
         <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
+        <option value="$PROJECT_DIR$/src/components/wxshare.vue" />
+        <option value="$PROJECT_DIR$/src/pages/redList/redlist.vue" />
       </list>
     </option>
   </component>
@@ -611,6 +586,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VAOrderH5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VAOrderH5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="redList" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -985,18 +982,18 @@
       <workItem from="1495345230827" duration="38760000" />
       <workItem from="1495429703991" duration="3567000" />
       <workItem from="1495436401298" duration="11912000" />
-      <workItem from="1495589802828" duration="3618000" />
+      <workItem from="1495589802828" duration="3919000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1398685000" />
+    <option name="totallyTimeSpent" value="1398986000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16067654" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10147992" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1072,11 +1069,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/assets/hongbao@2x.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/jiantou@2x.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1518,35 +1510,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-          <folding>
-            <marker date="1495594107000" expanded="false" signature="7:53" ph="..." />
-            <marker date="1495594107000" expanded="true" signature="71:1249" ph="//..." />
-            <marker date="1495594107000" expanded="true" signature="1276:3169" ph="{...}" />
-            <marker date="1495594107000" expanded="true" signature="1322:3167" ph="[...]" />
-            <marker date="1495594107000" expanded="true" signature="1338:1404" ph="{&quot;path&quot;: '/'...}" />
-            <marker date="1495594107000" expanded="true" signature="1422:1507" ph="{&quot;path&quot;: '/jingmo'...}" />
-            <marker date="1495594107000" expanded="true" signature="1529:1620" ph="{&quot;path&quot;: '/shopList'...}" />
-            <marker date="1495594107000" expanded="true" signature="1637:1723" ph="{&quot;path&quot;: '/erweima'...}" />
-            <marker date="1495594107000" expanded="true" signature="1739:1827" ph="{&quot;path&quot;: '/share'...}" />
-            <marker date="1495594107000" expanded="true" signature="1844:1938" ph="{&quot;path&quot;: '/inviteNum'...}" />
-            <marker date="1495594107000" expanded="true" signature="1954:2036" ph="{&quot;path&quot;: '/index'...}" />
-            <marker date="1495594107000" expanded="true" signature="2054:2148" ph="{&quot;path&quot;: '/orderList'...}" />
-            <marker date="1495594107000" expanded="true" signature="2166:2266" ph="{&quot;path&quot;: '/orderDetail'...}" />
-            <marker date="1495594107000" expanded="true" signature="2284:2372" ph="{&quot;path&quot;: '/addList'...}" />
-            <marker date="1495594107000" expanded="true" signature="2394:2479" ph="{&quot;path&quot;: '/addNew'...}" />
-            <marker date="1495594107000" expanded="true" signature="2497:2594" ph="{&quot;path&quot;: '/shopDetail'...}" />
-            <marker date="1495594107000" expanded="true" signature="2612:2712" ph="{&quot;path&quot;: '/submitOrder'...}" />
-            <marker date="1495594107000" expanded="true" signature="2730:2827" ph="{&quot;path&quot;: '/remark'...}" />
-            <marker date="1495594107000" expanded="true" signature="2845:2945" ph="{&quot;path&quot;: '/invoice'...}" />
-            <marker date="1495594107000" expanded="true" signature="2963:3163" ph="{&quot;path&quot;: '/submitPay'...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
@@ -1806,18 +1769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
-          <folding>
-            <element signature="n#template#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-            <marker date="1495594107000" expanded="true" signature="228:236" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/vue-circle-menu/dist/CircleMenu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="258">
@@ -1844,13 +1795,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/shopList/shopList.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1200">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
+        <state relative-caret-position="96">
+          <caret line="61" column="7" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
           <folding>
             <element signature="e#622#628#0" expanded="true" />
             <element signature="e#628#634#0" expanded="true" />
             <element signature="e#1479#1485#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-72">
+          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/wxshare.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="50" column="36" selection-start-line="50" selection-start-column="36" selection-end-line="50" selection-end-column="36" />
+          <folding>
+            <element signature="n#template#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/redList/redlist.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
