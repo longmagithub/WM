@@ -112,10 +112,8 @@
         this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            //  this.isAjax = true
             if (res.data.length > 0) {
               if (lon > 0 && lat > 0) { // 经纬度获取成功
-                // window.alert("shopId" + shopId)
                 this.goIndex(res.data[0].shopId)
                 return
               }
