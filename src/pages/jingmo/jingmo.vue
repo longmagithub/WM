@@ -1,7 +1,7 @@
 <template>
 </template>
 <script>
-  import {urlParse, setStore} from '../../common/utils/util'
+  import {urlParse} from '../../common/utils/util'
   //  import wxshare from '../../components/wxshare.vue'
   export default {
     data () {
@@ -31,8 +31,7 @@
           res = res.data
           if (res.success) {
             this.customerId = res.data.customerId
-            this.getLocation()
-//            this.getShopList(res.data.customerId)
+            this.getShopList(res.data.customerId)
           }
         })
       }
@@ -46,7 +45,7 @@
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
-      goIndex(custId) {
+      getShopList(custId) {
         window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?customerId=' + custId + '&t=' + Date.parse(new Date()))
 //        this.$router.replace({
 //          path: '/index',
@@ -54,33 +53,7 @@
 //            customerId: id
 //          }
 //        })
-      },
-      // 原生获取地理位置
-      getLocation() {
-        window.alert('获取地理位置')
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition((res) => {
-            this.location.longitude = res.coords.longitude
-            this.location.latitude = res.coords.latitude
-            let longitude = res.coords.longitude // 经度
-            let latitude = res.coords.latitude // 纬度
-            window.alert(longitude)
-            window.alert(latitude)
-            setStore('userLocation', this.location)
-            this.goIndex(this.customerId)
-          }, (err) => {
-            this.goIndex(this.customerId)
-            console.log(err)
-          })
-        } else {
-          this.isAjax = false
-          window.alert('无法获取到您的地理定位')
-        }
       }
     }
-//    ,
-//    components: {
-//      wxshare
-//    }
   }
 </script>
