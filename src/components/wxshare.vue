@@ -10,15 +10,18 @@
       }
     },
     created() {
-      this.setShareConfig()
+      //this.setShareConfig()
 //      this.getBaiDuMap()
+    }, 
+    mounted() {
+      this.setShareConfig()
     },
     methods: {
       setShareConfig() {
         let that = this
         let url = window.location.href.split('#')[0]
-        window.alert('下面是URL')
-        window.alert(url)
+        //window.alert('下面是URL')
+        //window.alert(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
           res = res.data
           if (res.success) {
