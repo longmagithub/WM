@@ -17,10 +17,6 @@
     },
     methods: {
       setShareConfig() {
-      //  let that = this
-      //  let url = window.location.href.split('#')[0]
-        //window.alert('下面是URL')
-        //window.alert(url)
         let that = this
         let url = window.location.href.split('#')[0]
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {

@@ -47,7 +47,6 @@
 </template>
 
 <script>
-  import {getStore} from '../../common/utils/util'
   //  import {getStore} from '../../common/utils/util'
   //  import {urlParse} from '../../common/utils/util'
   export default {
@@ -59,26 +58,17 @@
         itemShopList: {},
         thirdDiscounts: [], // 其他平台
         duration: [],  // uxwm平台
-      //  isAjax: false, // 判断ajax是否成功
-        latLon: [],
-      //  location: {}
+        latLon: []
       }
     },
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
-      this.getLocation() 
-    //  this.getShopList(this.customerId)
-    //  this.location = getStore('userLocation')
-    //  console.log(this.location)
-//      this.getLocation(this.location)
       this.getLocation()
     },
     methods: {
       // 原生获取地理位置
       getLocation() {
-      //  window.alert('获取地理位置')
-        console.log('12311231312434342324243')
 //        window.alert('获取地理位置000000')
 //        console.log('12311231312434342324243')
         if (navigator.geolocation) {
@@ -87,9 +77,8 @@
             let coords = location.coords
             let longitude = coords.longitude // 经度
             let latitude = coords.latitude // 纬度
-            this.getShopList(this.customerId,longitude,latitude)              
-          //window.alert(latitude)
-          },(error) => {
+            this.getShopList(this.customerId, longitude, latitude)
+          }, (error) => {
             switch (error.code) {
               case error.PERMISSION_DENIED:
 //                window.alert('定位失败,用户拒绝请求地理定位11111')
@@ -107,53 +96,9 @@
             this.getShopList(this.customerId, 0, 0)
           })
         } else {
-          window.alert('无法获取到您的地理定位') 
-        } 
-      },
-      // 请求门店列表
-      getShopList(id,longitude,latitude) {
-        const data = {
-          customerId: id,
-          pageSize: 30,
-          pageNumber: 1,
-          longitude: longitude, // 经度
-          latitude: latitude, // 维度
-          discounts: [], // uxwm 满减
-          thirdDiscounts: [] // 其他平台满减
+//          window.alert('无法获取到您的地理定位55555')
         }
-        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          if (res.success) {
-          //  this.isAjax = true
-            let shopId="";
-            res.data.forEach((data) => {
-              if(shopId===""){
-                shopId = data.shopId;
-              }
-              data.discounts = data.discounts.reverse()
-              data.thirdDiscounts = data.thirdDiscounts.reverse()
-              // 添加 图片分割
-              if (data.logo) {
-                data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
-              }
-              this.shopList.push(data)
-//              if (this.isAjax) {
-              //this.getBaiDuMap(this.location)
-//              }
-            })
-            console.log(this.shopList)
-            if(longitude>0&&latitude>0){
-            //window.alert("shopId" + shopId)
-            this.goIndex(shopId)
-            }
-          } 
-          // else {
-          //   this.isAjax = false
-          // }
-        })
       },
-      //   }
-      // },
       // 请求门店列表
       getShopList(id, lon, lat) {
         const data = {
@@ -203,17 +148,6 @@
       closeToast() {
         this.shopListShow = false
       },
-      // 去结算
-      gotopay() {
-        setStore('userPrice', [this.totalPack, 0, this.allPrice])
-        this.$router.push({
-          path: '/submitOrder',
-          query: {
-            shopId: this.shopId,
-            customerId: this.customerId
-          }
-        })
-      },
       // 去首页
       goIndex(id) {
 //        window.location.href =
@@ -227,7 +161,7 @@
         })
       }
     }
-  }  
+  }
 </script>
 <style>
   .shopList {

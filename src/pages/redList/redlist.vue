@@ -3,7 +3,7 @@
 		<header class="redlist-header">
 			<div class="red-tab"><span class="red-name" :class="{'finish': showIndex === 0}" @click="getShow(0)">可用红包</span></div>
 			<div class="red-tab"><span class="red-name" :class="{'finish': showIndex === 1}" @click="getShow(1)">过期红包</span></div>
-		</header><!-- /header -->
+		</header>
 		<section>
 	  	<ul class="use-packet" v-show="showIndex === 0">
 	  		<li class="packet-list" v-fo :class="{'finish': showIndex === 1}" v-for="item in redList.redpackets">
@@ -15,7 +15,7 @@
 	  				<p>￥{{item.price/100}}</p>
 	  			</div>
 	  		</li>
-	  		<li class="red-footer">
+	  		<li class="footer">
 	  			<p>没有更多了 ~ </p>
 	  		</li>
 	  	</ul>
@@ -30,7 +30,7 @@
 	  				<p>￥{{item.price/100}}</p>
 	  			</div>
 	  		</li>
-	  		<li class="red-footer">
+	  		<li class="footer">
 	  			<p>没有更多了 ~ </p>
 	  		</li>
 	  	</ul>
@@ -45,20 +45,26 @@ export default {
 			showIndex: 0,
 			shopId: '',
 			customerId: ''
+			// tabs: [
+			// 	{
+			// 		'title':'可用红包'
+			// 	},
+			// 	{
+			// 		'title':'过期红包'
+			// 	}
+			// ]
 		}
 	},
 	created() {
 		this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
 		this.customerId = this.$route.query.customerId ? this.$route.query.customerId : ''
 		this.getRedList()
-		this.getRedPacket()
 	},
 	methods: {
-		// 控制红包页面切换
+		//控制红包页面切换
 		getShow(i) {
 			this.showIndex = i
 		},
-		// 获取所有红包
 		getRedList() {
 			const data = {
 				shopId: this.shopId,
@@ -72,22 +78,7 @@ export default {
 					console.log(this.redList)
 				}
 			})
-		},
-		// 获取对应类型红包
-		getRedPacket(){
-			const data ={
-				shopId: this.shopId,
-				sessionId: this.customerId,
-				type: 1
-			}
-			this.axios.get(`br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
-				res = res.data
-				if(res.success){
-					this.redList = res.data
-					console.log(this.redList)
-				}
-			})
-		}
+		}	
 	}
 }
 </script>
@@ -136,7 +127,7 @@ export default {
 		padding-left:26px;
 		padding-right:10px;
 		margin-bottom:22px;
-		background:url('Group@2x.png') no-repeat;
+		background:url('../../assets/Group@2x.png') no-repeat;
 		background-size:336px 83px;
 	}
 	.redList section .use-packet .packet-list .redMessage{
@@ -183,7 +174,7 @@ export default {
 		padding-right:10px;
 		padding-bottom:11px;
 		margin-bottom:22px;
-		background:url('Group@2x.png') no-repeat;
+		background:url('../../assets/Group@2x.png') no-repeat;
 		background-size:336px 83px;
 	}
 	.redList section .old-packet .packet-list .redMessage{
@@ -254,13 +245,12 @@ export default {
 		float:left;
 		padding-top:6px;
 	}*/
-	.red-footer{
+
+	.footer{
 		width:100%;
 		text-align:center;
 	}
-	.red-footer p{
+	.footer p{
 		color:rgba(119,119,119,1);
 	}
 </style>
-
-
