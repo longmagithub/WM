@@ -8,7 +8,7 @@
     </header>
     <section>
       <ul class="use-packet" v-show="showIndex === 0">
-        <li class="packet-list" v-fo :class="{'finish': showIndex === 1}" v-for="item in redList.redpackets">
+        <li class="packet-list" v-for :class="{'finish': showIndex === 1}" v-for="item in redList.redpackets">
           <div class="redMessage">
             <p class="redName">{{item.name}}</p>
             <p class="redTime">{{item.useTime}}</p>
