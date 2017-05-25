@@ -4,9 +4,9 @@
     <div class="index-box">
       <div class="header" ref="header">
         <div class="title-name" @click="switchShop">{{shopDetail.name}}<i class="down-sanjian"
-                                                                          v-if="0"></i></div>
-        <div class="shopList" v-show="0">
-          <!--<div class="shopList" v-show="shopListShow">-->
+                                                                          v-if="!shopListShow"></i></div>
+        <!--<div class="shopList" v-show="0">-->
+        <div class="shopList" v-show="shopListShow">
           <ul>
             <li class="shopLsit-item"
                 v-for="(item,index) in shopListArr"
@@ -130,11 +130,6 @@
       // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
-      this.shopListArr = getStore('shopList')
-//      console.log('+++++++++++++++++++++++++++++++++++')
-      // 百度地址
-//      this.getBaiDuMap()
-      // 红包信息
       this.getRedEnvelope()
       // 商家信息
       this.getShopDetail()
@@ -142,54 +137,46 @@
       this.getFreedispatch()
       // 红包提示语
       this.getBoonMeg()
+      // 测试shoplist
+      this.testShopList(this.customerId, 0, 0)
     },
     computed: {
       // 检测 vuex 中boonPrice
-      ...mapState(['boonPrice']),
+      ...mapState(['boonPrice', 'cartList']),
       initHeight() {
         this.headerHeight = this.$refs.header
       }
     },
     methods: {
       // 红包
-      ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE', 'CLEAR_CART']),
-      // 百度地址算位置
-      getBaiDuMap(res) {
-        let location = []
-        this.shopListArr.forEach((item) => {
-          this.latLon += item.latitudeB + ',' + item.longitudeB + '|'
-        })
-        this.latLon = this.latLon.slice(9, -1)
-//        this.latLon = this.latLon.slice()
-        console.log(this.latLon)
-        window.alert('________----------___________------______-------__')
+      ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE', 'CLEAR_CART', 'INIT_BUYCART']),
+      // 测试shopList
+      testShopList(id, lon, lat) {
         const data = {
-          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
-          output: 'json', // 输出的数据类型
-//          origins: res.latitude + ',' + res.longitude, // 起点：维度，经度
-          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
-          destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
-          coord_type: 'gcj02' // 坐标类型
+          customerId: id,
+          pageSize: 30,
+          pageNumber: 1,
+          longitude: lon, // 经度
+          latitude: lat, // 维度
+          discounts: [], // uxwm 满减
+          thirdDiscounts: [] // 其他平台满减
         }
-        console.log(data)
-        this.$http.jsonp(`http://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+        this.axios.get(`/br/shop/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
-          window.alert(res.message)
-          res.result.forEach((item, index) => {
-            item.flag = index
-            this.shopListArr[index].location = item
-            location.push(item)
-          })
-          for (let i = 0; i < this.shopListArr.length; i++) {
-            for (let j = i; j < this.shopListArr.length; j++) {
-              if (this.shopListArr[i].location.distance.value > this.shopListArr[j].location.distance.value) {
-                let temp = this.shopListArr[i]
-                this.shopListArr[i] = this.shopListArr[j]
-                this.shopListArr[j] = temp
-              }
+          if (res.success) {
+            if (res.data.length > 0) {
+              res.data.forEach((data) => {
+                data.discounts = data.discounts.reverse()
+                data.thirdDiscounts = data.thirdDiscounts.reverse()
+                // 添加 图片分割
+                if (data.logo) {
+                  data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+                }
+              })
+              this.shopListArr = res.data
+              console.log(this.shopListArr)
             }
           }
-          setStore('shopList', this.shopListArr)
         })
       },
       // 商家信息
@@ -265,7 +252,7 @@
         this.shopListShow = !this.shopListShow
         this.shopId = item.shopId
         this.$router.push({
-          path: '/index',
+          path: '/loading',
           query: {
             shopId: item.shopId,
             customerId: getStore('userInfo').customerId
@@ -275,12 +262,11 @@
 //          '&shopId=' + item.shopId + '&t=' + Date.parse(new Date())
       },
       switchShop() {
-        return
-//        if (this.shopListArr === null) {
-//          return
-//        } else {
-//          this.shopListShow = !this.shopListShow
-//        }
+        if (this.shopListArr === null) {
+          return
+        } else {
+          this.shopListShow = !this.shopListShow
+        }
       },
       // 去用户详情
       goSeller() {
@@ -350,33 +336,41 @@
         }
       }
     },
-//    watch: {
-//      shopId: function (value) {
-//        // 调试代码 提交时注释
-//        setStore('userInfo', {
-//          'customerId': this.$route.query.customerId,
-//          'shopId': this.$route.query.shopId
-//        })
-//        setStore('openId', {
-//          'customerId': this.$route.query.customerId,
-//          'shopId': this.$route.query.shopId
-//        })
-//        // ↑↑↑↑↑调试带代码↑↑↑↑
-//        this.shopId = getStore('userInfo').shopId
-//        this.customerId = getStore('userInfo').customerId
-//        this.shopListArr = getStore('shopList')
-//        this.CLEAR_CART(this.shopId)
+    watch: {
+      shopId: function (value) {
+        console.log(this.shopId)
+        console.log('我是shopid啊：' + value)
+        // 调试代码 提交时注释
+        setStore('userInfo', {
+          'customerId': this.$route.query.customerId,
+          'shopId': value
+        })
+        setStore('openId', {
+          'customerId': this.$route.query.customerId,
+          'shopId': value
+        })
+        // ↑↑↑↑↑调试带代码↑↑↑↑
+//        console.log(JSON.stringify(this.cartList))
+//        console.log('________--------_______------vuex里面的数据 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑')
+        this.customerId = getStore('userInfo').customerId
+        this.shopListArr = getStore('shopList')
+        this.CLEAR_CART(value)
 //        removeStore('buyCart')
-//        // 红包信息
-//        this.getRedEnvelope()
-//        // 商家信息
-//        this.getShopDetail()
-//        // 免配送费
-//        this.getFreedispatch()
-//        // 红包提示语
-//        this.getBoonMeg()
-//      }
-//    },
+        // 红包信息
+        this.getRedEnvelope()
+        // 商家信息
+        this.getShopDetail()
+        // 免配送费
+        this.getFreedispatch()
+        // 红包提示语
+        this.getBoonMeg()
+        // 测试shoplist
+        this.testShopList(this.customerId, 0, 0)
+      }
+    },
+    updared() {
+      console.log('虚拟dom更新')
+    },
     components: {
       wxshare,
       goods,

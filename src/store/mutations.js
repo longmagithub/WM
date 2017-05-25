@@ -47,28 +47,35 @@ export default {
     remainQuantity, // 爆款库存
     userCount // 用户可以点多少
   }) {
+    // console.log('++++++++++++==============+')
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
-      if (dishTypeStyle === 1) { // 如果是爆款
+      // console.log('购物车shopID：' + shopid)
+      console.log('_____----111111----______')
+      if (cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] === 1) { // 如果是爆款
         if (cart[shopid][categoryId][itemId][foodId]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
           cart[shopid][categoryId][itemId][foodId]['overflowNum']++
           cart[shopid][categoryId][itemId][foodId]['num']++
+          console.log('1-1')
         } else if (cart[shopid][categoryId][itemId][foodId]['num'] < userCount) { // 如果没有超出 增加 num 和 limitNum
           cart[shopid][categoryId][itemId][foodId]['limitNum']++
           cart[shopid][categoryId][itemId][foodId]['num']++
+          console.log('1-2')
         } else if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) { // 本命默认是1 === 都不用加了 只是 num
           cart[shopid][categoryId][itemId][foodId]['num']++
           cart[shopid][categoryId][itemId][foodId]['overflowNum']++
+          console.log('1-3')
         }
       }
-      if (dishTypeStyle === 0) { // 非爆款
+      if (cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] === 0) { // 非爆款
         if (cart[shopid][categoryId][itemId][foodId]['limitCount'] === userCount) { // 如果没有超出 增加 num 和 limitNum
+          console.log('2-1')
           cart[shopid][categoryId][itemId][foodId]['overflowNum']++
           cart[shopid][categoryId][itemId][foodId]['num']++
         }
       }
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
-      // console.log(2)
+      console.log('_____----222222----______')
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
       cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
@@ -83,7 +90,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
     } else if (cart[shopid] && cart[shopid][categoryId]) {
-      // console.log(3)
+      console.log('_____----33333----______')
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId]['num'] = 1
@@ -100,7 +107,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
       cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
     } else if (cart[shopid]) {
-      // console.log(4)
+      console.log('_____----44444----______')
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -118,7 +125,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
       cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
     } else {
-      // console.log(5)
+      console.log('_____----666666----______')
       cart[shopid] = {}
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
@@ -141,6 +148,13 @@ export default {
     state.cartList = Object.assign({}, cart)
     // 存入localStorage
     setStore('buyCart', state.cartList)
+    // setStoere("buycart"+shopid,cart)
+    // var cart={
+    //
+    //   category{ id:,num:}
+    //   item{id:,num:}
+    //   foods:{id,num}
+    // }
   },
   // 移出购物车
   [REDUCE_CART](state, {
