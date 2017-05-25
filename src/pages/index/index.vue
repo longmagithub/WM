@@ -4,16 +4,16 @@
     <div class="index-box">
       <div class="header" ref="header">
         <div class="title-name" @click="switchShop">{{shopDetail.name}}<i class="down-sanjian"
-                                                                          v-if="!shopListShow"></i></div>
+                                                                          v-if="0"></i></div>
         <!--<div class="shopList" v-show="0">-->
-        <div class="shopList" v-show="shopListShow">
-          <ul>
-            <li class="shopLsit-item"
-                v-for="(item,index) in shopListArr"
-                @click="changeShop(item)">
-              <span class="item-text">{{item.shopName}}</span></li>
-          </ul>
-        </div>
+        <!--<div class="shopList" v-show="shopListShow">-->
+        <!--<ul>-->
+        <!--<li class="shopLsit-item"-->
+        <!--v-for="(item,index) in shopListArr"-->
+        <!--@click="changeShop(item)">-->
+        <!--<span class="item-text">{{item.shopName}}</span></li>-->
+        <!--</ul>-->
+        <!--</div>-->
         <div class="shopListTost" v-show="shopListShow" @click="switchShop"></div>
         <div class="content-wrapper"
              @click="goSeller">
@@ -49,13 +49,14 @@
             class="circle_menu_box"
             type="bottom"
             circle="circleMenu.circle"
-            :number="2"
+            :number="3"
             mask="white"
             colors="circleMenu.colors">
             <div class="circle-menu"
                  slot="item_btn"></div>
             <span slot="item_1" @click="goUser" class="orderList">订单</span>
             <span slot="item_2" @click="goInviteNum" class="">邀请码</span>
+            <span slot="item_3" @click="goredList" class="">红包</span>
           </circle-menu>
         </div>
       </div>
@@ -117,8 +118,6 @@
       }
     },
     created() {
-      console.log(this)
-      // 调试代码 提交时注释
       setStore('userInfo', {
         'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
@@ -127,7 +126,6 @@
         'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
-      // ↑↑↑↑↑调试带代码↑↑↑↑
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.getRedEnvelope()
@@ -138,7 +136,7 @@
       // 红包提示语
       this.getBoonMeg()
       // 测试shoplist
-      this.testShopList(this.customerId, 0, 0)
+      // this.testShopList(this.customerId, 0, 0)
     },
     computed: {
       // 检测 vuex 中boonPrice
@@ -261,12 +259,14 @@
 //        window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId +
 //          '&shopId=' + item.shopId + '&t=' + Date.parse(new Date())
       },
+      // 切换门店 遮盖
       switchShop() {
-        if (this.shopListArr === null) {
-          return
-        } else {
-          this.shopListShow = !this.shopListShow
-        }
+        return
+//        if (this.shopListArr === null) {
+//          return
+//        } else {
+//          this.shopListShow = !this.shopListShow
+//        }
       },
       // 去用户详情
       goSeller() {
@@ -284,7 +284,17 @@
           path: '/orderList',
           query: {
             shopId: this.shopId,
-            sessionId: this.customerId
+            sessionId: getStore('userInfo').customerId
+          }
+        })
+      },
+      // 去红包列表
+      goredList() {
+        this.$router.push({
+          path: '/redlist',
+          query: {
+            shopId: this.shopId,
+            customerId: getStore('userInfo').customerId
           }
         })
       },
@@ -304,7 +314,7 @@
           path: '/inviteNum',
           query: {
             shopId: this.shopId,
-            sessionId: this.customerId
+            sessionId: getStore('userInfo').customerId
           }
         })
       },
@@ -336,41 +346,35 @@
         }
       }
     },
-    watch: {
-      shopId: function (value) {
-        console.log(this.shopId)
-        console.log('我是shopid啊：' + value)
-        // 调试代码 提交时注释
-        setStore('userInfo', {
-          'customerId': this.$route.query.customerId,
-          'shopId': value
-        })
-        setStore('openId', {
-          'customerId': this.$route.query.customerId,
-          'shopId': value
-        })
-        // ↑↑↑↑↑调试带代码↑↑↑↑
-//        console.log(JSON.stringify(this.cartList))
-//        console.log('________--------_______------vuex里面的数据 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑')
-        this.customerId = getStore('userInfo').customerId
-        this.shopListArr = getStore('shopList')
-        this.CLEAR_CART(value)
-//        removeStore('buyCart')
-        // 红包信息
-        this.getRedEnvelope()
-        // 商家信息
-        this.getShopDetail()
-        // 免配送费
-        this.getFreedispatch()
-        // 红包提示语
-        this.getBoonMeg()
-        // 测试shoplist
-        this.testShopList(this.customerId, 0, 0)
-      }
-    },
-    updared() {
-      console.log('虚拟dom更新')
-    },
+//    watch: {
+//      shopId: function (value) {
+//        // 调试代码 提交时注释
+//        setStore('userInfo', {
+//          'customerId': this.$route.query.customerId,
+//          'shopId': value
+//        })
+//        setStore('openId', {
+//          'customerId': this.$route.query.customerId,
+//          'shopId': value
+//        })
+//        this.customerId = getStore('userInfo').customerId
+//        this.shopListArr = getStore('shopList')
+//        this.CLEAR_CART(value)
+//        // 红包信息
+//        this.getRedEnvelope()
+//        // 商家信息
+//        this.getShopDetail()
+//        // 免配送费
+//        this.getFreedispatch()
+//        // 红包提示语
+//        this.getBoonMeg()
+//        // 测试shoplist
+//        this.testShopList(this.customerId, 0, 0)
+//      }
+//    },
+//    updared() {
+//      console.log('虚拟dom更新')
+//    },
     components: {
       wxshare,
       goods,

@@ -81,7 +81,7 @@
       this.getReverTime()
     },
     methods: {
-      // 判断code
+      // 判断code 从公号模板入口开启
       isCode() {
         let url = window.location.href
         if (getStore('openId') === null) {
@@ -140,6 +140,7 @@
         this.dataStatus = '加载中...'
         const data = {
           sessionId: id,
+          shopId: this.shopId,
           pageSize: this.pageSize,
           pageIndex: this.pageIndex
         }
