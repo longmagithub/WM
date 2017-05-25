@@ -67,9 +67,10 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="isCloseBoon" @click="closeBoon">
-      <!--<div class="boon" v-show="1" @click="closeBoon">-->
+    <div class="boon" v-show="isCloseBoon">
+      <!--<div class="boon" v-show="1">-->
       <div class="backImg">
+        <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
         <div class="textContent">
           <p class="price">{{IndexboonPrice}}<i class="yuanIcon"></i></p>
@@ -321,7 +322,7 @@
       // 改变红包btn 内容
       toogleBoonBtn() {
         this.toogleBoonBtnText = '右上角你懂得'
-        this.toogleBoonBtnClass = true
+//        this.toogleBoonBtnClass = true
       },
       // 红包提示语
       getBoonMeg() {
@@ -457,6 +458,16 @@
     height: 374px;
     background: url("../../assets/hongbao@2x.png") no-repeat center;
     background-size: 288px 374px;
+  }
+
+  .boon .backImg .closeBoon {
+    position: absolute;
+    top: -10px;
+    right: 0px;
+    display: block;
+    width: 80px;
+    height: 60px;
+    /*border: 1px solid #fff;*/
   }
 
   .boon .backImg .boonDesc {

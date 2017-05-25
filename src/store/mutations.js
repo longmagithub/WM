@@ -72,6 +72,8 @@ export default {
           console.log('2-1')
           cart[shopid][categoryId][itemId][foodId]['overflowNum']++
           cart[shopid][categoryId][itemId][foodId]['num']++
+        } else {
+          cart[shopid][categoryId][itemId][foodId]['num']++
         }
       }
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {

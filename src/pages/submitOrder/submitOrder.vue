@@ -304,66 +304,6 @@
             while (flagTimeS < this.endTime)
             this.options = this.options.concat(flagTimeSArr)
           }
-//          this.options = this.options.concat(timeArr)
-//          timeArr.forEach(item => {
-//            console.log(new Date(item))
-//          })
-//          console.log(timeArr)
-//          if (i === 0) {
-//            let orderTaP = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-//              this.shopInfo.dispatching.duration + 15)
-//            let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-//              this.shopInfo.dispatching.duration + 15))
-//            // 开始第一次时间
-//            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-//            if (oneTimeIndex === 0) {
-//              timeArr.push(new Date(orderTaP).setMinutes(15))
-//            } else if (oneTimeIndex === 1) {
-//              timeArr.push(new Date(orderTaP).setMinutes(30))
-//            } else if (oneTimeIndex === 2) {
-//              timeArr.push(new Date(orderTaP).setMinutes(45))
-//            } else if (oneTimeIndex === 3) {
-//              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
-//            }
-//          } else if (i === 1) {
-//            let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-//              15)
-//            let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-//              15))
-//            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-//            if (oneTimeIndex === 0) {
-//              timeArr.push(new Date(orderTaP).setMinutes(15))
-//            } else if (oneTimeIndex === 1) {
-//              timeArr.push(new Date(orderTaP).setMinutes(30))
-//            } else if (oneTimeIndex === 2) {
-//              timeArr.push(new Date(orderTaP).setMinutes(45))
-//            } else if (oneTimeIndex === 3) {
-//              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
-//            }
-//          } else if (i === 3) {
-//            let orderTaP = new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-//              15)
-//            let onceTime = new Date(new Date(this.beginTime).setMinutes(new Date(this.beginTime).getMinutes() +
-//              15))
-//            // 开始第一次时间
-//            let oneTimeIndex = Math.floor(onceTime.getMinutes() / 15)
-//            if (oneTimeIndex === 0) {
-//              timeArr.push(new Date(orderTaP).setMinutes(15))
-//            } else if (oneTimeIndex === 1) {
-//              timeArr.push(new Date(orderTaP).setMinutes(30))
-//            } else if (oneTimeIndex === 2) {
-//              timeArr.push(new Date(orderTaP).setMinutes(45))
-//            } else if (oneTimeIndex === 3) {
-//              timeArr.push(new Date(new Date(orderTaP).setUTCMinutes(0)).setHours(new Date(orderTaP).getHours() + 1))
-//            }
-//          }
-//          let oncTime = timeArr[0]
-//          do {
-//            timeArr.push(oncTime += 900000)
-//          }
-//          while (oncTime < this.endTime)
-//          this.options = this.options.concat(timeArr)
-//          console.log(JSON.stringify(timeArr))
         }
       },
       // 优惠列表查询
