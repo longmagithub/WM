@@ -51,12 +51,14 @@ export default {
 		this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
 		this.customerId = this.$route.query.customerId ? this.$route.query.customerId : ''
 		this.getRedList()
+		this.getRedPacket()
 	},
 	methods: {
-		//控制红包页面切换
+		// 控制红包页面切换
 		getShow(i) {
 			this.showIndex = i
 		},
+		// 获取所有红包
 		getRedList() {
 			const data = {
 				shopId: this.shopId,
@@ -70,7 +72,22 @@ export default {
 					console.log(this.redList)
 				}
 			})
-		}	
+		},
+		// 获取对应类型红包
+		getRedPacket(){
+			const data ={
+				shopId: this.shopId,
+				sessionId: this.customerId,
+				type: 1
+			}
+			this.axios.get(`br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
+				res = res.data
+				if(res.success){
+					this.redList = res.data
+					console.log(this.redList)
+				}
+			})
+		}
 	}
 }
 </script>
