@@ -73,7 +73,7 @@ export default {
 			}
 			this.axios.get(`/br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
 				res = res.data
-				if(res.success){
+				if(res.success) {
 					this.redList = res.data
 					console.log(this.redList)
 				}
@@ -88,130 +88,130 @@ export default {
 		border-bottom:3px solid rgba(255,101,81,1);
 	}
 	.redlist-header{
-		display:flex;
-		width:100%;
-		height:43px;
-		line-height:43px;
-		background:#fff;
+		display: flex;
+		width: 100%;
+		height: 43px;
+		line-height: 43px;
+		background: #fff;
 	}
 	.redlist-header .red-tab{
-		flex:1;
-		text-align:center;
-		font-size:13px;	
-		text-align:center;
+		flex: 1;
+		text-align: center;
+		font-size: 13px;	
+		text-align: center;
 	}
 	.redlist-header .red-tab .red-name{
-		display:inline-block;
-		width:58px;
-		height:20px;
-		line-height:18px;
-		color:#ccc;
+		display: inline-block;
+		width: 58px;
+		height: 20px;
+		line-height: 18px;
+		color: #ccc;
 	}
 	.redList section{
-		display:flex;
-		margin-top:22px;
-		background:rgba(244,244,244,1);
+		display: flex;
+		margin-top: 22px;
+		background: rgba(244,244,244,1);
 		padding:0 20px;
-		position:relative;
+		position: relative;
 	}
 	.redList section .use-packet{
-		width:336px;	
+		width: 336px;	
 		justify-content: center;
 		align-content: center;
-		display:block;
+		display: block;
 	}
 	.redList section .use-packet .packet-list{
-		width:302px;
-		height:63px;
-		padding-top:20px;
-		padding-left:26px;
-		padding-right:10px;
-		margin-bottom:22px;
-		background:url('../../assets/Group@2x.png') no-repeat;
-		background-size:336px 83px;
+		width: 302px;
+		height: 63px;
+		padding-top: 20px;
+		padding-left: 26px;
+		padding-right: 10px;
+		margin-bottom: 22px;
+		background: url('../../assets/Group@2x.png') no-repeat;
+		background-size: 336px 83px;
 	}
 	.redList section .use-packet .packet-list .redMessage{
-		width:220px;
-		height:50px;
-		float:left;
+		width: 220px;
+		height: 50px;
+		float: left;
 	}
 	.redList section .use-packet .packet-list .redMessage .redName{
-		width:100px;
-		height:20px;
-		margin-bottom:2px;
-		font-size:14px;
-		color:rgba(52,52,52,1);
+		width: 100px;
+		height: 20px;
+		margin-bottom: 2px;
+		font-size: 14px;
+		color: rgba(52,52,52,1);
 	}
 	.redList section .use-packet .packet-list .redMessage .redTime{
-		width:204px;
-		height:14px;
-		font-size:10px;
-		color:rgba(108,108,108,1);
+		width: 204px;
+		height: 14px;
+		font-size: 10px;
+		color: rgba(108,108,108,1);
 	}
 	.redList section .use-packet .packet-list .redPrice{
-		width:34px;
-		height:35px;
-		float:left;
-		padding-top:6px;
+		width: 34px;
+		height: 35px;
+		float: left;
+		padding-top: 6px;
 	}
 	.redList section .use-packet .packet-list .redPrice p{
-		font-size:20px;
-		color:red;
+		font-size: 20px;
+		color: red;
 	}
  .redList section .old-packet{
-		width:336px;	
+		width: 336px;	
 		justify-content: center;
 		align-content: center;
-		position:absolute;
-		left:20px;
-		top:0;
+		position: absolute;
+		left: 20px;
+		top: 0;
 	}
 	.redList section .old-packet .packet-list{
-		width:302px;
-		height:63px;
-		padding-top:12px;
-		padding-left:26px;
-		padding-right:10px;
-		padding-bottom:11px;
-		margin-bottom:22px;
-		background:url('../../assets/Group@2x.png') no-repeat;
-		background-size:336px 83px;
+		width: 302px;
+		height: 63px;
+		padding-top: 12px;
+		padding-left: 26px;
+		padding-right: 10px;
+		padding-bottom: 11px;
+		margin-bottom: 22px;
+		background: url('../../assets/Group@2x.png') no-repeat;
+		background-size: 336px 83px;
 	}
 	.redList section .old-packet .packet-list .redMessage{
-		width:220px;
-		height:50px;
-		float:left;
-		border-right:1px solid rgba(235,235,235,1); 
+		width: 220px;
+		height: 50px;
+		float: left;
+		border-right: 1px solid rgba(235,235,235,1); 
 	}
 	.redList section .old-packet .packet-list .redMessage .redName{
-		width:100px;
-		height:20px;
-		margin-bottom:2px;
-		font-size:14px;
-		color:rgba(201,201,201,1);
+		width: 100px;
+		height: 20px;
+		margin-bottom: 2px;
+		font-size: 14px;
+		color: rgba(201,201,201,1);
 	}
 	.redList section .old-packet .packet-list .redMessage .redTime{
-		width:204px;
-		height:14px;
-		font-size:10px;
-		color:rgba(201,201,201,1);
+		width: 204px;
+		height: 14px;
+		font-size: 10px;
+		color: rgba(201,201,201,1);
 	}
 	.redList section .old-packet .packet-list .redMessage .redInfo{
-		width:204px;
-		height:10px;
-		font-size:9px;
-		color:rgba(255,101,81,1); 
+		width: 204px;
+		height: 10px;
+		font-size: 9px;
+		color: rgba(255,101,81,1); 
 	}
 	.redList section .old-packet .packet-list .redPrice{
-		width:45px;
-		height:45px;
-		float:left;
-		padding-top:16px;
-		margin-left:4px;
+		width: 45px;
+		height: 45px;
+		float: left;
+		padding-top: 16px;
+		margin-left: 4px;
 	}
 	.redList section .old-packet .packet-list .redPrice p{
-		font-size:20px;
-		color:rgba(201,201,201,1);
+		font-size: 20px;
+		color: rgba(201,201,201,1);
 	}
 	/*.redList section .old-packet .packet-list .packet-list .redMessage{
 		width:240px;
@@ -247,10 +247,10 @@ export default {
 	}*/
 
 	.footer{
-		width:100%;
-		text-align:center;
+		width: 100%;
+		text-align: center;
 	}
 	.footer p{
-		color:rgba(119,119,119,1);
+		color: rgba(119,119,119,1);
 	}
 </style>
