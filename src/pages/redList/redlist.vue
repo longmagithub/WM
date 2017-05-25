@@ -15,7 +15,7 @@
 	  				<p>￥{{item.price/100}}</p>
 	  			</div>
 	  		</li>
-	  		<li class="footer">
+	  		<li class="red-footer">
 	  			<p>没有更多了 ~ </p>
 	  		</li>
 	  	</ul>
@@ -30,7 +30,7 @@
 	  				<p>￥{{item.price/100}}</p>
 	  			</div>
 	  		</li>
-	  		<li class="footer">
+	  		<li class="red-footer">
 	  			<p>没有更多了 ~ </p>
 	  		</li>
 	  	</ul>
@@ -45,14 +45,6 @@ export default {
 			showIndex: 0,
 			shopId: '',
 			customerId: ''
-			// tabs: [
-			// 	{
-			// 		'title':'可用红包'
-			// 	},
-			// 	{
-			// 		'title':'过期红包'
-			// 	}
-			// ]
 		}
 	},
 	created() {
@@ -245,12 +237,13 @@ export default {
 		float:left;
 		padding-top:6px;
 	}*/
-
-	.footer{
+	.red-footer{
 		width:100%;
 		text-align:center;
 	}
-	.footer p{
+	.red-footer p{
 		color:rgba(119,119,119,1);
 	}
 </style>
+
+

@@ -610,6 +610,7 @@
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，是否爆款分类，限购数量，原价，库存
       addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                remainQuantity) {
+        console.log('多规格')
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -686,7 +687,7 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-                console.log(foodItem)
+//                console.log(foodItem)
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
                 if (item.dishTypeStyle === 0) {
@@ -742,7 +743,7 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-        console.log(JSON.stringify(this.cartFoodList))
+//        console.log(JSON.stringify(this.cartFoodList))
       },
       // toggle toast
       toggleToast(show, text) {
@@ -865,12 +866,13 @@
       shopCartList: function (value) {
         this.initCategoryNum()
       },
+      // 监听URL 变化
       changeShopId: function (value) {
         this.shopId = getStore('userInfo').shopId
         this.customerId = getStore('userInfo').customerId
         this.hoursArr = this.seller.hours
         // 初始化购物车，获取存储在localStorage中的购物车商品信息
-        this.INIT_BUYCART()
+//        this.INIT_BUYCART()
         // 菜谱列表
         this.getDistList()
         // 门店状态

@@ -6,7 +6,7 @@
       <transition name="move">
         <div class="cart-decrease"
              v-show="foodNum > 0"
-             @click.stop.prevent="removeOutCart(
+             @click="removeOutCart(
              foods.dishTypeRelations[0],
              foods.dishId,
              foods.dishSpecification[0].specificationId,
@@ -23,8 +23,9 @@
       </transition>
       <div class="cart-count" v-show="foodNum>0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
+           ref="addRef"
            :class="{forbid: !isYingye}"
-           @click.stop.prevent="addToCart(
+           @click="addToCart(
            foods.dishTypeRelations[0],
            foods.dishId,
            foods.dishSpecification[0].specificationId,
@@ -50,7 +51,7 @@
         <div class="cart-decrease uxwm-iconfont sanjiao"
              v-show="foodNum > 0"
              :class="{specification_delete: foods.dishSpecification.length > 1}"
-             @click.stop.prevent="showReduceTip">
+             @click="showReduceTip">
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
@@ -60,7 +61,7 @@
       <div class="cart-count" v-show="foodNum > 0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click.stop.prevent="showChooseList($event,foods)"></div>
+           @click="showChooseList($event,foods)"></div>
     </section>
     <!-- 售罄 -->
     <section v-else key="sellout-wrapper">
@@ -99,6 +100,11 @@
     },
     created() {
     },
+    beforeUpdate() {
+      console.log('注销')
+      console.log(this.$refs.addRef)
+      this.$refs.addRef.removeEventListener('clcik', this.addToCart)
+    },
     computed: {
       // 接受vuex
       ...mapState(['cartList']),
@@ -127,10 +133,12 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
+        console.log('假如购物车qqqqqqqqqqqqqqqqqq')
         if (this.isYingye) {
           if (dishTypeStyle === 1) {
             if (limitCount === 0) { // 个人无限制 取库存
               this.userCount = remainQuantity
+              console.log(this.foodNum)
 //              if (this.foodNum === limitCount) {
 //                this.showAddToCartAotType = true
 //                clearTimeout(this.timer)
@@ -141,6 +149,7 @@
 //              }
             } else if (limitCount <= remainQuantity) { // 个人 <= 库存 取个人
               this.userCount = limitCount
+              console.log(this.foodNum)
 //              if (this.foodNum === remainQuantity) {
 //                this.showAddToCartAotType = true
 //                clearTimeout(this.timer)
@@ -151,6 +160,7 @@
 //              }
             } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
               this.userCount = remainQuantity
+              console.log(this.foodNum)
             }
           }
           this.ADD_CART({

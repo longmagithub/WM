@@ -26,6 +26,11 @@ export default new Router({
       path: '/jingmo',
       component: require('../pages/jingmo/jingmo.vue')
     },
+    // loaning
+    {
+      path: '/loading',
+      component: require('../pages/loading/loading.vue')
+    },
     // shopList
     {
       path: '/shopList',

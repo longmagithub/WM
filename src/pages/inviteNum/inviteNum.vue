@@ -3,7 +3,7 @@
     <div class="invite">
       <div class="logoimg"></div>
       <div class="inviteText">
-        <p class="title">我的邀请码：<span class="inviteNum">{{idcode}}</span></p>
+        <p class="title">我的邀请码：<input class="inviteNum" type="text" v-model="idcode" readonly="readonly"></p>
         <p class="inviteDesc">好友使用您的邀请码并成功下单后,<br>
           您与好友都会获得一个最高<span class="inviteNum">10元</span>的红包</p>
       </div>
@@ -113,13 +113,13 @@
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
               window.location.href =
-              'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
+                'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
             }, 2000)
           } else if (res.code === 14001) {
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
               window.location.href =
-              'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
+                'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
             }, 2000)
           } else {
             this.toggleToast(1, res.message, 1500)
@@ -215,9 +215,12 @@
   }
 
   .invite .inviteText .title .inviteNum {
+    width: 100px;
     font-family: STYuanti-SC-Bold;
     font-size: 24px;
     color: #FF5544;
+    background: none;
+    /*border: none;*/
     letter-spacing: 0.85px;
   }
 
