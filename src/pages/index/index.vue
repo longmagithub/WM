@@ -244,7 +244,7 @@
       // 关闭红包
       closeBoon() {
         this.isCloseBoon = false
-        this.toggleToast(1, '领取成功，支付时将自动抵扣', 1300)
+//        this.toggleToast(1, '领取成功，支付时将自动抵扣', 1300)
       },
       // 切换门店
       changeShop(item) {
