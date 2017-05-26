@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fee3e17-5b01-400c-86e5-39f4be5c8033" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/css/app.7830da74e1f46cba73211259fedc586e.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/fonts/iconfont.82f1b52.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/fonts/iconfont.db9444b.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/WechatIMG22.8e82ce8.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/back.4aa093c.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/boonBtn.5a6f09b.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/hongbao@2x.f94f954.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/icon_pen.d549409.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/iconfont.6643f7d.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/img.753c69e.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/inviteLogo.971975f.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/inviteSuccess02.e64ab44.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/shaer.3f38d9c.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/img/shareBack.5bd37f4.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/app.f521ed701d1cbdd6bc76.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/manifest.8c66f5921184a3eb775c.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/static/js/vendor.db9c7a6c1eba667def39.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/redList/redlist.vue" afterPath="$PROJECT_DIR$/src/pages/redList/redlist.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" afterPath="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" />
     </list>
     <ignored path="H5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -348,33 +330,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="submitOrder.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="submitOrder.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="131" column="10" selection-start-line="131" selection-start-column="10" selection-end-line="131" selection-end-column="10" />
+            <state relative-caret-position="561">
+              <caret line="182" column="19" selection-start-line="182" selection-start-column="19" selection-end-line="182" selection-end-column="19" />
               <folding>
                 <element signature="e#9875#13778#0" expanded="false" />
-                <element signature="e#13820#14491#0" expanded="false" />
                 <element signature="e#14529#14963#0" expanded="false" />
                 <element signature="e#15006#16133#0" expanded="false" />
-                <element signature="e#16177#19735#0" expanded="false" />
-                <element signature="e#21871#24259#0" expanded="false" />
-                <element signature="e#24290#24461#0" expanded="false" />
-                <element signature="e#24501#26110#0" expanded="false" />
-                <element signature="e#26147#26402#0" expanded="false" />
-                <element signature="e#26448#27690#0" expanded="false" />
-                <element signature="e#27744#28056#0" expanded="false" />
+                <element signature="e#19834#21880#0" expanded="false" />
+                <element signature="e#21916#24304#0" expanded="false" />
+                <element signature="e#22049#24238#0" expanded="false" />
+                <element signature="e#24335#24506#0" expanded="false" />
+                <element signature="e#24546#26155#0" expanded="false" />
+                <element signature="e#26192#26447#0" expanded="false" />
+                <element signature="e#27789#28101#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="redlist.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="redlist.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/redList/redlist.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+            <state relative-caret-position="222">
+              <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -492,7 +473,6 @@
         <option value="$PROJECT_DIR$/src/pages/index/index.vue" />
         <option value="$PROJECT_DIR$/node_modules/vue-circle-menu/dist/CircleMenu.js" />
         <option value="$PROJECT_DIR$/src/pages/addNew/addNew.vue" />
-        <option value="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" />
         <option value="$PROJECT_DIR$/src/pages/orderDetail/orderDetail.vue" />
         <option value="$PROJECT_DIR$/src/pages/goods/goods.vue" />
         <option value="$PROJECT_DIR$/src/components/wxshare.vue" />
@@ -500,6 +480,7 @@
         <option value="$PROJECT_DIR$/build/webpack.base.conf.js" />
         <option value="$PROJECT_DIR$/src/pages/inviteNum/inviteNum.vue" />
         <option value="$PROJECT_DIR$/src/pages/redList/redlist.vue" />
+        <option value="$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue" />
       </list>
     </option>
   </component>
@@ -1283,12 +1264,12 @@
       <workItem from="1495677938404" duration="3945000" />
       <workItem from="1495690145421" duration="63000" />
       <workItem from="1495690766775" duration="78000" />
-      <workItem from="1495692104825" duration="22282000" />
+      <workItem from="1495692104825" duration="23188000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1441340000" />
+    <option name="totallyTimeSpent" value="1442246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="840" extended-state="6" />
@@ -1668,26 +1649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="131" column="10" selection-start-line="131" selection-start-column="10" selection-end-line="131" selection-end-column="10" />
-          <folding>
-            <element signature="e#9875#13778#0" expanded="false" />
-            <element signature="e#13820#14491#0" expanded="false" />
-            <element signature="e#14529#14963#0" expanded="false" />
-            <element signature="e#15006#16133#0" expanded="false" />
-            <element signature="e#16177#19735#0" expanded="false" />
-            <element signature="e#21871#24259#0" expanded="false" />
-            <element signature="e#24290#24461#0" expanded="false" />
-            <element signature="e#24501#26110#0" expanded="false" />
-            <element signature="e#26147#26402#0" expanded="false" />
-            <element signature="e#26448#27690#0" expanded="false" />
-            <element signature="e#27744#28056#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build/webpack.base.conf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
@@ -2012,9 +1973,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/redList/redlist.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="26" column="36" selection-start-line="26" selection-start-column="36" selection-end-line="26" selection-end-column="36" />
+        <state relative-caret-position="222">
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/submitOrder/submitOrder.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="182" column="19" selection-start-line="182" selection-start-column="19" selection-end-line="182" selection-end-column="19" />
+          <folding>
+            <element signature="e#9875#13778#0" expanded="false" />
+            <element signature="e#14529#14963#0" expanded="false" />
+            <element signature="e#15006#16133#0" expanded="false" />
+            <element signature="e#19834#21880#0" expanded="false" />
+            <element signature="e#21916#24304#0" expanded="false" />
+            <element signature="e#22049#24238#0" expanded="false" />
+            <element signature="e#24335#24506#0" expanded="false" />
+            <element signature="e#24546#26155#0" expanded="false" />
+            <element signature="e#26192#26447#0" expanded="false" />
+            <element signature="e#27789#28101#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

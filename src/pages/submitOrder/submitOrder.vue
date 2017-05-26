@@ -391,6 +391,7 @@
               // this.packPrice += item.num * item.packingFee
               if (item.price !== null && item.price >= 0 && item.num > 0) {
                 if (item.dishTypeStyle === 1) { // 爆款属性
+                  this.discounSwitch = false
                   if (item.overflowNum > 0) { // 满足爆款
                     this.newShopCart.push({
                       id: item.id,
