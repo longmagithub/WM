@@ -14,7 +14,7 @@
             <p class="redTime">{{item.startTime}}至{{item.endTime}}</p>
           </div>
           <div class="redPrice">
-            <p>￥{{item.price/100}}</p>
+            ￥<span>{{item.price/100}}</span>
           </div>
         </li>
         <li class="footer">
@@ -29,7 +29,7 @@
 
           </div>
           <div class="redPrice">
-            <p>￥{{item.price/100}}</p>
+            ￥<span>{{item.price/100}}</span>
           </div>
           <div class="red-icon" :class="'status' + item.state"></div>
         </li>
@@ -143,40 +143,51 @@
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
+    box-sizing: border-box;
     margin-top: 5px;
-    padding: 12px 23px 18px 23px;
-    min-height: 83px;
+    padding: 12px 23px;
+    line-height: 64px;
     background: url('../../assets/Group@2x.png') no-repeat center;
     background-size: 100% 100%;
   }
 
   .redList section .use-packet .packet-list .redMessage {
-    width: 80%;
-    height: 100%;
+    padding: 3px 0px 8px 0px;
   }
 
   .redList section .use-packet .packet-list .redMessage .redName {
-    width: 100%;
-    margin-bottom: 10px;
+    line-height: 20px;
+    font-family: PingFangSC-Medium;
     font-size: 14px;
-    color: rgba(52, 52, 52, 1);
+    color: #343434;
+    letter-spacing: 0.26px;
   }
 
   .redList section .use-packet .packet-list .redMessage .redTime {
-    width: 100%;
-    height: 14px;
-    font-size: 4px;
-    color: rgba(108, 108, 108, 1);
+    margin-top: 5px;
+    line-height: 14px;
+    font-family: PingFangSC-Regular;
+    font-size: 10px;
+    color: #6C6C6C;
+    letter-spacing: 0.19px;
   }
 
   .redList section .use-packet .packet-list .redPrice {
-    width: 20%;
-    padding-top: 10px;
+    border-left: 2px solid #ebebeb;
+    padding-left: 5px;
+    /*line-height: 25px;*/
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: #FF4931;
+    letter-spacing: 0;
   }
 
-  .redList section .use-packet .packet-list .redPrice p {
-    font-size: 18px;
-    color: rgba(255, 73, 49, 1);
+  .redList section .use-packet .packet-list .redPrice span {
+    /*line-height: 30px;*/
+    font-family: PingFangSC-Medium;
+    font-size: 22px;
+    color: #FF4931;
+    letter-spacing: 0;
   }
 
   .redList section .old-packet {
