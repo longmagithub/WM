@@ -1,7 +1,7 @@
 <template>
   <div class="orderlist-wrap" id="orderlist">
     <div id="orderlist_scroll">
-      <ul>
+      <ul class="orderlist_scroll_UL">
         <li class="bg-white" v-for="item in orderList" @click="viewDetail(item.orderNo, item.id)">
           <div class="orderList-logobox">
             <img v-if="item.shopLogo" :src="item.shopLogo" width="42px" height="42px">
@@ -217,7 +217,7 @@
     overflow-y: auto;
   }
 
-  ul {
+  .orderlist_scroll_UL {
     padding-top: 12px;
   }
 
