@@ -27,10 +27,12 @@
             <span class="amount">￥{{orderDetail.packPrice}}</span>
           </label>
         </li>
-        <li>
+        <li class="feesPrice_item">
           配送费
-          <label>
+          <label class="feesPrice_label">
             <span class="amount">￥{{orderDetail.dispatchPrice}}</span>
+            <p class="feesPrice_dispatchPriceRemark" v-if="orderDetail.dispatchPriceRemark">
+              {{orderDetail.dispatchPriceRemark}}</p>
           </label>
         </li>
         <li v-if="orderDetail.discountPrice">
@@ -307,20 +309,35 @@
   ul {
 
   li {
+    display: flex;
+    justify-content: space-between;
     margin-left: 16px;
-    padding: 16px 16px 16px 0;
+    padding: 12px 12px 16px 0;
     color: #949494;
     border-bottom: 1px solid #f1f1f1;
 
   label {
-    float: right;
 
+  /*float: right;*/
   .amount {
     margin-left: 37px;
     color: #343434;
   }
 
   }
+  .feesPrice_label {
+    text-align: right;
+
+  .feesPrice_dispatchPriceRemark {
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 10px;
+    height: 10px;
+    color: #949494;
+  }
+
+  }
+
   .discoount {
     display: inline;
     background: url('../../assets/icon_activity_status0.png') no-repeat left center;
@@ -338,6 +355,7 @@
   }
 
   }
+
   li.title {
     margin-left: 0;
     padding-left: 16px;

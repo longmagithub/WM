@@ -144,6 +144,7 @@
         .then((res) => {
           if (res.data.success) {
             this.addressDetail = res.data.data
+            this.addressDetail.address = res.data.data.address.slice(3)
             this.$emit('closeToast')
           }
         })

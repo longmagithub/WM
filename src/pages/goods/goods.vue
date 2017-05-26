@@ -104,7 +104,7 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="seller.activity">
+              <div class="describe" v-if="seller.activity.length > 0">
                 <!--<span class="title">阶梯配送费</span>-->
                 <span class="text" v-for="item in seller.activity">{{item.title}} </span>
                 <!--<span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元运费{{item.fee}} </span>-->
@@ -115,11 +115,15 @@
                 <li class="food" v-for="(item, index) in cartFoodList" v-if="item.num > 0" :key="index">
                   <div class="name-wap">
                     <div class="name-box">
-                      <span class="name">{{item.name}}</span>
+                      <span class="name">
+                        <i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i>
+                        {{item.name}}
+                      </span>
                       <span class="specs" v-if="item.specs">({{item.specs}})</span>
                     </div>
                   </div>
                   <div class="price-box">
+                    <s class="originalPrice" v-if="item.originalPrice">￥{{item.originalPrice}}</s>
                     <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
                     <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
                     <!--.limitNum,item.limitCount)}}</span></span>-->
@@ -632,6 +636,7 @@
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                 remainQuantity, userCount) {
+        console.log('购物车++')
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -687,7 +692,7 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-//                console.log(foodItem)
+                console.log(foodItem)
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
                 if (item.dishTypeStyle === 0) {
@@ -743,7 +748,7 @@
         })
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-//        console.log(JSON.stringify(this.cartFoodList))
+        console.log(JSON.stringify(this.cartFoodList))
       },
       // toggle toast
       toggleToast(show, text) {
@@ -965,6 +970,10 @@
     width: 85px;
     background: #f8f8f8;
     /*overflow: hidden;*/
+  }
+
+  .menu-wrapper > ul {
+    padding-bottom: 20px;
   }
 
   .menu-wrapper .menu-item {
@@ -1388,10 +1397,6 @@
     vertical-align: top;
   }
 
-  /*.highlight {*/
-  /*color: #fff;*/
-  /*}*/
-
   .shopcart .content .content-left .price-wrapper .desc {
     line-height: 49px;
     height: 49px;
@@ -1620,6 +1625,11 @@
     color: #343434;
   }
 
+  .shopcart .shopcart-list .list-content .food .name-wap .name-box .name .huo {
+    margin-right: 4px;
+    color: #ff553e;
+  }
+
   .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
     position: absolute;
     top: 0;
@@ -1639,6 +1649,12 @@
     font-size: 11px;
     font-weight: 700;
     color: #ff5740;
+  }
+
+  .shopcart .shopcart-list .list-content .food .price-box .originalPrice {
+    margin-left: 7px;
+    font-size: 12px;
+    color: #9c9c9c;
   }
 
   .shopcart .shopcart-list .list-content .food .price-box .price {

@@ -100,11 +100,6 @@
     },
     created() {
     },
-    beforeUpdate() {
-      console.log('注销')
-      console.log(this.$refs.addRef)
-      this.$refs.addRef.removeEventListener('clcik', this.addToCart)
-    },
     computed: {
       // 接受vuex
       ...mapState(['cartList']),
