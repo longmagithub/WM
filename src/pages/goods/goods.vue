@@ -972,6 +972,10 @@
     /*overflow: hidden;*/
   }
 
+  .menu-wrapper > ul {
+    padding-bottom: 20px;
+  }
+
   .menu-wrapper .menu-item {
     position: relative;
     display: table;
@@ -1392,10 +1396,6 @@
     display: inline-block;
     vertical-align: top;
   }
-
-  /*.highlight {*/
-  /*color: #fff;*/
-  /*}*/
 
   .shopcart .content .content-left .price-wrapper .desc {
     line-height: 49px;
