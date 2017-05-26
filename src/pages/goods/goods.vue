@@ -123,6 +123,7 @@
                     </div>
                   </div>
                   <div class="price-box">
+                    <s class="originalPrice" v-if="item.originalPrice">￥{{item.originalPrice}}</s>
                     <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
                     <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
                     <!--.limitNum,item.limitCount)}}</span></span>-->
@@ -1648,6 +1649,12 @@
     font-size: 11px;
     font-weight: 700;
     color: #ff5740;
+  }
+
+  .shopcart .shopcart-list .list-content .food .price-box .originalPrice {
+    margin-left: 7px;
+    font-size: 12px;
+    color: #9c9c9c;
   }
 
   .shopcart .shopcart-list .list-content .food .price-box .price {
