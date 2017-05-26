@@ -11,10 +11,10 @@
         <li class="packet-list" v-for :class="{'finish': showIndex === 1}" v-for="item in redList.redpackets">
           <div class="redMessage">
             <p class="redName">{{packetNameArr[item.type]}}</p>
-            <p class="redTime">{{item.startTime}}至{{item.endTime}}</p>
+            <p class="redTime">{{item.startTime}}<br>{{item.endTime}}</p>
           </div>
           <div class="redPrice">
-            ￥<span>{{item.price/100}}</span>
+            ￥<span>9{{item.price/100}}</span>
           </div>
         </li>
         <li class="footer">
@@ -152,6 +152,7 @@
   }
 
   .redList section .use-packet .packet-list .redMessage {
+    flex: 1;
     padding: 3px 0px 8px 0px;
   }
 
@@ -173,6 +174,8 @@
   }
 
   .redList section .use-packet .packet-list .redPrice {
+    flex: 0 0 86px;
+    text-align: center;
     border-left: 2px solid #ebebeb;
     padding-left: 5px;
     /*line-height: 25px;*/
