@@ -220,7 +220,7 @@
     font-size: 24px;
     color: #FF5544;
     background: none;
-    /*border: none;*/
+    border: none;
     letter-spacing: 0.85px;
   }
 

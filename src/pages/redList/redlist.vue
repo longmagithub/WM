@@ -8,8 +8,8 @@
 	  	<ul class="use-packet" v-show="showIndex === 0">
 	  		<li class="packet-list" v-for :class="{'finish': showIndex === 1}" v-for="item in redList.redpackets">
 	  			<div class="redMessage">
-	  				<p class="redName">{{item.name}}</p>
-	  				<p class="redTime">{{item.useTime}}</p>
+	  				<p class="redName">{{packetNameArr[item.type]}}</p>
+	  				<p class="redTime">{{item.startTime}}至{{item.endTime}}</p>
 	  			</div>
 	  			<div class="redPrice">
 	  				<p>￥{{item.price/100}}</p>
@@ -22,13 +22,14 @@
 	  	<ul class="old-packet" v-show="showIndex === 1">
 	  		<li class="packet-list" v-for="item in redList.redpackets">
 	  			<div class="redMessage">
-	  				<p class="redName">{{item.name}}</p>
-	  				<p class="redTime">{{item.useTime}}</p>
-	  				<p class="redInfo"></p>
+	  				<p class="redName">{{packetNameArr[item.type]}}</p>
+	  				<p class="redTime">{{item.startTime}}至{{item.endTime}}</p>
+	  				
 	  			</div>
 	  			<div class="redPrice">
 	  				<p>￥{{item.price/100}}</p>
 	  			</div>
+	  			<div class="red-icon" :class="'status' + item.state"></div>
 	  		</li>
 	  		<li class="footer">
 	  			<p>没有更多了 ~ </p>
@@ -44,31 +45,27 @@ export default {
 			redList:[],
 			showIndex: 0,
 			shopId: '',
-			customerId: ''
-			// tabs: [
-			// 	{
-			// 		'title':'可用红包'
-			// 	},
-			// 	{
-			// 		'title':'过期红包'
-			// 	}
-			// ]
+			customerId: '',
+			packetNameArr:['用户红包','新人红包','邀请红包']
 		}
 	},
 	created() {
 		this.shopId = this.$route.query.shopId ? this.$route.query.shopId : ''
 		this.customerId = this.$route.query.customerId ? this.$route.query.customerId : ''
 		this.getRedList()
+		this.getRedOldList()
 	},
 	methods: {
-		//控制红包页面切换
+		// 控制红包页面切换
 		getShow(i) {
 			this.showIndex = i
 		},
+		// 获取全部红包列表
 		getRedList() {
 			const data = {
 				shopId: this.shopId,
-        sessionId: this.customerId,
+        customerId: this.customerId,
+        state: 1,
         type: 0
 			}
 			this.axios.get(`/br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
@@ -78,7 +75,23 @@ export default {
 					console.log(this.redList)
 				}
 			})
-		}	
+		},
+		//无效红包
+		getRedOldList() {
+			const data = {
+				shopId: this.shopId,
+				customerId: this.customerId,
+				state: 0,
+				type: 0
+			}
+			this.axios.get(`/br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
+				res = res.data
+				if(res.success) {
+					this.redList = res.data
+					console.log(this.redList)
+				}
+			})
+		}
 	}
 }
 </script>
@@ -86,6 +99,7 @@ export default {
 	.finish{
 		color:red!important;
 		border-bottom:3px solid rgba(255,101,81,1);
+		border-radius: 10%;
 	}
 	.redlist-header{
 		display: flex;
@@ -108,93 +122,90 @@ export default {
 		color: #ccc;
 	}
 	.redList section{
-		display: flex;
 		margin-top: 22px;
 		background: rgba(244,244,244,1);
 		padding:0 20px;
 		position: relative;
 	}
 	.redList section .use-packet{
-		width: 336px;	
+		width: 100%;	
+		display: flex;
 		justify-content: center;
 		align-content: center;
 		display: block;
 	}
 	.redList section .use-packet .packet-list{
-		width: 302px;
 		height: 63px;
 		padding-top: 20px;
-		padding-left: 26px;
-		padding-right: 10px;
-		margin-bottom: 22px;
+		margin-bottom: 20px;
+		padding-left:16px; 
+		padding-right:10px;
 		background: url('../../assets/Group@2x.png') no-repeat;
-		background-size: 336px 83px;
+		background-size: 100% 82px;
 	}
-	.redList section .use-packet .packet-list .redMessage{
-		width: 220px;
-		height: 50px;
-		float: left;
+ 	.redList section .use-packet .packet-list .redMessage{
+ 	width:80%;
+	height: 100%;
+	float: left;
 	}
 	.redList section .use-packet .packet-list .redMessage .redName{
-		width: 100px;
-		height: 20px;
-		margin-bottom: 2px;
-		font-size: 14px;
-		color: rgba(52,52,52,1);
+	width:100%;
+	margin-bottom:10px;
+	font-size: 14px;
+	color: rgba(52,52,52,1);
 	}
 	.redList section .use-packet .packet-list .redMessage .redTime{
-		width: 204px;
-		height: 14px;
-		font-size: 10px;
-		color: rgba(108,108,108,1);
+	width:100%;
+	height: 14px;
+	font-size: 4px;
+	color: rgba(108,108,108,1);
 	}
 	.redList section .use-packet .packet-list .redPrice{
-		width: 34px;
-		height: 35px;
+		width:20%;
 		float: left;
-		padding-top: 6px;
+		padding-top:10px;
 	}
 	.redList section .use-packet .packet-list .redPrice p{
-		font-size: 20px;
-		color: red;
+		font-size: 18px;
+		color: rgba(255,73,49,1);
 	}
- .redList section .old-packet{
-		width: 336px;	
+	 .redList section .old-packet{
+		width: 100%;	
+		display: flex;
 		justify-content: center;
 		align-content: center;
-		position: absolute;
-		left: 20px;
+		display: block;
+		/*position: absolute;*/
 		top: 0;
 	}
 	.redList section .old-packet .packet-list{
-		width: 302px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		height: 63px;
-		padding-top: 12px;
-		padding-left: 26px;
-		padding-right: 10px;
-		padding-bottom: 11px;
-		margin-bottom: 22px;
+		padding-right:1%;
+		padding-top: 20px;
+		margin-bottom: 20px; 
 		background: url('../../assets/Group@2x.png') no-repeat;
-		background-size: 336px 83px;
+		background-size: 100% 100%;
+		position:relative;
 	}
 	.redList section .old-packet .packet-list .redMessage{
-		width: 220px;
-		height: 50px;
-		float: left;
-		border-right: 1px solid rgba(235,235,235,1); 
+		height: 100%;
+		padding-right: 2%;
+		padding-left: 2%;
 	}
 	.redList section .old-packet .packet-list .redMessage .redName{
-		width: 100px;
-		height: 20px;
-		margin-bottom: 2px;
+		width:100%;
+		margin-bottom:10px;
 		font-size: 14px;
-		color: rgba(201,201,201,1);
+		color: rgba(108,108,108,1);
 	}
 	.redList section .old-packet .packet-list .redMessage .redTime{
-		width: 204px;
+		width:100%;
 		height: 14px;
-		font-size: 10px;
-		color: rgba(201,201,201,1);
+		font-size: 4px;
+		color: rgba(108,108,108,1);
 	}
 	.redList section .old-packet .packet-list .redMessage .redInfo{
 		width: 204px;
@@ -203,54 +214,36 @@ export default {
 		color: rgba(255,101,81,1); 
 	}
 	.redList section .old-packet .packet-list .redPrice{
-		width: 45px;
-		height: 45px;
-		float: left;
-		padding-top: 16px;
-		margin-left: 4px;
+		padding-bottom: 18px;
+	}
+	.redList section .old-packet .packet-list .red-icon{
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		top: 0;
+		right: 4px;
 	}
 	.redList section .old-packet .packet-list .redPrice p{
-		font-size: 20px;
-		color: rgba(201,201,201,1);
+		font-size: 18px;
+		color: rgba(108,108,108,1);
 	}
-	/*.redList section .old-packet .packet-list .packet-list .redMessage{
-		width:240px;
-		height:50px;
-		float:left;
-		background:orange;
-	}
-	.redList section .old-packet .packet-list .redMessage .redName{
-		width:59px;
-		height:20px;
-		margin-bottom:2px;
-		font-size:14px;
-		color:rgba(52,52,52,1);
-	}
-	.redList section .old-packet .packet-list .redMessage .redTime{
-		width:204px;
-		height:14px;
-		font-size:10px;
-		color:rgba(108,108,108,1);
-	}
-	.redList section .old-packet .packet-list .redMessage .redInfo{
-		width:204px;
-		height:10px;
-		font-size:9px;
-		background:red;
-		color:rgba(255,101,81,1); 
-	} 
-	.redList section .use-packet .packet-list .redPrice{
-		width:30px;
-		height:35px;
-		float:left;
-		padding-top:6px;
-	}*/
-
 	.footer{
 		width: 100%;
 		text-align: center;
 	}
 	.footer p{
 		color: rgba(119,119,119,1);
+	}
+	.status1{
+		background: url('../../assets/icon_yiguoqi_normal@2x.png');
+		background-size: 32px 32px;
+	}
+	.status2{
+		background: url('../../assets/icon_yishiyong_normal@2x.png');
+		background-size: 32px 32px;
+	}
+	.status3{
+		background: url('../../assets/icon_beizanyong_normal@2x.png');
+		background-size: 32px 32px;
 	}
 </style>

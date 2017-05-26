@@ -210,7 +210,7 @@
     }
   }
 </script>
-<style scoped lang="scss">
+<style>
   .orderlist-wrap {
     line-height: 1em;
     color: #343434;
