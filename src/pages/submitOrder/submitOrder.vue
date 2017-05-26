@@ -46,7 +46,7 @@
                     <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 1">×{{item.limitNum}}</span>
-                  <span class="num" v-if="item.hotTyep === 0">×{{item.num}}</span>
+                  <span class="num" v-if="item.hotTyep === 0">×{{item.overflowNum}}</span>
                   <div class="price" v-if="item.hotTyep === 1">
                     <s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>
                     ￥{{item.limitNum * item.price | toFixedFil}}
