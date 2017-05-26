@@ -104,7 +104,7 @@
                 <h1 class="title">购物车</h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="seller.activity">
+              <div class="describe" v-if="seller.activity.length > 0">
                 <!--<span class="title">阶梯配送费</span>-->
                 <span class="text" v-for="item in seller.activity">{{item.title}} </span>
                 <!--<span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元运费{{item.fee}} </span>-->
@@ -115,7 +115,10 @@
                 <li class="food" v-for="(item, index) in cartFoodList" v-if="item.num > 0" :key="index">
                   <div class="name-wap">
                     <div class="name-box">
-                      <span class="name">{{item.name}}</span>
+                      <span class="name">
+                        <i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i>
+                        {{item.name}}
+                      </span>
                       <span class="specs" v-if="item.specs">({{item.specs}})</span>
                     </div>
                   </div>
@@ -1619,6 +1622,11 @@
     line-height: 24px;
     font-size: 14px;
     color: #343434;
+  }
+
+  .shopcart .shopcart-list .list-content .food .name-wap .name-box .name .huo {
+    margin-right: 4px;
+    color: #ff553e;
   }
 
   .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
