@@ -4,6 +4,7 @@
       <div class="logoimg"></div>
       <div class="inviteText">
         <p class="title">我的邀请码：<input class="inviteNum" type="text" v-model="idcode" readonly="readonly"></p>
+        <!--<p class="title">我的邀请码：<input class="inviteNum" type="text" value="FEQWRQWF" readonly="readonly"></p>-->
         <p class="inviteDesc">好友使用您的邀请码并成功下单后,<br>
           您与好友都会获得一个最高<span class="inviteNum">10元</span>的红包</p>
       </div>
@@ -30,7 +31,7 @@
         toastShow: false,
         toastText: '',
         customerId: '',
-        idcode: '',
+        idcode: 'FEQWRQWF',
         referenceCode: '',
         isSuccessInviteNum: '',
         isSuccessInvite: false
@@ -208,6 +209,7 @@
   }
 
   .invite .inviteText .title {
+    padding-left: 35px;
     font-family: STYuanti-SC-Regular;
     font-size: 18px;
     color: #FFFFFF;
@@ -215,7 +217,7 @@
   }
 
   .invite .inviteText .title .inviteNum {
-    width: 100px;
+    width: 135px;
     font-family: STYuanti-SC-Bold;
     font-size: 24px;
     color: #FF5544;
