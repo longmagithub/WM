@@ -49,7 +49,7 @@
         showIndex: 0,
         shopId: '',
         customerId: '',
-        useInfoArr: ['', '', '被占用,取消未付款订单后可用'],
+        useInfoArr: ['', '', '', '被占用,取消未付款订单后可用'],
         packetNameArr: ['用户红包', '新人红包', '邀请红包', '邀请红包']
       }
     },
