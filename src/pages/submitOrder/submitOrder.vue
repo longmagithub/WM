@@ -605,7 +605,8 @@
               this.gotoPay(res.data.orderId)
             } else if (res.code === 13023 || res.code === 13024 || res.code === 13026) {
               this.CLEAR_CART(data.shopId)
-              this.toggleToast(1, '菜品价格有变化，请重新下单')
+//              this.toggleToast(1, '菜品价格有变化，请重新下单')
+              this.toggleToast(1, res.message)
               setTimeout(() => {
                 this.$router.replace({
                   path: '/index',
@@ -616,18 +617,7 @@
                 })
               }, 2000)
             } else {
-//              this.toggleToast(1, res.message)
-              this.CLEAR_CART(data.shopId)
-              this.toggleToast(1, '菜品价格有变化，请重新下单')
-              setTimeout(() => {
-                this.$router.replace({
-                  path: '/index',
-                  query: {
-                    'shopId': getStore('userInfo').shopId,
-                    'customerId': getStore('userInfo').customerId
-                  }
-                })
-              }, 2000)
+              this.toggleToast(1, res.message)
             }
           })
         } else {
