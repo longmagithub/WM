@@ -685,6 +685,7 @@
         this.allPrice = 0
         // 购物车中所有商品的详细信息列表
         this.cartFoodList = []
+//        console.log(JSON.stringify(this.cartList[this.shopId]))
         this.goods.forEach((item, index) => {
           if (this.shopCartList && this.shopCartList[item.dishList[0].dishTypeRelations[0]]) {
             let num = 0

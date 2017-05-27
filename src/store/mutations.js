@@ -47,7 +47,6 @@ export default {
     remainQuantity, // 爆款库存
     userCount // 用户可以点多少
   }) {
-    // console.log('++++++++++++==============+')
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       // console.log('购物车shopID：' + shopid)

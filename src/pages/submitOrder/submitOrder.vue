@@ -39,24 +39,50 @@
           <div class="order-list">
             <div class="list-content">
               <ul>
-                <li class="food_list_item" v-for="item in newShopCart"
-                    v-if="item.num > 0">
+                <li class="food_list_item"
+                    v-for="item in newShopCart"
+                    v-if="item.num > 0 && item.hotTyep === 1 && item.dishTypeStyle === 1">
                   <div class="name_num">
-                    <span class="name"><i class="uxwm-iconfont huo" v-if="item.hotTyep === 1"></i>{{item.name}}</span>
+                    <span class="name">
+                      <i class="uxwm-iconfont huo"></i>
+                      {{item.name}}
+                    </span>
                     <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
-                  <span class="num" v-if="item.hotTyep === 1">×{{item.limitNum}}</span>
-                  <span class="num" v-if="item.hotTyep === 0">×{{item.overflowNum}}</span>
-                  <div class="price" v-if="item.hotTyep === 1">
+                  <span class="num" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">×{{item.limitNum}}</span>
+                  <div class="price" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">
                     <s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>
                     ￥{{item.limitNum * item.price | toFixedFil}}
                   </div>
-                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">￥{{item.num * item.price |
-                    toFixedFil}}
+                </li>
+                <li class="food_list_item"
+                    v-for="item in newShopCart"
+                    v-if="item.num > 0 && item.hotTyep === 0 && item.dishTypeStyle === 1 && item.overflowNum > 0 ">
+                  <div class="name_num">
+                    <span class="name">
+                      {{item.name}}
+                    </span>
+                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
                   </div>
-                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">￥{{item.overflowNum *
-                    item.originalPrice |
-                    toFixedFil}}
+                  <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">×{{item.overflowNum}}</span>
+                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">
+                    <!--<s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>-->
+                    ￥{{item.overflowNum * item.originalPrice | toFixedFil}}
+                  </div>
+                </li>
+                <li class="food_list_item"
+                    v-for="item in newShopCart"
+                    v-if="item.num > 0 && item.hotTyep === 0 && item.dishTypeStyle === 0">
+                  <div class="name_num">
+                    <span class="name">
+                      {{item.name}}
+                    </span>
+                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                  </div>
+                  <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">×{{item.num}}</span>
+                  <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">
+                    <!--<s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>-->
+                    ￥{{item.num * item.price | toFixedFil}}
                   </div>
                 </li>
                 <!--<li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0 && item.dishTypeStyle === 0">-->
@@ -385,6 +411,7 @@
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
         this.orderDish = []
+//        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(item => {
@@ -392,7 +419,8 @@
               if (item.price !== null && item.price >= 0 && item.num > 0) {
                 if (item.dishTypeStyle === 1) { // 爆款属性
                   this.discounSwitch = false
-                  if (item.overflowNum > 0) { // 满足爆款
+                  if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
+//                    console.log(123131231231)
                     this.newShopCart.push({
                       id: item.id,
                       name: item.name,
@@ -407,13 +435,13 @@
                       originalPrice: item.originalPrice,
                       remainQuantity: item.remainQuantity,
                       userCount: item.userCount,
-                      hotTyep: 1
+                      hotTyep: 0
                     })
                     this.orderDish.push({
                       specificationId: item.id,
-                      count: item.limitNum,
-                      price: item.price,
-                      type: 1
+                      count: item.overflowNum,
+                      price: item.originalPrice,
+                      type: 0
                     })
                   }
                   this.newShopCart.push({
@@ -430,13 +458,13 @@
                     originalPrice: item.originalPrice,
                     remainQuantity: item.remainQuantity,
                     userCount: item.userCount,
-                    hotTyep: 0
+                    hotTyep: 1
                   })
                   this.orderDish.push({
                     specificationId: item.id,
-                    count: item.overflowNum,
-                    price: item.originalPrice,
-                    type: 0
+                    count: item.limitNum,
+                    price: item.price,
+                    type: 1
                   })
                 }
                 if (item.dishTypeStyle === 0) { // 非爆款 如果改数据不是爆款正常添加到渲染数组(newShopCart)和提交订单数组(orderDish)
@@ -467,6 +495,7 @@
             })
           })
         })
+//        console.log(JSON.stringify(this.newShopCart))
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
@@ -573,7 +602,7 @@
             if (res.success === SUCCESS_OK) {
               this.orderId = res.data.orderId
               this.gotoPay(res.data.orderId)
-            } else if (res.code === 13023) {
+            } else if (res.code === 13023 || res.code === 13024 || res.code === 13026) {
               this.CLEAR_CART(data.shopId)
               this.toggleToast(1, '菜品价格有变化，请重新下单')
               setTimeout(() => {
