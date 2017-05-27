@@ -20,7 +20,7 @@
             <li class="food-item"
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon">
-                <img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px" alt="图片">
+                <img v-if="food.imageUrl" :src="food.imageUrl" src="food.imageUrl" width="52px" height="52px" alt="图片">
                 <img v-else src="../../assets/logo.png" width="52px" height="52px">
               </div>
               <div class="content">
@@ -479,9 +479,8 @@
                   dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
                 })
               })
-              this.isAjax = true
-              this.goods = res.data.dishesList
               this.$nextTick(() => {
+                this.goods = res.data.dishesList
                 this.initCategoryNum()
                 this._initScroll()
                 this._calculateHeight()
