@@ -278,6 +278,11 @@
     color: rgba(119, 119, 119, 1);
   }
 
+  .status0 {
+    background: url('../../assets/icon_yiguoqi_normal@2x.png');
+    background-size: 32px 32px;
+  }
+
   .status1 {
     background: url('../../assets/icon_yiguoqi_normal@2x.png');
     background-size: 32px 32px;
