@@ -26,6 +26,7 @@
           <div class="redMessage">
             <p class="redName">{{packetNameArr[item.type]}}</p>
             <p class="redTime">{{item.startTime}}<br>{{item.endTime}}</p>
+            <p class="redInfo">{{useInfoArr[item.state]}}</p>
           </div>
           <div class="redPrice">
             ￥<span>{{item.price/100}}</span>
@@ -48,6 +49,7 @@
         showIndex: 0,
         shopId: '',
         customerId: '',
+        useInfoArr: ['', '', '被占用,取消未付款订单后可用'],
         packetNameArr: ['用户红包', '新人红包', '邀请红包']
       }
     },
@@ -213,7 +215,7 @@
 
   .redList section .old-packet .packet-list .redMessage {
     flex: 1;
-    padding: 3px 0px 8px 0px;
+    padding: 3px 0px 10px 0px;
   }
 
   .redList section .old-packet .packet-list .redMessage .redName {
@@ -234,10 +236,10 @@
   }
 
   .redList section .old-packet .packet-list .redMessage .redInfo {
-    width: 204px;
-    height: 10px;
+    line-height: 13px;
     font-size: 9px;
     color: rgba(255, 101, 81, 1);
+    letter-spacing: 0.12px;
   }
 
   .redList section .old-packet .packet-list .redPrice {
