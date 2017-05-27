@@ -286,7 +286,7 @@
           this.endTime = new Date(this.endTime).setSeconds(0, 0)
           // 预约时间判断区间 开始
           let bespeakOncTime = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-            this.shopInfo.dispatching.duration + 15)
+            this.shopInfo.dispatching.duration)
           bespeakOncTime = new Date(bespeakOncTime).setSeconds(0, 0)
           // 判断时间2
 //          let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +

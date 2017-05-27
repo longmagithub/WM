@@ -209,7 +209,7 @@
   }
 
   .invite .inviteText .title {
-    padding-left: 35px;
+    padding-left: 30px;
     font-family: STYuanti-SC-Regular;
     font-size: 18px;
     color: #FFFFFF;
@@ -217,7 +217,7 @@
   }
 
   .invite .inviteText .title .inviteNum {
-    width: 135px;
+    width: 145px;
     font-family: STYuanti-SC-Bold;
     font-size: 24px;
     color: #FF5544;
