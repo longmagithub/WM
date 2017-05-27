@@ -14,7 +14,7 @@
             <p class="redTime">{{item.startTime}}<br>{{item.endTime}}</p>
           </div>
           <div class="redPrice">
-            ￥<span>9{{item.price/100}}</span>
+            ￥<span>{{item.price/100}}</span>
           </div>
         </li>
         <li class="footer">
@@ -85,7 +85,7 @@
           shopId: this.shopId,
           customerId: this.customerId,
           state: 0,
-          type: 0
+          type: 2
         }
         this.axios.get(`/br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
