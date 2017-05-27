@@ -25,8 +25,7 @@
         <li class="packet-list" v-for="item in oldRedList.redpackets">
           <div class="redMessage">
             <p class="redName">{{packetNameArr[item.type]}}</p>
-            <p class="redTime">{{item.startTime}}至{{item.endTime}}</p>
-
+            <p class="redTime">{{item.startTime}}<br>{{item.endTime}}</p>
           </div>
           <div class="redPrice">
             ￥<span>{{item.price/100}}</span>
@@ -85,7 +84,7 @@
           shopId: this.shopId,
           customerId: this.customerId,
           state: 0,
-          type: 2
+          type: 0
         }
         this.axios.get(`/br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
