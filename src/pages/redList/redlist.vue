@@ -22,7 +22,7 @@
         </li>
       </ul>
       <ul class="old-packet" v-show="showIndex === 1">
-        <li class="packet-list" v-for="item in redList.redpackets">
+        <li class="packet-list" v-for="item in oldRedList.redpackets">
           <div class="redMessage">
             <p class="redName">{{packetNameArr[item.type]}}</p>
             <p class="redTime">{{item.startTime}}至{{item.endTime}}</p>
@@ -45,6 +45,7 @@
     data () {
       return {
         redList: [],
+        oldRedList: [],
         showIndex: 0,
         shopId: '',
         customerId: '',
@@ -89,8 +90,8 @@
         this.axios.get(`/br/shop/redpacket/list${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            this.redList = res.data
-            console.log(this.redList)
+            this.oldRedList = res.data
+            console.log(this.oldRedList)
           }
         })
       }
@@ -178,7 +179,6 @@
     text-align: center;
     border-left: 2px solid #ebebeb;
     padding-left: 5px;
-    /*line-height: 25px;*/
     font-family: PingFangSC-Regular;
     font-size: 18px;
     color: #FF4931;
@@ -186,7 +186,6 @@
   }
 
   .redList section .use-packet .packet-list .redPrice span {
-    /*line-height: 30px;*/
     font-family: PingFangSC-Medium;
     font-size: 22px;
     color: #FF4931;
@@ -194,46 +193,45 @@
   }
 
   .redList section .old-packet {
+    box-sizing: border-box;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    padding: 18px;
     display: block;
-    /*position: absolute;*/
     top: 0;
   }
 
   .redList section .old-packet .packet-list {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 63px;
-    padding-right: 1%;
-    padding-top: 20px;
-    margin-bottom: 20px;
-    background: url('../../assets/Group@2x.png') no-repeat;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-top: 5px;
+    padding: 12px 23px;
+    line-height: 64px;
+    background: url('../../assets/Group@2x.png') no-repeat center;
     background-size: 100% 100%;
     position: relative;
   }
 
   .redList section .old-packet .packet-list .redMessage {
-    height: 100%;
-    padding-right: 2%;
-    padding-left: 2%;
+    flex: 1;
+    padding: 3px 0px 8px 0px;
   }
 
   .redList section .old-packet .packet-list .redMessage .redName {
-    width: 100%;
-    margin-bottom: 10px;
+    line-height: 20px;
+    font-family: PingFangSC-Medium;
     font-size: 14px;
-    color: rgba(108, 108, 108, 1);
+    color: rgba(201,201,201,1);
+    letter-spacing: 0.26px;
   }
 
   .redList section .old-packet .packet-list .redMessage .redTime {
-    width: 100%;
-    height: 14px;
-    font-size: 4px;
-    color: rgba(108, 108, 108, 1);
+    margin-top: 5px;
+    line-height: 14px;
+    font-family: PingFangSC-Regular;
+    font-size: 10px;
+    color: rgba(201,201,201,1);
+    letter-spacing: 0.19px;
   }
 
   .redList section .old-packet .packet-list .redMessage .redInfo {
@@ -244,7 +242,14 @@
   }
 
   .redList section .old-packet .packet-list .redPrice {
-    padding-bottom: 18px;
+    flex: 0 0 86px;
+    text-align: center;
+    border-left: 2px solid #ebebeb;
+    padding-left: 5px;
+    font-family: PingFangSC-Regular;
+    font-size: 18px;
+    color: rgba(201,201,201,1);
+    letter-spacing: 0;
   }
 
   .redList section .old-packet .packet-list .red-icon {
@@ -255,14 +260,17 @@
     right: 4px;
   }
 
-  .redList section .old-packet .packet-list .redPrice p {
-    font-size: 18px;
-    color: rgba(108, 108, 108, 1);
+  .redList section .old-packet .packet-list .redPrice span {
+    font-family: PingFangSC-Medium;
+    font-size: 22px;
+    color: rgba(201,201,201,1);
+    letter-spacing: 0;
   }
 
   .footer {
     width: 100%;
     text-align: center;
+    margin-top: 12px;
   }
 
   .footer p {
