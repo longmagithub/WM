@@ -479,8 +479,8 @@
                   dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
                 })
               })
+              this.goods = res.data.dishesList
               this.$nextTick(() => {
-                this.goods = res.data.dishesList
                 this.initCategoryNum()
                 this._initScroll()
                 this._calculateHeight()
