@@ -1,7 +1,7 @@
 <template>
 </template>
 <script>
-  import {getStore, setStore} from '../common/utils/util'
+  import {getStore} from '../common/utils/util'
   export default {
     data() {
       return {
@@ -17,7 +17,7 @@
     },
     methods: {
       setShareConfig() {
-        let that = this
+//        let that = this
         let url = window.location.href.split('#')[0]
 //        window.alert(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
@@ -29,7 +29,7 @@
               timestamp: res.data.timestamp, // 必填，生成签名的时间戳
               nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
               signature: res.data.signature, // 必填，签名，见附录1
-              jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'getLocation']
+              jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline']
             })
             wx.ready(() => {
               wx.onMenuShareTimeline({
@@ -57,64 +57,64 @@
                   // 用户取消分享后执行的回调函数
                 }
               })
-              wx.getLocation({
-                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-                success: function (res) {
-                  console.log(that)
-                  if (res.errMsg === 'getLocation:ok') {
+//              wx.getLocation({
+//                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+//                success: function (res) {
+//                  console.log(that)
+//                  if (res.errMsg === 'getLocation:ok') {
 //                    that.getBaiDuMap(res)
-                  } else if (res.errMsg === 'getLocation:cancel') {
+//                  } else if (res.errMsg === 'getLocation:cancel') {
 //                    that.getBaiDuMap(0)
-                  }
-                }
-              })
+//                  }
+//                }
+//              })
             })
           }
         })
-      },
-      // 百度地址算位置
-      getBaiDuMap(resData) {
-        let defaultLonca = {
-          latitude: this.shopListArr[0].latitudeB,
-          longitude: this.shopListArr[0].longitudeB
-        }
-        let defaultRes = {}
-        resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
-        let location = []
-        this.shopListArr.forEach((item) => {
-          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
-        })
-        this.latLon = this.latLon.join('|')
-//        window.alert('________----------___________------______-------__')
-        const data = {
-          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
-          output: 'json', // 输出的数据类型
-          origins: defaultRes.latitude + ',' + defaultRes.longitude, // 起点：维度，经度
-//          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
-          destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
-          coord_type: 'gcj02' // 坐标类型
-        }
-        this.$http.jsonp(`https://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
-          res = res.data
-          console.log(res)
-//          window.alert(res.message)
-          res.result.forEach((item, index) => {
-            item.flag = index
-            this.shopListArr[index].location = item
-            location.push(item)
-          })
-          for (let i = 0; i < this.shopListArr.length; i++) {
-            for (let j = i; j < this.shopListArr.length; j++) {
-              if (this.shopListArr[i].location.distance.value > this.shopListArr[j].location.distance.value) {
-                let temp = this.shopListArr[i]
-                this.shopListArr[i] = this.shopListArr[j]
-                this.shopListArr[j] = temp
-              }
-            }
-          }
-          setStore('shopList', this.shopListArr)
-        })
       }
+      // 百度地址算位置
+//      getBaiDuMap(resData) {
+//        let defaultLonca = {
+//          latitude: this.shopListArr[0].latitudeB,
+//          longitude: this.shopListArr[0].longitudeB
+//        }
+//        let defaultRes = {}
+//        resData === 0 ? defaultRes = defaultLonca : defaultRes = resData
+//        let location = []
+//        this.shopListArr.forEach((item) => {
+//          this.latLon.push(item.latitudeB + ',' + item.longitudeB)
+//        })
+//        this.latLon = this.latLon.join('|')
+//        window.alert('________----------___________------______-------__')
+//        const data = {
+//          ak: 'S4x3MzgMib0wWD5knazuh8mIDatI9QMW', // 用户访问权限
+//          output: 'json', // 输出的数据类型
+//          origins: defaultRes.latitude + ',' + defaultRes.longitude, // 起点：维度，经度
+//          origins: '30.274085' + ',' + '120.15507', // 起点：维度，经度
+//          destinations: this.latLon, // 终点：维度，经度|维度，经度  多个用 | 分开
+//          coord_type: 'gcj02' // 坐标类型
+//        }
+//        this.$http.jsonp(`https://api.map.baidu.com/routematrix/v2/riding${this.PublicJs.createParams(data)}`).then((res) => {
+//          res = res.data
+//          console.log(res)
+//          window.alert(res.message)
+//          res.result.forEach((item, index) => {
+//            item.flag = index
+//            this.shopListArr[index].location = item
+//            location.push(item)
+//          })
+//          for (let i = 0; i < this.shopListArr.length; i++) {
+//            for (let j = i; j < this.shopListArr.length; j++) {
+//              if (this.shopListArr[i].location.distance.value > this.shopListArr[j].location.distance.value) {
+//                let temp = this.shopListArr[i]
+//                this.shopListArr[i] = this.shopListArr[j]
+//                this.shopListArr[j] = temp
+//              }
+//            }
+//          }
+//          setStore('shopList', this.shopListArr)
+//        })
+//      }
     }
   }
 </script>
