@@ -41,10 +41,10 @@
             <span class="discount-amount">-￥{{orderDetail.discountPrice}}</span>
           </label>
         </li>
-        <li v-if="orderDetail.activities.length">
+        <li v-if="orderDetail.activities.length" v-for="item in orderDetail.activities">
           <div class="discoount">红包</div>
           <label>
-            <span class="discount-amount">-￥{{orderDetail.activities[0].valueC}}</span>
+            <span class="discount-amount">-￥{{item.valueC}}</span>
           </label>
         </li>
         <li class="total-amount">
