@@ -54,7 +54,7 @@ Vue.use(VueLazyload, {
   preLoad: 1,
   error: 'assets/item_logo.png',
   loading: 'assets/item_logo.png',
-  attempt: 1
+  attempt: 3
 })
 // 注册
 Vue.prototype.PublicJs = PublicJs
