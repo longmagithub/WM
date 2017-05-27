@@ -20,7 +20,7 @@
             <li class="food-item"
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon">
-                <img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px" alt="图片">
+                <img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px">
                 <img v-else src="../../assets/logo.png" width="52px" height="52px">
               </div>
               <div class="content">
