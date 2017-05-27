@@ -142,7 +142,8 @@
                          item.limitCount,
                          item.originalPrice,
                          item.remainQuantity,
-                         item.userCount)">
+                         item.userCount,
+                         item.categoryIdLength)">
                     </div>
                     <div class="cart-count">{{item.num}}</div>
                     <div class="cart-add uxwm-iconfont btn_add_disabled"
@@ -158,7 +159,8 @@
                          item.limitCount,
                          item.originalPrice,
                          item.remainQuantity,
-                         item.userCount)"></div>
+                         item.userCount,
+                         item.categoryIdLength)"></div>
                   </div>
                 </li>
                 <li class="food" v-if="totalPack">
@@ -210,7 +212,7 @@
                  specs.dishTypeStyleOfDish,
                  specs.dishSpecification[0].limitCount,
                  specs.dishSpecification[0].originalPrice,
-                 specs.dishSpecification[0].remainQuantity)">
+                 specs.dishSpecification[0].remainQuantity,'')">
               选好了
             </div>
           </div>
@@ -693,11 +695,58 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-//                console.log(JSON.stringify(item))
-//                console.log(JSON.stringify(foodItem))
+                console.log(JSON.stringify(foodid))
+                console.log(JSON.stringify(foodItem))
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
-                if (item.dishTypeStyle === 0 || foodItem.remainQuantity > 0) {
+//                if (item.dishTypeStyle === 0 || foodItem.remainQuantity > 0) {
+                if (item.dishTypeStyle === 0) {
+                  console.log('——————------')
+                  this.totalPack += foodItem.num * foodItem.packingFee
+                  this.totalPack = parseFloat(this.totalPack.toFixed(2))
+                  if (foodItem.dishTypeStyle === 1) {
+                    this.totalPrice +=
+                      (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                  } else {
+                    this.totalPrice += foodItem.num * foodItem.price
+                  }
+//                  this.totalPrice += foodItem.num * foodItem.price
+                  this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
+                  if (foodItem.num > 0) {
+                    if (foodItem.dishTypeStyle === 1) {
+                      this.discounSwitch = true
+                    } else if (foodItem.dishTypeStyle === 0) {
+                      this.discounSwitch = false
+                    }
+                    this.cartFoodList[cartFoodNum] = {}
+                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
+                    this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
+                    this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
+                    this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
+                    this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
+                    this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
+                    this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
+                    this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
+                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
+                    this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
+                    this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
+                    this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
+                    this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
+                    this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
+                    this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
+                    this.cartFoodList[cartFoodNum].categoryIdLength = foodItem.categoryIdLength // 分类id长度
+                    if (foodItem.dishTypeStyle === 1) {
+                      this.cartFoodList[cartFoodNum].priceAll =
+                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
+                    } else if (foodItem.dishTypeStyle === 0) {
+                      this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
+                    }
+                    cartFoodNum++
+                  } else {
+                    this.discounSwitch = false
+                  }
+                } else if (item.dishTypeStyle === 1 && foodItem.categoryIdLength === 1) {
+                  console.log('啦啦啦德玛西亚')
                   this.totalPack += foodItem.num * foodItem.packingFee
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
                   if (foodItem.dishTypeStyle === 1) {
@@ -748,7 +797,7 @@
             newArr[index] = 0
           }
         })
-//        console.log(JSON.stringify(this.cartFoodList))
+        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },

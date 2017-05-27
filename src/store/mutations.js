@@ -45,7 +45,8 @@ export default {
     limitCount, // 限制份数
     originalPrice, // 菜原价
     remainQuantity, // 爆款库存
-    userCount // 用户可以点多少
+    userCount, // 用户可以点多少
+    categoryIdLength // 分类id长度
   }) {
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
@@ -90,6 +91,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
     } else if (cart[shopid] && cart[shopid][categoryId]) {
       console.log('_____----33333----______')
       cart[shopid][categoryId][itemId] = {}
@@ -107,6 +109,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
       cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
     } else if (cart[shopid]) {
       console.log('_____----44444----______')
       cart[shopid][categoryId] = {}
@@ -125,6 +128,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
       cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
     } else {
       console.log('_____----666666----______')
       cart[shopid] = {}
@@ -144,6 +148,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
       cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
       cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
     }
     // 返回一个新的对象，否则计算属性无法监听到数据的变化
     state.cartList = Object.assign({}, cart)

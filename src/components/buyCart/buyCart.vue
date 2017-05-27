@@ -17,7 +17,8 @@
              foods.dishTypeStyleOfDish,
              foods.dishSpecification[0].limitCount,
              foods.dishSpecification[0].originalPrice,
-             foods.dishSpecification[0].remainQuantity)">
+             foods.dishSpecification[0].remainQuantity,
+             foods.dishTypeRelations.length)">
           <span class="inner uxwm-iconfont btn_reduce_normal"></span>
         </div>
       </transition>
@@ -36,7 +37,8 @@
            foods.dishTypeStyleOfDish,
            foods.dishSpecification[0].limitCount,
            foods.dishSpecification[0].originalPrice,
-           foods.dishSpecification[0].remainQuantity)">
+           foods.dishSpecification[0].remainQuantity,
+           foods.dishTypeRelations.length)">
         <transition name="fade">
           <p class="show_addToCart_hotType" v-if="showAddToCartAotType">
             该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦</p>
@@ -126,9 +128,9 @@
       // 引用vuex方法
       ...mapMutations(['ADD_CART', 'REDUCE_CART']),
       // 加入购物车
-      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，
-      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
-        console.log('假如购物车qqqqqqqqqqqqqqqqqq')
+      // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，分类id长度
+      addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
+                remainQuantity, categoryIdLength) {
         if (this.isYingye) {
           if (dishTypeStyle === 1) {
             if (limitCount === 0) { // 个人无限制 取库存
@@ -171,7 +173,8 @@
             limitCount,
             originalPrice,
             remainQuantity,
-            userCount: this.userCount
+            userCount: this.userCount,
+            categoryIdLength
           })
         } else {
           return
@@ -179,7 +182,8 @@
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
-      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice, remainQuantity) {
+      removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount,
+                    originalPrice, remainQuantity, categoryIdLength) {
         if (this.foodNum > 0) {
           if (limitCount === 0) { // 个人无限制 取库存
             this.userCount = remainQuantity
@@ -201,7 +205,8 @@
             limitCount,
             originalPrice,
             remainQuantity,
-            userCount: this.userCount
+            userCount: this.userCount,
+            categoryIdLength
           })
         }
       },
