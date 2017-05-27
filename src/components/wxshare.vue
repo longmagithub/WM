@@ -6,7 +6,8 @@
     data() {
       return {
         latLon: [],
-        shopListArr: getStore('shopList')
+        shopListArr: getStore('shopList'),
+        shopInfo: getStore('shopInfo')
       }
     },
     created() {
@@ -33,9 +34,9 @@
             })
             wx.ready(() => {
               wx.onMenuShareTimeline({
-                title: '我在马路炸鸡得到一个大红包，快来~快来~这里还有呐!', // 分享标题
+                title: `我在${this.shopInfo.name}}得到一个大红包，快来~快来~这里还有呐!`, // 分享标题
                 link: `http://newpay.tunnel.qydev.com/VAOrderH5/?#/erweima?${encodeURIComponent('price=6.66&desc=你好')}`, // 分享链接
-                imgUrl: '../../assets/item_logo.png', // 分享图标
+                imgUrl: this.shopInfo.logo, // 分享图标
                 success: function () {
                   // 用户确认分享后执行的回调函数
                 },
@@ -44,10 +45,10 @@
                 }
               })
               wx.onMenuShareAppMessage({
-                title: '我在马路炸鸡得到一个大红包，快来~快来~这里还有呐', // 分享标题
+                title: `我在${this.shopInfo.name}}得到一个大红包，快来~快来~这里还有呐!`, // 分享标题
                 desc: '微信点外卖-更便宜，更快捷。', // 分享描述
                 link: `http://newpay.tunnel.qydev.com/VAOrderH5/?#/erweima?${encodeURIComponent('price=6.66&desc=你好')}`, // 分享链接
-                imgUrl: '../../assets/item_logo.png', // 分享图标
+                imgUrl: this.shopInfo.logo, // 分享图标
                 type: '', // 分享类型,music、video或link，不填默认为link
                 dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                 success: function () {
