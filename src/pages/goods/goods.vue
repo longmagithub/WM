@@ -474,6 +474,11 @@
             if (res.data.dishesList === null) {
               this.toggleToast(1, res.message)
             } else {
+              res.data.dishesList.forEach(item => {
+                item.dishList.forEach(dishListItem => {
+                  dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+                })
+              })
               this.isAjax = true
               this.goods = res.data.dishesList
               this.$nextTick(() => {
