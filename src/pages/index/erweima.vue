@@ -16,7 +16,7 @@
 <script type="text/ecmascript-6">
   export default{
     created() {
-      window.alert(window.location.href)
+//      window.alert(window.location.href)
     }
   }
 </script>
