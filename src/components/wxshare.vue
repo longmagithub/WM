@@ -19,7 +19,7 @@
       setShareConfig() {
         let that = this
         let url = window.location.href.split('#')[0]
-        window.alert(url)
+//        window.alert(url)
         this.axios.get(`/mp/jsapi/sign?url=${encodeURIComponent(url)}`).then((res) => {
           res = res.data
           if (res.success) {
