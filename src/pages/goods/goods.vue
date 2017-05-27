@@ -693,10 +693,11 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-                console.log(foodItem)
+//                console.log(JSON.stringify(item))
+//                console.log(JSON.stringify(foodItem))
                 num += foodItem.num
 //                limitNum += foodItem.limitNum
-                if (item.dishTypeStyle === 0) {
+                if (item.dishTypeStyle === 0 || foodItem.remainQuantity > 0) {
                   this.totalPack += foodItem.num * foodItem.packingFee
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
                   if (foodItem.dishTypeStyle === 1) {
@@ -747,9 +748,9 @@
             newArr[index] = 0
           }
         })
+//        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-        console.log(JSON.stringify(this.cartFoodList))
       },
       // toggle toast
       toggleToast(show, text) {
