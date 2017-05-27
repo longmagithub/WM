@@ -98,7 +98,8 @@
                     class="name_num"><span class="name">餐盒费</span></div>
                   <div class="price">￥{{packPrice}}</div>
                 </li>
-                <li class="food_list_item" v-if="feesPrice">
+                <!--<li class="food_list_item" v-if="feesPrice">-->
+                <li class="food_list_item">
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
                 </li>
