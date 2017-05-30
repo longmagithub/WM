@@ -27,7 +27,7 @@
               <div class="content">
                 <div class="name_box"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i><span
                   class="name">{{food
-                  .name}}</span></div>
+                  .name}}(预发布:1.0)</span></div>
                 <span class="desc">{{food.description}}</span>
                 <!--<p class="sellNum" v-if="food.dishSpecification[0].saleCount">-->
                 <!--已售{{food.dishSpecification[0].saleCount}}份</p>-->
