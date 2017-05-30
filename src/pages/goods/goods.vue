@@ -20,11 +20,9 @@
             <li class="food-item"
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon">
-                <!--<img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px">-->
-                <img v-if="food.imageUrl"
-                     src="http://imagewm.u-xian.com/image/shop/2017/4/11/2017041110114119594332.jpeg" width="52px"
-                     height="52px">
+                <img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px">
                 <img v-else src="../../assets/logo.png" width="52px" height="52px">
+                <span>{{food.imageUrl}}</span>
               </div>
               <div class="content">
                 <div class="name_box"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i><span
