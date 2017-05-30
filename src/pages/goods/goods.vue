@@ -249,10 +249,6 @@
       freedispatchPrice: {
         type: Object,
         default: {}
-      },
-      changeShopId: {
-        type: String,
-        default: ''
       }
     },
     data() {

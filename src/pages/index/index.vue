@@ -61,7 +61,7 @@
         </div>
       </div>
       <div class="main">
-        <goods :seller="shopDetail" :changeShopId="shopId" :min-price="shopDetail.minPrice"
+        <goods :seller="shopDetail" :min-price="shopDetail.minPrice"
                :freedispatchPrice="freedispatch"></goods>
       </div>
     </div>
