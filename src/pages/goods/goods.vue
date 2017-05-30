@@ -27,7 +27,7 @@
               <div class="content">
                 <div class="name_box"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i><span
                   class="name">{{food
-                  .name}}(预发布:1.0)</span></div>
+                  .name}}(预发布:1.1)</span></div>
                 <span class="desc">{{food.description}}</span>
                 <!--<p class="sellNum" v-if="food.dishSpecification[0].saleCount">-->
                 <!--已售{{food.dishSpecification[0].saleCount}}份</p>-->
@@ -926,23 +926,23 @@
       // 监听shopCart的变化
       shopCartList: function (value) {
         this.initCategoryNum()
-      },
-      // 监听URL 变化
-      changeShopId: function (value) {
-        this.shopId = getStore('userInfo').shopId
-        this.customerId = getStore('userInfo').customerId
-        this.hoursArr = this.seller.hours
-        // 初始化购物车，获取存储在localStorage中的购物车商品信息
-//        this.INIT_BUYCART()
-        // 菜谱列表
-        this.getDistList()
-        // 门店状态
-        this.getShopState()
-        // 优惠列表
-        this.getDiscountList()
-        // 查询爆款活动接口
-        this.getActivityHotstyle()
       }
+      // 监听URL 变化
+//      changeShopId: function (value) {
+//        this.shopId = getStore('userInfo').shopId
+//        this.customerId = getStore('userInfo').customerId
+//        this.hoursArr = this.seller.hours
+//        // 初始化购物车，获取存储在localStorage中的购物车商品信息
+//        this.INIT_BUYCART()
+//        // 菜谱列表
+//        this.getDistList()
+//        // 门店状态
+//        this.getShopState()
+//        // 优惠列表
+//        this.getDiscountList()
+//        // 查询爆款活动接口
+//        this.getActivityHotstyle()
+//      }
     },
     components: {
       buyCart,
