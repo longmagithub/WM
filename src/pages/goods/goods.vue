@@ -21,7 +21,7 @@
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon">
                 <img v-if="food.imageUrl" :src="food.imageUrl" width="52px" height="52px">
-                <img v-else src="../../assets/logo.png" width="52px" height="52px">
+                <!--<img v-else src="../../assets/logo.png" width="52px" height="52px">-->
                 <span>{{food.imageUrl}}</span>
               </div>
               <div class="content">
