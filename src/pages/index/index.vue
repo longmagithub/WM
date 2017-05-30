@@ -19,8 +19,8 @@
              @click="goSeller">
           <div class="box-content">
             <div class="logo">
-              <img v-if="shopDetail.logo" :src="shopDetail.logo" alt="" width="48px" height="48px">
-              <img v-else src="../../assets/item_logo.png" alt="" width="50px" height="50px">
+              <img v-if="shopDetail.logo" :src="shopDetail.logo" width="48px" height="48px">
+              <img v-else src="../../assets/item_logo.png" width="50px" height="50px">
             </div>
             <div class="content">
               <!--下面打开-->
