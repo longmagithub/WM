@@ -21,13 +21,13 @@
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon">
                 <img v-if="food.imageUrl" :src="food.imageUrl" alt="图片加载失败" width="52px" height="52px">
-                <!--<img v-else src="../../assets/logo.png" width="52px" height="52px">-->
-                <span>ImgUrl：{{food.imageUrl}}</span>
+                <img v-else src="../../assets/logo.png" width="52px" height="52px">
+                <!--<span>ImgUrl：{{food.imageUrl}}</span>-->
               </div>
               <div class="content">
                 <div class="name_box"><i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i><span
                   class="name">{{food
-                  .name}}(预发布:1.1)</span></div>
+                  .name}}</span></div>
                 <span class="desc">{{food.description}}</span>
                 <!--<p class="sellNum" v-if="food.dishSpecification[0].saleCount">-->
                 <!--已售{{food.dishSpecification[0].saleCount}}份</p>-->

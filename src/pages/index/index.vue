@@ -146,6 +146,9 @@
         this.headerHeight = this.$refs.header
       }
     },
+    mounted() {
+      window.location.reload()
+    },
     methods: {
       // 红包
       ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE', 'CLEAR_CART', 'INIT_BUYCART']),
