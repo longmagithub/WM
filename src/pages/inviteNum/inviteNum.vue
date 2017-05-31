@@ -3,7 +3,7 @@
     <div class="invite">
       <div class="logoimg"></div>
       <div class="inviteText">
-        <p class="title">我的邀请码：<span class="inviteNum">{{idcode}}</span></p>
+        <p class="title">我的邀请码：<input class="inviteNum" type="text" v-model="idcode" readonly="readonly"></p>
         <p class="inviteDesc">好友使用您的邀请码并成功下单后,<br>
           您与好友都会获得一个最高<span class="inviteNum">20元</span>的红包</p>
       </div>
@@ -218,10 +218,13 @@
   }
 
   .invite .inviteText .title .inviteNum {
+    width: 140px;
     font-family: STYuanti-SC-Bold;
     font-size: 24px;
     color: #FF5544;
     letter-spacing: 0.85px;
+    border: none;
+    background: none;
   }
 
   .invite .inviteText .inviteDesc {

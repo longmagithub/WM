@@ -116,7 +116,7 @@
           if (res.success) {
             if (res.data.length > 0) {
               if (lon > 0 && lat > 0) { // 经纬度获取成功
-                this.goIndex(res.data[0].shopId, res.data[0].isNearby)
+                this.goIndex(res.data[0].shopId, res.data[0].nearby)
                 return
               }
               res.data.forEach((data) => {
