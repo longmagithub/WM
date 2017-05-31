@@ -89,7 +89,7 @@
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wxshare from '../../components/wxshare.vue'
-  import CircleMenu from 'vue-circle-menu'
+  import CircleMenu from '../../components/circleMenu/circleMenu'
   export default{
     data() {
       return {

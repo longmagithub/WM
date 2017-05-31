@@ -49,7 +49,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules|circleMenu/  // 忽略匹配circleMenu
       }
     ],
     loaders: [
