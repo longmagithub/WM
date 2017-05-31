@@ -480,12 +480,14 @@
                 })
               })
               this.goods = res.data.dishesList
-              // 初始化滚动
-              this._initScroll()
-              // 初始化数据
-              this.initCategoryNum()
-              // 获取区间高度
-              this._calculateHeight()
+              setTimeout(() => {
+                // 初始化滚动
+                this._initScroll()
+                // 初始化数据
+                this.initCategoryNum()
+                // 获取区间高度
+                this._calculateHeight()
+              }, 100)
             }
           }
         })
