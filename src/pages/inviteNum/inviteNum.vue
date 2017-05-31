@@ -16,7 +16,7 @@
         <div class="inviteBtn" @click="goShopList">确定</div>
       </div>
       <toast :show="toastShow" :text="toastText"></toast>
-    </div> 
+    </div>
   </div>
 </template>
 
@@ -164,7 +164,7 @@
     left: 0px;
     bottom: -300px;
     width: 100%;
-    height: 100%;
+    height: 100%;gi
     background: rgba(255, 209, 102, 1);
     background-size: 100%;
   }
