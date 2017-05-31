@@ -64,6 +64,7 @@
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
+      this.getShopList(this.customerId, 0, 0)
 //      this.getLocation()
     },
     methods: {
