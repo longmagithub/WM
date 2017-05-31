@@ -337,10 +337,6 @@
 //      console.log(JSON.stringify(this.cartList))
     },
     mounted() {
-      // 初始化数据
-      this.initCategoryNum()
-      // 获取区间高度
-      this._calculateHeight()
     },
     computed: {
       // 检测 vuex 中cartList
@@ -484,10 +480,12 @@
                 })
               })
               this.goods = res.data.dishesList
-              this.$nextTick(() => {
-                // 初始化滚动
-                this._initScroll()
-              })
+              // 初始化滚动
+              this._initScroll()
+              // 初始化数据
+              this.initCategoryNum()
+              // 获取区间高度
+              this._calculateHeight()
             }
           }
         })
