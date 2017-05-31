@@ -147,7 +147,6 @@
       }
     },
     mounted() {
-      window.location.reload()
     },
     methods: {
       // 红包
