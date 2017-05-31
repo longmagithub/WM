@@ -20,7 +20,8 @@
             <li class="food-item"
                 v-for="(food, foodIndex) in item.dishList" :key="foodIndex">
               <div class="icon">
-                <img v-if="food.imageUrl" :src="food.imageUrl" alt="图片加载失败" width="52px" height="52px">
+                <!--<img v-if="food.imageUrl" :src="food.imageUrl" alt="图片加载失败" width="52px" height="52px">-->
+                <img v-if="food.imageUrl" src="https://www.baidu.com/img/bd_logo1.png" alt="图片加载失败" width="52px" height="52px">
                 <img v-else src="../../assets/logo.png" width="52px" height="52px">
                 <!--<span>ImgUrl：{{food.imageUrl}}</span>-->
               </div>
