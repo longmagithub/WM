@@ -3,7 +3,7 @@
   <div class="shopList">
     <ul>
       <li class="listbox" v-for="item in shopList">
-        <div class="list-item" @click="goIndex(item.shopId)">
+        <div class="list-item" @click="goIndex(item.shopId, 1)">
           <div class="logo">
             <img v-if="item.logo" :src="item.logo" width="51px" height="51px">
             <img v-else src="../../assets/item_logo.png" width="51px" height="51px">
@@ -116,7 +116,7 @@
           if (res.success) {
             if (res.data.length > 0) {
               if (lon > 0 && lat > 0) { // 经纬度获取成功
-                this.goIndex(res.data[0].shopId)
+                this.goIndex(res.data[0].shopId, res.data[0].isNearby)
                 return
               }
               res.data.forEach((data) => {
@@ -150,14 +150,15 @@
         this.shopListShow = false
       },
       // 去首页
-      goIndex(id) {
+      goIndex(id, isDistance) {
 //        window.location.href =
 //          'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
         this.$router.push({
           path: '/index',
           query: {
             shopId: id,
-            customerId: this.customerId
+            customerId: this.customerId,
+            isDistance: isDistance ? 1 : 0
           }
         })
       }

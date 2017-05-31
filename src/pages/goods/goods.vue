@@ -180,9 +180,7 @@
         <div class="list-mask" @click="hideList" v-show="listShow"></div>
       </transition>
     </div>
-    <div class="closeSeller" v-show="!isYingye">
-      商家休息中，暂不接单
-    </div>
+    <div class="closeSeller" v-show="!isYingye">{{isYingyeText}}</div>
     <transition name="fade">
       <div class="shop-cover" @click="closeSpesc" v-if="showSpecs"></div>
     </transition>
@@ -306,6 +304,8 @@
         priceNum: 0, // 计算多分类
         originalPriceLimitCount: 0, // 计算多分类
         discounSwitch: false, // 判断爆款是否可以优惠
+        isDistance: 1, // 是否在配送距离范围内
+        isYingyeText: '商家休息中，暂不接单', // 营业是text文本
         textTime: [
           {
             beginTime: '08:00',
@@ -324,16 +324,26 @@
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.hoursArr = this.seller.hours
+      this.isDistance = parseInt(this.$route.query.isDistance)
+//      console.log('_____----------_______----------______-')
+//      console.log(this.$route.query.isDistance)
+//      console.log(this.isDistance)
       // 菜谱列表
       this.getDistList()
-      // 门店状态
-      this.getShopState()
       // 初始化购物车，获取存储在localStorage中的购物车商品信息
       this.INIT_BUYCART()
       // 优惠列表
       this.getDiscountList()
       // 查询爆款活动规则
       this.getActivityHotstyle()
+      // 判断是否在 配送范围内
+      if (this.isDistance) {
+        // 门店状态
+        this.getShopState()
+      } else {
+        this.isYingye = false
+        this.isYingyeText = '客官你太远啦，我们正努力向你靠拢'
+      }
 //      console.log(JSON.stringify(this.cartList))
     },
     computed: {
