@@ -336,6 +336,11 @@
       this.getActivityHotstyle()
 //      console.log(JSON.stringify(this.cartList))
     },
+    mounted() {
+      this.initCategoryNum()
+      this._initScroll()
+      this._calculateHeight()
+    },
     computed: {
       // 检测 vuex 中cartList
       ...mapState(['cartList']),
@@ -478,11 +483,6 @@
                 })
               })
               this.goods = res.data.dishesList
-              this.$nextTick(() => {
-                this.initCategoryNum()
-                this._initScroll()
-                this._calculateHeight()
-              })
             }
           }
         })
