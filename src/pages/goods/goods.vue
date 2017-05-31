@@ -324,19 +324,17 @@
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.hoursArr = this.seller.hours
-      // 初始化购物车，获取存储在localStorage中的购物车商品信息
-      this.INIT_BUYCART()
       // 菜谱列表
       this.getDistList()
       // 门店状态
       this.getShopState()
+      // 初始化购物车，获取存储在localStorage中的购物车商品信息
+      this.INIT_BUYCART()
       // 优惠列表
       this.getDiscountList()
       // 查询爆款活动规则
       this.getActivityHotstyle()
 //      console.log(JSON.stringify(this.cartList))
-    },
-    mounted() {
     },
     computed: {
       // 检测 vuex 中cartList
@@ -487,7 +485,7 @@
                 this.initCategoryNum()
                 // 获取区间高度
                 this._calculateHeight()
-              }, 100)
+              }, 500)
             }
           }
         })
