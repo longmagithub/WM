@@ -3,10 +3,9 @@
     <div class="invite">
       <div class="logoimg"></div>
       <div class="inviteText">
-        <p class="title">我的邀请码：<input class="inviteNum" type="text" v-model="idcode" readonly="readonly"></p>
-        <!--<p class="title">我的邀请码：<input class="inviteNum" type="text" value="FEQWRQWF" readonly="readonly"></p>-->
+        <p class="title">我的邀请码：<span class="inviteNum">{{idcode}}</span></p>
         <p class="inviteDesc">好友使用您的邀请码并成功下单后,<br>
-          您与好友都会获得一个最高<span class="inviteNum">10元</span>的红包</p>
+          您与好友都会获得一个最高<span class="inviteNum">20元</span>的红包</p>
       </div>
       <div class="inviteBorder"></div>
       <div class="inviteBox">
@@ -17,11 +16,11 @@
         <div class="inviteBtn" @click="goShopList">确定</div>
       </div>
       <toast :show="toastShow" :text="toastText"></toast>
-    </div>
+    </div> 
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import toast from '../../components/toast.vue'
   import {getStore, urlParse, setStore} from '../../common/utils/util'
   export default {
@@ -31,7 +30,7 @@
         toastShow: false,
         toastText: '',
         customerId: '',
-        idcode: 'FEQWRQWF',
+        idcode: '',
         referenceCode: '',
         isSuccessInviteNum: '',
         isSuccessInvite: false
@@ -113,14 +112,14 @@
             console.log(res.data)
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
-              window.location.href =
-                'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) /
+                1000
             }, 2000)
           } else if (res.code === 14001) {
             this.toggleToast(1, res.message, 1500)
             setTimeout(() => {
-              window.location.href =
-                'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?customerId=' + this.customerId + '&shopId=' + this.shopId + '&T=' + Date.parse(new Date()) / 1000
+              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?T=' + Date.parse(new Date()) /
+                1000
             }, 2000)
           } else {
             this.toggleToast(1, res.message, 1500)
@@ -159,10 +158,11 @@
 <style>
   .invite {
     /*display: none;*/
-    position: fixed;
+    position: absolute;
     z-index: 111;
     top: 0px;
     left: 0px;
+    bottom: -300px;
     width: 100%;
     height: 100%;
     background: rgba(255, 209, 102, 1);
@@ -171,7 +171,7 @@
 
   .invite .logoimg {
     position: absolute;
-    top: 47px;;
+    top: 47px;
     width: 100%;
     height: 182px;
     background: url("../../assets/inviteLogo.png") no-repeat center;
@@ -182,7 +182,7 @@
   @media (max-width: 320px) {
     .invite .logoimg {
       position: absolute;
-      top: 40px;;
+      top: 40px;
       width: 100%;
       height: 155px;
       background: url("../../assets/inviteLogo.png") no-repeat center;
@@ -194,8 +194,10 @@
     position: absolute;
     top: 254px;
     width: 100%;
+    height: 84px;
     text-align: center;
     color: #fff;
+    background: rgba(255, 209, 102, 1);
   }
 
   @media (max-width: 320px) {
@@ -209,7 +211,6 @@
   }
 
   .invite .inviteText .title {
-    padding-left: 30px;
     font-family: STYuanti-SC-Regular;
     font-size: 18px;
     color: #FFFFFF;
@@ -217,12 +218,9 @@
   }
 
   .invite .inviteText .title .inviteNum {
-    width: 145px;
     font-family: STYuanti-SC-Bold;
     font-size: 24px;
     color: #FF5544;
-    background: none;
-    border: none;
     letter-spacing: 0.85px;
   }
 
@@ -243,10 +241,10 @@
 
   .invite .inviteBorder {
     position: absolute;
-    top: 55%;
+    top: 338px;
     width: 100%;
-    height: 20px;
-    background: url("../../assets/inviteBorder.png") no-repeat center;
+    height: 30px;
+    background: rgba(255, 209, 102, 1) url("../../assets/inviteBorder.png") no-repeat center;
     background-size: 94% 20px;
   }
 
@@ -263,15 +261,17 @@
 
   .inviteBox {
     position: absolute;
-    top: 62%;
-    left: 15%;
-    width: 70%;
+    top: 364px;
+/*    left: 15%;*/
+    width: 100%;
+    background: rgba(255, 209, 102, 1);
   }
 
   .inviteBox .inviteWrapper {
     position: relative;
     box-sizing: border-box;
-    width: 100%;
+    width: 70%;
+    left: 15%;
     height: 50px;
     padding: 0 18px;
     font-size: 14px;
