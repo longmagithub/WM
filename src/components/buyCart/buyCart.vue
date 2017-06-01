@@ -192,6 +192,7 @@
           } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
             this.userCount = remainQuantity
           }
+          let type = remainQuantity !== 0 ? 1 : 0
           this.REDUCE_CART({
             shopid: this.shopId,
             categoryId,
@@ -201,7 +202,7 @@
             price,
             specs,
             packingFee,
-            dishTypeStyle,
+            dishTypeStyle: type,
             limitCount,
             originalPrice,
             remainQuantity,
