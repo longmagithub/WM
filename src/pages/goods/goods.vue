@@ -491,8 +491,11 @@
                   dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
                 })
               })
+              window.alert('赋值前')
               this.goods = res.data.dishesList
+              window.alert('赋值后')
               this.$nextTick(() => {
+                window.alert('nextTick')
                 // 初始化滚动
                 this._initScroll()
                 // 获取区间高度
