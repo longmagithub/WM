@@ -213,23 +213,23 @@
         this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            if (res.data.type === 1) {
-              if (res.data.first) {
-                if (res.data.price > 0) {
-                  console.log(res.data.price)
-                  let IndexboonPriceArr = []
-                  IndexboonPriceArr.push(res.data.price)
-                  console.log('____-----__-_-___-_-_-_-_------')
-                  console.log(IndexboonPriceArr.join())
-                  if (IndexboonPriceArr.join().length === 3) {
-                    this.IndexboonPrice = IndexboonPriceArr.join() + '0'
-                  } else {
-                    this.IndexboonPrice = res.data.price
-                  }
-                }
-                this.isCloseBoon = true
-              }
+//            if (res.data.type === 1) {
+//              if (res.data.first) {
+//                if (res.data.price > 0) {
+            console.log(res.data.price)
+            let IndexboonPriceArr = []
+            IndexboonPriceArr.push(res.data.price)
+            console.log('____-----__-_-___-_-_-_-_------')
+            console.log(IndexboonPriceArr.join())
+            if (IndexboonPriceArr.join().length === 3) {
+              this.IndexboonPrice = IndexboonPriceArr.join() + '0'
+            } else {
+              this.IndexboonPrice = res.data.price
             }
+//                }
+            this.isCloseBoon = true
+//              }
+//            }
           }
         })
       },
