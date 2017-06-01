@@ -577,7 +577,7 @@
           deceleration: 0.0008,
           click: true
         })
-//        window.alert('初始化滚动')
+        window.alert('初始化滚动')
         // 通过foodsScroll 监听个'scroll'事件 在scroll滚动的时候能把实时的位置给暴露出来
         // 事件回调函数的参数是pos,  pos就是位置（有x、y坐标）
         this.foodsScroll.on('scroll', (pos) => {
@@ -594,7 +594,7 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
-//        window.alert('初始化滚动')
+        window.alert('初始化滚动')
       },
       // menu 改变列表位置
       selectMenu(index, event) {
