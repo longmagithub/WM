@@ -2,7 +2,7 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item, index) in goods" class="menu-item" :class="{'current':currentIndex === index}"
+        <li v-for="(item, index) in goods" :key="index" class="menu-item" :class="{'current':currentIndex === index}"
             @click="selectMenu(index, $event)">
           <span class="text"><i class="uxwm-iconfont huo"
                                 v-show="item.dishTypeStyle === 1"></i>{{item.dishTypeName}}</span>
@@ -12,7 +12,7 @@
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="(item, index) in goods" class="food-list" ref="foodList">
+        <li v-for="(item, index) in goods" class="food-list" ref="foodList" :key="index">
           <h1 class="food-title"><span class="name">{{item.dishTypeName}}</span><span
             class="desc">{{item.dishTypeDescription
             }}</span></h1>
@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="ball-container">
-          <div v-for="ball in balls">
+          <div v-for="(ball, index) in balls" :key="index">
             <transition name="drop" @before-enter="beforeDrop" @enter="dropping" @after-enter="afterDrop">
               <div class="ball" v-show="ball.show">
                 <div class="inner inner-hook"></div>
@@ -488,14 +488,14 @@
                 })
               })
               this.goods = res.data.dishesList
-              setTimeout(() => {
+              this.$nextTick(() => {
                 // 初始化滚动
                 this._initScroll()
                 // 初始化数据
                 this.initCategoryNum()
                 // 获取区间高度
                 this._calculateHeight()
-              }, 500)
+              })
             }
           }
         })
@@ -577,6 +577,7 @@
           deceleration: 0.0008,
           click: true
         })
+//        window.alert('初始化滚动')
         // 通过foodsScroll 监听个'scroll'事件 在scroll滚动的时候能把实时的位置给暴露出来
         // 事件回调函数的参数是pos,  pos就是位置（有x、y坐标）
         this.foodsScroll.on('scroll', (pos) => {
@@ -593,6 +594,7 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
+//        window.alert('初始化滚动')
       },
       // menu 改变列表位置
       selectMenu(index, event) {
