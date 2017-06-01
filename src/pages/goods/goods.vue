@@ -489,8 +489,8 @@
               })
               this.goods = res.data.dishesList
               setTimeout(() => {
-                // 初始化数据
-                this.initCategoryNum()
+                // 获取区间高度
+                this._calculateHeight()
               }, 500)
             }
           }
@@ -593,6 +593,8 @@
 //        console.log(this.listHeight)
         // 初始化滚动
         this._initScroll()
+        // 初始化数据
+        this.initCategoryNum()
       },
       // menu 改变列表位置
       selectMenu(index, event) {
@@ -815,8 +817,6 @@
 //        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-        // 获取区间高度
-        this._calculateHeight()
       },
       // toggle toast
       toggleToast(show, text) {
