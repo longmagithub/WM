@@ -594,7 +594,7 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
-        window.alert('初始化滚动')
+        window.alert('获取区间高度')
       },
       // menu 改变列表位置
       selectMenu(index, event) {
@@ -817,6 +817,7 @@
         console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
+        window.alert('初始化数据')
       },
       // toggle toast
       toggleToast(show, text) {
