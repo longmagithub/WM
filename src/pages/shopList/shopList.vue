@@ -64,8 +64,8 @@
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
-//      this.getShopList(this.customerId, 0, 0)
-      this.getLocation()
+      this.getShopList(this.customerId, 0, 0)
+//      this.getLocation()
     },
     methods: {
       // 原生获取地理位置
@@ -119,14 +119,15 @@
                 this.goIndex(res.data[0].shopId, res.data[0].nearby)
                 return
               }
-              res.data.forEach((data) => {
-                data.discounts = data.discounts.reverse()
-                data.thirdDiscounts = data.thirdDiscounts.reverse()
-                // 添加 图片分割
-                if (data.logo) {
-                  data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
-                }
-              })
+              this.goIndex(res.data[0].shopId, res.data[0].nearby)
+//              res.data.forEach((data) => {
+//                data.discounts = data.discounts.reverse()
+//                data.thirdDiscounts = data.thirdDiscounts.reverse()
+//                // 添加 图片分割
+//                if (data.logo) {
+//                  data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+//                }
+//              })
               this.shopList = res.data
             }
           }
