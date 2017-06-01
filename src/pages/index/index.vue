@@ -111,7 +111,7 @@
         deliveryfee: {}, // 配送费
         shopStatus: 0, // 门店状态
         isCloseBoon: false,
-        IndexboonPrice: 0,
+        IndexboonPrice: '',
         headerHeight: 0,
         toogleBoonBtnText: '炫耀一下',
         toogleBoonBtnClass: false,
@@ -139,6 +139,10 @@
       this.getBoonMeg()
       // 测试shoplist
       // this.testShopList(this.customerId, 0, 0)
+      let a = []
+      a[0] = 5.2
+      console.log('++++++++++++++++=')
+      console.log(a.join() + '0')
     },
     computed: {
       // 检测 vuex 中boonPrice
@@ -211,8 +215,12 @@
             if (res.data.type === 1) {
               if (res.data.first) {
                 if (res.data.price > 0) {
-                  this.IndexboonPrice = parseFloat(res.data.price)
                   console.log(res.data.price)
+                  let IndexboonPriceArr = []
+                  IndexboonPriceArr[0] = res.data.price
+                  if (IndexboonPriceArr[0].join().length === 3) {
+                    this.IndexboonPrice = IndexboonPriceArr[0].join() + '0'
+                  }
                   console.log(this.IndexboonPrice)
                   this.isCloseBoon = true
                 }
