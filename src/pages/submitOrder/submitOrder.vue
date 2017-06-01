@@ -612,7 +612,8 @@
                   path: '/index',
                   query: {
                     'shopId': getStore('userInfo').shopId,
-                    'customerId': getStore('userInfo').customerId
+                    'customerId': getStore('userInfo').customerId,
+                    'isDistance': 1
                   }
                 })
               }, 2000)

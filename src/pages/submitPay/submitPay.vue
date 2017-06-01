@@ -138,7 +138,8 @@
                 path: '/index',
                 query: {
                   'shopId': getStore('userInfo').shopId,
-                  'customerId': getStore('userInfo').customerId
+                  'customerId': getStore('userInfo').customerId,
+                  'isDistance': 1
                 }
               })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
