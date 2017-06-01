@@ -213,17 +213,6 @@
         this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-            let IndexboonPriceArr = []
-            IndexboonPriceArr[0] = res.data.price
-            this.IndexboonPrice = IndexboonPriceArr[0].join()
-            console.log(this.IndexboonPrice)
-//            console.log(IndexboonPriceArr[0].join().length)
-//            console.log(res.data.price)
-//            if (IndexboonPriceArr[0].join().length === 4) {
-//              this.IndexboonPrice = IndexboonPriceArr[0].join() + '0'
-//            } else {
-//              this.IndexboonPrice = res.data.price
-//            }
             if (res.data.type === 1) {
               if (res.data.first) {
                 if (res.data.price > 0) {
