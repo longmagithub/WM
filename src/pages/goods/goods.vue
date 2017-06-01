@@ -348,7 +348,7 @@
     },
     mounted() {
       this.$nextTick(() => {
-        window.alert('德玛西亚')
+//        window.alert('德玛西亚')
       })
       // 初始化数据
 //      this.initCategoryNum()
@@ -494,11 +494,11 @@
                   dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
                 })
               })
-              window.alert('赋值前')
+//              window.alert('赋值前')
               this.goods = res.data.dishesList
-              window.alert('赋值后')
+//              window.alert('赋值后')
               this.$nextTick(() => {
-                window.alert('nextTick')
+//                window.alert('nextTick')
                 // 初始化滚动
 //                this._initScroll()
                 // 获取区间高度
@@ -579,37 +579,37 @@
       },
       // 初始化滚动
       _initScroll() {
-        window.alert('初始化滚动1')
+//        window.alert('初始化滚动1')
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
         })
-        window.alert('初始化滚动2')
+//        window.alert('初始化滚动2')
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
           probeType: 3,
           deceleration: 0.0008,
           click: true
         })
-        window.alert('初始化滚动3')
+//        window.alert('初始化滚动3')
         // 通过foodsScroll 监听个'scroll'事件 在scroll滚动的时候能把实时的位置给暴露出来
         // 事件回调函数的参数是pos,  pos就是位置（有x、y坐标）
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y))
         })
-        window.alert('初始化滚动4')
+//        window.alert('初始化滚动4')
       },
       // 获取区间高度
       _calculateHeight() {
-        window.alert('获取区间高度1')
+//        window.alert('获取区间高度1')
         let foodList = this.$refs.foodList
         let height = 0
         this.listHeight.push(height)
-        window.alert('获取区间高度2')
+//        window.alert('获取区间高度2')
         for (let i = 0; i < foodList.length; i++) {
           let item = foodList[i]
           height += item.clientHeight
           this.listHeight.push(height)
         }
-        window.alert('获取区间高度3')
+//        window.alert('获取区间高度3')
       },
       // menu 改变列表位置
       selectMenu(index, event) {
@@ -832,7 +832,7 @@
         console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
-        window.alert('初始化数据')
+//        window.alert('初始化数据')
       },
       // toggle toast
       toggleToast(show, text) {

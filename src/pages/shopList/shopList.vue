@@ -119,15 +119,15 @@
                 this.goIndex(res.data[0].shopId, res.data[0].nearby)
                 return
               }
-              this.goIndex(res.data[0].shopId, res.data[0].nearby)
-//              res.data.forEach((data) => {
-//                data.discounts = data.discounts.reverse()
-//                data.thirdDiscounts = data.thirdDiscounts.reverse()
-//                // 添加 图片分割
-//                if (data.logo) {
-//                  data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
-//                }
-//              })
+//              this.goIndex(res.data[0].shopId, res.data[0].nearby)
+              res.data.forEach((data) => {
+                data.discounts = data.discounts.reverse()
+                data.thirdDiscounts = data.thirdDiscounts.reverse()
+                // 添加 图片分割
+                if (data.logo) {
+                  data.logo = data.logo + '?x-oss-process=image/resize,m_fill,h_100,w_100'
+                }
+              })
               this.shopList = res.data
             }
           }
