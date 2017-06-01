@@ -490,7 +490,7 @@
               this.goods = res.data.dishesList
               setTimeout(() => {
                 // 初始化滚动
-                this._initScroll()
+//                this._initScroll()
                 // 获取区间高度
                 this._calculateHeight()
                 // 初始化数据
