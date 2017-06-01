@@ -67,8 +67,8 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="isCloseBoon">
-      <!--<div class="boon" v-show="1">-->
+    <!--<div class="boon" v-show="isCloseBoon">-->
+    <div class="boon" v-show="1">
       <div class="backImg">
         <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
@@ -142,6 +142,7 @@
       let a = []
       a[0] = 5.2
       console.log('++++++++++++++++=')
+      console.log(a.join().length)
       console.log(a.join() + '0')
     },
     computed: {
@@ -212,15 +213,24 @@
         this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
+            let IndexboonPriceArr = []
+            IndexboonPriceArr[0] = res.data.price
+            this.IndexboonPrice = IndexboonPriceArr[0].join()
+            console.log(this.IndexboonPrice)
+//            console.log(IndexboonPriceArr[0].join().length)
+//            console.log(res.data.price)
+//            if (IndexboonPriceArr[0].join().length === 4) {
+//              this.IndexboonPrice = IndexboonPriceArr[0].join() + '0'
+//            } else {
+//              this.IndexboonPrice = res.data.price
+//            }
             if (res.data.type === 1) {
               if (res.data.first) {
                 if (res.data.price > 0) {
                   console.log(res.data.price)
                   let IndexboonPriceArr = []
                   IndexboonPriceArr[0] = res.data.price
-                  if (IndexboonPriceArr[0].join().length === 3) {
-                    this.IndexboonPrice = IndexboonPriceArr[0].join() + '0'
-                  }
+                  this.IndexboonPrice = IndexboonPriceArr[0].join()
                   console.log(this.IndexboonPrice)
                   this.isCloseBoon = true
                 }
