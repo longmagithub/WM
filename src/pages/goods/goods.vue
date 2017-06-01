@@ -489,8 +489,6 @@
               })
               this.goods = res.data.dishesList
               setTimeout(() => {
-                // 获取区间高度
-                this._calculateHeight()
                 // 初始化数据
                 this.initCategoryNum()
               }, 500)
@@ -814,9 +812,11 @@
             newArr[index] = 0
           }
         })
-        console.log(JSON.stringify(this.cartFoodList))
+//        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
+        // 获取区间高度
+        this._calculateHeight()
       },
       // toggle toast
       toggleToast(show, text) {
