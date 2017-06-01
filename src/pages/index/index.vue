@@ -67,8 +67,8 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="isCloseBoon">
-    <!--<div class="boon" v-show="1">-->
+    <!--<div class="boon" v-show="isCloseBoon">-->
+      <div class="boon" v-show="1">
       <div class="backImg">
         <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
@@ -221,8 +221,8 @@
                   IndexboonPriceArr[0] = res.data.price
                   this.IndexboonPrice = IndexboonPriceArr[0].join()
                   console.log(this.IndexboonPrice)
-                  this.isCloseBoon = true
                 }
+                this.isCloseBoon = true
               }
             }
           }
