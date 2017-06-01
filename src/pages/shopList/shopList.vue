@@ -152,8 +152,10 @@
       },
       // 去首页
       goIndex(id, isDistance) {
-        window.location.href =
-          'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&isDistance=' + isDistance + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
+        setTimeout(() => {
+          window.location.href =
+            'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + id + '&isDistance=' + isDistance + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
+        }, 500)
 //        this.$router.push({
 //          path: '/index',
 //          query: {
