@@ -64,8 +64,8 @@
     created() {
       this.customerId = this.$route.query.customerId
       console.log(this.customerId)
-      this.getShopList(this.customerId, 0, 0)
-//      this.getLocation()
+//      this.getShopList(this.customerId, 0, 0)
+      this.getLocation()
     },
     methods: {
       // 原生获取地理位置

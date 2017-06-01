@@ -67,8 +67,8 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <!--<div class="boon" v-show="isCloseBoon">-->
-    <div class="boon" v-show="1">
+    <div class="boon" v-show="isCloseBoon">
+    <!--<div class="boon" v-show="1">-->
       <div class="backImg">
         <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
@@ -139,11 +139,6 @@
       this.getBoonMeg()
       // 测试shoplist
       // this.testShopList(this.customerId, 0, 0)
-      let a = []
-      a[0] = 5.2
-      console.log('++++++++++++++++=')
-      console.log(a.join().length)
-      console.log(a.join() + '0')
     },
     computed: {
       // 检测 vuex 中boonPrice
@@ -213,23 +208,20 @@
         this.axios.get(`/br/customer/redEnvelope${this.PublicJs.createParams(data)}`).then((res) => {
           res = res.data
           if (res.success) {
-//            if (res.data.type === 1) {
-//              if (res.data.first) {
-//                if (res.data.price > 0) {
-            console.log(res.data.price)
-            let IndexboonPriceArr = []
-            IndexboonPriceArr.push(res.data.price)
-            console.log('____-----__-_-___-_-_-_-_------')
-            console.log(IndexboonPriceArr.join())
-            if (IndexboonPriceArr.join().length === 3) {
-              this.IndexboonPrice = IndexboonPriceArr.join() + '0'
-            } else {
-              this.IndexboonPrice = res.data.price
+            if (res.data.type === 1) {
+              if (res.data.first) {
+                if (res.data.price > 0) {
+                  let IndexboonPriceArr = []
+                  IndexboonPriceArr.push(res.data.price)
+                  if (IndexboonPriceArr.join().length === 3) {
+                    this.IndexboonPrice = IndexboonPriceArr.join() + '0'
+                  } else {
+                    this.IndexboonPrice = res.data.price
+                  }
+                }
+                this.isCloseBoon = true
+              }
             }
-//                }
-            this.isCloseBoon = true
-//              }
-//            }
           }
         })
       },
