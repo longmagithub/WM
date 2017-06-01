@@ -488,10 +488,10 @@
                 })
               })
               this.goods = res.data.dishesList
-              setTimeout(() => {
+              this.$nextTick(() => {
                 // 获取区间高度
-                this._calculateHeight()
-              }, 800)
+                this._initScroll()
+              })
             }
           }
         })
@@ -578,6 +578,8 @@
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y))
         })
+        // 初始化滚动
+        this._calculateHeight()
       },
       // 获取区间高度
       _calculateHeight() {
@@ -591,8 +593,6 @@
         }
 //        window.alert(JSON.stringify(this.listHeight))
 //        console.log(this.listHeight)
-        // 初始化滚动
-        this._initScroll()
         // 初始化数据
         this.initCategoryNum()
       },
