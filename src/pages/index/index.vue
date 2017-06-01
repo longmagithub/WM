@@ -68,7 +68,7 @@
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
     <!--<div class="boon" v-show="isCloseBoon">-->
-      <div class="boon" v-show="1">
+    <div class="boon" v-show="1">
       <div class="backImg">
         <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
@@ -111,7 +111,7 @@
         deliveryfee: {}, // 配送费
         shopStatus: 0, // 门店状态
         isCloseBoon: false,
-        IndexboonPrice: '',
+        IndexboonPrice: 0,
         headerHeight: 0,
         toogleBoonBtnText: '炫耀一下',
         toogleBoonBtnClass: false,
@@ -218,9 +218,14 @@
                 if (res.data.price > 0) {
                   console.log(res.data.price)
                   let IndexboonPriceArr = []
-                  IndexboonPriceArr[0] = res.data.price
-                  this.IndexboonPrice = IndexboonPriceArr[0].join()
-                  console.log(this.IndexboonPrice)
+                  IndexboonPriceArr.push(res.data.price)
+                  console.log('____-----__-_-___-_-_-_-_------')
+                  console.log(IndexboonPriceArr.join())
+                  if (IndexboonPriceArr.join().length === 3) {
+                    this.IndexboonPrice = IndexboonPriceArr.join() + '0'
+                  } else {
+                    this.IndexboonPrice = res.data.price
+                  }
                 }
                 this.isCloseBoon = true
               }
