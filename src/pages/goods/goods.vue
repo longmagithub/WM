@@ -940,7 +940,7 @@
     watch: {
       // 监听shopCart的变化
       shopCartList: function (value) {
-        this.initCategoryNum()
+//        this.initCategoryNum()
       }
       // 监听URL 变化
 //      changeShopId: function (value) {
