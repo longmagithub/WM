@@ -497,9 +497,11 @@
               this.$nextTick(() => {
                 window.alert('nextTick')
                 // 初始化滚动
-                this._initScroll()
+//                this._initScroll()
                 // 获取区间高度
                 this._calculateHeight()
+                // 初始化数据
+                this.initCategoryNum()
               })
             }
           }
@@ -948,7 +950,7 @@
     watch: {
       // 监听shopCart的变化
       shopCartList: function (value) {
-//        this.initCategoryNum()
+        this.initCategoryNum()
       }
       // 监听URL 变化
 //      changeShopId: function (value) {
