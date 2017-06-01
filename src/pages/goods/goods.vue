@@ -491,7 +491,7 @@
               setTimeout(() => {
                 // 获取区间高度
                 this._calculateHeight()
-              }, 500)
+              }, 800)
             }
           }
         })
