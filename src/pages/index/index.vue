@@ -211,7 +211,7 @@
             if (res.data.type === 1) {
               if (res.data.first) {
                 if (res.data.price > 0) {
-                  this.IndexboonPrice = res.data.price
+                  this.IndexboonPrice = res.data.price + ''
                   this.isCloseBoon = true
                 }
               }

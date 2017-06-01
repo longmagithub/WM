@@ -347,6 +347,9 @@
 //      console.log(JSON.stringify(this.cartList))
     },
     mounted() {
+      this.$nextTick(() => {
+        window.alert('德玛西亚')
+      })
       // 初始化数据
 //      this.initCategoryNum()
     },
@@ -499,7 +502,7 @@
                 // 初始化滚动
 //                this._initScroll()
                 // 获取区间高度
-                this._calculateHeight()
+//                this._calculateHeight()
                 // 初始化数据
 //                this.initCategoryNum()
               })
