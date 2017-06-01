@@ -591,8 +591,8 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
-        window.alert(JSON.stringify(this.listHeight))
-        console.log(this.listHeight)
+//        window.alert(JSON.stringify(this.listHeight))
+//        console.log(this.listHeight)
         // 初始化滚动
         this._initScroll()
       },
