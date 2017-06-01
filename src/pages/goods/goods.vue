@@ -489,10 +489,10 @@
               })
               this.goods = res.data.dishesList
               setTimeout(() => {
-                // 初始化滚动
-//                this._initScroll()
                 // 获取区间高度
                 this._calculateHeight()
+                // 初始化滚动
+//                this._initScroll()
                 // 初始化数据
                 this.initCategoryNum()
               }, 500)
@@ -593,6 +593,8 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
+        window.alert(JSON.stringify(this.listHeight))
+        console.log(this.listHeight)
       },
       // menu 改变列表位置
       selectMenu(index, event) {
