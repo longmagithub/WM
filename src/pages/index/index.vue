@@ -67,8 +67,8 @@
     </div>
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
-    <div class="boon" v-show="isCloseBoon">
-    <!--<div class="boon" v-show="1">-->
+    <!--<div class="boon" v-show="isCloseBoon">-->
+    <div class="boon" v-show="1">
       <div class="backImg">
         <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
@@ -450,12 +450,15 @@
   }
 
   .boon .backImg {
+    box-sizing: border-box;
     position: relative;
     top: 10%;
     left: 11%;
+    padding-left: 16px;
     width: 78%;
     height: 374px;
-    background: url("../../assets/shareBack.png") no-repeat center;
+    background: url("../../assets/Group51@2x.png") no-repeat center;
+    /*background-size: 288px 374px;*/
     background-size: 288px 374px;
   }
 
@@ -493,7 +496,7 @@
   .boon .backImg .boonBtn {
     position: absolute;
     top: 389px;
-    left: 10%;
+    left: 11%;
     width: 80%;
     height: 45px;
     line-height: 45px;
