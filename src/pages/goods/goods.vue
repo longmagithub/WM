@@ -346,11 +346,6 @@
       }
 //      console.log(JSON.stringify(this.cartList))
     },
-    mounted() {
-      setTimeout(() => {
-        this._initScroll()
-      }, 20)
-    },
     computed: {
       // 检测 vuex 中cartList
       ...mapState(['cartList']),
@@ -495,7 +490,7 @@
               this.goods = res.data.dishesList
               setTimeout(() => {
                 this._calculateHeight()
-              }, 20)
+              }, 200)
 //              this.$nextTick(() => {
               // 获取区间高度
 //              })
@@ -600,6 +595,7 @@
 //        console.log(this.listHeight)
         // 初始化数据
         setTimeout(() => {
+          this._initScroll()
           this.initCategoryNum()
         }, 100)
       },
