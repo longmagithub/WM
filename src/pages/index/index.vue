@@ -455,7 +455,7 @@
     left: 11%;
     width: 78%;
     height: 374px;
-    background: url("../../assets/hongbao@2x.png") no-repeat center;
+    background: url("../../assets/shareBack.png") no-repeat center;
     background-size: 288px 374px;
   }
 
