@@ -108,6 +108,7 @@
       // 去列表页面
       goShopList() {
         if (this.referenceCode === '') {
+          this.toggleToast(1, '邀请码不能为空', 1500)
           return
         } else {
           const data = {
