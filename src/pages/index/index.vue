@@ -84,7 +84,7 @@
         </div>
       </div>
     </div>
-    <wxshare v-if="shopDetail" :shopName="shopDetail"></wxshare>
+    <wxshare></wxshare>
   </div>
 </template>
 
