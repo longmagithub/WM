@@ -192,9 +192,15 @@
           <div class="specs-content">
             <p class="text">规格</p>
             <div class="content">
-              <span class="specs-item" v-for="(itme, index) in specs.dishSpecification"
+              <span class="specs-item" v-for="(specsItme, index) in specs.dishSpecification"
                     :class="{'normal': index === specsIndex}"
-                    @click="selectSpecs(index)">{{itme.specificationName}}</span>
+                    @click="selectSpecs(index)">{{specsItme.specificationName}}</span>
+            </div>
+            <p class="text">口味</p>
+            <div class="content">
+              <span class="taste-item" v-for="(tasteItme, index) in textKouwei"
+                    :class="{'normal': index === tasteIndex}"
+                    @click="tasteSpecs(index)">{{tasteItme.name}}</span>
             </div>
           </div>
           <div class="specs-price">
@@ -280,6 +286,7 @@
         selectedFood: {},
         showSpecs: false,
         specsIndex: 0,  // 规格的index
+        tasteIndex: 0, // 口味index
         shopId: '',
         customerId: '',
         categoryNum: [], // 商品类型右上角已加入购物车的数量
@@ -315,6 +322,24 @@
           }, {
             beginTime: '13:00',
             endTime: '22:00'
+          }
+        ],
+        textKouwei: [
+          {
+            name: '老德玛',
+            id: 'laodema'
+          },
+          {
+            name: '老德玛1',
+            id: 'laodema1'
+          },
+          {
+            name: '老德玛2',
+            id: 'laodema2'
+          },
+          {
+            name: '老德玛3老德玛',
+            id: 'laodema3'
           }
         ]
       }
@@ -621,6 +646,7 @@
       closeSpesc() {
         this.showSpecs = false
         this.specsIndex = 0
+        this.tasteIndex = 0
       },
       // 子组件传来方法
       showSpecsFun(event, foods, toggleSpecs) {
@@ -630,6 +656,10 @@
       // 记录当前所选规格的索引值
       selectSpecs(index) {
         this.specsIndex = index
+      },
+      // 记录当前所选规格下口味的索引值
+      tasteSpecs(index) {
+        this.tasteIndex = index
       },
       // 多规格加入购车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，是否爆款分类，限购数量，原价，库存
@@ -1292,7 +1322,7 @@
 
   .specs-wrapper {
     position: fixed;
-    top: 30%;
+    top: 25%;
     left: 10%;
     width: 80%;
     min-height: 150px;
@@ -1341,19 +1371,40 @@
   }
 
   .specs-wrapper .specs-content .content .specs-item {
-    font-size: 12px;
+    box-sizing: border-box;
     margin: 3px 17px 12px 0px;
-    padding: 0px 5px;
+    padding: 0px 10px;
     height: 22px;
     line-height: 22px;
-    color: #898989;
-    border: 1px solid #898989;
-    border-radius: 11px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #A2A2A2;
+    letter-spacing: 0;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+  }
+
+  .specs-wrapper .specs-content .content .taste-item {
+    box-sizing: border-box;
+    margin: 3px 17px 10px 0px;
+    padding: 0px 5px;
+    line-height: 22px;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #A2A2A2;
+    letter-spacing: 0;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
   }
 
   .specs-wrapper .specs-content .content .normal {
-    color: #ff8932;
-    border: 1px solid #ff8932;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    background: #FF8932;
+    border: 1px solid #FF8932;
+    border-radius: 5px;
   }
 
   .specs-wrapper .specs-price {
