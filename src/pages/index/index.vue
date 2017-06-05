@@ -148,7 +148,7 @@
       // 红包提示语
       this.getBoonMeg()
       // 修改提示状态
-      if (getStore('isRemind').isRemind !== undefined) {
+      if (getStore('isRemind') !== null) {
         this.MENU_REMIND(getStore('isRemind').isRemind)
       }
       // 测试shoplist
@@ -324,7 +324,7 @@
       },
       // 邀请码
       goInviteNum() {
-        this.isRemind.inviteNumRemind = false
+//        this.isRemind.inviteNumRemind = false
         this.$router.push({
           path: '/inviteNum',
           query: {
