@@ -121,13 +121,13 @@
               console.log(res.data)
               this.toggleToast(1, res.message, 1500)
               setTimeout(() => {
-                window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) /
+                window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&isDistance=1&T=' + Date.parse(new Date()) /
                   1000
               }, 2000)
             } else if (res.code === 14001) {
               this.toggleToast(1, res.message, 1500)
               setTimeout(() => {
-                window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) /
+                window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&isDistance=1&T=' + Date.parse(new Date()) /
                   1000
               }, 2000)
             } else {
