@@ -51,7 +51,8 @@ Vue.use(VueResource) // 声明使用vue-resource
 Vue.use(VueValidator) // 声明使用vue-validator
 Vue.use(VueAxios, axios) // 声明使用VueAxios
 Vue.use(VueLazyload, {
-  loading: require('./assets/item_logo.png')
+  loading: require('./assets/logo.png'),
+  error: require('./assets/logo.png')
 })
 // 注册
 Vue.prototype.PublicJs = PublicJs

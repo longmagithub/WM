@@ -23,6 +23,7 @@
 <script>
   import toast from '../../components/toast.vue'
   import {getStore, urlParse, setStore} from '../../common/utils/util'
+  //  import {mapMutations} from 'vuex'
   export default {
     data() {
       return {
@@ -37,6 +38,9 @@
       }
     },
     created() {
+      setStore('isRemind', {
+        isRemind: true
+      })
       this.shopId = this.$route.query.shopId
       this.customerId = this.$route.query.customerId
       if (this.shopId && this.customerId) {
@@ -164,8 +168,8 @@
     left: 0px;
     bottom: -300px;
     width: 100%;
-    height: 100%;gi
-    background: rgba(255, 209, 102, 1);
+    height: 100%;
+    gi background: rgba(255, 209, 102, 1);
     background-size: 100%;
   }
 
@@ -265,7 +269,7 @@
   .inviteBox {
     position: absolute;
     top: 364px;
-/*    left: 15%;*/
+    /*    left: 15%;*/
     width: 100%;
     background: rgba(255, 209, 102, 1);
   }

@@ -12,7 +12,8 @@ import {
   USER_ADDRESSID, // 用户地址id
   RECORD_USERINFO, // 用户信息
   BOON_PRICE, // 红包金额
-  MANJIAN_FEESPRICE // 满减_配送费
+  MANJIAN_FEESPRICE, // 满减_配送费
+  MENU_REMIND // 是否有显示提醒小红点
   // RECORD_SHOPDETAIL,
   // GET_USERINFO,
   // CHOOSE_SEARCH_ADDRESS,
@@ -291,5 +292,9 @@ export default {
   [MANJIAN_FEESPRICE](state, manJianFeesPrice) {
     console.log(manJianFeesPrice)
     state.manJianFeesPrice = manJianFeesPrice
+  },
+  // 是否显示 小红点
+  [MENU_REMIND](state, menuRemind) {
+    state.menuRemind = menuRemind
   }
 }

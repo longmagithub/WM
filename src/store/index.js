@@ -36,7 +36,8 @@ const state = {
   endDate: null, // 红包结束时间
   redEnvelopeType: null, // 红包类型
   redEnvelopeId: '', // 红包id
-  manJianFeesPrice: null // 满减配送费金额
+  manJianFeesPrice: null, // 满减配送费金额
+  menuRemind: false // 是否显示提示小红点
 }
 
 export default new Vuex.Store({

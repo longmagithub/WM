@@ -19,7 +19,7 @@
           <div class="box-content">
             <div class="logo">
               <img v-if="shopDetail.logo" :src="shopDetail.logo" width="48px" height="48px">
-              <img v-else src="../../assets/item_logo.png" width="50px" height="50px">
+              <!--<img v-else src="../../assets/item_logo.png" width="50px" height="50px">-->
               <!--<img src="../../assets/item_logo.png" width="50px" height="50px">-->
             </div>
             <div class="content">
@@ -53,9 +53,13 @@
             mask="white"
             colors="circleMenu.colors">
             <div class="circle-menu"
-                 slot="item_btn"></div>
-            <span slot="item_1" @click="goUser" class="orderList">订单</span>
-            <span slot="item_2" @click="goInviteNum" class="">邀请码</span>
+                 slot="item_btn">
+              <i class="remind"
+                 v-show="isRemind.orderRemind || !menuRemind || isRemind.boonRemind"></i>
+            </div>
+            <span slot="item_1" @click="goUser" class="menu-orderList">订单</span>
+            <span slot="item_2" @click="goInviteNum" class="menu-inviteNum">邀请码
+              <i class="remind" v-show="!menuRemind"></i></span>
             <span slot="item_3" @click="goredList" class="">红包</span>
           </circle-menu>
         </div>
@@ -68,7 +72,7 @@
     <toast :show="toastShow" :text="toastText"></toast>
     <!--红包toast-->
     <div class="boon" v-show="isCloseBoon">
-    <!--<div class="boon" v-show="1">-->
+      <!--<div class="boon" v-show="1">-->
       <div class="backImg">
         <i class="closeBoon" @click="closeBoon"></i>
         <div class="boonDesc" v-html="boonMegText"></div>
@@ -94,6 +98,11 @@
   export default{
     data() {
       return {
+        isRemind: { // 提醒小红点
+          orderRemind: false,
+          inviteNumRemind: true,
+          boonRemind: false
+        },
         shopListShow: false, // 门店列表 switch
         freedispatch: {}, // 免配送费
         circleMenu: {
@@ -113,7 +122,7 @@
         isCloseBoon: false,
         IndexboonPrice: 0,
         headerHeight: 0,
-        toogleBoonBtnText: '炫耀一下',
+        toogleBoonBtnText: '邀请好友下单，领取更多红包',
         toogleBoonBtnClass: false,
         boonMegText: '', // 红包提示语
         shopListArr: []
@@ -128,6 +137,7 @@
         'customerId': this.$route.query.customerId,
         'shopId': this.$route.query.shopId
       })
+
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.getRedEnvelope()
@@ -137,12 +147,16 @@
       this.getFreedispatch()
       // 红包提示语
       this.getBoonMeg()
+      // 修改提示状态
+      if (getStore('isRemind').isRemind !== undefined) {
+        this.MENU_REMIND(getStore('isRemind').isRemind)
+      }
       // 测试shoplist
       // this.testShopList(this.customerId, 0, 0)
     },
     computed: {
       // 检测 vuex 中boonPrice
-      ...mapState(['boonPrice', 'cartList']),
+      ...mapState(['boonPrice', 'cartList', 'menuRemind']),
       initHeight() {
         this.headerHeight = this.$refs.header
       }
@@ -151,7 +165,7 @@
     },
     methods: {
       // 红包
-      ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE', 'CLEAR_CART', 'INIT_BUYCART']),
+      ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE', 'CLEAR_CART', 'INIT_BUYCART', 'MENU_REMIND']),
       // 测试shopList
       testShopList(id, lon, lat) {
         const data = {
@@ -310,6 +324,7 @@
       },
       // 邀请码
       goInviteNum() {
+        this.isRemind.inviteNumRemind = false
         this.$router.push({
           path: '/inviteNum',
           query: {
@@ -318,9 +333,10 @@
           }
         })
       },
-      // 改变红包btn 内容
+      // 点击红包跳转邀请码
       toogleBoonBtn() {
-        this.toogleBoonBtnText = '右上角你懂得'
+        this.goInviteNum()
+//        this.toogleBoonBtnText = '右上角你懂得'
 //        this.toogleBoonBtnClass = true
       },
       // 红包提示语
@@ -457,7 +473,7 @@
     padding-left: 16px;
     width: 78%;
     height: 374px;
-    background: url("../../assets/Group51@2x.png") no-repeat center;
+    background: url("../../assets/hongbao@2x.png") no-repeat center;
     /*background-size: 288px 374px;*/
     background-size: 288px 374px;
   }
@@ -496,17 +512,18 @@
   .boon .backImg .boonBtn {
     position: absolute;
     top: 389px;
-    left: 11%;
-    width: 80%;
+    /*padding-right: 10px;*/
+    left: 3%;
+    width: 100%;
     height: 45px;
     line-height: 45px;
     text-align: center;
     font-family: STYuanti-SC-Bold;
-    font-size: 22px;
-    color: #FFE826;
-    letter-spacing: 3.84px;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 1.15px;
     background: url("../../assets/boonBtn.png") no-repeat center;
-    background-size: 214px 45px;
+    background-size: 80% 45px;
   }
 
   .boon .backImg .toogleBoonBtnClass {
@@ -739,6 +756,7 @@
 
   .user .circle-menu {
     box-sizing: border-box;
+    position: relative;
     width: 48px;
     height: 48px;
     line-height: 45px;
@@ -747,22 +765,40 @@
     border-radius: 50%;
     background: url("../../assets/userImg.png") no-repeat center;
     background-size: 48px 48px;
-    border: 1px solid rgba(255, 255, 255, 0.9);
+    /*border: 1px solid rgba(255, 255, 255, 0.9);*/
   }
 
   .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item span {
+    box-sizing: border-box;
     display: block;
     width: 48px !important;
     height: 48px !important;
     line-height: 48px !important;
     border-radius: 50% !important;
-    background: #ff6651 !important;
-    font-size: 12px;
+    background: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    /*font-size: 12px;*/
     color: #fff;
   }
 
   .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item .orderList {
     font-size: 13px;
+  }
+
+  .menu-inviteNum,
+  .menu-orderList {
+    position: relative;
+  }
+
+  .user .circle-menu .remind,
+  .menu-inviteNum .remind {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #FF553E;
   }
 
   .user-btn {
