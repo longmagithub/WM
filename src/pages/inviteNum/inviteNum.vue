@@ -11,7 +11,7 @@
       <div class="inviteBox">
         <p class="inviteWrapper">
           <i class="uxwm-iconfont icon_inviteNum"></i>
-          <input type="text" class="inviteInput" v-model="referenceCode" placeholder="输入您的优惠码">
+          <input type="text" class="inviteInput" v-model="referenceCode" placeholder="输入好友的邀请码">
         </p>
         <div class="inviteBtn" @click="goShopList">确定</div>
       </div>
@@ -94,7 +94,7 @@
         this.axios.get(`/br/customer/idcode?sessionId=${id}`).then((res) => {
           res = res.data
           if (res.success) {
-            this.idcode = res.data.idCode
+            this.idcode = res.data.idCode.toUpperCase()
             this.isSuccessInviteNum = res.data.referenceCode
             if (this.isSuccessInviteNum === '') {
               this.isSuccessInvite = false
@@ -169,7 +169,7 @@
     bottom: -300px;
     width: 100%;
     height: 100%;
-    gi background: rgba(255, 209, 102, 1);
+    background: rgba(255, 209, 102, 1);
     background-size: 100%;
   }
 
