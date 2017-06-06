@@ -53,6 +53,7 @@
       isCode() {
         let url = window.location.href
         if (getStore('openId') === null) {
+          console.log('openId')
           if (url.indexOf('code') < 0) {
             this.to()
           } else {
@@ -106,27 +107,33 @@
       },
       // 去列表页面
       goShopList() {
-        const data = {
-          sessionId: this.customerId,
-          referenceCode: this.referenceCode
-        }
-        this.axios.post('/br/customer/idcode', data).then((res) => {
-          res = res.data
-          if (res.success && res.code === 200) {
-            console.log(res.data)
-            this.toggleToast(1, res.message, 1500)
-            setTimeout(() => {
-              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
-            }, 2000)
-          } else if (res.code === 14001) {
-            this.toggleToast(1, res.message, 1500)
-            setTimeout(() => {
-              window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) / 1000
-            }, 2000)
-          } else {
-            this.toggleToast(1, res.message, 1500)
+        if (this.referenceCode === '') {
+          return
+        } else {
+          const data = {
+            sessionId: this.customerId,
+            referenceCode: this.referenceCode
           }
-        })
+          this.axios.post('/br/customer/idcode', data).then((res) => {
+            res = res.data
+            if (res.success && res.code === 200) {
+              console.log(res.data)
+              this.toggleToast(1, res.message, 1500)
+              setTimeout(() => {
+                window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) /
+                  1000
+              }, 2000)
+            } else if (res.code === 14001) {
+              this.toggleToast(1, res.message, 1500)
+              setTimeout(() => {
+                window.location.href = 'http://newpay.tunnel.qydev.com/VAOrderH5/?#/index?shopId=' + this.shopId + '&customerId=' + this.customerId + '&T=' + Date.parse(new Date()) /
+                  1000
+              }, 2000)
+            } else {
+              this.toggleToast(1, res.message, 1500)
+            }
+          })
+        }
       },
       // 去授权
       to() {
