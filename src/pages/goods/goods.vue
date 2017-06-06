@@ -1782,27 +1782,6 @@
       white-space: nowrap;
     }
   }
-  /*适配 iPhone6Plus 414px 屏幕*/
-  @media only screen and (max-width: 414px) {
-    .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
-      width: 180px;
-      line-height: 24px;
-      font-size: 14px;
-      color: #343434;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
-      margin-left: 4px;
-      width: 180px;
-      font-size: 10px;
-      color: #a2a2a2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
   .shopcart .shopcart-list .list-content .food .food-rightBox {
     flex: 0 0 210px;
     display: flex;
