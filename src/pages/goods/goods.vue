@@ -123,15 +123,17 @@
                       <span class="specs" v-if="item.specs">({{item.specs}})</span>
                     </div>
                   </div>
-                  <div class="price-box">
-                    <s class="originalPrice" v-if="item.originalPrice">￥{{item.originalPrice}}</s>
-                    <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
-                    <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
-                    <!--.limitNum,item.limitCount)}}</span></span>-->
-                  </div>
-                  <div class="buyCart-wrapper">
-                    <div class="cart-decrease inner uxwm-iconfont btn_reduce_normal"
-                         @click.stop.prevent="removeOutCart(
+                  <div class="food-rightBox">
+                    <div class="price-box">
+                      <s class="originalPrice" v-if="item.originalPrice">￥{{item.originalPrice}}</s>
+                      <!--<s class="originalPrice">￥100</s>-->
+                      <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
+                      <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
+                      <!--.limitNum,item.limitCount)}}</span></span>-->
+                    </div>
+                    <div class="buyCart-wrapper">
+                      <div class="cart-decrease inner uxwm-iconfont btn_reduce_normal"
+                           @click.stop.prevent="removeOutCart(
                          item.category_id,
                          item.item_id,
                          item.food_id,
@@ -145,10 +147,10 @@
                          item.remainQuantity,
                          item.userCount,
                          item.categoryIdLength)">
-                    </div>
-                    <div class="cart-count">{{item.num}}</div>
-                    <div class="cart-add uxwm-iconfont btn_add_disabled"
-                         @click.stop.prevent="addToCart(
+                      </div>
+                      <div class="cart-count">{{item.num}}</div>
+                      <div class="cart-add uxwm-iconfont btn_add_disabled"
+                           @click.stop.prevent="addToCart(
                          item.category_id,
                          item.item_id,
                          item.food_id,
@@ -162,6 +164,7 @@
                          item.remainQuantity,
                          item.userCount,
                          item.categoryIdLength)"></div>
+                    </div>
                   </div>
                 </li>
                 <li class="food" v-if="totalPack">
@@ -1710,11 +1713,11 @@
   }
 
   .shopcart .shopcart-list .list-content .food {
-    position: relative;
-    padding: 12px 0;
-    /*height: 47px;*/
     box-sizing: border-box;
-    border-bottom: 2px solid #f1f1f1;
+    display: flex;
+    padding: 8px 0;
+    width: 100%;
+    border-bottom: 1px solid #f1f1f1;
   }
 
   .shopcart .shopcart-list .list-content .food:last-child {
@@ -1723,73 +1726,113 @@
 
   .shopcart .shopcart-list .list-content .food .name-wap {
     box-sizing: border-box;
-    justify-content: flex-start;
+    flex: 1;
     display: flex;
+    align-items: center;
     position: relative;
-    width: 100%;
-    padding-right: 150px;
   }
 
   .shopcart .shopcart-list .list-content .food .name-wap .name-box {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding-right: 50px;
+  }
+
+  .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
+    width: 130px;
+    line-height: 24px;
+    font-size: 14px;
+    color: #343434;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
-    width: 100%;
-    line-height: 24px;
-    font-size: 14px;
-    color: #343434;
-  }
-
   .shopcart .shopcart-list .list-content .food .name-wap .name-box .name .huo {
     margin-right: 4px;
     color: #ff553e;
   }
 
   .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    line-height: 24px;
     margin-left: 4px;
-    font-size: 14px;
+    width: 130px;
+    font-size: 10px;
     color: #a2a2a2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  /*适配 iPhone5 320px 屏幕*/
+  @media only screen and (max-width: 320px) {
+    .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
+      width: 90px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #343434;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
+      margin-left: 4px;
+      width: 90px;
+      font-size: 10px;
+      color: #a2a2a2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  /*适配 iPhone6Plus 414px 屏幕*/
+  @media only screen and (max-width: 414px) {
+    .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
+      width: 180px;
+      line-height: 24px;
+      font-size: 14px;
+      color: #343434;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
+      margin-left: 4px;
+      width: 180px;
+      font-size: 10px;
+      color: #a2a2a2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .shopcart .shopcart-list .list-content .food .food-rightBox {
+    flex: 0 0 210px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: nowrap;
   }
 
-  .shopcart .shopcart-list .list-content .food .price-box {
-    position: absolute;
-    right: 100px;
-    bottom: 12px;
-    line-height: 24px;
+  .shopcart .shopcart-list .list-content .food .food-rightBox .price-box {
     font-size: 11px;
     font-weight: 700;
     color: #ff5740;
   }
 
-  .shopcart .shopcart-list .list-content .food .price-box .originalPrice {
-    margin-left: 7px;
-    font-size: 12px;
+  .shopcart .shopcart-list .list-content .food .food-rightBox .price-box .originalPrice {
+    font-size: 11px;
     color: #9c9c9c;
   }
 
-  .shopcart .shopcart-list .list-content .food .price-box .price {
+  .shopcart .shopcart-list .list-content .food .food-rightBox .price-box .price {
     font-size: 15px;
   }
 
-  .shopcart .shopcart-list .list-content .food .buyCart-wrapper {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
+  .shopcart .shopcart-list .list-content .food .food-rightBox .buyCart-wrapper {
+    margin-left: 5px;
+    padding-right: 5px;
   }
 
-  .shopcart .shopcart-list .list-content .food .buyCart-wrapper .cart-add,
-  .shopcart .shopcart-list .list-content .food .buyCart-wrapper .cart-decrease {
+  .shopcart .shopcart-list .list-content .food .food-rightBox .buyCart-wrapper .cart-add,
+  .shopcart .shopcart-list .list-content .food .food-rightBox .buyCart-wrapper .cart-decrease {
     display: inline-block;
     padding: 6px;
     line-height: 22px;
@@ -1797,10 +1840,10 @@
     color: #ff8932;
   }
 
-  .shopcart .shopcart-list .list-content .food .buyCart-wrapper .cart-count {
+  .shopcart .shopcart-list .list-content .food .food-rightBox .buyCart-wrapper .cart-count {
     display: inline-block;
     vertical-align: top;
-    width: 12px;
+    /*width: 12px;*/
     padding-top: 6px;
     line-height: 22px;
     text-align: center;
