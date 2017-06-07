@@ -1,7 +1,8 @@
 <template>
   <div class="buyCart">
     <!-- 加减 button -->
-    <section class="cart-wrapper" v-if="(foods.dishSpecification.length === 1 && foods.state === 1)"
+    <section class="cart-wrapper"
+             v-if="(foods.dishSpecification.length === 1 && foods.state === 1 && (foods.dishSpecification[0].tastes.length === 0))"
              key="cart-wrapper">
       <transition name="move">
         <div class="cart-decrease"
@@ -47,12 +48,12 @@
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
-             v-else-if="foods.dishSpecification.length > 1 && foods.state === 1"
+             v-else-if="(foods.dishSpecification.length > 1 && foods.state === 1) || (foods.dishSpecification[0].tastes.length >= 1 && foods.state === 1)"
              key="specification-wrapper">
       <transition name="move">
         <div class="cart-decrease uxwm-iconfont sanjiao"
              v-show="foodNum > 0"
-             :class="{specification_delete: foods.dishSpecification.length > 1}"
+             :class="{specification_delete: foods.dishSpecification.length > 1 || foods.dishSpecification[0].tastes.length >= 1}"
              @click="showReduceTip">
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
@@ -115,8 +116,10 @@
         let itemId = this.foods.dishId
         if (this.shopCart && this.shopCart[categoryId] && this.shopCart[categoryId][itemId]) {
           let num = 0
-          Object.values(this.shopCart[categoryId][itemId]).forEach((item, index) => {
-            num += item.num
+          Object.values(this.shopCart[categoryId][itemId]).forEach(item => {
+            Object.values(item).forEach(tasteItem => {
+              num += tasteItem.num
+            })
           })
           return num
         } else {
@@ -135,29 +138,10 @@
           if (dishTypeStyle === 1) {
             if (limitCount === 0) { // 个人无限制 取库存
               this.userCount = remainQuantity
-              console.log(this.foodNum)
-//              if (this.foodNum === limitCount) {
-//                this.showAddToCartAotType = true
-//                clearTimeout(this.timer)
-//                this.timer = setTimeout(() => {
-//                  clearTimeout(this.timer)
-//                  this.showAddToCartAotType = false
-//                }, 1500)
-//              }
             } else if (limitCount <= remainQuantity) { // 个人 <= 库存 取个人
               this.userCount = limitCount
-              console.log(this.foodNum)
-//              if (this.foodNum === remainQuantity) {
-//                this.showAddToCartAotType = true
-//                clearTimeout(this.timer)
-//                this.timer = setTimeout(() => {
-//                  clearTimeout(this.timer)
-//                  this.showAddToCartAotType = false
-//                }, 1500)
-//              }
             } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
               this.userCount = remainQuantity
-              console.log(this.foodNum)
             }
           }
           this.ADD_CART({
@@ -174,7 +158,8 @@
             originalPrice,
             remainQuantity,
             userCount: this.userCount,
-            categoryIdLength
+            categoryIdLength,
+            tastes: ''
           })
         } else {
           return
@@ -184,6 +169,7 @@
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
       removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount,
                     originalPrice, remainQuantity, categoryIdLength) {
+        console.log('removeOutCart')
         if (this.foodNum > 0) {
           if (limitCount === 0) { // 个人无限制 取库存
             this.userCount = remainQuantity
@@ -207,7 +193,8 @@
             originalPrice,
             remainQuantity,
             userCount: this.userCount,
-            categoryIdLength
+            categoryIdLength,
+            tastes: ''
           })
         }
       },

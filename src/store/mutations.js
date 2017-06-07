@@ -47,109 +47,139 @@ export default {
     originalPrice, // 菜原价
     remainQuantity, // 爆款库存
     userCount, // 用户可以点多少
-    categoryIdLength // 分类id长度
+    categoryIdLength, // 分类id长度
+    tastes
   }) {
+    console.log(JSON.stringify(tastes))
     let cart = state.cartList
-    if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
+    if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
       // console.log('购物车shopID：' + shopid)
+      console.log('_____----000000----______')
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      // if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 1) { // 如果是爆款
+      //   if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      //     console.log('1-1')
+      //   } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] < userCount) { // 如果没有超出 增加 num 和 limitNum
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']++
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      //     console.log('1-2')
+      //   } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === userCount) { // 本命默认是1 === 都不用加了 只是 num
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
+      //     console.log('1-3')
+      //   }
+      // }
+      // if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 0) { // 非爆款
+      //   if (cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] === userCount) { // 如果没有超出 增加 num 和 limitNum
+      //     console.log('2-1')
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      //   } else {
+      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      //   }
+      // }
+    } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       console.log('_____----111111----______')
-      if (cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] === 1) { // 如果是爆款
-        if (cart[shopid][categoryId][itemId][foodId]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
-          cart[shopid][categoryId][itemId][foodId]['overflowNum']++
-          cart[shopid][categoryId][itemId][foodId]['num']++
-          console.log('1-1')
-        } else if (cart[shopid][categoryId][itemId][foodId]['num'] < userCount) { // 如果没有超出 增加 num 和 limitNum
-          cart[shopid][categoryId][itemId][foodId]['limitNum']++
-          cart[shopid][categoryId][itemId][foodId]['num']++
-          console.log('1-2')
-        } else if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) { // 本命默认是1 === 都不用加了 只是 num
-          cart[shopid][categoryId][itemId][foodId]['num']++
-          cart[shopid][categoryId][itemId][foodId]['overflowNum']++
-          console.log('1-3')
-        }
-      }
-      if (cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] === 0) { // 非爆款
-        if (cart[shopid][categoryId][itemId][foodId]['limitCount'] === userCount) { // 如果没有超出 增加 num 和 limitNum
-          console.log('2-1')
-          cart[shopid][categoryId][itemId][foodId]['overflowNum']++
-          cart[shopid][categoryId][itemId][foodId]['num']++
-        } else {
-          cart[shopid][categoryId][itemId][foodId]['num']++
-        }
-      }
+      cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['specs'] = specs
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['packingFee'] = packingFee
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] = dishTypeStyle
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] = limitCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['originalPrice'] = originalPrice
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
       console.log('_____----222222----______')
       cart[shopid][categoryId][itemId][foodId] = {}
-      cart[shopid][categoryId][itemId][foodId]['num'] = 1
-      cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
-      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
-      cart[shopid][categoryId][itemId][foodId]['id'] = foodId
-      cart[shopid][categoryId][itemId][foodId]['name'] = name
-      cart[shopid][categoryId][itemId][foodId]['price'] = price
-      cart[shopid][categoryId][itemId][foodId]['specs'] = specs
-      cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] = dishTypeStyle
-      cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
-      cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
-      cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
-      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['specs'] = specs
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['packingFee'] = packingFee
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] = dishTypeStyle
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] = limitCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['originalPrice'] = originalPrice
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
     } else if (cart[shopid] && cart[shopid][categoryId]) {
       console.log('_____----33333----______')
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
-      cart[shopid][categoryId][itemId][foodId]['num'] = 1
-      cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
-      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
-      cart[shopid][categoryId][itemId][foodId]['id'] = foodId
-      cart[shopid][categoryId][itemId][foodId]['name'] = name
-      cart[shopid][categoryId][itemId][foodId]['price'] = price
-      cart[shopid][categoryId][itemId][foodId]['specs'] = specs
-      cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] = dishTypeStyle
-      cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
-      cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
-      cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
-      cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
-      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['specs'] = specs
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['packingFee'] = packingFee
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] = dishTypeStyle
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] = limitCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['originalPrice'] = originalPrice
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
     } else if (cart[shopid]) {
       console.log('_____----44444----______')
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
-      cart[shopid][categoryId][itemId][foodId]['num'] = 1
-      cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
-      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
-      cart[shopid][categoryId][itemId][foodId]['id'] = foodId
-      cart[shopid][categoryId][itemId][foodId]['name'] = name
-      cart[shopid][categoryId][itemId][foodId]['price'] = price
-      cart[shopid][categoryId][itemId][foodId]['specs'] = specs
-      cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] = dishTypeStyle
-      cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
-      cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
-      cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
-      cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
-      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['specs'] = specs
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['packingFee'] = packingFee
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] = dishTypeStyle
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] = limitCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['originalPrice'] = originalPrice
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
     } else {
       console.log('_____----666666----______')
       cart[shopid] = {}
       cart[shopid][categoryId] = {}
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
-      cart[shopid][categoryId][itemId][foodId]['num'] = 1
-      cart[shopid][categoryId][itemId][foodId]['limitNum'] = 1
-      cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
-      cart[shopid][categoryId][itemId][foodId]['id'] = foodId
-      cart[shopid][categoryId][itemId][foodId]['name'] = name
-      cart[shopid][categoryId][itemId][foodId]['price'] = price
-      cart[shopid][categoryId][itemId][foodId]['specs'] = specs
-      cart[shopid][categoryId][itemId][foodId]['packingFee'] = packingFee
-      cart[shopid][categoryId][itemId][foodId]['dishTypeStyle'] = dishTypeStyle
-      cart[shopid][categoryId][itemId][foodId]['limitCount'] = limitCount
-      cart[shopid][categoryId][itemId][foodId]['originalPrice'] = originalPrice
-      cart[shopid][categoryId][itemId][foodId]['remainQuantity'] = remainQuantity
-      cart[shopid][categoryId][itemId][foodId]['userCount'] = userCount
-      cart[shopid][categoryId][itemId][foodId]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['specs'] = specs
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['packingFee'] = packingFee
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] = dishTypeStyle
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] = limitCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['originalPrice'] = originalPrice
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['remainQuantity'] = remainQuantity
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
     }
     // 返回一个新的对象，否则计算属性无法监听到数据的变化
     state.cartList = Object.assign({}, cart)
@@ -171,28 +201,29 @@ export default {
     foodId,
     name,
     price,
-    specs, dishTypeStyle, limitCount, originalPrice, remainQuantity, userCount
+    specs, dishTypeStyle, limitCount, originalPrice, remainQuantity, userCount, tastes
   }) {
+    console.log(tastes)
     let cart = state.cartList
-    if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
-      if (cart[shopid][categoryId][itemId][foodId]['num'] > 0) {
+    if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
+      if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > 0) {
         if (dishTypeStyle === 1) { // 如果是爆款
-          if (cart[shopid][categoryId][itemId][foodId]['num'] > userCount) { // 如果超出userConut 减少 num 和 overflowNum
-            cart[shopid][categoryId][itemId][foodId]['overflowNum']--
-            cart[shopid][categoryId][itemId][foodId]['num']--
-          } else if (cart[shopid][categoryId][itemId][foodId]['num'] < userCount) { // 如果没有超出 减少 num 和 limitNum
-            cart[shopid][categoryId][itemId][foodId]['limitNum']--
-            cart[shopid][categoryId][itemId][foodId]['num']--
-          } else if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) { // 本命默认是1 === 都不用减了 只是 num
-            cart[shopid][categoryId][itemId][foodId]['num']--
-            cart[shopid][categoryId][itemId][foodId]['limitNum']--
+          if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 减少 num 和 overflowNum
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']--
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+          } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] < userCount) { // 如果没有超出 减少 num 和 limitNum
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+          } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === userCount) { // 本命默认是1 === 都不用减了 只是 num
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
           }
         }
         if (dishTypeStyle === 0) { // 非爆款
-          cart[shopid][categoryId][itemId][foodId]['num']--
-          if (cart[shopid][categoryId][itemId][foodId]['num'] === userCount) {
-            cart[shopid][categoryId][itemId][foodId]['limitNum'] = 0
-            cart[shopid][categoryId][itemId][foodId]['overflowNum'] = 0
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+          if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === userCount) {
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 0
+            cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
           }
         }
         // 返回一个新的对象，否则计算属性无法监听到数据的变化

@@ -146,7 +146,8 @@
                          item.originalPrice,
                          item.remainQuantity,
                          item.userCount,
-                         item.categoryIdLength)">
+                         item.categoryIdLength,
+                         item.tastes)">
                       </div>
                       <div class="cart-count">{{item.num}}</div>
                       <div class="cart-add uxwm-iconfont btn_add_disabled"
@@ -163,7 +164,8 @@
                          item.originalPrice,
                          item.remainQuantity,
                          item.userCount,
-                         item.categoryIdLength)"></div>
+                         item.categoryIdLength,
+                         item.tastes)"></div>
                     </div>
                   </div>
                 </li>
@@ -193,15 +195,20 @@
           <i class="close uxwm-iconfont btn_close_normal" @click="closeSpesc"></i>
           <h2 class="specs-title">{{specs.name}}</h2>
           <div class="specs-content">
-            <p class="text">规格</p>
-            <div class="content">
-              <span class="specs-item" v-for="(specsItme, index) in specs.dishSpecification"
+            <p class="text" v-show="specs.dishSpecification.length > 1">规格</p>
+            <div class="content specs_Content"
+                 v-show="specs.dishSpecification.length > 1"
+                 :class="{'isTaste_Content': specs.dishSpecification[specsIndex].tastes.length}">
+              <span class="specs-item"
+                    v-for="(specsItme, index) in specs.dishSpecification"
                     :class="{'normal': index === specsIndex}"
-                    @click="selectSpecs(index)">{{specsItme.specificationName}}</span>
+                    @click="selectSpecs(index)">
+                {{specsItme.specificationName}}
+              </span>
             </div>
-            <p class="text">口味</p>
-            <div class="content">
-              <span class="taste-item" v-for="(tasteItme, index) in textKouwei"
+            <p class="text" v-show="specs.dishSpecification[specsIndex].tastes.length">口味</p>
+            <div class="content taste_Content" v-show="specs.dishSpecification[specsIndex].tastes.length">
+              <span class="taste-item" v-for="(tasteItme, index) in specs.dishSpecification[specsIndex].tastes"
                     :class="{'normal': index === tasteIndex}"
                     @click="tasteSpecs(index)">{{tasteItme.name}}</span>
             </div>
@@ -220,7 +227,8 @@
                  specs.dishTypeStyleOfDish,
                  specs.dishSpecification[0].limitCount,
                  specs.dishSpecification[0].originalPrice,
-                 specs.dishSpecification[0].remainQuantity,'')">
+                 specs.dishSpecification[0].remainQuantity,
+                 specs.dishSpecification[specsIndex].tastes[tasteIndex])">
               选好了
             </div>
           </div>
@@ -667,8 +675,9 @@
       // 多规格加入购车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，是否爆款分类，限购数量，原价，库存
       addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-               remainQuantity) {
+               remainQuantity, tastes) {
         console.log('多规格')
+//        console.log(JSON.stringify(tastes))
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -682,14 +691,16 @@
           limitCount,
           originalPrice,
           remainQuantity,
-          userCount: 0
+          userCount: 0,
+          tastes: tastes === undefined ? '' : tastes
         })
         this.closeSpesc()
       },
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                remainQuantity, userCount) {
+                remainQuantity, userCount, tastes) {
+        console.log(tastes)
         console.log('购物车++')
         this.ADD_CART({
           shopid: this.shopId,
@@ -704,13 +715,14 @@
           limitCount,
           originalPrice,
           remainQuantity,
-          userCount
+          userCount,
+          tastes: tastes === undefined ? '' : tastes
         })
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
       removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                    remainQuantity, userCount) {
+                    remainQuantity, userCount, tastes) {
         this.REDUCE_CART({
           shopid: this.shopId,
           categoryId,
@@ -724,7 +736,8 @@
           limitCount,
           originalPrice,
           remainQuantity,
-          userCount
+          userCount,
+          tastes: tastes === undefined ? '' : tastes
         })
       },
       // 初始化和shopCart变化时，重新获取购物车改变过的数据，赋值categoryNum，totalPrice，cartFoodList，整个数据流是自上而下的形式，
@@ -746,102 +759,104 @@
 //            let limitNum = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
-                let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]
-                console.log(JSON.stringify(foodid))
-                console.log(JSON.stringify(foodItem))
-                num += foodItem.num
+                Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]).forEach(tasteId => {
+                  let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
+                  console.log(JSON.stringify(tasteId))
+                  console.log(JSON.stringify(foodItem))
+                  num += foodItem.num
 //                limitNum += foodItem.limitNum
 //                if (item.dishTypeStyle === 0 || foodItem.remainQuantity > 0) {
-                if (item.dishTypeStyle === 0) {
-                  console.log('——————------')
-                  this.totalPack += foodItem.num * foodItem.packingFee
-                  this.totalPack = parseFloat(this.totalPack.toFixed(2))
-                  if (foodItem.dishTypeStyle === 1) {
-                    this.totalPrice +=
-                      (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
-                  } else {
-                    this.totalPrice += foodItem.num * foodItem.price
-                  }
-//                  this.totalPrice += foodItem.num * foodItem.price
-                  this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
-                  if (foodItem.num > 0) {
+                  if (item.dishTypeStyle === 0) {
+                    this.totalPack += foodItem.num * foodItem.packingFee
+                    this.totalPack = parseFloat(this.totalPack.toFixed(2))
                     if (foodItem.dishTypeStyle === 1) {
-                      this.discounSwitch = true
-                    } else if (foodItem.dishTypeStyle === 0) {
+                      this.totalPrice +=
+                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                    } else {
+                      this.totalPrice += foodItem.num * foodItem.price
+                    }
+//                  this.totalPrice += foodItem.num * foodItem.price
+                    this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
+                    if (foodItem.num > 0) {
+                      if (foodItem.dishTypeStyle === 1) {
+                        this.discounSwitch = true
+                      } else if (foodItem.dishTypeStyle === 0) {
+                        this.discounSwitch = false
+                      }
+                      this.cartFoodList[cartFoodNum] = {}
+                      this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
+                      this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
+                      this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
+                      this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
+                      this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
+                      this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
+                      this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
+                      this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
+                      this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
+                      this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
+                      this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
+                      this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
+                      this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
+                      this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
+                      this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
+                      this.cartFoodList[cartFoodNum].categoryIdLength = foodItem.categoryIdLength // 分类id长度
+                      this.cartFoodList[cartFoodNum].tastes = foodItem.tastes // 分类id长度
+                      if (foodItem.dishTypeStyle === 1) {
+                        this.cartFoodList[cartFoodNum].priceAll =
+                          (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
+                      } else if (foodItem.dishTypeStyle === 0) {
+                        this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
+                      }
+                      cartFoodNum++
+                    } else {
                       this.discounSwitch = false
                     }
-                    this.cartFoodList[cartFoodNum] = {}
-                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
-                    this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
-                    this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
-                    this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
-                    this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
-                    this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
-                    this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
-                    this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
-                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
-                    this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
-                    this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
-                    this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
-                    this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
-                    this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
-                    this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
-                    this.cartFoodList[cartFoodNum].categoryIdLength = foodItem.categoryIdLength // 分类id长度
+                  } else if (item.dishTypeStyle === 1 && foodItem.categoryIdLength === 1) {
+                    console.log('啦啦啦德玛西亚')
+                    this.totalPack += foodItem.num * foodItem.packingFee
+                    this.totalPack = parseFloat(this.totalPack.toFixed(2))
                     if (foodItem.dishTypeStyle === 1) {
-                      this.cartFoodList[cartFoodNum].priceAll =
-                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
-                    } else if (foodItem.dishTypeStyle === 0) {
-                      this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
+                      this.totalPrice +=
+                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                    } else {
+                      this.totalPrice += foodItem.num * foodItem.price
                     }
-                    cartFoodNum++
-                  } else {
-                    this.discounSwitch = false
-                  }
-                } else if (item.dishTypeStyle === 1 && foodItem.categoryIdLength === 1) {
-                  console.log('啦啦啦德玛西亚')
-                  this.totalPack += foodItem.num * foodItem.packingFee
-                  this.totalPack = parseFloat(this.totalPack.toFixed(2))
-                  if (foodItem.dishTypeStyle === 1) {
-                    this.totalPrice +=
-                      (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
-                  } else {
-                    this.totalPrice += foodItem.num * foodItem.price
-                  }
 //                  this.totalPrice += foodItem.num * foodItem.price
-                  this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
-                  if (foodItem.num > 0) {
-                    if (foodItem.dishTypeStyle === 1) {
-                      this.discounSwitch = true
-                    } else if (foodItem.dishTypeStyle === 0) {
+                    this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
+                    if (foodItem.num > 0) {
+                      if (foodItem.dishTypeStyle === 1) {
+                        this.discounSwitch = true
+                      } else if (foodItem.dishTypeStyle === 0) {
+                        this.discounSwitch = false
+                      }
+                      this.cartFoodList[cartFoodNum] = {}
+                      this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
+                      this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
+                      this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
+                      this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
+                      this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
+                      this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
+                      this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
+                      this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
+                      this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
+                      this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
+                      this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
+                      this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
+                      this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
+                      this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
+                      this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
+                      if (foodItem.dishTypeStyle === 1) {
+                        this.cartFoodList[cartFoodNum].priceAll =
+                          (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
+                      } else if (foodItem.dishTypeStyle === 0) {
+                        this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
+                      }
+                      cartFoodNum++
+                    } else {
                       this.discounSwitch = false
                     }
-                    this.cartFoodList[cartFoodNum] = {}
-                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
-                    this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
-                    this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
-                    this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
-                    this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
-                    this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
-                    this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
-                    this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
-                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
-                    this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
-                    this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
-                    this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
-                    this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
-                    this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
-                    this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
-                    if (foodItem.dishTypeStyle === 1) {
-                      this.cartFoodList[cartFoodNum].priceAll =
-                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
-                    } else if (foodItem.dishTypeStyle === 0) {
-                      this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
-                    }
-                    cartFoodNum++
-                  } else {
-                    this.discounSwitch = false
                   }
-                }
+                })
               })
             })
             newArr[index] = num
@@ -849,7 +864,7 @@
             newArr[index] = 0
           }
         })
-//        console.log(JSON.stringify(this.cartFoodList))
+        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },
@@ -1328,7 +1343,7 @@
     top: 25%;
     left: 10%;
     width: 80%;
-    min-height: 150px;
+    min-height: 140px;
     z-index: 70;
     border-radius: 12px;
     background: #ffffff;
@@ -1364,16 +1379,32 @@
     color: #565656;
   }
 
-  .specs-wrapper .specs-content .content {
+  .specs-wrapper .specs-content .specs_Content {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: space-around;
-    min-height: 53px;
+    /*min-height: 53px;*/
+    line-height: 0em;
+    padding-bottom: 14px;
+    margin-bottom: 8px;
+
+  }
+
+  .specs-wrapper .specs-content .isTaste_Content {
+    border-bottom: 1px solid #D8D8D8;
+  }
+
+  .specs-wrapper .specs-content .taste_Content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-around;
+    /*min-height: 53px;*/
     line-height: 0em;
   }
 
-  .specs-wrapper .specs-content .content .specs-item {
+  .specs-wrapper .specs-content .specs_Content .specs-item {
     box-sizing: border-box;
     margin: 3px 17px 12px 0px;
     padding: 0px 10px;
@@ -1387,7 +1418,7 @@
     border-radius: 5px;
   }
 
-  .specs-wrapper .specs-content .content .taste-item {
+  .specs-wrapper .specs-content .taste_Content .taste-item {
     box-sizing: border-box;
     margin: 3px 17px 10px 0px;
     padding: 0px 5px;
@@ -1747,6 +1778,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   .shopcart .shopcart-list .list-content .food .name-wap .name-box .name .huo {
     margin-right: 4px;
     color: #ff553e;
@@ -1761,6 +1793,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
   /*适配 iPhone5 320px 屏幕*/
   @media only screen and (max-width: 320px) {
     .shopcart .shopcart-list .list-content .food .name-wap .name-box .name {
@@ -1772,6 +1805,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+
     .shopcart .shopcart-list .list-content .food .name-wap .name-box .specs {
       margin-left: 4px;
       width: 90px;
@@ -1782,6 +1816,7 @@
       white-space: nowrap;
     }
   }
+
   .shopcart .shopcart-list .list-content .food .food-rightBox {
     flex: 0 0 210px;
     display: flex;
