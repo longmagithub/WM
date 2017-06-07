@@ -411,6 +411,7 @@
       async initData() {
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
+        console.log(this.newShopCart)
         this.orderDish = []
 //        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
@@ -929,9 +930,10 @@
     display: flex;
     line-height: 37px;
     padding-right: 14px;
-    height: 44px;
+    height: 50px;
     width: 100%;
-    border-bottom: 1px solid #f1f1f1;
+    color: #949494;
+    /*border-bottom: 1px solid #f1f1f1;*/
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .price {
@@ -1000,6 +1002,7 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name {
     width: 100%;
+    display: inline-block;
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .huo {
@@ -1015,9 +1018,12 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
     position: absolute;
-    top: 16px;
+    display:inline-block;
+    margin-top: 10px;
+    top: 10px;
     left: 0;
     font-size: 11px;
+    color: #bababa;
   }
 
   .orderDetail-wrapper .order-list .boonBox,
