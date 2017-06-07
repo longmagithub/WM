@@ -162,7 +162,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapState, mapMutations} from 'vuex'
   import {formatDate} from '../../common/utils/date'
   import {getStore, setStore} from '../../common/utils/util'
@@ -421,6 +421,7 @@
                 if (item.dishTypeStyle === 1) { // 爆款属性
                   this.discounSwitch = false
                   if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
+                    console.log(item)
 //                    console.log(123131231231)
                     this.newShopCart.push({
                       id: item.id,
@@ -928,7 +929,7 @@
     display: flex;
     line-height: 37px;
     padding-right: 14px;
-    height: 37px;
+    height: 44px;
     width: 100%;
     border-bottom: 1px solid #f1f1f1;
   }
@@ -1014,8 +1015,8 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 16px;
+    left: 0;
     font-size: 11px;
   }
 

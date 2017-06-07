@@ -8,6 +8,7 @@
                                 v-show="item.dishTypeStyle === 1"></i>{{item.dishTypeName}}</span>
           <span class="category_num" v-if="categoryNum[index]&&item.dishTypeStyle === 0">{{categoryNum[index]}}</span>
         </li>
+        <li class="menu-item"></li>
       </ul>
     </div>
     <div class="foods-wrapper" ref="foodsWrapper">
@@ -1153,6 +1154,14 @@
     font-size: 14px;
     font-weight: 400;
     color: #676767;
+  }
+
+  .food-title .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .food-title .desc .name {
