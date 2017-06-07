@@ -162,7 +162,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapState, mapMutations} from 'vuex'
   import {formatDate} from '../../common/utils/date'
   import {getStore, setStore} from '../../common/utils/util'
@@ -411,6 +411,7 @@
       async initData() {
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
+        console.log(this.newShopCart)
         this.orderDish = []
 //        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
@@ -421,6 +422,7 @@
                 if (item.dishTypeStyle === 1) { // 爆款属性
                   this.discounSwitch = false
                   if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
+                    console.log(item)
 //                    console.log(123131231231)
                     this.newShopCart.push({
                       id: item.id,
@@ -928,9 +930,10 @@
     display: flex;
     line-height: 37px;
     padding-right: 14px;
-    height: 37px;
+    height: 50px;
     width: 100%;
-    border-bottom: 1px solid #f1f1f1;
+    color: #949494;
+    /*border-bottom: 1px solid #f1f1f1;*/
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .price {
@@ -999,6 +1002,7 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name {
     width: 100%;
+    display: inline-block;
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .name .huo {
@@ -1014,9 +1018,12 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
     position: absolute;
-    top: 0;
-    right: 0;
+    display:inline-block;
+    margin-top: 10px;
+    top: 10px;
+    left: 0;
     font-size: 11px;
+    color: #bababa;
   }
 
   .orderDetail-wrapper .order-list .boonBox,

@@ -24,6 +24,7 @@
     <div class="submit-wrapper" @click="weChatPay">
       <div class="submitBtn">确认支付￥{{paidPrice | toFixedFil}}</div>
     </div>
+    <div  class="submit-pic"></div>
     <!--<div class="image-wrapper">-->
     <!--<div class="image"></div>-->
     <!--</div>-->
@@ -31,7 +32,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import CountDown from './counter/counter.vue'
   import toast from '../../components/toast.vue'
   import {getStore, removeStore} from '../../common/utils/util'
@@ -247,8 +248,9 @@
   }
 
   .submitPay .submit-wrapper {
-    margin-top: 44px;
+    margin-top: 24px;
     padding: 0 17px;
+    margin-bottom: 20px;
   }
 
   .submitPay .submit-wrapper .submitBtn {
@@ -272,6 +274,13 @@
     height: 134px;
     background: url("../../assets/img.png") no-repeat;
     background-size: 100% 134px;
+  }
+  
+  .submitPay .submit-pic {
+  	width: 100%;
+  	height: 265px;
+  	background: url("../../assets/Group6@2x.png") no-repeat;
+  	background-size: 100% 265px;
   }
 
   /*6p*/

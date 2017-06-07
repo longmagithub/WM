@@ -88,7 +88,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import goods from '../goods/goods.vue'
   import {setStore, getStore} from '../../common/utils/util'
   import toast from '../../components/toast.vue'

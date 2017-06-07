@@ -14,8 +14,11 @@
     <section class="bg-white order-foods">
       <ul>
         <li class="title">订单详情</li>
-        <li v-for="item in orderDetail.dishes">
-          {{item.dishName}}
+        <li class="dishDetail" v-for="item in orderDetail.dishes">
+          <label>
+            <span class="dishName">{{item.dishName}}</span>
+            <span class="dishType">({{item.dishType}},{{item.dishTaste}})</span>
+          </label>         
           <label>
             <span v-show="item.dishCount > 1">x{{item.dishCount}}</span>
             <span class="amount">￥{{item.dishCount * item.dishPrice | toFixedFil}}</span>
@@ -154,6 +157,7 @@
         .then((res) => {
           if (res.data.success) {
             this.orderDetail = res.data.data
+            console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
 //              this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, this.reverseTime)
@@ -312,9 +316,9 @@
     display: flex;
     justify-content: space-between;
     margin-left: 16px;
-    padding: 12px 12px 16px 0;
+    padding: 12px 12px 26px 0;
     color: #949494;
-    border-bottom: 1px solid #f1f1f1;
+    position: relative;
 
   label {
 
@@ -362,6 +366,19 @@
     font-size: 14px;
     color: #2b2a2e;
     border-bottom: 1px solid #f1f1f1;
+  }
+
+  .dishDetail .dishType {
+    display: inline-block;
+  }
+  
+  .dishDetail .dishType {
+    display: inline-block;
+    margin-top: 10px;
+    position: absolute;
+    left: 0;
+    top: 26px;
+    color: #bababa;
   }
 
   li.total-amount {
