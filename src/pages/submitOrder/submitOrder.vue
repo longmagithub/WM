@@ -973,7 +973,7 @@
     display: flex;
     line-height: 44px;
     padding-right: 14px;
-    height: 44px;
+    /*height: 44px;*/
     width: 100%;
     border-bottom: 1px solid #f1f1f1;
   }
