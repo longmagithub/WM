@@ -77,7 +77,8 @@
                     <span class="name">
                       {{item.name}}
                     </span>
-                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                    <span class="specs" v-if="item.specs">({{item.specs}}<span v-show="item.tastes.name">，{{item.tastes
+                        .name}}</span>)</span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">×{{item.num}}</span>
                   <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">
@@ -411,94 +412,103 @@
       async initData() {
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
-        console.log(this.newShopCart)
+//        console.log(this.newShopCart)
         this.orderDish = []
 //        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
-            Object.values(itemValue).forEach(item => {
-              // this.packPrice += item.num * item.packingFee
-              if (item.price !== null && item.price >= 0 && item.num > 0) {
-                if (item.dishTypeStyle === 1) { // 爆款属性
-                  this.discounSwitch = false
-                  if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
-                    console.log(item)
+            Object.values(itemValue).forEach(specItem => {
+              Object.values(specItem).forEach(item => {
+//                console.log(JSON.stringify(item))
+                // this.packPrice += item.num * item.packingFee
+                if (item.price !== null && item.price >= 0 && item.num > 0) {
+                  if (item.dishTypeStyle === 1) { // 爆款属性
+                    this.discounSwitch = false
+                    if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
 //                    console.log(123131231231)
+                      this.newShopCart.push({
+                        id: item.id, // 规格id
+                        name: item.name,  // 菜品名字
+                        num: item.num,  // 正常数量
+                        overflowNum: item.overflowNum, // 超出超出爆款限制数量
+                        packingFee: item.packingFee, // 餐盒费用
+                        price: item.price,  // 单价
+                        specs: item.specs,  // 规格名字
+                        dishTypeStyle: item.dishTypeStyle,  // 是否爆款 1是 0否
+                        limitNum: item.limitNum, // 用户在可点爆款数量
+                        limitCount: item.limitCount, // 爆款限制数量
+                        originalPrice: item.originalPrice,  // 爆款原价
+                        remainQuantity: item.remainQuantity,  // 爆款库存
+                        userCount: item.userCount,  // 用户可以点多少个  取item.remainQuantity 和  item.limitCount 最小值
+                        tastes: item.tastes, // 口味 对象
+                        hotTyep: 0  // 是否爆款 如果是爆款 超出爆款数量限制 也是否
+                      })
+                      this.orderDish.push({
+                        specificationId: item.id, // 规格id
+                        tasteId: item.tastes === '' ? '' : item.tastes.id, // 口味id
+                        count: item.limitNum, // 数量
+                        price: item.price,  // 价格
+                        type: 0 // 是否爆款 1是 0否
+                      })
+                    }
                     this.newShopCart.push({
-                      id: item.id,
-                      name: item.name,
-                      num: item.num,
-                      overflowNum: item.overflowNum,
-                      packingFee: item.packingFee,
-                      price: item.price,
-                      specs: item.specs,
-                      dishTypeStyle: item.dishTypeStyle,
-                      limitNum: item.limitNum,
-                      limitCount: item.limitCount,
-                      originalPrice: item.originalPrice,
-                      remainQuantity: item.remainQuantity,
-                      userCount: item.userCount,
-                      hotTyep: 0
+                      id: item.id, // 规格id
+                      name: item.name,  // 菜品名字
+                      num: item.num,  // 正常数量
+                      overflowNum: item.overflowNum, // 超出超出爆款限制数量
+                      packingFee: item.packingFee, // 餐盒费用
+                      price: item.price,  // 单价
+                      specs: item.specs,  // 规格名字
+                      dishTypeStyle: item.dishTypeStyle,  // 是否爆款 1是 0否
+                      limitNum: item.limitNum, // 用户在可点爆款数量
+                      limitCount: item.limitCount, // 爆款限制数量
+                      originalPrice: item.originalPrice,  // 爆款原价
+                      remainQuantity: item.remainQuantity,  // 爆款库存
+                      userCount: item.userCount,  // 用户可以点多少个  取item.remainQuantity 和  item.limitCount 最小值
+                      tastes: item.tastes, // 口味 对象
+                      hotTyep: 1  // 是否爆款 如果是爆款 超出爆款数量限制 也是否
                     })
                     this.orderDish.push({
-                      specificationId: item.id,
-                      count: item.overflowNum,
-                      price: item.originalPrice,
-                      type: 0
+                      specificationId: item.id, // 规格id
+                      tasteId: item.tastes === '' ? '' : item.tastes.id, // 口味id
+                      count: item.limitNum, // 数量
+                      price: item.price,  // 价格
+                      type: 1 // 是否爆款 1是 0否
                     })
                   }
-                  this.newShopCart.push({
-                    id: item.id,
-                    name: item.name,
-                    num: item.num,
-                    overflowNum: item.overflowNum,
-                    packingFee: item.packingFee,
-                    price: item.price,
-                    specs: item.specs,
-                    dishTypeStyle: item.dishTypeStyle,
-                    limitNum: item.limitNum,
-                    limitCount: item.limitCount,
-                    originalPrice: item.originalPrice,
-                    remainQuantity: item.remainQuantity,
-                    userCount: item.userCount,
-                    hotTyep: 1
-                  })
-                  this.orderDish.push({
-                    specificationId: item.id,
-                    count: item.limitNum,
-                    price: item.price,
-                    type: 1
-                  })
+                  if (item.dishTypeStyle === 0) { // 非爆款 如果改数据不是爆款正常添加到渲染数组(newShopCart)和提交订单数组(orderDish)
+                    this.newShopCart.push({
+                      id: item.id, // 规格id
+                      name: item.name,  // 菜品名字
+                      num: item.num,  // 正常数量
+                      overflowNum: item.overflowNum, // 超出超出爆款限制数量
+                      packingFee: item.packingFee, // 餐盒费用
+                      price: item.price,  // 单价
+                      specs: item.specs,  // 规格名字
+                      dishTypeStyle: item.dishTypeStyle,  // 是否爆款 1是 0否
+                      limitNum: item.limitNum, // 用户在可点爆款数量
+                      limitCount: item.limitCount, // 爆款限制数量
+                      originalPrice: item.originalPrice,  // 爆款原价
+                      remainQuantity: item.remainQuantity,  // 爆款库存
+                      userCount: item.userCount,  // 用户可以点多少个  取item.remainQuantity 和  item.limitCount 最小值
+                      tastes: item.tastes, // 口味 对象
+                      hotTyep: 0  // 是否爆款 如果是爆款 超出爆款数量限制 也是否
+                    })
+                    this.orderDish.push({
+                      specificationId: item.id, // 规格id
+                      tasteId: item.tastes === '' ? '' : item.tastes.id, // 口味id
+                      count: item.num,  // 数量
+                      price: item.dishTypeStyle === 0 ? item.price : item.originalPrice, // 价格
+                      type: 0 // 是否爆款 1是 0否
+                    })
+                  }
                 }
-                if (item.dishTypeStyle === 0) { // 非爆款 如果改数据不是爆款正常添加到渲染数组(newShopCart)和提交订单数组(orderDish)
-                  this.newShopCart.push({
-                    id: item.id,
-                    name: item.name,
-                    num: item.num,
-                    overflowNum: item.overflowNum,
-                    packingFee: item.packingFee,
-                    price: item.price,
-                    specs: item.specs,
-                    dishTypeStyle: item.dishTypeStyle,
-                    limitNum: item.limitNum,
-                    limitCount: item.limitCount,
-                    originalPrice: item.originalPrice,
-                    remainQuantity: item.remainQuantity,
-                    userCount: item.userCount,
-                    hotTyep: 0
-                  })
-                  this.orderDish.push({
-                    specificationId: item.id,
-                    count: item.num,
-                    price: item.dishTypeStyle === 0 ? item.price : item.originalPrice,
-                    type: 0
-                  })
-                }
-              }
+              })
             })
           })
         })
 //        console.log(JSON.stringify(this.newShopCart))
+        console.log(JSON.stringify(this.orderDish))
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
@@ -1018,7 +1028,7 @@
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
     position: absolute;
-    display:inline-block;
+    display: inline-block;
     margin-top: 10px;
     top: 10px;
     left: 0;
