@@ -47,7 +47,13 @@
                       <i class="uxwm-iconfont huo"></i>
                       {{item.name}}
                     </span>
-                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                    <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
+                    <span class="specs" v-if="item.specs || item.tastes">
+                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span><span
+                      v-show="item.specs !== '默认' && item.tastes">，</span><span
+                      v-show="item.tastes">{{item
+                        .tastes.name}}</span>)
+                      </span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">×{{item.limitNum}}</span>
                   <div class="price" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">
@@ -62,7 +68,13 @@
                     <span class="name">
                       {{item.name}}
                     </span>
-                    <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                    <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
+                    <span class="specs" v-if="item.specs || item.tastes">
+                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span><span
+                      v-show="item.specs !== '默认' && item.tastes">，</span><span
+                      v-show="item.tastes">{{item
+                        .tastes.name}}</span>)
+                      </span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">×{{item.overflowNum}}</span>
                   <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">
@@ -99,8 +111,8 @@
                     class="name_num"><span class="name">餐盒费</span></div>
                   <div class="price">￥{{packPrice}}</div>
                 </li>
-                <!--<li class="food_list_item" v-if="feesPrice">-->
-                <li class="food_list_item">
+                <li class="food_list_item" v-if="feesPrice">
+                  <!--<li class="food_list_item">-->
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
                 </li>
@@ -940,8 +952,8 @@
     display: flex;
     /*line-height: 37px;*/
     /*padding-right: 14px;*/
-   	/*height: 50px;*/
-   	padding: 12px 14px 12px 0;
+    /*height: 50px;*/
+    padding: 12px 14px 12px 0;
     width: 100%;
     color: #949494;
     /*border-bottom: 1px solid #f1f1f1;*/

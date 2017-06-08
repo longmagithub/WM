@@ -6,7 +6,8 @@
             @click="selectMenu(index, $event)">
           <span class="text"><i class="uxwm-iconfont huo"
                                 v-show="item.dishTypeStyle === 1"></i>{{item.dishTypeName}}</span>
-          <span class="category_num" v-if="categoryNum[index]&&item.dishTypeStyle === 0">{{categoryNum[index]}}</span>
+          <span class="category_num" v-if="categoryNum[index]">{{categoryNum[index]}}</span>
+          <!--<span class="category_num" v-if="categoryNum[index]&&item.dishTypeStyle === 0">{{categoryNum[index]}}</span>-->
         </li>
         <li class="menu-item"></li>
       </ul>
@@ -1056,6 +1057,7 @@
   }
 
   .menu-wrapper .menu-item {
+    box-sizing: border-box;
     position: relative;
     padding-left: 12px;
     padding-right: 9px;
@@ -1074,7 +1076,7 @@
   }
 
   .menu-wrapper .current .text {
-  	font-size: 10px!importent;
+    font-size: 10px ! importent;
   }
 
   .menu-wrapper .menu-item .text {

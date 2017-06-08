@@ -41,7 +41,7 @@ export default {
   }) {
     // console.log(JSON.stringify(tastes))
     let cart = state.cartList
-    if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
+    if ((cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id])) {
       // console.log('购物车shopID：' + shopid)
       console.log('_____----000000----______')
       if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 1) { // 如果是爆款
