@@ -57,7 +57,7 @@
              @click="showReduceTip">
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
-            <p class="show_delete_tip" v-if="showDeleteTip">多规格商品只能去购物车删除哦</p>
+            <p class="show_delete_tip" v-if="showDeleteTip">{{showDeleteText}}</p>
           </transition>
         </div>
       </transition>
@@ -97,11 +97,10 @@
       return {
         showSpecs: false, // 控制显示 规格
         showDeleteTip: false, // 多规格显示 删除 提示
+        showDeleteText: '多规格商品只能去购物车删除哦', // 多规格 或 多口味的 删除是 提示文本
         showAddToCartAotType: false, // 超过爆款限制
         userCount: 0 // 用户可以点多少个
       }
-    },
-    created() {
     },
     computed: {
       // 接受vuex

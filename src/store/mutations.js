@@ -14,17 +14,6 @@ import {
   BOON_PRICE, // 红包金额
   MANJIAN_FEESPRICE, // 满减_配送费
   MENU_REMIND // 是否有显示提醒小红点
-  // RECORD_SHOPDETAIL,
-  // GET_USERINFO,
-  // CHOOSE_SEARCH_ADDRESS,
-  // SAVE_GEOHASH,
-  // NEED_VALIDATION,
-  // SAVE_CART_ID_SIG,
-  // SAVE_ORDER_PARAM,
-  // CHANGE_ORDER_PARAM,
-  // ORDER_SUCCESS,
-  // SAVE_ORDER,
-  // OUT_LOGIN,
 } from './mutation-types.js'
 import {
   setStore,
@@ -50,12 +39,11 @@ export default {
     categoryIdLength, // 分类id长度
     tastes
   }) {
-    console.log(JSON.stringify(tastes))
+    // console.log(JSON.stringify(tastes))
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
       // console.log('购物车shopID：' + shopid)
       console.log('_____----000000----______')
-      // cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
       if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 1) { // 如果是爆款
         if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
           cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
@@ -74,15 +62,6 @@ export default {
         cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
         cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
       }
-      // if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 0) { // 非爆款
-      //   if (cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] === userCount) { // 如果没有超出 增加 num 和 limitNum
-      //     console.log('2-1')
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-      //   } else {
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-      //   }
-      // }
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId]) {
       console.log('_____----111111----______')
       cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
@@ -188,13 +167,6 @@ export default {
     state.cartList = Object.assign({}, cart)
     // 存入localStorage
     setStore('buyCart', state.cartList)
-    // setStoere("buycart"+shopid,cart)
-    // var cart={
-    //
-    //   category{ id:,num:}
-    //   item{id:,num:}
-    //   foods:{id,num}
-    // }
   },
   // 移出购物车
   [REDUCE_CART](state, {
