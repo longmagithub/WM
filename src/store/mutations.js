@@ -162,6 +162,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
+      cart[shopid][categoryId][itemId][foodId][tastes.id]['specNum'] = 1 // 爆款下多口味 点个多少个
     }
     // 返回一个新的对象，否则计算属性无法监听到数据的变化
     state.cartList = Object.assign({}, cart)
@@ -176,7 +177,13 @@ export default {
     foodId,
     name,
     price,
-    specs, dishTypeStyle, limitCount, originalPrice, remainQuantity, userCount, tastes
+    specs,
+    dishTypeStyle,
+    limitCount,
+    originalPrice,
+    remainQuantity,
+    userCount,
+    tastes
   }) {
     console.log(tastes)
     let cart = state.cartList
