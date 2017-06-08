@@ -55,22 +55,25 @@ export default {
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
       // console.log('购物车shopID：' + shopid)
       console.log('_____----000000----______')
-      cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-      // if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 1) { // 如果是爆款
-      //   if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-      //     console.log('1-1')
-      //   } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] < userCount) { // 如果没有超出 增加 num 和 limitNum
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']++
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-      //     console.log('1-2')
-      //   } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === userCount) { // 本命默认是1 === 都不用加了 只是 num
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-      //     cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
-      //     console.log('1-3')
-      //   }
-      // }
+      // cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+      if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 1) { // 如果是爆款
+        if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 增加 num 和 overflowNum
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+          console.log('1-1')
+        } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] < userCount) { // 如果没有超出 增加 num 和 limitNum
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']++
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+          console.log('1-2')
+        } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === userCount) { // 本命默认是1 === 都不用加了 只是 num
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
+          console.log('1-3')
+        }
+      } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 0) {
+        cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
+        cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
+      }
       // if (cart[shopid][categoryId][itemId][foodId][tastes.id]['dishTypeStyle'] === 0) { // 非爆款
       //   if (cart[shopid][categoryId][itemId][foodId][tastes.id]['limitCount'] === userCount) { // 如果没有超出 增加 num 和 limitNum
       //     console.log('2-1')
@@ -211,12 +214,15 @@ export default {
           if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 减少 num 和 overflowNum
             cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']--
             cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+            console.log('a-a')
           } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] < userCount) { // 如果没有超出 减少 num 和 limitNum
             cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
             cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+            console.log('a-b')
           } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === userCount) { // 本命默认是1 === 都不用减了 只是 num
             cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
             cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
+            console.log('a-c')
           }
         }
         if (dishTypeStyle === 0) { // 非爆款

@@ -121,7 +121,8 @@
                         <i class="uxwm-iconfont huo" v-show="item.dishTypeStyle === 1"></i>
                         {{item.name}}
                       </span>
-                      <span class="specs" v-if="item.specs">({{item.specs}})</span>
+                      <span class="specs" v-if="item.specs">({{item.specs}}<span v-show="item.tastes">，{{item.tastes
+                        .name}}</span>)</span>
                     </div>
                   </div>
                   <div class="food-rightBox">
@@ -700,7 +701,7 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                remainQuantity, userCount, tastes) {
+                remainQuantity, userCount, categoryIdLength, tastes) {
         console.log(tastes)
         console.log('购物车++')
         this.ADD_CART({
@@ -717,13 +718,13 @@
           originalPrice,
           remainQuantity,
           userCount,
-          tastes: tastes === undefined ? '' : tastes
+          tastes: tastes
         })
       },
       // 移除购物车
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
       removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                    remainQuantity, userCount, tastes) {
+                    remainQuantity, userCount, categoryIdLength, tastes) {
         this.REDUCE_CART({
           shopid: this.shopId,
           categoryId,
@@ -760,102 +761,57 @@
 //            let limitNum = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
+                // 同规格 不同口味的 总数量
                 Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]).forEach(tasteId => {
                   let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
-                  console.log(JSON.stringify(tasteId))
-                  console.log(JSON.stringify(foodItem))
+//                  console.log(JSON.stringify(tasteId))
+//                  console.log(JSON.stringify(foodItem))
                   num += foodItem.num
-//                limitNum += foodItem.limitNum
-//                if (item.dishTypeStyle === 0 || foodItem.remainQuantity > 0) {
-                  if (item.dishTypeStyle === 0) {
-                    this.totalPack += foodItem.num * foodItem.packingFee
-                    this.totalPack = parseFloat(this.totalPack.toFixed(2))
+                  // 餐盒费
+                  this.totalPack += foodItem.num * foodItem.packingFee
+                  this.totalPack = parseFloat(this.totalPack.toFixed(2))
+                  // 菜品费用 区分是否爆款 菜品费用
+                  if (foodItem.dishTypeStyle === 1) {
+                    this.totalPrice +=
+                      (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                  } else if (foodItem.dishTypeStyle === 0) {
+                    this.totalPrice += foodItem.num * foodItem.price
+                  }
+                  // 菜品费用加餐盒费用
+                  this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
+                  // 如果有爆款就不显示 动态满减
+                  if (foodItem.num > 0) {
                     if (foodItem.dishTypeStyle === 1) {
-                      this.totalPrice +=
-                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
-                    } else {
-                      this.totalPrice += foodItem.num * foodItem.price
-                    }
-//                  this.totalPrice += foodItem.num * foodItem.price
-                    this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
-                    if (foodItem.num > 0) {
-                      if (foodItem.dishTypeStyle === 1) {
-                        this.discounSwitch = true
-                      } else if (foodItem.dishTypeStyle === 0) {
-                        this.discounSwitch = false
-                      }
-                      this.cartFoodList[cartFoodNum] = {}
-                      this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
-                      this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
-                      this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
-                      this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
-                      this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
-                      this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
-                      this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
-                      this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
-                      this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
-                      this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
-                      this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
-                      this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
-                      this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
-                      this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
-                      this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
-                      this.cartFoodList[cartFoodNum].categoryIdLength = foodItem.categoryIdLength // 分类id长度
-                      this.cartFoodList[cartFoodNum].tastes = foodItem.tastes // 分类id长度
-                      if (foodItem.dishTypeStyle === 1) {
-                        this.cartFoodList[cartFoodNum].priceAll =
-                          (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
-                      } else if (foodItem.dishTypeStyle === 0) {
-                        this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
-                      }
-                      cartFoodNum++
-                    } else {
+                      this.discounSwitch = true
+                    } else if (foodItem.dishTypeStyle === 0) {
                       this.discounSwitch = false
                     }
-                  } else if (item.dishTypeStyle === 1 && foodItem.categoryIdLength === 1) {
-                    console.log('啦啦啦德玛西亚')
-                    this.totalPack += foodItem.num * foodItem.packingFee
-                    this.totalPack = parseFloat(this.totalPack.toFixed(2))
+                    this.cartFoodList[cartFoodNum] = {} // 创建单个菜分类
+                    this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
+                    this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
+                    this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
+                    this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
+                    this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
+                    this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
+                    this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
+                    this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
+                    this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
+                    this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
+                    this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
+                    this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
+                    this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
+                    this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
+                    this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
+                    this.cartFoodList[cartFoodNum].categoryIdLength = foodItem.categoryIdLength // 分类id长度
+                    this.cartFoodList[cartFoodNum].tastes = foodItem.tastes // 口味对象
                     if (foodItem.dishTypeStyle === 1) {
-                      this.totalPrice +=
-                        (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
-                    } else {
-                      this.totalPrice += foodItem.num * foodItem.price
+                      this.cartFoodList[cartFoodNum].priceAll = (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
+                    } else if (foodItem.dishTypeStyle === 0) {
+                      this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
                     }
-//                  this.totalPrice += foodItem.num * foodItem.price
-                    this.allPrice = parseFloat(this.totalPrice.toFixed(2)) + parseFloat(this.totalPack.toFixed(2))
-                    if (foodItem.num > 0) {
-                      if (foodItem.dishTypeStyle === 1) {
-                        this.discounSwitch = true
-                      } else if (foodItem.dishTypeStyle === 0) {
-                        this.discounSwitch = false
-                      }
-                      this.cartFoodList[cartFoodNum] = {}
-                      this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
-                      this.cartFoodList[cartFoodNum].item_id = itemid // 单个菜Id
-                      this.cartFoodList[cartFoodNum].food_id = foodid // 规格Id
-                      this.cartFoodList[cartFoodNum].num = foodItem.num // 菜数量
-                      this.cartFoodList[cartFoodNum].limitNum = foodItem.limitNum // 爆款数量
-                      this.cartFoodList[cartFoodNum].price = foodItem.price // 菜价格&爆款价格
-                      this.cartFoodList[cartFoodNum].name = foodItem.name // 菜名字
-                      this.cartFoodList[cartFoodNum].specs = foodItem.specs // 菜规格
-                      this.cartFoodList[cartFoodNum].packingFee = foodItem.packingFee // 饭盒费
-                      this.cartFoodList[cartFoodNum].dishTypeStyle = foodItem.dishTypeStyle // 是否爆款分类
-                      this.cartFoodList[cartFoodNum].limitCount = foodItem.limitCount // 限制份数
-                      this.cartFoodList[cartFoodNum].originalPrice = foodItem.originalPrice // 菜原价
-                      this.cartFoodList[cartFoodNum].remainQuantity = foodItem.remainQuantity // 爆款库存
-                      this.cartFoodList[cartFoodNum].userCount = foodItem.userCount // 用户可以点多少
-                      this.cartFoodList[cartFoodNum].overflowNum = foodItem.overflowNum // 超出多少
-                      if (foodItem.dishTypeStyle === 1) {
-                        this.cartFoodList[cartFoodNum].priceAll =
-                          (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * foodItem.overflowNum)
-                      } else if (foodItem.dishTypeStyle === 0) {
-                        this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
-                      }
-                      cartFoodNum++
-                    } else {
-                      this.discounSwitch = false
-                    }
+                    cartFoodNum++
+                  } else {
+                    this.discounSwitch = false
                   }
                 })
               })
