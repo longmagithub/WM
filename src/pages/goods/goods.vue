@@ -1072,7 +1072,7 @@
     font-weight: 600;
     border-left: 4px solid #ff6651;
   }
-  
+
   .menu-wrapper .current .text {
   	font-size: 10px!importent;
   }
