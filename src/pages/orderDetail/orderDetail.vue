@@ -17,7 +17,7 @@
         <li class="dishDetail" v-for="item in orderDetail.dishes">
           <label>
             <span class="dishName">{{item.dishName}}</span>
-            <span class="dishType">({{item.dishType}} {{item.tasteId}})</span>
+            <span class="dishType">({{item.dishType}} {{item.dishTaste}})</span>
           </label>         
           <label>
             <span v-show="item.dishCount > 1">x{{item.dishCount}}</span>
