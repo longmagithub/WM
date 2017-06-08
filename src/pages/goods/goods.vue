@@ -1056,6 +1056,7 @@
   }
 
   .menu-wrapper .menu-item {
+  	box-sizing: border-box;
     position: relative;
     padding-left: 12px;
     padding-right: 9px;
@@ -1099,7 +1100,7 @@
   .menu-wrapper .menu-item .category_num {
     position: absolute;
     top: 6px;
-    right: 20px;
+    right: 8px;
     box-sizing: border-box;
     padding: 2px 4px;
     height: 10px;
