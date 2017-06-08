@@ -1045,8 +1045,8 @@
   }
 
   .menu-wrapper {
-    flex: 0 0 85px;
-    width: 85px;
+    flex: 0 0 92px;
+    width: 92px;
     background: #f8f8f8;
     /*overflow: hidden;*/
   }
@@ -1057,6 +1057,8 @@
 
   .menu-wrapper .menu-item {
     position: relative;
+    padding-left: 12px;
+    padding-right: 9px;
     display: table;
     height: 51px;
     width: 100%;
@@ -1070,19 +1072,23 @@
     font-weight: 600;
     border-left: 4px solid #ff6651;
   }
+  
+  .menu-wrapper .current .text {
+  	font-size: 10px!importent;
+  }
 
   .menu-wrapper .menu-item .text {
     display: table-cell;
     vertical-align: middle;
     width: 100%;
-    padding: 0 15px;
+    /*padding: 0 10px;*/
     text-align: left;
     border-bottom: 1px solid #f1f1f1;
     font-size: 12px;
   }
 
   .menu-wrapper .menu-item .text .huo {
-    margin-right: 4px;
+    margin-right: 2px;
     color: #ff553e;
   }
 
@@ -1093,7 +1099,7 @@
   .menu-wrapper .menu-item .category_num {
     position: absolute;
     top: 6px;
-    right: 4px;
+    right: 20px;
     box-sizing: border-box;
     padding: 2px 4px;
     height: 10px;

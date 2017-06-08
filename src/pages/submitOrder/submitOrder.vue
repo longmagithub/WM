@@ -938,9 +938,10 @@
   .orderDetail-wrapper .order-list .list-content .food_list_item {
     box-sizing: border-box;
     display: flex;
-    line-height: 37px;
-    padding-right: 14px;
-    height: 50px;
+    /*line-height: 37px;*/
+    /*padding-right: 14px;*/
+   	/*height: 50px;*/
+   	padding: 12px 14px 12px 0;
     width: 100%;
     color: #949494;
     /*border-bottom: 1px solid #f1f1f1;*/
@@ -1027,11 +1028,11 @@
   }
 
   .orderDetail-wrapper .order-list .list-content .food_list_item .name_num .specs {
-    position: absolute;
-    display: inline-block;
+    /*position: absolute;*/
+    display: block;
     margin-top: 10px;
-    top: 10px;
-    left: 0;
+    /*top: 10px;*/
+    /*left: 0;*/
     font-size: 11px;
     color: #bababa;
   }
