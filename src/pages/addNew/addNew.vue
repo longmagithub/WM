@@ -52,6 +52,7 @@
 <script>
   import Toast from '../../components/toast.vue'
   import * as PublicJs from '../../common/utils/public'
+  import {getStore} from '../../common/utils/util'
   export default {
     created () {
       this.addressId = this.$route.query.addressId ? this.$route.query.addressId : ''
@@ -65,9 +66,15 @@
         // 修改 title
         PublicJs.changeTitleInWx('新增地址')
       }
+      this.seller = getStore('shopInfo')
+      this.address = this.seller.address.slice(6, 9)
+//      console.log(getStore('shopInfo'))
+//      console.log(this.seller.address.slice(6, 9))
     },
     data () {
       return {
+        seller: {},
+        address: '',
         toastShow: false,
         toastText: '',
         isAjaxing: false,
@@ -159,6 +166,9 @@
         } else if (!this.vaild.houseNum) {
           this.toggleToast(1, '地址不能为空')
           return
+        } else if (this.addressDetail.address.indexOf(this.address) < 0) {
+          this.toggleToast(1, '地区选择错误请重新选择')
+          return
         }
         if (this.isAjaxing) return
         this.isAjaxing = true
@@ -171,6 +181,7 @@
           address: '杭州市' + this.addressDetail.address,
           houseNum: this.addressDetail.houseNum
         }
+//        console.log(data)
         this.sendData(data)
       },
       sendData (data) {
