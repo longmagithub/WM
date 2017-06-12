@@ -89,8 +89,14 @@
                     <span class="name">
                       {{item.name}}
                     </span>
-                    <span class="specs" v-if="item.specs">({{item.specs}}<span v-show="item.tastes.name">，{{item.tastes
-                        .name}}</span>)</span>
+                    <!--<span class="specs" v-if="item.specs">({{item.specs}}<span v-show="item.tastes.name">，{{item.tastes
+                        .name}}</span>)</span>-->
+                    <span class="specs" v-if="item.specs || item.tastes">
+                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span><span
+                      v-show="item.specs !== '默认' && item.tastes">，</span><span
+                      v-show="item.tastes">{{item
+                        .tastes.name}}</span>)
+                      </span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">×{{item.num}}</span>
                   <div class="price" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">

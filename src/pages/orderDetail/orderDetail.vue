@@ -17,7 +17,12 @@
         <li class="dishDetail" v-for="item in orderDetail.dishes">
           <label>
             <span class="dishName">{{item.dishName}}</span>
-            <span class="dishType">({{item.dishType}} {{item.dishTaste}})</span>
+            <span class="dishType">
+            	(<span v-show="item.dishType !== '默认'">{{item.dishType}}</span><span
+                        v-show="item.dishType !== '默认' && item.dishTaste">，</span><span
+                        v-show="item.dishTaste">{{item
+                        .dishTaste}}</span>)
+            </span>
           </label>         
           <label>
             <span v-show="item.dishCount > 1">x{{item.dishCount}}</span>
