@@ -116,6 +116,7 @@
         if (this.shopCart && this.shopCart[categoryId] && this.shopCart[categoryId][itemId]) {
           let num = 0
           Object.values(this.shopCart[categoryId][itemId]).forEach(item => {
+            delete item.specsNum
             Object.values(item).forEach(tasteItem => {
               num += tasteItem.num
             })
@@ -133,6 +134,8 @@
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，分类id长度
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                 remainQuantity, categoryIdLength) {
+//        console.log(this.foodNum)
+        console.log('buyCary --- addToCart')
         if (this.isYingye) {
           if (dishTypeStyle === 1) {
             if (limitCount === 0) { // 个人无限制 取库存
@@ -168,7 +171,7 @@
       // 参数列表：商品id，分类id，菜品id，规格id，菜品名字，菜品价格，菜品规格，饭盒费
       removeOutCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount,
                     originalPrice, remainQuantity, categoryIdLength) {
-        console.log('removeOutCart')
+        console.log('buyCary --- removeOutCart')
         if (this.foodNum > 0) {
           if (limitCount === 0) { // 个人无限制 取库存
             this.userCount = remainQuantity

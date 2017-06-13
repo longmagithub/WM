@@ -432,10 +432,11 @@
         this.newShopCart = []
 //        console.log(this.newShopCart)
         this.orderDish = []
-        console.log(JSON.stringify(this.shopCart))
+//        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(specItem => {
+//              console.log(JSON.stringify(specItem))
               Object.values(specItem).forEach(item => {
 //                console.log(JSON.stringify(item))
                 // this.packPrice += item.num * item.packingFee
@@ -464,8 +465,8 @@
                       this.orderDish.push({
                         specificationId: item.id, // 规格id
                         tasteId: item.tastes === '' ? '' : item.tastes.id, // 口味id
-                        count: item.limitNum, // 数量
-                        price: item.price,  // 价格
+                        count: item.overflowNum, // 数量
+                        price: item.originalPrice,  // 价格
                         type: 0 // 是否爆款 1是 0否
                       })
                     }
@@ -525,8 +526,8 @@
             })
           })
         })
-        console.log(JSON.stringify(this.newShopCart))
-        console.log(JSON.stringify(this.orderDish))
+//        console.log(JSON.stringify(this.newShopCart))
+//        console.log(JSON.stringify(this.orderDish))
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {

@@ -330,6 +330,7 @@
         discounSwitch: false, // 判断爆款是否可以优惠
         isDistance: 1, // 是否在配送距离范围内
         isYingyeText: '商家休息中，暂不接单', // 营业是text文本
+        userCount: 0, // 用户可以点多少个
         textTime: [
           {
             beginTime: '08:00',
@@ -682,6 +683,15 @@
       addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                remainQuantity, tastes) {
 //        console.log('多规格')
+        if (dishTypeStyle === 1) {
+          if (limitCount === 0) { // 个人无限制 取库存
+            this.userCount = remainQuantity
+          } else if (limitCount <= remainQuantity) { // 个人 <= 库存 取个人
+            this.userCount = limitCount
+          } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
+            this.userCount = remainQuantity
+          }
+        }
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -695,8 +705,9 @@
           limitCount,
           originalPrice,
           remainQuantity,
-          userCount: 0,
-          tastes: tastes === undefined ? '' : tastes
+          userCount: this.userCount,
+          tastes: tastes === undefined ? '' : tastes,
+          tastesLength: 2
         })
         this.closeSpesc()
       },
@@ -763,7 +774,11 @@
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 // 同规格 不同口味的 总数量
-                Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]).forEach(tasteId => {
+                let activeSpecItems = Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid])
+                if (activeSpecItems.indexOf('specsNum') > 0) {
+                  activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
+                }
+                activeSpecItems.forEach(tasteId => {
                   let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
 //                  console.log(JSON.stringify(tasteId))
 //                  console.log(JSON.stringify(foodItem))
@@ -773,8 +788,7 @@
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
                   // 菜品费用 区分是否爆款 菜品费用
                   if (foodItem.dishTypeStyle === 1) {
-                    this.totalPrice +=
-                      (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                    this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                   } else if (foodItem.dishTypeStyle === 0) {
                     this.totalPrice += foodItem.num * foodItem.price
                   }
