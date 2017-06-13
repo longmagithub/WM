@@ -634,7 +634,7 @@
             if (res.success === SUCCESS_OK) {
               this.orderId = res.data.orderId
               this.gotoPay(res.data.orderId)
-            } else if (res.code === 13023 || res.code === 13024 || res.code === 13026) {
+            } else if (res.success === false) {
               this.CLEAR_CART(data.shopId)
 //              this.toggleToast(1, '菜品价格有变化，请重新下单')
               this.toggleToast(1, res.message)

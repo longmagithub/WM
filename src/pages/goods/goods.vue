@@ -682,7 +682,7 @@
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，是否爆款分类，限购数量，原价，库存
       addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                remainQuantity, tastes) {
-//        console.log('多规格')
+        console.log('多规格或多口味')
         if (dishTypeStyle === 1) {
           if (limitCount === 0) { // 个人无限制 取库存
             this.userCount = remainQuantity

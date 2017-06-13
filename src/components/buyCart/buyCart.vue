@@ -39,7 +39,8 @@
            foods.dishSpecification[0].limitCount,
            foods.dishSpecification[0].originalPrice,
            foods.dishSpecification[0].remainQuantity,
-           foods.dishTypeRelations.length)">
+           foods.dishTypeRelations.length,
+           foods.dishSpecification[0].tastes)">
         <transition name="fade">
           <p class="show_addToCart_hotType" v-if="showAddToCartAotType">
             该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦</p>
@@ -48,7 +49,7 @@
     </section>
     <!-- 多规格 -->
     <section class="specification-wrapper"
-             v-else-if="(foods.dishSpecification.length > 1 && foods.state === 1) || (foods.dishSpecification[0].tastes.length >= 1 && foods.state === 1)"
+             v-else-if="(foods.dishSpecification.length > 1 && foods.state === 1) || (foods.dishSpecification[0].tastes.length >= 0 && foods.state === 1)"
              key="specification-wrapper">
       <transition name="move">
         <div class="cart-decrease uxwm-iconfont sanjiao"
@@ -133,8 +134,7 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，个人限购数量，是否爆款分类，分类id长度
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                remainQuantity, categoryIdLength) {
-//        console.log(this.foodNum)
+                remainQuantity, categoryIdLength, tastes) {
         console.log('buyCary --- addToCart')
         if (this.isYingye) {
           if (dishTypeStyle === 1) {
@@ -161,7 +161,7 @@
             remainQuantity,
             userCount: this.userCount,
             categoryIdLength,
-            tastes: ''
+            tastes: tastes.length === 0 ? '' : tastes
           })
         } else {
           return
