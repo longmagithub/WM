@@ -633,8 +633,6 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
-//        window.alert(JSON.stringify(this.listHeight))
-//        console.log(this.listHeight)
         // 初始化数据
         setTimeout(() => {
           this._initScroll()
@@ -683,8 +681,7 @@
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费，是否爆款分类，限购数量，原价，库存
       addSpecs(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                remainQuantity, tastes) {
-        console.log('多规格')
-//        console.log(JSON.stringify(tastes))
+//        console.log('多规格')
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -707,8 +704,7 @@
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
                 remainQuantity, userCount, categoryIdLength, tastes) {
-        console.log(tastes)
-        console.log('购物车++')
+//        console.log('购物车++')
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -826,7 +822,7 @@
             newArr[index] = 0
           }
         })
-        console.log(JSON.stringify(this.cartFoodList))
+//        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },
