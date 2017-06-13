@@ -67,14 +67,10 @@
         PublicJs.changeTitleInWx('新增地址')
       }
       this.seller = getStore('shopInfo')
-      this.address = this.seller.address.slice(6, 9)
-//      console.log(getStore('shopInfo'))
-//      console.log(this.seller.address.slice(6, 9))
+      this.address = this.seller.address
     },
     data () {
       return {
-        seller: {},
-        address: '',
         toastShow: false,
         toastText: '',
         isAjaxing: false,
@@ -166,7 +162,7 @@
         } else if (!this.vaild.houseNum) {
           this.toggleToast(1, '地址不能为空')
           return
-        } else if (this.addressDetail.address.indexOf(this.address) < 0) {
+        } else if (this.address.indexOf(this.addressDetail.address) < 0) {
           this.toggleToast(1, '地区选择错误请重新选择')
           return
         }
@@ -181,7 +177,6 @@
           address: '杭州市' + this.addressDetail.address,
           houseNum: this.addressDetail.houseNum
         }
-//        console.log(data)
         this.sendData(data)
       },
       sendData (data) {
@@ -205,7 +200,7 @@
               this.$router.replace({
                 path: '/addList',
                 query: {
-                  addressId: this.addressId,
+//                  addressId: this.addressId,
                   shopId: this.shopId,
                   sessionId: this.sessionId
                 }

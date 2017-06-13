@@ -18,10 +18,10 @@
           <label>
             <span class="dishName">{{item.dishName}}</span>
             <span class="dishType">
-            	(<span v-show="item.dishType !== '默认'">{{item.dishType}}</span><span
+            	<span v-show="item.dishType !== '默认'">{{'('}}</span><span v-show="item.dishType !== '默认'">{{item.dishType}}</span><span
                         v-show="item.dishType !== '默认' && item.dishTaste">，</span><span
                         v-show="item.dishTaste">{{item
-                        .dishTaste}}</span>)
+                        .dishTaste}}</span><span v-show="item.dishType !== '默认'">{{')'}}</span>
             </span>
           </label>         
           <label>
