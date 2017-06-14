@@ -429,7 +429,7 @@
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(specItem => {
 //              console.log(JSON.stringify(specItem))
-              Object.values(specItem).forEach(item => {
+              Object.values(specItem).forEach((item, index) => {
 //                console.log(JSON.stringify(item))
                 // this.packPrice += item.num * item.packingFee
                 if (item.price !== null && item.price >= 0 && item.num > 0) {
