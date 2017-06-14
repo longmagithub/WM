@@ -54,11 +54,13 @@
       <transition name="move">
         <div class="cart-decrease uxwm-iconfont sanjiao"
              v-show="foodNum > 0"
-             :class="{specification_delete: foods.dishSpecification.length > 1 || foods.dishSpecification[0].tastes.length >= 1}"
-             @click="showReduceTip">
+             :class="{specification_delete: foods.dishSpecification.length >= 1 || foods.dishSpecification[0].tastes.length >= 1}"
+             @click="showReduceTip(foods.dishSpecification.length >= 1, foods.dishSpecification[0].tastes.length >= 1)">
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">{{showDeleteText}}</p>
+            <p class="show_delete_tip" v-if="showDeleteTasteTip">{{showDeleteTaste}}</p>
+            <p class="show_delete_tip" v-if="showDeleteAllTip">{{showDeleteAll}}</p>
           </transition>
         </div>
       </transition>
@@ -73,7 +75,7 @@
     </section>
   </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
   import {mapState, mapMutations} from 'vuex'
   //  import {loadFromLocal} from '../../common/js/store'
   export default {
@@ -98,7 +100,11 @@
       return {
         showSpecs: false, // 控制显示 规格
         showDeleteTip: false, // 多规格显示 删除 提示
+        showDeleteTasteTip: false, // 多口味显示 删除 提示
+        showDeleteAllTip: false, // 多分类显示 删除 提示
         showDeleteText: '多规格商品只能去购物车删除哦', // 多规格 或 多口味的 删除是 提示文本
+        showDeleteTaste: '多口味商品只能去购物车删除哦',
+        showDeleteAll: '多分类商品只能去购物车删除哦',
         showAddToCartAotType: false, // 超过爆款限制
         userCount: 0 // 用户可以点多少个
       }
@@ -209,12 +215,31 @@
         }
       },
       // 点击多规格商品的减按钮，弹出提示
-      showReduceTip() {
-        this.showDeleteTip = true
+      showReduceTip(type,taste) {
+      	/*if (type) {
+      		this.showDeleteTip = true 
+      	} else if (taste && !type){
+      		this.showDeleteTip = true
+      		this.showDeleteText = '12312'
+    		this.showDeleteAllTip = true
+      	} else if (taste){
+      		this.showDeleteTip = true
+      		this.showDeleteText = 'asfaf'
+    			this.showDeleteTasteTip = true
+    		}*/
+      	if(type && !taste){
+      		this.showDeleteTip = true
+      	} else if(taste){
+      		this.showDeleteTasteTip = true
+      	} else if(type && taste){
+      		this.showDeleteAllTip = true
+      	}
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
           clearTimeout(this.timer)
           this.showDeleteTip = false
+          this.showDeleteTasteTip = false
+          this.showDeleteAllTip = false
         }, 1500)
       }
     }

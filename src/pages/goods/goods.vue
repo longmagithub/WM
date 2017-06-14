@@ -123,10 +123,10 @@
                         {{item.name}}
                       </span>
                       <span class="specs" v-if="item.specs || item.tastes">
-                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span><span
-                        v-show="item.specs !== '默认' && item.tastes">，</span><span
-                        v-show="item.tastes">{{item
-                        .tastes.name}}</span>)
+                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span>
+                        <span v-show="item.specs === '默认'">{{item.specs}}</span>
+                        <span v-show="item.specs !== '默认' && item.tastes">，</span>
+                        <span v-show="item.tastes">{{item.tastes.name}}</span>)
                       </span>
                     </div>
                   </div>
