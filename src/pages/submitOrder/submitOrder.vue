@@ -41,7 +41,7 @@
               <ul>
                 <li class="food_list_item"
                     v-for="item in newShopCart"
-                    v-if="item.num > 0 && item.hotTyep === 1 && item.dishTypeStyle === 1">
+                    v-if="item.num > 0 && item.hotTyep === 1 && item.dishTypeStyle === 1 && item.limitNum !== 0">
                   <div class="name_num">
                     <span class="name">
                       <i class="uxwm-iconfont huo"></i>
@@ -104,14 +104,6 @@
                     ￥{{item.num * item.price | toFixedFil}}
                   </div>
                 </li>
-                <!--<li class="food_list_item" v-for="item in newShopCart" v-if="item.num > 0 && item.dishTypeStyle === 0">-->
-                <!--<div class="name_num">-->
-                <!--<span class="name">{{item.name}}</span>-->
-                <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
-                <!--</div>-->
-                <!--<span class="num">×{{item.num}}</span>-->
-                <!--<div class="price">￥{{item.num * item.price | toFixedFil}}</div>-->
-                <!--</li>-->
                 <li class="food_list_item">
                   <div
                     class="name_num"><span class="name">餐盒费</span></div>
@@ -526,8 +518,8 @@
             })
           })
         })
-//        console.log(JSON.stringify(this.newShopCart))
-//        console.log(JSON.stringify(this.orderDish))
+        console.log(JSON.stringify(this.newShopCart))
+        console.log(JSON.stringify(this.orderDish))
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
@@ -590,6 +582,11 @@
       // 提交订单
       submitOrder() {
         let boonPrice = Date.parse(new Date()) > Date.parse(new Date(this.endDate)) ? 0 : this.boonPrice
+        for (let i = 0; i < this.orderDish.length; i++) {
+          if (this.orderDish[i].count === 0) {
+            this.orderDish.splice(i, 1)
+          }
+        }
         if (this.addRess) {
           const data = {
             // 商户id
