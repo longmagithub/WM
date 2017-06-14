@@ -55,7 +55,7 @@
         <div class="cart-decrease uxwm-iconfont sanjiao"
              v-show="foodNum > 0"
              :class="{specification_delete: foods.dishSpecification.length > 1 || foods.dishSpecification[0].tastes.length >= 1}"
-             @click="showReduceTip">
+             @click="showReduceTip(foods.dishSpecification.length, foods.dishSpecification[0].tastes.length)">
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">{{showDeleteText}}</p>
@@ -98,7 +98,7 @@
       return {
         showSpecs: false, // 控制显示 规格
         showDeleteTip: false, // 多规格显示 删除 提示
-        showDeleteText: '多规格商品只能去购物车删除哦', // 多规格 或 多口味的 删除是 提示文本
+        showDeleteText: '多规格或多口味商品只能去购物车删除哦', // 多规格 或 多口味的 删除是 提示文本
         showAddToCartAotType: false, // 超过爆款限制
         userCount: 0 // 用户可以点多少个
       }
@@ -209,7 +209,7 @@
         }
       },
       // 点击多规格商品的减按钮，弹出提示
-      showReduceTip() {
+      showReduceTip(specsLength, tastesLength) {
         this.showDeleteTip = true
         clearTimeout(this.timer)
         this.timer = setTimeout(() => {
