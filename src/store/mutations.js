@@ -39,8 +39,7 @@ export default {
     categoryIdLength, // 分类id长度
     tastes
   }) {
-    console.log(categoryId)
-    console.log(itemId)
+    console.log(JSON.stringify(tastes))
     let cart = state.cartList
     if ((cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) && dishTypeStyle === 0) {
       // console.log('_____----11111----______')
@@ -81,14 +80,16 @@ export default {
           cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
           // console.log('1-3')
         }
-      } else if (cart[shopid][categoryId][itemId][foodId][tastes.id] !== undefined) { // 爆款有口味
+      } else if (cart[shopid][categoryId][itemId][foodId][tastes.id] !== '') { // 爆款有口味
         console.log('爆款有口味')
         // 当前规格id下有多少个子类，需要减1 'specsNum' 多出
         let activeSpecItems = Object.keys(cart[shopid][categoryId][itemId][foodId])
-        activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
+        if (activeSpecItems.indexOf('specsNum') >= 0) {
+          activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
+        }
+        console.log(activeSpecItems)
         if (activeSpecItems.indexOf(tastes.id) < 0 && tastes !== '') { // 当前爆款类下如果没有这个口味，就创建
           console.log('爆款0000000')
-          cart[shopid][categoryId][itemId][foodId]['specsNum']++
           cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
           cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
           cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
@@ -105,17 +106,17 @@ export default {
           cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
           cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
           cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-          cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = cart[shopid][categoryId][itemId][foodId]['specsNum']
         } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
-          cart[shopid][categoryId][itemId][foodId]['specsNum']++
-          cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = cart[shopid][categoryId][itemId][foodId]['specsNum']
+          // cart[shopid][categoryId][itemId][foodId]['specsNum']++
+          console.log(JSON.stringify(cart[shopid][categoryId][itemId][foodId]))
+          // cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = cart[shopid][categoryId][itemId][foodId]['specsNum']
           console.log('爆款111111')
           if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 增加 num 和
             // overflowNum
             cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']++
             cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
-            console.log('1-1')
-          } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['numm'] < userCount) { // 如果没有超出 增加 num 和
+            // console.log('1-1')
+          } else if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] < userCount) { // 如果没有超出 增加 num 和
             // limitNum
             cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']++
             cart[shopid][categoryId][itemId][foodId][tastes.id]['num']++
@@ -146,10 +147,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-      // if (dishTypeStyle === 1) {
-      cart[shopid][categoryId][itemId][foodId]['specsNum'] = 1
-      //   cart[shopid][categoryId][itemId][foodId][tastes.id] = cart[shopid][categoryId][itemId][foodId]['specsNum']
-      // }
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
       console.log('_____----44444----______')
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -170,12 +167,8 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
       cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = 1
-      // if (dishTypeStyle === 1) {
-      cart[shopid][categoryId][itemId][foodId]['specsNum'] = 1
-      //   cart[shopid][categoryId][itemId][foodId][tastes.id] = cart[shopid][categoryId][itemId][foodId]['specsNum']
-      // }
     } else if (cart[shopid] && cart[shopid][categoryId]) {
-      // console.log('_____----55555----______')
+      console.log('_____----55555----______')
       cart[shopid][categoryId][itemId] = {}
       cart[shopid][categoryId][itemId][foodId] = {}
       cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
@@ -195,10 +188,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
       cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = 1
-      // if (dishTypeStyle === 1) {
-      cart[shopid][categoryId][itemId][foodId]['specsNum'] = 1
-      //   cart[shopid][categoryId][itemId][foodId][tastes.id] = cart[shopid][categoryId][itemId][foodId]['specsNum']
-      // }
     } else if (cart[shopid]) {
       console.log('_____----66666----______')
       cart[shopid][categoryId] = {}
@@ -220,10 +209,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-      // if (dishTypeStyle === 1) {
-      cart[shopid][categoryId][itemId][foodId]['specsNum'] = 1
-      //   cart[shopid][categoryId][itemId][foodId][tastes.id] = cart[shopid][categoryId][itemId][foodId]['specsNum']
-      // }
     } else {
       console.log('_____----77777----______')
       cart[shopid] = {}
@@ -246,7 +231,6 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-      cart[shopid][categoryId][itemId][foodId]['specsNum'] = 1
     }
     // 返回一个新的对象，否则计算属性无法监听到数据的变化
     state.cartList = Object.assign({}, cart)
@@ -269,10 +253,10 @@ export default {
     userCount,
     tastes
   }) {
-    console.log(tastes)
     let cart = state.cartList
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
       if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > 0) {
+        console.log('购物车移除')
         if (dishTypeStyle === 1) { // 如果是爆款
           if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 减少 num 和 overflowNum
             cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']--
@@ -301,7 +285,8 @@ export default {
         setStore('buyCart', state.cartList)
       } else {
         // 商品数量为0，则清空当前商品的信息
-        cart[shopid][categoryId][itemId][foodId] = null
+        console.log('移除购物车数量为000')
+        cart[shopid][categoryId][itemId][foodId][tastes.id] = null
       }
     }
   },

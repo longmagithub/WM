@@ -770,6 +770,7 @@
         this.goods.forEach((item, index) => {
           if (this.shopCartList && this.shopCartList[item.dishList[0].dishTypeRelations[0]]) {
             let num = 0
+            let specsCount = 0
 //            let limitNum = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
@@ -778,17 +779,40 @@
                 if (activeSpecItems.indexOf('specsNum') > 0) {
                   activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
                 }
-                activeSpecItems.forEach(tasteId => {
+                activeSpecItems.forEach((tasteId, index) => {
                   let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
 //                  console.log(JSON.stringify(tasteId))
 //                  console.log(JSON.stringify(foodItem))
+                  if (foodItem.dishTypeStyle && foodItem.tastes.id !== '') {
+                    specsCount += (foodItem.num)
+                  }
                   num += foodItem.num
                   // 餐盒费
                   this.totalPack += foodItem.num * foodItem.packingFee
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
                   // 菜品费用 区分是否爆款 菜品费用
                   if (foodItem.dishTypeStyle === 1) {
-                    this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                    if (foodItem.tastes.id !== '') {
+//                      console.log('爆款多口味 计算总价')
+                      if (specsCount > foodItem.userCount) {
+//                        console.log('11111111')
+                        if (index === 0) {
+//                          console.log('AAAAAAA')
+                          this.totalPrice += (foodItem.price * foodItem.userCount) + (foodItem.originalPrice * (specsCount - foodItem.limitNum))
+                        } else if (index > 0) {
+//                          console.log('BBBBBBB')
+                          this.totalPrice += (foodItem.originalPrice * (foodItem.num * index))
+                          foodItem.limitNum = 0
+                          foodItem.overflowNum = foodItem.num
+                        }
+                      } else if (specsCount <= foodItem.userCount) {
+//                        console.log('0000000')
+                        this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                      }
+                    } else {
+//                      console.log('爆款无口味 计算总价')
+                      this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                    }
                   } else if (foodItem.dishTypeStyle === 0) {
                     this.totalPrice += foodItem.num * foodItem.price
                   }
@@ -961,22 +985,6 @@
       shopCartList: function (value) {
         this.initCategoryNum()
       }
-      // 监听URL 变化
-//      changeShopId: function (value) {
-//        this.shopId = getStore('userInfo').shopId
-//        this.customerId = getStore('userInfo').customerId
-//        this.hoursArr = this.seller.hours
-//        // 初始化购物车，获取存储在localStorage中的购物车商品信息
-//        this.INIT_BUYCART()
-//        // 菜谱列表
-//        this.getDistList()
-//        // 门店状态
-//        this.getShopState()
-//        // 优惠列表
-//        this.getDiscountList()
-//        // 查询爆款活动接口
-//        this.getActivityHotstyle()
-//      }
     },
     components: {
       buyCart,

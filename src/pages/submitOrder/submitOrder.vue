@@ -432,7 +432,7 @@
         this.newShopCart = []
 //        console.log(this.newShopCart)
         this.orderDish = []
-//        console.log(JSON.stringify(this.shopCart))
+        console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(specItem => {
