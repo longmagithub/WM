@@ -16,12 +16,18 @@
         <li class="title">订单详情</li>
         <li class="dishDetail" v-for="item in orderDetail.dishes">
           <label>
-            <span class="dishName">{{item.dishName}}</span>
+            <span class="dishName">
+            	<i class="uxwm-iconfont huo"></i>
+            	{{item.dishName}}
+            </span>
             <span class="dishType">
-            	<span v-show="item.dishType !== '默认'">{{'('}}</span><span v-show="item.dishType !== '默认'">{{item.dishType}}</span><span
-                        v-show="item.dishType !== '默认' && item.dishTaste">，</span><span
-                        v-show="item.dishTaste">{{item
-                        .dishTaste}}</span><span v-show="item.dishType !== '默认'">{{')'}}</span>
+            	<span v-show="item.dishType !== '默认'">{{'('}}</span>
+            	<span v-show="item.dishType !== '默认'">{{item.dishType}}</span>
+            	<span v-show="item.dishType !== '默认' && item.dishTaste">,</span>
+            	<span v-show="item.dishType === '默认' && item.dishTaste">{{'('}}</span>
+            	<span v-show="item.dishTaste">{{item.dishTaste}}</span>
+            	<span v-show="item.dishType === '默认' && item.dishTaste">{{')'}}</span>
+            	<span v-show="item.dishType !== '默认'">{{')'}}</span>
             </span>
           </label>         
           <label>
@@ -384,6 +390,11 @@
     left: 0;
     top: 20px;
     color: #bababa;
+  }
+  
+  .dishDetail .huo {
+  	margin-right: 4px;
+    color: #ff553e;
   }
 
   li.total-amount {

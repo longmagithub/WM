@@ -73,7 +73,7 @@
     </section>
   </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
   import {mapState, mapMutations} from 'vuex'
   //  import {loadFromLocal} from '../../common/js/store'
   export default {
@@ -370,5 +370,4 @@
     opacity: 1;
     background: rgba(7, 17, 27, 0.4);
   }
-
 </style>
