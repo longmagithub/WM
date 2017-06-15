@@ -790,7 +790,7 @@
                   if (foodItem.dishTypeStyle === 1) {
                     if (foodItem.tastes.id !== '') { // 是否爆款
                       if (specNum <= foodItem.userCount) { // 当前爆款下 所有口味个数 <= userCount
-                        console.log('CCCCCCC')
+//                        console.log('CCCCCCC')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
