@@ -42,8 +42,9 @@
            foods.dishTypeRelations.length,
            foods.dishSpecification[0].tastes)">
         <transition name="fade">
-          <p class="show_addToCart_hotType" v-if="showAddToCartAotType">
-            该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦</p>
+          <p class="show_addToCart_hotType" v-show="showAddToCartAotType">
+            该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦
+          </p>
         </transition>
       </div>
     </section>

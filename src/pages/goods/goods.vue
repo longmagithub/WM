@@ -770,47 +770,37 @@
         this.goods.forEach((item, index) => {
           if (this.shopCartList && this.shopCartList[item.dishList[0].dishTypeRelations[0]]) {
             let num = 0
-            let specsCount = 0
-//            let limitNum = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 // 同规格 不同口味的 总数量
                 let activeSpecItems = Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid])
-                if (activeSpecItems.indexOf('specsNum') > 0) {
-                  activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
+                if (activeSpecItems.indexOf('testNum') > 0) {
+                  activeSpecItems.splice(activeSpecItems.indexOf('testNum'), 1)
                 }
                 activeSpecItems.forEach((tasteId, index) => {
                   let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
-//                  console.log(JSON.stringify(tasteId))
-//                  console.log(JSON.stringify(foodItem))
-                  if (foodItem.dishTypeStyle && foodItem.tastes.id !== '') {
-                    specsCount += (foodItem.num)
-                  }
+                  let specNum = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]['testNum']
+                  console.log(activeSpecItems)
+                  console.log(specNum)
                   num += foodItem.num
                   // 餐盒费
                   this.totalPack += foodItem.num * foodItem.packingFee
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
                   // 菜品费用 区分是否爆款 菜品费用
                   if (foodItem.dishTypeStyle === 1) {
-                    if (foodItem.tastes.id !== '') {
-//                      console.log('爆款多口味 计算总价')
-                      if (specsCount > foodItem.userCount) {
-//                        console.log('11111111')
-                        if (index === 0) {
-//                          console.log('AAAAAAA')
-                          this.totalPrice += (foodItem.price * foodItem.userCount) + (foodItem.originalPrice * (specsCount - foodItem.limitNum))
-                        } else if (index > 0) {
-//                          console.log('BBBBBBB')
-                          this.totalPrice += (foodItem.originalPrice * (foodItem.num * index))
-                          foodItem.limitNum = 0
-                          foodItem.overflowNum = foodItem.num
-                        }
-                      } else if (specsCount <= foodItem.userCount) {
-//                        console.log('0000000')
+                    if (foodItem.tastes.id !== '') { // 是否爆款
+                      if (specNum <= foodItem.userCount) { // 当前爆款下 所有口味个数 <= userCount
+                        console.log('CCCCCCC')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                      } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
+                        this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+//                        if (index === 0) { // 是爆款，口味只有一个
+//                          console.log('AAAAAAAAA')
+//                        } else if (index > 0) { // 是爆款 口味有多个
+//                          console.log('BBBBBBBB')
+//                        }
                       }
                     } else {
-//                      console.log('爆款无口味 计算总价')
                       this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                     }
                   } else if (foodItem.dishTypeStyle === 0) {
@@ -860,7 +850,7 @@
             newArr[index] = 0
           }
         })
-//        console.log(JSON.stringify(this.cartFoodList))
+        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },
