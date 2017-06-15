@@ -115,8 +115,8 @@
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
                 </li>
-                <li class="food_list_item" v-if="manJianFeesPrice.state === 1 && allPrice > manJianFeesPrice.price"
-                    :class="{'manJianFeesPrice': manJianFeesPrice.state === 1 && allPrice > manJianFeesPrice.price}">
+                <li class="food_list_item" v-if="manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price"
+                    :class="{'manJianFeesPrice': manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price}">
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">
                     <span class="price_num">￥0</span>
@@ -525,7 +525,7 @@
       // 阶梯配送费
       getDispatchPrice(userPosition) {
         if (this.manJianFeesPrice.state === 1) {
-          if (this.allPrice > this.manJianFeesPrice.price) {
+          if (this.allPrice >= this.manJianFeesPrice.price) {
             this.feesPrice = 0
             this.getDiscountList()
             this.isFeessSwitch = false
