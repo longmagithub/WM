@@ -92,8 +92,8 @@ export default {
           console.log('爆款0000000')
           cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
           cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
-          cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 1
-          cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 0
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 1
           cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
           cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
           cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
