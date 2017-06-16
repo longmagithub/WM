@@ -39,7 +39,7 @@
                   <span class="limit-box_remainQuantity" v-show="food.dishSpecification[0].remainQuantity > 0">仅剩{{food
                     .dishSpecification[0].remainQuantity}}份</span>
                   <span class="limit-box_limitCount"
-                        v-show="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].limitCount === 0 && food.dishSpecification[0].remainQuantity === 0">
+                        v-show="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity === 0">
                     今日爆款已售完
                   </span>
                 </p>
@@ -261,6 +261,7 @@
   import buyCart from '../../components/buyCart/buyCart.vue'
   import {setStore, getStore} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
+  import MD5 from 'md5'
   const SUCCESS_OK = true
   export default {
     props: {
@@ -335,6 +336,7 @@
         isDistance: 1, // 是否在配送距离范围内
         isYingyeText: '商家休息中，暂不接单', // 营业是text文本
         userCount: 0, // 用户可以点多少个
+        dishListVersion: '',
         textTime: [
           {
             beginTime: '08:00',
@@ -370,6 +372,7 @@
     created() {
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      this.dishListVersion = getStore('distListmd5')[this.shopId]
       this.hoursArr = this.seller.hours
       this.isDistance = parseInt(this.$route.query.isDistance)
 //      console.log('_____----------_______----------______-')
@@ -391,7 +394,6 @@
         this.isYingye = false
         this.isYingyeText = '客官你太远啦，我们正努力向你靠拢'
       }
-//      console.log(JSON.stringify(this.cartList))
     },
     computed: {
       // 检测 vuex 中cartList
@@ -534,13 +536,23 @@
                   dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
                 })
               })
+              setStore('distListmd5', {
+                [this.shopId]: MD5(JSON.stringify(res.data.dishesList))
+              })
+              console.log(this.dishListVersion)
+              console.log(MD5(JSON.stringify(res.data.dishesList)))
               this.goods = res.data.dishesList
               setTimeout(() => {
                 this._calculateHeight()
+                if (this.dishListVersion !== MD5(JSON.stringify(res.data.dishesList))) {
+//                  console.log('更新了-————————-=====-___________----______----')
+//                  console.log(this.cartList[this.shopId])
+                  if (this.cartList[this.shopId] !== null) {
+                    this.toggleToast(1, '商品已过期，请重新下单。')
+                  }
+                  this.CLEAR_CART(this.shopId)
+                }
               }, 200)
-//              this.$nextTick(() => {
-              // 获取区间高度
-//              })
             }
           }
         })
@@ -866,7 +878,7 @@
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.toastShow = !this.toastShow
-          }, 1000)
+          }, 1500)
         } else {
           return
         }
