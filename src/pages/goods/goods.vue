@@ -260,6 +260,9 @@
                     v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 4"
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+              </span>
+              <span class="text 5"
                     v-else>{{specs.dishSpecification[specsIndex].dishPrice}}
               </span>
             </div>
@@ -855,11 +858,13 @@
                         console.log('CCCCCCC')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
+                        console.log(specNum)
+                        console.log('AAAAAAAA')
                         this.switchTypePrice = false
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       } else {
                         this.switchTypePrice = false
-                        console.log('CCCCCCC')
+                        console.log('bbbbbbbbb')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       }
                     } else {
@@ -873,8 +878,8 @@
                   // 如果有爆款就不显示 动态满减
                   if (foodItem.num > 0) {
                     if (foodItem.dishTypeStyle === 1) {
-                      if (foodItem.userCount === 0 && foodItem.remainQuantity === 0) {
-                        this.discounSwitch = false
+                      if (foodItem.userCount !== 0 && foodItem.remainQuantity !== 0) {
+                        this.discounSwitch = true
                       }
                     }
                     this.cartFoodList[cartFoodNum] = {} // 创建单个菜分类
