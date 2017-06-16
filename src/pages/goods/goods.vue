@@ -38,6 +38,10 @@
                     .dishSpecification[0].limitCount}}份</span>
                   <span class="limit-box_remainQuantity" v-show="food.dishSpecification[0].remainQuantity > 0">仅剩{{food
                     .dishSpecification[0].remainQuantity}}份</span>
+                  <span class="limit-box_limitCount"
+                        v-show="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity === 0">
+                    今日爆款已售完
+                  </span>
                 </p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
@@ -257,6 +261,7 @@
   import buyCart from '../../components/buyCart/buyCart.vue'
   import {setStore, getStore} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
+  import MD5 from 'md5'
   const SUCCESS_OK = true
   export default {
     props: {
@@ -331,6 +336,7 @@
         isDistance: 1, // 是否在配送距离范围内
         isYingyeText: '商家休息中，暂不接单', // 营业是text文本
         userCount: 0, // 用户可以点多少个
+        dishListVersion: '',
         textTime: [
           {
             beginTime: '08:00',
@@ -366,6 +372,7 @@
     created() {
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
+      this.dishListVersion = getStore('distListmd5')[this.shopId]
       this.hoursArr = this.seller.hours
       this.isDistance = parseInt(this.$route.query.isDistance)
 //      console.log('_____----------_______----------______-')
@@ -387,7 +394,6 @@
         this.isYingye = false
         this.isYingyeText = '客官你太远啦，我们正努力向你靠拢'
       }
-//      console.log(JSON.stringify(this.cartList))
     },
     computed: {
       // 检测 vuex 中cartList
@@ -530,13 +536,23 @@
                   dishListItem.imageUrl = dishListItem.imageUrl + '?x-oss-process=image/resize,m_fill,h_100,w_100'
                 })
               })
+              setStore('distListmd5', {
+                [this.shopId]: MD5(JSON.stringify(res.data.dishesList))
+              })
+              console.log(this.dishListVersion)
+              console.log(MD5(JSON.stringify(res.data.dishesList)))
               this.goods = res.data.dishesList
               setTimeout(() => {
                 this._calculateHeight()
+                if (this.dishListVersion !== MD5(JSON.stringify(res.data.dishesList))) {
+//                  console.log('更新了-————————-=====-___________----______----')
+//                  console.log(this.cartList[this.shopId])
+                  if (this.cartList[this.shopId] !== null) {
+                    this.toggleToast(1, '商品已过期，请重新下单。')
+                  }
+                  this.CLEAR_CART(this.shopId)
+                }
               }, 200)
-//              this.$nextTick(() => {
-              // 获取区间高度
-//              })
             }
           }
         })
@@ -770,47 +786,37 @@
         this.goods.forEach((item, index) => {
           if (this.shopCartList && this.shopCartList[item.dishList[0].dishTypeRelations[0]]) {
             let num = 0
-            let specsCount = 0
-//            let limitNum = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
               Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid]).forEach(foodid => {
                 // 同规格 不同口味的 总数量
                 let activeSpecItems = Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid])
-                if (activeSpecItems.indexOf('specsNum') > 0) {
-                  activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
+                if (activeSpecItems.indexOf('testNum') > 0) {
+                  activeSpecItems.splice(activeSpecItems.indexOf('testNum'), 1)
                 }
                 activeSpecItems.forEach((tasteId, index) => {
                   let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
-//                  console.log(JSON.stringify(tasteId))
-//                  console.log(JSON.stringify(foodItem))
-                  if (foodItem.dishTypeStyle && foodItem.tastes.id !== '') {
-                    specsCount += (foodItem.num)
-                  }
+                  let specNum = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]['testNum']
+                  console.log(activeSpecItems)
+                  console.log(specNum)
                   num += foodItem.num
                   // 餐盒费
                   this.totalPack += foodItem.num * foodItem.packingFee
                   this.totalPack = parseFloat(this.totalPack.toFixed(2))
                   // 菜品费用 区分是否爆款 菜品费用
                   if (foodItem.dishTypeStyle === 1) {
-                    if (foodItem.tastes.id !== '') {
-//                      console.log('爆款多口味 计算总价')
-                      if (specsCount > foodItem.userCount) {
-//                        console.log('11111111')
-                        if (index === 0) {
-//                          console.log('AAAAAAA')
-                          this.totalPrice += (foodItem.price * foodItem.userCount) + (foodItem.originalPrice * (specsCount - foodItem.limitNum))
-                        } else if (index > 0) {
-//                          console.log('BBBBBBB')
-                          this.totalPrice += (foodItem.originalPrice * (foodItem.num * index))
-                          foodItem.limitNum = 0
-                          foodItem.overflowNum = foodItem.num
-                        }
-                      } else if (specsCount <= foodItem.userCount) {
-//                        console.log('0000000')
+                    if (foodItem.tastes.id !== '') { // 是否爆款
+                      if (specNum <= foodItem.userCount) { // 当前爆款下 所有口味个数 <= userCount
+//                        console.log('CCCCCCC')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+                      } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
+                        this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
+//                        if (index === 0) { // 是爆款，口味只有一个
+//                          console.log('AAAAAAAAA')
+//                        } else if (index > 0) { // 是爆款 口味有多个
+//                          console.log('BBBBBBBB')
+//                        }
                       }
                     } else {
-//                      console.log('爆款无口味 计算总价')
                       this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                     }
                   } else if (foodItem.dishTypeStyle === 0) {
@@ -860,7 +866,7 @@
             newArr[index] = 0
           }
         })
-//        console.log(JSON.stringify(this.cartFoodList))
+        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },
@@ -872,7 +878,7 @@
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.toastShow = !this.toastShow
-          }, 1000)
+          }, 1500)
         } else {
           return
         }
