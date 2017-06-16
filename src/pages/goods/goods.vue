@@ -254,13 +254,13 @@
                     v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].dishPrice}}
               </span>
               <span class="text 2"
-                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 3"
-                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 4"
-                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 5"
                     v-else>{{specs.dishSpecification[specsIndex].dishPrice}}

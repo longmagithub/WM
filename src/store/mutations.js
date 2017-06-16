@@ -338,13 +338,17 @@ export default {
         state.cartList = Object.assign({}, cart)
         // 存入localStorage
         setStore('buyCart', state.cartList)
-      }
-      if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === 0) {
-        // 商品数量为0，则清空当前商品的信息
+      } else {
         console.log('移除购物车数量为000')
         cart[shopid][categoryId][itemId][foodId][tastes.id] = null
         cart[shopid][categoryId][itemId][foodId]['testNum'] = 0
       }
+      // if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === 0) {
+      //   // 商品数量为0，则清空当前商品的信息
+      //   console.log('移除购物车数量为000')
+      //   cart[shopid][categoryId][itemId][foodId][tastes.id] = null
+      //   cart[shopid][categoryId][itemId][foodId]['testNum'] = 0
+      // }
     }
   },
   // 清空当前商品的购物车信息
