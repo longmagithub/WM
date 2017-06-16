@@ -21,13 +21,13 @@
             	{{item.dishName}}
             </span>
             <span class="dishType">
-            	<span v-show="item.dishType !== '' && item.dishType !== '默认'">(</span>
+            	<span v-show="item.dishType !== '' && item.dishType !== '默认' || item.dishTaste">(</span>
             	<span v-show="item.dishType !== '' && item.dishType !== '默认'">{{item.dishType}}</span>
             	<span v-show="item.dishType !== '' && item.dishType !== '默认' && item.dishTaste">,</span>
             	<!--<span v-show="item.dishType === '' && item.dishTaste">(</span>-->
             	<span v-show="item.dishTaste">{{item.dishTaste}}</span>
             	<!--<span v-show="item.dishType === '' && item.dishTaste">)</span>-->
-            	<span v-show="item.dishType !== '' && item.dishType !== '默认'">)</span>
+            	<span v-show="item.dishType !== '' && item.dishType !== '默认' || item.dishTaste">)</span>
             </span>
           </label>         
           <label>
