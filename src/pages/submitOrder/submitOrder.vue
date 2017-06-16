@@ -441,7 +441,7 @@
                 if (item.price !== null && item.price >= 0 && item.num > 0) {
                   if (item.dishTypeStyle === 1) { // 爆款属性
                     this.discounSwitch = false
-                    if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
+                    if (item.overflowNum > 0 && item.userCount !== 0) { // 是爆款 但是已经超出限制范围
 //                    console.log(123131231231)
                       this.newShopCart.push({
                         id: item.id, // 规格id
