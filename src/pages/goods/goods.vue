@@ -372,7 +372,9 @@
     created() {
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
-      this.dishListVersion = getStore('distListmd5')[this.shopId]
+      if (getStore('distListmd5') !== null) {
+        this.dishListVersion = getStore('distListmd5')[this.shopId]
+      }
       this.hoursArr = this.seller.hours
       this.isDistance = parseInt(this.$route.query.isDistance)
 //      console.log('_____----------_______----------______-')
