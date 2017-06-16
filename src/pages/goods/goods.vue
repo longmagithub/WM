@@ -254,13 +254,13 @@
                     v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].dishPrice}}
               </span>
               <span class="text 2"
-                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 3"
-                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 4"
-                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 5"
                     v-else>{{specs.dishSpecification[specsIndex].dishPrice}}
@@ -468,7 +468,6 @@
       listShow() {
         if (!this.totalNum) {
           this.showCartList = true
-          this.CLEAR_CART(this.shopId)
           return false
         }
         let show = !this.showCartList
@@ -829,6 +828,7 @@
         this.cartFoodList = []
 //        console.log(JSON.stringify(this.cartList[this.shopId]))
         this.goods.forEach((item, index) => {
+          console.log(index)
           if (this.shopCartList && this.shopCartList[item.dishList[0].dishTypeRelations[0]]) {
             let num = 0
             Object.keys(this.shopCartList[item.dishList[0].dishTypeRelations[0]]).forEach(itemid => {
@@ -912,7 +912,6 @@
               })
             })
             newArr[index] = num
-            console.log(newArr.length)
             if (newArr.length === 0) {
               this.switchTypePrice = true
             }
@@ -921,6 +920,7 @@
             newArr[index] = 0
           }
         })
+        console.log('11111')
 //        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
@@ -1046,6 +1046,7 @@
     watch: {
       // 监听shopCart的变化
       shopCartList: function (value) {
+        console.log(value)
         this.initCategoryNum()
       }
     },
