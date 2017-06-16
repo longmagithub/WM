@@ -60,9 +60,9 @@
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">{{showDeleteText}}</p>
-            <p class="show_addToCart_hotType" v-show="isShowSpecToast">
-              该美食限{{userCount}}份优惠，超过以原价计算哦
-            </p>
+            <!--<p class="show_addToCart_hotType" v-show="isShowSpecToast">-->
+              <!--该美食限{{userCount}}份优惠，超过以原价计算哦-->
+            <!--</p>-->
           </transition>
         </div>
       </transition>
