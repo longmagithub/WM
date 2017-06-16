@@ -38,6 +38,10 @@
                     .dishSpecification[0].limitCount}}份</span>
                   <span class="limit-box_remainQuantity" v-show="food.dishSpecification[0].remainQuantity > 0">仅剩{{food
                     .dishSpecification[0].remainQuantity}}份</span>
+                  <span class="limit-box_limitCount"
+                        v-show="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].limitCount === 0 && food.dishSpecification[0].remainQuantity === 0">
+                    今日爆款已售完
+                  </span>
                 </p>
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
