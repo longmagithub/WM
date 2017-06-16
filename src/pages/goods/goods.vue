@@ -44,10 +44,10 @@
                   </span>
                 </p>
                 <div class="price-wrapper">
-                  <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
+                  <div class="price">￥<span class="price-num">{{food.dishSpecification[0].originalPrice}}</span>
                     <span class="text" v-if="food.dishSpecification.length > 1">起</span>
                     <span class="originalPrice" v-if="food.dishTypeStyleOfDish === 1">爆款价:￥{{food.dishSpecification[0]
-                      .originalPrice}}</span>
+                      .dishPrice}}</span>
                   </div>
                   <buyCart ref="buyCart"
                            @add="addFood"
@@ -137,7 +137,10 @@
                   </div>
                   <div class="food-rightBox">
                     <div class="price-box">
-                      <s class="originalPrice" v-if="item.originalPrice !== 0.0 && item.remainQuantity !== 1">￥{{item.originalPrice}}</s>
+                      <s class="originalPrice" v-if="item.originalPrice > 0 && item.remainQuantity > 0">                      	
+                      	￥
+                      	{{item.originalPrice}}
+                      </s>
                       <!--<s class="originalPrice">￥100</s>-->
                       <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
                       <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
@@ -226,7 +229,10 @@
             </div>
           </div>
           <div class="specs-price">
-            <div class="price-box">￥<span class="text">{{specs.dishSpecification[specsIndex].dishPrice}}</span></div>
+            <div class="price-box">￥
+            	<span class="text" v-if="specs.dishSpecification[specsIndex].remainingQuantity>0">{{specs.dishSpecification[specsIndex].dishPrice}}</span>
+            	<span class="text" v-else>{{specs.dishSpecification[specsIndex].originalPrice}}</span>
+            </div>
             <div class="submit"
                  @click.stop.prevent="addSpecs(
                  specs.dishTypeRelations[0],
