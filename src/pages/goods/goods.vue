@@ -833,7 +833,11 @@
                   // 如果有爆款就不显示 动态满减
                   if (foodItem.num > 0) {
                     if (foodItem.dishTypeStyle === 1) {
-                      this.discounSwitch = true
+                      if (foodItem.userCount === 0 && foodItem.dishTypeStyle === 1 && foodItem.remainQuantity === 0) {
+                        this.discounSwitch = false
+                      } else {
+                        this.discounSwitch = true
+                      }
                     } else if (foodItem.dishTypeStyle === 0) {
                       this.discounSwitch = false
                     }
