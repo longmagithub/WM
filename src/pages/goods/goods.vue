@@ -251,12 +251,15 @@
           <div class="specs-price">
             <div class="price-box">￥
               <span class="text 1"
-                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0">{{specs.dishSpecification[specsIndex].dishPrice}}
+                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].dishPrice}}
               </span>
               <span class="text 2"
-                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0">{{specs.dishSpecification[specsIndex].originalPrice}}
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0 && switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 3"
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0 && !switchTypePrice">{{specs.dishSpecification[specsIndex].originalPrice}}
+              </span>
+              <span class="text 4"
                     v-else>{{specs.dishSpecification[specsIndex].dishPrice}}
               </span>
             </div>
@@ -371,6 +374,7 @@
         isYingyeText: '商家休息中，暂不接单', // 营业是text文本
         userCount: 0, // 用户可以点多少个
         dishListVersion: '',
+        switchTypePrice: true, // 控制改变爆款的显示价格
         showSpecToast: false, // 控制 buyCart 超出限制的toast限制
         textTime: [
           {
@@ -846,16 +850,22 @@
                   // 菜品费用 区分是否爆款 菜品费用
                   if (foodItem.dishTypeStyle === 1) {
                     if (foodItem.tastes.id !== '') { // 是否爆款
-                      if (specNum <= foodItem.userCount) { // 当前爆款下 所有口味个数 <= userCount
+                      if (specNum < foodItem.userCount) { // 当前爆款下 所有口味个数 <= userCount
+                        this.switchTypePrice = true
                         console.log('CCCCCCC')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
+                        this.switchTypePrice = false
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
 //                        if (index === 0) { // 是爆款，口味只有一个
 //                          console.log('AAAAAAAAA')
 //                        } else if (index > 0) { // 是爆款 口味有多个
                         console.log('BBBBBBBB')
 //                        }
+                      } else {
+                        this.switchTypePrice = false
+                        console.log('CCCCCCC')
+                        this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       }
                     } else {
                       this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
