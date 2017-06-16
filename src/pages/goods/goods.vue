@@ -857,11 +857,6 @@
                       } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
                         this.switchTypePrice = false
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
-//                        if (index === 0) { // 是爆款，口味只有一个
-//                          console.log('AAAAAAAAA')
-//                        } else if (index > 0) { // 是爆款 口味有多个
-                        console.log('BBBBBBBB')
-//                        }
                       } else {
                         this.switchTypePrice = false
                         console.log('CCCCCCC')
@@ -963,6 +958,7 @@
         this.toggleCartList()
         this.CLEAR_CART(this.shopId)
         this.discounSwitch = false
+        this.switchTypePrice = true
       },
       // 关闭购物车
       hideList() {
