@@ -159,7 +159,7 @@
                     <div class="price-box">
                       <s class="originalPrice" v-if="item.originalPrice > 0 && item.remainQuantity > 0">
                         ￥
-                        {{item.originalPrice * item.overflowNum | toFixedFil}}
+                        {{item.originalPrice * item.num | toFixedFil}}
                       </s>
                       <!--<s class="originalPrice">￥100</s>-->
                       <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
