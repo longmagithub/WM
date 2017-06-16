@@ -60,6 +60,9 @@
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">{{showDeleteText}}</p>
+            <p class="show_addToCart_hotType" v-show="isShowSpecToast">
+              该美食限{{userCount}}份优惠，超过以原价计算哦
+            </p>
           </transition>
         </div>
       </transition>
@@ -93,6 +96,9 @@
       },
       isYingye: {
         type: Boolean
+      },
+      showSpecToast: {
+        type: Number
       }
     },
     data() {
@@ -101,6 +107,7 @@
         showDeleteTip: false, // 多规格显示 删除 提示
         showDeleteText: '多规格或多口味商品只能去购物车删除哦', // 多规格 或 多口味的 删除是 提示文本
         showAddToCartAotType: false, // 超过爆款限制
+        isShowSpecToast: false,
         userCount: 0 // 用户可以点多少个
       }
     },
@@ -215,7 +222,10 @@
           })
         }
       },
-      // 打开godds组件里面 多规格
+      testFun() {
+        console.log('12312312312312312312312312')
+      },
+      // 打开goods组件里面 多规格
       showChooseList(event, foods) {
         if (this.isYingye) {
           this.$emit('showSpecs', event, foods, this.showSpecs)
@@ -231,6 +241,23 @@
           clearTimeout(this.timer)
           this.showDeleteTip = false
         }, 1500)
+      },
+      showSpecToastFun() {
+        if (this.showSpecToast !== 0) {
+          if (this.foodNum > this.showSpecToast) {
+            this.isShowSpecToast = true
+            clearTimeout(this.timer)
+            this.timer = setTimeout(() => {
+              clearTimeout(this.timer)
+              this.isShowSpecToast = false
+            }, 1500)
+          }
+        }
+      }
+    },
+    watch: {
+      showSpecToast: function (val) {
+        this.showSpecToastFun()
       }
     }
   }

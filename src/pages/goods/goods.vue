@@ -34,25 +34,45 @@
                 <!--<p class="sellNum" v-if="food.dishSpecification[0].saleCount">-->
                 <!--已售{{food.dishSpecification[0].saleCount}}份</p>-->
                 <p class="limit-box" v-show="item.dishTypeStyle === 1">
-                  <span class="limit-box_limitCount" v-show="food.dishSpecification[0].limitCount > 0">限{{food
+                  <span class="limit-box_limitCount"
+                        v-show="food.dishSpecification[0].limitCount > 0 && food.dishSpecification[0].remainQuantity !== 0">限{{food
                     .dishSpecification[0].limitCount}}份</span>
-                  <span class="limit-box_remainQuantity" v-show="food.dishSpecification[0].remainQuantity > 0">仅剩{{food
+                  <span class="limit-box_remainQuantity"
+                        v-show="food.dishSpecification[0].remainQuantity > 0 && food.dishSpecification[0].remainQuantity !== 0">仅剩{{food
                     .dishSpecification[0].remainQuantity}}份</span>
+                  <!--<span class="limit-box_limitCount" v-show="food.dishSpecification[0].limitCount > 0">限{{food-->
+                  <!--.dishSpecification[0].limitCount}}份</span>-->
+                  <!--<span class="limit-box_remainQuantity" v-show="food.dishSpecification[0].remainQuantity > 0">仅剩{{food-->
+                  <!--.dishSpecification[0].remainQuantity}}份</span>-->
                   <span class="limit-box_limitCount"
                         v-show="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity === 0">
                     今日爆款已售完
                   </span>
+                  <!--<span class="originalPrice" v-if="food.dishTypeStyleOfDish === 1">爆款价:￥{{food.dishSpecification[0]-->
+                  <!--.originalPrice}}</span>-->
                 </p>
                 <div class="price-wrapper">
-                  <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
+                  <div class="price">￥
+                    <span class="price-num"
+                          v-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity !== 0">
+                      {{food.dishSpecification[0].dishPrice}}</span>
+                    <span class="price-num"
+                          v-else-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity === 0">
+                      {{food.dishSpecification[0].originalPrice}}</span>
+                    <span class="price-num" v-else>{{food.dishSpecification[0].dishPrice}}</span>
                     <span class="text" v-if="food.dishSpecification.length > 1">起</span>
-                    <span class="originalPrice" v-if="food.dishTypeStyleOfDish === 1">爆款价:￥{{food.dishSpecification[0]
-                      .originalPrice}}</span>
+                    <s class="originalPrice"
+                       v-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity !== 0">￥{{food.dishSpecification[0]
+                      .originalPrice}}</s>
+                    <span class="originalPrice"
+                          v-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity === 0">爆款价:￥{{food.dishSpecification[0]
+                      .dishPrice}}</span>
                   </div>
                   <buyCart ref="buyCart"
                            @add="addFood"
                            @showSpecs="showSpecsFun"
                            :shopId="shopId"
+                           :showSpecToast="userCount"
                            :foods="food"
                            :isYingye="isYingye"
                            :index="index"></buyCart>
@@ -128,8 +148,8 @@
                       </span>
                       <span class="specs" v-if="item.specs || item.tastes">
                         (<span v-show="item.specs !== '' && item.specs !== '默认'">{{item.specs}}</span>
-                        
-                     <!--   <span v-show="item.specs === ''">{{item.specs}}</span>-->
+
+                        <!--   <span v-show="item.specs === ''">{{item.specs}}</span>-->
                         <span v-show="item.specs !== '' && item.specs !== '默认' && item.tastes">，</span>
                         <span v-show="item.tastes">{{item.tastes.name}}</span>)
                       </span>
@@ -226,7 +246,17 @@
             </div>
           </div>
           <div class="specs-price">
-            <div class="price-box">￥<span class="text">{{specs.dishSpecification[specsIndex].dishPrice}}</span></div>
+            <div class="price-box">￥
+              <span class="text 1"
+                    v-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity !== 0">{{specs.dishSpecification[specsIndex].dishPrice}}
+              </span>
+              <span class="text 2"
+                    v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0">{{specs.dishSpecification[specsIndex].originalPrice}}
+              </span>
+              <span class="text 3"
+                    v-else >{{specs.dishSpecification[specsIndex].dishPrice}}
+              </span>
+            </div>
             <div class="submit"
                  @click.stop.prevent="addSpecs(
                  specs.dishTypeRelations[0],
@@ -338,6 +368,7 @@
         isYingyeText: '商家休息中，暂不接单', // 营业是text文本
         userCount: 0, // 用户可以点多少个
         dishListVersion: '',
+        showSpecToast: false, // 控制 buyCart 超出限制的toast限制
         textTime: [
           {
             beginTime: '08:00',
