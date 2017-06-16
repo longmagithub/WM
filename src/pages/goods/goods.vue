@@ -800,6 +800,10 @@
                   let specNum = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]['testNum']
                   console.log(activeSpecItems)
                   console.log(specNum)
+                  if (foodItem.userCount === 0 && foodItem.dishTypeStyle === 1 && foodItem.remainQuantity === 0) {
+                    foodItem.limitNum = 0
+                    foodItem.overflowNum = 1
+                  }
                   num += foodItem.num
                   // 餐盒费
                   this.totalPack += foodItem.num * foodItem.packingFee
@@ -808,14 +812,14 @@
                   if (foodItem.dishTypeStyle === 1) {
                     if (foodItem.tastes.id !== '') { // 是否爆款
                       if (specNum <= foodItem.userCount) { // 当前爆款下 所有口味个数 <= userCount
-//                        console.log('CCCCCCC')
+                        console.log('CCCCCCC')
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
                       } else if (specNum > foodItem.userCount) { // 当前爆款下 所有口味个数 > userCount
                         this.totalPrice += (foodItem.price * foodItem.limitNum) + (foodItem.originalPrice * (foodItem.num - foodItem.limitNum))
 //                        if (index === 0) { // 是爆款，口味只有一个
 //                          console.log('AAAAAAAAA')
 //                        } else if (index > 0) { // 是爆款 口味有多个
-//                          console.log('BBBBBBBB')
+                        console.log('BBBBBBBB')
 //                        }
                       }
                     } else {
