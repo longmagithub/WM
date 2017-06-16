@@ -158,8 +158,8 @@
                   <div class="food-rightBox">
                     <div class="price-box">
                       <s class="originalPrice" v-if="item.originalPrice > 0 && item.remainQuantity > 0">
-                      	￥
-                      	{{item.originalPrice}}
+                        ￥
+                        {{item.originalPrice * item.overflowNum | toFixedFil}}
                       </s>
                       <!--<s class="originalPrice">￥100</s>-->
                       <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
@@ -257,7 +257,7 @@
                     v-else-if="specs.dishTypeStyleOfDish === 1 && specs.dishSpecification[specsIndex].remainQuantity === 0">{{specs.dishSpecification[specsIndex].originalPrice}}
               </span>
               <span class="text 3"
-                    v-else >{{specs.dishSpecification[specsIndex].dishPrice}}
+                    v-else>{{specs.dishSpecification[specsIndex].dishPrice}}
               </span>
             </div>
             <div class="submit"
