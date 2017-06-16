@@ -17,7 +17,7 @@
         <li class="dishDetail" v-for="item in orderDetail.dishes">
           <label>
             <span class="dishName">
-            	<i class="uxwm-iconfont huo"></i>
+            	<i class="uxwm-iconfont huo" v-show="item.dishOriginalPrice !== 0.0"></i>
             	{{item.dishName}}
             </span>
             <span class="dishType">

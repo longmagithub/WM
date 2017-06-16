@@ -132,7 +132,7 @@
                   </div>
                   <div class="food-rightBox">
                     <div class="price-box">
-                      <s class="originalPrice" v-if="item.originalPrice">￥{{item.originalPrice}}</s>
+                      <s class="originalPrice" v-if="item.originalPrice !== 0.0">￥{{item.originalPrice}}</s>
                       <!--<s class="originalPrice">￥100</s>-->
                       <span>￥<span class="price">{{item.priceAll | toFixedFil}}</span></span>
                       <!--<span>￥<span class="price">{{shopCartItemPrice(item.price,item.originalPrice,item.num,item-->
