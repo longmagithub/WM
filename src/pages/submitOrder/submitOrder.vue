@@ -435,7 +435,7 @@
                 // this.packPrice += item.num * item.packingFee
                 if (item.userCount === 0 && item.dishTypeStyle === 1 && item.remainQuantity === 0) {
                   item.limitNum = 0
-                  item.overflowNum = 1
+                  item.overflowNum = item.num
                 }
                 if (item.price !== null && item.price >= 0 && item.num > 0) {
                   if (item.dishTypeStyle === 1) { // 爆款属性

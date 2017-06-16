@@ -802,7 +802,7 @@
                   console.log(specNum)
                   if (foodItem.userCount === 0 && foodItem.dishTypeStyle === 1 && foodItem.remainQuantity === 0) {
                     foodItem.limitNum = 0
-                    foodItem.overflowNum = 1
+                    foodItem.overflowNum = foodItem.num
                   }
                   num += foodItem.num
                   // 餐盒费
