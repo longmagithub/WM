@@ -32,7 +32,7 @@
                   .name}}</span></div>
                 <span class="desc">{{food.description}}</span>
                 <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
-                已售{{food.dishSpecification[0].saleCount}}份</p>
+                  已售{{food.dishSpecification[0].saleCount}}份</p>
                 <p class="limit-box" v-show="item.dishTypeStyle === 1">
                   <span class="limit-box_limitCount"
                         v-show="food.dishSpecification[0].limitCount > 0 && food.dishSpecification[0].remainQuantity !== 0">限{{food
@@ -576,8 +576,8 @@
               setStore('distListmd5', {
                 [this.shopId]: MD5(JSON.stringify(res.data.dishesList))
               })
-              console.log(this.dishListVersion)
-              console.log(MD5(JSON.stringify(res.data.dishesList)))
+//              console.log(this.dishListVersion)
+//              console.log(MD5(JSON.stringify(res.data.dishesList)))
               this.goods = res.data.dishesList
               setTimeout(() => {
                 this._calculateHeight()
@@ -585,9 +585,9 @@
 //                  console.log('更新了-————————-=====-___________----______----')
 //                  console.log(this.cartList[this.shopId])
                   if (this.cartList[this.shopId] !== null) {
-                    this.toggleToast(1, '商品已过期，请重新下单。')
+//                    this.toggleToast(1, '商品已过期，请重新下单。')
                   }
-                  this.CLEAR_CART(this.shopId)
+//                  this.CLEAR_CART(this.shopId)
                 }
               }, 200)
             }
@@ -870,11 +870,7 @@
                     if (foodItem.dishTypeStyle === 1) {
                       if (foodItem.userCount === 0 && foodItem.remainQuantity === 0) {
                         this.discounSwitch = false
-                      } else {
-                        this.discounSwitch = true
                       }
-                    } else if (foodItem.dishTypeStyle === 0) {
-                      this.discounSwitch = false
                     }
                     this.cartFoodList[cartFoodNum] = {} // 创建单个菜分类
                     this.cartFoodList[cartFoodNum].category_id = item.dishList[0].dishTypeRelations[0] // 分类Id
@@ -956,6 +952,7 @@
         this.isToastText = !this.isToastText
         this.toggleCartList()
         this.CLEAR_CART(this.shopId)
+        this.discounSwitch = false
       },
       // 关闭购物车
       hideList() {
