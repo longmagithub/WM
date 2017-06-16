@@ -165,6 +165,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
+      cart[shopid][categoryId][itemId][foodId]['testNum'] = 1
     } else if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId]) {
       console.log('_____----44444----______')
       cart[shopid][categoryId][itemId][foodId] = {}
@@ -184,7 +185,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-      cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = 1
+      cart[shopid][categoryId][itemId][foodId]['testNum'] = 1
     } else if (cart[shopid] && cart[shopid][categoryId]) {
       console.log('_____----55555----______')
       cart[shopid][categoryId][itemId] = {}
@@ -205,7 +206,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-      cart[shopid][categoryId][itemId][foodId][tastes.id]['specsNum'] = 1
+      cart[shopid][categoryId][itemId][foodId]['testNum'] = 1
     } else if (cart[shopid]) {
       console.log('_____----66666----______')
       cart[shopid][categoryId] = {}
@@ -227,6 +228,7 @@ export default {
       cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
       cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
       cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
+      cart[shopid][categoryId][itemId][foodId]['testNum'] = 1
     } else {
       console.log('_____----77777----______')
       cart[shopid] = {}
