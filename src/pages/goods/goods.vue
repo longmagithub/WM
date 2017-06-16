@@ -46,8 +46,8 @@
                 <div class="price-wrapper">
                   <div class="price">￥<span class="price-num">{{food.dishSpecification[0].dishPrice}}</span>
                     <span class="text" v-if="food.dishSpecification.length > 1">起</span>
-                    <s class="originalPrice" v-if="food.dishTypeStyleOfDish === 1">￥{{food.dishSpecification[0]
-                      .originalPrice}}</s>
+                    <span class="originalPrice" v-if="food.dishTypeStyleOfDish === 1">爆款价:￥{{food.dishSpecification[0]
+                      .originalPrice}}</span>
                   </div>
                   <buyCart ref="buyCart"
                            @add="addFood"
