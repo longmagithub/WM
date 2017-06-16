@@ -88,12 +88,12 @@ export default {
           activeSpecItems.splice(activeSpecItems.indexOf('specsNum'), 1)
         }
         console.log(activeSpecItems)
-        if (activeSpecItems.indexOf(tastes.id) < 0 && tastes !== '' && cart[shopid][categoryId][itemId][foodId]['testNum'] >= userCount) { // 当前爆款类下如果没有这个口味，就创建
+        if (activeSpecItems.indexOf(tastes.id) < 0 && tastes !== '' && cart[shopid][categoryId][itemId][foodId]['testNum'] > userCount) { // 当前爆款类下如果没有这个口味，就创建
           console.log('爆款0000000')
           cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
           cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] = 1
           cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum'] = 0
-          cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
+          cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 1
           cart[shopid][categoryId][itemId][foodId][tastes.id]['id'] = foodId
           cart[shopid][categoryId][itemId][foodId][tastes.id]['name'] = name
           cart[shopid][categoryId][itemId][foodId][tastes.id]['price'] = price
@@ -106,7 +106,7 @@ export default {
           cart[shopid][categoryId][itemId][foodId][tastes.id]['userCount'] = userCount
           cart[shopid][categoryId][itemId][foodId][tastes.id]['categoryIdLength'] = categoryIdLength
           cart[shopid][categoryId][itemId][foodId][tastes.id]['tastes'] = tastes
-        } else if (activeSpecItems.indexOf(tastes.id) < 0 && tastes !== '' && cart[shopid][categoryId][itemId][foodId]['testNum'] < userCount) {
+        } else if (activeSpecItems.indexOf(tastes.id) < 0 && tastes !== '' && cart[shopid][categoryId][itemId][foodId]['testNum'] <= userCount) {
           console.log('爆款111111111')
           console.log(userCount)
           cart[shopid][categoryId][itemId][foodId][tastes.id] = {}
