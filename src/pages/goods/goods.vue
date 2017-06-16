@@ -878,7 +878,8 @@
                   // 如果有爆款就不显示 动态满减
                   if (foodItem.num > 0) {
                     if (foodItem.dishTypeStyle === 1) {
-                      if (foodItem.userCount !== 0 && foodItem.remainQuantity !== 0) {
+                      console.log('12312312312312312312')
+                      if (foodItem.userCount !== 0) {
                         this.discounSwitch = true
                       }
                     }
@@ -906,8 +907,6 @@
                       this.cartFoodList[cartFoodNum].priceAll = foodItem.num * foodItem.price
                     }
                     cartFoodNum++
-                  } else {
-                    this.discounSwitch = false
                   }
                 })
               })

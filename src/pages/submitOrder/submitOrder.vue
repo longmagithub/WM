@@ -39,7 +39,7 @@
           <div class="order-list">
             <div class="list-content">
               <ul>
-                <li class="food_list_item"
+                <li class="food_list_item 1"
                     v-for="item in newShopCart"
                     v-if="item.num > 0 && item.hotTyep === 1 && item.dishTypeStyle === 1 && item.limitNum !== 0">
                   <div class="name_num">
@@ -48,16 +48,23 @@
                       {{item.name}}
                     </span>
                     <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
-                    <span class="specs" v-if="item.specs || item.tastes">
+                    <span class="specs 1" v-if="item.specs || item.tastes">
                         (<span v-show="item.specs !== '' && item.specs !== '默认'">{{item.specs}}</span>
                         <span v-show="item.specs !== '' && item.specs !== '默认' && item.tastes">，</span>
                         <span v-show="item.tastes">{{item.tastes.name}}</span>)
                     </span>
                   </div>
-                  <span class="num" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">×{{item.limitNum}}</span>
-                  <div class="price" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">
+                  <span class="num 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0">
+                    ×{{item.num}}</span>
+                  <span class="num 2" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount === 0">
+                    ×{{item.limitNum}}</span>
+                  <div class="price 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0">
                     <s class="originalPrice">￥{{item.limitNum * item.originalPrice | toFixedFil}}</s>
                     ￥{{item.limitNum * item.price | toFixedFil}}
+                  </div>
+                  <div class="price 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount === 0">
+                    <!--<s class="originalPrice">￥{{item.num * item.originalPrice | toFixedFil}}</s>-->
+                    ￥{{item.num * item.originalPrice | toFixedFil}}
                   </div>
                 </li>
                 <li class="food_list_item"
@@ -470,7 +477,7 @@
                       price: item.price,  // 单价
                       specs: item.specs,  // 规格名字
                       dishTypeStyle: item.dishTypeStyle,  // 是否爆款 1是 0否
-                      limitNum: item.limitNum, // 用户在可点爆款数量
+                      limitNum: item.userCount === 0 ? item.num : item.limitNum, // 用户在可点爆款数量
                       limitCount: item.limitCount, // 爆款限制数量
                       originalPrice: item.originalPrice,  // 爆款原价
                       remainQuantity: item.remainQuantity,  // 爆款库存
@@ -481,9 +488,9 @@
                     this.orderDish.push({
                       specificationId: item.id, // 规格id
                       tasteId: item.tastes === '' ? '' : item.tastes.id, // 口味id
-                      count: item.limitNum, // 数量
-                      price: item.price,  // 价格
-                      type: 1 // 是否爆款 1是 0否
+                      count: item.userCount === 0 ? item.num : item.limitNum, // 数量
+                      price: item.userCount === 0 ? item.originalPrice : item.price,  // 价格
+                      type: item.userCount === 0 ? 0 : 1 // 是否爆款 1是 0否
                     })
                   }
                   if (item.dishTypeStyle === 0) { // 非爆款 如果改数据不是爆款正常添加到渲染数组(newShopCart)和提交订单数组(orderDish)
