@@ -43,7 +43,7 @@
            foods.dishSpecification[0].tastes)">
         <transition name="fade">
           <p class="show_addToCart_hotType" v-show="showAddToCartAotType">
-            该美食限{{foods.dishSpecification[0].limitCount}}份优惠，超过以原价计算哦
+            该美食限{{userCount}}份优惠，超过以原价计算哦
           </p>
         </transition>
       </div>
@@ -149,6 +149,16 @@
               this.userCount = limitCount
             } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
               this.userCount = remainQuantity
+            }
+            if (this.userCount !== 0) {
+              if (this.foodNum > this.userCount) {
+                this.showAddToCartAotType = true
+                clearTimeout(this.timer)
+                this.timer = setTimeout(() => {
+                  clearTimeout(this.timer)
+                  this.showAddToCartAotType = false
+                }, 1500)
+              }
             }
           }
           this.ADD_CART({
