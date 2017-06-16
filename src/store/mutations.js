@@ -273,7 +273,9 @@ export default {
     tastes
   }) {
     let cart = state.cartList
+    console.log('!@#$%^&*()')
     if (cart[shopid] && cart[shopid][categoryId] && cart[shopid][categoryId][itemId] && cart[shopid][categoryId][itemId][foodId] && cart[shopid][categoryId][itemId][foodId][tastes.id]) {
+      console.log(cart[shopid][categoryId][itemId][foodId][tastes.id]['num'])
       if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > 0) {
         console.log('购物车移除')
         if (dishTypeStyle === 1) { // 如果是爆款
@@ -336,10 +338,12 @@ export default {
         state.cartList = Object.assign({}, cart)
         // 存入localStorage
         setStore('buyCart', state.cartList)
-      } else {
+      }
+      if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] === 0) {
         // 商品数量为0，则清空当前商品的信息
         console.log('移除购物车数量为000')
         cart[shopid][categoryId][itemId][foodId][tastes.id] = null
+        cart[shopid][categoryId][itemId][foodId]['testNum'] = 0
       }
     }
   },

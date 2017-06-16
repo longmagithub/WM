@@ -468,6 +468,7 @@
       listShow() {
         if (!this.totalNum) {
           this.showCartList = true
+          this.CLEAR_CART(this.shopId)
           return false
         }
         let show = !this.showCartList
