@@ -921,7 +921,7 @@
             newArr[index] = 0
           }
         })
-        console.log(JSON.stringify(this.cartFoodList))
+//        console.log(JSON.stringify(this.cartFoodList))
         this.totalPrice = this.totalPrice.toFixed(2)
         this.categoryNum = newArr.concat([])
       },
