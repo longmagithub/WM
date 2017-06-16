@@ -289,28 +289,9 @@ export default {
               cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum'] = 0
               cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
               cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
+              cart[shopid][categoryId][itemId][foodId]['testNum'] = 0
               console.log('bbbbbb')
             }
-            // cart[shopid][categoryId][itemId][foodId]['testNum']--
-            // console.log('testNum' + cart[shopid][categoryId][itemId][foodId]['testNum'])
-            // console.log('userCount' + userCount)
-            // if ((cart[shopid][categoryId][itemId][foodId]['testNum']) > (userCount - 1)) { // 如果超出userConut 减少 num 和
-            //   // overflowNum
-            //   cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']--
-            //   cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
-            //   console.log('aaaaaa')
-            // } else if (cart[shopid][categoryId][itemId][foodId]['testNum'] < (userCount - 1)) { // 如果没有超出 减少 num 和
-            //   // limitNum
-            //   cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
-            //   cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
-            //   console.log('bbbbbb')
-            // } else if (cart[shopid][categoryId][itemId][foodId]['testNum'] === (userCount - 1)) { // 本命默认是1 === 都不用减了
-            //   // 只是 num
-            //   cart[shopid][categoryId][itemId][foodId][tastes.id]['num']--
-            //   cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']--
-            //   // cart[shopid][categoryId][itemId][foodId][tastes.id]['limitNum']--
-            //   console.log('cccccc')
-            // }
           } else {
             if (cart[shopid][categoryId][itemId][foodId][tastes.id]['num'] > userCount) { // 如果超出userConut 减少 num 和 overflowNum
               cart[shopid][categoryId][itemId][foodId][tastes.id]['overflowNum']--
