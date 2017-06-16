@@ -49,11 +49,10 @@
                     </span>
                     <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
                     <span class="specs" v-if="item.specs || item.tastes">
-                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span><span
-                      v-show="item.specs !== '默认' && item.tastes">，</span><span
-                      v-show="item.tastes">{{item
-                        .tastes.name}}</span>)
-                      </span>
+                        (<span v-show="item.specs !== '' && item.specs !== '默认'">{{item.specs}}</span>
+                        <span v-show="item.specs !== '' && item.specs !== '默认' && item.tastes">，</span>
+                        <span v-show="item.tastes">{{item.tastes.name}}</span>)
+                    </span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">×{{item.limitNum}}</span>
                   <div class="price" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1">
@@ -70,10 +69,9 @@
                     </span>
                     <!--<span class="specs" v-if="item.specs">({{item.specs}})</span>-->
                     <span class="specs" v-if="item.specs || item.tastes">
-                        (<span v-show="item.specs !== '默认'">{{item.specs}}</span><span
-                      v-show="item.specs !== '默认' && item.tastes">，</span><span
-                      v-show="item.tastes">{{item
-                        .tastes.name}}</span>)
+                        (<span v-show="item.specs !== ''&& item.specs !== '默认'">{{item.specs}}</span>
+                        <span v-show="item.specs !== '' && item.specs !== '默认' && item.tastes">，</span>
+                        <span v-show="item.tastes">{{item.tastes.name}}</span>)
                       </span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 1">×{{item.overflowNum}}</span>
@@ -92,11 +90,11 @@
                     <!--<span class="specs" v-if="item.specs">({{item.specs}}<span v-show="item.tastes.name">，{{item.tastes
                         .name}}</span>)</span>-->
                     <span class="specs" v-if="item.specs || item.tastes">
-                    		<span v-show="item.dishType !== ''">(</span>
-                        <span v-show="item.specs !== ''">{{item.specs}}</span>
-                        <span v-show="item.specs !== '' && item.tastes">，</span>
+                    		<span v-show="item.dishType !== '' && item.dishType !== '默认'">(</span>
+                        <span v-show="item.specs !== '' && item.specs !== '默认'">{{item.specs}}</span>
+                        <span v-show="item.specs !== '' && item.specs !== '默认'  && item.tastes">，</span>
                         <span v-show="item.tastes">{{item.tastes.name}}</span>
-                        <span v-show="item.dishType !== ''">)</span>
+                        <span v-show="item.dishType !== '' && item.dishType !== '默认'">)</span>
                       </span>
                   </div>
                   <span class="num" v-if="item.hotTyep === 0 && item.dishTypeStyle === 0">×{{item.num}}</span>
@@ -433,17 +431,9 @@
               Object.values(specItem).forEach((item, index) => {
 //                console.log(JSON.stringify(item))
                 // this.packPrice += item.num * item.packingFee
-                if (item.userCount === 0 && item.dishTypeStyle === 1 && item.remainQuantity === 0) {
-                  item.limitNum = 0
-                  item.overflowNum = item.num
-                }
                 if (item.price !== null && item.price >= 0 && item.num > 0) {
                   if (item.dishTypeStyle === 1) { // 爆款属性
-                    if (item.userCount === 0 && item.remainQuantity === 0) {
-                      this.discounSwitch = true
-                    } else {
-                      this.discounSwitch = false
-                    }
+                    this.discounSwitch = false
                     if (item.overflowNum > 0) { // 是爆款 但是已经超出限制范围
 //                    console.log(123131231231)
                       this.newShopCart.push({
