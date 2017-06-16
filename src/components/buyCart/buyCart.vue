@@ -118,9 +118,13 @@
         if (this.shopCart && this.shopCart[categoryId] && this.shopCart[categoryId][itemId]) {
           let num = 0
           Object.values(this.shopCart[categoryId][itemId]).forEach(item => {
-            delete item.specsNum
+//            delete item.specsNum
+//            console.log(Object.keys(item))
+//            console.log(Object.values(item))
             Object.values(item).forEach(tasteItem => {
-              num += tasteItem.num
+              if ((typeof tasteItem) !== 'number') {
+                num += tasteItem.num
+              }
             })
           })
           return num
