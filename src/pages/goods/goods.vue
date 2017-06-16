@@ -837,7 +837,7 @@
                 if (activeSpecItems.indexOf('testNum') > 0) {
                   activeSpecItems.splice(activeSpecItems.indexOf('testNum'), 1)
                 }
-                activeSpecItems.forEach((tasteId, index) => {
+                activeSpecItems.forEach((tasteId) => {
                   let foodItem = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid][tasteId]
                   let specNum = this.shopCartList[item.dishList[0].dishTypeRelations[0]][itemid][foodid]['testNum']
                   console.log(activeSpecItems)
@@ -878,7 +878,6 @@
                   // 如果有爆款就不显示 动态满减
                   if (foodItem.num > 0) {
                     if (foodItem.dishTypeStyle === 1) {
-                      console.log('12312312312312312312')
                       if (foodItem.userCount !== 0) {
                         this.discounSwitch = true
                       }
@@ -912,7 +911,12 @@
               })
             })
             newArr[index] = num
+            console.log(newArr.length)
+            if (newArr.length === 0) {
+              this.switchTypePrice = true
+            }
           } else {
+            this.switchTypePrice = true
             newArr[index] = 0
           }
         })
