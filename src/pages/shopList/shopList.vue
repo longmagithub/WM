@@ -81,6 +81,7 @@
             let latitude = coords.latitude // 纬度
             this.getShopList(this.customerId, longitude, latitude)
           }, (error) => {
+            this.getShopList(this.customerId, 0, 0)
             switch (error.code) {
               case error.PERMISSION_DENIED:
                 window.alert('定位失败,用户拒绝请求地理定位11111')
