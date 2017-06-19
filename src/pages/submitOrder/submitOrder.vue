@@ -56,10 +56,10 @@
                   </div>
                   <span class="num 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0 &&
                    item.overflowNum !== 0">
-                    ×{{item.overflowNum}}</span>
+                    ×{{item.limitNum}}</span>
                   <span class="num 3" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0 &&
                    item.overflowNum === 0">
-                    ×{{item.num}}</span>
+                    ×{{item.limitNum}}</span>
                   <span class="num 2" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount === 0">
                     ×{{item.limitNum}}</span>
                   <div class="price 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0">
