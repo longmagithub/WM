@@ -74,7 +74,7 @@
 //        console.log('12311231312434342324243')
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((location) => {
-//            window.alert('获取成功')
+            window.alert('获取成功')
             let coords = location.coords
             let longitude = coords.longitude // 经度
             let latitude = coords.latitude // 纬度
