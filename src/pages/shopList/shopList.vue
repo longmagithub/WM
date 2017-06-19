@@ -70,9 +70,10 @@
     methods: {
       // 原生获取地理位置
       getLocation() {
-//        window.alert('获取地理位置000000')
+        window.alert('获取地理位置000000')
 //        console.log('12311231312434342324243')
         if (navigator.geolocation) {
+          window.alert('获取地理位置000000')
           navigator.geolocation.getCurrentPosition((location) => {
             window.alert('获取成功')
             let coords = location.coords
