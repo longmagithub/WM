@@ -70,7 +70,7 @@
     methods: {
       // 原生获取地理位置
       getLocation() {
-        window.alert('获取地理位置000000')
+        window.alert('getLocation')
 //        console.log('12311231312434342324243')
         if (navigator.geolocation) {
           window.alert('获取地理位置000000')
@@ -97,6 +97,10 @@
                 break
             }
             this.getShopList(this.customerId, 0, 0)
+          }, {
+            'enableHighAccuracy': false,
+            'timeout': 2000,
+            'maximumAge': 3000
           })
         } else {
           this.getShopList(this.customerId, 0, 0)
