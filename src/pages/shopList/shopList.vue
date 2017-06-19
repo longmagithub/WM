@@ -97,6 +97,7 @@
             this.getShopList(this.customerId, 0, 0)
           })
         } else {
+          this.getShopList(this.customerId, 0, 0)
           window.alert('无法获取到您的地理定位55555')
         }
       },
