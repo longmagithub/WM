@@ -40,7 +40,7 @@
             <div class="list-content">
               <ul>
                 <li class="food_list_item 1"
-                    v-for="item in newShopCart"
+                    v-for="(item, itemIndex) in newShopCart"
                     v-if="item.num > 0 && item.hotTyep === 1 && item.dishTypeStyle === 1 && item.limitNum !== 0">
                   <div class="name_num">
                     <span class="name">
@@ -54,7 +54,11 @@
                         <span v-show="item.tastes">{{item.tastes.name}}</span>)
                     </span>
                   </div>
-                  <span class="num 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0">
+                  <span class="num 1" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0 &&
+                   item.overflowNum !== 0">
+                    ×{{item.overflowNum}}</span>
+                  <span class="num 3" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount !== 0 &&
+                   item.overflowNum === 0">
                     ×{{item.num}}</span>
                   <span class="num 2" v-if="item.hotTyep === 1 && item.dishTypeStyle === 1 && item.userCount === 0">
                     ×{{item.limitNum}}</span>
@@ -67,7 +71,7 @@
                     ￥{{item.num * item.originalPrice | toFixedFil}}
                   </div>
                 </li>
-                <li class="food_list_item"
+                <li class="food_list_item 2"
                     v-for="item in newShopCart"
                     v-if="item.num > 0 && item.hotTyep === 0 && item.dishTypeStyle === 1 && item.overflowNum > 0 ">
                   <div class="name_num">
@@ -145,9 +149,7 @@
             <div class="totalPrice"
                  :class="{isTotalPrice: isFeessSwitch}">总计：<span
               class="totaPrice-num">￥{{allNum -
-              boonPrice < 0 ?
-              0.01 :
-              allNum -
+            boonPrice < 0 ? 0.01 : allNum -
               boonPrice | toFixedFil}}</span><span
               v-if="isFeessSwitch"
               class="noFessPrice">(不包含配送费)</span>
@@ -180,9 +182,9 @@
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex'
-  import {formatDate} from '../../common/utils/date'
-  import {getStore, setStore} from '../../common/utils/util'
+  import { mapState, mapMutations } from 'vuex'
+  import { formatDate } from '../../common/utils/date'
+  import { getStore, setStore } from '../../common/utils/util'
   import * as PublicJs from '../../common/utils/public'
   import toast from '../../components/toast.vue'
   const SUCCESS_OK = true
