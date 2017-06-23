@@ -148,11 +148,11 @@ export default new Router({
       component: memberCard
     },
     // 会员卡别名
-    // {
-    //   path: '/memberCard',
-    //   component: memberCard,
-    //   alias: '/member'
-    // },
+    {
+      path: '/memberCard',
+      component: memberCard,
+      alias: '/card'
+    },
     // 会员充值页面
     {
       path: '/recharge',

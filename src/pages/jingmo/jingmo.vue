@@ -22,10 +22,10 @@
     created() {
       this.url = window.location.href
       // console.log(this.url)
-      if (this.url.indexOf('code') < 0) {
-        setStore('entry', this.$router.path)
+      if (this.url.indexOf('code') < 0) { //  没有code
+        setStore('entry', this.$router.history.current.path)
         this.to()
-      } else {
+      } else {  //  有code
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
@@ -54,7 +54,7 @@
                 break
               }
             }
-            // this.getShopList(res.data.customerId)
+            this.getShopList(res.data.customerId)
           }
         })
       }
@@ -65,6 +65,7 @@
           encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo')
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
+        console.log(oauthJumpUrl)
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
