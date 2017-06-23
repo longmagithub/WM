@@ -47,20 +47,20 @@
             setStore('token', res.data.token)
             // choose entry
             let entry = getStore('entry')
-            switch (entry) {
-              case MEMBERCARD: {
-                this.goMemberCard(res.data.customerId)
-                break
-              }
-              case SHOPLIST: {
-                this.getShopList(res.data.customerId)
-                break
-              }
-              default: {
-                this.getShopList(res.data.customerId)
-                break
-              }
-            }
+            // switch (entry) {
+            //   case MEMBERCARD: {
+            //     this.goMemberCard(res.data.customerId)
+            //     break
+            //   }
+            //   case SHOPLIST: {
+            //     this.getShopList(res.data.customerId)
+            //     break
+            //   }
+            //   default: {
+            //     this.getShopList(res.data.customerId)
+            //     break
+            //   }
+            // }
             // window.alert(entry)
             this.goMemberCard(res.data.customerId)
           }
