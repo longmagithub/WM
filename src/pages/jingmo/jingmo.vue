@@ -61,8 +61,8 @@
                 break
               }
             }
-            window.alert(entry)
-            this.getShopList(res.data.customerId)
+            // window.alert(entry)
+            this.goMemberCard(res.data.customerId)
           }
         })
       }
