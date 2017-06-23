@@ -31,8 +31,8 @@
                   class="name">{{food
                   .name}}</span></div>
                 <span class="desc">{{food.description}}</span>
-                <p class="sellNum" v-if="food.dishSpecification[0].saleCount">
-                  已售{{food.dishSpecification[0].saleCount}}份</p>
+                <!--<p class="sellNum" v-if="food.dishSpecification[0].saleCount">
+                  已售{{food.dishSpecification[0].saleCount}}份</p>-->
                 <p class="limit-box" v-show="item.dishTypeStyle === 1">
                   <span class="limit-box_limitCount"
                         v-show="food.dishSpecification[0].limitCount > 0 && food.dishSpecification[0].remainQuantity !== 0">限{{food
@@ -1408,6 +1408,7 @@
     background: #ffffff;
     opacity: 1;
     padding-top: 19px;
+    text-align: center;
   }
 
   .btn_close_normal:before {
@@ -1423,8 +1424,14 @@
     margin-bottom: 7px;
     text-align: center;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     color: #343434;
+    width: 214px;
+		overflow : hidden;
+		text-overflow: ellipsis;
+		display: block;
+		white-space: nowrap;
+		padding-left: 20px;
   }
 
   .specs-wrapper .specs-content {
