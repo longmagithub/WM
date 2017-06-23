@@ -3,8 +3,8 @@
 <script>
   import {urlParse, getStore, setStore} from '../../common/utils/util'
   //  import wxshare from '../../components/wxshare.vue'
-  const MEMBERCARD = '/memberCard'
-  const SHOPLIST = '/shopList'
+  const MEMBERCARD = 'member'
+  const SHOPLIST = 'shopList'
   export default {
     data () {
       return {
@@ -23,7 +23,14 @@
       this.url = window.location.href
       // console.log(this.url)
       if (this.url.indexOf('code') < 0) { //  没有code
-        setStore('entry', this.$router.history.current.path)
+        let index = this.url.indexOf('entry')
+        let entry
+        if (index < 0) {
+          entry = 'shopList'
+        } else {
+          entry = this.url.slice(index + 6)
+        }
+        setStore('entry', entry)
         this.to()
       } else {  //  有code
         const data = {
@@ -66,7 +73,7 @@
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
         // 跳转授权 浏览器不保留记录
         console.log(oauthJumpUrl)
-        window.location.replace(oauthJumpUrl)
+        // window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
       goMemberCard(custId) {
