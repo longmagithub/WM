@@ -61,6 +61,7 @@
                 break
               }
             }
+            window.alert(entry)
             this.getShopList(res.data.customerId)
           }
         })
