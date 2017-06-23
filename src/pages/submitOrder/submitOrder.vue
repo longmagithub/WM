@@ -120,8 +120,8 @@
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
                 </li>
-                <li class="food_list_item" v-if="manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price"
-                    :class="{'manJianFeesPrice': manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price}">
+                <li class="food_list_item" v-if="manJianFeesPrice && manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price"
+                    :class="{'manJianFeesPrice': manJianFeesPrice && manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price}">
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">
                     <span class="price_num">￥0</span>
@@ -169,6 +169,9 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
+      <div class="tipss">
+          因天气原因，配送员也许会晚一些到达，请谅解
+      </div>
       <div class="price">待支付￥{{allNum - boonPrice < 0 ? 0.01 : allNum - boonPrice |
         toFixedFil}}<span class="noFessPrice"
                           v-if="isFeessSwitch">(不包含配送费)</span>
@@ -529,7 +532,7 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
-        if (this.manJianFeesPrice.state === 1) {
+        if (this.manJianFeesPrice && this.manJianFeesPrice.state === 1) {
           if (this.allPrice >= this.manJianFeesPrice.price) {
             this.feesPrice = 0
             this.getDiscountList()
@@ -630,8 +633,9 @@
             // 红包id
             redEnvelopeId: this.redEnvelopeId
           }
-          setStore('userOrderIofo', data)
+          setStore('userOrderInfo', data)
           const api = '/br/order'
+          data.payType = 1
           this.axios.post(api, data).then((res) => {
             res = res.data
             if (res.success === SUCCESS_OK) {
@@ -665,7 +669,8 @@
         this.$router.push({
           path: '/submitPay',
           query: {
-            orderId: this.orderId
+            orderId: this.orderId,
+            amount: this.allNum - this.boonPrice < 0 ? 0.01 : this.allNum - this.boonPrice
           }
         })
       },
@@ -773,6 +778,23 @@
 </script>
 
 <style>
+  .tipss{
+    position: absolute;
+    top: -26px;
+    left: 0;
+    width: 100%;
+    height: 26px;
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+    /*background-color: white;*/
+    background: #FFF8EE;
+    text-align: center;
+    line-height: 26px;
+    font-size: 11px;
+    color: #FE8932;
+    letter-spacing: 0;
+  }
   .submitOrder-wrapper {
     padding-bottom: 49px;
   }

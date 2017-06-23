@@ -15,13 +15,28 @@
     </div>
     <div class="payPattern-wrapper">
       <p class="payPattern-tiele">选择支付方式</p>
-      <p class="payPattern">
+      <p class="payPattern" v-if='enableMember' @click='choosePay("memberCard")'>
+        <img class="balance" src="../../assets/tips/balance@2x.png">
+        <span class="text">
+          会员卡余额
+          <span class="buzu" v-if='!balanceEnough'>(余额不足，请选择其他支付方式）</span>
+        </span>
+        <img :src='payConfig.method.memberCard?payConfig.iconUrl[1]:payConfig.iconUrl[0]' 
+              class="icon_xuanze_normal">
+      </p>
+      <p class="payPattern topline" v-if='showWeChat' @click='choosePay("weChat")'>
         <i class="uxwm-iconfont icon_wechat_normal"></i>
         <span class="text">微信支付</span>
-        <i class="uxwm-iconfont btn_right_normal"></i>
+       <!--  <i class="uxwm-iconfont btn_right_normal"></i> -->
+       <img :src='payConfig.method.weChat?payConfig.iconUrl[1]:payConfig.iconUrl[0]' 
+              class="icon_xuanze_normal">
       </p>
+      <div class="checkMore topline" @click='showWxPay' v-if='!showWeChat'>
+        查看更多支付方式
+        <img src="../../assets/memberCard/btn_xiangxia_normal@2x.png">
+      </div>
     </div>
-    <div class="submit-wrapper" @click="weChatPay">
+    <div class="submit-wrapper" @click="startPay">
       <div class="submitBtn">确认支付￥{{paidPrice | toFixedFil}}</div>
     </div>
     <div  class="submit-pic"></div>
@@ -62,7 +77,22 @@
             beginTime: '13:00',
             endTime: '22:00'
           }
-        ]
+        ],
+        shopId: '',
+        customerId: '',
+        balance: 0,
+        showWeChat: false,
+        enableMember: true,
+        balanceEnough: false,
+        payConfig: {
+          method: {
+            weChat: false,
+            memberCard: false
+          },
+          // 由于webpack 相对路径需要使用require
+          iconUrl: [require('../../assets/memberCard/icon_xuanze_normal@2x.png'),
+                    require('../../assets/memberCard/icon_xuanze_pressed@2x.png')]
+        }
       }
     },
     created() {
@@ -74,13 +104,75 @@
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
-      this.paidPrice = getStore('userOrderIofo').paidPrice ? getStore('userOrderIofo').paidPrice : 0
+      this.paidPrice = getStore('userOrderInfo').paidPrice ? getStore('userOrderInfo').paidPrice : 0
+      this.shopId = getStore('userInfo').shopId
+      this.customerId = getStore('userInfo').customerId
+      this.checkMemberCard()
     },
     methods: {
       ...mapMutations(['CLEAR_CART', 'BOON_PRICE', 'CONFIRM_REMARK']),
       countDownFun() {
         this.isTime = !this.isTime
         this.toggleToast(1, '订单已超时')
+      },
+      // 切换支付方式
+      choosePay(key) {
+        if (key === 'memberCard' && !this.balanceEnough) return
+        this.payConfig.method.weChat = false
+        this.payConfig.method.memberCard = false
+        this.payConfig.method[key] = true
+      },
+      // 显示微信支付方式
+      showWxPay() {
+        this.showWeChat = true
+      },
+      startPay() {
+        if (!this.isTime) {
+          this.toggleToast(1, '订单已超时')
+        } else {
+          if (this.payConfig.method.weChat) {
+            this.weChatPay()
+          } else if (this.payConfig.method.memberCard) {
+            this.memberPay()
+          } else {
+            console.log('wrong path. check selected way.')
+          }
+        }
+      },
+      // 使用会员卡支付
+      memberPay() {
+        if (!this.isTime) {
+          this.toggleToast(1, '订单已超时')
+        } else {
+          let data = getStore('userOrderInfo')
+          data.payType = 2
+          this.axios.post('/br/order', data)
+            .then((response) => {
+              response = response.data
+              if (response.success) {
+                //  支付成功
+                this.CLEAR_CART(getStore('userInfo').shopId)
+                this.BOON_PRICE({
+                  boonPrice: 0,
+                  endDate: null,
+                  redEnvelopeType: null,
+                  redEnvelopeId: ''
+                })
+                removeStore('buyCart')
+                removeStore('userPrice')
+                this.$router.replace({
+                  path: '/index',
+                  query: {
+                    'shopId': getStore('userInfo').shopId,
+                    'customerId': getStore('userInfo').customerId,
+                    'isDistance': 1
+                  }
+                })
+              } else {
+                this.toggleToast(1, response.message)
+              }
+            })
+        }
       },
       // 调取微信支付
       weChatPay() {
@@ -113,7 +205,7 @@
       },
       // 调取微信 支付
       sendWxSDK (data) {
-        const that = this
+        const that = this //  微信支付回调中 this指向会出现问题
         WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
             'appId': data.appId,
@@ -162,6 +254,51 @@
         } else {
           return
         }
+      },
+      // 查询是否有会员卡
+      checkMemberCard () {
+        let data = {
+          customerId: this.customerId,
+          shopId: this.shopId
+        }
+        this.axios.get(`/br/shop/system/list${this.PublicJs.createParams(data)}`)
+          .then((response) => {
+            response = response.data
+            if (response.code === 200) {
+              if (response.data.enableMemberSystem) {   // 如果开通了会员功能
+                this.enableMember = true
+                this.checkBalance()
+              } else {
+                this.enableMember = false
+                this.showWeChat = true
+              }
+            }
+          })
+          .catch((error) => {
+            console.log('network error' + error)
+          })
+      },
+      // 查询会员卡余额
+      checkBalance () {
+        let data = {
+          customerId: this.customerId,
+          shopId: this.shopId
+        }
+        this.axios.get(`/br/member/card${this.PublicJs.createParams(data)}`)
+          .then((response) => {
+              response = response.data
+              if (response.code === 200) {
+                // 操作成功
+                this.balance = response.data.cardInfo.balance
+                this.balanceEnough = (this.balance >= this.paidPrice)
+              } else {
+                this.toggleToast(1, 'server error.')
+              }
+            })
+          .catch((error) => {
+            console.log('get card info fail' + error)
+            this.toggleToast(1, 'network error, plz try later')
+          })
       }
     },
     components: {
@@ -178,6 +315,57 @@
 </script>
 
 <style scoped>
+  .buzu{
+    font-size: 10px;
+    color: #c5c5c5;
+    letter-spacing: 0.59px;
+    line-height: 20px;
+  }
+  .balance{
+    margin-right: 14px;
+    height: 30px;
+    width: 30px;
+  }
+  .icon_xuanze_normal{
+    position: absolute;
+    right: 17px;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 21px;
+    height: 21px;
+  }
+  .checkMore{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    font-size: 10px;
+    color: #A9A9A9;
+    letter-spacing: 0.38px;
+    padding: 5px 0;
+  }
+  .checkMore>img{
+    width: 8px;
+    height: 5px;
+  }
+  .underline:after{
+    content: '';
+    width: calc(100% - 34px);
+    height: 1px;
+    position: absolute;
+    top: 100%;
+    left: 17px;
+    border-top: 1px solid #f1f1f1;
+  }
+  .topline:before{
+    content: '';
+    width: calc(100% - 34px);
+    height: 1px;
+    position: absolute;
+    top: 0;
+    left: 17px;
+    border-top: 1px solid #f1f1f1;
+  }
   .submitPay .time-wrapper {
     padding: 24px 17px 0px 17px;
     line-height: 1em;
@@ -225,6 +413,7 @@
 
   .submitPay .payPattern-wrapper .payPattern {
     display: flex;
+    align-items: center;
     position: relative;
     padding: 0 17px;
     height: 59px;

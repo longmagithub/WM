@@ -128,7 +128,7 @@
             <div class="manjianDesc" v-if="manjianDesc" v-html="manjianDesc"></div>
             <div class="list-header">
               <div class="header">
-                <h1 class="title">购物车</h1>
+                <h1 class="title">购物车<span v-show='!manjianDesc'>(满减活动与爆款商品不能同享)</span></h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
               <div class="describe" v-if="seller.activity.length > 0">
@@ -1759,7 +1759,10 @@
     color: #606062;
     border-left: 5px solid #ff8932;
   }
-
+  .shopcart .shopcart-list .list-header .header .title span{
+    font-size: 11px;
+    color: #acacac;
+  }
   .shopcart .shopcart-list .list-header .header .empty {
     /*float: right;*/
     font-size: 11px;

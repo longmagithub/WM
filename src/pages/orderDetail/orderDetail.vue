@@ -95,6 +95,7 @@
         <li>下单时间：{{orderDetail.orderTime}}</li>
       </ul>
     </section>
+    <span class="tipsss">因天气原因，配送员也许会晚一些到达，请谅解</span>
     <section class="bg-white phone">
       <ul @click="callPhone(orderDetail.shopPhone)">
         <li>
@@ -313,6 +314,15 @@
   }
 </script>
 <style scoped lang="scss">
+  .tipsss{
+    font-size: 11px;
+    color: #FF984C;
+    letter-spacing: 0.1px;
+    margin-left: 16px;
+    line-height: 16px;
+    position:relative;
+    top: -4px;
+  }
   .order-detail-wrap {
     padding-top: 12px;
     padding-bottom: 12px;

@@ -26,6 +26,10 @@ module.exports = {
     // 括号前面不用空格
     'space-before-function-paren': 0,
     // 可以有空行
-    'no-multiple-empty-lines': ["error", {"max": 2, "maxBOF": 1}]
+    'no-multiple-empty-lines': ["error", {"max": 2, "maxBOF": 1}],
+    // allow tab
+    'no-mixed-spaces-and-tabs': ["error", "smart-tabs"],
+    'no-tabs': 'off',
+    'indent': 0
   }
 }

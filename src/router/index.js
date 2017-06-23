@@ -18,6 +18,11 @@ const remark = r => require.ensure([], () => r(require('../pages/submitOrder/rem
 const invoice = r => require.ensure([], () => r(require('../pages/submitOrder/invoice/invoice.vue')), 'invoice')
 const submitPay = r => require.ensure([], () => r(require('../pages/submitPay/submitPay.vue')), 'submitPay')
 const redlist = r => require.ensure([], () => r(require('../pages/redList/redlist.vue')), 'redlist')
+
+const memberCard = r => require.ensure([], () => r(require('../pages/memberCard/memberCard.vue')), 'memberCard')
+const recharge = r => require.ensure([], () => r(require('../pages/recharge/recharge.vue')), 'recharge')
+const paySuccess = r => require.ensure([], () => r(require('../pages/paySuccess/paySuccess.vue')), 'paySuccess')
+const payFail = r => require.ensure([], () => r(require('../pages/payFail/payFail.vue')), 'payFail')
 export default new Router({
   scrollBehavior: () => ({y: 0}),
   routes: [
@@ -32,6 +37,16 @@ export default new Router({
       // component: require('../pages/jingmo/jingmo.vue')
       component: jingmo
     },
+    {
+      path: '/jingmo',
+      component: jingmo,
+      alias: '/member'
+    },
+    // {
+    //   path: '/jingmo',
+    //   component: jingmo,
+    //   alias: '/shopList'
+    // },
     // loaning
     {
       path: '/loading',
@@ -126,6 +141,32 @@ export default new Router({
       path: '/redlist',
       // component: require('../pages/redList/redlist.vue')
       component: redlist
+    },
+    // 会员卡页面
+    {
+      path: '/memberCard',
+      component: memberCard
+    },
+    // 会员卡别名
+    // {
+    //   path: '/memberCard',
+    //   component: memberCard,
+    //   alias: '/member'
+    // },
+    // 会员充值页面
+    {
+      path: '/recharge',
+      component: recharge
+    },
+    // 支付成功
+    {
+      path: '/paySuccess',
+      component: paySuccess
+    },
+    // 支付失败
+    {
+      path: '/payFail',
+      component: payFail
     }
   ]
 })

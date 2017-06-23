@@ -64,6 +64,12 @@
           </circle-menu>
         </div>
       </div>
+      <div class="tips" v-if='weatherInfo.switch'>
+        <div class="text" v-if='weatherInfo.switch'>
+          {{weatherInfo.text}}
+          <img src="../../assets/tips/notice@2x.png">
+        </div>
+      </div>
       <div class="main">
         <goods :seller="shopDetail" :min-price="shopDetail.minPrice"
                :freedispatchPrice="freedispatch"></goods>
@@ -125,7 +131,11 @@
         toogleBoonBtnText: '邀请好友下单，领取更多红包',
         toogleBoonBtnClass: false,
         boonMegText: '', // 红包提示语
-        shopListArr: []
+        shopListArr: [],
+        weatherInfo: {
+          switch: true,
+          text: ''
+        }
       }
     },
     created() {
@@ -151,6 +161,8 @@
       if (getStore('isRemind').isRemind !== undefined) {
         this.MENU_REMIND(getStore('isRemind').isRemind)
       }
+      // 获取天气信息
+      this.getWeather()
       // 测试shoplist
       // this.testShopList(this.customerId, 0, 0)
     },
@@ -164,6 +176,21 @@
     mounted() {
     },
     methods: {
+      // 获取天气信息
+      getWeather() {
+        const data = {
+          shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/shop/weather${this.PublicJs.createParams(data)}`)
+          .then((response) => {
+            response = response.data
+            if (response.success) {
+              this.weatherInfo.switch = response.data.dispatchRemarkSwitch
+              this.weatherInfo.text = response.data.dispatchRemark
+            }
+          })
+      },
       // 红包
       ...mapMutations(['BOON_PRICE', 'MANJIAN_FEESPRICE', 'CLEAR_CART', 'INIT_BUYCART', 'MENU_REMIND']),
       // 测试shopList
@@ -401,6 +428,33 @@
 </script>
 
 <style>
+  .tips{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+  .tips>.text{
+    height: 28px;
+    background: rgba(255,174,100,0.21);
+    border-radius: 2px;
+    font-size: 10px;
+    color: #FF8932;
+    letter-spacing: 0;
+    position: relative;
+    box-sizing: border-box;
+    padding: 0 10px;
+    line-height: 28px;
+  }
+  .tips>.text>img{
+    position: absolute;
+    left: -20px;
+    top: 7px;
+    width: 12px;
+    height: 12px;
+  }
   .index-box {
     display: flex;
     flex-direction: column;
