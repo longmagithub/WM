@@ -4,8 +4,8 @@
   import {urlParse, setStore} from '../../common/utils/util'
   import {config} from '../../common/utils/index'
   //  import wxshare from '../../components/wxshare.vue'
-  const MEMBERCARD = 'member'
-  const SHOPLIST = 'shopList'
+  const MEMBERCARD = '/member'
+  const SHOPLIST = '/shopList'
   const targetURL = config.test.url
   const appId = config.test.appId
   export default {
@@ -28,14 +28,15 @@
       // console.log(this.url)
       if (this.url.indexOf('code') < 0) { //  没有code
         // let index = this.url.indexOf('entry')
-        let entry = urlParse().entry || 'shopList'
+        // let entry = urlParse().entry || 'shopList'
         // if (index < 0) {
         //   entry = 'shopList'
         // } else {
         //   entry = this.url.slice(index + 6)
         // }
-        this.state = entry
-        setStore('entry', entry)
+        this.state = this.$router.history.current.path
+        console.log('state: ' + this.state)
+        // setStore('entry', entry)
         this.to()
       } else {                            //  有code
         const data = {
@@ -43,7 +44,6 @@
           type: 1 // 授权类型：1静默授权；2用户授权
         }
         this.state = urlParse(window.location.herf).entry
-        document.write(this.state)
         // console.log(data)
         this.axios.post('/mp/authority/customer', data).then((res) => {
           res = res.data
@@ -53,7 +53,7 @@
             setStore('openId', res.data.openId)
             setStore('token', res.data.token)
             // choose entry
-            let entry = this.state
+            let entry = this.$router.history.current.path
             switch (entry) {
               case MEMBERCARD: {
                 this.goMemberCard(res.data.customerId)
@@ -80,7 +80,7 @@
     methods: {
       to() {
         const oauthCallbackUrl =
-          encodeURIComponent(targetURL + '/?#/jingmo')
+          encodeURIComponent(targetURL + '/?#' + this.state)
           // encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo')
         // const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=${this.state}#wechat_redirect`
         const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=${this.state}#wechat_redirect`
