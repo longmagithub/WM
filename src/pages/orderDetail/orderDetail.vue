@@ -95,7 +95,7 @@
         <li>下单时间：{{orderDetail.orderTime}}</li>
       </ul>
     </section>
-    <span class="tipsss">因天气原因，配送员也许会晚一些到达，请谅解</span>
+    <span class="tipsss" v-if='weatherInfo.switch'>{{weatherInfo.text}}</span>
     <section class="bg-white phone">
       <ul @click="callPhone(orderDetail.shopPhone)">
         <li>
@@ -125,6 +125,7 @@
     mounted () {
       this.$nextTick(() => {
         this.getOrderDetail()
+        this.getWeather()
       })
     },
     data () {
@@ -152,7 +153,11 @@
         orderStatusTipArr: ['', '已付款，待商家接单', '已接单，待配送', '已接单，待配送', '配送中，待收货', '已完成', '订单关闭'],
         reverseTime: 0, // 倒计时时间
         ReverBeginTime: new Date(), // 用来计算倒计时
-        ReverEndTime: new Date() // 用来计算倒计时
+        ReverEndTime: new Date(), // 用来计算倒计时,
+        weatherInfo: {
+          switch: false,
+          text: ''
+        }
       }
     },
     components: {
@@ -160,6 +165,21 @@
     },
     methods: {
       ...mapMutations(['CLEAR_CART']),
+      // 获取天气信息
+      getWeather() {
+        const data = {
+          // shopId: this.shopId,
+          customerId: this.getStore('userInfo').customerId
+        }
+        this.axios.get(`/br/shop/weather${this.PublicJs.createParams(data)}`)
+          .then((response) => {
+            response = response.data
+            if (response.success) {
+              this.weatherInfo.switch = response.data.dispatchRemarkSwitch
+              this.weatherInfo.text = response.data.dispatchRemark
+            }
+          })
+      },
       getOrderDetail () {
         const data = {
           sessionId: this.sessionId,
@@ -322,6 +342,7 @@
     line-height: 16px;
     position:relative;
     top: -4px;
+    overflow: scroll;
   }
   .order-detail-wrap {
     padding-top: 12px;

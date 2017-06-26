@@ -550,8 +550,8 @@
             })
           })
         })
-        console.log(JSON.stringify(this.newShopCart))
-        console.log(JSON.stringify(this.orderDish))
+        // console.log(JSON.stringify(this.newShopCart))
+        // console.log(JSON.stringify(this.orderDish))
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
@@ -817,6 +817,7 @@
     font-size: 11px;
     color: #FE8932;
     letter-spacing: 0;
+    overflow: scroll;
   }
   .submitOrder-wrapper {
     padding-bottom: 49px;

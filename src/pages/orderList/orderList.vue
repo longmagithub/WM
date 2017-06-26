@@ -86,7 +86,6 @@
         let url = window.location.href
         if (getStore('openId') === null) {
           if (url.indexOf('code') < 0) {
-//            console.log('没有授权')
             this.to()
           } else {
             const data = {

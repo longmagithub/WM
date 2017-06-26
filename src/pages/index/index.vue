@@ -436,6 +436,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
+    overflow: scroll;
   }
   .tips>.text{
     height: 28px;

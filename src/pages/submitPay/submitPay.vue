@@ -151,23 +151,26 @@
               response = response.data
               if (response.success) {
                 //  支付成功
-                this.CLEAR_CART(getStore('userInfo').shopId)
-                this.BOON_PRICE({
-                  boonPrice: 0,
-                  endDate: null,
-                  redEnvelopeType: null,
-                  redEnvelopeId: ''
-                })
-                removeStore('buyCart')
-                removeStore('userPrice')
-                this.$router.replace({
-                  path: '/index',
-                  query: {
-                    'shopId': getStore('userInfo').shopId,
-                    'customerId': getStore('userInfo').customerId,
-                    'isDistance': 1
-                  }
-                })
+                this.toggleToast(1, '支付成功')
+                setTimeout(() => {
+                  this.CLEAR_CART(getStore('userInfo').shopId)
+                  this.BOON_PRICE({
+                    boonPrice: 0,
+                    endDate: null,
+                    redEnvelopeType: null,
+                    redEnvelopeId: ''
+                  })
+                  removeStore('buyCart')
+                  removeStore('userPrice')
+                  this.$router.replace({
+                    path: '/index',
+                    query: {
+                      'shopId': getStore('userInfo').shopId,
+                      'customerId': getStore('userInfo').customerId,
+                      'isDistance': 1
+                    }
+                  })
+                }, 1300)
               } else {
                 this.toggleToast(1, response.message)
               }
@@ -291,6 +294,9 @@
                 // 操作成功
                 this.balance = response.data.cardInfo.balance
                 this.balanceEnough = (this.balance >= this.paidPrice)
+                if (this.balanceEnough) {
+                  this.payConfig.method.memberCard = true
+                }
               } else {
                 this.toggleToast(1, 'server error.')
               }

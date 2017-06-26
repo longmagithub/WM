@@ -84,12 +84,12 @@
             response = response.data
 						if (response.success) {	// 收到支付结果，页面跳转
 							let result = response.data.payResult
-							if (result.success === true) {
+							if (result.success) {
 								// go to paysuccess
 								this.$router.push({
 									path: '/paySuccess',
 									query: {
-										amount: ''
+										amount: result.payAmount
 									}
 								})
 							} else {

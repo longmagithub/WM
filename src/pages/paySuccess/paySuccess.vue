@@ -6,7 +6,7 @@
 				<span class="text">充值金额</span>
 				<div class="amount">
 					<span class="symbol">¥</span>
-					<span>29.94</span>
+					<span>{{this.$router.history.current.query.payAmount}}</span>
 				</div>
 		</div>
 		
