@@ -52,9 +52,11 @@
             console.log(entry)
 
             if (entry.search(SHOPLIST) >= 0) {
-              this.getShopList()
+              console.log('go shop')
+              this.getShopList(res.data.customerId)
             } else if (entry.search(MEMBERCARD) >= 0) {
-              this.goMemberCard()
+              console.log('go member')
+              this.goMemberCard(res.data.customerId)
             }
             // window.alert(entry)
             console.log('no if-else path matching')
