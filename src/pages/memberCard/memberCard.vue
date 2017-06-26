@@ -54,7 +54,7 @@
     },
     mounted() {
       console.log(this.$router)
-      this.shopId = getStore('userInfo').shopId
+      // this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.getCard()
     },
@@ -72,8 +72,8 @@
       //  获取会员卡信息
       getCard() {
         let data = {
-          customerId: this.customerId,
-          shopId: this.shopId
+          customerId: this.customerId
+          // shopId: this.shopId
         }
         // this.axios.get(`/wlj/member/card${this.PublicJs.createParams(data)}`,
         //                 { responsetype: 'json',

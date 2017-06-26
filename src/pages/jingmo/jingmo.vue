@@ -51,9 +51,9 @@
             console.log('found entry:' + typeof (entry))
             console.log(entry)
 
-            if (entry.indexOf(SHOPLIST) >= 0) {
+            if (entry.search(SHOPLIST) >= 0) {
               this.getShopList()
-            } else if (entry.indexOf(MEMBERCARD) >= 0) {
+            } else if (entry.search(MEMBERCARD) >= 0) {
               this.goMemberCard()
             }
             // window.alert(entry)
