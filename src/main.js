@@ -18,7 +18,7 @@ import {sync} from 'vuex-router-sync'
 // 引入自定义过滤
 import * as filters from './filters'
 // 添加mockjs拦截请求，模拟返回服务器数据
-import mock from './plugins/mock'
+// import mock from './plugins/mock'
 // 懒加载
 import VueLazyload from 'vue-lazyload'
 // 引入工具类
@@ -41,7 +41,7 @@ sync(store, router)
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
-console.log(mock)
+// console.log(mock)
 
 // Vue.use(WxPay)
 // 微信配置

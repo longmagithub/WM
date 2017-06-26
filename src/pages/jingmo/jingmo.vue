@@ -5,7 +5,7 @@
   import {config} from '../../common/utils/index'
   //  import wxshare from '../../components/wxshare.vue'
   const MEMBERCARD = '/member'
-  const SHOPLIST = '/shopList'
+  const SHOPLIST = '/jingmo'
   const targetURL = config.test.url
   const appId = config.test.appId
   export default {
@@ -54,6 +54,7 @@
             setStore('token', res.data.token)
             // choose entry
             let entry = this.$router.history.current.path
+            console.log('found entry: ' + entry)
             switch (entry) {
               case MEMBERCARD: {
                 this.goMemberCard(res.data.customerId)
@@ -69,6 +70,7 @@
               }
             }
             // window.alert(entry)
+            console.log('no path matching')
             this.goMemberCard(res.data.customerId)
           }
         })
