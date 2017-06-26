@@ -27,13 +27,6 @@
       this.url = window.location.href
       // console.log(this.url)
       if (this.url.indexOf('code') < 0) { //  没有code
-        // let index = this.url.indexOf('entry')
-        // let entry = urlParse().entry || 'shopList'
-        // if (index < 0) {
-        //   entry = 'shopList'
-        // } else {
-        //   entry = this.url.slice(index + 6)
-        // }
         this.state = this.$router.history.current.path
         console.log('state: ' + this.state)
         // setStore('entry', entry)
@@ -55,19 +48,10 @@
             // choose entry
             let entry = this.$router.history.current.path
             console.log('found entry: ' + entry)
-            switch (entry) {
-              case MEMBERCARD: {
-                this.goMemberCard(res.data.customerId)
-                break
-              }
-              case SHOPLIST: {
-                this.getShopList(res.data.customerId)
-                break
-              }
-              default: {
-                this.getShopList(res.data.customerId)
-                break
-              }
+            if (entry === SHOPLIST) {
+              this.getShopList()
+            } else if (entry === MEMBERCARD) {
+              this.goMemberCard()
             }
             // window.alert(entry)
             console.log('no path matching')
