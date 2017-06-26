@@ -3,8 +3,8 @@
  * @example ?id=12345&a=b
  * @return Object {id: 12345, a: b}
  */
-export function urlParse() {
-  let url = window.location.search
+export function urlParse(str) {
+  let url = str || window.location.search
   let obj = {}
   // 正则：开始是?或&,第二个 非?或&的字符一个或多个 = 后面非?或&的字符一个或多个
   let reg = /[?&][^?&]+=[^?&]+/g

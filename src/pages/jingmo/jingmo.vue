@@ -1,10 +1,13 @@
 <template>
 </template>
 <script>
-  import {urlParse, getStore, setStore} from '../../common/utils/util'
+  import {urlParse, setStore} from '../../common/utils/util'
+  import {config} from '../../common/utils/index'
   //  import wxshare from '../../components/wxshare.vue'
   const MEMBERCARD = 'member'
   const SHOPLIST = 'shopList'
+  const targetURL = config.test.url
+  const appId = config.test.appId
   export default {
     data () {
       return {
@@ -16,28 +19,32 @@
         location: {
           longitude: '', // 经度
           latitude: '' // 维度
-        }
+        },
+        state: ''
       }
     },
     created() {
       this.url = window.location.href
       // console.log(this.url)
       if (this.url.indexOf('code') < 0) { //  没有code
-        let index = this.url.indexOf('entry')
-        let entry
-        if (index < 0) {
-          entry = 'shopList'
-        } else {
-          entry = this.url.slice(index + 6)
-        }
+        // let index = this.url.indexOf('entry')
+        let entry = urlParse().entry || 'shopList'
+        // if (index < 0) {
+        //   entry = 'shopList'
+        // } else {
+        //   entry = this.url.slice(index + 6)
+        // }
+        this.state = entry
         setStore('entry', entry)
         this.to()
-      } else {  //  有code
+      } else {                            //  有code
         const data = {
           code: urlParse().code,
           type: 1 // 授权类型：1静默授权；2用户授权
         }
-        console.log(data)
+        this.state = urlParse(window.location.herf).entry
+        document.write(this.state)
+        // console.log(data)
         this.axios.post('/mp/authority/customer', data).then((res) => {
           res = res.data
           if (res.success) {
@@ -46,42 +53,47 @@
             setStore('openId', res.data.openId)
             setStore('token', res.data.token)
             // choose entry
-            let entry = getStore('entry')
-            // switch (entry) {
-            //   case MEMBERCARD: {
-            //     this.goMemberCard(res.data.customerId)
-            //     break
-            //   }
-            //   case SHOPLIST: {
-            //     this.getShopList(res.data.customerId)
-            //     break
-            //   }
-            //   default: {
-            //     this.getShopList(res.data.customerId)
-            //     break
-            //   }
-            // }
+            let entry = this.state
+            switch (entry) {
+              case MEMBERCARD: {
+                this.goMemberCard(res.data.customerId)
+                break
+              }
+              case SHOPLIST: {
+                this.getShopList(res.data.customerId)
+                break
+              }
+              default: {
+                this.getShopList(res.data.customerId)
+                break
+              }
+            }
             // window.alert(entry)
             this.goMemberCard(res.data.customerId)
           }
         })
+          .catch((error) => {
+            console.log('network error: ' + error)
+          })
       }
     },
     methods: {
       to() {
         const oauthCallbackUrl =
-          encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo')
-        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+          encodeURIComponent(targetURL + '/?#/jingmo')
+          // encodeURIComponent('http://newpay.tunnel.qydev.com/VAOrderH5/?#/jingmo')
+        // const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx96f6daa5f8a71039&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=${this.state}#wechat_redirect`
+        const oauthJumpUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${oauthCallbackUrl}&response_type=code&scope=snsapi_base&state=${this.state}#wechat_redirect`
         // 跳转授权 浏览器不保留记录
         // console.log(oauthJumpUrl)
         window.location.replace(oauthJumpUrl)
 //        window.location.href = oauthJumpUrl
       },
       goMemberCard(custId) {
-        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/memberCard?customerId=' + custId)
+        window.location.replace(targetURL + '/?#/memberCard?customerId=' + custId)
       },
       getShopList(custId) {
-        window.location.replace('http://newpay.tunnel.qydev.com/VAOrderH5/?#/shopList?customerId=' + custId + '&t=' + Date.parse(new Date()))
+        window.location.replace(targetURL + '/?#/shopList?customerId=' + custId + '&t=' + Date.parse(new Date()))
 //        this.$router.replace({
 //          path: '/index',
 //          query: {

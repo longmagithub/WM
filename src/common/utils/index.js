@@ -64,3 +64,18 @@ export function isPromise (val) {
 export function assert (condition, msg) {
   if (!condition) throw new Error(`[vuex] ${msg}`)
 }
+//  环境配置
+export const config = {
+  test: {
+    url: 'http://newpay.tunnel.qydev.com/VAOrderH5',
+    appId: 'wx96f6daa5f8a71039'
+  },
+  pre: {
+    url: 'https://uxwmpre.u-xian.com/VAOrderH5',
+    appId: 'wx4340e30a4fa4b63b'
+  },
+  prd: {
+    url: 'https://mlzj.u-xian.com/VAOrderH5',
+    appId: ''
+  }
+}
