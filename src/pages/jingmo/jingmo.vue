@@ -47,7 +47,8 @@
             setStore('token', res.data.token)
             // choose entry
             let entry = this.$router.history.current.path.toString()
-            console.log('found entry: ' + entry)
+            console.log('found entry:')
+            console.log(entry)
             if (entry.indexOf(SHOPLIST) >= 0) {
               this.getShopList()
             } else if (entry.indexOf(MEMBERCARD) >= 0) {
