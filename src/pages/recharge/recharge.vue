@@ -46,7 +46,7 @@
       }
     },
     mounted() {
-      this.shopId = getStore('userInfo').shopId
+      // this.shopId = getStore('shopId').shopId
       this.customerId = getStore('userInfo').customerId
       this.getDiscounts()
     },
@@ -70,8 +70,8 @@
       // 获取优惠信息
       getDiscounts() {
         let data = {
-          customerId: this.customerId,
-          shopId: this.shopId
+          customerId: this.customerId
+          // shopId: this.shopId
         }
         this.axios.get(`/br/shop/member/recharge${this.PublicJs.createParams(data)}`)
           .then((response) => {

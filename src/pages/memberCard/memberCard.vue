@@ -39,7 +39,7 @@
 <script type="text/javascript">
   import fukuanma from '../../components/fukuanma.vue'
   import toast from '../../components/toast.vue'
-  import {getStore} from '../../common/utils/util'
+  import {getLocal} from '../../common/utils/util'
   export default{
     data() {
       return {
@@ -55,7 +55,7 @@
     mounted() {
       console.log(this.$router)
       // this.shopId = getStore('userInfo').shopId
-      this.customerId = getStore('customerId')
+      this.customerId = getLocal('customerId')
       this.getCard()
     },
     methods: {

@@ -13,7 +13,7 @@
 	</div>
 </template>
 <script>
-  import {getStore} from '../common/utils/util'
+  import {getLocal} from '../common/utils/util'
   import axios from 'axios'
   const TIMER_COUNT = 90 * 1000		// 90	秒失效
   const XHR_TIMEOUT = 30 * 1000		// 30 秒重试
@@ -26,15 +26,16 @@
         customerId: '',
         qrCode: '',
         qrImageBase64: '',
-        timer: null
+        timer: null,
+        token: null
 			}
 		},
 		methods: {
 			// 查询付款码
 			requestCode () {
 				let data = {
-					customerId: this.customerId,
-          shopId: this.shopId
+					customerId: this.customerId
+          // shopId: this.shopId
 				}
 				this.axios.get(`/br/member/card/payment/qrcode${this.PublicJs.createParams(data)}`)
 					.then((response) => {
@@ -57,7 +58,7 @@
 				if (cancel) cancel()	// 若已经有该请求则取消，重新发送
 				let data = {
 					customerId: this.customerId,
-          shopId: this.shopId,
+          // shopId: this.shopId,
           qrcode: this.qrCode
 				}
 				this.axios.get(`/br/member/card/payment/qrcode/state${this.PublicJs.createParams(data)}`, {
@@ -106,8 +107,9 @@
 			}
 		},
 		mounted () {
-      this.shopId = getStore('userInfo').shopId
-      this.customerId = getStore('userInfo').customerId
+      // this.shopId = getStore('userInfo').shopId
+      this.token = getLocal('token')
+      this.customerId = getLocal('customerId')
       this.requestCode()
 		}
 	}

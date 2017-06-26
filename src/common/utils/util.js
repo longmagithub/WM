@@ -39,6 +39,13 @@ export const getStore = name => {
   return JSON.parse(window.localStorage.getItem(name))
 }
 
+export const setLocal = (name, content) => {
+  window.localStorage.setItem(name, content)
+}
+export const getLocal = name => {
+  return window.localStorage.getItem(name)
+}
+
 /**
  * 删除localStorage
  */
