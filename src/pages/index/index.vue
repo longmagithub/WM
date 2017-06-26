@@ -97,7 +97,7 @@
 
 <script>
   import goods from '../goods/goods.vue'
-  import {setStore, getStore} from '../../common/utils/util'
+  import {setStore, getStore, getLocal} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
   import {mapState, mapMutations} from 'vuex'
   import wxshare from '../../components/wxshare.vue'
@@ -158,12 +158,12 @@
       this.getFreedispatch()
       // 红包提示语
       this.getBoonMeg()
-      // 修改提示状态
-      if (getStore('isRemind').isRemind !== undefined) {
-        this.MENU_REMIND(getStore('isRemind').isRemind)
-      }
       // 获取天气信息
       this.getWeather()
+      // 修改提示状态
+      if (getStore('isRemind') && getStore('isRemind').isRemind !== undefined) {
+        this.MENU_REMIND(getStore('isRemind').isRemind)
+      }
       // 测试shoplist
       // this.testShopList(this.customerId, 0, 0)
     },
@@ -181,7 +181,8 @@
       getWeather() {
         const data = {
           // shopId: this.shopId,
-          customerId: this.customerId
+          customerId: getLocal('customerId')
+          // customerId: this.customerId
         }
         this.axios.get(`/br/shop/weather${this.PublicJs.createParams(data)}`)
           .then((response) => {
