@@ -46,9 +46,11 @@
             setStore('openId', res.data.openId)
             setStore('token', res.data.token)
             // choose entry
-            let entry = this.$router.history.current.path.toString()
-            console.log('found entry:')
+            let entry = urlParse(window.location.herf).state
+            // let entry = this.$router.history.current.path.toString()
+            console.log('found entry:' + typeof (entry))
             console.log(entry)
+
             if (entry.indexOf(SHOPLIST) >= 0) {
               this.getShopList()
             } else if (entry.indexOf(MEMBERCARD) >= 0) {
