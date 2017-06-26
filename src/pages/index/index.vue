@@ -44,14 +44,15 @@
             满{{freedispatch.price}}元免配送费
           </div>
         </div>
+            <!-- circle="circleMenu.circle" -->
         <div class="user">
           <circle-menu
             class="circle_menu_box"
             type="bottom"
-            circle="circleMenu.circle"
+            :circle="true"
             :number="3"
             mask="white"
-            colors="circleMenu.colors">
+            :colors="circleMenu.colors">
             <div class="circle-menu"
                  slot="item_btn">
               <i class="remind"
@@ -133,7 +134,7 @@
         boonMegText: '', // 红包提示语
         shopListArr: [],
         weatherInfo: {
-          switch: true,
+          switch: false,
           text: ''
         }
       }
@@ -179,7 +180,7 @@
       // 获取天气信息
       getWeather() {
         const data = {
-          shopId: this.shopId,
+          // shopId: this.shopId,
           customerId: this.customerId
         }
         this.axios.get(`/br/shop/weather${this.PublicJs.createParams(data)}`)

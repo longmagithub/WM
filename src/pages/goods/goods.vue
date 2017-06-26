@@ -60,7 +60,7 @@
                           v-else-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity === 0">
                       {{food.dishSpecification[0].originalPrice}}</span>
                     <span class="price-num" v-else>{{food.dishSpecification[0].dishPrice}}</span>
-                    <span class="text" v-if="food.dishSpecification.length > 1">起</span>
+                    <span class="text" v-if="food.dishSpecification && food.dishSpecification.length > 1">起</span>
                     <s class="originalPrice"
                        v-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity !== 0">￥{{food.dishSpecification[0]
                       .originalPrice}}</s>
@@ -131,7 +131,7 @@
                 <h1 class="title">购物车<span v-show='!manjianDesc'>(满减活动与爆款商品不能同享)</span></h1>
                 <span class="empty uxwm-iconfont btn_delete_normal" @click="clearToast">清空</span>
               </div>
-              <div class="describe" v-if="seller.activity.length > 0">
+              <div class="describe" v-if="seller.activity && seller.activity.length > 0">
                 <!--<span class="title">阶梯配送费</span>-->
                 <span class="text" v-for="item in seller.activity">{{item.title}} </span>
                 <!--<span class="text" v-for="item in seller.dispatching.fees">满{{item.price}}元运费{{item.fee}} </span>-->
@@ -230,9 +230,9 @@
           <i class="close uxwm-iconfont btn_close_normal" @click="closeSpesc"></i>
           <h2 class="specs-title">{{specs.name}}</h2>
           <div class="specs-content">
-            <p class="text" v-show="specs.dishSpecification.length > 1">规格</p>
+            <p class="text" v-show="specs.dishSpecification && specs.dishSpecification.length > 1">规格</p>
             <div class="content specs_Content"
-                 v-show="specs.dishSpecification.length > 1"
+                 v-show="specs.dishSpecification && specs.dishSpecification.length > 1"
                  :class="{'isTaste_Content': specs.dishSpecification[specsIndex].tastes.length}">
               <span class="specs-item"
                     v-for="(specsItme, index) in specs.dishSpecification"
@@ -524,7 +524,7 @@
         if (this.discounSwitch) {
           return false
         } else {
-          if (this.seller.activity.length > 0) {
+          if (this.seller.activity && this.seller.activity.length > 0) {
             let discArr = []
             let desc = ''
             let allFeesPrice = this.allPrice
