@@ -87,7 +87,10 @@
 							if (result.success === true) {
 								// go to paysuccess
 								this.$router.push({
-									path: '/paySuccess'
+									path: '/paySuccess',
+									query: {
+										amount: ''
+									}
 								})
 							} else {
 								// go to payFail

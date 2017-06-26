@@ -32,7 +32,7 @@
   </div>
 </template>
 <script type="text/javascript">
-  import {getStore} from '../../common/utils/util'
+  import {getStore, getLocal} from '../../common/utils/util'
   import toast from '../../components/toast.vue'
   export default {
     data () {
@@ -42,12 +42,15 @@
         rights: [],
         toastShow: false,
         toastText: '',
-        canSelect: true
+        canSelect: true,
+        customerId: '',
+        token: ''
       }
     },
     mounted() {
       // this.shopId = getStore('shopId').shopId
-      this.customerId = getStore('userInfo').customerId
+      this.customerId = getLocal('customerId')
+      this.token = getLocal('token')
       this.getDiscounts()
     },
     methods: {
@@ -70,7 +73,8 @@
       // 获取优惠信息
       getDiscounts() {
         let data = {
-          customerId: this.customerId
+          customerId: this.customerId,
+          token: this.token
           // shopId: this.shopId
         }
         this.axios.get(`/br/shop/member/recharge${this.PublicJs.createParams(data)}`)
