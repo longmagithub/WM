@@ -86,7 +86,8 @@
               if (response.success) {
                 // 操作成功
                 this.balance = response.data.cardInfo.balance
-                this.card_number = response.data.cardInfo.cardId
+                let num = response.data.cardInfo.cardId
+                this.card_number = num.slice(0, 4) + ' ' + num.slice(4, 8) + ' ' + num.slice(8, 13)
               } else {
                 this.toggleToast(1, 'server error.')
               }

@@ -171,8 +171,8 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="tipss">
-          因天气原因，配送员也许会晚一些到达，请谅解
+      <div class="tipss" v-if='weatherInfo.switch'>
+          {{weatherInfo.text}}
       </div>
       <div class="price">待支付￥{{allNum - boonPrice < 0 ? 0.01 : allNum - boonPrice |
         toFixedFil}}<span class="noFessPrice"
@@ -242,7 +242,11 @@
             beginTime: '20:00',
             endTime: '23:00'
           }
-        ]
+        ],
+        weatherInfo: {
+          switch: false,
+          text: ''
+        }
       }
     },
     created() {
@@ -271,6 +275,8 @@
       this.getRedEnvelope()
       // 计算预计时间
       this.getShopState()
+      // 获取天气信息
+      this.getWeather()
 //      console.log(JSON.stringify(this.newShopCart))
     },
     mounted() {
@@ -281,6 +287,21 @@
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID', 'CLEAR_CART']),
+      // 获取天气信息
+      getWeather() {
+        const data = {
+          // shopId: this.shopId,
+          customerId: this.customerId
+        }
+        this.axios.get(`/br/shop/weather${this.PublicJs.createParams(data)}`)
+          .then((response) => {
+            response = response.data
+            if (response.success) {
+              this.weatherInfo.switch = response.data.dispatchRemarkSwitch
+              this.weatherInfo.text = response.data.dispatchRemark
+            }
+          })
+      },
       // 计算预计时间
       getShopState() {
 //        console.log('出餐时间：' + this.shopInfo.makingTime)

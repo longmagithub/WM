@@ -4,16 +4,18 @@
 		<div class="content">
 			<span class="title">付款码</span>
 			<img :src="qrImageBase64">
-			<span class="code">{{qrCode}}</span>
+			<span class="code">{{qrCodeStyle}}</span>
 			<div class="text">
 				<img src="../assets/memberCard/btn_gengxin_normal@2x.png" @click='requestCode()'>
 				<span>为保障您的资金安全，该付款码定时更新</span>
 			</div>
 		</div>
+		<toast :show="toastShow" :text="toastText"></toast>
 	</div>
 </template>
 <script>
   import {getLocal} from '../common/utils/util'
+  import toast from '../components/toast.vue'
   import axios from 'axios'
   const TIMER_COUNT = 90 * 1000		// 90	秒失效
   const XHR_TIMEOUT = 30 * 1000		// 30 秒重试
@@ -25,16 +27,21 @@
 				shopId: '',
         customerId: '',
         qrCode: '',
+        qrCodeStyle: '',
         qrImageBase64: '',
         timer: null,
-        token: null
+        toastTimer: null,
+        token: null,
+        toastShow: false,
+        toastText: ''
 			}
 		},
 		methods: {
 			// 查询付款码
 			requestCode () {
 				let data = {
-					customerId: this.customerId
+					customerId: this.customerId,
+					token: this.token
           // shopId: this.shopId
 				}
 				this.axios.get(`/br/member/card/payment/qrcode${this.PublicJs.createParams(data)}`)
@@ -42,10 +49,15 @@
             response = response.data
 						if (response.success) {
 							// 查询成功
-							this.qrCode = response.data.qrCodeInfo.qrCode
+							let code = response.data.qrCodeInfo.qrCode
+							this.qrCode = code
+							this.qrCodeStyle = code.slice(0, 4) + ' ' + code.slice(4, 8) + ' ' + code.slice(8, 12) + ' ' + code.slice(12, 18)
 							this.qrImageBase64 = response.data.qrCodeInfo.qrImageBase64
 							if (!this.timer)	this.startTimer()
 							this.requestState()
+						} else {
+							// 展示错误信息
+							this.toggleToast(1, response.message)
 						}
 					})
 					.catch((error) => {
@@ -59,7 +71,8 @@
 				let data = {
 					customerId: this.customerId,
           // shopId: this.shopId,
-          qrcode: this.qrCode
+          qrcode: this.qrCode,
+          token: this.token
 				}
 				this.axios.get(`/br/member/card/payment/qrcode/state${this.PublicJs.createParams(data)}`, {
 							timeout: XHR_TIMEOUT,
@@ -83,6 +96,8 @@
 								})
 							}
 						} else {
+							// 展示错误信息
+							// this.toggleToast(1, response.message)
 							this.requestState()
 						}
 					})
@@ -104,13 +119,30 @@
 				if (cancel) cancel()	// 若已经有该请求则取消
 				if (this.timer) clearInterval(this.timer)
 				this.$emit('hide')
-			}
+			},
+			// toggle toast
+      toggleToast(show, text) {
+        if (show === true || show === 1) {
+          this.toastShow = !this.toastShow
+          this.toastText = text
+          clearTimeout(this.timer)
+          this.toastTimer = setTimeout(() => {
+            this.toastShow = !this.toastShow
+          }, 1500)
+        } else {
+          return
+        }
+      }
 		},
 		mounted () {
       // this.shopId = getStore('userInfo').shopId
       this.token = getLocal('token')
+      // this.customerId = getStore('userInfo').customerId
       this.customerId = getLocal('customerId')
       this.requestCode()
+		},
+		components: {
+			toast
 		}
 	}
 </script>
