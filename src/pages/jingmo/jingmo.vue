@@ -57,10 +57,11 @@
             } else if (entry.search(MEMBERCARD) >= 0) {
               console.log('go member')
               this.goMemberCard(res.data.customerId)
+            } else {
+              console.log('no if-else path matching')
+              this.goMemberCard(res.data.customerId)
             }
             // window.alert(entry)
-            console.log('no if-else path matching')
-            this.goMemberCard(res.data.customerId)
           }
         })
           .catch((error) => {

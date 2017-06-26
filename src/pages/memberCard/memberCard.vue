@@ -55,7 +55,7 @@
     mounted() {
       console.log(this.$router)
       // this.shopId = getStore('userInfo').shopId
-      this.customerId = getStore('userInfo').customerId
+      this.customerId = getStore('customerId')
       this.getCard()
     },
     methods: {
