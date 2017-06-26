@@ -4,8 +4,8 @@
   import {urlParse, setStore} from '../../common/utils/util'
   import {config} from '../../common/utils/index'
   //  import wxshare from '../../components/wxshare.vue'
-  const MEMBERCARD = '/member'
-  const SHOPLIST = '/jingmo'
+  const MEMBERCARD = 'member'
+  const SHOPLIST = 'jingmo'
   const targetURL = config.test.url
   const appId = config.test.appId
   export default {
@@ -46,15 +46,15 @@
             setStore('openId', res.data.openId)
             setStore('token', res.data.token)
             // choose entry
-            let entry = this.$router.history.current.path
+            let entry = this.$router.history.current.path.toString()
             console.log('found entry: ' + entry)
-            if (entry === SHOPLIST) {
+            if (entry.indexOf(SHOPLIST) >= 0) {
               this.getShopList()
-            } else if (entry === MEMBERCARD) {
+            } else if (entry.indexOf(MEMBERCARD) >= 0) {
               this.goMemberCard()
             }
             // window.alert(entry)
-            console.log('no path matching')
+            console.log('no if-else path matching')
             this.goMemberCard(res.data.customerId)
           }
         })
