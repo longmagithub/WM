@@ -23,13 +23,14 @@
         state: ''
       }
     },
-    created() {
-      // 点击返回按钮到此页时的处理
-      // let jingmoed = window.sessionStorage.getItem('jingmoed')
+    beforeCreate() {
       let oauthed = window.sessionStorage.getItem('oauthed')
       if (oauthed) {
         WeixinJSBridge.call('closeWindow')
       }
+    },
+    created() {
+      // 点击返回按钮到此页时的处理
       this.url = window.location.href
       // console.log(this.url)
       if (this.url.indexOf('code') < 0) { //  没有code

@@ -23,7 +23,7 @@ const memberCard = r => require.ensure([], () => r(require('../pages/memberCard/
 const recharge = r => require.ensure([], () => r(require('../pages/recharge/recharge.vue')), 'recharge')
 const paySuccess = r => require.ensure([], () => r(require('../pages/paySuccess/paySuccess.vue')), 'paySuccess')
 const payFail = r => require.ensure([], () => r(require('../pages/payFail/payFail.vue')), 'payFail')
-const testPage = r => require.ensure([], () => r(require('../pages/testPage/testPage.vue')), 'testPage')
+// const testPage = r => require.ensure([], () => r(require('../pages/testPage/testPage.vue')), 'testPage')
 export default new Router({
   scrollBehavior: () => ({y: 0}),
   routes: [
@@ -168,10 +168,6 @@ export default new Router({
     {
       path: '/payFail',
       component: payFail
-    },
-    {
-      path: '/testPage',
-      component: testPage
     }
   ]
 })
