@@ -431,7 +431,7 @@
 
 <style>
   .tips{
-    padding: 10px 0;
+    padding: 11px 0;
     width: 100%;
     /*height: 50px;*/
     display: flex;
@@ -441,22 +441,23 @@
     overflow: scroll;
   }
   .tips>.text{
-    /*height: 28px;*/
-    background: rgba(255,174,100,0.21);
+    margin: 0 24px;
+    background: rgba(255,174,100,.21);
     border-radius: 2px;
     font-size: 10px;
-    color: #FF8932;
+    color: #ff8932;
     letter-spacing: 0;
     position: relative;
     box-sizing: border-box;
     padding: 6px 10px;
   }
   .tips>.text>img{
-    position: relative;
-    left: 2px;
-    top: 2px;
+    position: absolute;
+    left: -16px;
+    top: 50%;
     width: 12px;
     height: 12px;
+    transform: translate(0,-50%);
   }
   .index-box {
     display: flex;
