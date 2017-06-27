@@ -171,6 +171,9 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
+      <div class="baotext" v-show="!isDiscount">
+    	满减活动与爆款商品不能同享
+      </div>      
       <div class="tipss" v-if='weatherInfo.switch'>
           {{weatherInfo.text}}
       </div>
@@ -801,6 +804,19 @@
 </script>
 
 <style>
+  .baotext{
+    position: absolute;
+    top: -66px;
+    left: 0;
+    width: 100%;
+    height: 26px;
+    background: #FFF8EE;
+    text-align: center;
+    line-height: 26px;
+    font-size: 11px;
+    color: #FE8932;
+    letter-spacing: 0;
+  }	
   .tipss{
     position: absolute;
     bottom: 100%;
