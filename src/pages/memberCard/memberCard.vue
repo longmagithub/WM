@@ -23,13 +23,13 @@
 			<img src="../../assets/memberCard/icon_fukuan_normal@2x.png">
 			<p>付款</p>
 		</div>
-		<div @click='goCharge'>
+		<div @click='goCharge' class="recharge">
 			<img src="../../assets/memberCard/icon_chongzhi_normal@2x.png">
 			<p>充值</p>
 			<div class="youhui">
 				优惠
-				<img src="../../assets/memberCard/icon_youhui_normal@2x.png">
 			</div>
+        <img class="youhuiIMG" src="../../assets/memberCard/icon_youhui_normal@2x.png">
 		</div>
 	</div>
 
@@ -145,6 +145,7 @@
 		position: absolute;
 		left: 0;
 		top: -12px;
+    height: 198px;
 		width: calc(100% + 5px);
 		z-index: -1;
 	}
@@ -211,11 +212,23 @@
 		position: relative;
 
 	}
-	.btns img{
+	.btns>div>img{
 		width: 34px;
 		height: 34px;
 		margin-bottom: 11px;
 	}
+  .recharge>.youhui{
+
+  }
+  .recharge>.youhuiIMG{
+    position: absolute;
+    left: 100%;
+    bottom: 100%;
+    width: 36px;
+    height: 20px;
+    z-index: -1;
+    margin-bottom: 0;
+  }
 	.btns .youhui{
 		position: absolute;
 		left: 100%;
@@ -228,14 +241,15 @@
 		-webkit-text-size-adjust:none; 
 		-webkit-font-size-adjust: none;
 		font-size-adjust: none;
-		font-size:9px;
+		font-size:11px;
+    margin-bottom: 5px;
 	}
-	.btns .youhui>img{
+	/*.btns .youhui>img{
 		position: absolute;
 		top: 1px;
 		left: 0;
 		width: 36px;
 		height: 20px;
 		z-index: -1;
-	}
+	}*/
 </style>
