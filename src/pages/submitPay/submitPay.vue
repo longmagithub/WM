@@ -82,7 +82,7 @@
         customerId: '',
         balance: 0,
         showWeChat: false,
-        enableMember: true,
+        enableMember: false,
         balanceEnough: false,
         payConfig: {
           method: {
@@ -144,9 +144,13 @@
         if (!this.isTime) {
           this.toggleToast(1, '订单已超时')
         } else {
-          let data = getStore('userOrderInfo')
-          data.payType = 2
-          this.axios.post('/br/order', data)
+          let data = {
+            customerId: getStore('userInfo').customerId,
+            shopId: getStore('userInfo').shopId,
+            orderId: this.orderId,
+            payType: 2
+          }
+          this.axios.post('/br/order/pay', data)
             .then((response) => {
               response = response.data
               if (response.success) {
@@ -190,7 +194,8 @@
             const data = {
               customerId: getStore('userInfo').customerId,
               shopId: getStore('userInfo').shopId,
-              orderId: this.orderId
+              orderId: this.orderId,
+              payType: 1
             }
             this.axios.post(`/br/order/pay`, data)
             .then((res) => {
@@ -275,6 +280,8 @@
                 this.enableMember = false
                 this.showWeChat = true
               }
+            } else {
+              this.toggleToast(1, response.message)
             }
           })
           .catch((error) => {

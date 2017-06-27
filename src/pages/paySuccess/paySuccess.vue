@@ -6,7 +6,7 @@
 				<span class="text">充值金额</span>
 				<div class="amount">
 					<span class="symbol">¥</span>
-					<span>{{this.$router.history.current.query.amount/100}}</span>
+					<span>{{this.$router.history.current.query.amount/100 | toFixedFil}}</span>
 				</div>
 		</div>
 		
@@ -24,7 +24,13 @@
 					path: 'memberCard'
 				})
 			}
-		}
+		},
+		filters: {
+      // 保留2位
+      toFixedFil(val) {
+        return val.toFixed(2)
+      }
+    }
 	}
 </script>
 <style scoped>
