@@ -95,7 +95,7 @@
         <li>下单时间：{{orderDetail.orderTime}}</li>
       </ul>
     </section>
-    <span class="tipsss" v-if='weatherInfo.switch'>{{weatherInfo.text}}</span>
+    <div class="tipsss" v-if='weatherInfo.switch'>{{weatherInfo.text}}</div>
     <section class="bg-white phone">
       <ul @click="callPhone(orderDetail.shopPhone)">
         <li>
@@ -169,7 +169,7 @@
       getWeather() {
         const data = {
           // shopId: this.shopId,
-          customerId: this.getStore('userInfo').customerId
+          customerId: getStore('userInfo').customerId
         }
         this.axios.get(`/br/shop/weather${this.PublicJs.createParams(data)}`)
           .then((response) => {
@@ -338,7 +338,7 @@
     font-size: 11px;
     color: #FF984C;
     letter-spacing: 0.1px;
-    margin-left: 16px;
+    margin: 0 17px;
     line-height: 16px;
     position:relative;
     top: -4px;

@@ -431,8 +431,9 @@
 
 <style>
   .tips{
+    padding: 10px 0;
     width: 100%;
-    height: 50px;
+    /*height: 50px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -440,7 +441,7 @@
     overflow: scroll;
   }
   .tips>.text{
-    height: 28px;
+    /*height: 28px;*/
     background: rgba(255,174,100,0.21);
     border-radius: 2px;
     font-size: 10px;
@@ -448,13 +449,12 @@
     letter-spacing: 0;
     position: relative;
     box-sizing: border-box;
-    padding: 0 10px;
-    line-height: 28px;
+    padding: 6px 10px;
   }
   .tips>.text>img{
-    position: absolute;
-    left: -20px;
-    top: 7px;
+    position: relative;
+    left: 2px;
+    top: 2px;
     width: 12px;
     height: 12px;
   }

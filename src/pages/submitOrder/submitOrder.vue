@@ -803,21 +803,21 @@
 <style>
   .tipss{
     position: absolute;
-    top: -26px;
+    bottom: 100%;
+    /* top: -26px; */
     left: 0;
     width: 100%;
-    height: 26px;
-    /*display: flex;
-    justify-content: center;
-    align-items: center;*/
-    /*background-color: white;*/
+    /* height: 26px; */
+    /* background-color: white; */
     background: #FFF8EE;
     text-align: center;
-    line-height: 26px;
+    line-height: 16px;
     font-size: 11px;
     color: #FE8932;
     letter-spacing: 0;
-    overflow: scroll;
+    box-sizing: border-box;
+    /* overflow: scroll; */
+    padding: 4px 14px;
   }
   .submitOrder-wrapper {
     padding-bottom: 49px;
