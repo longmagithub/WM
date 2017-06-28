@@ -203,14 +203,14 @@
         .then((res) => {
           if (res.data.success) {
             this.orderDetail = res.data.data
-            let disPatchInfo = this.orderDetail.activities.filter((item) => {             //  提取配送费合并
-              return item.title === '配送费'
-            })
-            if (disPatchInfo.length > 0) {
-              let index = disPatchInfo[0].valueC.indexOf('(')
-              disPatchInfo[0].valueC = disPatchInfo[0].valueC.slice(index)
-              this.orderDetail.dispatchPrice += disPatchInfo[0].valueC
-            }
+            // let disPatchInfo = this.orderDetail.activities.filter((item) => {             //  提取配送费合并
+            //   return item.title === '配送费'
+            // })
+            // if (disPatchInfo.length > 0) {
+            //   let index = disPatchInfo[0].valueC.indexOf('(')
+            //   disPatchInfo[0].valueC = disPatchInfo[0].valueC.slice(index)
+            //   this.orderDetail.dispatchPrice += disPatchInfo[0].valueC
+            // }
             this.orderDetail.activities = this.orderDetail.activities.filter((item) => {  //  从活动中剔除运送费
               return item.title !== '配送费'
             })
@@ -225,7 +225,6 @@
             // console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
-//              this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, this.reverseTime)
               this.getReverTime(res.data.data.orderTime)
             } else if (res.data.data.state === 6 || res.data.data.state === 100) {
               this.orderStatus.tip = '超过15分钟未付款，系统取消了订单'

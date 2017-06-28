@@ -134,7 +134,7 @@
                 </li>
               </ul>
             </div>
-            <div class="baotext top-line bottom-line" v-show="!isDiscount">
+            <div class="baotext top-line bottom-line" v-show="hasHot">
               满减活动与爆款商品不能同享
             </div>     
             <div class="discount" v-if="isDiscount">
@@ -287,7 +287,16 @@
       this.initData()
     },
     computed: {
-      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice'])
+      ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice']),
+      hasHot: function() {
+        if (this.newShopCart) {
+          return this.newShopCart.find((item) => {
+            return item.hotTyep === 1
+          })
+        } else {
+          return false
+        }
+      }
     },
     methods: {
       ...mapMutations(['INIT_BUYCART', 'SAVE_SHOPID', 'CLEAR_CART']),
