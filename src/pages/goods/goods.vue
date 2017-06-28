@@ -52,6 +52,7 @@
                   <!--.originalPrice}}</span>-->
                 </p>
                 <div class="price-wrapper">
+                	<p id="overflow_remain" v-show="overflowRemain">不好意思亲，库存量不足了哦</p>
                   <div class="price">￥
                     <span class="price-num"
                           v-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity !== 0">
@@ -182,7 +183,8 @@
                          item.remainQuantity,
                          item.userCount,
                          item.categoryIdLength,
-                         item.tastes)">
+                         item.tastes,
+                         item.num)">
                       </div>
                       <div class="cart-count">{{item.num}}</div>
                       <div class="cart-add uxwm-iconfont btn_add_disabled"
@@ -200,7 +202,8 @@
                          item.remainQuantity,
                          item.userCount,
                          item.categoryIdLength,
-                         item.tastes)"></div>
+                         item.tastes,
+                         item.num)"></div>
                     </div>
                   </div>
                 </li>
@@ -337,6 +340,7 @@
             show: false
           }
         ],
+        overflowRemain: false,
         dropBalls: [],
         toastShow: false,
         toastText1: '',
@@ -428,6 +432,8 @@
       this.INIT_BUYCART()
       // 优惠列表
       this.getDiscountList()
+      // 刷新清空购物车
+      this.clearCartBuy()
       // 查询爆款活动规则
       this.getActivityHotstyle()
       // 判断是否在 配送范围内
@@ -774,8 +780,25 @@
       // 加入购物车
       // 参数列表：分类id，单个菜id，规格id，单个菜名字，单个菜价格，单个菜规格，饭盒费,
       addToCart(categoryId, itemId, foodId, name, price, specs, packingFee, dishTypeStyle, limitCount, originalPrice,
-                remainQuantity, userCount, categoryIdLength, tastes) {
+                remainQuantity, userCount, categoryIdLength, tastes, num) {
 //        console.log('购物车++')
+				/* if (this.isYingye) {
+					if (dishTypeStyle === 1) { // 如果是爆款
+						if (limitCount === 0) { // 如果爆款购买无限制
+							this.userCount = remainQuantity // 用户可购买数量 = 库存数量
+							this.userNum = num // 用户购买数量
+							if (num <= remainQuantity) {
+								this.overflowRemain = false
+							} else if (num > remainQuantity) {
+								this.overflowRemain = true
+							}
+						} else if (limitCount <= remainQuantity) { // 如果爆款限购 《= 库存
+							this.userCount = limitCount // 用户可购买数量 = 爆款限购
+						} else if (limitCount > remainQuantity) { // 如果爆款限购 》 库存量
+							this.userCount = remainQuantity // 用户可购买数量 = 库存数量
+						}
+					}
+				} */
         this.ADD_CART({
           shopid: this.shopId,
           categoryId,
@@ -969,6 +992,13 @@
         this.discounSwitch = false
         this.switchTypePrice = true
       },
+      // 刷新清空购物车
+      clearCartBuy() {
+	      this.toggleCartList()
+	      this.CLEAR_CART(this.shopId)
+	      this.discounSwitch = false
+	      this.switchTypePrice = true
+      },
       // 关闭购物车
       hideList() {
         this.showCartList = !this.showCartList
@@ -1064,6 +1094,21 @@
 </script>
 
 <style>
+	#overflow_remain {
+    position: fixed;
+    padding: 1%;
+    top: 9%;
+    right: 8%;
+    min-width: 150px;
+    border: 1px;
+    border-radius: 0.25rem;
+    text-align: center;
+    transform: translateY(-50%);
+    color: #ffffff;
+    background: #6C6C6C;
+    font-size: 10px;
+	}
+	
   .goods {
     display: flex;
     position: absolute;

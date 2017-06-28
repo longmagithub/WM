@@ -30,6 +30,6 @@ module.exports = {
     // allow tab
     'no-mixed-spaces-and-tabs': ["error", "smart-tabs"],
     'no-tabs': 'off',
-    'indent': 0
+    'indent': 0         
   }
 }
