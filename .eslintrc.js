@@ -13,7 +13,8 @@ module.exports = {
   'globals': {
     'wx': true,
     'WeixinJSBridge': true,
-    'AMap': true
+    'AMap': true,
+    'WeixinApi': true
   },
   // add your custom rules here
   'rules': {

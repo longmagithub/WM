@@ -23,14 +23,20 @@
         state: ''
       }
     },
+    beforeCreate() {
+      let oauthed = window.sessionStorage.getItem('oauthed')
+      if (oauthed) {
+        WeixinJSBridge.call('closeWindow')
+      }
+    },
     created() {
+      // 点击返回按钮到此页时的处理
       this.url = window.location.href
       // console.log(this.url)
       if (this.url.indexOf('code') < 0) { //  没有code
         this.state = this.$router.history.current.path
         console.log('state: ' + this.state)
-        // setStore('entry', entry)
-        this.to()
+        this.to()                          // 去授权
       } else {                            //  有code
         const data = {
           code: urlParse().code,
@@ -40,17 +46,14 @@
         // console.log(data)
         this.axios.post('/mp/authority/customer', data).then((res) => {
           res = res.data
-          if (res.success) {
+          if (res.success) {  //  授权成功，跳转
+            window.sessionStorage.setItem('oauthed', true)  // 标记为已经授权，仅此次浏览器打开期间有效
             this.customerId = res.data.customerId
             setStore('customerId', this.customerId)
             setStore('openId', res.data.openId)
             setStore('token', res.data.token)
             // choose entry
             let entry = urlParse(window.location.herf).state
-            // let entry = this.$router.history.current.path.toString()
-            console.log('found entry:' + typeof (entry))
-            console.log(entry)
-
             if (entry.search(SHOPLIST) >= 0) {
               console.log('go shop')
               this.getShopList(res.data.customerId)
@@ -61,7 +64,6 @@
               console.log('no if-else path matching')
               this.goMemberCard(res.data.customerId)
             }
-            // window.alert(entry)
           }
         })
           .catch((error) => {
