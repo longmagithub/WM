@@ -9,7 +9,7 @@
       <p class="order-status-tip"
          v-if="orderDetail.state === 7 || orderDetail.state === 10">
         {{orderStatus.tip}}</p>
-      <button type="button" class="btn-to-pay" v-if="orderDetail.state === 0" @click="weChatPay()">去支付</button>
+      <button type="button" class="btn-to-pay" v-if="orderDetail.state === 0" @click="gotoPay()">去支付</button>
     </section>
     <section class="bg-white order-foods">
       <ul>
@@ -114,7 +114,7 @@
 </template>
 <script>
   import Toast from '../../components/toast.vue'
-  import {getStore} from '../../common/utils/util'
+  import {getStore, setStore} from '../../common/utils/util'
   import {mapMutations} from 'vuex'
   import * as PublicJs from '../../common/utils/public'
   export default {
@@ -183,6 +183,16 @@
               this.weatherInfo.text = response.data.dispatchRemark
             }
           })
+      },
+      // 跳转支付页面
+      gotoPay() {
+        this.$router.push({
+          path: '/submitPay',
+          query: {
+            orderId: this.sessionId,
+            amount: this.orderDetail.payPrice
+          }
+        })
       },
       getOrderDetail () {
         const data = {
@@ -260,6 +270,9 @@
       addMinutes (date, minutes) {
         date = date.replace(/-/g, '/')
         let oT = new Date(new Date(date).setMinutes(new Date(date).getMinutes() + minutes))
+        setStore('reverseTime', {
+                'reverseTimeKey': Math.round(oT / 1000)
+              })
         let mm = oT.getMinutes() === 0 ? '00' : oT.getMinutes()
         return '请在' + oT.getHours() + ':' + mm + '前付款，超过时间，订单将被自动取消'
       },
