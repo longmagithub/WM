@@ -119,7 +119,7 @@
                     class="name_num"><span class="name">餐盒费</span></div>
                   <div class="price">￥{{packPrice}}</div>
                 </li>
-                <li class="food_list_item" v-if="feesPrice">
+                <li class="food_list_item">
                   <!--<li class="food_list_item">-->
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
@@ -134,6 +134,9 @@
                 </li>
               </ul>
             </div>
+            <div class="baotext top-line bottom-line" v-show="!isDiscount">
+              满减活动与爆款商品不能同享
+            </div>     
             <div class="discount" v-if="isDiscount">
               <div class="list-content"></div>
               <p class="discount-title" v-for="item in discountList" v-if="item.discountId === shopDiscountId">
@@ -171,9 +174,7 @@
       </ul>
     </div>
     <div class="submitOrder-btn">
-      <div class="baotext" v-show="!isDiscount">
-    	满减活动与爆款商品不能同享
-      </div>      
+       
       <div class="tipss" v-if='weatherInfo.switch'>
           {{weatherInfo.text}}
       </div>
@@ -805,18 +806,25 @@
 
 <style>
   .baotext{
-    position: absolute;
-    top: -66px;
-    left: 0;
-    width: 100%;
-    height: 26px;
-    background: #FFF8EE;
-    text-align: center;
-    line-height: 26px;
+    position: relative;
+    /* top: -66px; */
+    left: -16px;
+    width: 100vw;
+    height: 30px;
+    /* background: #E7E7E7; */
+    /* text-align: center; */
+    line-height: 30px;
     font-size: 11px;
-    color: #FE8932;
+    color: #949494;
     letter-spacing: 0;
+    padding-left: 16px;
   }	
+  .bottom-line {
+    border-bottom: 1px solid #f1f1f1;
+  }
+  .top-line {
+    border-top: 1px solid #f1f1f1
+  }
   .tipss{
     position: absolute;
     bottom: 100%;
