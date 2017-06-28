@@ -56,12 +56,15 @@
           </label>
         </li>
         <li v-if="orderDetail.activities.length" v-for="item in orderDetail.activities">
-          <div class="discoount">红包</div>
+          <div class="discoount">{{item.title}}</div>
           <label>
-            <span class="discount-amount">-￥{{item.valueC}}</span>
+            <span class="discount-amount">{{item.valueC}}</span>
           </label>
         </li>
-        <li class="total-amount">
+        <li class="top-line extend" v-if='hot'>
+          <span>满减活动与爆款商品不能同享</span>
+        </li>
+        <li class="total-amount top-line">
           总计：<span>￥{{orderDetail.payPrice}}</span>
         </li>
       </ul>
@@ -157,7 +160,8 @@
         weatherInfo: {
           switch: false,
           text: ''
-        }
+        },
+        hot: false
       }
     },
     components: {
@@ -189,7 +193,23 @@
         .then((res) => {
           if (res.data.success) {
             this.orderDetail = res.data.data
-            console.log(this.orderDetail)
+            let disPatchInfo = this.orderDetail.activities.filter((item) => {             //  提取配送费合并
+              return item.title === '配送费'
+            })
+            if (disPatchInfo.length > 0) {
+              let index = disPatchInfo[0].valueC.indexOf('(')
+              disPatchInfo[0].valueC = disPatchInfo[0].valueC.slice(index)
+              this.orderDetail.dispatchPrice += disPatchInfo[0].valueC
+            }
+            this.orderDetail.activities = this.orderDetail.activities.filter((item) => {  //  从活动中剔除运送费
+              return item.title !== '配送费'
+            })
+            if (this.orderDetail.dishes.find((item) => {                                  // 判断爆款
+              return item.dishOriginalPrice !== 0
+            })) {
+              this.hot = true
+            }
+            // console.log(this.orderDetail)
             this.orderStatus.iconCode = res.data.data.state
             if (res.data.data.state === 0) {
 //              this.orderStatus.tip = this.addMinutes(res.data.data.orderTime, this.reverseTime)
@@ -344,6 +364,12 @@
     top: -4px;
     overflow: scroll;
   }
+  .bottom-line {
+    border-bottom: 1px solid #f1f1f1;
+  }
+  .top-line {
+    border-top: 1px solid #f1f1f1
+  }
   .order-detail-wrap {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -409,6 +435,12 @@
     color: #2b2a2e;
     border-bottom: 1px solid #f1f1f1;
   }
+  li.extend {
+    margin-left: 0;
+    padding: 8px 0;
+    padding-left: 16px;
+    font-size: 10px;
+  }
 
   .dishDetail .dishType {
     display: inline-block;
@@ -429,6 +461,8 @@
   }
 
   li.total-amount {
+    margin-left: 0;
+    padding-left: 16px;
     color: #343434;
     text-align: right;
 
