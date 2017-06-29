@@ -119,17 +119,17 @@
                     class="name_num"><span class="name">餐盒费</span></div>
                   <div class="price">￥{{packPrice}}</div>
                 </li>
-                <li class="food_list_item" v-if="!(manJianFeesPrice && manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price)">
+                <li class="food_list_item" v-if="!isDispatchFree">
                   <!--<li class="food_list_item">-->
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">￥{{feesPrice}}</div>
                 </li>
-                <li class="food_list_item" v-if="manJianFeesPrice && manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price"
+                <li class="food_list_item" v-if='isDispatchFree'
                     :class="{'manJianFeesPrice': manJianFeesPrice && manJianFeesPrice.state === 1 && allPrice >= manJianFeesPrice.price}">
                   <div class="name_num"><span class="name">配送费</span></div>
                   <div class="price">
                     <span class="price_num">￥0</span>
-                    <span class="price_desc">(满{{manJianFeesPrice.price}}元免配送费)</span>
+                    <span class="price_desc">(满{{manjianInfo.price}}元免配送费)</span>
                   </div>
                 </li>
               </ul>
@@ -151,8 +151,8 @@
             </div>
             <div class="totalPrice"
                  :class="{isTotalPrice: isFeessSwitch}">总计：<span
-              class="totaPrice-num">￥{{allNum -
-            boonPrice < 0 ? 0.01 : allNum -
+                  class="totaPrice-num">￥{{allNum -
+                  boonPrice < 0 ? 0.01 : allNum -
               boonPrice | toFixedFil}}</span><span
               v-if="isFeessSwitch"
               class="noFessPrice">(不包含配送费)</span>
@@ -250,7 +250,12 @@
         weatherInfo: {
           switch: false,
           text: ''
-        }
+        },
+        dispatchConfig: {
+          switch: false,
+          amount: 0
+        },
+        manjianInfo: {}
       }
     },
     created() {
@@ -285,6 +290,7 @@
     },
     mounted() {
       this.initData()
+      this.manjianInfo = getStore('manjianInfo')
     },
     computed: {
       ...mapState(['cartList', 'remarkText', 'inputText', 'invoice', 'userAddressId', 'manJianFeesPrice']),
@@ -296,6 +302,9 @@
         } else {
           return false
         }
+      },
+      isDispatchFree: function() {
+         return this.manjianInfo.state && this.manjianInfo.state === 1 && this.allPrice >= this.manjianInfo.price
       }
     },
     methods: {
@@ -317,14 +326,10 @@
       },
       // 计算预计时间
       getShopState() {
-//        console.log('出餐时间：' + this.shopInfo.makingTime)
-//        console.log('配送时间：' + this.shopInfo.dispatching.duration)
         // 默认时间 当前时间 + 出餐时间 + 配送时间
         this.estimateTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
           this.shopInfo.dispatching.duration))
         this.options.push(Date.parse(this.estimateTime))
-//        let timeArr = []
-//        for (let i = 0; i < this.testTime.length; i++) {
         for (let i = 0; i < this.shopInfo.hours.length; i++) {
           // 开始时间
           let beginTimeHours = parseFloat(this.shopInfo.hours[i].beginTime.split(':')[0])
@@ -344,9 +349,6 @@
           let bespeakOncTime = new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
             this.shopInfo.dispatching.duration)
           bespeakOncTime = new Date(bespeakOncTime).setSeconds(0, 0)
-          // 判断时间2
-//          let onceTime = new Date(new Date().setMinutes(new Date().getMinutes() + this.shopInfo.makingTime +
-//              this.shopInfo.dispatching.duration + 15))
           if ((bespeakOncTime >= this.beginTime && bespeakOncTime <= this.endTime)) {
             // 开始第一次时间
             let oneTimeIndex = Math.floor(new Date(bespeakOncTime).getMinutes() / 15)
@@ -467,21 +469,17 @@
       async initData() {
         // 先将当前商品的购物车数据进行处理，每个商品的信息作为一个对象放入数组中
         this.newShopCart = []
-//        console.log(this.newShopCart)
         this.orderDish = []
         console.log(JSON.stringify(this.shopCart))
         Object.values(this.shopCart).forEach(categoryItem => {
           Object.values(categoryItem).forEach(itemValue => {
             Object.values(itemValue).forEach(specItem => {
-//              console.log(JSON.stringify(specItem))
               Object.values(specItem).forEach((item, index) => {
-//                console.log(JSON.stringify(item))
                 // this.packPrice += item.num * item.packingFee
                 if (item.price !== null && item.price >= 0 && item.num > 0) {
                   if (item.dishTypeStyle === 1) { // 爆款属性
                     this.discounSwitch = false
                     if (item.overflowNum > 0 && item.userCount !== 0) { // 是爆款 但是已经超出限制范围
-//                    console.log(123131231231)
                       this.newShopCart.push({
                         id: item.id, // 规格id
                         name: item.name,  // 菜品名字
@@ -568,6 +566,7 @@
       },
       // 阶梯配送费
       getDispatchPrice(userPosition) {
+        this.manJianFeesPrice = this.manjianInfo
         if (this.manJianFeesPrice && this.manJianFeesPrice.state === 1) {
           if (this.allPrice >= this.manJianFeesPrice.price) {
             this.feesPrice = 0
@@ -679,7 +678,7 @@
               this.gotoPay(res.data.orderId)
             } else if (res.success === false) {
               this.CLEAR_CART(data.shopId)
-//              this.toggleToast(1, '菜品价格有变化，请重新下单')
+                //              this.toggleToast(1, '菜品价格有变化，请重新下单')
               this.toggleToast(1, res.message)
               setTimeout(() => {
                 this.$router.replace({
@@ -758,8 +757,6 @@
         let discArr = []
         let allFeesPrice = this.allPrice
         let newTime = Date.parse(new Date()) / 1000
-//        let beginTime = Date.parse(new Date(data.beginTime)) / 1000
-//        let endTime = Date.parse(new Date(data.endTime)) / 1000
         for (let i = 0; i < data.length; i++) {
           if (Date.parse(new Date(data[i].beginTime)) / 1000 <= newTime <= Date.parse(new Date(data[i].endTime)) /
             1000) {
