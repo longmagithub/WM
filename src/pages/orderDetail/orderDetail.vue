@@ -13,7 +13,7 @@
     </section>
     <section class="bg-white order-foods">
       <ul>
-        <li class="title">订单详情1</li>
+        <li class="title">订单详情</li>
         <li class="dishDetail" v-for="item in orderDetail.dishes">
           <label>
             <span class="dishName">
