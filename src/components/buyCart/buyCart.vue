@@ -108,6 +108,7 @@
         showDeleteText: '多规格或多口味商品只能去购物车删除哦', // 多规格 或 多口味的 删除是 提示文本
         showAddToCartAotType: false, // 超过爆款限制
         isShowSpecToast: false,
+        disType: false,
         userCount: 0 // 用户可以点多少个
       }
     },
@@ -150,12 +151,16 @@
         console.log('buyCary --- addToCart')
         if (this.isYingye) {
           if (dishTypeStyle === 1) { // 如果是爆款
+          this.dishType = true
             if (limitCount === 0) { // 如果爆款购买无限制
               this.userCount = remainQuantity // 用户可购买数量 = 库存数量
+              this.showSpecToastFun(dishTypeStyle)
             } else if (limitCount <= remainQuantity) { // 如果爆款限购 《= 库存
               this.userCount = limitCount // 用户可购买数量 = 爆款限购
+              this.showSpecToastFun(dishTypeStyle)
             } else if (limitCount >= remainQuantity) { // 如果爆款限购 》 库存量
               this.userCount = remainQuantity // 用户可购买数量 = 库存数量
+              this.showSpecToastFun(dishTypeStyle)
             }
             /* if (this.userCount !== 0) {
               if (this.foodNum < this.userCount) {

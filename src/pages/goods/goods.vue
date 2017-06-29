@@ -52,7 +52,7 @@
                   <!--.originalPrice}}</span>-->
                 </p>
                 <div class="price-wrapper">
-                	<p id="overflow_remain" v-show="overflowRemain">不好意思亲，库存量不足了哦</p>
+                	<!--<p id="overflow_remain" v-show="overflowRemain">不好意思亲，库存量不足了哦</p>-->
                   <div class="price">￥
                     <span class="price-num"
                           v-if="food.dishTypeStyleOfDish === 1 && food.dishSpecification[0].remainQuantity !== 0">
@@ -433,7 +433,7 @@
       // 优惠列表
       this.getDiscountList()
       // 刷新清空购物车
-      this.clearCartBuy()
+      /* this.clearCartBuy() */
       // 查询爆款活动规则
       this.getActivityHotstyle()
       // 判断是否在 配送范围内
@@ -993,12 +993,12 @@
         this.switchTypePrice = true
       },
       // 刷新清空购物车
-      clearCartBuy() {
+      /* clearCartBuy() {
 	      this.toggleCartList()
 	      this.CLEAR_CART(this.shopId)
 	      this.discounSwitch = false
 	      this.switchTypePrice = true
-      },
+      }, */
       // 关闭购物车
       hideList() {
         this.showCartList = !this.showCartList
