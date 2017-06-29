@@ -62,7 +62,10 @@
         this.discounts.forEach((item) => {
           item.selected = false
         })
-        this.discounts[index].selected = true
+        // this.discounts[index].selected = true
+        let item = this.discounts[index]
+        item.selected = true
+        this.$set(this.discounts, index, item)
       },
       // 清空选择
       clearSelect () {
@@ -102,7 +105,8 @@
           return
         } else {
           this.selectBtn(index)
-          setTimeout(() => {
+          this.$nextTick(function() {
+            this.selectBtn(index)
             // 发起支付
             const data = {
               customerId: getStore('userInfo').customerId,
@@ -123,7 +127,9 @@
                 console.log('network error' + error)
                 this.clearSelect()
               })
-          }, 300)
+          })
+          setTimeout(function() {
+          }, 500)
         }
       },
       // 调取微信支付
@@ -156,11 +162,11 @@
       },
       toggleToast(show, text) {
         if (show === true || show === 1) {
-          this.toastShow = !this.toastShow
+          this.toastShow = true
           this.toastText = text
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
-            this.toastShow = !this.toastShow
+            this.toastShow = false
           }, 1300)
         } else {
           return
@@ -244,7 +250,7 @@
     position: absolute;
     right: -8px;
     top: -8px;
-    width: 38px;
+    min-width: 38px;
     height: 16px;
     font-family: PingFangSC-Light;
     font-size: 11px;

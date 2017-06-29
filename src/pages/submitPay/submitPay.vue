@@ -304,6 +304,8 @@
                 this.balanceEnough = (this.balance >= this.paidPrice)
                 if (this.balanceEnough) {
                   this.payConfig.method.memberCard = true
+                } else {
+                  this.payConfig.method.weChat = true
                 }
               } else {
                 this.toggleToast(1, 'server error.')
