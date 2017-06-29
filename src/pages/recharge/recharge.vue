@@ -69,8 +69,11 @@
       },
       // 清空选择
       clearSelect () {
-        this.discounts.forEach((item) => {
-          item.selected = false
+        this.discounts.forEach((item, index) => {
+          // item.selected = false
+          let clearItem = this.discounts[index]
+          clearItem.selected = false
+          this.$set(this.discounts, index, clearItem)
         })
       },
       // 获取优惠信息
@@ -145,18 +148,24 @@
             'signType': data.signType // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           },
           function (res) {
+            window.alert(res)
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               // 支付成功
               console.log('payment OK')
-              this.$router.replace({
+              that.$router.replace({
                 path: '/memberCard'
               })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              this.clearSelect()
+              window.alert('您已取消支付')
+              that.clearSelect()
               that.toggleToast(1, '您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              this.clearSelect()
+              window.alert('订单支付失败')
+              that.clearSelect()
               that.toggleToast(1, '订单支付失败')
+            } else {
+              window.alert('other choice')
+              that.clearSelect()
             }
           })
       },

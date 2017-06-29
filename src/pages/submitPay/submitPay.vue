@@ -280,6 +280,7 @@
               } else {
                 this.enableMember = false
                 this.showWeChat = true
+                this.payConfig.method.weChat = true
               }
             } else {
               this.toggleToast(1, response.message)
@@ -305,6 +306,7 @@
                 if (this.balanceEnough) {
                   this.payConfig.method.memberCard = true
                 } else {
+                  this.showWeChat = true
                   this.payConfig.method.weChat = true
                 }
               } else {
@@ -324,7 +326,7 @@
     filters: {
       // 保留2位
       toFixedFil(val) {
-        return val.toFixed(2)
+        return parseFloat(val).toFixed(2)
       }
     }
   }

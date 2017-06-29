@@ -2,7 +2,10 @@
 <div class="index">
 	<fukuanma v-if='showCode' v-on:hide='toggleCode'></fukuanma>
 	<div class="card">
-		<img src="../../assets/memberCard/img_huiyuan_normal@2x.png">
+		<!-- <img src="../../assets/memberCard/img_huiyuan_normal@2x.png"> -->
+    <div class="img">
+      <img class="jitui" src="../../assets/memberCard/img_jitui_normal@2x.png">
+    </div>
 		<div class="card_content">
 			<div class="logo">
 				<img src="../../assets/thankumom.jpg">
@@ -130,6 +133,13 @@
 		font-size: 12px;
 		background-color: white;
 	}
+  .jitui{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 59px;
+    height: 51px;
+  }
 	.card{
 		margin-top: 20px;
 		width: 85.6%;
@@ -149,6 +159,16 @@
 		width: calc(100% + 5px);
 		z-index: -1;
 	}
+  .card>.img{
+    background-image: url('../../assets/memberCard/img_huiyuan_normal@2x.png');
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: -12px;
+    height: 198px;
+    width: calc(100% + 5px);
+    z-index: -1;
+  }
 	.card_content{
 		width: 100%;
 		height: 146px;
