@@ -13,7 +13,7 @@
     </section>
     <section class="bg-white order-foods">
       <ul>
-        <li class="title">订单详情</li>
+        <li class="title">订单详情1</li>
         <li class="dishDetail" v-for="item in orderDetail.dishes">
           <label>
             <span class="dishName">
@@ -214,9 +214,6 @@
             this.orderDetail.activities = this.orderDetail.activities.filter((item) => {  //  从活动中剔除运送费
               return item.title !== '配送费'
             })
-            // this.orderDetail.activities.forEach((item) => {
-            //   item.valueC = '-¥' + item.valueC.substr(3)
-            // })
             if (this.orderDetail.dishes.find((item) => {                                  // 判断爆款
               return item.dishOriginalPrice !== 0
             })) {

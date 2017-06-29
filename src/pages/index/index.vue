@@ -279,6 +279,7 @@
           if (res.success) {
             res.data.price = res.data.price / 100
             this.freedispatch = res.data
+            setStore('manjianInfo', res.data || {})
             this.MANJIAN_FEESPRICE(res.data)
             if (res.data === null) {
               this.freedispatch = {
