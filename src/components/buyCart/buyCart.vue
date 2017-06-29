@@ -246,7 +246,7 @@
         this.timer = setTimeout(() => {
           clearTimeout(this.timer)
           this.showDeleteTip = false
-        }, 1500)
+        }, 2000)
       },
       /* showSpecToastFun() {
         if (this.showSpecToast !== 0) {
