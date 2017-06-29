@@ -102,26 +102,28 @@
           return
         } else {
           this.selectBtn(index)
-          // 发起支付
-          const data = {
-            customerId: getStore('userInfo').customerId,
-            shopId: getStore('userInfo').shopId,
-            rechargeId: this.discounts[index].discountId
-          }
-          this.axios.post('/br/member/recharge', data)
-            .then((response) => {
-              response = response.data
-              if (response.success) {
-                this.sendWxSDK(response.data)
-              } else {
-                this.toggleToast(1, response.message)
+          setTimeout(() => {
+            // 发起支付
+            const data = {
+              customerId: getStore('userInfo').customerId,
+              shopId: getStore('userInfo').shopId,
+              rechargeId: this.discounts[index].discountId
+            }
+            this.axios.post('/br/member/recharge', data)
+              .then((response) => {
+                response = response.data
+                if (response.success) {
+                  this.sendWxSDK(response.data)
+                } else {
+                  this.toggleToast(1, response.message)
+                  this.clearSelect()
+                }
+              })
+              .catch((error) => {
+                console.log('network error' + error)
                 this.clearSelect()
-              }
-            })
-            .catch((error) => {
-              console.log('network error' + error)
-              this.clearSelect()
-            })
+              })
+          }, 300)
         }
       },
       // 调取微信支付

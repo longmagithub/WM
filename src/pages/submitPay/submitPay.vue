@@ -104,7 +104,8 @@
     },
     mounted() {
       this.orderId = this.$route.query.orderId ? this.$route.query.orderId : ''
-      this.paidPrice = getStore('userOrderInfo').paidPrice ? getStore('userOrderInfo').paidPrice : 0
+      this.paidPrice = this.$route.query.amount ? this.$route.query.amount : 0
+      // this.paidPrice = getStore('userOrderInfo').paidPrice ? getStore('userOrderInfo').paidPrice : 0
       this.shopId = getStore('userInfo').shopId
       this.customerId = getStore('userInfo').customerId
       this.checkMemberCard()

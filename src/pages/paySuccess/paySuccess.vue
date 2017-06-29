@@ -3,7 +3,7 @@
 		<div class="container">
 				<img src="../../assets/memberCard/icon_chenggong_normal@2x.png">
 				<span class="success">支付成功</span>
-				<span class="text">充值金额</span>
+				<span class="text">支付金额</span>
 				<div class="amount">
 					<span class="symbol">¥</span>
 					<span>{{this.$router.history.current.query.amount/100 | toFixedFil}}</span>

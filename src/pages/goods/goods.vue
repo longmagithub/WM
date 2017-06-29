@@ -86,8 +86,8 @@
     </div>
     <div class="shopcart_module" v-show="isYingye">
       <div class="shopcart">
-        <div class="content" @click="toggleCartList">
-          <div class="content-left">
+        <div class="content">
+          <div class="content-left" @click="toggleCartList">
             <div class="logo-wrapper">
               <div class="logo" :class="{'highlight': totalNum > 0}">
                 <span class="uxwm-iconfont btn_shopping_normal" :class="{'highlight': totalNum > 0}"></span>
