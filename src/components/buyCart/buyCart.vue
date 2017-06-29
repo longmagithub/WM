@@ -69,7 +69,7 @@
       <div class="cart-count" v-show="foodNum > 0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click="showChooseList($event,foods),showSpecToastFun()"></div>
+           @click="plusClicked($event,foods,false)"></div>
     </section>
     <!-- 售罄 -->
     <section v-else key="sellout-wrapper">
@@ -269,6 +269,12 @@
             this.showAddToCartAotType = false
           }, 1500)
         }
+      },
+      plusClicked(e, foods, hot) {
+        this.showChooseList(e, foods)
+        if (hot) {
+          this.showSpecToastFun()
+        }
       }
     },
     watch: {
@@ -282,6 +288,7 @@
   .specification-wrapper,
   .cart-wrapper {
     font-size: 0;
+    position: relative;
   }
 
   .sellout {
@@ -374,7 +381,7 @@
     color: #ff8932;
   }
 
-  .specification-wrapper .show_addToCart_hotType {
+	.show_addToCart_hotType {
     position: absolute;
     /*position: fixed;*/
     padding: .5rem 0;
@@ -387,8 +394,8 @@
     transform: translateY(-50%);
     color: #ffffff;
     background-color: rgba(0, 0, 0, .7);
-    font-size: 10px;
-  }
+    font-size: 10px;		
+	}
 
   .cart-wrapper .forbid {
     color: #dddddd;
