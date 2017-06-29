@@ -203,20 +203,20 @@
         .then((res) => {
           if (res.data.success) {
             this.orderDetail = res.data.data
-            // let disPatchInfo = this.orderDetail.activities.filter((item) => {             //  提取配送费合并
-            //   return item.title === '配送费'
-            // })
-            // if (disPatchInfo.length > 0) {
-            //   let index = disPatchInfo[0].valueC.indexOf('(')
-            //   disPatchInfo[0].valueC = disPatchInfo[0].valueC.slice(index)
-            //   this.orderDetail.dispatchPrice += disPatchInfo[0].valueC
-            // }
+            let disPatchInfo = this.orderDetail.activities.filter((item) => {             //  提取配送费合并
+              return item.title === '配送费'
+            })
+            if (disPatchInfo.length > 0) {
+              // let index = disPatchInfo[0].valueC.indexOf('(')
+              // disPatchInfo[0].valueC = disPatchInfo[0].valueC.slice(index)
+              this.orderDetail.dispatchPrice += disPatchInfo[0].valueC
+            }
             this.orderDetail.activities = this.orderDetail.activities.filter((item) => {  //  从活动中剔除运送费
               return item.title !== '配送费'
             })
-            this.orderDetail.activities.forEach((item) => {
-              item.valueC = '-¥' + item.valueC.substr(3)
-            })
+            // this.orderDetail.activities.forEach((item) => {
+            //   item.valueC = '-¥' + item.valueC.substr(3)
+            // })
             if (this.orderDetail.dishes.find((item) => {                                  // 判断爆款
               return item.dishOriginalPrice !== 0
             })) {
