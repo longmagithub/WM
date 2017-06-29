@@ -60,16 +60,16 @@
           <span class="inner uxwm-iconfont btn_reduce_normal sanjiao"></span>
           <transition name="fade">
             <p class="show_delete_tip" v-if="showDeleteTip">{{showDeleteText}}</p>
-            <!--<p class="show_addToCart_hotType" v-show="isShowSpecToast">-->
-              <!--该美食限{{userCount}}份优惠，超过以原价计算哦-->
-            <!--</p>-->
+           	<p class="show_addToCart_hotType" v-show="showAddToCartAotType">
+              该美食限{{showSpecToast}}份优惠，超过以原价计算哦
+            </p>
           </transition>
         </div>
       </transition>
       <div class="cart-count" v-show="foodNum > 0">{{foodNum}}</div>
       <div class="cart-add uxwm-iconfont btn_add_disabled"
            :class="{forbid: !isYingye}"
-           @click="showChooseList($event,foods)"></div>
+           @click="showChooseList($event,foods),showSpecToastFun()"></div>
     </section>
     <!-- 售罄 -->
     <section v-else key="sellout-wrapper">
@@ -149,24 +149,25 @@
                 remainQuantity, categoryIdLength, tastes) {
         console.log('buyCary --- addToCart')
         if (this.isYingye) {
-          if (dishTypeStyle === 1) {
-            if (limitCount === 0) { // 个人无限制 取库存
-              this.userCount = remainQuantity
-            } else if (limitCount <= remainQuantity) { // 个人 <= 库存 取个人
-              this.userCount = limitCount
-            } else if (limitCount >= remainQuantity) { // 个人 >= 库存 取库存
-              this.userCount = remainQuantity
+          if (dishTypeStyle === 1) { // 如果是爆款
+            if (limitCount === 0) { // 如果爆款购买无限制
+              this.userCount = remainQuantity // 用户可购买数量 = 库存数量
+            } else if (limitCount <= remainQuantity) { // 如果爆款限购 《= 库存
+              this.userCount = limitCount // 用户可购买数量 = 爆款限购
+            } else if (limitCount >= remainQuantity) { // 如果爆款限购 》 库存量
+              this.userCount = remainQuantity // 用户可购买数量 = 库存数量
             }
-            if (this.userCount !== 0) {
-              if (this.foodNum > this.userCount) {
-                this.showAddToCartAotType = true
+            /* if (this.userCount !== 0) {
+              if (this.foodNum < this.userCount) {
+              console.log(this.foodNum)
+                this.showAddToCartAotType = false
                 clearTimeout(this.timer)
                 this.timer = setTimeout(() => {
                   clearTimeout(this.timer)
-                  this.showAddToCartAotType = false
+                  this.showAddToCartAotType = true
                 }, 1500)
               }
-            }
+            } */
           }
           this.ADD_CART({
             shopid: this.shopId,
@@ -242,7 +243,7 @@
           this.showDeleteTip = false
         }, 1500)
       },
-      showSpecToastFun() {
+      /* showSpecToastFun() {
         if (this.showSpecToast !== 0) {
           if (this.foodNum > this.showSpecToast) {
             this.isShowSpecToast = true
@@ -252,6 +253,16 @@
               this.isShowSpecToast = false
             }, 1500)
           }
+        }
+      } */
+     showSpecToastFun() {
+        if (this.foodNum >= this.showSpecToast && this.foodNum !== 0) {
+          this.showAddToCartAotType = true
+          clearTimeout(this.timer)
+          this.timer = setTimeout(() => {
+            clearTimeout(this.timer)
+            this.showAddToCartAotType = false
+          }, 1500)
         }
       }
     },
@@ -358,7 +369,7 @@
     color: #ff8932;
   }
 
-  .cart-wrapper .cart-add .show_addToCart_hotType {
+  .specification-wrapper .show_addToCart_hotType {
     position: absolute;
     /*position: fixed;*/
     padding: .5rem 0;
