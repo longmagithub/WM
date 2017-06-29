@@ -246,7 +246,7 @@
         this.timer = setTimeout(() => {
           clearTimeout(this.timer)
           this.showDeleteTip = false
-        }, 1500)
+        }, 2000)
       },
       /* showSpecToastFun() {
         if (this.showSpecToast !== 0) {
@@ -260,7 +260,7 @@
           }
         }
       } */
-     showSpecToastFun() {
+      showSpecToastFun() {
         if (this.foodNum >= this.showSpecToast && this.foodNum !== 0) {
           this.showAddToCartAotType = true
           clearTimeout(this.timer)
