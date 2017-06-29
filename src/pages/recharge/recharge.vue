@@ -108,6 +108,9 @@
           return
         } else {
           this.selectBtn(index)
+          setTimeout(function() {
+            this.clearSelect()
+          }, 0)
           this.$nextTick(function() {
             this.selectBtn(index)
             // 发起支付
@@ -131,12 +134,11 @@
                 this.clearSelect()
               })
           })
-          setTimeout(function() {
-          }, 500)
         }
       },
       // 调取微信支付
       sendWxSDK (data) {
+        this.clearSelect()
         const that = this
         WeixinJSBridge.invoke(
           'getBrandWCPayRequest', {
@@ -148,7 +150,7 @@
             'signType': data.signType // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
           },
           function (res) {
-            window.alert(res)
+            // window.alert(res)
             if (res.err_msg === 'get_brand_wcpay_request:ok') {
               // 支付成功
               console.log('payment OK')
@@ -156,15 +158,15 @@
                 path: '/memberCard'
               })
             } else if (res.err_msg === 'get_brand_wcpay_request:cancel') {
-              window.alert('您已取消支付')
+              // window.alert('您已取消支付')
               that.clearSelect()
               that.toggleToast(1, '您已取消支付')
             } else if (res.err_msg === 'get_brand_wcpay_request:fail') {
-              window.alert('订单支付失败')
+              // window.alert('订单支付失败')
               that.clearSelect()
               that.toggleToast(1, '订单支付失败')
             } else {
-              window.alert('other choice')
+              // window.alert('other choice')
               that.clearSelect()
             }
           })
