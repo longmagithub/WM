@@ -23,6 +23,9 @@ const memberCard = r => require.ensure([], () => r(require('../pages/memberCard/
 const recharge = r => require.ensure([], () => r(require('../pages/recharge/recharge.vue')), 'recharge')
 const paySuccess = r => require.ensure([], () => r(require('../pages/paySuccess/paySuccess.vue')), 'paySuccess')
 const payFail = r => require.ensure([], () => r(require('../pages/payFail/payFail.vue')), 'payFail')
+const integralRecord = r => require.ensure([], () => r(require('../pages/integralRecord/integralRecord.vue')), 'integralRecord')
+const integralList = r => require.ensure([], () => r(require('../pages/integralList/integralList.vue')), 'integralList')
+const my = r => require.ensure([], () => r(require('../pages/my/my.vue')), 'my')
 // const testPage = r => require.ensure([], () => r(require('../pages/testPage/testPage.vue')), 'testPage')
 export default new Router({
   scrollBehavior: () => ({y: 0}),
@@ -168,6 +171,21 @@ export default new Router({
     {
       path: '/payFail',
       component: payFail
+    },
+    // 积分兑换列表页面
+    {
+      path: '/integralRecord',
+      component: integralRecord
+    },
+    // 我的
+    {
+      path: '/my',
+      component: my
+    },
+    // 积分列表
+    {
+      path: '/integralList',
+      component: integralList
     }
   ]
 })

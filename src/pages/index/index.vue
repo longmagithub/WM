@@ -45,8 +45,9 @@
           </div>
         </div>
             <!-- circle="circleMenu.circle" -->
-        <div class="user">
-          <circle-menu
+        <div class="user" @click="goMy">
+        	<img src="../../assets/my.jpg"/>
+          <!--<circle-menu
             class="circle_menu_box"
             type="bottom"
             :circle="true"
@@ -62,7 +63,7 @@
             <span slot="item_2" @click="goInviteNum" class="menu-inviteNum">邀请码
               <i class="remind" v-show="!menuRemind"></i></span>
             <span slot="item_3" @click="goredList" class="">红包</span>
-          </circle-menu>
+          </circle-menu>-->
         </div>
       </div>
       <div class="tips" v-if='weatherInfo.switch'>
@@ -322,6 +323,16 @@
 //          this.shopListShow = !this.shopListShow
 //        }
       },
+      // 去我的
+      goMy() {
+        this.$router.push({
+          path: '/my',
+          query: {
+            shopId: this.shopId,
+            customerId: getStore('userInfo').customerId
+          }
+        })
+      },
       // 去用户详情
       goSeller() {
         this.$router.push({
@@ -333,7 +344,7 @@
         })
       },
       // 去我的
-      goUser() {
+      /* goUser() {
         this.$router.push({
           path: '/orderList',
           query: {
@@ -341,7 +352,7 @@
             sessionId: getStore('userInfo').customerId
           }
         })
-      },
+      }, */
       // 去红包列表
       goredList() {
         this.$router.push({
@@ -808,12 +819,23 @@
   }
 
   .user {
+  	width: 48px;
+  	height: 48px;
     position: absolute;
     top: 15px;
     right: 20px;
+    background: palegreen;
+    border: 2px solid #fff;
+    border-radius: 100%;
+  }
+  
+  .user img{
+  	width: 48px;
+  	height: 48px;
+  	border-radius: 100%;
   }
 
-  .user .circle-menu {
+/*  .user .circle-menu {
     box-sizing: border-box;
     position: relative;
     width: 48px;
@@ -824,10 +846,9 @@
     border-radius: 50%;
     background: url("../../assets/userImg.png") no-repeat center;
     background-size: 48px 48px;
-    /*border: 1px solid rgba(255, 255, 255, 0.9);*/
-  }
+  }*/
 
-  .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item span {
+/*  .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item span {
     box-sizing: border-box;
     display: block;
     width: 48px !important;
@@ -836,11 +857,10 @@
     border-radius: 50% !important;
     background: none !important;
     border: 1px solid rgba(255, 255, 255, 0.9) !important;
-    /*font-size: 12px;*/
     color: #fff;
-  }
+  }*/
 
-  .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item .orderList {
+/*  .user #CircleMenu .oy-menu-group .btn-list .oy-menu-item .orderList {
     font-size: 13px;
   }
 
@@ -858,7 +878,7 @@
     height: 12px;
     border-radius: 50%;
     background: #FF553E;
-  }
+  }*/
 
   .user-btn {
     display: block;

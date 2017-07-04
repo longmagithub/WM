@@ -4,7 +4,7 @@
 	<div class="card">
 		<!-- <img src="../../assets/memberCard/img_huiyuan_normal@2x.png"> -->
     <div class="img">
-      <img class="jitui" src="../../assets/memberCard/img_jitui_normal@2x.png">
+      <!--<img class="jitui" src="../../assets/memberCard/img_jitui_normal@2x.png">-->
     </div>
 		<div class="card_content">
 			<div class="logo">
@@ -17,8 +17,13 @@
 				<span>{{balance}}<span>元</span></span>
 			</div>
 		</div>
-		<div class="card_number">
-			卡号：{{card_number}}
+		<div class="card_main">
+			<div class="card_number">
+				卡号：{{card_number}}
+			</div>
+			<div class="card_integral">
+				每消费1元得1积分
+			</div>
 		</div>
 	</div>
 	<div class="btns">
@@ -28,11 +33,16 @@
 		</div>
 		<div @click='goCharge' class="recharge">
 			<img src="../../assets/memberCard/icon_chongzhi_normal@2x.png">
-			<p>充值</p>
+			<p>优惠充值</p>
 			<div class="youhui">
 				优惠
 			</div>
         <img class="youhuiIMG" src="../../assets/memberCard/icon_youhui_normal@2x.png">
+		</div>
+		<div @click='goIntegral' class="integral">
+			<img src="../../assets/memberCard/icon_jifen_normal@2x.png"/>
+			<p>积分</p>
+			<p style="font-size: 12px;letter-spacing: 0.07px;">(500积分)</p>
 		</div>
 	</div>
 
@@ -70,6 +80,12 @@
       goCharge() {
         this.$router.push({
           path: '/recharge'
+        })
+      },
+      // 去积分兑换
+      goIntegral() {
+        this.$router.push({
+          path: '/redlist'
         })
       },
       //  获取会员卡信息
@@ -161,7 +177,7 @@
 	}
   .card>.img{
     background-image: url('../../assets/memberCard/img_huiyuan_normal@2x.png');
-    background-size: cover;
+    background-size: 100% 100%;
     position: absolute;
     left: 0;
     top: -12px;
@@ -211,12 +227,30 @@
 	.card_text>span>span{
 		font-size: 14px;
 	}
-	.card_number{
+	.card_main{
 		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-content: space-between;
+	}
+	.card_number{
+		width: 50%;
 		height: 39px;
 		line-height: 39px;
-		padding-left: 19px;
+		font-family: PingFangSC-Regular;
 		font-size: 11px;
+		color: #FFFFFF;
+		letter-spacing: 0.17px;
+	}
+	.card_integral {
+		width: 40%;
+		height: 39px;
+		text-align: right;
+		line-height: 39px;
+		font-family: PingFangSC-Regular;
+		font-size: 11px;
+		color: #FFFFFF;
+		letter-spacing: 0.96px;		
 	}
 	.btns{
 		width: 80%;
@@ -225,6 +259,11 @@
 		font-size: 14px;
 		color: #FFC86D;
 		margin-top: 38px;
+	}
+	.btns p{
+		background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,212,111,1)), to(rgba(255,162,103,1)));
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 	.btns>div{
 		display: inline-block;
@@ -242,8 +281,8 @@
   }
   .recharge>.youhuiIMG{
     position: absolute;
-    left: 100%;
-    bottom: 100%;
+    left: 70%;
+    bottom: 95%;
     width: 36px;
     height: 20px;
     z-index: -1;
@@ -251,10 +290,10 @@
   }
 	.btns .youhui{
 		position: absolute;
-		left: 100%;
-		bottom: 100%;
+		left: 58%;
+		bottom: 96%;
 		/*background-image: url('../../assets/memberCard/icon_youhui_normal@2x.png');*/
-		width: 2em;
+		width: 3em;
 		padding-left: 5px;
 		font-family: PingFangSC-Light;
 		color: #FFFFFF;
